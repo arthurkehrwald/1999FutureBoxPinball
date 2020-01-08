@@ -1,0 +1,154 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/SimpleSlope.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/SimpleSlope_R.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/SimpleCube.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Slingshot.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Slingshot_R.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Bumper.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/MultiTrigger.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Trigger.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scripts/WeirdCamera.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/ScoreLabel.gd" type="Script" id=15]
+[ext_resource path="res://Scripts/ReserveBallsLabel.gd" type="Script" id=16]
+[ext_resource path="res://Scenes/Drain.tscn" type="PackedScene" id=17]
+
+[node name="Main" type="Spatial"]
+
+[node name="NormalCamera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.565962, 0.824431, 0, -0.824431, 0.565962, 0, 12, 10 )
+current = true
+fov = 55.0691
+
+[node name="WeirdCamera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 12, 12 )
+projection = 2
+current = true
+fov = 55.0691
+size = 5.04
+near = 0.47
+script = ExtResource( 14 )
+
+[node name="Ball" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12365, -0.067045, 3.4016 )
+gravity_scale = 10.0
+
+[node name="Box" parent="." instance=ExtResource( 2 )]
+
+[node name="BoardAligned" type="Spatial" parent="Box"]
+transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871558, 0.996195, 0, 0, 0 )
+
+[node name="Plunger" parent="Box/BoardAligned" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, -5.21541e-08, 0, 0, 1, 4.1, 0, 4 )
+max_distance = 3.0
+
+[node name="Flipper" parent="Box/BoardAligned" instance=ExtResource( 4 )]
+transform = Transform( 0.939693, 0, -0.34202, 0, 1, -2.23517e-08, 0.34202, 0, 0.939693, -2.04366, -2.98023e-07, 6.48047 )
+
+[node name="Flipper_R" parent="Box/BoardAligned" instance=ExtResource( 5 )]
+transform = Transform( 0.939693, 0, 0.34202, 0, 1, -2.98023e-08, -0.34202, 0, 0.939693, 0.98794, -1.78814e-07, 6.5316 )
+
+[node name="Static" type="Spatial" parent="Box/BoardAligned"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0 )
+
+[node name="SimpleSlope" parent="Box/BoardAligned/Static" instance=ExtResource( 6 )]
+transform = Transform( -3.93403e-07, -1.3027e-15, 1.7, -2.98023e-07, 1, -2.4606e-16, -9, -3.31137e-08, -7.43094e-08, -4.5, 0, 5 )
+
+[node name="SimpleSlope_R" parent="Box/BoardAligned/Static" instance=ExtResource( 7 )]
+transform = Transform( -3.93403e-07, 2.97243e-15, -1.7, 5.96046e-07, 1, 1.3182e-16, 9, -6.62273e-08, -7.43094e-08, 3.3, 2.98023e-08, 5 )
+
+[node name="SimpleCube" parent="Box/BoardAligned/Static" instance=ExtResource( 8 )]
+transform = Transform( 1, -2.69008e-08, -2.498e-13, 2.69008e-08, 1, 0, 8.21565e-15, 0, 30, 3.5, 0, 2 )
+
+[node name="SimpleCube2" parent="Box/BoardAligned/Static" instance=ExtResource( 8 )]
+transform = Transform( 3.63731, 1.5768e-08, 0.5, -1.04308e-07, 1, 7.45058e-09, -2.1, -1.49012e-08, 0.866025, 1.92252, -8.9407e-07, 5.87787 )
+
+[node name="SimpleCube3" parent="Box/BoardAligned/Static" instance=ExtResource( 8 )]
+transform = Transform( 3.63731, -4.4195e-09, -0.5, 2.98023e-08, 1, 0, 2.1, 0, 0.866025, -3.00428, -7.7486e-07, 5.87788 )
+
+[node name="Slingshots" type="Spatial" parent="Box/BoardAligned"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0 )
+
+[node name="Slingshot" parent="Box/BoardAligned/Slingshots" instance=ExtResource( 9 )]
+transform = Transform( 1, 3.70577e-22, 5.0822e-21, -3.70577e-22, 1, -1.04308e-07, 0, 0, 1, -3.2, -2.98023e-08, 4.8 )
+
+[node name="Slingshot_R" parent="Box/BoardAligned/Slingshots" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 1.27055e-21, 0, 1, 0, 0, 0, 1, 2, -5.06639e-07, 4.9 )
+
+[node name="Bumpers" type="Spatial" parent="Box/BoardAligned"]
+
+[node name="Bumper" parent="Box/BoardAligned/Bumpers" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, -7.45058e-09, 1, -0.493, 0, -0.004 )
+
+[node name="Bumper6" parent="Box/BoardAligned/Bumpers" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, -6.70552e-08, 0, 0, 1, 1.5, 5.96046e-08, -1.5 )
+
+[node name="Bumper2" parent="Box/BoardAligned/Bumpers" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, 0, 1, -2.5, -1.49012e-08, -1.5 )
+
+[node name="Bumper4" parent="Box/BoardAligned/Bumpers" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 0, 1, -2.5, 2.98023e-08, -4.5 )
+
+[node name="Bumper3" parent="Box/BoardAligned/Bumpers" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, 0, 1, -0.5, 8.9407e-08, -3 )
+
+[node name="Bumper5" parent="Box/BoardAligned/Bumpers" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 0, 1, 1.5, 2.98023e-08, -4.5 )
+
+[node name="Triggers" type="Spatial" parent="Box/BoardAligned"]
+visible = false
+
+[node name="MultiTrigger" parent="Box/BoardAligned/Triggers" instance=ExtResource( 12 )]
+transform = Transform( 0.984808, -2.75152e-09, 0.173648, 7.45058e-09, 1, 1.49012e-08, -0.173648, 0, 0.984808, -1.45008, -2.98023e-07, 3.47061 )
+
+[node name="MultiTrigger2" parent="Box/BoardAligned/Triggers" instance=ExtResource( 12 )]
+transform = Transform( 0.984808, -1.48705e-08, -0.173648, 1.39698e-08, 1, 7.45058e-09, 0.173648, 0, 0.984808, 0.449922, -3.27826e-07, 3.47061 )
+
+[node name="Trigger" parent="Box/BoardAligned/Triggers" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, -4.47035e-08, -1, 0, 1, -4.47035e-08, 0, 0.4, -8 )
+
+[node name="Trigger2" parent="Box/BoardAligned/Triggers" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, -4.47035e-08, -1, 0, 1, -4.47035e-08, -1.1, 0.4, -8 )
+
+[node name="Trigger3" parent="Box/BoardAligned/Triggers" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, -4.47035e-08, -1, 0, 1, -4.47035e-08, 1.1, 0.4, -8 )
+
+[node name="Trigger4" parent="Box/BoardAligned/Triggers" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16184, 0, 0 )
+
+[node name="BoxAligned" type="Spatial" parent="Box"]
+
+[node name="SimpleSlope" parent="Box/BoxAligned" instance=ExtResource( 6 )]
+transform = Transform( -9.83506e-08, 0, -2.25, 0, 2.25, 0, 2.25, 0, -9.83506e-08, 4.5, 0.6, -8 )
+
+[node name="SimpleSlope2" parent="Box/BoxAligned" instance=ExtResource( 6 )]
+transform = Transform( 2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, -4.5, 0.6, -8 )
+
+[node name="Drain" parent="Box/BoxAligned" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.757429, -0.354228, 7.80386 )
+
+[node name="ReserveBallsLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -111.0
+margin_right = -4.0
+margin_bottom = 14.0
+text = "Reserve Balls:"
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Score:"
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
