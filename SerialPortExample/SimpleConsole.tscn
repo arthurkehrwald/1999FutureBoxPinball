@@ -5,12 +5,18 @@
 
 [node name="Control" type="Control"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LineEdit" type="LineEdit" parent="."]
 margin_left = 43.0
 margin_top = 85.3383
 margin_right = 457.0
 margin_bottom = 119.338
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SendButton" type="Button" parent="."]
 margin_left = 494.0
@@ -27,6 +33,9 @@ margin_bottom = 468.503
 hint_tooltip = "Baudrate selection is what will open the port
 "
 toggle_mode = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Baudrate" type="Label" parent="."]
 margin_left = 374.168
@@ -61,6 +70,9 @@ margin_right = 449.164
 margin_bottom = 398.671
 bbcode_enabled = true
 scroll_following = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CheckBox" type="CheckBox" parent="."]
 margin_left = 500.438
