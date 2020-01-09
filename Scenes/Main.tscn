@@ -155,7 +155,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ArthurTestCube" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63686, 0, 3.23907 )
 mesh = SubResource( 1 )
 material/0 = null
