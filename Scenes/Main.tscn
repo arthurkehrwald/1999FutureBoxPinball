@@ -155,8 +155,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+
+[node name="marcohugecube" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77682, 1.21719, -4.94845 )
+
 [node name="ArthurTestCube2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.556, 0, 0 )
+
 
 mesh = SubResource( 1 )
 material/0 = null
