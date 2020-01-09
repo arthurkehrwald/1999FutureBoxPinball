@@ -24,6 +24,9 @@ margin_top = 78.3383
 margin_right = 553.0
 margin_bottom = 130.338
 text = "Send"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="OptionButton" type="OptionButton" parent="."]
 margin_left = 454.168
@@ -55,6 +58,9 @@ margin_right = 262.168
 margin_bottom = 469.503
 hint_tooltip = "Refresh Port list"
 text = "R"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PortList" type="OptionButton" parent="."]
 margin_left = 106.168

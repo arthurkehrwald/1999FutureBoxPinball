@@ -45,14 +45,15 @@ func _physics_process(delta):
 			#global_transform.origin = start_pos
 			#is_at_start = true
 	
-	for i in PORT.list_ports():
-		if i == "COM3":
-		   port = i
+	#for i in PORT.list_ports():
+		#if i == "COM7":
+		  # port = i
 
-	PORT.open(port, 9600, 1000)
+	#PORT.open(port, 9600, 1000)
 	
-	$RichTextLabel.add_text(PORT.read())
+	#$RichTextLabel.add_text(PORT.read())
 	#serialData = PORT.read()
+	#serialData = com.readline(PORT)
 	
 	
 	

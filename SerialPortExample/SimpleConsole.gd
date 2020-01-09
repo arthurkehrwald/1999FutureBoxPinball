@@ -36,6 +36,7 @@ func _on_OptionButton_item_selected(ID):
 	else:
 		print("You must select a port first")
 	set_physics_process(true)
+	data = PORT.get_available()
 
 func _on_UpdateButton_pressed(): #Updates the port list
 	$PortList.clear()

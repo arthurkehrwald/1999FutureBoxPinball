@@ -3,9 +3,6 @@
 [ext_resource path="res://bin/GDsercomm.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-
 resource_name = "SERCOMM"
 class_name = "SERCOMM"
 library = ExtResource( 1 )
-_sections_unfolded = [ "Resource" ]
-
