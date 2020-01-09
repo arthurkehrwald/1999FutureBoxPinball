@@ -33,6 +33,10 @@ GameState="*res://Scripts/GameState.gd"
 3d_physics/layer_6="rollovers"
 3d_physics/layer_7="drain"
 
+[physics]
+
+3d/physics_engine="Bullet"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

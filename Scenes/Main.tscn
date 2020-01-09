@@ -17,8 +17,7 @@
 [ext_resource path="res://Scripts/ScoreLabel.gd" type="Script" id=15]
 [ext_resource path="res://Scripts/ReserveBallsLabel.gd" type="Script" id=16]
 [ext_resource path="res://Scenes/Drain.tscn" type="PackedScene" id=17]
-
-[sub_resource type="CubeMesh" id=1]
+[ext_resource path="res://Scenes/DefaultBall.tscn" type="PackedScene" id=18]
 
 [node name="Main" type="Spatial"]
 
@@ -30,15 +29,16 @@ fov = 55.0691
 [node name="WeirdCamera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 12, 12 )
 projection = 2
-current = true
 fov = 55.0691
 size = 5.04
 near = 0.47
 script = ExtResource( 14 )
 
+[node name="DefaultBall" parent="." instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.838808, 1.16207, -6.10194 )
+
 [node name="Ball" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12365, -0.067045, 3.4016 )
-gravity_scale = 10.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.722953, 1.61625, -6.08588 )
 
 [node name="Box" parent="." instance=ExtResource( 2 )]
 
@@ -50,10 +50,10 @@ transform = Transform( 1, 0, 0, 0, 1, -5.21541e-08, 0, 0, 1, 4.1, 0, 4 )
 max_distance = 3.0
 
 [node name="Flipper" parent="Box/BoardAligned" instance=ExtResource( 4 )]
-transform = Transform( 0.939693, 0, -0.34202, 0, 1, -2.23517e-08, 0.34202, 0, 0.939693, -2.04366, -2.98023e-07, 6.48047 )
+transform = Transform( 0.939693, 0, -0.34202, 0, 1, -2.23517e-08, 0.34202, 0, 0.939693, -2.04366, 0, 6.52687 )
 
 [node name="Flipper_R" parent="Box/BoardAligned" instance=ExtResource( 5 )]
-transform = Transform( 0.939693, 0, 0.34202, 0, 1, -2.98023e-08, -0.34202, 0, 0.939693, 0.98794, -1.78814e-07, 6.5316 )
+transform = Transform( 0.939693, 0, 0.34202, 0, 1, -2.98023e-08, -0.34202, 0, 0.939693, 0.98794, 0, 6.578 )
 
 [node name="Static" type="Spatial" parent="Box/BoardAligned"]
 transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0 )
@@ -83,6 +83,7 @@ transform = Transform( 1, 3.70577e-22, 5.0822e-21, -3.70577e-22, 1, -1.04308e-07
 transform = Transform( 1, 0, 1.27055e-21, 0, 1, 0, 0, 0, 1, 2, -5.06639e-07, 4.9 )
 
 [node name="Bumpers" type="Spatial" parent="Box/BoardAligned"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.28472, 0.287376 )
 
 [node name="Bumper" parent="Box/BoardAligned/Bumpers" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, -7.45058e-09, 1, -0.493, 0, -0.004 )
@@ -132,7 +133,7 @@ transform = Transform( -9.83506e-08, 0, -2.25, 0, 2.25, 0, 2.25, 0, -9.83506e-08
 transform = Transform( 2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, -4.5, 0.6, -8 )
 
 [node name="Drain" parent="Box/BoxAligned" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.757429, -0.354228, 7.80386 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.757429, 2.81074, 7.80386 )
 
 [node name="ReserveBallsLabel" type="Label" parent="."]
 anchor_left = 1.0
@@ -154,8 +155,3 @@ script = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ArthurTestCube" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63686, 0, 3.23907 )
-mesh = SubResource( 1 )
-material/0 = null
