@@ -8,6 +8,7 @@ var start_pos = Vector3()
 var	max_pos = Vector3()
 var move_progress = 0.0
 var is_at_start = true
+var pos;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

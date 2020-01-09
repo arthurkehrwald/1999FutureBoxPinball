@@ -9,7 +9,6 @@ onready var com=$Com
 
 var port
 var data
-var intData
 
 func _ready():
 	PORT.close()
@@ -25,6 +24,5 @@ func _ready():
 func _physics_process(delta): 
 	if PORT.get_available()>0:
 		for i in range(PORT.get_available()):
-			print(PORT.read())
-			#data = PORT.read()
-			#intData = int(data);
+			data = int(PORT.read())
+			$RichTextLabel.add_text(String(data))
