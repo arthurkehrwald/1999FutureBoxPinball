@@ -3,7 +3,7 @@
 [ext_resource path="res://SerialPortExample/Com.gd" type="Script" id=1]
 [ext_resource path="res://SerialPortExample/SerialReaderTest.gd" type="Script" id=2]
 
-[node name="Control" type="Control"]
+[node name="SerialReader" type="Control"]
 margin_right = 78.0
 margin_bottom = 71.0
 script = ExtResource( 2 )

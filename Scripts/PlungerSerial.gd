@@ -1,14 +1,5 @@
 extends KinematicBody
 
-#setting up the serial port reader
-const SERCOMM = preload("res://bin/GDsercomm.gdns")
-onready var PORT = SERCOMM.new()
-
-onready var com=$Com 
-
-var port
-var serialData
-
 export var windup_speed = 3.0
 export var release_speed = 10.0
 export var max_distance = 5.0
@@ -44,18 +35,6 @@ func _physics_process(delta):
 		#else:
 			#global_transform.origin = start_pos
 			#is_at_start = true
-	
-	#for i in PORT.list_ports():
-		#if i == "COM7":
-		  # port = i
-
-	#PORT.open(port, 9600, 1000)
-	
-	#$RichTextLabel.add_text(PORT.read())
-	#serialData = PORT.read()
-	#serialData = com.readline(PORT)
-	
-	
 	
 	set_translation(start_pos.linear_interpolate(max_pos, move_progress))
 		
