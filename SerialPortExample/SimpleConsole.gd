@@ -8,6 +8,7 @@ onready var com=$Com
 #use it as node since script alone won't have the editor help
 
 var port
+var data
 
 func _ready():
 	#adding the baudrates options
@@ -21,6 +22,7 @@ func _ready():
 func _physics_process(delta): 
 	if PORT.get_available()>0:
 		for i in range(PORT.get_available()):
+			#data = com.redline(port)
 			$RichTextLabel.add_text(PORT.read())
 
 func _on_SendButton_pressed():
