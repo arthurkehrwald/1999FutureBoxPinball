@@ -9,26 +9,20 @@ onready var com=$Com
 
 var port
 var data
-var label
-var sprite
 
 func _ready():
-	sprite = $Sprite
-	label = get_node("Label")
+	set_physics_process(false)
 	PORT.close()
-	#for index in PORT.list_ports():
-	#	if index == "COM7":
-	#		port = index
-
-	PORT.open("COM7", 9600,1000)
-
+	PORT.open("COM7",9600,1000)
+	set_physics_process(true)
 #_physics_process may lag with lots of characters, but is the simplest way
 #for best speed, you can use a thread
 #do not use _process due to fps being too high
 func _physics_process(delta): 
 	if PORT.get_available()>0:
-		for i in range(PORT.get_available()):
-			data = PORT.read()
-			#print(PORT.read())
-			sprite.set_position(Vector2(data, data)*10);
-			label.set_text(String(PORT.read()))
+		#for i in range(PORT.get_available()):
+		data = PORT.read()
+		#$RichTextLabel.add_text(String(int(data)) + "\n")
+		if(data!= "0"):
+			$Sprite.set_position(Vector2(data,data) * 10)
+

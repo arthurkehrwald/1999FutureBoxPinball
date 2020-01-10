@@ -20,9 +20,9 @@ func _ready():
 #for best speed, you can use a thread
 #do not use _process due to fps being too high
 func _physics_process(delta): 
+	print(PORT.get_available())
 	if PORT.get_available()>0:
 		for i in range(PORT.get_available()):
-			#data = com.redline(port)
 			$RichTextLabel.add_text(PORT.read())
 
 func _on_SendButton_pressed():
