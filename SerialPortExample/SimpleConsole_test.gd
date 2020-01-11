@@ -22,7 +22,9 @@ func _physics_process(delta):
 	if PORT.get_available()>0:
 		#for i in range(PORT.get_available()):
 		data = PORT.read()
-		#$RichTextLabel.add_text(String(int(data)) + "\n")
-		if(data!= "0"):
-			$Sprite.set_position(Vector2(data,data) * 10)
+		$RichTextLabel.add_text(data)
+		print(data.get_type())
+		print(typeof(data))
+		#if(data!= "0"):
+		#	$Sprite.set_position(Vector2(data,data) * 10)
 
