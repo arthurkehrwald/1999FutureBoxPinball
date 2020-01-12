@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/BossHealthBar.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Bar.tscn" type="PackedScene" id=2]
+
+[node name="BossHealthBar" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -200.0
+margin_top = 20.0
+margin_bottom = 50.0
+tint_progress = Color( 1, 0.0313726, 0.0313726, 1 )
+nine_patch_stretch = true
+script = ExtResource( 1 )

@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Plunger.gd" type="Script" id=1]
-[ext_resource path="res://Materials/light_blue_material.tres" type="Material" id=2]
+[ext_resource path="res://Materials/light_blue_test.tres" type="Material" id=2]
+[ext_resource path="res://Meshes/Wireframe/cube_wireframe.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.5, 0.471, 2 )
@@ -21,3 +23,8 @@ shape = SubResource( 1 )
 transform = Transform( 0.3, 0, 0, 0, 0.2, 0, 0, 0, 0.3, 0, 0.2, 0.25 )
 mesh = SubResource( 2 )
 material/0 = ExtResource( 2 )
+
+[node name="Wireframe" type="MeshInstance" parent="MeshInstance"]
+mesh = ExtResource( 3 )
+material/0 = null
+script = ExtResource( 4 )

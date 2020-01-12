@@ -3,4 +3,6 @@
 [ext_resource path="res://Textures/checkerboard.png" type="Texture" id=1]
 
 [resource]
+flags_unshaded = true
+albedo_color = Color( 1, 0, 0.890196, 1 )
 albedo_texture = ExtResource( 1 )

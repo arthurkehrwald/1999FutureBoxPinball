@@ -1,7 +1,7 @@
 extends Spatial
 
 export var all_hit_color = Color()
-export var score_value = 500
+export var money_value = 500
 
 var child_trigger_count = 0
 var child_triggers_hit = 0
@@ -17,8 +17,8 @@ func _on_ChildTrigger_hit():
 	child_triggers_hit += 1
 	if child_triggers_hit == child_trigger_count:
 		$ResetTimer.start()
+		GameState.set_player_money(GameState.player_money + money_value)
 		emit_signal("all_hit", all_hit_color)
-		GameState.set_score(GameState.current_score + score_value)
 
 func _on_ChildTrigger_reset():
 	child_triggers_hit -= 1

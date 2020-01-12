@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Meshes/slingshot.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Materials/mat_white_unlit.tres" type="Material" id=2]
+[ext_resource path="res://Materials/light_blue_test.tres" type="Material" id=2]
 [ext_resource path="res://Scenes/SlingshotTrigger.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=4]
+[ext_resource path="res://Meshes/Wireframe/slingshot_wireframe.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=6]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.119733
@@ -21,6 +24,12 @@ collision_layer = 2
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="Wireframe" type="MeshInstance" parent="MeshInstance"]
+mesh = ExtResource( 5 )
+material/0 = null
+script = ExtResource( 6 )
 
 [node name="CollisionShapeCylinder1" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.934, 0.25, 0.58 )

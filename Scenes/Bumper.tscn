@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Bumper.gd" type="Script" id=1]
-[ext_resource path="res://Materials/mat_white_unlit.tres" type="Material" id=2]
+[ext_resource path="res://Materials/white_unlit.tres" type="Material" id=2]
+[ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=3]
+[ext_resource path="res://Meshes/Wireframe/bumper_wireframe.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=5]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.5
@@ -21,4 +24,10 @@ shape = SubResource( 1 )
 transform = Transform( 0.5, 0, 0, 0, 0.3, 0, 0, 0, 0.5, 0, 0.3, 0 )
 mesh = SubResource( 2 )
 material/0 = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Wireframe" type="MeshInstance" parent="MeshInstance"]
+mesh = ExtResource( 4 )
+material/0 = null
+script = ExtResource( 5 )
 [connection signal="body_entered" from="." to="." method="_on_Bumper_body_entered"]
