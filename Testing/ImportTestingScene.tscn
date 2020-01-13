@@ -73,4 +73,3 @@ material/0 = ExtResource( 3 )
 
 [node name="Ball" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96, 0, 0 )
-mode = 1

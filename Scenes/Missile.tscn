@@ -1,0 +1,46 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/Missile.gd" type="Script" id=1]
+[ext_resource path="res://Meshes/boss_missile.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=3]
+[ext_resource path="res://Meshes/Wireframe/boss_missile_wireframe.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://Materials/black_unlit.tres" type="Material" id=5]
+[ext_resource path="res://Materials/ultraviolet_additive.tres" type="Material" id=6]
+[ext_resource path="res://Animations/missile_animation_02.tres" type="Animation" id=7]
+[ext_resource path="res://Animations/missile_animation_01.tres" type="Animation" id=8]
+[ext_resource path="res://Animations/missile_animation_03.tres" type="Animation" id=9]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.196949
+height = 0.266283
+
+[node name="Missile" type="Area"]
+transform = Transform( 0.895329, -0.429305, 0.118667, 0.41344, 0.900147, 0.137122, -0.165685, -0.0737073, 0.98342, 0.872658, 2.06805, -1.38382 )
+collision_layer = 128
+collision_mask = 2565
+script = ExtResource( 1 )
+speed = 0.5
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 5 )
+
+[node name="Wireframe" type="MeshInstance" parent="MeshInstance"]
+mesh = ExtResource( 4 )
+material/0 = null
+script = ExtResource( 3 )
+
+[node name="Wireframe2" type="MeshInstance" parent="MeshInstance"]
+visible = false
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "missile_animation_01"
+anims/missile_animation_01 = ExtResource( 8 )
+anims/missile_animation_02 = ExtResource( 7 )
+anims/missile_animation_03 = ExtResource( 9 )
+[connection signal="body_entered" from="." to="." method="_on_Missile_body_entered"]

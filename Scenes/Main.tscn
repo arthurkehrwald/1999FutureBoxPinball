@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Box.tscn" type="PackedScene" id=2]
@@ -20,6 +20,10 @@
 [ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=21]
+
+[sub_resource type="Environment" id=3]
+background_mode = 1
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -31,22 +35,22 @@ ambient_light_color = Color( 1, 1, 1, 1 )
 [node name="Main" type="Spatial"]
 
 [node name="NormalCamera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.565962, 0.824431, 0, -0.824431, 0.565962, 0, 12, 10 )
+transform = Transform( 1, 0, 0, 0, 0.984102, -0.177602, 0, 0.177602, 0.984102, -0.552408, -2.06092, 7.13899 )
+environment = SubResource( 3 )
 current = true
 fov = 80.0
 
 [node name="WeirdCamera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 12.57, 8.632 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 13.525, 8.462 )
 environment = SubResource( 2 )
 projection = 2
-current = true
 fov = 55.0691
 size = 4.87
 near = 1.0
 script = ExtResource( 14 )
 
 [node name="Ball" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.07085, -1.68853, 3.42251 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4191, -1.88694, 5.03209 )
 
 [node name="Box" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
@@ -55,8 +59,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
 transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871558, 0.996195, 0, 0, 0 )
 
 [node name="Plunger" parent="Box/BoardAligned" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, -5.21541e-08, 0, 0, 1, 4.1, 0, 4 )
-max_distance = 3.0
+transform = Transform( 1, 0, 0, 0, 1, -5.21541e-08, 0, 0, 1, 4.1, -1.19209e-07, 5.4 )
+max_distance = 1.0
 
 [node name="Flipper" parent="Box/BoardAligned" instance=ExtResource( 4 )]
 transform = Transform( 0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, -2.04366, 0, 6.52687 )
@@ -71,10 +75,13 @@ transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0 )
 transform = Transform( -3.93403e-07, -1.3027e-15, 1.7, -2.98023e-07, 1, -2.4606e-16, -9, -3.31137e-08, -7.43094e-08, -4.5, 0, 5 )
 
 [node name="SimpleSlope_R" parent="Box/BoardAligned/Static" instance=ExtResource( 7 )]
-transform = Transform( -3.93403e-07, 2.97243e-15, -1.7, 5.96046e-07, 1, 1.3182e-16, 9, -6.62273e-08, -7.43094e-08, 3.3, 2.98023e-08, 5 )
+transform = Transform( -3.93403e-07, 2.97243e-15, -1.7, 7.15256e-07, 1, -8.88178e-16, 9, -6.70552e-08, -7.43094e-08, 3.3, 2.38419e-07, 4.6 )
 
 [node name="SimpleCube" parent="Box/BoardAligned/Static" instance=ExtResource( 8 )]
-transform = Transform( 1, -2.69008e-08, -1.45688e-13, 2.69008e-08, 1, 0, 8.21565e-15, 0, 17.733, 3.5, -2.38419e-07, 4.24607 )
+transform = Transform( 1, -2.69008e-08, -7.28441e-14, 2.69008e-08, 1, 0, 8.21565e-15, 0, 8.8665, 3.5, 1.19209e-07, 2.84607 )
+
+[node name="SimpleCube4" parent="Box/BoardAligned/Static" instance=ExtResource( 8 )]
+transform = Transform( 1, -2.69008e-08, -5.09908e-14, 2.69008e-08, 1, 0, 8.21565e-15, 0, 6.20655, 3.5, -3.57628e-07, 6.84607 )
 
 [node name="SimpleCube2" parent="Box/BoardAligned/Static" instance=ExtResource( 8 )]
 transform = Transform( 3.63731, 1.5768e-08, 0.5, -1.04308e-07, 1, 7.45058e-09, -2.1, -1.49012e-08, 0.866025, 1.92252, -8.9407e-07, 5.87787 )
@@ -87,6 +94,9 @@ transform = Transform( 0.7, 0, 0, -1.32349e-23, 0.7, 0, -4.23516e-21, 0, 0.7, -2
 
 [node name="CurvedSlope" parent="Box/BoardAligned/Static/CurvedRamp" instance=ExtResource( 17 )]
 transform = Transform( 1, -2.64698e-23, 6.35275e-22, -2.64698e-23, 1, -7.45058e-09, 4.23516e-22, 1.49012e-08, 1, 4.28571, 0, 0 )
+
+[node name="Ball Feed" parent="Box/BoardAligned/Static" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 1.90582e-21, 0, 1, 0, 0, 0, 1, 3.2, -8.34465e-07, 5 )
 
 [node name="Slingshots" type="Spatial" parent="Box/BoardAligned"]
 transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0 )
@@ -132,7 +142,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16184, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.659, 0, 7.515 )
 
 [node name="Boss" parent="Box/BoardAligned/Actors" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -4 )
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.5, 0, -4 )
 
 [node name="BoxAligned" type="Spatial" parent="Box"]
 
@@ -143,6 +153,7 @@ transform = Transform( -9.83506e-08, 0, -2.25, 0, 2.25, 0, 2.25, 0, -9.83506e-08
 transform = Transform( 2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, -4.5, 0.6, -8 )
 
 [node name="ScoreLabel" type="Label" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 14.0
 text = "Score:"
@@ -152,5 +163,6 @@ __meta__ = {
 }
 
 [node name="HUD" parent="." instance=ExtResource( 19 )]
+visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

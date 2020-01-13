@@ -64,6 +64,11 @@ global_reset={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
  ]
 }
+boss_fire_three_missiles={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -74,7 +79,11 @@ global_reset={
 3d_physics/layer_5="bumpers"
 3d_physics/layer_6="rollovers"
 3d_physics/layer_7="drain"
-3d_physics/layer_8="actor"
+3d_physics/layer_8="missiles"
+3d_physics/layer_9="bombs"
+3d_physics/layer_10="player_ship"
+3d_physics/layer_11="boss"
+3d_physics/layer_12="enemy_ships"
 
 [physics]
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/PlayerShip.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=2]
 [ext_resource path="res://Materials/light_blue_test.tres" type="Material" id=3]
-
+[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=4]
+[ext_resource path="res://Meshes/Wireframe/cube_wireframe.obj" type="ArrayMesh" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 0.5, 0.3 )
@@ -11,7 +12,7 @@ extents = Vector3( 1, 0.5, 0.3 )
 [sub_resource type="CubeMesh" id=2]
 
 [node name="PlayerShip" type="StaticBody"]
-collision_layer = 128
+collision_layer = 512
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -24,8 +25,13 @@ mesh = SubResource( 2 )
 material/0 = ExtResource( 3 )
 script = ExtResource( 2 )
 
+[node name="Wireframe" type="MeshInstance" parent="MeshInstance"]
+mesh = ExtResource( 5 )
+material/0 = null
+script = ExtResource( 4 )
+
 [node name="HitboxArea" type="Area" parent="."]
-collision_layer = 128
+collision_layer = 512
 
 [node name="HitboxShape" type="CollisionShape" parent="HitboxArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )

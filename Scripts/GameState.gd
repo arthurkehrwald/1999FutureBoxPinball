@@ -1,7 +1,7 @@
 extends Node
 
 # Balancing variables---------------------
-const START_PLAYER_HEALTH = 70
+const START_PLAYER_HEALTH = 100
 const MAX_PLAYER_HEALTH = 100
 const START_PLAYER_MONEY = 200
 const MAX_PLAYER_MONEY = 1000
@@ -52,9 +52,9 @@ func global_init():
 	emit_signal("set_wireframe_material", pink_unlit)
 	emit_signal("set_collision_object_material", light_blue)
 	emit_signal("toggle_nightmode", true)
+	nightmode_enabled = true
 	
 func local_init():
-	print("init game")
 	set_player_health(START_PLAYER_HEALTH)
 	set_player_money(START_PLAYER_MONEY)
 	set_boss_health(START_BOSS_HEALTH)	

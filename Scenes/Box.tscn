@@ -33,7 +33,7 @@ extents = Vector3( 4.5, 1, 8 )
 
 [node name="Wall1" type="StaticBody" parent="."]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 4.5, 0, 0 )
-collision_layer = 2
+collision_layer = 258
 physics_material_override = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Wall1"]
@@ -60,7 +60,7 @@ script = ExtResource( 4 )
 
 [node name="Wall2" type="StaticBody" parent="."]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -4.5, 0, 0 )
-collision_layer = 2
+collision_layer = 258
 physics_material_override = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Wall2"]
@@ -87,7 +87,7 @@ script = ExtResource( 4 )
 
 [node name="Wall3" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8 )
-collision_layer = 2
+collision_layer = 258
 physics_material_override = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Wall3"]
@@ -114,7 +114,7 @@ script = ExtResource( 4 )
 
 [node name="Wall4" type="StaticBody" parent="."]
 transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 0, -8 )
-collision_layer = 2
+collision_layer = 258
 physics_material_override = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Wall4"]
@@ -141,7 +141,7 @@ script = ExtResource( 4 )
 
 [node name="Floor" type="StaticBody" parent="."]
 transform = Transform( -7.02442e-07, -9, 1.40336e-14, 1.4006, -3.42874e-08, 0.996195, -16.0088, 3.91907e-07, 0.0871562, 0, 0, -0.009 )
-collision_layer = 2
+collision_layer = 258
 collision_mask = 0
 physics_material_override = SubResource( 5 )
 
@@ -163,6 +163,7 @@ shape = SubResource( 7 )
 
 [node name="Ceiling" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+collision_layer = 258
 
 [node name="CollisionShape" type="CollisionShape" parent="Ceiling"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )

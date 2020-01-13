@@ -2,7 +2,5 @@
 
 [ext_resource path="res://Testing/ProcessTest.gd" type="Script" id=1]
 
-
-
 [node name="ProcessTest" type="Spatial"]
 script = ExtResource( 1 )

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Flipper.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/flipper.obj" type="ArrayMesh" id=2]
-[ext_resource path="res://Materials/light_blue_test.tres" type="Material" id=3]
+[ext_resource path="res://Materials/black_unlit.tres" type="Material" id=3]
 [ext_resource path="res://Meshes/Wireframe/flipper_wireframe.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=5]
 
