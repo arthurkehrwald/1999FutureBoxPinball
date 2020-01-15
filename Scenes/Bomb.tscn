@@ -40,7 +40,7 @@ one_shot = true
 monitoring = false
 monitorable = false
 collision_layer = 256
-collision_mask = 2688
+collision_mask = 3968
 
 [node name="ExplosionShape" type="CollisionShape" parent="ExplosionArea"]
 shape = SubResource( 4 )

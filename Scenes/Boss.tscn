@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Boss.gd" type="Script" id=1]
 [ext_resource path="res://Materials/light_blue_test.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=3]
 [ext_resource path="res://Meshes/Wireframe/cube_wireframe.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/BossMissileGun.tscn" type="PackedScene" id=7]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 0.6, 1 )
@@ -14,9 +16,6 @@ extents = Vector3( 1, 0.6, 1 )
 [node name="Boss" type="StaticBody"]
 collision_layer = 1024
 script = ExtResource( 1 )
-bomb_fire_rate = 200
-bomb_muzzle_velocity = 5
-missile_fire_rate = 200
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0 )
@@ -35,26 +34,18 @@ script = ExtResource( 5 )
 
 [node name="HitboxArea" type="Area" parent="."]
 collision_layer = 1024
+collision_mask = 257
 
 [node name="HitboxShape" type="CollisionShape" parent="HitboxArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0 )
 shape = SubResource( 1 )
 
-[node name="RightMuzzle" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 1.3, 1, 0 )
+[node name="BossBombGun" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 1.5, 0.6, 0 )
 
-[node name="MissileMuzzle" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.352 )
+[node name="BossBombGun2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, -1.5, 0.6, 0 )
 
-[node name="LeftMuzzle" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, -1.3, 1, 0 )
-
-[node name="BombShootTimer" type="Timer" parent="."]
-
-[node name="MissileShootTimer" type="Timer" parent="."]
-
-[node name="MissileBurstTimer" type="Timer" parent="."]
-wait_time = 0.3
+[node name="BossMissileGun" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5 )
 [connection signal="body_entered" from="HitboxArea" to="." method="_on_HitboxArea_body_entered"]
-[connection signal="timeout" from="BombShootTimer" to="." method="_on_BombShootTimer_timeout"]
-[connection signal="timeout" from="MissileShootTimer" to="." method="_on_MissileShootTimer_timeout"]

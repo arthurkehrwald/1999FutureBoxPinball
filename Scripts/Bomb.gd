@@ -1,8 +1,7 @@
 extends RigidBody
 
 export var fuse_time = 5
-export var damage_to_player = 10
-export var damage_to_boss = 10
+export var chain_explosion_delay = .2
 
 const explosion_hitreg_duration = .1
 
@@ -12,9 +11,14 @@ func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
 	
 func _ready():
+	add_collision_exception_with($ExplosionArea)
 	$Timer.wait_time = fuse_time
 	$Timer.start()
-
+	
+func _on_GunHitboxArea_body_exited(body, gun_static_body):
+	if body == self and get_collision_exceptions().has(gun_static_body):
+		remove_collision_exception_with(gun_static_body)
+		
 func _on_Timer_timeout():
 	if is_exploding:
 		self.queue_free()
@@ -25,15 +29,12 @@ func _on_Timer_timeout():
 		$Timer.start()
 	
 func _on_ExplosionArea_body_entered(body):
-	if body.get_collision_layer() == 1024:
-		GameState.set_boss_health(GameState.boss_health - damage_to_boss)
-		print ("boss go boom")
-		return
-		
-	if body.get_collision_layer() == 512:
-		GameState.set_player_health(GameState.player_health - damage_to_player)
-		print ("player go boom")
-		return
+	body._on_Bomb_explosion_hit()
+	
+func _on_Bomb_explosion_hit():
+	$Timer.stop()
+	$Timer.wait_time(chain_explosion_delay)
+	$Timer.start()
 	
 func _on_GameState_global_reset():
 	self.queue_free()

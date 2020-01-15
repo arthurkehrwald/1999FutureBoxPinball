@@ -42,4 +42,4 @@ transform = Transform( 1, 0, 0, 0, 1, -6.55651e-07, 0, -7.45058e-08, 10.7115, 0.
 transform = Transform( 1, 0, 0, 0, 1, -6.55651e-07, 0, -7.45058e-08, 10.7115, -0.69505, -0.0478572, 6.30511 )
 
 [node name="Boss" parent="BoardAligned" instance=ExtResource( 5 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )

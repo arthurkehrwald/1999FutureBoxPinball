@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/BossGun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/BossBombGun.gd" type="Script" id=2]
+
+[node name="BossBombGun" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+bomb_fire_rate = 1
+[connection signal="body_exited" from="HitboxArea" to="." method="_on_HitboxArea_body_exited"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
