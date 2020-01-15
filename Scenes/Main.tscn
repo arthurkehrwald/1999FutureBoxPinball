@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/BoxV2.tscn" type="PackedScene" id=2]
@@ -25,6 +25,12 @@
 [sub_resource type="Environment" id=1]
 background_mode = 1
 
+[sub_resource type="Curve3D" id=2]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 2.98912, 1.20862, -0.96394, 2.68775, -0.0840614, -0.210128, -2.68775, 0.0840614, 0.210128, 0.812746, -0.313743, 0.0981646 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
 [node name="Main" type="Spatial"]
 
 [node name="NormalCamera" type="Camera" parent="."]
@@ -34,7 +40,7 @@ current = true
 fov = 80.0
 
 [node name="Ball" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, -1.9, 8.1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46862, -1.07675, 4.74448 )
 
 [node name="ScoreLabel" type="Label" parent="."]
 visible = false
@@ -93,11 +99,11 @@ transform = Transform( 3.63731, 1.5768e-08, 0.5, -1.04308e-07, 1, 7.45058e-09, -
 [node name="SimpleCube3" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 8 )]
 transform = Transform( 3.63731, -4.4195e-09, -0.5, 2.98023e-08, 1, 0, 2.1, 0, 0.866025, -3.00428, -7.7486e-07, 5.87788 )
 
-[node name="CurvedRamp" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 16 )]
-transform = Transform( 0.7, 0, 0, -1.32349e-23, 0.7, 0, -4.23516e-21, 0, 0.7, -2.04956, -1.19209e-07, -0.653942 )
+[node name="CurvedRamp_R" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 17 )]
+transform = Transform( 0.675883, -0.018931, -0.181172, 0.0189344, 0.69974, -0.00248011, 0.181172, -0.00250589, 0.676145, 1.3, 0, -1 )
 
-[node name="CurvedSlope" parent="Box&Camera/BoxV2/BoardAligned/Static/CurvedRamp" instance=ExtResource( 17 )]
-transform = Transform( 1, -2.64698e-23, 6.35275e-22, -2.64698e-23, 1, -7.45058e-09, 4.23516e-22, 1.49012e-08, 1, 4.28571, 0, 0 )
+[node name="CurvedRamp" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 16 )]
+transform = Transform( 0.676148, -2.64698e-23, 0.181173, -1.86265e-09, 0.7, -4.47035e-08, -0.181173, 7.45058e-09, 0.676148, -2.17, 0, -1 )
 
 [node name="Ball Feed" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 1.90582e-21, 0, 1, 0, 0, 0, 1, 3.2, -8.34465e-07, 5 )
@@ -156,3 +162,6 @@ transform = Transform( -9.83506e-08, 0, -2.25, -1.49012e-07, 2.25, 0, 2.25, 1.49
 
 [node name="SimpleSlope2" parent="Box&Camera/BoxV2/BoxAligned" instance=ExtResource( 6 )]
 transform = Transform( 2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, -4.5, -0.4, -7.6 )
+
+[node name="Path" type="Path" parent="."]
+curve = SubResource( 2 )

@@ -17,5 +17,9 @@ func _on_Missile_body_entered(body):
 	#trigger explosion fx here
 	self.queue_free()
 	
+func _on_Bomb_explosion_hit():
+	#trigger explosion fx
+	self.queue_free()	
+
 func _on_GameState_global_reset():
 	self.queue_free()

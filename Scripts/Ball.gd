@@ -29,11 +29,11 @@ func _ready():
 	set_process(false)
 	
 func _on_GameState_reset_ball():
-	teleport(start_pos)
+	teleport(start_pos, false, Vector3(.0,.0,.0))
 	
 # teleport function is from:
 # https://github.com/markopolojorgensen/godot_2d_camera_limiter/blob/all_addons/addons/movement/teleporter.gd
-func teleport(destination):
+func teleport(destination, maintain_velocity, impulse_on_exit):
 	if teleporting:
 		return
 	
@@ -54,6 +54,10 @@ func teleport(destination):
 	
 	set_physics_process(true)
 	set_sleeping(false)
+	if !maintain_velocity:
+		set_linear_velocity(Vector3(0,0,0))
+		set_angular_velocity(Vector3(0,0,0))
+	apply_central_impulse(impulse_on_exit)
 	teleporting = false
 
 func _process(delta):
@@ -74,11 +78,9 @@ func _physics_process(delta):
 		if is_airborne:
 			gravity_scale *= airborne_gravity_scale_multiplier
 			emit_signal("physics_debug_info_update", 1, 0)
-			print("takeoff")
 		else:
 			gravity_scale /= airborne_gravity_scale_multiplier
 			emit_signal("physics_debug_info_update", 0, 1)
-			print("landed")	
 			
 	
 func set_gravity_scale_based_on_speed(delta):

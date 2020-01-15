@@ -11,6 +11,9 @@ var can_be_triggered = true
 signal hit
 signal reset
 
+func _enter_tree():
+	GameState.connect("global_reset", self, "_on_GameState_global_reset")
+
 func _ready():
 	default_color = $MeshInstance.get_surface_material(0).albedo_color
 	unique_material = $MeshInstance.get_surface_material(0).duplicate()
@@ -37,3 +40,7 @@ func _on_MultiTrigger_all_hit(all_hit_color):
 func _on_MultiTrigger_all_reset():
 	$MeshInstance.get_material_override().albedo_color = default_color
 	can_be_triggered = true
+	
+func _on_GameState_global_reset():
+	unique_material = $MeshInstance.get_surface_material(0).duplicate()
+	$MeshInstance.set_material_override(unique_material)

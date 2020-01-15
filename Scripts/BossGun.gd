@@ -13,9 +13,10 @@ func _ready():
 
 func _on_HitboxArea_body_entered(body):
 	#HitboxArea only scans for impacts and bombs - no layer check necessary
-	if body.get_linear_velocity().length() > min_impact_velocity_for_stun:
-		var stun_duration = min(max_impact_stun_duration, body.get_linear_velocity().length() * impact_velocity_stun_duration_conversion_rate)
-		set_stunned(stun_duration)
+	if !get_collision_exceptions().has(body):
+		if body.get_linear_velocity().length() > min_impact_velocity_for_stun:
+			var stun_duration = min(max_impact_stun_duration, body.get_linear_velocity().length() * impact_velocity_stun_duration_conversion_rate)
+			set_stunned(stun_duration)
 
 func _on_Bomb_explosion_hit():
 	set_stunned(bomb_explosion_stun_duration)

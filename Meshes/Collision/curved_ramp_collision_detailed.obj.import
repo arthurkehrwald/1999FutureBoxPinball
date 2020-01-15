@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/curved_ramp_collision_detailed.obj-0eb0976e09bf93b42ec6ff638ea417ff.mesh"
+
+[deps]
+
+files=[ "res://.import/curved_ramp_collision_detailed.obj-0eb0976e09bf93b42ec6ff638ea417ff.mesh" ]
+
+source_file="res://Meshes/Collision/curved_ramp_collision_detailed.obj"
+dest_files=[ "res://.import/curved_ramp_collision_detailed.obj-0eb0976e09bf93b42ec6ff638ea417ff.mesh", "res://.import/curved_ramp_collision_detailed.obj-0eb0976e09bf93b42ec6ff638ea417ff.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

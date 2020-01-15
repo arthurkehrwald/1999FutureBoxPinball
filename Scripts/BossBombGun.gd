@@ -7,7 +7,7 @@ export var bomb_muzzle_velocity = 10
 
 func _ready():
 	$ShotTimer.wait_time = bomb_fire_rate
-	#$ShotTimer.start()
+	$ShotTimer.start()
 
 func _on_ShotTimer_timeout():
 	if !stunned:

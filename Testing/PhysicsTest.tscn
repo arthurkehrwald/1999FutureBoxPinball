@@ -1,22 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scenes/DefaultBall.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/CurvedRamp.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/TestBall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/BoxV2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/SimpleCube.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Testing/DebugOutputLabel.gd" type="Script" id=7]
 
 [node name="PhysicsTest" type="Spatial"]
-
-[node name="DefaultBall" parent="." instance=ExtResource( 1 )]
-visible = false
-
-[node name="Ball" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.063, 1.187, 4.64 )
-
-[node name="Box" parent="." instance=ExtResource( 3 )]
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.490873, 0.499718, -0.713671, 0, 0.819152, 0.573577, 0.871231, -0.281553, 0.4021, -4.925, 4.364, 5.002 )
@@ -29,17 +20,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BoardAligned" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0, 0 )
+[node name="BoxV2" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 0, 0 )
 
-[node name="Plunger" parent="BoardAligned" instance=ExtResource( 4 )]
+[node name="BoardAligned" type="Spatial" parent="BoxV2"]
+transform = Transform( 1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, -1.06889, 0.0146435 )
+
+[node name="Plunger" parent="BoxV2/BoardAligned" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 7.45058e-08, 0, -7.45058e-08, 1, 0, 0.152326, 5.47002 )
 
-[node name="SimpleCube" parent="BoardAligned" instance=ExtResource( 6 )]
+[node name="SimpleCube" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, -6.55651e-07, 0, -7.45058e-08, 10.7115, 0.691027, -0.0478572, 6.30511 )
 
-[node name="SimpleCube2" parent="BoardAligned" instance=ExtResource( 6 )]
+[node name="SimpleCube2" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, -6.55651e-07, 0, -7.45058e-08, 10.7115, -0.69505, -0.0478572, 6.30511 )
 
-[node name="Boss" parent="BoardAligned" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+[node name="CurvedRamp" parent="BoxV2/BoardAligned" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, -7.45058e-08, 0, 7.45058e-08, 1, 2.06958, 0.0380585, 0.00699986 )
+
+[node name="TestBall" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23514, -1.55603, 6.97177 )

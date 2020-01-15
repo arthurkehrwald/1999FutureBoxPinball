@@ -19,7 +19,7 @@ transform = Transform( 0.895329, -0.429305, 0.118667, 0.41344, 0.900147, 0.13712
 collision_layer = 128
 collision_mask = 2565
 script = ExtResource( 1 )
-speed = 0.5
+speed = 3.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

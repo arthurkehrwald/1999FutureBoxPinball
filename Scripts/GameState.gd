@@ -48,10 +48,10 @@ func _ready():
 	global_init()
 	
 func global_init():
-	emit_signal("global_reset")
 	emit_signal("set_wireframe_material", pink_unlit)
 	emit_signal("set_collision_object_material", light_blue)
 	emit_signal("toggle_nightmode", true)
+	emit_signal("global_reset")
 	nightmode_enabled = true
 	
 func local_init():
