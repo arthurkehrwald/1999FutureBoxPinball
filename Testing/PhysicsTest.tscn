@@ -17,7 +17,7 @@ flags_unshaded = true
 albedo_color = Color( 0, 1, 0.0392157, 1 )
 albedo_texture = ExtResource( 9 )
 
-[sub_resource type="SphereMesh" id=3]
+[sub_resource type="SphereMesh" id=2]
 
 [node name="PhysicsTest" type="Spatial"]
 
@@ -66,7 +66,7 @@ transform = Transform( 0.939693, 0, -0.34202, -3.72529e-09, 1, -2.23517e-08, 0.3
 transform = Transform( 0.939693, 0, 0.34202, 3.72529e-09, 1, -1.49012e-08, -0.34202, 2.98023e-08, 0.939693, 1.64429, 1.90735e-06, 6.03432 )
 
 [node name="Looping" parent="BoxV2/BoardAligned" instance=ExtResource( 11 )]
-transform = Transform( -1, 0, -3.25842e-07, 0, 1, 4.47035e-08, 3.25842e-07, 6.70552e-08, -1, -2.60536, -0.000533819, 1.96771 )
+transform = Transform( -0.843644, 0.056122, -0.533961, 0.0561219, 0.998292, 0.0162543, 0.533961, -0.0162541, -0.845353, -1.62273, 0.204344, 1.8363 )
 
 [node name="Ball2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.44323, 0, -5.63116 )
@@ -81,7 +81,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.674584, -1.24626, 5.69727 )
 airborne_gravity_scale_multiplier = 0.3
 
 [node name="MeshInstance" parent="TestBall/Ball" index="1"]
-mesh = SubResource( 3 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="Ball" parent="." instance=ExtResource( 2 )]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/PseudoPhysicsPathFollow.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/BallMesh.tscn" type="PackedScene" id=2]
@@ -13,18 +13,20 @@ _data = {
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.2, 0.2, 0.2 )
 
+[sub_resource type="SphereMesh" id=3]
+
 [node name="Looping" type="Path"]
 curve = SubResource( 1 )
 
 [node name="PathFollow" type="PathFollow" parent="."]
-transform = Transform( 0.638723, -0.769431, 0, 0.769432, 0.638722, 0, 0, 0, 0.999995, 0, 0, -2 )
-offset = 10.358
+transform = Transform( -0.909713, -0.397438, 0.119686, 0.385601, -0.702672, 0.597863, -0.153522, 0.590166, 0.792437, -0.299759, 1.63666, -0.741999 )
+offset = 4.39
 rotation_mode = 4
 loop = false
 script = ExtResource( 1 )
 
 [node name="BallReplica" parent="PathFollow" instance=ExtResource( 2 )]
-visible = false
+transform = Transform( 0.2, 0, 0, 7.45058e-09, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 
 [node name="Area" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.631775, -0.000732422, 1.91482 )
@@ -35,7 +37,7 @@ collision_mask = 257
 shape = SubResource( 2 )
 
 [node name="Exit" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.55338 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.0174 )
 
 [node name="DebugLabel" type="Label" parent="."]
 margin_right = 40.0
@@ -47,7 +49,18 @@ __meta__ = {
 format_string = "angle %s max %s"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.5
+autostart = true
+
+[node name="TestPoint1" type="MeshInstance" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="TestPoint2" type="MeshInstance" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null
 [connection signal="angle_changed" from="PathFollow" to="DebugLabel" method="_on_PathFollow_angle_changed"]
 [connection signal="body_entered" from="Area" to="PathFollow" method="_on_Area_body_entered"]
 [connection signal="timeout" from="Timer" to="PathFollow" method="_on_Timer_timeout"]

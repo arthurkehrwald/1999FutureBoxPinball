@@ -14,7 +14,7 @@ var teleporting = false
 var teleport_physics_cooldown_time_remaining = 0
 
 # for setting gravity scale based on speed
-const TELEPORT_PHYSICS_COOLDOWN_BUFFER = .02
+const TELEPORT_PHYSICS_COOLDOWN_BUFFER = .001
 
 func _enter_tree():
 	GameState.connect("toggle_nightmode", self, "_on_GameState_toggle_nightmode")
@@ -27,6 +27,7 @@ func _ready():
 	set_process(false)
 	
 func _on_GameState_reset_ball():
+	set_locked(false)
 	teleport(start_pos, false, Vector3(.0,.0,.0))
 	
 # teleport function is from:
@@ -57,6 +58,14 @@ func teleport(destination, maintain_velocity, impulse_on_exit):
 		set_angular_velocity(Vector3(0,0,0))
 	apply_central_impulse(impulse_on_exit)
 	teleporting = false
+	
+func set_locked(is_locked):
+	axis_lock_linear_x = is_locked
+	axis_lock_linear_y = is_locked
+	axis_lock_linear_z = is_locked
+	axis_lock_angular_x = is_locked
+	axis_lock_angular_y = is_locked
+	axis_lock_angular_z = is_locked
 
 func _process(delta):
 	teleport_physics_cooldown_time_remaining -= delta
