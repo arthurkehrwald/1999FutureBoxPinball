@@ -1,6 +1,6 @@
 extends "res://Scripts/Ball.gd"
 
-var start_force = 20
+var start_force = 15
 var applied_force = true
 
 func _ready():

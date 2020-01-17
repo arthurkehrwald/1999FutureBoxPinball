@@ -85,6 +85,7 @@ boss_fire_three_missiles={
 3d_physics/layer_11="boss"
 3d_physics/layer_12="enemy_ships"
 3d_physics/layer_13="explosions"
+3d_physics/layer_14="force_fields"
 
 [physics]
 

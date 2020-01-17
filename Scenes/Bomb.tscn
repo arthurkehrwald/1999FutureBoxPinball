@@ -15,10 +15,10 @@ radius = 0.200338
 
 [node name="Bomb" type="RigidBody"]
 collision_layer = 4352
-collision_mask = 3999
+collision_mask = 12191
 mass = 0.8
 physics_material_override = SubResource( 1 )
-gravity_scale = 10.0
+gravity_scale = 8.0
 continuous_cd = true
 can_sleep = false
 script = ExtResource( 1 )

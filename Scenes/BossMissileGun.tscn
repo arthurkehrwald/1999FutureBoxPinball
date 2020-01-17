@@ -11,7 +11,8 @@ extents = Vector3( 0.9, 0.5, 0.4 )
 
 [node name="BossMissileGun" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-missile_fire_rate = 0.5
+shoot_on_ready = false
+fire_rate = 5
 
 [node name="CollisionShape" parent="." index="0"]
 shape = SubResource( 1 )

@@ -5,11 +5,7 @@ var missile_animation_format_string = "missile_animation_0%s"
 
 var rng = RandomNumberGenerator.new()
 
-export var missile_fire_rate = 5.0
-
 func _ready():
-		$ShotTimer.wait_time = missile_fire_rate
-		$ShotTimer.start()
 		rng.randomize()
 		
 func _process(_delta):

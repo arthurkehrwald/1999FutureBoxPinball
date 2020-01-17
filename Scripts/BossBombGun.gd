@@ -2,12 +2,7 @@ extends "res://Scripts/BossGun.gd"
 
 var bomb_scene = preload("res://Scenes/Bomb.tscn")
 
-export var bomb_fire_rate = 10
-export var bomb_muzzle_velocity = 10
-
-func _ready():
-	$ShotTimer.wait_time = bomb_fire_rate
-	$ShotTimer.start()
+export var bomb_muzzle_velocity = 5
 
 func _on_ShotTimer_timeout():
 	if !stunned:
