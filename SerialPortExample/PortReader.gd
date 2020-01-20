@@ -8,9 +8,10 @@ onready var com=$Com
 #use it as node since script alone won't have the editor help
 
 var port
-var number
 var output
-var intData = 0;
+var intData = 0
+var floatData = 0.0
+var normalizedData = 0.0
 var data = ""
 
 func _ready():
@@ -30,8 +31,13 @@ func _physics_process(delta):
 			if(raw != 10):
 				output = PoolByteArray([raw]).get_string_from_ascii()
 				data += output
-		intData = int(data)
+		#intData = int(data)
+		floatData = float(data)
 		#$RichTextLabel.add_text(data)
 		data = ""
-		#if(intData > 20 && intData < 300):
-		#	$Sprite.set_position(Vector2(intData, intData))
+		#print(floatData)
+		#print(intData)
+		if(floatData > 20 && intData < 200):
+		#	#$Sprite.set_position(Vector2(intData, intData))
+			normalizedData = (float((floatData - 21)/(199-20)))
+		#	print(normalizedData)
