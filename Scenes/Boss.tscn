@@ -41,10 +41,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0 )
 shape = SubResource( 1 )
 
 [node name="BossBombGun" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 1.5, 0.6, 0 )
+transform = Transform( 1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 1.5, 0.6, 0 )
+shoot_on_ready = false
 
 [node name="BossBombGun2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, -1.5, 0.6, 0 )
+transform = Transform( 1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, -1.5, 0.6, 0 )
+shoot_on_ready = false
 
 [node name="BossMissileGun" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5 )

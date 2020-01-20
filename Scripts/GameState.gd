@@ -62,7 +62,7 @@ func local_init():
 func _on_PlayerShip_ball_drained():
 	set_player_health(player_health - BALL_DRAINED_PLAYER_DAMAGE)
 	if player_health > 0:
-		print("reset")
+		print("GameState: ball drained reset")
 		emit_signal("reset_ball")
 	else:
 		emit_signal("game_over")
@@ -87,7 +87,7 @@ func set_player_money(new_player_money):
 
 func _process(_delta):
 	processDebugInput()
-				
+	
 func processDebugInput():
 	if Input.is_action_just_pressed("test_reload_scene"):
 		get_tree().reload_current_scene()
@@ -95,6 +95,7 @@ func processDebugInput():
 		global_init()
 		
 	if Input.is_action_just_pressed("global_reset"):
+		print("GameState: global reset")
 		local_init()
 		global_init()
 		

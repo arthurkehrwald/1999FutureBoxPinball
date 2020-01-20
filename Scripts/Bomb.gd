@@ -20,9 +20,7 @@ func _on_GunHitboxArea_body_exited(body, gun_static_body):
 		remove_collision_exception_with(gun_static_body)
 		
 func _on_Timer_timeout():
-	print("bumm?")
 	if is_exploding:
-		print("bumm")
 		owner.queue_free()
 	else:
 		is_exploding = true
@@ -42,3 +40,4 @@ func _on_Bomb_explosion_hit():
 	
 func _on_GameState_global_reset():
 	owner.queue_free()
+	pass

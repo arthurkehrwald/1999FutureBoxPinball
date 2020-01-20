@@ -9,7 +9,7 @@
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.2, 0.2, 0.2 )
 
-[node name="Looping" type="Path"]
+[node name="WireRamp" type="Path"]
 curve = ExtResource( 4 )
 
 [node name="PathFollow" type="PathFollow" parent="."]

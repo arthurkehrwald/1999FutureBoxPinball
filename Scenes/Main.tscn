@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
+[ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/BoxV2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=4]
@@ -20,6 +21,7 @@
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=22]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -60,7 +62,8 @@ transform = Transform( 1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0
 
 [node name="Plunger" parent="Box&Camera/BoxV2/BoardAligned" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, -5.21541e-08, 0, 0, 1, 4.1, -1.19209e-07, 5.4 )
-max_distance = 1.0
+release_speed = 30.0
+max_distance = 2.0
 
 [node name="Flipper" parent="Box&Camera/BoxV2/BoardAligned" instance=ExtResource( 4 )]
 transform = Transform( 0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, -2.04366, 0, 6.52687 )
@@ -90,10 +93,10 @@ transform = Transform( 3.63731, 1.5768e-08, 0.5, -1.04308e-07, 1, 7.45058e-09, -
 transform = Transform( 3.63731, -4.4195e-09, -0.5, 2.98023e-08, 1, 0, 2.1, 0, 0.866025, -3.00428, -7.7486e-07, 5.87788 )
 
 [node name="CurvedRamp_R" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 17 )]
-transform = Transform( 0.675883, -0.018931, -0.181172, 0.0189344, 0.69974, -0.00248011, 0.181172, -0.00250589, 0.676145, 1.3, 0, -1 )
+transform = Transform( 0.675883, -0.018931, -0.181172, 0.0189344, 0.69974, -0.00248009, 0.181172, -0.0025059, 0.676145, 0.994169, 0, -1 )
 
 [node name="CurvedRamp" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 16 )]
-transform = Transform( 0.676148, -2.64698e-23, 0.181173, -1.86265e-09, 0.7, -4.47035e-08, -0.181173, 7.45058e-09, 0.676148, -2.17, 0, -1 )
+transform = Transform( 0.676148, -2.64698e-23, 0.181173, -1.86265e-09, 0.7, -5.96046e-08, -0.181173, 7.45058e-09, 0.676148, -1.9898, 0, -1 )
 
 [node name="Ball Feed" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 1.90582e-21, 0, 1, 0, 0, 0, 1, 3.2, -8.34465e-07, 5 )
@@ -108,7 +111,7 @@ transform = Transform( 1, 3.70577e-22, 5.0822e-21, -3.70577e-22, 1, -1.04308e-07
 transform = Transform( 1, 0, 1.27055e-21, 0, 1, 0, 0, 0, 1, 2, -5.06639e-07, 4.9 )
 
 [node name="Bumpers" type="Spatial" parent="Box&Camera/BoxV2/BoardAligned"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70267, 1.3113e-06, -3.89201 )
+transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 1.70267, -0.99452, -3.78748 )
 
 [node name="Bumper2" parent="Box&Camera/BoxV2/BoardAligned/Bumpers" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, 0, 1, -4.73241, -0.0200427, -2.30065 )
@@ -142,7 +145,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16184, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.659, 0, 7.515 )
 
 [node name="Boss" parent="Box&Camera/BoxV2/BoardAligned/Actors" instance=ExtResource( 18 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.5, 0, -4 )
+transform = Transform( -1, 0, -3.25841e-07, 7.10543e-15, 1, 1.49012e-08, 3.25841e-07, 1.49012e-08, -1, -0.5, -1.98904, -3.79094 )
+
+[node name="LoopingLouiesLooping" parent="Box&Camera/BoxV2/BoardAligned" instance=ExtResource( 22 )]
+transform = Transform( 0.590507, 1.09136e-08, 0.807033, 2.23517e-08, 1, -2.98023e-08, -0.807033, 5.96046e-08, 0.590507, 2.72165, 0.190651, -5.71111 )
 
 [node name="BoxAligned" type="Spatial" parent="Box&Camera/BoxV2"]
 transform = Transform( 1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 0, 0 )
@@ -152,3 +158,6 @@ transform = Transform( -9.83506e-08, 0, -2.25, -1.49012e-07, 2.25, 0, 2.25, 1.49
 
 [node name="SimpleSlope2" parent="Box&Camera/BoxV2/BoxAligned" instance=ExtResource( 6 )]
 transform = Transform( 2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, -4.5, -0.4, -7.6 )
+
+[node name="BallParent" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.32465, -1.11615, 4.70952 )

@@ -2,8 +2,13 @@ extends PathFollow
 
 signal debug_info_update(angle, speed, acceleration)
 
+export var looping_louie_trigger_progress = .5
+
 var looping_body = null
+var looping_body_is_bomb = false
 var speed = 0
+var looping_body_is_waiting_at_entrance = false
+var looping_body_entered_at_entrance = false
 var looping_body_exited_at_entrance = false
 var entrance_transform = Transform()
 var exit_transform = Transform()
@@ -20,13 +25,11 @@ const SPEED_ROTATION_RATE = 6
 
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
-
+	
 func _ready():
-	set_unit_offset(0.0)
-	set_physics_process(false)
 	entrance_transform = get_node("../").get_node("EntranceArea").get_global_transform()
 	exit_transform = get_node("../").get_node("ExitArea").get_global_transform()
-
+	set_physics_process(false)
 	
 func _on_EntranceArea_body_entered(body):
 	if looping_body == null:
@@ -36,12 +39,16 @@ func _on_EntranceArea_body_entered(body):
 		if speed > 0:
 			set_unit_offset(0.0)
 			looping_body = body
+			looping_body_is_waiting_at_entrance = true
+			looping_body_entered_at_entrance = true
 			body.set_visible(false)
 			body.set_locked(true)
 			if body.get_collision_layer() == 1:
 				$BallReplica.set_visible(true)
+				looping_body_is_bomb = false
 			else:
 				$BombReplica.set_visible(true)
+				looping_body_is_bomb = true
 			set_physics_process(true)
 			
 			
@@ -53,12 +60,15 @@ func _on_ExitArea_body_entered(body):
 		if speed < 0:
 			set_unit_offset(1.0)
 			looping_body = body
+			looping_body_is_waiting_at_entrance = false
+			looping_body_entered_at_entrance = false
 			body.set_visible(false)
 			body.set_locked(true)
 			if body.get_collision_layer() == 1:
 				$BallReplica.set_visible(true)
 			else:
 				$BombReplica.set_visible(true)
+				looping_body_is_bomb = true
 			set_physics_process(true)
 
 func _on_EntranceArea_body_exited(body):
@@ -95,20 +105,37 @@ func _physics_process(delta):
 			looping_body.set_visible(true)
 			if reached_exit:
 				looping_body_exited_at_entrance = false
-				looping_body.teleport(exit_transform.origin, false, exit_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
+				#looping_body.teleport(exit_transform.origin, false, exit_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
+				looping_body.apply_central_impulse(exit_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
 			if reached_entrance:
 				looping_body_exited_at_entrance = true
-				looping_body.teleport(entrance_transform.origin, false, -entrance_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
+				#looping_body.teleport(entrance_transform.origin, false, -entrance_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
+				looping_body.apply_central_impulse(-entrance_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
 			$BallReplica.set_visible(false)
 			$BombReplica.set_visible(false)
 			set_physics_process(false)
 		else:
 			set_offset(get_offset() + speed * delta)
-			$BallReplica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
-			
+			if looping_body_is_bomb:
+				$BombReplica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
+			else:
+				$BallReplica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
+			if looping_body_is_waiting_at_entrance and get_unit_offset() > .6:
+				looping_body.teleport(exit_transform.origin, false, Vector3(0, 0, 0))
+				looping_body_is_waiting_at_entrance = false
+			elif !looping_body_is_waiting_at_entrance and get_unit_offset() < .4:
+				looping_body.teleport(entrance_transform.origin, false, Vector3(0, 0, 0))
+				looping_body_is_waiting_at_entrance = true
+	elif looping_body_is_bomb:
+		#that means the bomb exploded while it was on the rail
+		reset()
 	emit_signal("debug_info_update", incline, speed, acceleration)
 		
 func _on_GameState_global_reset():
+	reset()
+
+func reset():
+	print("loop reset")
 	set_physics_process(false)
 	set_unit_offset(0.0)
 	$BallReplica.set_visible(false)

@@ -6,10 +6,10 @@
 [ext_resource path="res://Meshes/Wireframe/curved_ramp_wireframe.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Meshes/Collision/cuved_ramp_collision_v3.tres" type="Shape" id=5]
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.636307, 1, 1.61094 )
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.164197, 0.481477, 0.518697 )
 
 [node name="CurvedRamp" type="StaticBody"]
@@ -40,7 +40,7 @@ collision_mask = 257
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 0.995509, 0, -0.0946643, 0, 1, 0, 0.0946643, 0, 0.995509, 0.0181585, 1, 0.122243 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Area2" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0665345, 0, 0 )
@@ -54,15 +54,15 @@ collision_mask = 257
 
 [node name="CollisionShape" type="CollisionShape" parent="Area2"]
 transform = Transform( 0.99945, -0.00676189, -0.0324445, 0.00105539, 0.984962, -0.172768, 0.0331249, 0.172639, 0.984428, -0.499718, 0.579141, 1.13283 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Area2"]
 transform = Transform( 0.989837, -0.00676189, -0.142044, -0.0179306, 0.984962, -0.171839, 0.141069, 0.172639, 0.974831, -0.407717, 0.895036, 0.178578 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Area2"]
 transform = Transform( 0.95482, -0.0067619, -0.297107, -0.044935, 0.984962, -0.166826, 0.293767, 0.172639, 0.940158, -0.282087, 1.17275, -0.743142 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Area3" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0665345, 0, 0 )
@@ -76,12 +76,12 @@ collision_mask = 257
 
 [node name="CollisionShape" type="CollisionShape" parent="Area3"]
 transform = Transform( 0.999669, 0.00303059, 0.0255442, 0, 0.993036, -0.117815, -0.0257233, 0.117776, 0.992707, 0.461504, 0.453305, 1.17673 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Area3"]
 transform = Transform( 0.998694, 0.00344346, -0.0509632, -0.0102281, 0.991, -0.133474, 0.0500449, 0.133821, 0.989741, 0.395992, 0.606841, 0.155998 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Area3"]
 transform = Transform( 0.952558, 0.00344345, -0.304335, -0.0439774, 0.991, -0.126435, 0.30116, 0.133821, 0.944137, 0.593247, 0.811581, -0.763922 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
