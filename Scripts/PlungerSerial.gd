@@ -1,5 +1,16 @@
 extends KinematicBody
 
+const SERCOMM = preload("res://bin/GDsercomm.gdns")
+onready var PORT = SERCOMM.new()
+
+onready var com=$Com 
+
+var port
+var number
+var output
+var intData = 0;
+var data = ""
+
 export var windup_speed = 3.0
 export var release_speed = 10.0
 export var max_distance = 5.0
@@ -12,6 +23,12 @@ var pos;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_physics_process(false)
+	PORT.close()
+	PORT.open("COM3", 9600, 1000)
+	set_physics_process(true)
+	
+	
 	start_pos = get_translation()
 	max_pos = start_pos + get_transform().basis.z.normalized() * max_distance
 
@@ -36,6 +53,15 @@ func _physics_process(delta):
 		#else:
 			#global_transform.origin = start_pos
 			#is_at_start = true
-	
-	set_translation(start_pos.linear_interpolate(max_pos, move_progress))
+			
+	if PORT.get_available()>0:
+		for i in range(PORT.get_available()):
+			var raw = PORT.read(true)
+			if(raw != 10):
+				output = PoolByteArray([raw]).get_string_from_ascii()
+				data += output
+		intData = int(data)
+		data = ""
+		if(intData > 20 && intData < 300):
+			set_translation(Vector3(intData, intData, intData))
 		
