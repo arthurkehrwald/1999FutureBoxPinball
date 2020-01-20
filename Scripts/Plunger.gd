@@ -9,7 +9,6 @@ var	max_pos = Vector3()
 var move_progress = 0.0
 var is_at_start = true
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	start_pos = get_translation()
 	max_pos = start_pos + get_transform().basis.z.normalized() * max_distance

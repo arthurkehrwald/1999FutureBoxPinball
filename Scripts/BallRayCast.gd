@@ -1,11 +1,11 @@
 extends RayCast
 
-var ball
+var parent
 
 func _ready():
-	ball = get_node("../Ball")
+	parent = get_node("../Rigidbody")
 	
 func _physics_process(_delta):
 	var t = get_transform()
-	t.origin = ball.get_transform().origin
+	t.origin = parent.get_transform().origin
 	set_transform(t)

@@ -1,117 +1,119 @@
 extends PathFollow
 
-signal angle_changed(angle)
+signal debug_info_update(angle, speed, acceleration)
 
 var looping_body = null
 var speed = 0
-var current_pos = Vector3(0, 0, 0)
-var prev_pos = Vector3(0, 0, 0)
-var curve
-var timer
-var test_point1
-var test_point2
+var looping_body_exited_at_entrance = false
+var entrance_transform = Transform()
+var exit_transform = Transform()
+var timer = Timer
+
+const MIN_START_PROXIMITY = .1
+
+const START_VELOCITY_MULTIPLIER = 1 # not zero
+const GRAVITY = 15
+const RESISTANCE = 2
+const FRICTION = .6
+
+const SPEED_ROTATION_RATE = 6
 
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
 
 func _ready():
 	set_unit_offset(0.0)
-	set_process(false)
-	curve = get_node("../").get_curve()
-	timer = get_node("../").get_node("Timer")
-	test_point1 = get_node("../").get_node("TestPoint1")
-	test_point2 = get_node("../").get_node("TestPoint2")
-	
-	
-func _on_Area_body_entered(body):
-	looping_body = body
-	speed = body.get_linear_velocity().length() * .8
-	body.set_visible(false)
-	body.set_locked(true)
-	body.teleport(get_node("../Exit").get_global_transform().origin, false, Vector3(0, 0, 0))
-	$BallReplica.set_visible(true)
-	current_pos = $BallReplica.get_global_transform().origin
-	prev_pos = current_pos - $BallReplica.get_global_transform().basis.z.normalized() *.1
-	set_process(true)
-	timer.start()
-	
-func _process(delta):
-		
-	#                 X(current_pos)
-	#                /|
-	#               / |
-	#              /  |
-	#             /   |
-	#            /    |
-	# (prev_pos)X-----X (pos_alpha)
+	set_physics_process(false)
+	entrance_transform = get_node("../").get_node("EntranceArea").get_global_transform()
+	exit_transform = get_node("../").get_node("ExitArea").get_global_transform()
 
-	var pos_alpha = Vector3(current_pos.x, prev_pos.y, current_pos.x)
-	var prev_to_alpha = pos_alpha - prev_pos
-	var prev_to_current = current_pos - prev_pos
-	var incline = rad2deg(prev_to_current.normalized().angle_to(prev_to_alpha.normalized()))
-	#if incline > 90:
-		#incline -= (incline - 90) * 2
-		
-	var vertical_distance = current_pos.y - prev_pos.y
-	if vertical_distance == 0:
-		incline = 0
-	else:	
-		incline = rad2deg(atan(prev_to_alpha.length() / (current_pos.y - prev_pos.y)))
-		
-
-	emit_signal("angle_changed", incline)
 	
-	#speed -= (incline / 90) * .1
-#	if get_unit_offset() != 1:
-#		set_offset(get_offset() + speed * .4 * delta)
-#	else:
-#		if looping_body != null:
-#			looping_body.set_locked(false)
-#			looping_body.apply_central_impulse(-get_node("../Exit").get_global_transform().basis.z.normalized() * speed)
-#			looping_body.set_visible(true)
-#		$BallReplica.set_visible(false)
-		#set_process(false)
+func _on_EntranceArea_body_entered(body):
+	if looping_body == null:
+		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(-entrance_transform.basis.z), 3) + 1)
+		print(angle_factor)
+		speed = angle_factor * body.get_linear_velocity().length() * START_VELOCITY_MULTIPLIER
+		if speed > 0:
+			set_unit_offset(0.0)
+			looping_body = body
+			body.set_visible(false)
+			body.set_locked(true)
+			if body.get_collision_layer() == 1:
+				$BallReplica.set_visible(true)
+			else:
+				$BombReplica.set_visible(true)
+			set_physics_process(true)
+			
+			
+func _on_ExitArea_body_entered(body):
+	if looping_body == null:
+		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(-exit_transform.basis.z), 3) + 1)
+		print(angle_factor)
+		speed = angle_factor * body.get_linear_velocity().length() * -START_VELOCITY_MULTIPLIER
+		if speed < 0:
+			set_unit_offset(1.0)
+			looping_body = body
+			body.set_visible(false)
+			body.set_locked(true)
+			if body.get_collision_layer() == 1:
+				$BallReplica.set_visible(true)
+			else:
+				$BombReplica.set_visible(true)
+			set_physics_process(true)
+
+func _on_EntranceArea_body_exited(body):
+	if looping_body != null and looping_body_exited_at_entrance:
+		looping_body = null
+
+func _on_ExitArea_body_exited(body):
+	if looping_body != null and !looping_body_exited_at_entrance:
+		looping_body = null
+
+func _physics_process(delta):
+	var incline = Vector3(0, 0, 1).angle_to(-get_global_transform().basis.z)
+	if incline > PI / 2:
+		incline -= (incline - PI / 2) * 2
+	incline /= PI / 2
+	var point_ahead = get_global_transform().origin + get_global_transform().basis.z.normalized()
+	if point_ahead.y < get_global_transform().origin.y:
+		incline = -incline
+		
+	var acceleration = -incline * GRAVITY
+	acceleration *= .8 * pow(abs(incline) + .01, -1) + .2 
+	if abs(acceleration) < RESISTANCE:
+		acceleration = 0
+	else:
+		acceleration -= RESISTANCE * sign(acceleration)
+	
+	if looping_body != null:
+		speed += acceleration * delta
+		speed *= 1 - FRICTION * delta
+		var reached_entrance = speed < 0 and get_unit_offset() == 0
+		var reached_exit = speed > 0 and get_unit_offset() == 1
+		if reached_exit or reached_entrance:
+			looping_body.set_locked(false)
+			looping_body.set_visible(true)
+			if reached_exit:
+				looping_body_exited_at_entrance = false
+				looping_body.teleport(exit_transform.origin, false, exit_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
+			if reached_entrance:
+				looping_body_exited_at_entrance = true
+				looping_body.teleport(entrance_transform.origin, false, -entrance_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
+			$BallReplica.set_visible(false)
+			$BombReplica.set_visible(false)
+			set_physics_process(false)
+		else:
+			set_offset(get_offset() + speed * delta)
+			$BallReplica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
+			
+	emit_signal("debug_info_update", incline, speed, acceleration)
 		
 func _on_GameState_global_reset():
-	set_process(false)
+	set_physics_process(false)
 	set_unit_offset(0.0)
 	$BallReplica.set_visible(false)
+	$BombReplica.set_visible(false)
 	if looping_body != null:
 		looping_body.set_visible(true)
-	looping_body = null
+		looping_body = null
 	speed = 0
-	current_pos = Vector3(0, 0, 0)
-	prev_pos = Vector3(0, 0, 0)
-
-
-func _on_Timer_timeout():
-	prev_pos = current_pos
-	current_pos = $BallReplica.get_global_transform().origin
-	print(current_pos)
-	
-	var incline = 0.0
-	var point_progress = curve.get_point_count()  * get_unit_offset()
-	if point_progress > .2:
-		var last_point_crossed = int(point_progress)
-		var progress_to_next_point = point_progress - last_point_crossed	
-		current_pos = curve.interpolate(last_point_crossed, progress_to_next_point)
-
-		var prev_point_progress = point_progress - .1
-		var prev_last_point_crossed = max(int(prev_point_progress), 0)
-		var prev_progress_to_next_point = prev_point_progress - prev_last_point_crossed
-		prev_pos = curve.interpolate(prev_last_point_crossed, prev_progress_to_next_point)
-		var test_point_1_transform = test_point1.get_global_transform()
-		test_point_1_transform.origin = prev_pos
-		test_point1.set_global_transform(test_point_1_transform)
-		var test_point_2_transform = test_point2.get_global_transform()
-		test_point_2_transform.origin = prev_pos
-		test_point2.set_global_transform(test_point_2_transform)
-
-		var vertical_dist = current_pos.y - prev_pos.y
-		var point_alpha = Vector3(current_pos.x, prev_pos.y, current_pos.z)
-		var horizontal_dist = prev_pos.distance_to(point_alpha)
-		if horizontal_dist != 0:
-			incline = rad2deg(atan(vertical_dist / horizontal_dist))
-	print(incline)
-	print("")
-	emit_signal("angle_changed", incline)

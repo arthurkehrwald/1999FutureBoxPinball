@@ -1,4 +1,4 @@
-extends RigidBody
+extends "res://Scripts/BallBombCommon.gd"
 
 export var fuse_time = 5
 export var chain_explosions_enabled = true
@@ -20,8 +20,10 @@ func _on_GunHitboxArea_body_exited(body, gun_static_body):
 		remove_collision_exception_with(gun_static_body)
 		
 func _on_Timer_timeout():
+	print("bumm?")
 	if is_exploding:
-		self.queue_free()
+		print("bumm")
+		owner.queue_free()
 	else:
 		is_exploding = true
 		$Explosion.monitoring = true
@@ -39,4 +41,4 @@ func _on_Bomb_explosion_hit():
 		$Timer.start()
 	
 func _on_GameState_global_reset():
-	self.queue_free()
+	owner.queue_free()

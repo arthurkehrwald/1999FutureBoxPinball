@@ -13,7 +13,6 @@ var start_pos = Vector3()
 var teleporting = false
 var teleport_physics_cooldown_time_remaining = 0
 
-# for setting gravity scale based on speed
 const TELEPORT_PHYSICS_COOLDOWN_BUFFER = .001
 
 func _enter_tree():
@@ -21,14 +20,8 @@ func _enter_tree():
 	start_pos = get_global_transform().origin
 
 func _ready():
-	GameState.connect("global_reset", self, "_on_GameState_reset_ball")
-	GameState.connect("reset_ball", self,"_on_GameState_reset_ball")
-	raycast = get_node("../BallRayCast")
+	raycast = get_node("../BallBombRayCast")
 	set_process(false)
-	
-func _on_GameState_reset_ball():
-	set_locked(false)
-	teleport(start_pos, false, Vector3(.0,.0,.0))
 	
 # teleport function is from:
 # https://github.com/markopolojorgensen/godot_2d_camera_limiter/blob/all_addons/addons/movement/teleporter.gd
@@ -75,7 +68,7 @@ func _process(delta):
 	
 func _on_GameState_toggle_nightmode(toggle):
 	if toggle:
-		$OmniLight.show()
+		$OmniLight.hide()
 	else:
 		$OmniLight.hide()
 
