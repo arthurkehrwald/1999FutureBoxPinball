@@ -53,15 +53,4 @@ func _physics_process(delta):
 		#else:
 			#global_transform.origin = start_pos
 			#is_at_start = true
-			
-	if PORT.get_available()>0:
-		for i in range(PORT.get_available()):
-			var raw = PORT.read(true)
-			if(raw != 10):
-				output = PoolByteArray([raw]).get_string_from_ascii()
-				data += output
-		intData = int(data)
-		data = ""
-		if(intData > 20 && intData < 300):
-			set_translation(Vector3(intData, intData, intData))
-		
+		set_translation(start_pos.linear_interpolate(max_pos, move_progress))
