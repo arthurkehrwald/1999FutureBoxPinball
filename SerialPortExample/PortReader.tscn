@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://SerialPortExample/PortReader.gd" type="Script" id=1]
+[ext_resource path="res://SerialPortExample/PortReaderThread.gd" type="Script" id=1]
 [ext_resource path="res://SerialPortExample/Com.gd" type="Script" id=2]
 
 [node name="PortReader" type="Control"]

@@ -17,9 +17,9 @@ func _ready():
 func _physics_process(delta):
 	
 	move_progress = $PortReader.normalizedData
-	print(move_progress)
-	var vector_to_start_pos = start_pos - get_global_transform().origin
-	var to_start_dot_forward = vector_to_start_pos.normalized().dot(get_global_transform().basis.x.normalized())
+	#print(move_progress)
+	#var vector_to_start_pos = start_pos - get_global_transform().origin
+	#var to_start_dot_forward = vector_to_start_pos.normalized().dot(get_global_transform().basis.x.normalized())
 
 	#if Input.is_action_pressed("ui_down"):
 	#	if move_progress < 1:
