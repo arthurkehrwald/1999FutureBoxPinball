@@ -84,6 +84,9 @@ func set_player_money(new_player_money):
 	emit_signal("player_money_changed", player_money)
 	if player_money == MAX_PLAYER_MONEY:
 		emit_signal("player_money_maxed")
+		
+func _on_MultiballShip_ball_locked():
+	pass
 
 func _process(_delta):
 	processDebugInput()
