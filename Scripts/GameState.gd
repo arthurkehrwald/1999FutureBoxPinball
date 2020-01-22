@@ -5,13 +5,14 @@ const START_PLAYER_HEALTH = 100
 const MAX_PLAYER_HEALTH = 100
 const START_PLAYER_MONEY = 200
 const MAX_PLAYER_MONEY = 1000
-const BALL_DRAINED_PLAYER_DAMAGE = 25
+const BALL_DRAINED_PLAYER_DAMAGE = 0
+const BALL_DESTROYED_COST = 200
 const START_BOSS_HEALTH = 50
 const MAX_BOSS_HEALTH = 100
 #-----------------------------------------
 
 signal global_reset
-signal reset_ball
+signal spawn_ball
 signal game_over
 signal boss_died
 signal player_died
@@ -19,6 +20,7 @@ signal boss_health_changed(new_boss_health)
 signal player_health_changed(new_player_health)
 signal player_money_changed(new_player_money)
 signal player_money_maxed
+signal activate_enemy_ships
 
 signal set_wireframe_material( material)
 signal set_collision_object_material(material)
@@ -28,6 +30,7 @@ var player_money = 100 setget set_player_money
 var boss_health = 100 setget set_boss_health
 var player_health = 100 setget set_player_health
 var nightmode_enabled = false
+var balls_on_field = 0
 
 var pink_unlit = preload("res://Materials/pink_unlit.tres")
 var ultraviolet_subtractive = preload("res://Materials/ultraviolet_subtractive.tres")
@@ -41,6 +44,7 @@ var current_collision_object_material_index = 0
 var wireframe_materials = [pink_unlit, ultraviolet_subtractive, ultraviolet_additive]
 var current_wireframe_material_index = 0
 
+
 func _enter_tree():
 	local_init()
 
@@ -48,10 +52,12 @@ func _ready():
 	global_init()
 	
 func global_init():
+	emit_signal("global_reset")
 	emit_signal("set_wireframe_material", pink_unlit)
 	emit_signal("set_collision_object_material", light_blue)
 	emit_signal("toggle_nightmode", true)
-	emit_signal("global_reset")
+	emit_signal("spawn_ball")
+	emit_signal("activate_enemy_ships")
 	nightmode_enabled = true
 	
 func local_init():
@@ -59,11 +65,14 @@ func local_init():
 	set_player_money(START_PLAYER_MONEY)
 	set_boss_health(START_BOSS_HEALTH)	
 
-func _on_PlayerShip_ball_drained():
+func _on_PlayerShip_ball_drained(ball):
 	set_player_health(player_health - BALL_DRAINED_PLAYER_DAMAGE)
 	if player_health > 0:
-		print("GameState: ball drained reset")
-		emit_signal("reset_ball")
+		print("GameState: balls on field: ", balls_on_field)
+		if balls_on_field == 1:
+			ball.back_to_spawn()
+		else:
+			ball.delete()
 	else:
 		emit_signal("game_over")
 		
@@ -84,9 +93,10 @@ func set_player_money(new_player_money):
 	emit_signal("player_money_changed", player_money)
 	if player_money == MAX_PLAYER_MONEY:
 		emit_signal("player_money_maxed")
-		
+
 func _on_MultiballShip_ball_locked():
-	pass
+	if balls_on_field <= 0:
+		emit_signal("spawn_ball")
 
 func _process(_delta):
 	processDebugInput()

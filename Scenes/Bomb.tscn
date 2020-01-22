@@ -8,7 +8,7 @@
 [node name="BombParent" instance=ExtResource( 4 )]
 
 [node name="Rigidbody" parent="." index="0"]
-collision_layer = 257
+collision_layer = 256
 script = ExtResource( 1 )
 airborne_gravity_scale_multiplier = 0.2
 
