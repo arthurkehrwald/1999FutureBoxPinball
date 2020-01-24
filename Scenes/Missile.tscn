@@ -15,7 +15,7 @@ radius = 0.196949
 height = 0.266283
 
 [node name="Missile" type="Area"]
-transform = Transform( 0.895329, -0.429305, 0.118667, 0.41344, 0.900147, 0.137122, -0.165685, -0.0737073, 0.98342, 0.872658, 2.06805, -1.38382 )
+transform = Transform( 0.999999, 0, 0, 0, 0.121869, -0.992546, 0, 0.992546, 0.121869, 0, 0, 0 )
 collision_layer = 128
 collision_mask = 2565
 script = ExtResource( 1 )

@@ -1,14 +1,10 @@
 extends Node
 
 # Balancing variables---------------------
-const START_PLAYER_HEALTH = 100
-const MAX_PLAYER_HEALTH = 100
 const START_PLAYER_MONEY = 200
 const MAX_PLAYER_MONEY = 1000
-const BALL_DRAINED_PLAYER_DAMAGE = 0
 const BALL_DESTROYED_COST = 200
-const START_BOSS_HEALTH = 50
-const MAX_BOSS_HEALTH = 100
+const BALL_RESET_DELAY = 1.0
 #-----------------------------------------
 
 signal global_reset
@@ -27,8 +23,10 @@ signal set_collision_object_material(material)
 signal toggle_nightmode(toggle)
 
 var player_money = 100 setget set_player_money
-var boss_health = 100 setget set_boss_health
-var player_health = 100 setget set_player_health
+var boss_health = 100 setget broadcast_boss_health
+var max_boss_health = 100
+var player_health = 100 setget broadcast_player_health
+var max_player_health = 100
 var nightmode_enabled = false
 var balls_on_field = 0
 
@@ -61,14 +59,11 @@ func global_init():
 	nightmode_enabled = true
 	
 func local_init():
-	set_player_health(START_PLAYER_HEALTH)
 	set_player_money(START_PLAYER_MONEY)
-	set_boss_health(START_BOSS_HEALTH)	
 
-func _on_PlayerShip_ball_drained(ball):
-	set_player_health(player_health - BALL_DRAINED_PLAYER_DAMAGE)
+func on_PlayerShip_ball_drained(ball):
+	#yield(get_tree().create_timer(BALL_RESET_DELAY), "timeout")
 	if player_health > 0:
-		print("GameState: balls on field: ", balls_on_field)
 		if balls_on_field == 1:
 			ball.back_to_spawn()
 		else:
@@ -76,16 +71,16 @@ func _on_PlayerShip_ball_drained(ball):
 	else:
 		emit_signal("game_over")
 		
-func set_boss_health(new_boss_health):
-	boss_health = clamp(new_boss_health, 0, MAX_BOSS_HEALTH)
+func broadcast_boss_health(new_boss_health):
+	boss_health = new_boss_health
 	emit_signal("boss_health_changed", boss_health)
 	if boss_health == 0:
 		emit_signal("boss_died")
 
-func set_player_health(new_player_health):
-	player_health = clamp(new_player_health, 0, MAX_PLAYER_HEALTH)
+func broadcast_player_health(new_player_health):
+	player_health = new_player_health
 	emit_signal("player_health_changed", player_health)
-	if player_health == 0:
+	if player_health <= 0:
 		emit_signal("player_died")
 	
 func set_player_money(new_player_money):

@@ -4,7 +4,6 @@ func _ready():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
 	
 func back_to_spawn():
-	print("ball reset")
 	set_locked(false)
 	set_visible(true)
 	teleport(start_pos, false, Vector3(.0,.0,.0))

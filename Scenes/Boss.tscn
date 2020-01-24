@@ -1,53 +1,41 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Boss.gd" type="Script" id=1]
-[ext_resource path="res://Materials/light_blue_test.tres" type="Material" id=2]
-[ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=3]
-[ext_resource path="res://Meshes/Wireframe/cube_wireframe.obj" type="ArrayMesh" id=4]
-[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Damageable.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/BossMissileGun.tscn" type="PackedScene" id=7]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 0.6, 1 )
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1, 0.6, 1 )
 
-[node name="Boss" type="StaticBody"]
-collision_layer = 1024
+[node name="Boss" instance=ExtResource( 2 )]
+collision_layer = 17408
 script = ExtResource( 1 )
+max_health = 100.0
+use_speed_based_impact_damage = true
+min_impact_speed_for_damage = 1.0
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0 )
 shape = SubResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="MeshInstance" parent="." index="1"]
 transform = Transform( 1, 0, 0, 0, 0.6, 0, 0, 0, 1, 0, 0.6, 0 )
-mesh = SubResource( 2 )
-material/0 = ExtResource( 2 )
-script = ExtResource( 3 )
 
-[node name="Wireframe" type="MeshInstance" parent="MeshInstance"]
-mesh = ExtResource( 4 )
-material/0 = null
-script = ExtResource( 5 )
-
-[node name="HitboxArea" type="Area" parent="."]
-collision_layer = 1024
-collision_mask = 257
-
-[node name="HitboxShape" type="CollisionShape" parent="HitboxArea"]
+[node name="HitboxShape" parent="HitboxArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
-[node name="BossBombGun" parent="." instance=ExtResource( 6 )]
+[node name="BossBombGun" parent="." index="3" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 1.5, 0.6, 0 )
 shoot_on_ready = false
 
-[node name="BossBombGun2" parent="." instance=ExtResource( 6 )]
+[node name="BossBombGun2" parent="." index="4" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, -1.5, 0.6, 0 )
 shoot_on_ready = false
 
-[node name="BossMissileGun" parent="." instance=ExtResource( 7 )]
+[node name="BossMissileGun" parent="." index="5" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5 )
-[connection signal="body_entered" from="HitboxArea" to="." method="_on_HitboxArea_body_entered"]

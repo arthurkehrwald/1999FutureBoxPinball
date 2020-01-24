@@ -5,4 +5,5 @@ func _enter_tree():
 
 func _ready():
 	value = GameState.player_health
-	max_value = GameState.MAX_PLAYER_HEALTH
+	max_value = GameState.max_player_health
+	print("PlayerHealthBar: max_value - ", max_value)

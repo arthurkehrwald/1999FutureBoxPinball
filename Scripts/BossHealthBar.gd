@@ -5,4 +5,4 @@ func _enter_tree():
 
 func _ready():
 	value = GameState.boss_health
-	max_value = GameState.MAX_BOSS_HEALTH
+	max_value = GameState.max_boss_health

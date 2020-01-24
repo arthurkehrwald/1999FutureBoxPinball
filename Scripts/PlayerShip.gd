@@ -1,10 +1,14 @@
-extends StaticBody
+extends "res://Scripts/Damageable.gd"
 
-export var bomb_damage_taken = 30
+func _enter_tree():
+	GameState.connect("global_reset", self, "_on_GameState_global_reset")
+	connect("health_changed", GameState, "broadcast_player_health")
+	GameState.max_player_health = max_health
 
-func _on_HitboxArea_body_entered(body):
+func _on_PlayerHitboxArea_body_entered(body):
 	if body.get_collision_layer() == 1:
-		GameState._on_PlayerShip_ball_drained(body)
-		
-func _on_Bomb_explosion_hit():
-	GameState.set_player_health(GameState.player_health - bomb_damage_taken)
+		GameState.on_PlayerShip_ball_drained(body)
+		pass
+
+func _on_GameState_global_reset():
+	set_alive(true)

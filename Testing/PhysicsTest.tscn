@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scenes/CurvedRamp.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Bomb.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/BoxV2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=5]
@@ -9,9 +8,11 @@
 [ext_resource path="res://Testing/DebugOutputLabel.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=10]
 
 [node name="PhysicsTest" type="Spatial"]
+
+[node name="BallParent" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, -6.70552e-08, 0, 6.70552e-08, 1, -0.0516796, -1.39388, 4.6348 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.852065, 0.523436, 0, -0.523436, 0.852065, 0, 5, 10 )
@@ -42,16 +43,18 @@ transform = Transform( 1, 0, 0, 0, 1, -7.15256e-07, 0, -7.45058e-09, 10.7115, 0.
 [node name="SimpleCube2" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, -7.15256e-07, 0, -7.45058e-09, 10.7115, -0.69505, -0.0533386, 6.20058 )
 
-[node name="CurvedRamp" parent="BoxV2/BoardAligned" instance=ExtResource( 1 )]
-transform = Transform( 0.999731, 5.44828e-09, 0.0231758, 2.32831e-09, 1, -2.98023e-07, -0.0231759, 1.19209e-07, 0.999737, -1.07288, -2.99259, 0.461307 )
-visible = false
-
 [node name="SimpleCube4" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
-transform = Transform( 0.483038, 0, -9.37899, -1.49012e-08, 1, 1.78814e-07, 0.8756, 5.96046e-08, 5.17406, 3.78214, -2.04786, 4.72852 )
-visible = false
+transform = Transform( 0.483038, 0, -9.37899, -4.47035e-08, 1, 1.78814e-07, 0.8756, 8.9407e-08, 5.17406, 2.72172, -0.0478373, 3.18957 )
 
 [node name="SimpleCube3" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
-transform = Transform( 0.400941, 8.88178e-16, 9.81285, 0, 1, -5.96046e-08, -0.916104, 7.45058e-08, 4.29468, -3.90332, -2.04786, 5.15812 )
+transform = Transform( 0.400941, 8.88178e-16, 9.81285, 1.49012e-08, 1, -5.96046e-08, -0.916104, 1.19209e-07, 4.29468, -2.65613, -0.0476537, 3.4621 )
+
+[node name="SimpleCube6" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
+transform = Transform( 0.483038, 0, -9.37899, -4.47035e-08, 1, 1.78814e-07, 0.8756, 8.9407e-08, 5.17406, 3.78214, -3.04786, 4.72852 )
+visible = false
+
+[node name="SimpleCube5" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
+transform = Transform( 0.400941, 8.88178e-16, 9.81285, 1.49012e-08, 1, -5.96046e-08, -0.916104, 1.04308e-07, 4.29468, -3.90332, -3.04786, 5.15812 )
 visible = false
 
 [node name="Flipper" parent="BoxV2/BoardAligned" instance=ExtResource( 5 )]
@@ -62,11 +65,5 @@ visible = false
 transform = Transform( 0.939693, 0, 0.34202, 7.45058e-09, 1, -3.72529e-08, -0.34202, 8.9407e-08, 0.939693, 1.64429, -2, 6.03432 )
 visible = false
 
-[node name="LoopingLouiesLooping" parent="BoxV2/BoardAligned" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, 4.47035e-08, 1, 0.596916, 0.203933, 0 )
-
-[node name="BallParent" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.239408, -1.01248, 4.65705 )
-
-[node name="BombParent" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287703, 0, -5.59911 )
+[node name="PlayerShip" parent="BoxV2/BoardAligned" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 0 )
