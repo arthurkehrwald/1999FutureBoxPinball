@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Boss.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Damageable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/BossMissileGun.tscn" type="PackedScene" id=7]
 
@@ -39,3 +40,13 @@ shoot_on_ready = false
 
 [node name="BossMissileGun" parent="." index="5" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5 )
+
+[node name="HealthBar" parent="." index="6" instance=ExtResource( 3 )]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -100.0
+margin_top = 23.327
+margin_right = 100.0
+margin_bottom = 50.327
+tint_progress = Color( 1, 0, 0, 1 )
+[connection signal="health_changed" from="." to="HealthBar" method="_on_value_changed"]

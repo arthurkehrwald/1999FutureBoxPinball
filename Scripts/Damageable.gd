@@ -22,7 +22,6 @@ func _on_HitboxArea_body_entered(body):
 	else:
 		print(current_health)
 		current_health -= static_impact_damage
-	print("Damageable: current_health - ", current_health, " max - ", max_health)
 	emit_signal("health_changed", current_health)
 	if current_health <= 0:
 		set_alive(false)

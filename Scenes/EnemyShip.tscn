@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Damageable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/EnemyShip.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Bumper.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/HealthBar3D.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.5
@@ -31,6 +32,10 @@ script = ExtResource( 3 )
 [node name="HitboxShape" parent="HitboxArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
 shape = SubResource( 3 )
+
+[node name="HealthBar3D" parent="." index="3" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 [connection signal="came_to_life" from="." to="." method="_on_EnemyShip_came_to_life"]
 [connection signal="death" from="." to="." method="_on_EnemyShip_death"]
+[connection signal="health_changed" from="." to="HealthBar3D" method="_on_health_changed"]
 [connection signal="body_entered" from="HitboxArea" to="HitboxArea" method="_on_HitboxArea_body_entered"]

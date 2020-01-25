@@ -1,7 +1,5 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scenes/BossHealthBar.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/PlayerHealthBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD/game_over_banner.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/CenterBanner.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/MoneyBar.tscn" type="PackedScene" id=5]
@@ -19,10 +17,6 @@ __meta__ = {
 
 [node name="MoneyBar" parent="." instance=ExtResource( 5 )]
 
-[node name="BossHealthBar" parent="." instance=ExtResource( 1 )]
-margin_bottom = 53.0
-step = 1.0
-
 [node name="CenterBanner" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -38,5 +32,3 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="PlayerHealthBar" parent="." instance=ExtResource( 2 )]

@@ -9,24 +9,18 @@ const BALL_RESET_DELAY = 1.0
 
 signal global_reset
 signal spawn_ball
-signal game_over
 signal boss_died
 signal player_died
-signal boss_health_changed(new_boss_health)
-signal player_health_changed(new_player_health)
 signal player_money_changed(new_player_money)
 signal player_money_maxed
 signal activate_enemy_ships
+signal laser_trex_set_active(is_active)
 
 signal set_wireframe_material( material)
 signal set_collision_object_material(material)
 signal toggle_nightmode(toggle)
 
 var player_money = 100 setget set_player_money
-var boss_health = 100 setget broadcast_boss_health
-var max_boss_health = 100
-var player_health = 100 setget broadcast_player_health
-var max_player_health = 100
 var nightmode_enabled = false
 var balls_on_field = 0
 
@@ -56,32 +50,24 @@ func global_init():
 	emit_signal("toggle_nightmode", true)
 	emit_signal("spawn_ball")
 	emit_signal("activate_enemy_ships")
+	emit_signal("laser_trex_set_active", true)
 	nightmode_enabled = true
 	
 func local_init():
 	set_player_money(START_PLAYER_MONEY)
 
-func on_PlayerShip_ball_drained(ball):
-	#yield(get_tree().create_timer(BALL_RESET_DELAY), "timeout")
+func on_PlayerShip_ball_drained(ball, player_health):
 	if player_health > 0:
 		if balls_on_field == 1:
 			ball.back_to_spawn()
 		else:
-			ball.delete()
-	else:
-		emit_signal("game_over")
-		
-func broadcast_boss_health(new_boss_health):
-	boss_health = new_boss_health
-	emit_signal("boss_health_changed", boss_health)
-	if boss_health == 0:
-		emit_signal("boss_died")
-
-func broadcast_player_health(new_player_health):
-	player_health = new_player_health
-	emit_signal("player_health_changed", player_health)
-	if player_health <= 0:
-		emit_signal("player_died")
+			ball.delete()	
+	
+func on_PlayerShip_death():
+	emit_signal("player_died")
+	
+func on_Boss_death():
+	emit_signal("boss_died")
 	
 func set_player_money(new_player_money):
 	player_money = clamp(new_player_money, 0, MAX_PLAYER_MONEY)
