@@ -17,11 +17,10 @@ func _ready():
 	muzzle_transforms[2] = $Muzzle2.get_global_transform()
 
 func _on_Area_body_entered(body):
-	print(balls_locked)
 	loaded_balls[balls_locked] = body
-	body.set_visible(false)
+	#body.set_visible(false)
 	body.set_locked(true)
-	body.teleport(muzzle_transforms[balls_locked].origin, false, Vector3(0, 0, 0))
+	body.delayed_teleport(muzzle_transforms[balls_locked].origin)
 	GameState.balls_on_field -= 1	
 	balls_locked += 1
 	if balls_locked >= 3:

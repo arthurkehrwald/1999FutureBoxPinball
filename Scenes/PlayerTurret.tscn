@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/PlayerTurret.gd" type="Script" id=1]
+[ext_resource path="res://Meshes/dotted_line.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Materials/cyan_unlit.tres" type="Material" id=3]
+
+[sub_resource type="CubeMesh" id=1]
+
+[node name="PlayerTurret" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0 )
+script = ExtResource( 1 )
+max_shot_speed = 34
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.5, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="TeleporterExit" type="Spatial" parent="."]
+
+[node name="DottedLine" type="MeshInstance" parent="TeleporterExit"]
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 3 )

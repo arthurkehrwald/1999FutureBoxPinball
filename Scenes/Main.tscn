@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/BoxV2.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/ShopMenu.tscn" type="PackedScene" id=23]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -121,6 +122,7 @@ transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, 0, 1, -4.73241, -0.020042
 transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 0, 1, 0.491396, -0.0200436, -2.2481 )
 
 [node name="Triggers" type="Spatial" parent="Box&Camera/BoxV2/BoardAligned"]
+visible = false
 
 [node name="MultiTrigger" parent="Box&Camera/BoxV2/BoardAligned/Triggers" instance=ExtResource( 12 )]
 transform = Transform( 0.984808, -2.75152e-09, 0.173648, 7.45058e-09, 1, 1.49012e-08, -0.173648, 0, 0.984808, -1.45008, -2.98023e-07, 3.47061 )
@@ -146,13 +148,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16184, 0, 0 )
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 1.49012e-08, -1.62921e-07, 0, 0.2, -6.252 )
 
 [node name="MultiballShip" parent="Box&Camera/BoxV2/BoardAligned" instance=ExtResource( 1 )]
-transform = Transform( 0.81643, -5.50351e-09, -0.577445, -1.11759e-08, 1, -2.5332e-08, 0.577445, 2.71352e-08, 0.816431, -3.61933, 4.76837e-07, -5.97135 )
+transform = Transform( 0.81643, -5.50351e-09, -0.577445, -1.11759e-08, 1, -2.23517e-08, 0.577445, 3.72529e-08, 0.816431, -3.61933, 4.76837e-07, -5.97135 )
 
 [node name="PlayerShip" parent="Box&Camera/BoxV2/BoardAligned" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, -0.572276, -0.104717, 7.87041 )
 
 [node name="Boss" parent="Box&Camera/BoxV2/BoardAligned" instance=ExtResource( 18 )]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 8.19564e-08, 3.25841e-07, 8.19564e-08, -1, -0.451044, 4.76837e-07, -3.81248 )
+
+[node name="ShopMenu" parent="Box&Camera/BoxV2/BoardAligned" instance=ExtResource( 23 )]
+transform = Transform( 0.704025, 0, 0, 0, -7.45058e-09, 1, 0, -0.704025, -2.23517e-08, -0.594071, 0.0656389, 4.4246 )
 
 [node name="BoxAligned" type="Spatial" parent="Box&Camera/BoxV2"]
 transform = Transform( 1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 0, 0 )

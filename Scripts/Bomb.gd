@@ -23,10 +23,7 @@ func _on_Timer_timeout():
 	if is_exploding:
 		owner.queue_free()
 	else:
-		is_exploding = true
-		$Explosion.monitoring = true
-		$Timer.wait_time = explosion_hitreg_duration
-		$Timer.start()
+		explode()
 	
 func _on_Explosion_body_entered(body):
 	if body != self and body.has_method("_on_Bomb_explosion_hit"):
@@ -38,6 +35,16 @@ func _on_Bomb_explosion_hit():
 		$Timer.set_wait_time(chain_explosion_delay)
 		$Timer.start()
 	
+func _on_LaserTrex_hit():
+	if !is_exploding:
+		explode()
+
 func _on_GameState_global_reset():
 	owner.queue_free()
 	pass
+
+func explode():
+	is_exploding = true
+	$Explosion.monitoring = true
+	$Timer.wait_time = explosion_hitreg_duration
+	$Timer.start()

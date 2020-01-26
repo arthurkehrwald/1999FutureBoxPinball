@@ -9,5 +9,6 @@
 [node name="Rigidbody" parent="." index="0"]
 collision_mask = 28575
 script = ExtResource( 3 )
+airborne_gravity_scale_multiplier = 0.8
 
 [node name="BallMesh" parent="Rigidbody" index="2" instance=ExtResource( 1 )]

@@ -1,7 +1,9 @@
 extends StaticBody
 
+export var anim_speed = 1.0
+
 func _ready():
-	pass
+	$AnimationPlayer.set_speed_scale(anim_speed)
 
 func set_open(is_open):
 	$CollisionShape.set_deferred("disabled", is_open)

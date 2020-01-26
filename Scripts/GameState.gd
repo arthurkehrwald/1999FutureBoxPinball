@@ -15,6 +15,7 @@ signal player_money_changed(new_player_money)
 signal player_money_maxed
 signal activate_enemy_ships
 signal laser_trex_set_active(is_active)
+signal laser_trex_gates_set_open(is_open)
 
 signal set_wireframe_material( material)
 signal set_collision_object_material(material)
@@ -22,7 +23,10 @@ signal toggle_nightmode(toggle)
 
 var player_money = 100 setget set_player_money
 var nightmode_enabled = false
+var laser_trex_gates_are_open = false
 var balls_on_field = 0
+
+var plunger_progress = 0.0
 
 var pink_unlit = preload("res://Materials/pink_unlit.tres")
 var ultraviolet_subtractive = preload("res://Materials/ultraviolet_subtractive.tres")
@@ -41,6 +45,7 @@ func _enter_tree():
 	local_init()
 
 func _ready():
+	set_pause_mode(Node.PAUSE_MODE_PROCESS)
 	global_init()
 	
 func global_init():
@@ -80,6 +85,8 @@ func _on_MultiballShip_ball_locked():
 		emit_signal("spawn_ball")
 
 func _process(_delta):
+	if Input.is_action_just_pressed("pause"):
+		get_tree().set_pause(!get_tree().is_paused())
 	processDebugInput()
 	
 func processDebugInput():
@@ -111,3 +118,6 @@ func processDebugInput():
 		nightmode_enabled = !nightmode_enabled
 		emit_signal("toggle_nightmode", nightmode_enabled)
 		
+	if Input.is_action_just_pressed("gate_test"):
+		laser_trex_gates_are_open = !laser_trex_gates_are_open
+		emit_signal("laser_trex_gates_set_open", laser_trex_gates_are_open)

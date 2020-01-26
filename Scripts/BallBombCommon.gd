@@ -13,7 +13,7 @@ var start_pos = Vector3()
 var teleporting = false
 var teleport_physics_cooldown_time_remaining = 0
 
-const TELEPORT_PHYSICS_COOLDOWN_BUFFER = .01
+const TELEPORT_PHYSICS_COOLDOWN_BUFFER = .02
 
 func _enter_tree():
 	GameState.connect("toggle_nightmode", self, "_on_GameState_toggle_nightmode")
@@ -23,9 +23,9 @@ func _ready():
 	raycast = get_node("../BallBombRayCast")
 	set_process(false)
 	
-# teleport function is from:
-# https://github.com/markopolojorgensen/godot_2d_camera_limiter/blob/all_addons/addons/movement/teleporter.gd
 func teleport(destination, maintain_velocity, impulse_on_exit):
+	print("BallBombCommon: teleporting to - ", destination)
+	
 	var t = get_transform()
 	t.origin = destination
 	set_global_transform(t)
@@ -36,6 +36,29 @@ func teleport(destination, maintain_velocity, impulse_on_exit):
 		set_angular_velocity(Vector3(0,0,0))
 	apply_central_impulse(impulse_on_exit)
 	
+func delayed_teleport(destination):
+	if teleporting:
+		return
+	
+	teleporting = true
+	set_physics_process(false)
+	
+	teleport_physics_cooldown_time_remaining = TELEPORT_PHYSICS_COOLDOWN_BUFFER
+	set_process(true)
+	yield(self, "teleport_physics_cooldown_buffer_expired")
+	
+	var t = get_global_transform()
+	t.origin = destination
+	set_global_transform(t)
+	
+	teleport_physics_cooldown_time_remaining = TELEPORT_PHYSICS_COOLDOWN_BUFFER
+	set_process(true)
+	yield(self, "teleport_physics_cooldown_buffer_expired")
+	
+	set_physics_process(true)
+	teleporting = false
+	print("teleport complete")
+	
 func set_locked(is_locked):
 	axis_lock_linear_x = is_locked
 	axis_lock_linear_y = is_locked
@@ -45,7 +68,6 @@ func set_locked(is_locked):
 	axis_lock_angular_z = is_locked
 
 func _process(delta):
-	print("processing")
 	teleport_physics_cooldown_time_remaining -= delta
 	if teleport_physics_cooldown_time_remaining <= 0:
 		print("buffer expired, target acquired")

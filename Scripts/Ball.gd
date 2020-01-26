@@ -14,3 +14,6 @@ func delete():
 
 func _on_GameState_global_reset():
 	delete()
+
+func _on_LaserTrex_hit():
+	delete()

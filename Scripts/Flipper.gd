@@ -12,10 +12,10 @@ var input_code = ""
 func _ready():	
 	start_transform = get_transform()	
 	if IS_RIGHT_FLIPPER:
-		input_code = "ui_right"
+		input_code = "flipper_right"
 		max_transform = start_transform.rotated(get_transform().basis.y.normalized(), deg2rad(-MAX_TURN_ANGLE))
 	else:
-		input_code = "ui_left"
+		input_code = "flipper_left"
 		max_transform = start_transform.rotated(get_transform().basis.y.normalized(), deg2rad(MAX_TURN_ANGLE))
 
 func _physics_process(delta):	

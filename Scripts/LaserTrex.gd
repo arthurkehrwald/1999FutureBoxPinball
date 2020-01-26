@@ -9,6 +9,8 @@ export var time_until_laser_toggle = 0.0
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
 	GameState.connect("laser_trex_set_active", self, "_on_GameState_laser_trex_set_active")
+	GameState.connect("laser_trex_gates_set_open", $Gate1, "set_open")
+	GameState.connect("laser_trex_gates_set_open", $Gate2, "set_open")
 
 func _ready():
 	$HealthBar3D.set_max_health(max_health)
@@ -44,3 +46,8 @@ func laser_set_active(is_active):
 	$LaserArea.set_visible(is_active)
 	time_until_laser_toggle = laser_uptime if is_active else laser_downtime
 	laser_is_active = is_active
+
+
+func _on_LaserArea_body_entered(body):
+	if body.has_method("_on_LaserTrex_hit"):
+		body._on_LaserTrex_hit()
