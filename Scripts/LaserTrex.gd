@@ -8,7 +8,7 @@ export var time_until_laser_toggle = 0.0
 
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
-	GameState.connect("laser_trex_set_active", self, "_on_GameState_laser_trex_set_active")
+	GameState.connect("laser_trex_set_active", self, "set_alive")
 	GameState.connect("laser_trex_gates_set_open", $Gate1, "set_open")
 	GameState.connect("laser_trex_gates_set_open", $Gate2, "set_open")
 
@@ -20,9 +20,6 @@ func _process(delta):
 	if time_until_laser_toggle <= 0:
 		laser_set_active(!laser_is_active)
 	pass	
-	
-func _on_GameState_laser_trex_set_active(is_active):
-	set_alive(true)
 
 func _on_GameState_global_reset():
 	set_alive(false)	

@@ -55,7 +55,7 @@ func global_init():
 	emit_signal("toggle_nightmode", true)
 	emit_signal("spawn_ball")
 	emit_signal("activate_enemy_ships")
-	emit_signal("laser_trex_set_active", true)
+	emit_signal("laser_trex_set_active", false)
 	nightmode_enabled = true
 	
 func local_init():

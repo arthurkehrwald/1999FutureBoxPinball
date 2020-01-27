@@ -9,6 +9,9 @@ var selected_item = 1
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
 
+func _ready():
+	texture = $Viewport.get_texture()
+
 func _process(delta):
 	var previously_selected = selected_item
 	if Input.is_action_just_pressed("flipper_left"):

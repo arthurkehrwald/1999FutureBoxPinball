@@ -40,9 +40,6 @@ shape = SubResource( 1 )
 [node name="MeshInstance" parent="." index="1"]
 transform = Transform( 0.353553, 0, 0.0707107, 0, 0.5, 0, -0.353553, 0, 0.0707107, -0.28, 0.5, -0.8 )
 
-[node name="HitboxArea" parent="." index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-
 [node name="HitboxShape" parent="HitboxArea" index="0"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.28, 0.5, -0.8 )
 shape = SubResource( 2 )

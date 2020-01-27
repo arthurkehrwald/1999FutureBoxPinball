@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/HealthBar3D.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Bar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD/lifebar_bg.png" type="Texture" id=3]
+[ext_resource path="res://HUD/victory_banner.png" type="Texture" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -22,3 +23,8 @@ render_target_v_flip = true
 
 [node name="Bar" parent="Viewport" instance=ExtResource( 2 )]
 tint_progress = Color( 1, 0, 0, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Viewport"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )

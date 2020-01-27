@@ -31,4 +31,4 @@ script = ExtResource( 3 )
 mesh = ExtResource( 4 )
 material/0 = null
 script = ExtResource( 5 )
-[connection signal="body_entered" from="." to="." method="_on_Bumper_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_HitboxArea_body_entered"]
