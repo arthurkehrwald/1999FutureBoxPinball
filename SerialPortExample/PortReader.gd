@@ -13,6 +13,10 @@ var intData = 0
 var floatData = 0.0
 var normalizedData = 0.0
 var data = ""
+var raw = 0
+
+var leftButton = false
+var rightButton = false
 
 func _ready():
 	set_physics_process(false)
@@ -27,12 +31,20 @@ func _physics_process(delta):
 	#print(PORT.get_available())
 	if PORT.get_available()>0:
 		for i in range(PORT.get_available()):
-			var raw = PORT.read(true)
-			if(raw != 10):
-				output = PoolByteArray([raw]).get_string_from_ascii()
-				data += output
-		floatData = float(data)
-		data = ""
-		if(floatData > 20 && intData < 200):
-			normalizedData = (float((floatData - 21)/(199-20)))
+			raw = PORT.read(true)
+			if raw != 10 :
+				if raw == 76:
+					leftButton = true
+					print("L")
+				if raw == 82:
+					rightButton = true
+					print("R")
+				else:
+					output = PoolByteArray([raw]).get_string_from_ascii()
+					data += output
+		if raw < 58: 
+			floatData = float(data)
+			data = ""
+			if floatData > 20 && intData < 200:
+				normalizedData = (float((floatData - 21)/(199-20)))
 		#	print(normalizedData)
