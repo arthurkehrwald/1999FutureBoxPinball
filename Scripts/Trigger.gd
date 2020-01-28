@@ -41,6 +41,6 @@ func _on_MultiTrigger_all_reset():
 	$MeshInstance.get_material_override().albedo_color = default_color
 	can_be_triggered = true
 	
-func _on_GameState_global_reset():
+func _on_GameState_global_reset(_is_init):
 	unique_material = $MeshInstance.get_surface_material(0).duplicate()
 	$MeshInstance.set_material_override(unique_material)

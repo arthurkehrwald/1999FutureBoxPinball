@@ -7,7 +7,7 @@ func _enter_tree():
 func _ready():
 	$HealthBar3D.set_max_health(max_health)
 
-func _on_GameState_global_reset():
+func _on_GameState_global_reset(is_init):
 	set_alive(false)
 	
 func _on_GameState_activate_enemy_ships():

@@ -71,11 +71,11 @@ func _on_ExitArea_body_entered(body):
 				looping_body_is_bomb = true
 			set_physics_process(true)
 
-func _on_EntranceArea_body_exited(body):
+func _on_EntranceArea_body_exited(_body):
 	if looping_body != null and looping_body_exited_at_entrance:
 		looping_body = null
 
-func _on_ExitArea_body_exited(body):
+func _on_ExitArea_body_exited(_body):
 	if looping_body != null and !looping_body_exited_at_entrance:
 		looping_body = null
 
@@ -131,7 +131,7 @@ func _physics_process(delta):
 		reset()
 	emit_signal("debug_info_update", incline, speed, acceleration)
 		
-func _on_GameState_global_reset():
+func _on_GameState_global_reset(_is_init):
 	reset()
 
 func reset():

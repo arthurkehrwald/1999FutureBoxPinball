@@ -13,6 +13,11 @@ var teleporter_entrance
 var dotted_line_start_transform = Transform()
 var has_shot = false
 
+var ball_scene = preload("res://Scenes/Ball.tscn")
+
+func _enter_tree():
+	GameState.connect("global_reset", self, "_on_GameState_global_reset")
+
 func _ready():
 	start_transform = get_transform()
 	min_transform = start_transform.rotated(get_transform().basis.y.normalized(), deg2rad(-max_turn_angle))
@@ -56,6 +61,17 @@ func _on_TeleporterEntrance_ball_entered(ball, _teleporter_entrance):
 	ball_to_shoot = ball
 	has_shot = false
 	set_process(true)
+	
+func _on_ShopMenu_bought_turret_shot():
+	var ball_instance = ball_scene.instance()
+	get_node("/root/Main").add_child(ball_instance)
+	ball_instance.get_node("Rigidbody").set_visible(false)
+	ball_instance.get_node("Rigidbody").set_locked(true)
+	ball_instance.get_node("Rigidbody").delayed_teleport($TeleporterExit.get_global_transform().origin)
+	ball_to_shoot = ball_instance.get_node("Rigidbody")
+	GameState.balls_on_field += 1
+	has_shot = false
+	set_process(true)
 
 func _on_Plunger_released(progress):
 	if is_processing():
@@ -63,10 +79,21 @@ func _on_Plunger_released(progress):
 		
 func shoot(plunger_progress):
 	$TeleporterExit/DottedLine.set_visible(false)
-	teleporter_entrance.set_active(true)
+	if teleporter_entrance != null:
+		teleporter_entrance.set_active(true)
 	ball_to_shoot.set_locked(false)
 	ball_to_shoot.set_visible(true)
 	var plunger_force = .15 * pow(plunger_progress - 1.7, 3) + 1
 	print(plunger_force)
 	ball_to_shoot.apply_central_impulse(-$TeleporterExit.get_global_transform().basis.z.normalized() * max_shot_speed * plunger_force)
 	has_shot = true
+
+func _on_GameState_global_reset(is_init):
+	print("Turret global reset")
+	$TeleporterExit/DottedLine.set_visible(false)
+	ball_to_shoot = null
+	has_shot = false
+	if !is_init:
+		set_process(false)
+	var start_rotation = Quat(start_transform.basis.orthonormalized())
+	set_transform(Transform(start_rotation, get_transform().origin))	

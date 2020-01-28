@@ -7,5 +7,5 @@ func _enter_tree():
 func _ready():
 	$HealthBar.max_value = max_health
 	
-func _on_GameState_global_reset():
+func _on_GameState_global_reset(_is_init):
 	set_alive(true)

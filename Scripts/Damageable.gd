@@ -41,3 +41,12 @@ func set_alive(_is_alive):
 		current_health = 0
 		emit_signal("death")
 	emit_signal("health_changed", current_health)
+
+func set_health(new_health):
+	if is_alive:
+		current_health = new_health
+		if current_health <= 0:
+			set_alive(false)
+		else:
+			emit_signal("health_changed", current_health)
+	

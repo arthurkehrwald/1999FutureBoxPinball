@@ -9,7 +9,7 @@ func _enter_tree():
 	GameState.connect("boss_died", self, "_on_GameState_boss_died")
 	hide()
 	
-func _on_GameState_global_reset():
+func _on_GameState_global_reset(_is_init):
 	hide()
 	
 func _on_GameState_player_died():

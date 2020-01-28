@@ -5,7 +5,6 @@ var ball_scene = preload("res://Scenes/Ball.tscn")
 func _enter_tree():
 	GameState.connect("spawn_ball", self, "_on_GameState_spawn_ball")
 
-
 func _on_GameState_spawn_ball():
 	var ball_instance = ball_scene.instance()
 	add_child(ball_instance)

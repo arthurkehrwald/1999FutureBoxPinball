@@ -1,4 +1,4 @@
-extends RayCast
+extends Spatial
 
 var parent
 

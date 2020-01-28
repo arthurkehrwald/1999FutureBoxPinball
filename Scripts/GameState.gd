@@ -2,19 +2,19 @@ extends Node
 
 # Balancing variables---------------------
 const START_PLAYER_MONEY = 200
-const MAX_PLAYER_MONEY = 1000
+const MAX_PLAYER_MONEY = 300
 const BALL_DESTROYED_COST = 200
 const BALL_RESET_DELAY = 1.0
 #-----------------------------------------
 
-signal global_reset
+signal global_reset(is_init)
 signal spawn_ball
 signal boss_died
 signal player_died
 signal player_money_changed(new_player_money)
 signal player_money_maxed
 signal activate_enemy_ships
-signal laser_trex_set_active(is_active)
+signal laser_trex_set_alive(is_alive)
 signal laser_trex_gates_set_open(is_open)
 
 signal set_wireframe_material( material)
@@ -25,6 +25,7 @@ var player_money = 100 setget set_player_money
 var nightmode_enabled = false
 var laser_trex_gates_are_open = false
 var balls_on_field = 0
+var balls_are_remote_controlled = true
 
 var plunger_progress = 0.0
 
@@ -46,16 +47,16 @@ func _enter_tree():
 
 func _ready():
 	set_pause_mode(Node.PAUSE_MODE_PROCESS)
+	emit_signal("global_reset", true)
 	global_init()
 	
 func global_init():
-	emit_signal("global_reset")
 	emit_signal("set_wireframe_material", pink_unlit)
 	emit_signal("set_collision_object_material", light_blue)
 	emit_signal("toggle_nightmode", true)
 	emit_signal("spawn_ball")
 	emit_signal("activate_enemy_ships")
-	emit_signal("laser_trex_set_active", false)
+	emit_signal("laser_trex_set_alive", false)
 	nightmode_enabled = true
 	
 func local_init():
@@ -84,6 +85,9 @@ func _on_MultiballShip_ball_locked():
 	if balls_on_field <= 0:
 		emit_signal("spawn_ball")
 
+func _on_ShopMenu_bought_remote_control():
+	pass
+
 func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		get_tree().set_pause(!get_tree().is_paused())
@@ -93,11 +97,13 @@ func processDebugInput():
 	if Input.is_action_just_pressed("test_reload_scene"):
 		get_tree().reload_current_scene()
 		local_init()
+		emit_signal("global_reset", false)
 		global_init()
 		
 	if Input.is_action_just_pressed("global_reset"):
 		print("GameState: global reset")
 		local_init()
+		emit_signal("global_reset", false)
 		global_init()
 		
 	if Input.is_action_just_pressed("test_cycle_materials"):

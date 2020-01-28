@@ -9,9 +9,11 @@ func _ready():
 
 func _on_PlayerHitboxArea_body_entered(body):
 	if body.get_collision_layer() == 1:
-		print(body.name)
 		GameState.on_PlayerShip_ball_drained(body, current_health)
 		pass
 
-func _on_GameState_global_reset():
+func _on_GameState_global_reset(_is_init):
 	set_alive(true)
+
+func _on_ShopMenu_bought_repair():
+	set_health(max_health)

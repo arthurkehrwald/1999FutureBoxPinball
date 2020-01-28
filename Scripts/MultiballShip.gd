@@ -33,7 +33,7 @@ func _on_Area_body_entered(body):
 	else:
 		GameState._on_MultiballShip_ball_locked()
 
-func _on_GameState_global_reset():
+func _on_GameState_global_reset(_is_init):
 	balls_locked = 0
 	loaded_balls.clear()
 	loaded_balls.resize(3)

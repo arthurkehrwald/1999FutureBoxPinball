@@ -6,7 +6,7 @@ signal louie_triggered
 
 var louie_active = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !louie_active and (looping_body_entered_at_entrance and get_unit_offset() > progress_required_to_trigger_louie) or (!looping_body_entered_at_entrance and get_unit_offset() < progress_required_to_trigger_louie):
 		emit_signal("louie_triggered")
 		louie_active = true

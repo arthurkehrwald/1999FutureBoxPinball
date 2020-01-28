@@ -39,9 +39,9 @@ func _on_LaserTrex_hit():
 	if !is_exploding:
 		explode()
 
-func _on_GameState_global_reset():
-	owner.queue_free()
-	pass
+func _on_GameState_global_reset(is_init):
+	if !is_init:
+		owner.queue_free()
 
 func explode():
 	is_exploding = true

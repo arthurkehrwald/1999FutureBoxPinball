@@ -1,36 +1,71 @@
-extends Sprite3D
+extends Control
+
+signal bought_repair
+signal bought_flipper
+signal bought_turret_shot
+signal bought_remote_control
+
+export var decision_time = 5.0
 
 var item_01_texture = preload("res://HUD/shop_item_01.png")
 var item_02_texture = preload("res://HUD/shop_item_02.png")
 var item_03_texture = preload("res://HUD/shop_item_03.png")
+var item_04_texture = preload("res://HUD/shop_item_04.png")
 
 var selected_item = 1
 
-func _enter_tree():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
-
 func _ready():
-	texture = $Viewport.get_texture()
+	$DecisionTimer.set_wait_time(decision_time)
 
-func _process(delta):
-	var previously_selected = selected_item
-	if Input.is_action_just_pressed("flipper_left"):
-		selected_item -= 1
-		if selected_item < 1:
-			selected_item = 3
-	if Input.is_action_just_pressed("flipper_right"):
-		selected_item += 1
-		if selected_item > 3:
-			selected_item = 1
-			
-	if previously_selected != selected_item:
-		match selected_item:
-			1:
-				texture = item_01_texture
-			2:
-				texture = item_02_texture
-			3:
-				texture = item_03_texture
+func _process(_delta):
+	if $DecisionTimer.time_left <= decision_time - 2 and Input.is_action_just_pressed("shop_confirm"):
+		$DecisionTimer.stop()
+		buy_item(selected_item)
+	else:
+		var previously_selected = selected_item
+		if Input.is_action_just_pressed("flipper_left"):
+			selected_item -= 1
+			if selected_item < 1:
+				selected_item = 4
+		if Input.is_action_just_pressed("flipper_right"):
+			selected_item += 1
+			if selected_item > 4:
+				selected_item = 1
+				
+		if previously_selected != selected_item:
+			match selected_item:
+				1:
+					$TextureRect.texture = item_01_texture
+				2:
+					$TextureRect.texture = item_02_texture
+				3:
+					$TextureRect.texture = item_03_texture
+				4:
+					$TextureRect.texture = item_04_texture	
 
-func _on_GameState_global_reset():
-	texture = null
+func set_active(is_active):
+	print("ShopMenu: active - ", is_active)
+	$TextureRect.texture = item_01_texture
+	set_visible(is_active)
+	if is_active:
+		$DecisionTimer.start()
+	set_process(is_active)
+	get_tree().paused = is_active
+
+func _on_DecisionTimer_timeout():
+	print("ShopMenu: decision timer timeout")
+	buy_item(selected_item)
+
+func buy_item(item_index):
+	set_active(false)
+	print("ShopMenu: player bought a thing")
+	GameState.set_player_money(0)
+	match item_index:
+		1:
+			emit_signal("bought_repair")
+		2:
+			emit_signal("bought_flipper")
+		3:
+			emit_signal("bought_turret_shot")
+		4:
+			emit_signal("bought_remote_control")

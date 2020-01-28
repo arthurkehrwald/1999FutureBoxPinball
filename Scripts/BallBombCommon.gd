@@ -20,7 +20,7 @@ func _enter_tree():
 	start_pos = get_global_transform().origin
 
 func _ready():
-	raycast = get_node("../BallBombRayCast")
+	raycast = get_node("../StuckToRigidbody/RayCast")
 	set_process(false)
 	
 func teleport(destination, maintain_velocity, impulse_on_exit):
@@ -80,7 +80,7 @@ func _on_GameState_toggle_nightmode(toggle):
 	else:
 		$OmniLight.hide()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if is_airborne == raycast.is_colliding():
 		is_airborne = !is_airborne
 		if is_airborne:
