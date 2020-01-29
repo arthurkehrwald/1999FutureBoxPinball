@@ -1,15 +1,24 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/LoopingLouiesLooping.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/WireRamp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/LoopingLouie.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Animations/looping_curve.tres" type="Curve3D" id=4]
+[ext_resource path="res://Animations/looping_louies_looping_curve.tres" type="Curve3D" id=4]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.617053, 0.263543, 0.2 )
+
+[sub_resource type="Curve3D" id=2]
+_data = {
+"points": PoolVector3Array( 0.0169129, 0, 2.44399, -0.0169129, 0, -2.44399, -2.50662, 0, -0.0158609, 0, 0, 0, 0, 0, 0, -0.0288075, 0, -0.0666003, 0, 0, 0, 0, 0, 0, -0.0288075, 0, -0.0666003, 0.0169127, 0, 2.68078, -0.0169127, 0, -2.68078, -2.50662, 0, -0.0158609 ),
+"tilts": PoolRealArray( 0, 0, 0, 0 )
+}
 
 [node name="LoopingLouiesLooping" instance=ExtResource( 2 )]
 curve = ExtResource( 4 )
 
 [node name="PathFollow" parent="." index="0"]
-transform = Transform( -0.622925, -0.0468582, -0.780691, 1.86244e-09, 0.998204, -0.0598935, 0.78214, -0.0373196, -0.621771, 0.514192, 0.045732, 4.44518 )
+transform = Transform( -0.974963, 0.0957846, -0.20012, 0, 0.902031, 0.431599, 0.221868, 0.420911, -0.879397, 6.50809, -0.283037, -0.0562016 )
 script = ExtResource( 1 )
 gravity = 10
 resistance = 5
@@ -17,12 +26,17 @@ friction = 0.3
 allow_exit_as_entrance = true
 
 [node name="EntranceArea" parent="." index="1"]
-transform = Transform( 0.580006, 0, 0.814612, 0, 1, 0, -0.814612, 0, 0.580006, 0.587625, 0.00556642, 4.36541 )
+transform = Transform( 0.83265, 0, 0.553799, 0, 1, 0, -0.553799, 0, 0.83265, 6.62511, -0.259082, -0.0831906 )
+
+[node name="CollisionShape" parent="EntranceArea" index="0"]
+transform = Transform( -0.702078, 0, 0.712099, 0, 1, 0, -0.712099, 0, -0.702078, -0.122419, -0.0736203, -0.0360835 )
+shape = SubResource( 1 )
 
 [node name="ExitArea" parent="." index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.24278, -0.508857, -0.333672 )
+transform = Transform( -0.639439, 0, -0.768842, 0, 1, 0, 0.768842, 0, -0.639439, 0.367968, -0.0334542, 4.22468 )
 
 [node name="LoopingLouie" parent="." index="4" instance=ExtResource( 3 )]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.235347, 1.96172, 0 )
+curve = SubResource( 2 )
 [connection signal="louie_triggered" from="PathFollow" to="LoopingLouie" method="_on_PathFollow_louie_triggered"]
 [connection signal="landed" from="LoopingLouie" to="PathFollow" method="_on_LoopingLouie_landed"]

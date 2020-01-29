@@ -9,7 +9,6 @@ var speed = 0
 enum states {NONE, AT_ENTRANCE, AT_EXIT}
 var looping_body_waiting_status = states.NONE
 var looping_body_entered_status = states.NONE
-var looping_body_exited_status = states.NONE
 
 var entrance_transform = Transform()
 var exit_transform = Transform()
@@ -42,35 +41,29 @@ func _ready():
 	
 func _on_EntranceArea_body_entered(body):
 	if looping_body == null:
-		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(-entrance_transform.basis.z), 3) + 1)
+		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(entrance_transform.basis.z), 3) + 1)
 		print("WireRamp: angle_factor - ", angle_factor)
 		speed = angle_factor * body.get_linear_velocity().length() * start_velocity_multiplier
 		if speed > 0:
+			looping_body = body
+			looping_body.delayed_teleport(entrance_transform.origin)
 			set_unit_offset(0.0)
 			looping_body_waiting_status = states.AT_ENTRANCE
 			looping_body_entered_status = states.AT_ENTRANCE
-			start_follow(body)
+			start_follow()
 			
 func _on_ExitArea_body_entered(body):
 	if looping_body == null:
-		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(-exit_transform.basis.z), 3) + 1)
+		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(exit_transform.basis.z), 3) + 1)
 		print("WireRamp: angle_factor - ", angle_factor)
 		speed = angle_factor * body.get_linear_velocity().length() * -start_velocity_multiplier
 		if speed < 0:
+			looping_body = body
+			looping_body.delayed_teleport(exit_transform.origin)
 			set_unit_offset(1.0)
 			looping_body_waiting_status = states.AT_EXIT
 			looping_body_entered_status = states.AT_EXIT
-			start_follow(body)
-
-func _on_EntranceArea_body_exited(_body):
-	if looping_body != null and looping_body_exited_status == states.AT_ENTRANCE:
-		print("looping body set to null because it exited entrance area")
-		looping_body = null
-
-func _on_ExitArea_body_exited(_body):
-	if looping_body != null and looping_body_exited_status == states.AT_EXIT:
-		print("looping body set to null because it exited exit area")
-		looping_body = null
+			start_follow()
 
 func _physics_process(delta):
 	var incline = Vector3(0, 0, 1).angle_to(-get_global_transform().basis.z)
@@ -94,15 +87,12 @@ func _physics_process(delta):
 		var reached_entrance = speed < 0 and get_unit_offset() == 0
 		var reached_exit = speed > 0 and get_unit_offset() == 1
 		if reached_exit or reached_entrance:
+			looping_body.set_locked(false)
 			print("Wire Ramp finished")
 			if reached_exit:
-				looping_body_exited_status = states.AT_EXIT
-				#looping_body.teleport(exit_transform.origin, false, exit_transform.basis.z.normalized() * speed / start_velocity_multiplier)
-				looping_body.apply_central_impulse(exit_transform.basis.z.normalized() * speed / start_velocity_multiplier)
+				looping_body.apply_central_impulse(-exit_transform.basis.z.normalized() * speed / start_velocity_multiplier)
 			if reached_entrance:
-				looping_body_exited_status = states.AT_ENTRANCE
-				#looping_body.teleport(entrance_transform.origin, false, -entrance_transform.basis.z.normalized() * speed / start_velocity_multiplier)
-				looping_body.apply_central_impulse(-entrance_transform.basis.z.normalized() * speed / start_velocity_multiplier)
+				looping_body.apply_central_impulse(-entrance_transform.basis.z.normalized() * -speed / start_velocity_multiplier)
 			reset()
 		else:
 			set_offset(get_offset() + speed * delta)
@@ -124,13 +114,12 @@ func _physics_process(delta):
 func _on_GameState_global_reset(is_init):
 	reset(is_init)
 	
-func start_follow(body):
-	if body == null:
+func start_follow():
+	if looping_body == null:
 		print("looping body is null")
-	looping_body = body
-	body.set_visible(false)
-	body.set_locked(true)
-	if body.get_collision_layer() == 1:
+	looping_body.set_visible(false)
+	looping_body.set_locked(true)
+	if looping_body.get_collision_layer() == 1:
 		$BallReplica.set_visible(true)
 		looping_body_is_bomb = false
 	else:
@@ -154,9 +143,11 @@ func reset(is_init = false):
 		if allow_exit_as_entrance:
 			exit_area.set_deferred("monitoring", true)
 			exit_area.set_deferred("monitorable", true)
-	if looping_body != null:
-		looping_body.set_visible(true)
-		looping_body.set_locked(false)
-		looping_body = null
-		print("looping body set to null because of reset")
+		if looping_body != null:
+			looping_body_waiting_status = states.NONE
+			looping_body_entered_status = states.NONE
+			looping_body.set_visible(true)
+			looping_body.set_locked(false)
+			looping_body = null
+			print("looping body set to null because of reset")
 	speed = 0

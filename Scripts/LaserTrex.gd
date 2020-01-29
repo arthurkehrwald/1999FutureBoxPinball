@@ -9,8 +9,6 @@ export var time_until_laser_toggle = 0.0
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
 	GameState.connect("laser_trex_set_alive", self, "set_alive")
-	GameState.connect("laser_trex_gates_set_open", $Gate1, "set_open")
-	GameState.connect("laser_trex_gates_set_open", $Gate2, "set_open")
 
 func _ready():
 	set_process(false)
@@ -32,6 +30,7 @@ func _on_LaserTrex_death():
 	set_active(false)
 
 func set_active(is_active):
+	set_target_gate_open(!is_active)
 	$HitboxArea.set_deferred("monitoring", is_active)
 	$HitboxArea.set_deferred("monitorable", is_active)
 	$Bar3D.set_visible(is_active)
@@ -50,3 +49,12 @@ func laser_set_active(is_active):
 func _on_LaserArea_body_entered(body):
 	if body.has_method("_on_LaserTrex_hit"):
 		body._on_LaserTrex_hit()
+		
+func set_target_gate_open(is_open):
+	$BottomCollisionShape.set_deferred("disabled", is_open)
+	if $AnimationPlayer.is_playing():
+		$AnimationPlayer.stop()
+	if is_open:
+		$AnimationPlayer.play("gate_open_anim")
+	else:
+		$AnimationPlayer.play_backwards("gate_open_anim")

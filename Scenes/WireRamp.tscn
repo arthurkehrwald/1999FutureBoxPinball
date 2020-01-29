@@ -31,7 +31,7 @@ collision_layer = 8192
 collision_mask = 257
 
 [node name="CollisionShape" type="CollisionShape" parent="EntranceArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.197 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2 )
 shape = SubResource( 1 )
 
 [node name="ExitArea" type="Area" parent="."]
@@ -40,7 +40,7 @@ collision_layer = 8192
 collision_mask = 257
 
 [node name="CollisionShape" type="CollisionShape" parent="ExitArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.217 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2 )
 shape = SubResource( 1 )
 
 [node name="DebugLabel" type="Label" parent="."]
@@ -53,6 +53,4 @@ __meta__ = {
 format_string = "incline %s speed %s acceleration %s"
 [connection signal="debug_info_update" from="PathFollow" to="DebugLabel" method="_on_PathFollow_debug_info_update"]
 [connection signal="body_entered" from="EntranceArea" to="PathFollow" method="_on_EntranceArea_body_entered"]
-[connection signal="body_exited" from="EntranceArea" to="PathFollow" method="_on_EntranceArea_body_exited"]
 [connection signal="body_entered" from="ExitArea" to="PathFollow" method="_on_ExitArea_body_entered"]
-[connection signal="body_exited" from="ExitArea" to="PathFollow" method="_on_ExitArea_body_exited"]

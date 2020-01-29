@@ -160,45 +160,42 @@ transform = Transform( 0.836076, 1.09091e-07, -0.548615, -4.84288e-08, 1, 8.9407
 transform = Transform( 0.805256, 1.11576e-07, -0.592929, -8.19564e-08, 1, 1.19209e-07, 0.592928, -6.70552e-08, 0.805257, 3.21053, -0.150935, -4.13729 )
 
 [node name="MysteryTeleporterExit" parent="BoxV3/BoardAligned" instance=ExtResource( 26 )]
-transform = Transform( -0.880633, 0.0454006, -0.471619, 0.0448965, 0.998916, 0.012328, 0.471667, -0.0103175, -0.881717, -3.89888, -0.000811815, 2.23289 )
+transform = Transform( 0.957024, 0.0454007, 0.286431, -0.0464535, 0.998917, -0.00312243, -0.286262, -0.0103176, 0.958097, -3.83971, 0.422765, 2.53143 )
 
 [node name="MysteryTeleporterExit2" parent="BoxV3/BoardAligned" instance=ExtResource( 26 )]
-transform = Transform( -0.881153, 0.0337794, 0.471623, 0.0448889, 0.998916, 0.0123217, -0.470695, 0.0320279, -0.881715, 3.36753, -0.350796, 1.68092 )
+transform = Transform( 0.997945, 0.0337795, -0.0544518, -0.035458, 0.998916, -0.0301592, 0.053374, 0.032028, 0.998062, 3.09049, 0.34231, 2.08743 )
+
+[node name="SimpleSlope_R2" parent="BoxV3/BoardAligned" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50766, 0.000474215, -7.71008 )
 
 [node name="StageTwoEntryRamp" parent="BoxV3/BoardAligned" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96573, -8.55923e-05, -5.76779 )
 curve = ExtResource( 25 )
 
 [node name="PathFollow" parent="BoxV3/BoardAligned/StageTwoEntryRamp" index="0"]
-gravity = 4
+gravity = 6
 
 [node name="EntranceArea" parent="BoxV3/BoardAligned/StageTwoEntryRamp" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17342, 0.203443, 0.550225 )
+transform = Transform( -1, 0, -3.25841e-07, -4.26326e-14, 1, 0, 3.25841e-07, 0, -1, 0.261449, 0.24858, 0.331333 )
 
 [node name="ExitArea" parent="BoxV3/BoardAligned/StageTwoEntryRamp" index="2"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, -6.61682, 0.578, 1.81629 )
+transform = Transform( 1, 0, 0, 0, -0.373328, 0.9277, 0, -0.9277, -0.373328, -6.61682, 0.814443, 1.84694 )
 
 [node name="StageOneEntryRamp" parent="BoxV3/BoardAligned" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96573, -8.4877e-05, 0.0568439 )
 curve = ExtResource( 29 )
 
 [node name="PathFollow" parent="BoxV3/BoardAligned/StageOneEntryRamp" index="0"]
-gravity = 4
+gravity = 8
 
 [node name="EntranceArea" parent="BoxV3/BoardAligned/StageOneEntryRamp" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17342, 0.203443, 0.550225 )
+transform = Transform( -1, 0, -3.25841e-07, -2.84217e-14, 1, 0, 3.25841e-07, 0, -1, 0.289441, 0.259625, 0.311094 )
 
 [node name="ExitArea" parent="BoxV3/BoardAligned/StageOneEntryRamp" index="2"]
-transform = Transform( 1, 0, 0, 0, 0.154538, -0.987987, 0, 0.987987, 0.154538, -5.98453, 1.03144, -1.31205 )
-
-[node name="SimpleSlope_R2" parent="BoxV3/BoardAligned" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50766, 0.000474215, -7.71008 )
+transform = Transform( 1, 0, 0, 0, -0.353116, 0.93558, 0, -0.93558, -0.353116, -5.98453, 1.03144, -1.31205 )
 
 [node name="LoopingLouiesLooping" parent="BoxV3/BoardAligned" instance=ExtResource( 28 )]
-transform = Transform( 0.811554, 3.93575e-09, -0.584278, -2.04891e-07, 1, -2.98023e-08, 0.584278, 0, 0.811555, -1.96265, 0.77106, -2.67657 )
-
-[node name="EntranceArea" parent="BoxV3/BoardAligned/LoopingLouiesLooping" index="1"]
-transform = Transform( 0.986266, -5.96046e-08, 0.165149, -7.45058e-09, 0.999999, -1.2666e-07, -0.165151, -2.23517e-08, 0.986266, 5.284, -0.531855, -0.00256854 )
+transform = Transform( 0.860378, 0, -0.509658, -3.72529e-08, 1, 0, 0.509657, 0, 0.860378, -2.37255, 0.655235, -2.41056 )
 
 [node name="Reference" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, 0, -2.62545, 0.214347 )
@@ -218,5 +215,3 @@ transform = Transform( 1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, -9.
 [editable path="BoxV3/BoardAligned/StageTwoEntryRamp"]
 
 [editable path="BoxV3/BoardAligned/StageOneEntryRamp"]
-
-[editable path="BoxV3/BoardAligned/LoopingLouiesLooping"]
