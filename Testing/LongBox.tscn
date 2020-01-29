@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=1]
+[ext_resource path="res://Meshes/Wireframe/long_box_wireframe.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=3]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.1, 0.3, 6 )
+
+[sub_resource type="CubeMesh" id=2]
+
+[node name="LongBox" type="StaticBody"]
+collision_layer = 2
+collision_mask = 257
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
+shape = SubResource( 1 )
+
+[node name="Wireframe" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 1.372, 0, 0, 0, 1, 0, 0.3, 0 )
+mesh = ExtResource( 2 )
+material/0 = null
+script = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.3, 0, 0, 0, 6, 0, 0.3, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+script = ExtResource( 1 )

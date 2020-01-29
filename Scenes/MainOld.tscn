@@ -1,0 +1,228 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Trigger.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/SimpleSlope.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Slingshot_R.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Shop.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/CentralHUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/MultiTrigger.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/CurvedRamp.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/WeirdCamera.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/CurvedRamp_R.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/SimpleCube.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Bumper.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/SimpleSlope_R.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/NoRemoteControlArea.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/BoxV2.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/PlayerTurret.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Slingshot.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/RemoteBallControlTimer.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/TemporaryFlipper.tscn" type="PackedScene" id=29]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+
+[node name="Main" type="Spatial"]
+
+[node name="NormalCamera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.984102, -0.177602, 0, 0.177602, 0.984102, -0.552408, -2.06092, 7.13899 )
+environment = SubResource( 1 )
+current = true
+fov = 80.0
+
+[node name="RemoteBallControlTimer" parent="." instance=ExtResource( 27 )]
+
+[node name="HUD" parent="." instance=ExtResource( 19 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Box&Camera" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 0, 0 )
+
+[node name="WeirdCamera" parent="Box&Camera" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, -1.63913e-07, 1, 0, -1, -1.63913e-07, -0.005, 17.682, 5.507 )
+
+[node name="BoxV2" parent="Box&Camera" instance=ExtResource( 24 )]
+
+[node name="BoardAligned" type="Spatial" parent="Box&Camera/BoxV2"]
+transform = Transform( 1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, -1.10493, -0.0940756 )
+
+[node name="Back" type="Spatial" parent="Box&Camera/BoxV2/BoardAligned"]
+transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 0 )
+
+[node name="CurvedRamp_R" parent="Box&Camera/BoxV2/BoardAligned/Back" instance=ExtResource( 14 )]
+transform = Transform( 0.482774, -0.0135222, -0.129409, 0.0135246, 0.499815, -0.00177146, 0.129409, -0.00178993, 0.482961, 1.55239, 0.0899839, -3.41633 )
+
+[node name="CurvedRamp" parent="Box&Camera/BoxV2/BoardAligned/Back" instance=ExtResource( 10 )]
+transform = Transform( 0.482963, 4.21438e-09, 0.129409, -8.3819e-09, 0.5, -5.21541e-08, -0.12941, 5.21541e-08, 0.482964, -0.778867, 0.0295252, -3.45067 )
+
+[node name="LoopingLouiesLooping" parent="Box&Camera/BoxV2/BoardAligned/Back" instance=ExtResource( 23 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 1.49012e-08, -1.62921e-07, 0, 0.2, -6.252 )
+
+[node name="MultiballShip" parent="Box&Camera/BoxV2/BoardAligned/Back" instance=ExtResource( 6 )]
+transform = Transform( 0.732616, -9.20546e-09, 0.680644, 8.19564e-08, 1, -5.96046e-08, -0.680643, 1.11759e-07, 0.732618, 3.63054, 0.546104, -2.50715 )
+
+[node name="Boss" parent="Box&Camera/BoxV2/BoardAligned/Back" instance=ExtResource( 18 )]
+transform = Transform( -0.8, 2.5532e-14, -3.11531e-07, -3.90799e-14, 0.800001, 9.68575e-08, 3.11531e-07, 9.68575e-08, -0.800001, 0.354665, 7.15256e-07, -5.67757 )
+
+[node name="Moon" parent="Box&Camera/BoxV2/BoardAligned/Back" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, -1.04308e-07, 0, 1.04308e-07, 1, 1.77059, 0.157392, -0.323826 )
+
+[node name="Bumpers" type="Spatial" parent="Box&Camera/BoxV2/BoardAligned/Back"]
+transform = Transform( 0.907059, -1.77636e-15, 0.421004, 2.23517e-08, 1, -6.70552e-08, -0.421004, 1.04308e-07, 0.907059, 0.597717, -0.000295639, -3.57866 )
+
+[node name="Bumper" parent="Box&Camera/BoxV2/BoardAligned/Back/Bumpers" instance=ExtResource( 20 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, -2.6077e-08, 0, 2.6077e-08, 0.5, -3.10048, -0.120796, -3.34575 )
+
+[node name="Bumper2" parent="Box&Camera/BoxV2/BoardAligned/Back/Bumpers" instance=ExtResource( 20 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, -3.35276e-08, 0, 3.35276e-08, 0.5, -2.38466, -0.120795, -2.72105 )
+
+[node name="Bumper3" parent="Box&Camera/BoxV2/BoardAligned/Back/Bumpers" instance=ExtResource( 20 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, -4.09782e-08, 0, 4.09782e-08, 0.5, -3.29319, -0.120795, -2.42998 )
+
+[node name="Bumpers2" type="Spatial" parent="Box&Camera/BoxV2/BoardAligned/Back"]
+transform = Transform( 0.864819, 1.83823e-08, 0.502085, 3.35276e-08, 1, -1.19209e-07, -0.502085, 1.04308e-07, 0.864819, 1.95627, 0.0582018, -0.0749705 )
+
+[node name="Bumper" parent="Box&Camera/BoxV2/BoardAligned/Back/Bumpers2" instance=ExtResource( 20 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, -2.6077e-08, 0, 2.6077e-08, 0.5, -3.10048, -0.120796, -3.34575 )
+
+[node name="Bumper2" parent="Box&Camera/BoxV2/BoardAligned/Back/Bumpers2" instance=ExtResource( 20 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, -3.35276e-08, 0, 3.35276e-08, 0.5, -2.38466, -0.120795, -2.72105 )
+
+[node name="Bumper3" parent="Box&Camera/BoxV2/BoardAligned/Back/Bumpers2" instance=ExtResource( 20 )]
+transform = Transform( 0.5, 1.86265e-09, 0, -1.86265e-09, 0.5, -4.09782e-08, 0, 3.72529e-08, 0.5, 4.61026, -0.120794, -4.17228 )
+
+[node name="TemporaryFlipper" parent="Box&Camera/BoxV2/BoardAligned/Back" instance=ExtResource( 29 )]
+transform = Transform( -0.34202, -4.78914e-09, -0.939693, -2.23517e-08, 1, 3.72529e-09, 0.939693, 3.72529e-08, -0.34202, 3.69012, -8.34465e-07, -0.483353 )
+collision_mask = 1
+IS_RIGHT_FLIPPER = true
+TURN_SPEED = 1000
+
+[node name="Front" type="Spatial" parent="Box&Camera/BoxV2/BoardAligned"]
+transform = Transform( 1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 1.19209e-07, 0.0938097 )
+
+[node name="Flipper" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 1 )]
+transform = Transform( 0.820302, -7.7294e-09, -0.571931, -3.72529e-09, 1, -2.23517e-08, 0.571931, 2.23517e-08, 0.820302, -1.65791, 0.000211, 6.65033 )
+
+[node name="Flipper_R" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 11 )]
+transform = Transform( 0.832022, 0, 0.554743, -7.45058e-09, 1, -7.45058e-09, -0.554743, 2.23517e-08, 0.832023, 1.10909, 3.17097e-05, 6.69163 )
+collision_mask = 1
+TURN_SPEED = 1000
+
+[node name="SimpleSlope" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 3 )]
+transform = Transform( -3.93403e-07, -1.3027e-15, 1.7, -4.76837e-07, 1, 1.77636e-15, -9, -2.23517e-08, -7.43094e-08, -4.5, 0, 5 )
+
+[node name="SimpleSlope_R" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 21 )]
+transform = Transform( -3.93403e-07, 2.97243e-15, -1.7, 8.9407e-07, 1, 2.66454e-15, 9.00001, -1.49012e-08, -7.43094e-08, 3.88069, -9.93013e-05, 5.23435 )
+
+[node name="SimpleCube2" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 17 )]
+transform = Transform( 5.0547, 0.00259901, 0.585947, -0.0188993, 0.999996, -0.000245363, -3.65496, -0.00157649, 0.810349, 2.39518, -0.00111699, 5.74113 )
+
+[node name="SimpleCube3" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 17 )]
+transform = Transform( 5.46196, -2.42966e-08, -0.603959, 0, 1, -7.45058e-09, 4.13895, 3.72529e-08, 0.797015, -2.93161, -0.000178099, 5.75942 )
+
+[node name="Slingshot" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 26 )]
+transform = Transform( 0.6, 2.22346e-22, -2.13163e-15, -2.91168e-22, 0.6, -1.11759e-08, 2.13163e-15, 1.11759e-08, 0.6, -2.66704, 0.000524998, 5.1203 )
+
+[node name="Slingshot_R" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 4 )]
+transform = Transform( 0.6, 1.70394e-29, -2.13163e-15, -3.97047e-23, 0.6, -1.11759e-08, 2.13163e-15, 1.11759e-08, 0.6, 2.05677, -0.00273943, 5.13086 )
+
+[node name="LaserTrex" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 16 )]
+transform = Transform( -1.30337e-07, 0, -0.8, -7.45058e-09, 0.8, 1.77636e-15, 0.8, 7.45058e-09, -1.30337e-07, -4.08907, -4.76837e-07, 0.361427 )
+
+[node name="NoRemoteControlArea" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.245351, -1.19209e-07, 6.59987 )
+
+[node name="Shop" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 7 )]
+transform = Transform( 0.615785, 0, 0.787914, 0, 1, 2.23517e-08, -0.787914, 0, 0.615785, -2.59438, -3.57628e-07, 5.59008 )
+
+[node name="CenterHUD" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, -1.63913e-07, 1, 0, -1, -1.63913e-07, -0.517337, 0.250524, 4.62605 )
+
+[node name="PlayerTurret" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 0.965925, -0.258819, 0, 0.258819, 0.965925, -0.427597, 0.746134, 6.92024 )
+
+[node name="Static" type="Spatial" parent="Box&Camera/BoxV2/BoardAligned"]
+transform = Transform( 1, 0, -3.55271e-15, -5.29396e-23, 1, -1.49012e-08, 3.55271e-15, 1.49012e-08, 1, 0.320007, 0, 0 )
+
+[node name="SimpleCube" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 17 )]
+transform = Transform( 0.423401, -2.69008e-08, -7.28441e-14, 1.13898e-08, 1, -1.78814e-07, 2.9976e-15, 2.23517e-08, 8.8665, 3.57703, 3.57628e-07, 2.84607 )
+
+[node name="SimpleCube5" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 17 )]
+transform = Transform( 0.423401, -2.69008e-08, -1.12268e-13, 1.13898e-08, 1, -4.76837e-07, 3.66374e-15, 5.96046e-08, 12.8045, 3.57703, 4.76837e-07, -1.49176 )
+
+[node name="SimpleCube4" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 17 )]
+transform = Transform( 0.423401, -2.69008e-08, -5.09908e-14, 1.13898e-08, 1, -2.98023e-07, 2.55351e-15, 3.72529e-08, 6.20655, 3.57703, -4.76837e-07, 7.78891 )
+
+[node name="Plunger" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 13 )]
+transform = Transform( 0.696708, 1.58819e-22, 3.55271e-15, -1.47061e-22, 1, -6.70552e-08, -2.4752e-15, 6.70552e-08, 1, 3.93258, -0.0386969, 6.54983 )
+max_distance = 2.0
+
+[node name="Ball Feed" parent="Box&Camera/BoxV2/BoardAligned/Static" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 8.47033e-22, -5.29396e-23, 1, -1.49012e-08, 0, 1.49012e-08, 1, 3.09425, -4.76837e-07, 5.83035 )
+
+[node name="Slingshots" type="Spatial" parent="Box&Camera/BoxV2/BoardAligned"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0 )
+
+[node name="Bumpers" type="Spatial" parent="Box&Camera/BoxV2/BoardAligned"]
+transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, 4.47035e-08, 1, 1.70267, -2.24624, -3.78748 )
+
+[node name="Bumper2" parent="Box&Camera/BoxV2/BoardAligned/Bumpers" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, -5.21541e-08, 0, 7.45058e-09, 1, -4.73241, -0.0200427, -2.30065 )
+
+[node name="Bumper4" parent="Box&Camera/BoxV2/BoardAligned/Bumpers" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 0, 1, 0.491396, -0.0200436, -2.2481 )
+
+[node name="Triggers" type="Spatial" parent="Box&Camera/BoxV2/BoardAligned"]
+visible = false
+
+[node name="MultiTrigger" parent="Box&Camera/BoxV2/BoardAligned/Triggers" instance=ExtResource( 9 )]
+transform = Transform( 0.984808, -2.75152e-09, 0.173648, 7.45058e-09, 1, 1.49012e-08, -0.173648, 0, 0.984808, -1.45008, -2.98023e-07, 3.47061 )
+
+[node name="MultiTrigger2" parent="Box&Camera/BoxV2/BoardAligned/Triggers" instance=ExtResource( 9 )]
+transform = Transform( 0.984808, -1.48705e-08, -0.173648, 1.39698e-08, 1, 7.45058e-09, 0.173648, 0, 0.984808, 0.449922, -3.27826e-07, 3.47061 )
+
+[node name="Trigger" parent="Box&Camera/BoxV2/BoardAligned/Triggers" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, -4.47035e-08, -1, 0, 1, -4.47035e-08, 0, 0.4, -8 )
+
+[node name="Trigger2" parent="Box&Camera/BoxV2/BoardAligned/Triggers" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, -4.47035e-08, -1, 0, 1, -4.47035e-08, -1.1, 0.4, -8 )
+
+[node name="Trigger3" parent="Box&Camera/BoxV2/BoardAligned/Triggers" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, -4.47035e-08, -1, 0, 1, -4.47035e-08, 1.1, 0.4, -8 )
+
+[node name="Trigger4" parent="Box&Camera/BoxV2/BoardAligned/Triggers" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16184, 0, 0 )
+
+[node name="Actors" type="Spatial" parent="Box&Camera/BoxV2/BoardAligned"]
+
+[node name="PlayerShip" parent="Box&Camera/BoxV2/BoardAligned" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, -1.19209e-07, 0, 1.19209e-07, 1, -0.445983, 0.0102859, 8.31565 )
+
+[node name="BoxAligned" type="Spatial" parent="Box&Camera/BoxV2"]
+transform = Transform( 1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 0, 0 )
+
+[node name="SimpleSlope" parent="Box&Camera/BoxV2/BoxAligned" instance=ExtResource( 3 )]
+transform = Transform( -9.83506e-08, 0, -2.25, -1.49012e-07, 2.25, 0, 2.25, 1.49012e-07, -9.83506e-08, 4.5, -0.4, -7.6 )
+
+[node name="SimpleSlope2" parent="Box&Camera/BoxV2/BoxAligned" instance=ExtResource( 3 )]
+transform = Transform( 2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, -4.5, -0.4, -7.6 )
+[connection signal="menu_triggered" from="Box&Camera/BoxV2/BoardAligned/Front/Shop" to="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD" method="_on_Shop_menu_triggered"]
+[connection signal="bought_flipper" from="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD/Viewport/ShopMenu" to="Box&Camera/BoxV2/BoardAligned/Back/TemporaryFlipper" method="_on_ShopMenu_bought_flipper"]
+[connection signal="bought_remote_control" from="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD/Viewport/ShopMenu" to="RemoteBallControlTimer" method="_on_ShopMenu_bought_remote_control"]
+[connection signal="bought_repair" from="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD/Viewport/ShopMenu" to="Box&Camera/BoxV2/BoardAligned/PlayerShip" method="_on_ShopMenu_bought_repair"]
+[connection signal="bought_turret_shot" from="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD/Viewport/ShopMenu" to="Box&Camera/BoxV2/BoardAligned/Front/PlayerTurret" method="_on_ShopMenu_bought_turret_shot"]
+[connection signal="released" from="Box&Camera/BoxV2/BoardAligned/Static/Plunger" to="Box&Camera/BoxV2/BoardAligned/Front/PlayerTurret" method="_on_Plunger_released"]
+
+[editable path="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD"]

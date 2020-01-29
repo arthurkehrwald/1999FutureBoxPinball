@@ -7,22 +7,23 @@
 [ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=5]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.559, 0.3, 0.127 )
+extents = Vector3( 0.559, 0.3, 0.0590627 )
 
 [sub_resource type="CylinderShape" id=2]
-radius = 0.258864
+radius = 0.180597
 height = 0.6
 
 [sub_resource type="CylinderShape" id=3]
-radius = 0.154589
+radius = 0.100407
 height = 0.6
 
 [node name="Flipper" type="KinematicBody"]
-transform = Transform( 0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 0, 0, 0 )
+transform = Transform( 0.819152, 0, -0.573577, 0, 1, 0, 0.573577, 0, 0.819152, 0, 0, 0 )
 collision_layer = 4
+collision_mask = 257
 script = ExtResource( 1 )
 MAX_TURN_ANGLE = 50
-TURN_SPEED = 1000
+TURN_SPEED = 800
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.7, 0, 0, 0 )
@@ -35,17 +36,17 @@ material/0 = null
 script = ExtResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.995818, 0, 0.0913626, 0, 1, 0, -0.0913626, 0, 0.995818, 0.54, 0.15, 0.0802937 )
+transform = Transform( 0.998384, 0, 0.056832, 0, 1, 0, -0.056832, 0, 0.998384, 0.540308, 0.15, 0.0857122 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="."]
-transform = Transform( 0.995818, 0, -0.0913626, 0, 1, 0, 0.0913626, 0, 0.995818, 0.54, 0.15, -0.0782097 )
+transform = Transform( 0.998072, 0, -0.0620764, 0, 1, 0, 0.0620764, 0, 0.998072, 0.5393, 0.15, -0.0669573 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0534035, 0.15, 0.0138631 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10455, 0.15, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1341, 0.15, 5.96046e-08 )
 shape = SubResource( 3 )

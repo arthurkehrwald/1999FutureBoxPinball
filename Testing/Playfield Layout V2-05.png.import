@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Playfield Layout V2-01.png-4fd1e33df8a8b7ef41bdf1107b0b0a02.s3tc.stex"
-path.etc2="res://.import/Playfield Layout V2-01.png-4fd1e33df8a8b7ef41bdf1107b0b0a02.etc2.stex"
+path.s3tc="res://.import/Playfield Layout V2-05.png-7187b5f1c56cde32467c47cbe46c6976.s3tc.stex"
+path.etc2="res://.import/Playfield Layout V2-05.png-7187b5f1c56cde32467c47cbe46c6976.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Playfield Layout V2-01.png"
-dest_files=[ "res://.import/Playfield Layout V2-01.png-4fd1e33df8a8b7ef41bdf1107b0b0a02.s3tc.stex", "res://.import/Playfield Layout V2-01.png-4fd1e33df8a8b7ef41bdf1107b0b0a02.etc2.stex" ]
+source_file="res://Testing/Playfield Layout V2-05.png"
+dest_files=[ "res://.import/Playfield Layout V2-05.png-7187b5f1c56cde32467c47cbe46c6976.s3tc.stex", "res://.import/Playfield Layout V2-05.png-7187b5f1c56cde32467c47cbe46c6976.etc2.stex" ]
 
 [params]
 

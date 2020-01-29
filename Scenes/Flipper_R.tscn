@@ -3,17 +3,17 @@
 [ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=1]
 
 [node name="Flipper_R" instance=ExtResource( 1 )]
-transform = Transform( 0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, 0, 0, 0 )
+transform = Transform( 0.819152, 0, 0.573577, 0, 1, 0, -0.573577, 0, 0.819152, 0, 0, 0 )
 IS_RIGHT_FLIPPER = true
 
 [node name="MeshInstance" parent="." index="0"]
 transform = Transform( -1, 0, -1.05697e-07, 0, 1, 0, 1.50996e-07, 0, -0.7, 0, 0, 0 )
 
 [node name="CollisionShape" parent="." index="1"]
-transform = Transform( 0.995818, 0, -0.0913626, 0, 1, 0, 0.0913626, 0, 0.995818, -0.54, 0.15, 0.0802937 )
+transform = Transform( 0.998001, 0, -0.0632086, 0, 1, 0, 0.0632086, 0, 0.998001, -0.54, 0.15, 0.0802937 )
 
 [node name="CollisionShape4" parent="." index="2"]
-transform = Transform( 0.995818, 0, 0.0913626, 0, 1, 0, -0.0913626, 0, 0.995818, -0.54, 0.15, -0.0782097 )
+transform = Transform( 0.997855, 0, 0.0654728, 0, 1, 0, -0.0654728, 0, 0.997855, -0.54, 0.15, -0.0782097 )
 
 [node name="CollisionShape3" parent="." index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09545, 0.15, 0 )

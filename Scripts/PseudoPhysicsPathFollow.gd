@@ -2,8 +2,6 @@ extends PathFollow
 
 signal debug_info_update(angle, speed, acceleration)
 
-export var looping_louie_trigger_progress = .5
-
 var looping_body = null
 var looping_body_is_bomb = false
 var speed = 0
@@ -16,10 +14,11 @@ var timer = Timer
 
 const MIN_START_PROXIMITY = .1
 
-const START_VELOCITY_MULTIPLIER = 1 # not zero
-const GRAVITY = 15
-const RESISTANCE = 2
-const FRICTION = .6
+export var start_velocity_multiplier = 1 # not zero
+export var gravity = 15
+export var resistance = 2
+export var FRICTION = .6
+export var allow_exit_as_entrance = false
 
 const SPEED_ROTATION_RATE = 6
 
@@ -30,12 +29,15 @@ func _ready():
 	entrance_transform = get_node("../").get_node("EntranceArea").get_global_transform()
 	exit_transform = get_node("../").get_node("ExitArea").get_global_transform()
 	set_physics_process(false)
+	if !allow_exit_as_entrance:
+		get_node("../").get_node("ExitArea").set_monitorable(false)
+		get_node("../").get_node("ExitArea").set_monitoring(false)
 	
 func _on_EntranceArea_body_entered(body):
 	if looping_body == null:
 		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(-entrance_transform.basis.z), 3) + 1)
 		print(angle_factor)
-		speed = angle_factor * body.get_linear_velocity().length() * START_VELOCITY_MULTIPLIER
+		speed = angle_factor * body.get_linear_velocity().length() * start_velocity_multiplier
 		if speed > 0:
 			set_unit_offset(0.0)
 			looping_body = body
@@ -56,7 +58,7 @@ func _on_ExitArea_body_entered(body):
 	if looping_body == null:
 		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(-exit_transform.basis.z), 3) + 1)
 		print(angle_factor)
-		speed = angle_factor * body.get_linear_velocity().length() * -START_VELOCITY_MULTIPLIER
+		speed = angle_factor * body.get_linear_velocity().length() * -start_velocity_multiplier
 		if speed < 0:
 			set_unit_offset(1.0)
 			looping_body = body
@@ -88,12 +90,12 @@ func _physics_process(delta):
 	if point_ahead.y < get_global_transform().origin.y:
 		incline = -incline
 		
-	var acceleration = -incline * GRAVITY
+	var acceleration = -incline * gravity
 	acceleration *= .8 * pow(abs(incline) + .01, -1) + .2 
-	if abs(acceleration) < RESISTANCE:
+	if abs(acceleration) < resistance:
 		acceleration = 0
 	else:
-		acceleration -= RESISTANCE * sign(acceleration)
+		acceleration -= resistance * sign(acceleration)
 	
 	if looping_body != null:
 		speed += acceleration * delta
@@ -105,12 +107,12 @@ func _physics_process(delta):
 			looping_body.set_visible(true)
 			if reached_exit:
 				looping_body_exited_at_entrance = false
-				#looping_body.teleport(exit_transform.origin, false, exit_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
-				looping_body.apply_central_impulse(exit_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
+				#looping_body.teleport(exit_transform.origin, false, exit_transform.basis.z.normalized() * speed / start_velocity_multiplier)
+				looping_body.apply_central_impulse(exit_transform.basis.z.normalized() * speed / start_velocity_multiplier)
 			if reached_entrance:
 				looping_body_exited_at_entrance = true
-				#looping_body.teleport(entrance_transform.origin, false, -entrance_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
-				looping_body.apply_central_impulse(-entrance_transform.basis.z.normalized() * speed / START_VELOCITY_MULTIPLIER)
+				#looping_body.teleport(entrance_transform.origin, false, -entrance_transform.basis.z.normalized() * speed / start_velocity_multiplier)
+				looping_body.apply_central_impulse(-entrance_transform.basis.z.normalized() * speed / start_velocity_multiplier)
 			$BallReplica.set_visible(false)
 			$BombReplica.set_visible(false)
 			set_physics_process(false)
@@ -121,10 +123,10 @@ func _physics_process(delta):
 			else:
 				$BallReplica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
 			if looping_body_is_waiting_at_entrance and get_unit_offset() > .6:
-				looping_body.teleport(exit_transform.origin, false, Vector3(0, 0, 0))
+				looping_body.delayed_teleport(exit_transform.origin)
 				looping_body_is_waiting_at_entrance = false
 			elif !looping_body_is_waiting_at_entrance and get_unit_offset() < .4:
-				looping_body.teleport(entrance_transform.origin, false, Vector3(0, 0, 0))
+				looping_body.delayed_teleport(entrance_transform.origin)
 				looping_body_is_waiting_at_entrance = true
 	elif looping_body_is_bomb:
 		#that means the bomb exploded while it was on the rail

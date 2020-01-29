@@ -15,6 +15,7 @@ func _ready():
 	remote_control_timer = get_node_or_null("/root/Main/RemoteBallControlTimer")
 	if remote_control_timer == null:
 		print("Ball: could not find remote control timer")
+		set_remote_controlled(false)
 	else:
 		remote_control_timer.connect("start", self, "_on_RemoteControlTimer_start")
 		remote_control_timer.connect("timeout", self, "_on_RemoteControlTimer_timeout")

@@ -13,6 +13,7 @@ extents = Vector3( 0.636307, 1, 1.61094 )
 extents = Vector3( 0.164197, 0.481477, 0.518697 )
 
 [node name="CurvedRamp" type="StaticBody"]
+transform = Transform( 0.594161, 0, 0.0835039, 0, 0.6, 0, -0.0835039, 0, 0.594161, 0, 0, 0 )
 collision_layer = 2
 collision_mask = 257
 

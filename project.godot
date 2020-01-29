@@ -144,6 +144,7 @@ shop_confirm={
 
 [physics]
 
+common/physics_fps=120
 3d/physics_engine="Bullet"
 
 [rendering]
