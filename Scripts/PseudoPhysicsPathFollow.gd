@@ -5,11 +5,16 @@ signal debug_info_update(angle, speed, acceleration)
 var looping_body = null
 var looping_body_is_bomb = false
 var speed = 0
-var looping_body_is_waiting_at_entrance = false
-var looping_body_entered_at_entrance = false
-var looping_body_exited_at_entrance = false
+
+enum states {NONE, AT_ENTRANCE, AT_EXIT}
+var looping_body_waiting_status = states.NONE
+var looping_body_entered_status = states.NONE
+var looping_body_exited_status = states.NONE
+
 var entrance_transform = Transform()
 var exit_transform = Transform()
+var entrance_area = Area
+var exit_area = Area
 var timer = Timer
 
 const MIN_START_PROXIMITY = .1
@@ -17,7 +22,7 @@ const MIN_START_PROXIMITY = .1
 export var start_velocity_multiplier = 1 # not zero
 export var gravity = 15
 export var resistance = 2
-export var FRICTION = .6
+export var friction = .6
 export var allow_exit_as_entrance = false
 
 const SPEED_ROTATION_RATE = 6
@@ -26,59 +31,45 @@ func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
 	
 func _ready():
-	entrance_transform = get_node("../").get_node("EntranceArea").get_global_transform()
-	exit_transform = get_node("../").get_node("ExitArea").get_global_transform()
+	entrance_area = get_node("../EntranceArea")
+	exit_area = get_node("../ExitArea")
+	entrance_transform = entrance_area.get_global_transform()
+	exit_transform = exit_area.get_global_transform()
 	set_physics_process(false)
 	if !allow_exit_as_entrance:
-		get_node("../").get_node("ExitArea").set_monitorable(false)
-		get_node("../").get_node("ExitArea").set_monitoring(false)
+		exit_area.set_monitorable(false)
+		exit_area.set_monitoring(false)
 	
 func _on_EntranceArea_body_entered(body):
 	if looping_body == null:
 		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(-entrance_transform.basis.z), 3) + 1)
-		print(angle_factor)
+		print("WireRamp: angle_factor - ", angle_factor)
 		speed = angle_factor * body.get_linear_velocity().length() * start_velocity_multiplier
 		if speed > 0:
 			set_unit_offset(0.0)
-			looping_body = body
-			looping_body_is_waiting_at_entrance = true
-			looping_body_entered_at_entrance = true
-			body.set_visible(false)
-			body.set_locked(true)
-			if body.get_collision_layer() == 1:
-				$BallReplica.set_visible(true)
-				looping_body_is_bomb = false
-			else:
-				$BombReplica.set_visible(true)
-				looping_body_is_bomb = true
-			set_physics_process(true)
-			
+			looping_body_waiting_status = states.AT_ENTRANCE
+			looping_body_entered_status = states.AT_ENTRANCE
+			start_follow(body)
 			
 func _on_ExitArea_body_entered(body):
 	if looping_body == null:
 		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(-exit_transform.basis.z), 3) + 1)
-		print(angle_factor)
+		print("WireRamp: angle_factor - ", angle_factor)
 		speed = angle_factor * body.get_linear_velocity().length() * -start_velocity_multiplier
 		if speed < 0:
 			set_unit_offset(1.0)
-			looping_body = body
-			looping_body_is_waiting_at_entrance = false
-			looping_body_entered_at_entrance = false
-			body.set_visible(false)
-			body.set_locked(true)
-			if body.get_collision_layer() == 1:
-				$BallReplica.set_visible(true)
-			else:
-				$BombReplica.set_visible(true)
-				looping_body_is_bomb = true
-			set_physics_process(true)
+			looping_body_waiting_status = states.AT_EXIT
+			looping_body_entered_status = states.AT_EXIT
+			start_follow(body)
 
 func _on_EntranceArea_body_exited(_body):
-	if looping_body != null and looping_body_exited_at_entrance:
+	if looping_body != null and looping_body_exited_status == states.AT_ENTRANCE:
+		print("looping body set to null because it exited entrance area")
 		looping_body = null
 
 func _on_ExitArea_body_exited(_body):
-	if looping_body != null and !looping_body_exited_at_entrance:
+	if looping_body != null and looping_body_exited_status == states.AT_EXIT:
+		print("looping body set to null because it exited exit area")
 		looping_body = null
 
 func _physics_process(delta):
@@ -99,50 +90,73 @@ func _physics_process(delta):
 	
 	if looping_body != null:
 		speed += acceleration * delta
-		speed *= 1 - FRICTION * delta
+		speed *= 1 - friction * delta
 		var reached_entrance = speed < 0 and get_unit_offset() == 0
 		var reached_exit = speed > 0 and get_unit_offset() == 1
 		if reached_exit or reached_entrance:
-			looping_body.set_locked(false)
-			looping_body.set_visible(true)
+			print("Wire Ramp finished")
 			if reached_exit:
-				looping_body_exited_at_entrance = false
+				looping_body_exited_status = states.AT_EXIT
 				#looping_body.teleport(exit_transform.origin, false, exit_transform.basis.z.normalized() * speed / start_velocity_multiplier)
 				looping_body.apply_central_impulse(exit_transform.basis.z.normalized() * speed / start_velocity_multiplier)
 			if reached_entrance:
-				looping_body_exited_at_entrance = true
+				looping_body_exited_status = states.AT_ENTRANCE
 				#looping_body.teleport(entrance_transform.origin, false, -entrance_transform.basis.z.normalized() * speed / start_velocity_multiplier)
 				looping_body.apply_central_impulse(-entrance_transform.basis.z.normalized() * speed / start_velocity_multiplier)
-			$BallReplica.set_visible(false)
-			$BombReplica.set_visible(false)
-			set_physics_process(false)
+			reset()
 		else:
 			set_offset(get_offset() + speed * delta)
 			if looping_body_is_bomb:
 				$BombReplica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
 			else:
 				$BallReplica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
-			if looping_body_is_waiting_at_entrance and get_unit_offset() > .6:
+			if looping_body_waiting_status == states.AT_ENTRANCE and get_unit_offset() > .6:
 				looping_body.delayed_teleport(exit_transform.origin)
-				looping_body_is_waiting_at_entrance = false
-			elif !looping_body_is_waiting_at_entrance and get_unit_offset() < .4:
+				looping_body_waiting_status = states.AT_EXIT
+			elif looping_body_waiting_status == states.AT_EXIT and get_unit_offset() < .4:
 				looping_body.delayed_teleport(entrance_transform.origin)
-				looping_body_is_waiting_at_entrance = true
+				looping_body_waiting_status == states.AT_ENTRANCE
 	elif looping_body_is_bomb:
 		#that means the bomb exploded while it was on the rail
 		reset()
 	emit_signal("debug_info_update", incline, speed, acceleration)
 		
-func _on_GameState_global_reset(_is_init):
-	reset()
+func _on_GameState_global_reset(is_init):
+	reset(is_init)
+	
+func start_follow(body):
+	if body == null:
+		print("looping body is null")
+	looping_body = body
+	body.set_visible(false)
+	body.set_locked(true)
+	if body.get_collision_layer() == 1:
+		$BallReplica.set_visible(true)
+		looping_body_is_bomb = false
+	else:
+		$BombReplica.set_visible(true)
+		looping_body_is_bomb = true
+	entrance_area.set_deferred("monitoring", false)
+	entrance_area.set_deferred("monitorable", false)
+	exit_area.set_deferred("monitoring", false)
+	exit_area.set_deferred("monitorable", false)
+	print("wire ramp: start follow")
+	set_physics_process(true)
 
-func reset():
-	print("loop reset")
+func reset(is_init = false):
 	set_physics_process(false)
 	set_unit_offset(0.0)
 	$BallReplica.set_visible(false)
 	$BombReplica.set_visible(false)
+	if !is_init:
+		entrance_area.set_deferred("monitoring", true)
+		entrance_area.set_deferred("monitorable", true)
+		if allow_exit_as_entrance:
+			exit_area.set_deferred("monitoring", true)
+			exit_area.set_deferred("monitorable", true)
 	if looping_body != null:
 		looping_body.set_visible(true)
+		looping_body.set_locked(false)
 		looping_body = null
+		print("looping body set to null because of reset")
 	speed = 0

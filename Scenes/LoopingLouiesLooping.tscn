@@ -9,13 +9,18 @@
 curve = ExtResource( 4 )
 
 [node name="PathFollow" parent="." index="0"]
+transform = Transform( -0.622925, -0.0468582, -0.780691, 1.86244e-09, 0.998204, -0.0598935, 0.78214, -0.0373196, -0.621771, 0.514192, 0.045732, 4.44518 )
 script = ExtResource( 1 )
+gravity = 10
+resistance = 5
+friction = 0.3
+allow_exit_as_entrance = true
 
 [node name="EntranceArea" parent="." index="1"]
-transform = Transform( 0.479825, 0, 0.877364, 0, 1, 0, -0.877364, 0, 0.479825, -0.201335, 0, 1.98379 )
+transform = Transform( 0.580006, 0, 0.814612, 0, 1, 0, -0.814612, 0, 0.580006, 0.587625, 0.00556642, 4.36541 )
 
 [node name="ExitArea" parent="." index="2"]
-transform = Transform( -0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 0.542725, 0, -2.00439 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.24278, -0.508857, -0.333672 )
 
 [node name="LoopingLouie" parent="." index="4" instance=ExtResource( 3 )]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.235347, 1.96172, 0 )

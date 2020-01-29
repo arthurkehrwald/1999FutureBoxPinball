@@ -36,7 +36,7 @@ func teleport(destination, maintain_velocity, impulse_on_exit):
 		set_angular_velocity(Vector3(0,0,0))
 	apply_central_impulse(impulse_on_exit)
 	
-func delayed_teleport(destination):
+func delayed_teleport(destination, impulse_on_exit = Vector3(0, 0, 0)):
 	if teleporting:
 		return
 	
@@ -57,7 +57,10 @@ func delayed_teleport(destination):
 	
 	set_physics_process(true)
 	teleporting = false
-	print("teleport complete")
+	
+	set_linear_velocity(Vector3(0,0,0))
+	set_angular_velocity(Vector3(0,0,0))
+	apply_central_impulse(impulse_on_exit)
 	
 func set_locked(is_locked):
 	axis_lock_linear_x = is_locked
@@ -70,7 +73,6 @@ func set_locked(is_locked):
 func _process(delta):
 	teleport_physics_cooldown_time_remaining -= delta
 	if teleport_physics_cooldown_time_remaining <= 0:
-		print("buffer expired, target acquired")
 		set_process(false)
 		emit_signal("teleport_physics_cooldown_buffer_expired")
 	

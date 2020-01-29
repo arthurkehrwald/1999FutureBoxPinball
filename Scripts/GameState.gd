@@ -76,10 +76,10 @@ func on_Boss_death():
 	emit_signal("boss_died")
 	
 func set_player_money(new_player_money):
+	if player_money < MAX_PLAYER_MONEY and new_player_money >= MAX_PLAYER_MONEY:
+		emit_signal("player_money_maxed")
 	player_money = clamp(new_player_money, 0, MAX_PLAYER_MONEY)
 	emit_signal("player_money_changed", player_money)
-	if player_money == MAX_PLAYER_MONEY:
-		emit_signal("player_money_maxed")
 
 func _on_MultiballShip_ball_locked():
 	if balls_on_field <= 0:

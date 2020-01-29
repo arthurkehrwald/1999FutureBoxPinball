@@ -95,5 +95,5 @@ func _on_GameState_global_reset(is_init):
 	has_shot = false
 	if !is_init:
 		set_process(false)
-	var start_rotation = Quat(start_transform.basis.orthonormalized())
-	set_transform(Transform(start_rotation, get_transform().origin))	
+		var start_rotation = Quat(start_transform.basis.orthonormalized())
+		set_transform(Transform(start_rotation, get_transform().origin))	
