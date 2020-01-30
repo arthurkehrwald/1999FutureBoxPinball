@@ -127,7 +127,7 @@ transform = Transform( 0.506656, -4.08507e-07, -0.211189, 8.6613e-08, 1.15522, 7
 transform = Transform( 1.1892, 2.98023e-08, -1.19209e-07, 7.40977e-09, 1.84928, -1.78814e-07, -7.78802e-10, 1.3411e-07, 5.01194, -4.51581, -0.0236411, -5.5835 )
 
 [node name="LongBox2" parent="BoxV3/BoardAligned" instance=ExtResource( 7 )]
-transform = Transform( 0.592519, 0, -0.166868, 0, 1, -2.79397e-09, 0.805556, 0, 0.122739, 2.30139, 7.55787e-05, 5.57761 )
+transform = Transform( 0.520905, 0, -0.176824, -2.23517e-08, 1, -1.86265e-09, 0.853615, 0, 0.107904, 2.28183, 0.000595331, 5.65028 )
 
 [node name="LongBox4" parent="BoxV3/BoardAligned" instance=ExtResource( 7 )]
 transform = Transform( 0.957001, 9.71119e-09, -0.06009, -1.49012e-08, 1, 0, 0.290084, 7.45058e-09, 0.19824, 3.575, 0, 4.14 )
@@ -136,7 +136,7 @@ transform = Transform( 0.957001, 9.71119e-09, -0.06009, -1.49012e-08, 1, 0, 0.29
 transform = Transform( 0.957001, 0, 0.06009, 1.86265e-09, 1, 0, -0.290084, 0, 0.19824, -4.127, 0, 3.838 )
 
 [node name="LongBox3" parent="BoxV3/BoardAligned" instance=ExtResource( 7 )]
-transform = Transform( 0.592519, 0, 0.166868, 0, 0.661069, -9.31323e-10, -0.805556, 0, 0.122739, -2.83605, 7.15256e-07, 5.578 )
+transform = Transform( 0.543511, 0, 0.173879, 0, 0.661069, -9.31323e-10, -0.839402, 2.23517e-08, 0.112587, -2.73993, -0.000394106, 5.62396 )
 
 [node name="LaserTrex" parent="BoxV3/BoardAligned" instance=ExtResource( 15 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 3.10862e-15, -1, 0, -4.37114e-08, 4.01601, -2.81334e-05, 0.71889 )

@@ -30,7 +30,7 @@ extents = Vector3( 0.7, 0.5, 0.1 )
 [sub_resource type="Animation" id=9]
 resource_name = "gate_open_anim"
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance:translation")
+tracks/0/path = NodePath("DropTargetParent/MeshInstance:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -39,11 +39,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( -0.417634, 0.5, -0.662366 ), Vector3( -0.418, -0.6, -0.662 ) ]
+"values": [ Vector3( 0, 0.5, 0 ), Vector3( 0, -0.6, 0 ) ]
 }
 
 [sub_resource type="BoxShape" id=10]
-extents = Vector3( 0.7, 0.5, 0.1 )
+extents = Vector3( 1, 0.5, 0.1 )
 
 [node name="LaserTrex" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -57,22 +57,23 @@ transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -
 shape = SubResource( 1 )
 
 [node name="MeshInstance" parent="." index="1"]
-transform = Transform( 0.494975, 0, 0.0707107, 0, 0.5, 0, -0.494975, 0, 0.0707107, -0.418, -0.6, -0.662 )
+transform = Transform( 0.707107, 0, 0.707107, 0, 0.2, 0, -0.707107, 0, 0.707107, 0.208, 0.811935, -0.208 )
 
 [node name="HitboxShape" parent="HitboxArea" index="0"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.28, 0.5, -0.8 )
 shape = SubResource( 2 )
 
-[node name="TrexMesh" type="MeshInstance" parent="." index="3"]
-transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, -1.06479e-07, 1, -0.326782 )
-visible = false
-mesh = ExtResource( 3 )
+[node name="DropTargetParent" type="Spatial" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.595158, 0, -0.791894 )
+
+[node name="MeshInstance" type="MeshInstance" parent="DropTargetParent" index="0"]
+transform = Transform( 0.707107, 0, 0.0707107, 0, 0.5, 0, -0.707107, 0, 0.0707107, 0.109406, 0.5, -0.109405 )
+mesh = SubResource( 3 )
 material/0 = null
 
-[node name="MeshInstance2" type="MeshInstance" parent="." index="4"]
-transform = Transform( 0.7, 0, 0, 0, 0.2, 0, 0, 0, 0.576, 0, 0.799805, 0.0788574 )
-visible = false
-mesh = SubResource( 3 )
+[node name="TrexMesh" type="MeshInstance" parent="." index="4"]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, -1.06479e-07, 1, -0.326782 )
+mesh = ExtResource( 3 )
 material/0 = null
 
 [node name="LaserArea" type="Area" parent="." index="5"]
@@ -90,7 +91,7 @@ mesh = SubResource( 5 )
 material/0 = SubResource( 6 )
 
 [node name="StaticBody" type="StaticBody" parent="." index="6"]
-transform = Transform( 0.770746, 0, -0.707107, 0, 0.5, 0, 0.770746, 0, 0.707107, 0.529, 0.25, -0.666 )
+transform = Transform( 1.06066, 0, -0.707107, 0, 0.5, 0, 1.06066, 0, 0.707107, 0.976325, 0.25, -0.690365 )
 collision_layer = 2
 collision_mask = 257
 
@@ -108,7 +109,7 @@ material/0 = null
 anims/gate_open_anim = SubResource( 9 )
 
 [node name="BottomCollisionShape" type="CollisionShape" parent="." index="9"]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.402632, 0.5, -0.691344 )
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.473407, 0.5, -0.866258 )
 shape = SubResource( 10 )
 [connection signal="came_to_life" from="." to="." method="_on_LaserTrex_came_to_life"]
 [connection signal="death" from="." to="." method="_on_LaserTrex_death"]
