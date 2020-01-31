@@ -9,22 +9,38 @@ var PORT_SERVER = 5550
 var socketUDP = PacketPeerUDP.new()
 
 
+var xPos = 3.0
+var yPos = 6.0
+var zPos = 9.0
+var yaw = 0.0
+var pitch = 0.0
+var roll = 0.0 
+var frame_number = 0
+
 func _ready():
 	start_server()
 
+
 func _process(delta):
+	
 	if socketUDP.get_available_packet_count() > 0:
 		var array_bytes = socketUDP.get_packet()
 		var stream = StreamPeerBuffer.new()
 		stream.set_data_array(array_bytes)
-		print(stream.get_double())
-		print(stream.get_double())
-		print(stream.get_double())
-		print(stream.get_double())
-		print(stream.get_double())
-		print(stream.get_double())
-		print(stream.get_32())
-		print("----------")
+		xPos = stream.get_double()
+		yPos = stream.get_double()
+		zPos = stream.get_double()
+		yaw = stream.get_double()
+		pitch = stream.get_double()
+		roll = stream.get_double()
+		frame_number = stream.get_32()
+		print(xPos)
+		#print(yPos)
+		#print(zPos)
+		#print(yaw)
+		#print(pitch)
+		#print(roll)
+		#print(frame_number)
 func start_server():
 	if(socketUDP.listen(PORT_SERVER) != OK):
 		printt("error")

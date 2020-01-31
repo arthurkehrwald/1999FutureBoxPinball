@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/WeirdCamera.gd" type="Script" id=1]
+[ext_resource path="res://HeadTracking/TestUDP.tscn" type="PackedScene" id=2]
+[ext_resource path="res://SerialPortExample/PortReader.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CubeMesh" id=1]
+
+[node name="Camera_Test_Scene" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12, 12 )
+projection = 2
+current = true
+size = 5.04
+near = 0.47
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TestUDP" parent="." instance=ExtResource( 2 )]
+
+[node name="testCube" type="MeshInstance" parent="."]
+transform = Transform( 0.721463, 0.692418, -0.00704641, -0.692453, 0.721437, -0.00611392, 0.000850181, 0.00929027, 0.999956, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="PortReader" parent="." instance=ExtResource( 3 )]

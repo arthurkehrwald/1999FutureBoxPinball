@@ -32,7 +32,3 @@ GameState="*res://Scripts/GameState.gd"
 3d_physics/layer_5="bumpers"
 3d_physics/layer_6="rollovers"
 3d_physics/layer_7="drain"
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"

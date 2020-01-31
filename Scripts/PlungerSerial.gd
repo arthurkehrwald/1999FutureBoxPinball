@@ -17,19 +17,5 @@ func _ready():
 func _physics_process(delta):
 	
 	move_progress = $PortReader.normalizedData
-	#print(move_progress)
-	#var vector_to_start_pos = start_pos - get_global_transform().origin
-	#var to_start_dot_forward = vector_to_start_pos.normalized().dot(get_global_transform().basis.x.normalized())
-
-	#if Input.is_action_pressed("ui_down"):
-	#	if move_progress < 1:
-	#		move_progress += windup_speed / max_distance * delta
-
-	#elif move_progress > 0:
-	#	move_progress -= release_speed / max_distance * delta
-	#	if move_progress < 0:
-	#		move_progress = 0
-
-	
 	set_translation(start_pos.linear_interpolate(max_pos, move_progress))
 		
