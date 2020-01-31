@@ -2,8 +2,8 @@ extends Path
 
 signal landed
 
-export var speed = 1
-export var loops_to_fly = 3
+export var speed = 3
+export var loops_to_fly = 1
 
 var curve_length = 0
 var dist_travelled = 0

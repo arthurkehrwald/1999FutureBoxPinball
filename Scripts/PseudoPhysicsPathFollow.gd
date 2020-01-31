@@ -105,7 +105,7 @@ func _physics_process(delta):
 				looping_body_waiting_status = states.AT_EXIT
 			elif looping_body_waiting_status == states.AT_EXIT and get_unit_offset() < .4:
 				looping_body.delayed_teleport(entrance_transform.origin)
-				looping_body_waiting_status == states.AT_ENTRANCE
+				looping_body_waiting_status = states.AT_ENTRANCE
 	elif looping_body_is_bomb:
 		#that means the bomb exploded while it was on the rail
 		reset()

@@ -20,6 +20,7 @@ gravity_scale = 8.0
 continuous_cd = true
 can_sleep = false
 script = ExtResource( 1 )
+airborne_gravity_scale_multiplier = 1.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbody"]
 shape = SubResource( 2 )
@@ -30,4 +31,6 @@ shape = SubResource( 2 )
 script = ExtResource( 2 )
 
 [node name="RayCast" type="RayCast" parent="StuckToRigidbody"]
-cast_to = Vector3( 0, 0.5, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.4, 0 )
+collision_mask = 2

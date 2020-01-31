@@ -7,10 +7,9 @@ func _enter_tree():
 
 func _ready():
 	$Timer.set_wait_time(duration)
-	$Bar3D.set_max_value(duration)
 
-func _process(delta):
-	$Bar3D._on_value_changed($Timer.time_left)
+func _process(_delta):
+	$Bar3D._on_value_changed($Timer.time_left, duration)
 
 func set_active(is_active):
 	set_physics_process(is_active)
@@ -25,7 +24,7 @@ func set_active(is_active):
 	$CollisionShape3.set_deferred("disabled", !is_active)
 	$CollisionShape4.set_deferred("disabled", !is_active)
 	
-func _on_GameState_global_reset(is_init):
+func _on_GameState_global_reset(_is_init):
 	set_active(false)
 	
 func _on_ShopMenu_bought_flipper():

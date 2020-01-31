@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/BoxV2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=5]
@@ -12,7 +12,7 @@
 [node name="PhysicsTest" type="Spatial"]
 
 [node name="BallParent" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, -6.70552e-08, 0, 6.70552e-08, 1, 2.97194, -1.12339, 4.56043 )
+transform = Transform( 1, 0, 0, 0, 1, -6.70552e-08, 0, 6.70552e-08, 1, 0.191703, -1.12339, 4.56043 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.852065, 0.523436, 0, -0.523436, 0.852065, 0, 5, 10 )
@@ -35,38 +35,38 @@ transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0
 transform = Transform( 1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, -1.06889, 0.0146435 )
 
 [node name="Plunger" parent="BoxV2/BoardAligned" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, -2.23517e-08, 0, 2.23517e-08, 1, 2.96646, 0.146847, 5.36549 )
+transform = Transform( 1, 0, 0, 0, 1, -3.72529e-08, 0, 3.72529e-08, 1, 0.0912883, 0.167268, 5.55978 )
+release_speed = 15.0
 
 [node name="SimpleCube" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, -7.15256e-07, 0, 7.45058e-09, 10.7115, 3.65749, -0.0533386, 6.20058 )
+transform = Transform( 1, 0, 0, 0, 1, -7.15256e-07, 0, 2.23517e-08, 10.7115, 0.782318, -0.0329181, 6.39487 )
 
 [node name="SimpleCube2" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, -7.15256e-07, 0, 7.45058e-09, 10.7115, 2.27141, -0.0533386, 6.20058 )
+transform = Transform( 1, 0, 0, 0, 1, -7.15256e-07, 0, 2.23517e-08, 10.7115, -0.603762, -0.0329181, 6.39487 )
 
 [node name="SimpleCube7" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
-transform = Transform( -1.62921e-07, 0, 10.7115, 4.47035e-08, 1, 2.84217e-14, -1, 4.47035e-08, -1.74512e-06, -0.800936, -0.0533386, 6.71921 )
+transform = Transform( -1.62921e-07, 0, 10.7115, 5.96046e-08, 1, 2.84217e-14, -1, 5.96046e-08, -1.74512e-06, -3.67611, -0.0329181, 6.9135 )
 
 [node name="SimpleCube4" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
-transform = Transform( 0.483038, 0, -9.37899, -5.21541e-08, 1, 1.78814e-07, 0.8756, 1.04308e-07, 5.17406, 5.68818, -0.0478371, 3.18957 )
+transform = Transform( 0.483038, 0, -9.37899, -5.96046e-08, 1, 1.78814e-07, 0.8756, 1.19209e-07, 5.17406, 2.81301, -0.0274166, 3.38386 )
 
 [node name="SimpleCube3" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
-transform = Transform( 0.400941, 8.88178e-16, 9.81285, 2.23517e-08, 1, -5.96046e-08, -0.916104, 1.19209e-07, 4.29468, 0.310328, -0.0476534, 3.4621 )
+transform = Transform( 0.400941, 8.88178e-16, 9.81285, 2.98023e-08, 1, -5.96046e-08, -0.916104, 1.19209e-07, 4.29468, -2.56484, -0.0272329, 3.65639 )
 
 [node name="SimpleCube6" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
-transform = Transform( 0.483038, 0, -9.37899, -5.21541e-08, 1, 1.78814e-07, 0.8756, 1.04308e-07, 5.17406, 6.7486, -3.04786, 4.72852 )
+transform = Transform( 0.483038, 0, -9.37899, -5.96046e-08, 1, 1.78814e-07, 0.8756, 1.19209e-07, 5.17406, 3.87343, -3.02744, 4.92281 )
 visible = false
 
 [node name="SimpleCube5" parent="BoxV2/BoardAligned" instance=ExtResource( 6 )]
-transform = Transform( 0.400941, 8.88178e-16, 9.81285, 2.23517e-08, 1, -5.96046e-08, -0.916104, 1.19209e-07, 4.29468, -0.936862, -3.04786, 5.15812 )
+transform = Transform( 0.400941, 8.88178e-16, 9.81285, 2.98023e-08, 1, -5.96046e-08, -0.916104, 1.19209e-07, 4.29468, -3.81203, -3.02744, 5.35241 )
 visible = false
 
 [node name="Flipper" parent="BoxV2/BoardAligned" instance=ExtResource( 5 )]
-transform = Transform( 0.939693, 0, -0.34202, -7.45058e-09, 1, -4.47035e-08, 0.34202, 1.19209e-07, 0.939693, 1.31332, -2, 6.11602 )
+transform = Transform( 0.939693, 0, -0.34202, -7.45058e-09, 1, -4.47035e-08, 0.34202, 1.19209e-07, 0.939693, -1.56185, -1.97958, 6.31031 )
 visible = false
 
 [node name="Flipper_R" parent="BoxV2/BoardAligned" instance=ExtResource( 8 )]
-transform = Transform( 0.939693, 0, 0.34202, 7.45058e-09, 1, -3.72529e-08, -0.34202, 1.04308e-07, 0.939693, 4.61075, -2, 6.03432 )
+transform = Transform( 0.939693, 0, 0.34202, 7.45058e-09, 1, -3.72529e-08, -0.34202, 1.19209e-07, 0.939693, 1.73558, -1.97958, 6.22861 )
 visible = false
 
-[node name="LoopingLouiesLooping" parent="BoxV2/BoardAligned" instance=ExtResource( 1 )]
-transform = Transform( 0.991468, -2.09238e-08, -0.130353, 1.39698e-08, 1, -5.96046e-08, 0.130353, 8.19564e-08, 0.991468, -2.19265, 0.81455, -2.10337 )
+[node name="Moon" parent="BoxV2/BoardAligned" instance=ExtResource( 1 )]

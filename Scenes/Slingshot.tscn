@@ -49,11 +49,5 @@ shape = SubResource( 2 )
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 3 )
 
-[node name="SlingshotTrigger" parent="." instance=ExtResource( 3 )]
-transform = Transform( 4.91075e-08, 0, -0.075, 0, 0.25, 0, 0.650448, 0, 5.66234e-09, 0.075, 0.25, -0.801 )
-
 [node name="SlingshotTrigger3" parent="." instance=ExtResource( 3 )]
 transform = Transform( -0.375377, 0, 0.0652408, 0, 0.25, 0, -0.965304, 0, -0.0253701, 0.580276, 0.25, -0.501094 )
-
-[node name="SlingshotTrigger2" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.32913, 0, -0.0483746, 0, 0.25, 0, 0.277795, 0, 0.057314, 0.489983, 0.25, 0.290301 )

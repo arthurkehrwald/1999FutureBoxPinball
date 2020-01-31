@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.654631, 0.4, 1.85 )
+
+[node name="Area" type="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0665345, 0, 0 )
+space_override = 3
+gravity_vec = Vector3( 0, 20, 0 )
+gravity = 1.0
+linear_damp = 0.0
+angular_damp = 0.0
+collision_layer = 8192
+collision_mask = 257
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 0.901649, 0.39648, -0.172719, -0.428179, 0.874528, -0.227734, 0.0607554, 0.27929, 0.958283, 0.142376, 0.709334, 0.0654343 )
+shape = SubResource( 1 )

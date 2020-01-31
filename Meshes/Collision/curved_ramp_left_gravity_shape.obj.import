@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/curved_ramp_left_gravity_shape.obj-5a8a22beda62ea6840853e16a01672db.mesh"
+
+[deps]
+
+files=[ "res://.import/curved_ramp_left_gravity_shape.obj-5a8a22beda62ea6840853e16a01672db.mesh" ]
+
+source_file="res://Meshes/Collision/curved_ramp_left_gravity_shape.obj"
+dest_files=[ "res://.import/curved_ramp_left_gravity_shape.obj-5a8a22beda62ea6840853e16a01672db.mesh", "res://.import/curved_ramp_left_gravity_shape.obj-5a8a22beda62ea6840853e16a01672db.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

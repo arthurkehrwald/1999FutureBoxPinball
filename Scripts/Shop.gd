@@ -3,6 +3,7 @@ extends Area
 signal menu_triggered
 
 var balls_inside = 0
+var is_open = false
 
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
@@ -16,11 +17,16 @@ func _process(_delta):
 		set_open(false)
 		emit_signal("menu_triggered")
 
-func _on_Shop_body_entered(_body):
-	balls_inside += 1
-	set_process(true)
+func _on_Shop_body_entered(body):
+	if body.has_method("indicator_set_visible"):
+		body.indicator_set_visible(true)
+	if is_open:
+		balls_inside += 1
+		set_process(true)
 
-func _on_Shop_body_exited(_body):
+func _on_Shop_body_exited(body):
+	if body.has_method("indicator_set_visible"):
+		body.indicator_set_visible(false)
 	balls_inside -= 1
 	if balls_inside >= 0:
 		set_process(false) 
@@ -32,9 +38,8 @@ func _on_GameState_global_reset(_is_init):
 func _on_GameState_player_money_maxed():
 	set_open(true)
 	
-func set_open(is_open):
-	print("Shop: open status - ", is_open)
+func set_open(_is_open):
+	#print("Shop: open status - ", _is_open)
 	balls_inside = 0
 	set_process(false)
-	set_deferred("monitoring", is_open)
-	set_deferred("monitorable", is_open)
+	is_open = _is_open

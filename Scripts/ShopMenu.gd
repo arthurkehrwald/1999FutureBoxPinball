@@ -16,9 +16,12 @@ var selected_item = 1
 
 func _ready():
 	$DecisionTimer.set_wait_time(decision_time)
+	$TimeRemainingBar.max_value = decision_time * 100
 
 func _process(_delta):
-	if $DecisionTimer.time_left <= decision_time - 2 and Input.is_action_just_pressed("shop_confirm"):
+	$TimeRemainingLabel.text = str(round($DecisionTimer.time_left))
+	$TimeRemainingBar.value = $DecisionTimer.time_left * 100
+	if $DecisionTimer.time_left <= decision_time - 1 and Input.is_action_just_pressed("shop_confirm"):
 		$DecisionTimer.stop()
 		buy_item(selected_item)
 	else:
@@ -44,7 +47,8 @@ func _process(_delta):
 					$TextureRect.texture = item_04_texture	
 
 func set_active(is_active):
-	print("ShopMenu: active - ", is_active)
+	#print("ShopMenu: active - ", is_active)
+	selected_item = 1
 	$TextureRect.texture = item_01_texture
 	set_visible(is_active)
 	if is_active:
@@ -53,12 +57,12 @@ func set_active(is_active):
 	get_tree().paused = is_active
 
 func _on_DecisionTimer_timeout():
-	print("ShopMenu: decision timer timeout")
+	#print("ShopMenu: decision timer timeout")
 	buy_item(selected_item)
 
 func buy_item(item_index):
 	set_active(false)
-	print("ShopMenu: player bought a thing")
+	#print("ShopMenu: player bought a thing")
 	GameState.set_player_money(0)
 	match item_index:
 		1:

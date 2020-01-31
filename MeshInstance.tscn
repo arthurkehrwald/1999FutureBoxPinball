@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Meshes/Wireframe/moon_wireframe.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Materials/ultraviolet_additive.tres" type="Material" id=2]
+[ext_resource path="res://Materials/moon_gate_mat.tres" type="Material" id=3]
+
+[node name="MeshInstance" type="MeshInstance"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 2 )

@@ -63,6 +63,7 @@ func _on_TeleporterEntrance_ball_entered(ball, _teleporter_entrance):
 	set_process(true)
 	
 func _on_ShopMenu_bought_turret_shot():
+	#print("Turret: on shop menu bought turret shot")
 	var ball_instance = ball_scene.instance()
 	get_node("/root/Main").add_child(ball_instance)
 	ball_instance.get_node("Rigidbody").set_visible(false)
@@ -84,12 +85,12 @@ func shoot(plunger_progress):
 	ball_to_shoot.set_locked(false)
 	ball_to_shoot.set_visible(true)
 	var plunger_force = .15 * pow(plunger_progress - 1.7, 3) + 1
-	print(plunger_force)
+	#print(plunger_force)
 	ball_to_shoot.apply_central_impulse(-$TeleporterExit.get_global_transform().basis.z.normalized() * max_shot_speed * plunger_force)
 	has_shot = true
 
 func _on_GameState_global_reset(is_init):
-	print("Turret global reset")
+	#print("Turret global reset")
 	$TeleporterExit/DottedLine.set_visible(false)
 	ball_to_shoot = null
 	has_shot = false

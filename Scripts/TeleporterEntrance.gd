@@ -18,7 +18,7 @@ func set_active(is_active):
 func _on_TeleporterEntrance_body_entered(body):
 	var random = randf()
 	if random > exit_2_chance:
-		emit_signal("ball_entered_3", body, self)
+		emit_signal("ball_entered_1", body, self)
 	elif random > exit_1_chance:
 		emit_signal("ball_entered_2", body, self)
 	else:

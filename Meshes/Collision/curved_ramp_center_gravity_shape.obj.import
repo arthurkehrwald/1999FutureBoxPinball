@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/curved_ramp_center_gravity_shape.obj-c4eac40ac59bef56f225cca8685dd5ec.mesh"
+
+[deps]
+
+files=[ "res://.import/curved_ramp_center_gravity_shape.obj-c4eac40ac59bef56f225cca8685dd5ec.mesh" ]
+
+source_file="res://Meshes/Collision/curved_ramp_center_gravity_shape.obj"
+dest_files=[ "res://.import/curved_ramp_center_gravity_shape.obj-c4eac40ac59bef56f225cca8685dd5ec.mesh", "res://.import/curved_ramp_center_gravity_shape.obj-c4eac40ac59bef56f225cca8685dd5ec.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

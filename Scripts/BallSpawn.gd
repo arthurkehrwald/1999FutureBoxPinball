@@ -4,6 +4,7 @@ var ball_scene = preload("res://Scenes/Ball.tscn")
 
 func _enter_tree():
 	GameState.connect("spawn_ball", self, "_on_GameState_spawn_ball")
+	GameState.ball_spawn_pos = get_global_transform().origin
 
 func _on_GameState_spawn_ball():
 	var ball_instance = ball_scene.instance()

@@ -6,7 +6,7 @@
 [ext_resource path="res://Animations/test_curve.tres" type="Curve3D" id=4]
 [ext_resource path="res://Scenes/BombMesh.tscn" type="PackedScene" id=5]
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.2, 0.2, 0.2 )
 
 [node name="WireRamp" type="Path"]
@@ -32,7 +32,7 @@ collision_mask = 257
 
 [node name="CollisionShape" type="CollisionShape" parent="EntranceArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="ExitArea" type="Area" parent="."]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, -2 )
@@ -41,7 +41,7 @@ collision_mask = 257
 
 [node name="CollisionShape" type="CollisionShape" parent="ExitArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="DebugLabel" type="Label" parent="."]
 margin_right = 40.0

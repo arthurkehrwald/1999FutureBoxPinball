@@ -3,8 +3,8 @@ extends "res://Scripts/Damageable.gd"
 export var laser_uptime = 3.0
 export var laser_downtime = 5.0
 
-export var laser_is_active = false
-export var time_until_laser_toggle = 0.0
+var laser_is_active = false
+var time_until_laser_toggle = 0.0
 
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
@@ -12,7 +12,6 @@ func _enter_tree():
 
 func _ready():
 	set_process(false)
-	$Bar3D.set_max_value(max_health)
 
 func _process(delta):
 	time_until_laser_toggle -= delta
@@ -36,7 +35,7 @@ func set_active(is_active):
 	$Bar3D.set_visible(is_active)
 	laser_set_active(false)
 	set_process(is_active)
-	print("LaserTrex: active - ", is_active)
+	#print("LaserTrex: active - ", is_active)
 
 func laser_set_active(is_active):
 	$LaserArea.set_deferred("monitoring", is_active)
@@ -44,14 +43,14 @@ func laser_set_active(is_active):
 	$LaserArea.set_visible(is_active)
 	time_until_laser_toggle = laser_uptime if is_active else laser_downtime
 	laser_is_active = is_active
-	print("LaserTrex: laser active - ", is_active)
+	#print("LaserTrex: laser active - ", is_active)
 
 func _on_LaserArea_body_entered(body):
 	if body.has_method("_on_LaserTrex_hit"):
 		body._on_LaserTrex_hit()
 		
 func set_target_gate_open(is_open):
-	$BottomCollisionShape.set_deferred("disabled", is_open)
+	$StaticBody/BottomCollisionShape.set_deferred("disabled", is_open)
 	if $AnimationPlayer.is_playing():
 		$AnimationPlayer.stop()
 	if is_open:

@@ -17,7 +17,6 @@ const TELEPORT_PHYSICS_COOLDOWN_BUFFER = .02
 
 func _enter_tree():
 	GameState.connect("toggle_nightmode", self, "_on_GameState_toggle_nightmode")
-	start_pos = get_global_transform().origin
 
 func _ready():
 	raycast = get_node("../StuckToRigidbody/RayCast")
