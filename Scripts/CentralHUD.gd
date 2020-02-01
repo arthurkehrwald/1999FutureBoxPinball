@@ -12,4 +12,11 @@ func _on_GameState_global_reset(_is_init):
 	pass
 	
 func _on_Shop_menu_triggered():
+	$Viewport/ObjectiveHUD.set_visible(false)
 	$Viewport/ShopMenu.set_active(true)
+
+func _on_ShopMenu_closed():
+	$Viewport/ObjectiveHUD.set_visible(true)
+
+func _on_Any_panel_changed():
+	$Viewport/GlitchShader.glitch_out()

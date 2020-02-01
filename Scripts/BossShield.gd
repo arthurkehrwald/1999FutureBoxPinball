@@ -4,7 +4,7 @@ export var regeneration_time = 20.0
 
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
-	GameState.connect("boss_shield_set_alive", self, "set_alive")
+	GameState.connect("bossfight_began", self, "set_alive", [true])
 	
 func _ready():
 	set_process(false)

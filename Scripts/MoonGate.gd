@@ -15,7 +15,6 @@ var is_spinning = false
 
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
-	GameState.connect("moon_gate_set_active", self, "set_active")
 	
 func _ready():
 	#normal_basis = get_transform().basis
@@ -55,10 +54,10 @@ func _on_MoonGateHitboxArea_body_entered(body):
 	set_process(true)
 	
 	if is_flying:
-		var angle = body.get_linear_velocity().normalized().angle_to(-get_global_transform().basis.z.normalized())
-		#print("MoonGate: ball entered at angle - ", angle)
+		var angle = body.get_linear_velocity().normalized().angle_to(-Vector3(0, 0, 1))
+		print("MoonGate: ball entered at angle - ", angle)
 		if angle < PI / 2:
-			body.apply_central_impulse(body_to_moon.normalized() * impulse_strength)
+			body.apply_central_impulse(body.get_linear_velocity().normalized() * impulse_strength)
 	elif not is_spinning:
 		is_spinning = true
 		set_visible(true)

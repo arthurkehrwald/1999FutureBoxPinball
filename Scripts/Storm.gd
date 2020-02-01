@@ -1,14 +1,12 @@
 extends Area
 
 func _enter_tree():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
-	GameState.connect("storm_set_active", self, "set_active")
+	GameState.connect("pregame_began", self, "set_active", [false])
+	GameState.connect("exposition_began", self, "set_active", [true])
+	GameState.connect("bossfight_began", self, "set_active", [false])
 	
 func _ready():
 	pass
-
-func _on_GameState_global_reset(_is_init):
-	set_active(false)
 	
 func set_active(is_active):
 	set_visible(is_active)

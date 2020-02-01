@@ -25,9 +25,6 @@ export var friction = .6
 export var allow_exit_as_entrance = false
 
 const SPEED_ROTATION_RATE = 6
-
-func _enter_tree():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
 	
 func _ready():
 	entrance_area = get_node("../EntranceArea")
@@ -93,7 +90,7 @@ func _physics_process(delta):
 				looping_body.apply_central_impulse(-exit_transform.basis.z.normalized() * speed / start_velocity_multiplier)
 			if reached_entrance:
 				looping_body.apply_central_impulse(-entrance_transform.basis.z.normalized() * -speed / start_velocity_multiplier)
-			reset()
+			reset(true)
 		else:
 			set_offset(get_offset() + speed * delta)
 			if looping_body_is_bomb:
@@ -108,12 +105,9 @@ func _physics_process(delta):
 				looping_body_waiting_status = states.AT_ENTRANCE
 	elif looping_body_is_bomb:
 		#that means the bomb exploded while it was on the rail
-		reset()
+		reset(true)
 	emit_signal("debug_info_update", incline, speed, acceleration)
 		
-func _on_GameState_global_reset(is_init):
-	reset(is_init)
-	
 func start_follow():
 	if looping_body == null:
 		print("looping body is null")
@@ -132,22 +126,19 @@ func start_follow():
 	print("wire ramp: start follow")
 	set_physics_process(true)
 
-func reset(is_init = false):
+func reset(is_active):
 	set_physics_process(false)
 	set_unit_offset(0.0)
 	$BallReplica.set_visible(false)
 	$BombReplica.set_visible(false)
-	if !is_init:
-		entrance_area.set_deferred("monitoring", true)
-		entrance_area.set_deferred("monitorable", true)
-		if allow_exit_as_entrance:
-			exit_area.set_deferred("monitoring", true)
-			exit_area.set_deferred("monitorable", true)
-		if looping_body != null:
-			looping_body_waiting_status = states.NONE
-			looping_body_entered_status = states.NONE
-			looping_body.set_visible(true)
-			looping_body.set_locked(false)
-			looping_body = null
-			print("looping body set to null because of reset")
+	entrance_area.set_deferred("monitoring", is_active)
+	entrance_area.set_deferred("monitorable", is_active)
+	exit_area.set_deferred("monitoring", is_active and allow_exit_as_entrance)
+	exit_area.set_deferred("monitorable", is_active and allow_exit_as_entrance)
+	if looping_body != null:
+		looping_body_waiting_status = states.NONE
+		looping_body_entered_status = states.NONE
+		looping_body.set_visible(true)
+		looping_body.set_locked(false)
+		looping_body = null
 	speed = 0

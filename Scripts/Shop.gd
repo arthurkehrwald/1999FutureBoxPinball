@@ -2,12 +2,14 @@ extends Area
 
 signal menu_triggered
 
+export var money_required_to_open = 200
+
 var balls_inside = 0
 var is_open = false
 
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
-	GameState.connect("player_money_maxed", self, "_on_GameState_player_money_maxed")
+	GameState.connect("player_money_changed", self, "_on_GameState_player_money_changed")
 
 func _ready():
 	set_process(false)
@@ -35,8 +37,9 @@ func _on_Shop_body_exited(body):
 func _on_GameState_global_reset(_is_init):
 	set_open(false)
 
-func _on_GameState_player_money_maxed():
-	set_open(true)
+func _on_GameState_player_money_changed(new_player_money):
+	if not is_open and new_player_money >= money_required_to_open:
+		set_open(true)
 	
 func set_open(_is_open):
 	#print("Shop: open status - ", _is_open)

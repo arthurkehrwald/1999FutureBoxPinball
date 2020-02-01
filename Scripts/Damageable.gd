@@ -15,7 +15,7 @@ export var min_impact_speed_for_damage = 5.0
 export var max_impact_damage = 15.0
 export var gives_money = true
 export var money_yield_is_damage_based = true
-export var flat_money_yield = 100.0
+export var flat_money_yield = 10.0
 export var damage_to_money_rate = 1.0
 
 var current_health = 3
@@ -36,10 +36,11 @@ func _on_HitboxArea_body_entered(body):
 				money_yield = damage * damage_to_money_rate
 			else:
 				money_yield = flat_money_yield
-			GameState.set_player_money(GameState.player_money + money_yield)
-			var money_text_3d_instance = money_text_3d_scene.instance()
-			money_text_3d_instance.set_money_amount(money_yield)
-			$MoneyTextPos.add_child(money_text_3d_instance)
+			if money_yield != 0:
+				GameState.set_player_money(GameState.player_money + money_yield)
+				var money_text_3d_instance = money_text_3d_scene.instance()
+				money_text_3d_instance.set_money_amount(money_yield)
+				$MoneyTextPos.add_child(money_text_3d_instance)
 
 		current_health -= damage
 		emit_signal("health_changed", current_health, max_health)

@@ -8,7 +8,6 @@ var time_until_laser_toggle = 0.0
 
 func _enter_tree():
 	GameState.connect("global_reset", self, "_on_GameState_global_reset")
-	GameState.connect("laser_trex_set_alive", self, "set_alive")
 
 func _ready():
 	set_process(false)

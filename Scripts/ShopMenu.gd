@@ -4,8 +4,11 @@ signal bought_repair
 signal bought_flipper
 signal bought_turret_shot
 signal bought_remote_control
+signal panel_changed
+signal closed
 
 export var decision_time = 5.0
+export var price_for_all_items = 200
 
 var item_01_texture = preload("res://HUD/shop_item_01.png")
 var item_02_texture = preload("res://HUD/shop_item_02.png")
@@ -24,6 +27,8 @@ func _process(_delta):
 	if $DecisionTimer.time_left <= decision_time - 1 and Input.is_action_just_pressed("shop_confirm"):
 		$DecisionTimer.stop()
 		buy_item(selected_item)
+		set_active(false)
+		emit_signal("closed")
 	else:
 		var previously_selected = selected_item
 		if Input.is_action_just_pressed("flipper_left"):
@@ -36,6 +41,7 @@ func _process(_delta):
 				selected_item = 1
 				
 		if previously_selected != selected_item:
+			emit_signal("panel_changed")
 			match selected_item:
 				1:
 					$TextureRect.texture = item_01_texture
@@ -47,7 +53,7 @@ func _process(_delta):
 					$TextureRect.texture = item_04_texture	
 
 func set_active(is_active):
-	#print("ShopMenu: active - ", is_active)
+	print("ShopMenu: active - ", is_active)
 	selected_item = 1
 	$TextureRect.texture = item_01_texture
 	set_visible(is_active)
@@ -59,11 +65,14 @@ func set_active(is_active):
 func _on_DecisionTimer_timeout():
 	#print("ShopMenu: decision timer timeout")
 	buy_item(selected_item)
+	emit_signal("closed")
+	set_active(false)
 
 func buy_item(item_index):
-	set_active(false)
 	#print("ShopMenu: player bought a thing")
-	GameState.set_player_money(0)
+	GameState.set_player_money(GameState.player_money - price_for_all_items)
+	if GameState.current_state == GameState.state.ENEMY_FLEET and not GameState.is_objective_two_complete:
+		GameState.on_objective_two_complete()
 	match item_index:
 		1:
 			emit_signal("bought_repair")

@@ -28,7 +28,11 @@ func _on_GameState_global_reset(_is_init):
 	set_active(false)
 	
 func _on_ShopMenu_bought_flipper():
-	set_active(true)
+	if $Timer.is_stopped():
+		set_active(true)
+	else:
+		$Timer.stop()
+		$Timer.start()
 
 func _on_Timer_timeout():
 	set_active(false)

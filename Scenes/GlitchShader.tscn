@@ -1,0 +1,157 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Textures/shader_texture_01.png" type="Texture" id=1]
+[ext_resource path="res://Textures/checkerboard.png" type="Texture" id=2]
+[ext_resource path="res://Materials/GlitchShader.tres" type="Material" id=3]
+[ext_resource path="res://Scenes/GlitchShader.gd" type="Script" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D screen: hint_albedo;
+uniform float brightness: hint_range(0,.1);
+uniform float size: hint_range(0.1, 2.0);
+uniform float offset: hint_range(-1.0, 2.0);
+
+void fragment()
+{
+	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
+	COLOR.rgb += texture(screen, SCREEN_UV * size + offset).rgb * brightness;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/brightness = 0.055
+shader_param/size = 0.648
+shader_param/offset = 0.396
+shader_param/screen = ExtResource( 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "glitch_idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BackBufferCopy/lines:material:shader_param/offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.396, -0.075 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("displace:material:shader_param/dispOffset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.647, 0.056 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "glitchy_glitch"
+tracks/0/type = "value"
+tracks/0/path = NodePath("displace:material:shader_param/dispAmt")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.003, 0.009, 0.003 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("displace:material:shader_param/dispSize")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.245, 0.111, 0.245 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("displace:material:shader_param/abberationAmtX")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.003, 0.018, 0.003 ]
+}
+
+[node name="GlitchShader" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 346.053, 236.597 )
+scale = Vector2( 2.36739, 1.63641 )
+texture = ExtResource( 2 )
+
+[node name="displace" type="ColorRect" parent="."]
+material = ExtResource( 3 )
+margin_left = -47.0
+margin_top = -47.0
+margin_right = 1617.0
+margin_bottom = 2268.0
+rect_scale = Vector2( 0.471004, 0.249587 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+position = Vector2( 358.737, 248.621 )
+scale = Vector2( 3.59243, 2.4959 )
+copy_mode = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="lines" type="ColorRect" parent="BackBufferCopy"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 119.0
+margin_bottom = 467.0
+rect_scale = Vector2( 0.467468, 0.252525 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.1
+anims/glitch_idle = SubResource( 3 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+playback_speed = 5.0
+anims/glitchy_glitch = SubResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

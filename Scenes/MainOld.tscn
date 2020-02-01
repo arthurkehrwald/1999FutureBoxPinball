@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Trigger.tscn" type="PackedScene" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Shop.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/CentralHUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/MultiTrigger.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/CurvedRamp.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=11]
@@ -144,9 +143,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.245351, -1.19209e-07, 6.599
 [node name="Shop" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 7 )]
 transform = Transform( 0.615785, 0, 0.787914, 0, 1, 2.23517e-08, -0.787914, 0, 0.615785, -2.59438, -3.57628e-07, 5.59008 )
 
-[node name="CenterHUD" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, -1.63913e-07, 1, 0, -1, -1.63913e-07, -0.517337, 0.250524, 4.62605 )
-
 [node name="PlayerTurret" parent="Box&Camera/BoxV2/BoardAligned/Front" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 0.965925, -0.258819, 0, 0.258819, 0.965925, -0.427597, 0.746134, 6.92024 )
 
@@ -215,11 +211,4 @@ transform = Transform( -9.83506e-08, 0, -2.25, -1.49012e-07, 2.25, 0, 2.25, 1.49
 
 [node name="SimpleSlope2" parent="Box&Camera/BoxV2/BoxAligned" instance=ExtResource( 3 )]
 transform = Transform( 2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, -4.5, -0.4, -7.6 )
-[connection signal="menu_triggered" from="Box&Camera/BoxV2/BoardAligned/Front/Shop" to="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD" method="_on_Shop_menu_triggered"]
-[connection signal="bought_flipper" from="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD/Viewport/ShopMenu" to="Box&Camera/BoxV2/BoardAligned/Back/TemporaryFlipper" method="_on_ShopMenu_bought_flipper"]
-[connection signal="bought_remote_control" from="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD/Viewport/ShopMenu" to="RemoteBallControlTimer" method="_on_ShopMenu_bought_remote_control"]
-[connection signal="bought_repair" from="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD/Viewport/ShopMenu" to="Box&Camera/BoxV2/BoardAligned/PlayerShip" method="_on_ShopMenu_bought_repair"]
-[connection signal="bought_turret_shot" from="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD/Viewport/ShopMenu" to="Box&Camera/BoxV2/BoardAligned/Front/PlayerTurret" method="_on_ShopMenu_bought_turret_shot"]
 [connection signal="released" from="Box&Camera/BoxV2/BoardAligned/Static/Plunger" to="Box&Camera/BoxV2/BoardAligned/Front/PlayerTurret" method="_on_Plunger_released"]
-
-[editable path="Box&Camera/BoxV2/BoardAligned/Front/CenterHUD"]

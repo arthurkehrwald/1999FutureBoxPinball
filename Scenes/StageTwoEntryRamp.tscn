@@ -1,64 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Animations/StageTwoEntryCurve.tres" type="Curve3D" id=1]
-[ext_resource path="res://Scripts/PseudoPhysicsPathFollow.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/BombMesh.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Testing/DebugOutputLabel.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/BallMesh.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/WireRamp.tscn" type="PackedScene" id=2]
 
-[sub_resource type="SphereMesh" id=1]
-
-[sub_resource type="SphereMesh" id=2]
-
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 0.2, 0.2, 0.2 )
-
-[node name="StageTwoEntryRamp" type="Path"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96573, -8.55923e-05, -5.76779 )
+[node name="StageTwoEntryRamp" instance=ExtResource( 2 )]
 curve = ExtResource( 1 )
 
-[node name="PathFollow" type="PathFollow" parent="."]
-transform = Transform( -0.999885, -9.40013e-05, -0.00305972, -7.27516e-12, 0.999529, -0.0306975, 0.00306134, -0.0307024, -0.999357, -0.628906, 0.0227509, 1.9523 )
-rotation_mode = 4
-loop = false
-script = ExtResource( 2 )
-gravity = 12
+[node name="EntranceArea" parent="." index="1"]
+transform = Transform( -0.999804, 0, -0.0198081, 0, 1, 0, 0.0198081, 0, -0.999804, 0.244181, 0.282234, 0.331445 )
 
-[node name="BallReplica" parent="PathFollow" instance=ExtResource( 6 )]
-transform = Transform( 0.2, 0, 0, 7.45058e-09, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
-visible = false
-mesh = SubResource( 1 )
-
-[node name="BombReplica" parent="PathFollow" instance=ExtResource( 3 )]
-visible = false
-mesh = SubResource( 2 )
-
-[node name="EntranceArea" type="Area" parent="."]
-transform = Transform( -1, 0, -3.25841e-07, -7.10543e-15, 1, 0, 3.25841e-07, 0, -1, 0.257526, 0.319057, 0.260677 )
-collision_layer = 8192
-collision_mask = 257
-
-[node name="CollisionShape" type="CollisionShape" parent="EntranceArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2 )
-shape = SubResource( 3 )
-
-[node name="ExitArea" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.63913e-07, 1, 0, -1, -1.63913e-07, -6.61084, 0.75928, 1.79367 )
-collision_layer = 8192
-collision_mask = 257
-
-[node name="CollisionShape" type="CollisionShape" parent="ExitArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2 )
-shape = SubResource( 3 )
-
-[node name="DebugLabel" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-format_string = "incline %s speed %s acceleration %s"
-[connection signal="debug_info_update" from="PathFollow" to="DebugLabel" method="_on_PathFollow_debug_info_update"]
-[connection signal="body_entered" from="EntranceArea" to="PathFollow" method="_on_EntranceArea_body_entered"]
-[connection signal="body_entered" from="ExitArea" to="PathFollow" method="_on_ExitArea_body_entered"]
+[node name="ExitArea" parent="." index="2"]
+transform = Transform( -1, 3.66436e-07, -1.31788e-07, 0, 0.338426, 0.940993, 3.89414e-07, 0.940993, -0.338426, -6.63033, 0.832609, 1.85706 )

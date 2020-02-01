@@ -14,10 +14,6 @@ curve = ExtResource( 4 )
 [node name="PathFollow" parent="." index="0"]
 transform = Transform( -0.974963, 0.0957846, -0.20012, 0, 0.902031, 0.431599, 0.221868, 0.420911, -0.879397, 6.50809, -0.283037, -0.0562016 )
 script = ExtResource( 1 )
-gravity = 10
-resistance = 5
-friction = 0.3
-allow_exit_as_entrance = true
 
 [node name="EntranceArea" parent="." index="1"]
 transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 6.52322, -0.259082, -0.0171835 )

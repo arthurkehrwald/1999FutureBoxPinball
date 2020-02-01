@@ -1,0 +1,36 @@
+{
+  "exposition": [
+    {
+      "name": "Allies",
+      "text": "Rex, are you alive?",
+      "duration": 3
+    },
+    {
+      "name": "Rex",
+      "text": "Ooga Booga",
+      "duration": 2
+    },
+    {
+      "name": "Allies",
+      "text": "The Emperor's soldiers are locking down the system. You must...",
+      "duration": 5
+    }
+  ],
+  "enemy_fleet_appears": [
+    {
+      "name": "Enemies",
+      "text": "Surrender and you WILL be harmed!",
+      "duration": 3
+    },
+    {
+      "name": "Allies",
+      "text": "Oh golly, here they come. Good luck, Rex!",
+      "duration": 3
+    },
+    {
+      "name": "Rex",
+      "text": "They're already dead.",
+      "duration": 2
+    }
+  ]
+}
