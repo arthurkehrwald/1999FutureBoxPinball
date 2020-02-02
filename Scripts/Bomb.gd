@@ -1,5 +1,7 @@
 extends "res://Scripts/BallBombCommon.gd"
 
+var explosion_scene = preload("res://Scenes/Explosion.tscn")
+
 export var fuse_time = 5.0
 export var chain_explosions_enabled = true
 export var chain_explosion_delay = .2
@@ -24,24 +26,14 @@ func _ready():
 #		remove_collision_exception_with(gun_static_body)
 		
 func _on_Timer_timeout():
-	if is_exploding:
-		owner.queue_free()
-	else:
-		explode()
+	explode()
 	
-func _on_Explosion_body_entered(body):
-	if body != self:
-		if body.has_method("_on_Bomb_explosion_hit"):
-			body._on_Bomb_explosion_hit(get_global_transform().origin)
-		elif body.owner.has_method("_on_Bomb_explosion_hit"):
-			body.owner._on_Bomb_explosion_hit(get_global_transform().origin)
-	
-func _on_Bomb_explosion_hit(_explosion_pos):
+func _on_Bomb_explosion_hit():
 	if chain_explosions_enabled:
 		$Timer.stop()
 		$Timer.set_wait_time(chain_explosion_delay)
 		$Timer.start()
-	
+
 func _on_LaserTrex_hit():
 	if !is_exploding:
 		explode()
@@ -51,7 +43,8 @@ func _on_GameState_global_reset(is_init):
 		owner.queue_free()
 
 func explode():
-	is_exploding = true
-	$Explosion.monitoring = true
-	$Timer.wait_time = EXPLOSION_HITREG_DURATION
-	$Timer.start()
+	var explosion_instance = explosion_scene.instance()
+	get_node("/root").add_child(explosion_instance)
+	explosion_instance.set_global_transform(get_global_transform())
+	explosion_instance.init(explosion_instance.explosion_type.BOMB)
+	owner.queue_free()

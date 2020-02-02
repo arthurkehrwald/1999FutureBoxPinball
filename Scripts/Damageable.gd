@@ -24,20 +24,15 @@ var is_alive = false
 
 func _on_HitboxArea_body_entered(body):
 	if is_alive:
-		var damage = calc_damage(body.get_linear_velocity().length)
+		var damage = calc_damage(body.get_linear_velocity().length())
 		if damage > 0:		
 			take_damage(damage)
 
-func _on_Bomb_explosion_hit(explosion_pos):
-	$ShieldRayCast.cast_to = get_global_transform().origin - explosion_pos
-	$ShieldRayCast.force_raycast_update()
-	$ShieldRayCast.enabled = true
-	if !$ShieldRayCast.is_colliding():
-		print(name, " was hit by bomb explosion")
-		set_health(current_health - bomb_explosion_damage)
+func _on_Bomb_explosion_hit():
+	take_damage(bomb_explosion_damage)
 
 func _on_Missile_explosion_hit():
-	set_health(current_health - missile_explosion_damage)
+	take_damage(missile_explosion_damage)
 	
 func set_alive(_is_alive):
 	#print("Damageable (", name, "): alive - ", _is_alive)

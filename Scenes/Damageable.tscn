@@ -24,8 +24,4 @@ shape = SubResource( 2 )
 
 [node name="MoneyTextPos" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-
-[node name="ShieldRayCast" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-collision_mask = 32768
 [connection signal="body_entered" from="HitboxArea" to="." method="_on_HitboxArea_body_entered"]

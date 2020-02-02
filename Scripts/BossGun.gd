@@ -1,7 +1,7 @@
 extends StaticBody
 
 signal was_hit_directly(speed)
-signal was_hit_explosion(explosion_pos)
+signal was_hit_bomb_explosion()
 
 export var shoot_on_ready = true
 export var fire_rate = 3
@@ -25,9 +25,9 @@ func _on_HitboxArea_body_entered(body):
 		set_stunned(stun_duration)
 	emit_signal("was_hit_directly", body.get_linear_velocity().length())	
 
-func _on_Bomb_explosion_hit(explosion_pos):
+func _on_Bomb_explosion_hit():
 	set_stunned(bomb_explosion_stun_duration)
-	emit_signal("was_hit_explosion", explosion_pos)
+	emit_signal("was_hit_bomb_explosion")
 	
 func set_stunned(stun_duration):
 	if !stunned or $StunTimer.time_left < stun_duration:

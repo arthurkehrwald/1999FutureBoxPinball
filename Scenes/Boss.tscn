@@ -18,6 +18,7 @@ extents = Vector3( 1, 1.17565, 1.54783 )
 [node name="Boss" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 max_health = 100.0
+bomb_explosion_damage = 10.0
 use_speed_based_impact_damage = true
 impact_speed_damage_conversion_rate = 0.3
 min_impact_speed_for_damage = 1.0
@@ -66,6 +67,11 @@ collision_mask = 257
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02812, 0.725043 )
 shape = SubResource( 2 )
 [connection signal="health_changed" from="." to="Bar3D" method="_on_value_changed"]
-[connection signal="was_hit_directly" from="BossBombGun" to="." method="_on_BossBombGun_was_hit_directly"]
+[connection signal="was_hit_bomb_explosion" from="BossBombGun" to="." method="_on_BossGun_was_hit_bomb_explosion"]
+[connection signal="was_hit_directly" from="BossBombGun" to="." method="_on_BossGun_was_hit_directly"]
+[connection signal="was_hit_bomb_explosion" from="BossBombGun2" to="." method="_on_BossGun_was_hit_bomb_explosion"]
+[connection signal="was_hit_directly" from="BossBombGun2" to="." method="_on_BossGun_was_hit_directly"]
+[connection signal="was_hit_bomb_explosion" from="BossMissileGun" to="." method="_on_BossGun_was_hit_bomb_explosion"]
+[connection signal="was_hit_directly" from="BossMissileGun" to="." method="_on_BossGun_was_hit_directly"]
 
 [editable path="Bar3D"]

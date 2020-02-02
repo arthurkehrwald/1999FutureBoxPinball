@@ -17,7 +17,7 @@ extents = Vector3( 2, 1, 0.1 )
 [node name="BossShield" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 max_health = 20.0
-bomb_explosion_damage = 1.0
+bomb_explosion_damage = 5.0
 static_impact_damage = 0.0
 
 [node name="MeshInstance" parent="." index="0"]

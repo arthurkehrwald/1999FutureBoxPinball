@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Missile.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/boss_missile.obj" type="ArrayMesh" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Animations/missile_animation_02.tres" type="Animation" id=7]
 [ext_resource path="res://Animations/missile_animation_01.tres" type="Animation" id=8]
 [ext_resource path="res://Animations/missile_animation_03.tres" type="Animation" id=9]
+[ext_resource path="res://Scenes/Explosion.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.196949
@@ -43,4 +44,6 @@ autoplay = "missile_animation_01"
 anims/missile_animation_01 = ExtResource( 8 )
 anims/missile_animation_02 = ExtResource( 7 )
 anims/missile_animation_03 = ExtResource( 9 )
+
+[node name="Explosion" parent="." instance=ExtResource( 10 )]
 [connection signal="body_entered" from="." to="." method="_on_Missile_body_entered"]
