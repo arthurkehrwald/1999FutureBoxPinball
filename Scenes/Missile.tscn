@@ -17,7 +17,7 @@ height = 0.266283
 [node name="Missile" type="Area"]
 transform = Transform( 0.999999, 0, 0, 0, 0.121869, -0.992546, 0, 0.992546, 0.121869, 0, 0, 0 )
 collision_layer = 128
-collision_mask = 2565
+collision_mask = 16385
 script = ExtResource( 1 )
 speed = 3.0
 

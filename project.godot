@@ -123,6 +123,11 @@ start={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
  ]
 }
+debug_spawn_ball={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":66,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -141,6 +146,7 @@ start={
 3d_physics/layer_13="explosions"
 3d_physics/layer_14="force_fields"
 3d_physics/layer_15="damageable"
+3d_physics/layer_16="shield"
 
 [physics]
 

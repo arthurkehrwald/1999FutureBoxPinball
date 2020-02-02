@@ -9,12 +9,7 @@ func _enter_tree():
 func _ready():
 	$AnimationPlayer.playback_speed = speed
 
-func _on_Missile_body_entered(body):
-	#layer 10 -> 512 is the player ship
-	if body.get_collision_layer() == 512 || body.get_collision_layer() == 4:
-		GameState.set_player_health(GameState.player_health - damage_to_player)
-		print("player missile hit")
-	#trigger explosion fx here
+func _on_Missile_body_entered(_body):
 	self.queue_free()
 	
 func _on_Bomb_explosion_hit():

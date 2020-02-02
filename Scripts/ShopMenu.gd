@@ -60,7 +60,7 @@ func set_active(is_active):
 	if is_active:
 		$DecisionTimer.start()
 	set_process(is_active)
-	get_tree().paused = is_active
+	GameState.set_paused(is_active)
 
 func _on_DecisionTimer_timeout():
 	#print("ShopMenu: decision timer timeout")

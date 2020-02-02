@@ -12,7 +12,7 @@ func _on_GameState_global_reset(_is_init):
 	pass
 	
 func _on_Shop_menu_triggered():
-	$Viewport/ObjectiveHUD.set_visible(false)
+	$Viewport/ObjectiveHUD.turn_off()
 	$Viewport/ShopMenu.set_active(true)
 
 func _on_ShopMenu_closed():

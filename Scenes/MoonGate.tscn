@@ -21,9 +21,6 @@ mesh = ExtResource( 2 )
 material/0 = ExtResource( 5 )
 material/1 = ExtResource( 3 )
 
-[node name="HitboxArea" parent="." index="1"]
-collision_layer = 24576
-
 [node name="HitboxShape" parent="HitboxArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )

@@ -9,10 +9,10 @@
 [ext_resource path="res://Scenes/BossMissileGun.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/BossShield.tscn" type="PackedScene" id=8]
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.716914, 1, 0.147876 )
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 1, 1.17565, 1.54783 )
 
 [node name="Boss" instance=ExtResource( 2 )]
@@ -29,25 +29,28 @@ mesh = ExtResource( 4 )
 material/0 = ExtResource( 5 )
 material/1 = null
 
+[node name="HitboxArea" parent="." index="1"]
+collision_mask = 1
+
 [node name="HitboxShape" parent="HitboxArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -1.035 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="BossBombGun" parent="." index="2" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 1.5, 0.6, 0 )
-visible = false
-shoot_on_ready = false
+collision_mask = 257
 
 [node name="BossBombGun2" parent="." index="3" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, -1.5, 0.6, 0 )
-visible = false
-shoot_on_ready = false
+collision_mask = 257
 
 [node name="BossMissileGun" parent="." index="4" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5 )
+collision_mask = 257
+shoot_on_ready = true
 
 [node name="BossShield" parent="." index="5" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.52703 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.57264 )
 
 [node name="Bar3D" parent="." index="6" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57968, 0 )
@@ -56,12 +59,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57968, 0 )
 tint_progress = Color( 1, 0.00392157, 0.00392157, 1 )
 
 [node name="StaticBody" type="StaticBody" parent="." index="7"]
-collision_layer = 1024
+collision_layer = 16384
 collision_mask = 257
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02812, 0.725043 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 [connection signal="health_changed" from="." to="Bar3D" method="_on_value_changed"]
+[connection signal="was_hit_directly" from="BossBombGun" to="." method="_on_BossBombGun_was_hit_directly"]
 
 [editable path="Bar3D"]

@@ -192,7 +192,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50766, 0.000474215, -7.71008
 transform = Transform( 0.860378, 0, -0.509658, -3.72529e-08, 1, 0, 0.509657, 0, 0.860378, -2.37255, 0.655235, -2.41056 )
 
 [node name="EnemyFleet" parent="BoxV3/Playfield" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.180125, -7.48634e-05, 1.67094 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115225, -7.43866e-05, 1.80435 )
 
 [node name="Storm" parent="BoxV3/Playfield" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.34299 )

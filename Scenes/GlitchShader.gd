@@ -22,5 +22,4 @@ func _on_Timer_timeout():
 	$Timer.start()
 
 func glitch_out():
-	print("glitch")
 	$AnimationPlayer2.play("glitchy_glitch")

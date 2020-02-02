@@ -9,7 +9,7 @@
 script = ExtResource( 4 )
 
 [node name="ParentForAnimation" type="Spatial" parent="."]
-transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.0762803, 0 )
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0 )
 
 [node name="EnemyShip" parent="ParentForAnimation" instance=ExtResource( 1 )]
 

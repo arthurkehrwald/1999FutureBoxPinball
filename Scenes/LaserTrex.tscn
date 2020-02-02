@@ -64,12 +64,12 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="TrexMesh" type="MeshInstance" parent="." index="3"]
-transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, -1.06479e-07, 1, -0.326782 )
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 0.146402, 1, -0.326782 )
 mesh = ExtResource( 3 )
 material/0 = null
 
 [node name="LaserArea" type="Area" parent="." index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.290863 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.146402, 0, -0.290863 )
 collision_layer = 8192
 collision_mask = 257
 
@@ -89,7 +89,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.73474, -0.568054 )
 anims/gate_open_anim = SubResource( 6 )
 
 [node name="StaticBody" type="StaticBody" parent="." index="7"]
-collision_layer = 2
+collision_layer = 16384
 
 [node name="BottomCollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.473407, 0.5, -0.866258 )

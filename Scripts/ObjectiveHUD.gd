@@ -5,7 +5,7 @@ signal panel_changed
 var had_objectives = false
 
 func _enter_tree():
-	GameState.connect("global_reset", self, "reset")
+	GameState.connect("pregame_began", self, "reset")
 	GameState.connect("pregame_began", self, "turn_off")
 	GameState.connect("enemy_fleet_fight_began", self, "change_objective", ["Defeat the emperor's fleet!", "Buy something at the shop!"])
 	GameState.connect("bossfight_began", self, "change_objective", ["Defeat the emperor!", ""])
@@ -13,6 +13,8 @@ func _enter_tree():
 	GameState.connect("objective_two_completed", self, "set_objective_complete", [2])
 	
 func set_objective_complete(completed_obj_index):
+	if get_tree().paused:
+		yield(GameState, "unpaused")
 	match completed_obj_index:
 		1:
 			$ObjectiveCheckBox1.pressed = true
@@ -46,6 +48,5 @@ func turn_off():
 	if $AnimationPlayer.is_playing():
 		$AnimationPlayer.stop()
 		
-func reset(is_init):
-	if !is_init:
-		had_objectives = false
+func reset():
+	had_objectives = false

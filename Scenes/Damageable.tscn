@@ -16,7 +16,7 @@ material/0 = null
 
 [node name="HitboxArea" type="Area" parent="."]
 collision_layer = 16384
-collision_mask = 257
+collision_mask = 4353
 
 [node name="HitboxShape" type="CollisionShape" parent="HitboxArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00781775, 1.00454, -0.00820518 )
@@ -24,4 +24,8 @@ shape = SubResource( 2 )
 
 [node name="MoneyTextPos" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="ShieldRayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+collision_mask = 32768
 [connection signal="body_entered" from="HitboxArea" to="." method="_on_HitboxArea_body_entered"]

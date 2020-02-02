@@ -12,13 +12,12 @@ height = 0.6
 
 [node name="EnemyShip" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+money_yield_is_damage_based = false
+flat_money_yield = 20.0
 
 [node name="MeshInstance" parent="." index="0"]
 transform = Transform( 0.5, 0, 0, 0, 0.3, 0, 0, 0, 0.5, 0, 0.3, 0 )
 mesh = SubResource( 1 )
-
-[node name="HitboxArea" parent="." index="1"]
-collision_layer = 18432
 
 [node name="HitboxShape" parent="HitboxArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )

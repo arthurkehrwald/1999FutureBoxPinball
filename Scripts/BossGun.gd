@@ -1,5 +1,8 @@
 extends StaticBody
 
+signal was_hit_directly(speed)
+signal was_hit_explosion(explosion_pos)
+
 export var shoot_on_ready = true
 export var fire_rate = 3
 
@@ -17,14 +20,14 @@ func _ready():
 		$ShotTimer.start()
 
 func _on_HitboxArea_body_entered(body):
-	#HitboxArea only scans for impacts and bombs - no layer check necessary
-	if !get_collision_exceptions().has(body):
-		if body.get_linear_velocity().length() > min_impact_velocity_for_stun:
-			var stun_duration = min(max_impact_stun_duration, body.get_linear_velocity().length() * impact_velocity_stun_duration_conversion_rate)
-			set_stunned(stun_duration)
+	if body.get_linear_velocity().length() > min_impact_velocity_for_stun:
+		var stun_duration = min(max_impact_stun_duration, body.get_linear_velocity().length() * impact_velocity_stun_duration_conversion_rate)
+		set_stunned(stun_duration)
+	emit_signal("was_hit_directly", body.get_linear_velocity().length())	
 
-func _on_Bomb_explosion_hit():
+func _on_Bomb_explosion_hit(explosion_pos):
 	set_stunned(bomb_explosion_stun_duration)
+	emit_signal("was_hit_explosion", explosion_pos)
 	
 func set_stunned(stun_duration):
 	if !stunned or $StunTimer.time_left < stun_duration:

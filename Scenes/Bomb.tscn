@@ -9,15 +9,17 @@
 
 [node name="Rigidbody" parent="." index="0"]
 collision_layer = 256
-collision_mask = 28575
+collision_mask = 10655
 script = ExtResource( 1 )
 airborne_gravity_scale_multiplier = 0.2
+fuse_time = 3.2
+chain_explosions_enabled = false
 
 [node name="Timer" type="Timer" parent="Rigidbody" index="2"]
 one_shot = true
 
 [node name="Explosion" parent="Rigidbody" index="3" instance=ExtResource( 3 )]
-collision_mask = 20352
 
 [node name="BombMesh" parent="Rigidbody" index="4" instance=ExtResource( 2 )]
 [connection signal="timeout" from="Rigidbody/Timer" to="Rigidbody" method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Rigidbody/Explosion" to="Rigidbody" method="_on_Explosion_body_entered"]

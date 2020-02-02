@@ -31,9 +31,9 @@ void fragment()
 [resource]
 shader = SubResource( 1 )
 shader_param/dispOffset = 0.647
-shader_param/dispAmt = 0.001
-shader_param/abberationAmtX = 0.001
-shader_param/abberationAmtY = 0.003
-shader_param/dispSize = 0.352
+shader_param/dispAmt = 0.003
+shader_param/abberationAmtX = 0.01
+shader_param/abberationAmtY = 0.01
+shader_param/dispSize = 0.245
 shader_param/maxAlpha = 1.0
 shader_param/displace = ExtResource( 1 )

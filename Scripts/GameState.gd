@@ -1,7 +1,7 @@
 extends Node
 
 # Balancing variables---------------------
-const START_PLAYER_MONEY = 200
+const START_PLAYER_MONEY = 0
 const MAX_PLAYER_MONEY = 1000
 const PLAYER_COOLNESS_DECAY_PER_SEC = 10.0
 const BALL_DESTROYED_COST = 200
@@ -17,6 +17,9 @@ signal solar_eclipse_began
 
 signal objective_one_completed
 signal objective_two_completed
+
+signal paused
+signal unpaused
 
 signal player_money_changed(new_player_money)
 signal player_coolness_changed(new_player_coolness)
@@ -72,7 +75,7 @@ func _process(delta):
 		advance_state()
 		
 	if Input.is_action_just_pressed("pause"):
-		get_tree().set_pause(!get_tree().is_paused())
+		set_paused(!get_tree().is_paused())
 	processDebugInput()
 	if player_coolness > 0:
 		set_player_coolness(player_coolness - PLAYER_COOLNESS_DECAY_PER_SEC * delta)
@@ -141,6 +144,13 @@ func on_PlayerShip_death():
 func on_Boss_death():
 	pass
 	
+func set_paused(is_paused):
+	get_tree().paused = is_paused
+	if is_paused:
+		emit_signal("paused")
+	else:
+		emit_signal("unpaused")
+	
 func set_player_money(new_player_money):
 	player_money = clamp(new_player_money, 0, MAX_PLAYER_MONEY)
 	emit_signal("player_money_changed", player_money)
@@ -181,3 +191,6 @@ func processDebugInput():
 	if Input.is_action_just_pressed("toggle_nightmode"):
 		nightmode_enabled = !nightmode_enabled
 		emit_signal("toggle_nightmode", nightmode_enabled)
+
+	if Input.is_action_just_pressed("debug_spawn_ball"):
+		emit_signal("spawn_ball")
