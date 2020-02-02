@@ -5,6 +5,10 @@ var missile_animation_format_string = "missile_animation_0%s"
 
 var rng = RandomNumberGenerator.new()
 
+func _enter_tree():
+	GameState.connect("bossfight_began", self, "set_firing", [true])
+	GameState.connect("solar_eclipse_began", self, "set_firing_rate_multiplier", [1.3])
+
 func _ready():
 		rng.randomize()
 		
@@ -17,7 +21,6 @@ func _on_ShotTimer_timeout():
 		shoot_missile(rng.randi_range(1,3))
 
 func shoot_missile(animation_index):
-	print("missile")
 	var missile_instance = missile_scene.instance()
 	missile_instance.set_transform($Muzzle.get_transform())
 	$Muzzle.add_child(missile_instance)

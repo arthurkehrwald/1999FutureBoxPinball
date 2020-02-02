@@ -3,7 +3,6 @@
 [resource]
 resource_name = "boss_missile_animation_01"
 length = 16.0
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:translation")
 tracks/0/interp = 2

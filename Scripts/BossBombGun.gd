@@ -4,6 +4,10 @@ var bomb_scene = preload("res://Scenes/Bomb.tscn")
 
 export var bomb_muzzle_velocity = 5
 
+func _enter_tree():
+	GameState.connect("bossfight_began", self, "set_firing", [true])
+	GameState.connect("solar_eclipse_began", self, "set_firing_rate_multiplier", [1.3])
+
 func _on_ShotTimer_timeout():
 	if !stunned:
 		shoot_bomb()

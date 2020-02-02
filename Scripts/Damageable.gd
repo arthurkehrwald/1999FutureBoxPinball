@@ -5,6 +5,7 @@ var money_text_3d_scene = preload("res://Scenes/MoneyText3D.tscn")
 signal came_to_life
 signal health_changed(new_health, max_health)
 signal death
+signal death_by_damage
 
 export var max_health = 3.0
 export var bomb_explosion_damage = 3.0
@@ -22,16 +23,25 @@ export var damage_to_money_rate = 1.0
 var current_health = 3
 var is_alive = false
 
+func _ready():
+	$RayCast.set_global_transform(Transform(Basis.IDENTITY, get_global_transform().origin))
+
 func _on_HitboxArea_body_entered(body):
 	if is_alive:
 		var damage = calc_damage(body.get_linear_velocity().length())
 		if damage > 0:		
 			take_damage(damage)
 
-func _on_Bomb_explosion_hit():
-	take_damage(bomb_explosion_damage)
+func _on_Bomb_explosion_hit(explosion_pos):
+	$RayCast.set_cast_to(explosion_pos - $RayCast.get_global_transform().origin)
+	$RayCast.force_raycast_update()
+	$RayCast.enabled = true
+	if $RayCast.is_colliding():
+		print("Damageable: explosion blocked")
+	else:
+		take_damage(bomb_explosion_damage)
 
-func _on_Missile_explosion_hit():
+func _on_Missile_explosion_hit(explosion_pos):
 	take_damage(missile_explosion_damage)
 	
 func set_alive(_is_alive):
@@ -72,6 +82,7 @@ func take_damage(damage):
 func set_health(new_health):
 	current_health = new_health
 	if current_health <= 0:
+		emit_signal("death_by_damage")
 		set_alive(false)
 	elif current_health >= max_health:
 		set_alive(true)

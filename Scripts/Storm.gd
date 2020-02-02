@@ -1,8 +1,7 @@
 extends Area
 
 func _enter_tree():
-	GameState.connect("pregame_began", self, "set_active", [false])
-	GameState.connect("exposition_began", self, "set_active", [true])
+	GameState.connect("pregame_began", self, "set_active", [true])
 	GameState.connect("bossfight_began", self, "set_active", [false])
 	
 func _ready():

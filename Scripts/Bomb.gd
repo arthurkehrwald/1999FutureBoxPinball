@@ -1,7 +1,5 @@
 extends "res://Scripts/BallBombCommon.gd"
 
-var explosion_scene = preload("res://Scenes/Explosion.tscn")
-
 export var fuse_time = 5.0
 export var chain_explosions_enabled = true
 export var chain_explosion_delay = .2
@@ -28,7 +26,7 @@ func _ready():
 func _on_Timer_timeout():
 	explode()
 	
-func _on_Bomb_explosion_hit():
+func _on_Bomb_explosion_hit(_explosion_pos):
 	if chain_explosions_enabled:
 		$Timer.stop()
 		$Timer.set_wait_time(chain_explosion_delay)
@@ -43,8 +41,20 @@ func _on_GameState_global_reset(is_init):
 		owner.queue_free()
 
 func explode():
-	var explosion_instance = explosion_scene.instance()
-	get_node("/root").add_child(explosion_instance)
-	explosion_instance.set_global_transform(get_global_transform())
-	explosion_instance.init(explosion_instance.explosion_type.BOMB)
+	set_locked(true)
+	$Explosion.explode()
+	$MeshInstance.set_visible(false)
+	yield($Explosion, "exploded")
 	owner.queue_free()
+
+#func _on_Explosion_body_entered(body):
+#	print("Explosion hit: ", body.owner.name, " at pos: ", body.get_global_transform().origin)
+#	raycast.cast_to = body.owner.get_global_transform().origin - get_global_transform().origin
+#	raycast.force_raycast_update()
+#	if !raycast.is_colliding():
+#		if body.has_method("_on_Bomb_explosion_hit"):
+#			body._on_Bomb_explosion_hit()
+#		elif body.owner.has_method("_on_Bomb_explosion_hit"):
+#			body.owner._on_Bomb_explosion_hit()
+#	else:
+#		print("Explosion: raycast hit")

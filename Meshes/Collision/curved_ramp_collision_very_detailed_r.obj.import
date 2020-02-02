@@ -15,4 +15,5 @@ dest_files=[ "res://.import/curved_ramp_collision_very_detailed_r.obj-6b71a5d832
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true

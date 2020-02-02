@@ -147,6 +147,12 @@ transform = Transform( 1.1892, 2.98023e-08, -1.19209e-07, 7.40977e-09, 1.84928, 
 [node name="LongBox2" parent="BoxV3/Playfield" instance=ExtResource( 7 )]
 transform = Transform( 0.520905, 0, -0.176824, -7.45058e-08, 1, -8.3819e-09, 0.853616, 0, 0.107904, 2.11681, 0.000596285, 5.65028 )
 
+[node name="LongBox9" parent="BoxV3/Playfield" instance=ExtResource( 7 )]
+transform = Transform( 0.995656, 0.0905248, 0.00452365, -0.0915244, 0.994537, 0.0103983, -0.0171745, -0.0519782, 0.206837, 1.38223, 0.183407, 7.3896 )
+
+[node name="LongBox10" parent="BoxV3/Playfield" instance=ExtResource( 7 )]
+transform = Transform( 0.995656, 0.0905248, 0.00452365, -0.0915244, 0.994537, 0.0103983, -0.0171745, -0.0519782, 0.206837, -2.18785, 0.183407, 7.3896 )
+
 [node name="LongBox4" parent="BoxV3/Playfield" instance=ExtResource( 7 )]
 transform = Transform( 0.884939, -0.0198197, -0.0963822, 0.0184204, 0.999802, -0.00156481, 0.465342, -0.00188576, 0.183352, 3.19489, 0.014817, 4.28561 )
 

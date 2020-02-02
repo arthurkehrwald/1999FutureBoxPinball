@@ -3,23 +3,19 @@
 [ext_resource path="res://Scripts/Explosion.gd" type="Script" id=1]
 
 [sub_resource type="SphereShape" id=1]
-radius = 12.2841
+radius = 2.0
 
 [node name="Explosion" type="Area"]
 monitoring = false
 monitorable = false
 collision_layer = 4096
-collision_mask = 16768
+collision_mask = 16384
 script = ExtResource( 1 )
 
 [node name="ExplosionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
-[node name="RayCast" type="RayCast" parent="."]
-collision_mask = 49154
-
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.2
 one_shot = true
 [connection signal="body_entered" from="." to="." method="_on_Explosion_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

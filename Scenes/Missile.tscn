@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Missile.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/boss_missile.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=3]
 [ext_resource path="res://Meshes/Wireframe/boss_missile_wireframe.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Materials/black_unlit.tres" type="Material" id=5]
-[ext_resource path="res://Materials/ultraviolet_additive.tres" type="Material" id=6]
 [ext_resource path="res://Animations/missile_animation_02.tres" type="Animation" id=7]
 [ext_resource path="res://Animations/missile_animation_01.tres" type="Animation" id=8]
 [ext_resource path="res://Animations/missile_animation_03.tres" type="Animation" id=9]
@@ -34,11 +33,6 @@ mesh = ExtResource( 4 )
 material/0 = null
 script = ExtResource( 3 )
 
-[node name="Wireframe2" type="MeshInstance" parent="MeshInstance"]
-visible = false
-mesh = ExtResource( 4 )
-material/0 = ExtResource( 6 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "missile_animation_01"
 anims/missile_animation_01 = ExtResource( 8 )
@@ -47,3 +41,4 @@ anims/missile_animation_03 = ExtResource( 9 )
 
 [node name="Explosion" parent="." instance=ExtResource( 10 )]
 [connection signal="body_entered" from="." to="." method="_on_Missile_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

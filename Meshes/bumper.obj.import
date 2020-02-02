@@ -15,4 +15,5 @@ dest_files=[ "res://.import/bumper.obj-49378ee931655f7e0a2fda1451364a33.mesh", "
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true

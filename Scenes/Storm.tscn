@@ -5,11 +5,11 @@
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 4.5, 2, 4 )
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true
 albedo_color = Color( 0.482353, 0.482353, 0.482353, 0.905882 )
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="CubeMesh" id=3]
 
 [node name="Storm" type="Area"]
 space_override = 1
@@ -22,6 +22,6 @@ shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 4.5, 0, 0, 0, 2, 0, 0, 0, 4, 0, 2, -4 )
-material_override = SubResource( 3 )
-mesh = SubResource( 2 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
