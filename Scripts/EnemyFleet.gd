@@ -7,14 +7,19 @@ var remaining_ship_count = 0
 var is_active = false
 
 func _enter_tree():
-	GameState.connect("pregame_began", self, "set_active", [false])
-	GameState.connect("enemy_fleet_fight_began", self, "set_active", [true])
+	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 
 func _ready():
 	total_ship_count = $ParentForAnimation.get_child_count()
 	remaining_ship_count = total_ship_count
 	for ship in $ParentForAnimation.get_children():
 		connect("was_set_active", ship, "set_alive")
+
+func _on_GameState_stage_changed(new_stage):
+	if new_stage == GameState.stage.ENEMY_FLEET:
+		set_active(true)
+	else:
+		set_active(false)
 
 func set_active(_is_active):
 	is_active = _is_active

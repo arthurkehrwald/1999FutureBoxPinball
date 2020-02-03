@@ -14,21 +14,25 @@ var is_spinning = false
 #var normal_basis = Basis()
 
 func _enter_tree():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
+	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 	
 func _ready():
 	#normal_basis = get_transform().basis
 	#spinning_basis = get_transform().scaled(1.4, 1.4, 1.4).basis
 	set_process(false)
 	
-func _on_GameState_global_reset(is_init):
-	if !is_init:
+func _on_GameState_stage_changed(new_stage, is_debug_skip):
+	if is_debug_skip or new_stage == GameState.stage.PREGAME:
 		set_process(false)
 		is_spinning = false
 		if $AnimationPlayer.is_playing():
 			$AnimationPlayer.stop()
-	set_alive(true)
-	set_active(true)
+		set_alive(true)
+		
+	if new_stage == GameState.stage.BOSS_BEGIN or new_stage == GameState.stage.SOLAR_ECLIPSE:
+			set_active(true)
+	else:
+			set_active(false)		
 
 func _on_MoonGate_came_to_life(): 
 	#print("MoonGate: came to life, was flying - ", is_flying)

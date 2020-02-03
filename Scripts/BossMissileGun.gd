@@ -5,10 +5,6 @@ var missile_animation_format_string = "missile_animation_0%s"
 
 var rng = RandomNumberGenerator.new()
 
-func _enter_tree():
-	GameState.connect("bossfight_began", self, "set_firing", [true])
-	GameState.connect("solar_eclipse_began", self, "set_firing_rate_multiplier", [1.3])
-
 func _ready():
 		rng.randomize()
 		

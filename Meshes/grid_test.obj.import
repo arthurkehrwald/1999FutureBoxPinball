@@ -15,5 +15,4 @@ dest_files=[ "res://.import/grid_test.obj-1b71958241fe8014b8f6b20512a99f51.mesh"
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
-offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true

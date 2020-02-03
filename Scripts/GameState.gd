@@ -9,6 +9,7 @@ const BALL_RESET_DELAY = 1.0
 #-----------------------------------------
 
 signal global_reset(is_init)
+signal stage_changed(new_stage, is_debug_skip)
 signal pregame_began
 signal exposition_began
 signal enemy_fleet_fight_began
@@ -36,8 +37,8 @@ signal set_wireframe_material( material)
 signal set_collision_object_material(material)
 signal toggle_nightmode(toggle)
 
-enum state {NONE, PREGAME, EXPOSITION, ENEMY_FLEET, BOSS_BEGIN, SOLAR_ECLIPSE}
-var current_state = state.NONE
+enum stage {NONE, PREGAME, EXPOSITION, ENEMY_FLEET, BOSS_BEGIN, SOLAR_ECLIPSE}
+var current_stage = stage.NONE
 
 var ball_spawn_pos = Vector3(0, 0, 0)
 
@@ -71,8 +72,8 @@ func _ready():
 	call_deferred("global_init", true)
 
 func _process(delta):
-	if current_state == state.PREGAME and Input.is_action_just_pressed("start"):
-		advance_state()
+	if current_stage == stage.PREGAME and Input.is_action_just_pressed("start"):
+		advance_stage()
 		
 	if Input.is_action_just_pressed("pause"):
 		set_paused(!get_tree().is_paused())
@@ -87,35 +88,35 @@ func global_init(is_on_start):
 	emit_signal("toggle_nightmode", true)
 	set_player_money(START_PLAYER_MONEY)
 	nightmode_enabled = true
-	current_state = state.NONE
-	advance_state()
+	current_stage = stage.NONE
+	advance_stage()
 			
-func advance_state():
+func advance_stage():
 	is_objective_one_complete = false
 	is_objective_two_complete = false
-	match current_state:
-		state.NONE:
-			current_state = state.PREGAME
+	match current_stage:
+		stage.NONE:
+			current_stage = stage.PREGAME
 			emit_signal("pregame_began")
-		state.PREGAME:
-			current_state = state.EXPOSITION
+		stage.PREGAME:
+			current_stage = stage.EXPOSITION
 			emit_signal("exposition_began")
-		state.EXPOSITION:
-			current_state = state.ENEMY_FLEET
+		stage.EXPOSITION:
+			current_stage = stage.ENEMY_FLEET
 			emit_signal("enemy_fleet_fight_began")
-		state.ENEMY_FLEET:
+		stage.ENEMY_FLEET:
 			is_objective_two_complete = true
-			current_state = state.BOSS_BEGIN
+			current_stage = stage.BOSS_BEGIN
 			emit_signal("bossfight_began")
-		state.BOSS_BEGIN:
-			current_state = state.BOSS_BEGIN
+		stage.BOSS_BEGIN:
+			current_stage = stage.BOSS_BEGIN
 			emit_signal("solar_eclipse_began")
-		state.SOLAR_ECLIPSE:
+		stage.SOLAR_ECLIPSE:
 			pass
 		
 func on_TransmissionHUD_finished():
-	if current_state == state.EXPOSITION:
-		advance_state()
+	if current_stage == stage.EXPOSITION:
+		advance_stage()
 		
 func on_PlayerShip_ball_drained(ball, player_health):
 	if player_health > 0:
@@ -130,13 +131,13 @@ func on_objective_one_complete():
 	is_objective_one_complete = true
 	emit_signal("objective_one_completed")
 	if is_objective_two_complete:
-		advance_state()
+		advance_stage()
 		
 func on_objective_two_complete():
 	is_objective_two_complete = true
 	emit_signal("objective_two_completed")
 	if is_objective_one_complete:
-		advance_state()
+		advance_stage()
 	
 func on_PlayerShip_death():
 	pass
@@ -171,7 +172,7 @@ func processDebugInput():
 		global_init(false)
 		
 	if Input.is_action_just_pressed("global_reset"):
-		print("GameState: global reset")
+		print("Gamestage: global reset")
 		global_init(false)
 		
 	if Input.is_action_just_pressed("test_cycle_materials"):

@@ -1,16 +1,16 @@
 extends Sprite3D
 
 func _enter_tree():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
+	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 
 func _ready():
 	texture = $Viewport.get_texture()
 	pass
 
-func _on_GameState_global_reset(_is_init):
-	$Viewport/ShopMenu.set_active(false)
-	pass
-	
+func _on_GameState_stage_changed(new_stage):
+	if new_stage == GameState.stage.PREGAME:
+		$Viewport/ShopMenu.set_active(false)
+
 func _on_Shop_menu_triggered():
 	$Viewport/ObjectiveHUD.turn_off()
 	$Viewport/ShopMenu.set_active(true)

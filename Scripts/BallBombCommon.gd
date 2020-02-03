@@ -17,10 +17,15 @@ const TELEPORT_PHYSICS_COOLDOWN_BUFFER = .02
 
 func _enter_tree():
 	GameState.connect("toggle_nightmode", self, "_on_GameState_toggle_nightmode")
+	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 
 func _ready():
 	raycast = get_node("../StuckToRigidbody/RayCast")
 	set_process(false)
+	
+func _on_GameState_stage_changed(new_stage, is_debug_skip):
+	if is_debug_skip or new_stage == GameState.stage.PREGAME:
+		queue_free()
 	
 func teleport(destination, maintain_velocity, impulse_on_exit):
 	print("BallBombCommon: teleporting to - ", destination)

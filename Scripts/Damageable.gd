@@ -3,7 +3,7 @@ extends Spatial
 var money_text_3d_scene = preload("res://Scenes/MoneyText3D.tscn")
 
 signal came_to_life
-signal health_changed(new_health, max_health)
+signal health_changed(new_health, max_health, old_health)
 signal death
 signal death_by_damage
 
@@ -41,8 +41,21 @@ func _on_Bomb_explosion_hit(explosion_pos):
 	else:
 		take_damage(bomb_explosion_damage)
 
-func _on_Missile_explosion_hit(explosion_pos):
+func _on_Missile_explosion_hit(_explosion_pos):
 	take_damage(missile_explosion_damage)
+	
+func on_Explosion_hit(type, explosion_pos):
+	$RayCast.set_cast_to(explosion_pos - $RayCast.get_global_transform().origin)
+	$RayCast.force_raycast_update()
+	$RayCast.enabled = true
+	if $RayCast.is_colliding():
+		print("Damageable: explosion blocked")
+	else:
+		match type:
+			0:
+				take_damage(bomb_explosion_damage)
+			1:
+				take_damage(missile_explosion_damage)
 	
 func set_alive(_is_alive):
 	#print("Damageable (", name, "): alive - ", _is_alive)
@@ -53,7 +66,7 @@ func set_alive(_is_alive):
 	else:
 		current_health = 0
 		emit_signal("death")
-	emit_signal("health_changed", current_health, max_health)
+	emit_signal("health_changed", current_health, max_health, 0.0)
 	
 func calc_damage(impact_speed):
 	var damage = 0.0
@@ -80,6 +93,7 @@ func take_damage(damage):
 	set_health(current_health - damage)
 
 func set_health(new_health):
+	var old_health = current_health
 	current_health = new_health
 	if current_health <= 0:
 		emit_signal("death_by_damage")
@@ -87,5 +101,5 @@ func set_health(new_health):
 	elif current_health >= max_health:
 		set_alive(true)
 	else:
-		emit_signal("health_changed", current_health, max_health)
+		emit_signal("health_changed", current_health, max_health, old_health)
 	

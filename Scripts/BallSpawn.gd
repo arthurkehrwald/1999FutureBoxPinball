@@ -3,9 +3,15 @@ extends Spatial
 var ball_scene = preload("res://Scenes/Ball.tscn")
 
 func _enter_tree():
-	GameState.connect("exposition_began", self, "spawn_ball")
+	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 	GameState.connect("spawn_ball", self, "spawn_ball")	
 	GameState.ball_spawn_pos = get_global_transform().origin
+	
+func _on_GameState_stage_changed(new_stage, is_debug_skip):
+	if is_debug_skip:
+		spawn_ball()
+	elif new_stage == GameState.stage.EXPOSITION:
+		spawn_ball()
 		
 func spawn_ball():
 	var ball_instance = ball_scene.instance()

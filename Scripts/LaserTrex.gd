@@ -7,7 +7,7 @@ var laser_is_active = false
 var time_until_laser_toggle = 0.0
 
 func _enter_tree():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
+	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 
 func _ready():
 	set_process(false)
@@ -16,10 +16,10 @@ func _process(delta):
 	time_until_laser_toggle -= delta
 	if time_until_laser_toggle <= 0:
 		laser_set_active(!laser_is_active)
-	pass	
-
-func _on_GameState_global_reset(_is_init):
-	set_alive(false)	
+		
+func _on_GameState_stage_changed(new_stage, is_debug_skip):
+	if is_debug_skip or new_stage != GameState.stage.SOLAR_ECLIPSE:
+		set_alive(false)
 		
 func _on_LaserTrex_came_to_life():
 	set_active(true)

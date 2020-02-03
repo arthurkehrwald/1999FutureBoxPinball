@@ -2,19 +2,9 @@ extends "res://Scripts/Damageable.gd"
 
 export var regeneration_time = 20.0
 
-
-func _enter_tree():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
-	GameState.connect("pregame_began", self, "set_visible", [false])
-	GameState.connect("bossfight_began", self, "set_alive", [true])
-	
 func _ready():
 	set_process(false)
-
-func _on_GameState_global_reset(is_init):
-	if not is_init:
-		set_process(false)
-
+		
 func _on_BossShield_came_to_life():
 	set_active(true)
 

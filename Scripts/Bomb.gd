@@ -8,9 +8,6 @@ const EXPLOSION_HITREG_DURATION = .1
 const COLLISION_LAYER_SWITCH_DELAY = .4
 
 var is_exploding = false
-
-func _enter_tree():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
 	
 func _ready():
 	$Timer.set_wait_time(fuse_time)
@@ -36,14 +33,10 @@ func _on_LaserTrex_hit():
 	if !is_exploding:
 		explode()
 
-func _on_GameState_global_reset(is_init):
-	if !is_init:
-		owner.queue_free()
-
 func explode():
 	set_locked(true)
 	$Explosion.explode()
-	$MeshInstance.set_visible(false)
+	$BombMesh.set_visible(false)
 	yield($Explosion, "exploded")
 	owner.queue_free()
 
