@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://SerialPortExample/SimpleConsole.gd" type="Script" id=1]
 [ext_resource path="res://SerialPortExample/Com.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
 
 [node name="Control" type="Control"]
 script = ExtResource( 1 )
@@ -24,6 +25,9 @@ margin_top = 78.3383
 margin_right = 553.0
 margin_bottom = 130.338
 text = "Send"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="OptionButton" type="OptionButton" parent="."]
 margin_left = 454.168
@@ -55,6 +59,9 @@ margin_right = 262.168
 margin_bottom = 469.503
 hint_tooltip = "Refresh Port list"
 text = "R"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PortList" type="OptionButton" parent="."]
 margin_left = 106.168
@@ -89,6 +96,10 @@ margin_top = 45.1125
 margin_right = 345.457
 margin_bottom = 64.1125
 text = "BASIC SERIAL MONITOR"
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 689, 313 )
+texture = ExtResource( 3 )
 [connection signal="gui_input" from="LineEdit" to="." method="_on_LineEdit_gui_input"]
 [connection signal="pressed" from="SendButton" to="." method="_on_SendButton_pressed"]
 [connection signal="item_selected" from="OptionButton" to="." method="_on_OptionButton_item_selected"]
