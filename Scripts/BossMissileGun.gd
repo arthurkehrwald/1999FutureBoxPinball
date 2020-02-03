@@ -7,16 +7,13 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 		rng.randomize()
-		
-func _process(_delta):
-	if Input.is_action_just_pressed("boss_fire_three_missiles"):
-		shoot_three_missiles()
 
 func _on_ShotTimer_timeout():
-	if !stunned:
+	if !stunned and is_firing:
 		shoot_missile(rng.randi_range(1,3))
 
 func shoot_missile(animation_index):
+	print("BossMissileGun: shot")
 	var missile_instance = missile_scene.instance()
 	missile_instance.set_transform($Muzzle.get_transform())
 	$Muzzle.add_child(missile_instance)

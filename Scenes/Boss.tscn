@@ -77,7 +77,7 @@ transform = Transform( 1, 0, 0, 0, 0.899497, -0.436927, 0, 0.436927, 0.899497, 1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 1.58227, 1.53787 )
 [connection signal="came_to_life" from="." to="." method="_on_Boss_came_to_life"]
 [connection signal="death" from="." to="." method="_on_Boss_death"]
-[connection signal="health_changed" from="." to="Bar3D" method="_on_value_changed"]
 [connection signal="health_changed" from="." to="." method="_on_Boss_health_changed"]
+[connection signal="health_changed" from="." to="Bar3D" method="_on_value_changed"]
 
 [editable path="Bar3D"]

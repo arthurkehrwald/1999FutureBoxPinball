@@ -10,7 +10,8 @@ var remote_control_time_bar = Sprite3D
 var indicator = Sprite3D
 
 func _ready():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
+	if not is_connected("stage_changed", GameState, "_on_GameState_stage_changed"):
+		GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 	remote_control_time_bar = get_node("../StuckToRigidbody/Bar3D")
 	remote_control_timer = get_node_or_null("/root/Main/RemoteBallControlTimer")
 	if remote_control_timer == null:
@@ -31,6 +32,10 @@ func _physics_process(_delta):
 		if Input.is_action_pressed("flipper_right") and not Input.is_action_pressed("flipper_left"):
 			apply_central_impulse(Vector3(1, 0, 0) * remote_control_strength * clamp(abs(linear_velocity.z) * .05, 0, 1))
 
+func _on_GameState_stage_changed(new_stage, is_debug_skip):
+	if is_debug_skip or new_stage == GameState.stage.PREGAME:
+		delete()
+
 func delete():
 	GameState.balls_on_field -= 1
 	owner.queue_free()
@@ -42,11 +47,7 @@ func set_remote_controlled(_is_remote_controlled):
 	
 func set_remote_control_blocked(is_blocked):
 	is_remote_control_blocked = is_blocked
-		
-func _on_GameState_global_reset(is_init):
-	if !is_init:
-		delete()
-
+	
 func _on_LaserTrex_hit():
 	delete()
 

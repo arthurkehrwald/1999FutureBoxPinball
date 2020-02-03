@@ -4,8 +4,8 @@ func _enter_tree():
 	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 	connect("death_by_damage", GameState, "on_PlayerShip_death")
 
-func _on_GameState_stage_changed(new_stage):
-	if new_stage == GameState.stage.PREGAME:
+func _on_GameState_stage_changed(new_stage, is_debug_skip):
+	if new_stage == GameState.stage.PREGAME or is_debug_skip:
 		set_alive(true)
 
 func _on_PlayerHitboxArea_body_entered(body):

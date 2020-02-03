@@ -71,8 +71,7 @@ func _on_DecisionTimer_timeout():
 func buy_item(item_index):
 	#print("ShopMenu: player bought a thing")
 	GameState.set_player_money(GameState.player_money - price_for_all_items)
-	if GameState.current_state == GameState.state.ENEMY_FLEET and not GameState.is_objective_two_complete:
-		GameState.on_objective_two_complete()
+	GameState.on_ShopMenu_player_bought_anything()
 	match item_index:
 		1:
 			emit_signal("bought_repair")

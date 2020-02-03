@@ -8,7 +8,7 @@ var balls_inside = 0
 var is_open = false
 
 func _enter_tree():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
+	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 	GameState.connect("player_money_changed", self, "_on_GameState_player_money_changed")
 
 func _ready():
@@ -34,8 +34,9 @@ func _on_Shop_body_exited(body):
 		set_process(false) 
 		balls_inside = 0
 
-func _on_GameState_global_reset(_is_init):
-	set_open(false)
+func _on_GameState_stage_changed(new_stage, _is_debug_skip):
+	if new_stage == GameState.stage.PREGAME:
+		set_open(false)
 
 func _on_GameState_player_money_changed(new_player_money):
 	if not is_open and new_player_money >= money_required_to_open:

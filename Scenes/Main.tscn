@@ -51,6 +51,7 @@ transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, -
 [node name="WeirdCamera" parent="BoxV3" instance=ExtResource( 14 )]
 pause_mode = 2
 transform = Transform( 1, 0, 0, 0, -1.63913e-07, 1, 0, -1, -1.63913e-07, 0, 15, 4.339 )
+environment = null
 
 [node name="Playfield" type="Spatial" parent="BoxV3"]
 transform = Transform( 1, 0, 0, 0, 0.994521, 0.104528, 0, -0.104528, 0.994521, 0, -2.5744, 0.547205 )
@@ -169,7 +170,7 @@ transform = Transform( 0.957001, 0, 0.06009, 1.86265e-09, 1, 0, -0.290084, 0, 0.
 transform = Transform( 0.543511, 0, 0.173879, 2.98023e-08, 0.66107, -3.72529e-09, -0.839403, 4.47035e-08, 0.112587, -2.90495, -0.000393867, 5.62396 )
 
 [node name="LaserTrex" parent="BoxV3/Playfield" instance=ExtResource( 15 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 5.77316e-15, -1, 0, -4.37114e-08, 3.85099, -2.81334e-05, 0.71889 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 8.88178e-16, -1, 0, -4.37114e-08, 4, 0.0838709, 0.797977 )
 
 [node name="SimpleSlope" parent="BoxV3/Playfield" instance=ExtResource( 8 )]
 transform = Transform( 1.69137, 0, 0, 0, 1, 0, 0, 0, 4.64051, -4.51105, -0.000384092, 1.56313 )

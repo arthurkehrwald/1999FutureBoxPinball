@@ -5,7 +5,7 @@ var bomb_scene = preload("res://Scenes/Bomb.tscn")
 export var bomb_muzzle_velocity = 5
 
 func _on_ShotTimer_timeout():
-	if !stunned:
+	if !stunned and is_firing:
 		shoot_bomb()
 
 #func _on_HitboxArea_body_exited(body):
@@ -13,6 +13,7 @@ func _on_ShotTimer_timeout():
 #		remove_collision_exception_with(body)
 
 func shoot_bomb():
+	print("BombGun: shoot")
 	var bomb_instance = bomb_scene.instance()
 	bomb_instance.set_transform($Muzzle.get_transform())
 	#bomb_instance.get_node("Rigidbody").add_collision_exception_with(self)

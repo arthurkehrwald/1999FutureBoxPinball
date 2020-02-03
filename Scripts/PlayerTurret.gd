@@ -16,7 +16,7 @@ var has_shot = false
 var ball_scene = preload("res://Scenes/Ball.tscn")
 
 func _enter_tree():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
+	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 
 func _ready():
 	start_transform = get_transform()
@@ -51,6 +51,15 @@ func _process(delta):
 	var new_rotation = Quat(min_transform.basis.slerp(max_transform.basis.orthonormalized(), rotation_progress))
 	set_transform(Transform(new_rotation, get_transform().origin))	
 	
+
+func _on_GameState_stage_changed(new_stage, is_debug_skip):
+	if is_debug_skip or new_stage == GameState.stage.PREGAME:
+		$TeleporterExit/DottedLine.set_visible(false)
+		ball_to_shoot = null
+		has_shot = false
+		set_process(false)
+		var start_rotation = Quat(start_transform.basis.orthonormalized())
+		set_transform(Transform(start_rotation, get_transform().origin))		
 	
 func _on_TeleporterEntrance_ball_entered(ball, _teleporter_entrance):
 	_teleporter_entrance.set_active(false)
@@ -89,12 +98,3 @@ func shoot(plunger_progress):
 	ball_to_shoot.apply_central_impulse(-$TeleporterExit.get_global_transform().basis.z.normalized() * max_shot_speed * plunger_force)
 	has_shot = true
 
-func _on_GameState_global_reset(is_init):
-	#print("Turret global reset")
-	$TeleporterExit/DottedLine.set_visible(false)
-	ball_to_shoot = null
-	has_shot = false
-	if !is_init:
-		set_process(false)
-		var start_rotation = Quat(start_transform.basis.orthonormalized())
-		set_transform(Transform(start_rotation, get_transform().origin))	

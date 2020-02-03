@@ -1,7 +1,7 @@
 extends StaticBody
 
 signal was_hit_directly(speed)
-signal was_hit_bomb_explosion()
+signal was_hit_bomb_explosion
 
 export var shoot_on_ready = false
 export var base_firing_rate = 3
@@ -50,6 +50,7 @@ func _on_StunTimer_timeout():
 	print("gun no longer stunned")
 
 func set_firing(_is_firing):
+	print("Boss Gun: set firing -", _is_firing)
 	is_firing = _is_firing
 	$ShotTimer.stop()
 	$ShotTimer.start()

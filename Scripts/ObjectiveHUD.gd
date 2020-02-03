@@ -5,13 +5,28 @@ signal panel_changed
 var had_objectives = false
 
 func _enter_tree():
-	GameState.connect("pregame_began", self, "reset")
-	GameState.connect("pregame_began", self, "turn_off")
-	GameState.connect("enemy_fleet_fight_began", self, "change_objective", ["Defeat the emperor's fleet!", "Buy something at the shop!"])
-	GameState.connect("bossfight_began", self, "change_objective", ["Defeat the emperor!", ""])
+	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 	GameState.connect("objective_one_completed", self, "set_objective_complete", [1])
 	GameState.connect("objective_two_completed", self, "set_objective_complete", [2])
 	
+func _on_GameState_stage_changed(new_stage, is_debug_skip):
+	match new_stage:
+		GameState.stage.PREGAME:
+			print("ObjectiveHUD: pregame began")
+			reset()
+			turn_off()
+		GameState.stage.EXPOSITION:
+			if is_debug_skip:
+				reset()
+				turn_off()
+		GameState.stage.ENEMY_FLEET:
+			change_objective("Defeat the enemy fleet!", "Buy something at the shop!")
+		GameState.stage.BOSS_BEGIN:
+			change_objective("Defeat the emperor!", "")
+		GameState.stage.SOLAR_ECLIPSE:
+			if is_debug_skip:
+				change_objective("Defeat the emperor!", "")
+
 func set_objective_complete(completed_obj_index):
 	if get_tree().paused:
 		yield(GameState, "unpaused")

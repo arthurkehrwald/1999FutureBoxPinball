@@ -15,7 +15,7 @@ func _ready():
 	for ship in $ParentForAnimation.get_children():
 		connect("was_set_active", ship, "set_alive")
 
-func _on_GameState_stage_changed(new_stage):
+func _on_GameState_stage_changed(new_stage, _is_debug_skip):
 	if new_stage == GameState.stage.ENEMY_FLEET:
 		set_active(true)
 	else:
@@ -36,6 +36,5 @@ func _on_EnemyShip_death():
 	if is_active:
 		remaining_ship_count -= 1
 		if remaining_ship_count <= 0:
-			if GameState.current_state == GameState.state.ENEMY_FLEET and not GameState.is_objective_one_complete:
-				GameState.on_objective_one_complete()
+			GameState.on_EnemyFleet_defeated()
 			set_active(false)

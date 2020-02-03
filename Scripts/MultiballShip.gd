@@ -8,7 +8,7 @@ var loaded_balls = []
 var muzzle_transforms = []
 
 func _enter_tree():
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
+	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 
 func _ready():
 	muzzle_transforms.resize(3)
@@ -33,7 +33,8 @@ func _on_Area_body_entered(body):
 	else:
 		GameState._on_MultiballShip_ball_locked()
 
-func _on_GameState_global_reset(_is_init):
-	balls_locked = 0
-	loaded_balls.clear()
-	loaded_balls.resize(3)
+func _on_GameState_stage_changed(new_stage, is_debug_skip):
+	if is_debug_skip or new_stage == GameState.stage.PREGAME:
+		balls_locked = 0
+		loaded_balls.clear()
+		loaded_balls.resize(3)

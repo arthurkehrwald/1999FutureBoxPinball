@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Damageable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/LaserTrex.gd" type="Script" id=2]
@@ -10,17 +10,19 @@ extents = Vector3( 0.5, 0.5, 0.1 )
 
 [sub_resource type="CubeMesh" id=2]
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 1, 0.756863, 0.756863, 1 )
+
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.1, 1, 4.5 )
 
-[sub_resource type="CubeMesh" id=4]
+[sub_resource type="CubeMesh" id=5]
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=6]
 flags_transparent = true
 albedo_color = Color( 1, 0, 0.819608, 0.521569 )
 
-[sub_resource type="Animation" id=6]
-resource_name = "gate_open_anim"
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("DropTargetParent/MeshInstance:translation")
 tracks/0/interp = 1
@@ -34,10 +36,10 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0.5, 0 ), Vector3( 0, -0.6, 0 ) ]
 }
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=8]
 extents = Vector3( 1, 0.5, 0.1 )
 
-[sub_resource type="BoxShape" id=8]
+[sub_resource type="BoxShape" id=9]
 extents = Vector3( 0.5, 0.5, 0.1 )
 
 [node name="LaserTrex" instance=ExtResource( 1 )]
@@ -66,7 +68,7 @@ material/0 = null
 [node name="TrexMesh" type="MeshInstance" parent="." index="3"]
 transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 0.146402, 1, -0.326782 )
 mesh = ExtResource( 3 )
-material/0 = null
+material/0 = SubResource( 3 )
 
 [node name="LaserArea" type="Area" parent="." index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.146402, 0, -0.290863 )
@@ -75,29 +77,29 @@ collision_mask = 257
 
 [node name="CollisionShape" type="CollisionShape" parent="LaserArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5.51141 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="LaserArea" index="1"]
 transform = Transform( 0.1, 0, 0, 0, 1.1, 0, 0, 0, 4.5, 0, 1.10005, -5.5 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
 
 [node name="Bar3D" parent="." index="5" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.73474, -0.568054 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
-anims/gate_open_anim = SubResource( 6 )
+anims/gate_open_anim = SubResource( 7 )
 
 [node name="StaticBody" type="StaticBody" parent="." index="7"]
 collision_layer = 16384
 
 [node name="BottomCollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.473407, 0.5, -0.866258 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="TrexCollisionShape" type="CollisionShape" parent="StaticBody" index="1"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.664978, 1.36713, -0.664978 )
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="MoneyTextPos" parent="." index="8"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.17413, -0.615601 )

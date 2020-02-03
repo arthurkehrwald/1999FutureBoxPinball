@@ -8,13 +8,7 @@ const BALL_DESTROYED_COST = 200
 const BALL_RESET_DELAY = 1.0
 #-----------------------------------------
 
-signal global_reset(is_init)
 signal stage_changed(new_stage, is_debug_skip)
-signal pregame_began
-signal exposition_began
-signal enemy_fleet_fight_began
-signal bossfight_began
-signal solar_eclipse_began
 
 signal objective_one_completed
 signal objective_two_completed
@@ -47,8 +41,8 @@ var player_coolness = 0 setget set_player_coolness
 var nightmode_enabled = false
 var balls_on_field = 0
 
-var is_objective_one_complete = false
-var is_objective_two_complete = false
+var is_fleet_defeated = false
+var has_player_used_shop = false
 
 var plunger_progress = 0.0
 
@@ -69,11 +63,11 @@ func _enter_tree():
 
 func _ready():
 	set_pause_mode(Node.PAUSE_MODE_PROCESS)
-	call_deferred("global_init", true)
+	call_deferred("set_stage", stage.PREGAME, false)
 
 func _process(delta):
 	if current_stage == stage.PREGAME and Input.is_action_just_pressed("start"):
-		advance_stage()
+		set_stage(stage.EXPOSITION, false)
 		
 	if Input.is_action_just_pressed("pause"):
 		set_paused(!get_tree().is_paused())
@@ -81,42 +75,27 @@ func _process(delta):
 	if player_coolness > 0:
 		set_player_coolness(player_coolness - PLAYER_COOLNESS_DECAY_PER_SEC * delta)
 	
-func global_init(is_on_start):
-	emit_signal("global_reset", is_on_start)
+func global_init():
 	emit_signal("set_wireframe_material", pink_unlit)
 	emit_signal("set_collision_object_material", light_blue)
-	emit_signal("toggle_nightmode", true)
+	emit_signal("toggle_nightmode", false)
 	set_player_money(START_PLAYER_MONEY)
-	nightmode_enabled = true
-	current_stage = stage.NONE
-	advance_stage()
+	nightmode_enabled = false
+	set_stage(stage.PREGAME, false)
 			
-func advance_stage():
-	is_objective_one_complete = false
-	is_objective_two_complete = false
-	match current_stage:
-		stage.NONE:
-			current_stage = stage.PREGAME
-			emit_signal("pregame_began")
-		stage.PREGAME:
-			current_stage = stage.EXPOSITION
-			emit_signal("exposition_began")
-		stage.EXPOSITION:
-			current_stage = stage.ENEMY_FLEET
-			emit_signal("enemy_fleet_fight_began")
-		stage.ENEMY_FLEET:
-			is_objective_two_complete = true
-			current_stage = stage.BOSS_BEGIN
-			emit_signal("bossfight_began")
-		stage.BOSS_BEGIN:
-			current_stage = stage.BOSS_BEGIN
-			emit_signal("solar_eclipse_began")
-		stage.SOLAR_ECLIPSE:
-			pass
+func set_stage(new_stage, is_debug_skip):
+	print("GameState: set stage to: ", new_stage)
+	if new_stage == stage.PREGAME:
+		set_player_money(START_PLAYER_MONEY)
+	elif new_stage == stage.ENEMY_FLEET:
+		has_player_used_shop = false
+		is_fleet_defeated = false
+	current_stage = new_stage
+	emit_signal("stage_changed", new_stage, is_debug_skip)
 		
 func on_TransmissionHUD_finished():
 	if current_stage == stage.EXPOSITION:
-		advance_stage()
+		set_stage(stage.ENEMY_FLEET, false)
 		
 func on_PlayerShip_ball_drained(ball, player_health):
 	if player_health > 0:
@@ -126,19 +105,26 @@ func on_PlayerShip_ball_drained(ball, player_health):
 			ball.delayed_teleport(ball_spawn_pos)
 		else:
 			ball.delete()	
-			
-func on_objective_one_complete():
-	is_objective_one_complete = true
-	emit_signal("objective_one_completed")
-	if is_objective_two_complete:
-		advance_stage()
-		
-func on_objective_two_complete():
-	is_objective_two_complete = true
-	emit_signal("objective_two_completed")
-	if is_objective_one_complete:
-		advance_stage()
 	
+func on_EnemyFleet_defeated():
+	if current_stage == stage.ENEMY_FLEET:
+		if not is_fleet_defeated:
+			is_fleet_defeated = true
+			emit_signal("objective_one_completed")
+		if has_player_used_shop:
+			set_stage(stage.BOSS_BEGIN, false)
+
+func on_ShopMenu_player_bought_anything():
+	if current_stage == stage.ENEMY_FLEET:
+		if not has_player_used_shop:
+			has_player_used_shop = true
+			emit_signal("objective_two_completed")
+		if is_fleet_defeated:
+			set_stage(stage.BOSS_BEGIN, false)		
+			
+func on_Boss_hit_solar_eclipse_threshold():
+	set_stage(stage.SOLAR_ECLIPSE, false)
+
 func on_PlayerShip_death():
 	pass
 	
@@ -169,11 +155,14 @@ func _on_MultiballShip_ball_locked():
 func processDebugInput():
 	if Input.is_action_just_pressed("test_reload_scene"):
 		get_tree().reload_current_scene()
-		global_init(false)
+		global_init()
 		
-	if Input.is_action_just_pressed("global_reset"):
+	if Input.is_action_just_pressed("debug_goto_pregame"):
 		print("Gamestage: global reset")
-		global_init(false)
+		global_init()
+		
+	if Input.is_action_just_pressed("debug_goto_exposition"):
+		set_stage(stage.EXPOSITION, true)
 		
 	if Input.is_action_just_pressed("test_cycle_materials"):
 		if current_collision_object_material_index < collision_object_materials.size() - 1:

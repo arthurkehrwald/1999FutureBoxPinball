@@ -12,13 +12,16 @@ func _enter_tree():
 	file.open(transmissions_file_path, file.READ)
 	transmissions_dict = parse_json(file.get_as_text())
 	assert (typeof(transmissions_dict) == TYPE_DICTIONARY and transmissions_dict.size() > 0)
-	print(transmissions_dict.size())
-	GameState.connect("global_reset", self, "_on_GameState_global_reset")
-	GameState.connect("exposition_began", self, "play_dialogue", ["exposition"])
-	GameState.connect("enemy_fleet_fight_began", self, "play_dialogue", ["enemy_fleet_appears"])
+	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")	
 	
-func _on_GameState_global_reset(_is_init):
-	transmission_panel_reset()
+func _on_GameState_stage_changed(new_stage, is_debug_skip):
+	if is_debug_skip or new_stage == GameState.stage.PREGAME:
+		transmission_panel_reset()
+	match new_stage:
+		GameState.stage.EXPOSITION:
+			play_dialogue("exposition")
+		GameState.stage.ENEMY_FLEET:
+			play_dialogue("enemy_fleet_appears")
 		
 func play_dialogue(key):
 	for transmission in transmissions_dict[key]:

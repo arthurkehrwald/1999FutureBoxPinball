@@ -6,6 +6,7 @@ signal black_hole_health_threshold_reached
 export var missiles_health_percent = 80.0
 export var laser_trex_health_percent = 60.0
 export var black_hole_health_percent = 40.0
+export var solar_eclipse_health_percent = 20.0
 
 func _enter_tree():
 	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
@@ -14,6 +15,7 @@ func _enter_tree():
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	match new_stage:
 		GameState.stage.BOSS_BEGIN:
+			print("Boss: bossfight began")
 			set_alive(true)
 			$BossBombGun.set_firing(true)
 			yield(get_tree().create_timer($BossBombGun.base_firing_rate * .5), "timeout")
@@ -30,6 +32,7 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 				$BossShield.set_alive(true)
 				$BossShield.set_visible(true)
 		_:
+			print("Boss: disabled based on stage")
 			set_alive(false)
 			$BossBombGun.set_firing(false)
 			$BossBombGun2.set_firing(false)

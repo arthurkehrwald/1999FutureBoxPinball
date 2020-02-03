@@ -7,7 +7,7 @@ extents = Vector3( 4.5, 2, 4 )
 
 [sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true
-albedo_color = Color( 0.482353, 0.482353, 0.482353, 0.905882 )
+albedo_color = Color( 0.282353, 0.282353, 0.282353, 0.560784 )
 
 [sub_resource type="CubeMesh" id=3]
 
