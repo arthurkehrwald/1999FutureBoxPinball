@@ -53,7 +53,7 @@ func _process(_delta):
 					$TextureRect.texture = item_04_texture	
 
 func set_active(is_active):
-	print("ShopMenu: active - ", is_active)
+	#print("ShopMenu: active - ", is_active)
 	selected_item = 1
 	$TextureRect.texture = item_01_texture
 	set_visible(is_active)

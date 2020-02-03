@@ -50,7 +50,7 @@ func _on_StunTimer_timeout():
 	print("gun no longer stunned")
 
 func set_firing(_is_firing):
-	print("Boss Gun: set firing -", _is_firing)
+	#print("Boss Gun: set firing -", _is_firing)
 	is_firing = _is_firing
 	$ShotTimer.stop()
 	$ShotTimer.start()

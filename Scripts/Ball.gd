@@ -8,9 +8,12 @@ var is_remote_control_blocked = false
 var remote_control_timer = Timer
 var remote_control_time_bar = Sprite3D
 var indicator = Sprite3D
+var ready_counter = 0
 
 func _ready():
-	if not is_connected("stage_changed", GameState, "_on_GameState_stage_changed"):
+	ready_counter += 1
+	print("Ball: ready method called ", ready_counter, " times")
+	if not GameState.is_connected("stage_changed", self, "_on_GameState_stage_changed"):
 		GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 	remote_control_time_bar = get_node("../StuckToRigidbody/Bar3D")
 	remote_control_timer = get_node_or_null("/root/Main/RemoteBallControlTimer")

@@ -32,7 +32,7 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 				$BossShield.set_alive(true)
 				$BossShield.set_visible(true)
 		_:
-			print("Boss: disabled based on stage")
+			#print("Boss: disabled based on stage")
 			set_alive(false)
 			$BossBombGun.set_firing(false)
 			$BossBombGun2.set_firing(false)

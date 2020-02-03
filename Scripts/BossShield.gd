@@ -14,7 +14,7 @@ func _on_BossShield_death():
 func set_active(is_active):
 	if is_active:
 		set_visible(true)
-	print("boss shield: active - ", is_active)
+	#print("boss shield: active - ", is_active)
 	$MeshInstance.set_visible(is_active)
 	$StaticBody/CollisionShape.set_deferred("disabled", !is_active)
 	$HitboxArea.set_deferred("monitoring", is_active)
