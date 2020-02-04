@@ -32,5 +32,29 @@
       "text": "They're already dead.",
       "duration": 2
     }
+  ],
+  "enemy_fleet_defeated": [
+	{
+		"name": "Emperor",
+		"text": "Infidels! Must I do everything myself?",
+		"duration": 4
+	},
+	{
+		"name": "Rex";
+		"text:" "Come at me bro!"
+		"duration": 2
+	}
+  ],
+  "laser_trex_appears": [
+	{
+		"name": "LaZer Trex",
+		"text": "*trex noises*"
+		"duration": 3
+	},
+	{
+		"name": "Rex",
+		"text": "What in the..."
+		"duration": 2
+	}
   ]
 }

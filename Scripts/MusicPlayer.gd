@@ -58,7 +58,7 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 				$Track2.stop()
 				$Track3.play()
 			$Track2.volume_db = target_volume
-			$Track3.volumed_db = target_volume - fade_out_volume_lower_amount
+			$Track3.volume_db = target_volume - fade_out_volume_lower_amount
 			$Track3.play()
 			fade_out_player = $Track2
 			fade_in_player = $Track3
