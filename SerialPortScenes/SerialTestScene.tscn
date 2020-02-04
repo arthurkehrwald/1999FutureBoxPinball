@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=1]
+[ext_resource path="res://SerialPortScenes/SerialPlunger.tscn" type="PackedScene" id=2]
+[ext_resource path="res://SerialPortExample/PortReader.tscn" type="PackedScene" id=3]
+[ext_resource path="res://SerialPortScenes/Serial_Flipper_L.tscn" type="PackedScene" id=4]
+[ext_resource path="res://SerialPortScenes/Serial_Flipper_R.tscn" type="PackedScene" id=5]
+
+[node name="PlungerTestScene_01" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.648372, 0.761323, 0, -0.761323, 0.648372, 0, 2.5955, 6.8219 )
+
+[node name="Plunger" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="PortReader" parent="." instance=ExtResource( 3 )]
+
+[node name="PlungerSerial_01" parent="." instance=ExtResource( 2 )]
+
+[node name="Serial_Flipper_L" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.819152, 0, -0.573577, 0, 1, 0, 0.573577, 0, 0.819152, -2.32887, 0, 0 )
+
+[node name="Serial_Flipper_R" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.819152, 0, 0.573577, 0, 1, 0, -0.573577, 0, 0.819152, 2.65423, 0, 0 )
+[connection signal="button_signal" from="PortReader" to="Serial_Flipper_L" method="_on_PortReader_button_signal"]
+[connection signal="button_signal" from="PortReader" to="Serial_Flipper_R" method="_on_PortReader_button_signal"]
+[connection signal="plunger_signal" from="PortReader" to="PlungerSerial_01" method="_on_PortReader_plunger_signal"]
