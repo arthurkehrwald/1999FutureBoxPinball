@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/announcer_moon_active.wav-e957ce7190aed2f9fa6d1f0f011dbc3f.sample"
+
+[deps]
+
+source_file="res://Audio/Announcer/announcer_moon_active.wav"
+dest_files=[ "res://.import/announcer_moon_active.wav-e957ce7190aed2f9fa6d1f0f011dbc3f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

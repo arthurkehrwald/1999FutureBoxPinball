@@ -78,6 +78,7 @@ func calc_damage(impact_speed):
 	return damage
 
 func take_damage(damage):
+	GameState.on_player_did_anything_at_all()
 	if gives_money:	
 			var money_yield = 0.0
 			if money_yield_is_damage_based:

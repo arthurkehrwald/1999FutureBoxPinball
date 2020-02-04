@@ -45,11 +45,13 @@ func _on_MoonGate_came_to_life():
 
 func _on_MoonGate_death():
 	#print("MoonGate: died")
+	Announcer.say("moon_destroyed")
 	set_visible(true)
 	set_deferred("is_flying", true)
 
 func _on_MoonGateHitboxArea_body_entered(body):
 	#print("MoonGate: hit")
+	Announcer.say("moon_dmg")
 	
 	var body_to_moon = get_global_transform().origin - body.get_global_transform().origin
 	spin_axis = body.get_linear_velocity().cross(body_to_moon).normalized()

@@ -58,6 +58,7 @@ func set_active(is_active):
 	$TextureRect.texture = item_01_texture
 	set_visible(is_active)
 	if is_active:
+		Announcer.say("choose_purchase")
 		$DecisionTimer.start()
 	set_process(is_active)
 	GameState.set_paused(is_active)

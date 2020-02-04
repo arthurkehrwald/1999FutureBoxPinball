@@ -25,7 +25,8 @@ func _ready():
 	
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	if is_debug_skip or new_stage == GameState.stage.PREGAME:
-		queue_free()
+		pass
+		#owner.queue_free()
 	
 func teleport(destination, maintain_velocity, impulse_on_exit):
 	print("BallBombCommon: teleporting to - ", destination)

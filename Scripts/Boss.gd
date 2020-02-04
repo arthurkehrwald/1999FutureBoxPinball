@@ -2,6 +2,7 @@ extends "res://Scripts/Damageable.gd"
 
 signal laser_trex_health_threshold_reached
 signal black_hole_health_threshold_reached
+signal solar_eclipse_health_threshold_reached
 
 export var missiles_health_percent = 80.0
 export var laser_trex_health_percent = 60.0
@@ -22,6 +23,8 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 			$BossBombGun2.set_firing(true)
 			$BossShield.set_alive(true)
 			$BossShield.set_visible(true)
+			if is_debug_skip:
+				$BossMissileGun.set_firing(false)
 		GameState.stage.SOLAR_ECLIPSE:
 			if is_debug_skip:
 				set_alive(true)
@@ -63,4 +66,9 @@ func _on_Boss_health_changed(new_health, max_health, old_health):
 	if not old_health / max_health * 100 <= black_hole_health_percent:
 		if new_health / max_health * 100 <= black_hole_health_percent:
 			emit_signal("black_hole_health_threshold_reached")
-	
+	if not old_health / max_health * 100 <= solar_eclipse_health_percent:
+		if new_health / max_health * 100 <= solar_eclipse_health_percent:
+			emit_signal("solar_eclipse_health_threshold_reached")
+
+func _on_Boss_death_by_damage():
+	GameState.on_Boss_death()

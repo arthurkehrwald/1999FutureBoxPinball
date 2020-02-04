@@ -15,3 +15,7 @@ func _on_PlayerHitboxArea_body_entered(body):
 
 func _on_ShopMenu_bought_repair():
 	set_health(max_health)
+
+
+func _on_PlayerShip_death_by_damage():
+	GameState.on_PlayerShip_death()

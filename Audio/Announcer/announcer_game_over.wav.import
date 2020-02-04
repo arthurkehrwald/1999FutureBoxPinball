@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/announcer_game_over.wav-0e550a43424e1f0f831ce86e8b710ab1.sample"
+
+[deps]
+
+source_file="res://Audio/Announcer/announcer_game_over.wav"
+dest_files=[ "res://.import/announcer_game_over.wav-0e550a43424e1f0f831ce86e8b710ab1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

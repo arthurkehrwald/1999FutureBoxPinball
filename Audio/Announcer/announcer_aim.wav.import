@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/announcer_aim.wav-b65138270b42582acd3d4c3324f9540a.sample"
+
+[deps]
+
+source_file="res://Audio/Announcer/announcer_aim.wav"
+dest_files=[ "res://.import/announcer_aim.wav-b65138270b42582acd3d4c3324f9540a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

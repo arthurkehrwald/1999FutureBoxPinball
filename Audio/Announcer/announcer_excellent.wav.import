@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/announcer_excellent.wav-475b7389aa13107aaffcb568cce05695.sample"
+
+[deps]
+
+source_file="res://Audio/Announcer/announcer_excellent.wav"
+dest_files=[ "res://.import/announcer_excellent.wav-475b7389aa13107aaffcb568cce05695.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/announcer_ally_slain.wav-b0d597d06a76b43e2a2ecba0eca746ba.sample"
+
+[deps]
+
+source_file="res://Audio/Announcer/announcer_ally_slain.wav"
+dest_files=[ "res://.import/announcer_ally_slain.wav-b0d597d06a76b43e2a2ecba0eca746ba.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

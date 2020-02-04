@@ -8,13 +8,8 @@ var is_remote_control_blocked = false
 var remote_control_timer = Timer
 var remote_control_time_bar = Sprite3D
 var indicator = Sprite3D
-var ready_counter = 0
 
 func _ready():
-	ready_counter += 1
-	print("Ball: ready method called ", ready_counter, " times")
-	if not GameState.is_connected("stage_changed", self, "_on_GameState_stage_changed"):
-		GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 	remote_control_time_bar = get_node("../StuckToRigidbody/Bar3D")
 	remote_control_timer = get_node_or_null("/root/Main/RemoteBallControlTimer")
 	if remote_control_timer == null:
@@ -23,7 +18,7 @@ func _ready():
 	else:
 		remote_control_timer.connect("start", self, "_on_RemoteControlTimer_start")
 		remote_control_timer.connect("timeout", self, "_on_RemoteControlTimer_timeout")
-		remote_control_timer.connect("time_left_changed", remote_control_time_bar, "_on_value_changed", [1])
+		remote_control_timer.connect("time_left_changed", remote_control_time_bar, "_on_value_changed", [1, 0])
 		set_remote_controlled(!remote_control_timer.is_stopped())
 	indicator = get_node("../StuckToRigidbody/Indicator")
 	indicator_set_visible(false)
@@ -34,10 +29,6 @@ func _physics_process(_delta):
 			apply_central_impulse(Vector3(-1, 0, 0) * remote_control_strength * clamp(abs(linear_velocity.z) * .05, 0, 1))
 		if Input.is_action_pressed("flipper_right") and not Input.is_action_pressed("flipper_left"):
 			apply_central_impulse(Vector3(1, 0, 0) * remote_control_strength * clamp(abs(linear_velocity.z) * .05, 0, 1))
-
-func _on_GameState_stage_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage == GameState.stage.PREGAME:
-		delete()
 
 func delete():
 	GameState.balls_on_field -= 1
@@ -52,7 +43,11 @@ func set_remote_control_blocked(is_blocked):
 	is_remote_control_blocked = is_blocked
 	
 func _on_LaserTrex_hit():
-	delete()
+	GameState.set_player_money(GameState.player_money - GameState.BALL_DESTROYED_COST)
+	if GameState.balls_on_field > 1:
+		delete()
+	else:
+		delayed_teleport(GameState.ball_spawn_pos)
 
 func _on_RemoteControlTimer_start():
 	set_remote_controlled(true)

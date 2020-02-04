@@ -19,6 +19,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+decision_time = 10.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 578.0

@@ -27,6 +27,7 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 		land()
 
 func _on_PathFollow_louie_triggered():
+	Announcer.say("looping_louie")
 	set_process(true)
 
 func land():

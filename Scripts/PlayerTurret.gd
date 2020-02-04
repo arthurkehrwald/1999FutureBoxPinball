@@ -62,6 +62,7 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 		set_transform(Transform(start_rotation, get_transform().origin))		
 	
 func _on_TeleporterEntrance_ball_entered(ball, _teleporter_entrance):
+	Announcer.say("turret_active")
 	_teleporter_entrance.set_active(false)
 	teleporter_entrance = _teleporter_entrance
 	ball.set_visible(false)
@@ -70,8 +71,10 @@ func _on_TeleporterEntrance_ball_entered(ball, _teleporter_entrance):
 	ball_to_shoot = ball
 	has_shot = false
 	set_process(true)
+	delayed_announcer_instructions()
 	
 func _on_ShopMenu_bought_turret_shot():
+	Announcer.say("turret_active")
 	#print("Turret: on shop menu bought turret shot")
 	var ball_instance = ball_scene.instance()
 	get_node("/root/Main").add_child(ball_instance)
@@ -82,6 +85,7 @@ func _on_ShopMenu_bought_turret_shot():
 	GameState.balls_on_field += 1
 	has_shot = false
 	set_process(true)
+	delayed_announcer_instructions()
 
 func _on_Plunger_released(progress):
 	if is_processing():
@@ -98,3 +102,7 @@ func shoot(plunger_progress):
 	ball_to_shoot.apply_central_impulse(-$TeleporterExit.get_global_transform().basis.z.normalized() * max_shot_speed * plunger_force)
 	has_shot = true
 
+func delayed_announcer_instructions():
+	yield(get_tree().create_timer(2.0), "timeout")
+	if !has_shot:
+		Announcer.say("plunger_fire")

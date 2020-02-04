@@ -11,6 +11,7 @@ func _enter_tree():
 
 func _ready():
 	set_process(false)
+	#set_alive(true)
 
 func _process(delta):
 	time_until_laser_toggle -= delta
@@ -22,6 +23,7 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 		set_alive(false)
 		
 func _on_LaserTrex_came_to_life():
+	Announcer.say("trex_active")
 	set_active(true)
 
 func _on_LaserTrex_death():
@@ -56,3 +58,7 @@ func set_target_gate_open(is_open):
 		$AnimationPlayer.play("gate_open_anim")
 	else:
 		$AnimationPlayer.play_backwards("gate_open_anim")
+
+
+func _on_LaserTrex_death_by_damage():
+	Announcer.say("trex_defeat")

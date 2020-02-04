@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/announcer_insert_coin.wav-49b78fbbccd75a3ab9f3ee5b46673f7d.sample"
+
+[deps]
+
+source_file="res://Audio/Announcer/announcer_insert_coin.wav"
+dest_files=[ "res://.import/announcer_insert_coin.wav-49b78fbbccd75a3ab9f3ee5b46673f7d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

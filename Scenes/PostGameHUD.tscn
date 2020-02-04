@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://HUD/objective_01.png" type="Texture" id=1]
+[ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://HUD/shop_time_left_bar_fill.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scripts/PostGameHUD.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 2 )
+
+[node name="PostGameHud" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -502.0
+margin_bottom = -1522.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 578.0
+margin_bottom = 398.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="TimeRemainingBar" type="TextureProgress" parent="."]
+margin_left = 265.032
+margin_top = 312.489
+margin_right = 313.032
+margin_bottom = 360.489
+value = 90.0
+texture_progress = ExtResource( 3 )
+fill_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeRemainingLabel" type="Label" parent="."]
+margin_left = 276.679
+margin_top = 319.136
+margin_right = 301.679
+margin_bottom = 355.136
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "5"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResultLabel" type="Label" parent="."]
+margin_left = 159.917
+margin_top = 108.681
+margin_right = 407.917
+margin_bottom = 157.681
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "Victory!"
+align = 1
+valign = 1
+
+[node name="DescriptionLabel" type="Label" parent="."]
+margin_left = 166.403
+margin_top = 257.861
+margin_right = 414.403
+margin_bottom = 306.861
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "restarting in:"
+align = 1
+valign = 1
+[connection signal="timeout" from="RestartTimer" to="." method="_on_RestartTimer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Scenes/BoxV3.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Testing/stage 3 final-01.png" type="Texture" id=2]
@@ -10,8 +10,8 @@
 [ext_resource path="res://Scenes/SimpleSlope.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Slingshot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Slingshot_R.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Bumper.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/SimpleRamp.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Meshes/slope_mesh.obj" type="ArrayMesh" id=12]
 [ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/WeirdCamera.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=15]
@@ -40,17 +40,37 @@
 [ext_resource path="res://Scenes/GlitchShader.tscn" type="PackedScene" id=38]
 [ext_resource path="res://Scenes/ShopMenu.tscn" type="PackedScene" id=39]
 [ext_resource path="res://Scripts/CentralHUD.gd" type="Script" id=40]
+[ext_resource path="res://Scenes/BumperCage.tscn" type="PackedScene" id=41]
+[ext_resource path="res://Scenes/BlackHole.tscn" type="PackedScene" id=42]
+[ext_resource path="res://Scenes/RibbonHUD.tscn" type="PackedScene" id=43]
+[ext_resource path="res://Meshes/Wireframe/slope_mesh_wireframe.obj" type="ArrayMesh" id=44]
+[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=45]
+[ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=46]
+[ext_resource path="res://Scenes/PostGameHUD.tscn" type="PackedScene" id=47]
+
+[sub_resource type="ConcavePolygonShape" id=1]
+data = PoolVector3Array( 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, -1, 1, -1, 1, 1, -1, 1, -1, -1, -1, -1, -1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, -1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.248211, 0.354, 1 )
 
 [node name="Main" type="Spatial"]
 
 [node name="RemoteBallControlTimer" parent="." instance=ExtResource( 34 )]
+
+[node name="RibbonHUD" parent="." instance=ExtResource( 43 )]
+pause_mode = 2
+
+[node name="MusicPlayer" parent="." instance=ExtResource( 11 )]
 
 [node name="BoxV3" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, -0.230998, 0, -0.0680175 )
 
 [node name="WeirdCamera" parent="BoxV3" instance=ExtResource( 14 )]
 pause_mode = 2
-transform = Transform( 1, 0, 0, 0, -1.63913e-07, 1, 0, -1, -1.63913e-07, 0, 15, 4.339 )
+transform = Transform( 1, 0, 0, 0, -3.27826e-07, 1, 0, -1, -3.27826e-07, 0.0123291, 10.8958, 2.55503 )
 environment = null
 
 [node name="Playfield" type="Spatial" parent="BoxV3"]
@@ -66,6 +86,7 @@ TURN_SPEED = 1000
 
 [node name="Plunger" parent="BoxV3/Playfield" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1, 7.15256e-07, 6.22101 )
+release_speed = 30.0
 
 [node name="PlayerTurret" parent="BoxV3/Playfield" instance=ExtResource( 21 )]
 transform = Transform( 0.800208, -0.214922, -0.559889, 0.0626884, 0.958442, -0.278317, 0.596437, 0.187613, 0.780427, -3.9114, 0.962308, 4.87383 )
@@ -86,29 +107,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.882665, 3.73619, 5.81741e-05, -
 [node name="LongBox6" parent="BoxV3/Playfield" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 0.176186, 3.73275, -1.19209e-06, 7.03805 )
 
-[node name="StageTwoBumperCluster" type="Spatial" parent="BoxV3/Playfield"]
-transform = Transform( 0.991532, -9.45073e-09, -0.129868, 8.3819e-09, 1, 0, 0.129868, 0, 0.991532, -2.59226, 0.00143576, -4.07374 )
+[node name="BumperCage2" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
+transform = Transform( 0.362242, 2.18455e-09, 0.932084, -4.47035e-08, 1, 0, -0.932084, -7.45058e-08, 0.362242, -2.34837, 0.00204873, -3.79035 )
 
-[node name="Bumper" parent="BoxV3/Playfield/StageTwoBumperCluster" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, -1.86265e-09, 1, 1.49012e-08, 1.49012e-08, -2.98023e-08, 1, 0.641397, -0.000111341, 0.0167778 )
-
-[node name="Bumper2" parent="BoxV3/Playfield/StageTwoBumperCluster" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, -1.86265e-09, 1, 4.47035e-08, 0, -4.47035e-08, 1, -0.221408, 0.000529289, 0.763095 )
-
-[node name="Bumper3" parent="BoxV3/Playfield/StageTwoBumperCluster" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, -1.86265e-09, 1, 4.47035e-08, 0, -4.47035e-08, 1, -0.483063, 3.71933e-05, -0.347644 )
-
-[node name="StageOneBumperCluster" type="Spatial" parent="BoxV3/Playfield"]
-transform = Transform( 0.991532, -9.45073e-09, -0.129868, 3.72529e-09, 1, 0, 0.129868, 0, 0.991532, -1.99657, 0.00143623, -1.37979 )
-
-[node name="Bumper" parent="BoxV3/Playfield/StageOneBumperCluster" instance=ExtResource( 11 )]
-transform = Transform( 1, -9.31323e-10, 0, -1.86265e-09, 1, 2.23517e-08, 1.49012e-08, -2.98023e-08, 1, 0.641397, -0.000111341, 0.0167779 )
-
-[node name="Bumper2" parent="BoxV3/Playfield/StageOneBumperCluster" instance=ExtResource( 11 )]
-transform = Transform( 1, -9.31323e-10, -1.49012e-08, -1.86265e-09, 1, 5.21541e-08, 0, -4.47035e-08, 1, -0.221408, 0.000529051, 0.763095 )
-
-[node name="Bumper3" parent="BoxV3/Playfield/StageOneBumperCluster" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, -1.86265e-09, 1, 4.47035e-08, 0, -4.47035e-08, 1, -0.483063, 3.71933e-05, -0.347644 )
+[node name="BumperCage3" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
+transform = Transform( -0.242787, -7.06477e-09, 0.97008, -5.21541e-08, 1, -5.58794e-09, -0.97008, -5.21541e-08, -0.242787, -2.09849, 0.00210643, -1.30236 )
 
 [node name="Boss" parent="BoxV3/Playfield" instance=ExtResource( 18 )]
 transform = Transform( -0.8, -6.20542e-15, -3.11531e-07, -7.10543e-15, 0.8, 7.45058e-09, 3.11532e-07, 7.45058e-09, -0.8, 0.71656, 0.127957, -5.34779 )
@@ -139,20 +142,47 @@ transform = Transform( -0.491802, -7.94434e-08, -0.13171, -2.38419e-07, 0.712213
 [node name="LongBox5" parent="BoxV3/Playfield/MultiballShipTerrain" instance=ExtResource( 7 )]
 transform = Transform( 0.563526, -6.39774e-08, -0.124962, -1.3411e-07, 0.712213, -2.32831e-08, 0.8261, 1.86265e-07, 0.0852434, 2.33684, 0.00126052, -7.18885 )
 
-[node name="SimpleRamp" parent="BoxV3/Playfield/MultiballShipTerrain" instance=ExtResource( 12 )]
-transform = Transform( 0.506656, -4.08507e-07, -0.211189, 8.6613e-08, 1.15522, 7.45058e-08, 0.109469, -1.78814e-07, 0.977445, -3.98942, 0.000309706, -4.57399 )
+[node name="SimpleRamp" type="StaticBody" parent="BoxV3/Playfield/MultiballShipTerrain"]
+transform = Transform( 0.977445, -1.47145e-07, -0.211189, 1.67095e-07, 1, 7.66165e-08, 0.211189, -1.10177e-07, 0.977445, -3.98942, 0.000309706, -4.57399 )
+
+[node name="CollisionShape" type="CollisionShape" parent="BoxV3/Playfield/MultiballShipTerrain/SimpleRamp"]
+transform = Transform( -1.93715e-07, 4.65661e-10, 0.5, -7.45058e-09, 0.2, 9.31323e-10, -1, -1.86265e-09, -8.9407e-08, -0.195774, 0.2, 2.38419e-07 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="BoxV3/Playfield/MultiballShipTerrain/SimpleRamp"]
+transform = Transform( -1.78814e-07, 0, 0.3, -7.45058e-09, 0.2, 4.65661e-10, -1, -1.86265e-09, -4.47035e-08, 0, 0.2, 0 )
+mesh = ExtResource( 12 )
+material/0 = SubResource( 2 )
+script = ExtResource( 46 )
+
+[node name="WireframeMesh" type="MeshInstance" parent="BoxV3/Playfield/MultiballShipTerrain/SimpleRamp/MeshInstance"]
+mesh = ExtResource( 44 )
+material/0 = null
+script = ExtResource( 45 )
+
+[node name="Area" type="Area" parent="BoxV3/Playfield/MultiballShipTerrain/SimpleRamp"]
+transform = Transform( 1, 0, 0, 0, 1.70703, 0, 0, 0, 1, 0, 0.341406, 0 )
+space_override = 3
+gravity = 4.0
+linear_damp = 0.0
+angular_damp = 0.0
+collision_layer = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="BoxV3/Playfield/MultiballShipTerrain/SimpleRamp/Area"]
+transform = Transform( 1, 1.49012e-08, 7.45058e-08, 3.72529e-09, 1, 3.72529e-09, -5.96046e-08, -2.98023e-08, 1, -0.0966163, 0.153606, -1.90735e-06 )
+shape = SubResource( 3 )
 
 [node name="SimpleSlope" parent="BoxV3/Playfield/MultiballShipTerrain" instance=ExtResource( 8 )]
-transform = Transform( 1.1892, 2.98023e-08, -1.19209e-07, 7.40977e-09, 1.84928, -1.78814e-07, -7.78802e-10, 1.3411e-07, 5.01194, -4.51581, -0.0236411, -5.5835 )
+transform = Transform( 1.1892, 2.98023e-08, -1.19209e-07, 7.40977e-09, 1.84928, -2.98023e-07, -7.78802e-10, 1.63913e-07, 5.01194, -4.5044, -0.0239835, -5.58676 )
 
 [node name="LongBox2" parent="BoxV3/Playfield" instance=ExtResource( 7 )]
 transform = Transform( 0.520905, 0, -0.176824, -7.45058e-08, 1, -8.3819e-09, 0.853616, 0, 0.107904, 2.11681, 0.000596285, 5.65028 )
 
 [node name="LongBox9" parent="BoxV3/Playfield" instance=ExtResource( 7 )]
-transform = Transform( 0.995656, 0.0905248, 0.00452365, -0.0915244, 0.994537, 0.0103983, -0.0171745, -0.0519782, 0.206837, 1.38223, 0.183407, 7.3896 )
+transform = Transform( 1, 0, 0, 0, 1, -5.58794e-09, 0, 0, 0.207148, 1.38223, -0.0194232, 7.3896 )
 
 [node name="LongBox10" parent="BoxV3/Playfield" instance=ExtResource( 7 )]
-transform = Transform( 0.995656, 0.0905248, 0.00452365, -0.0915244, 0.994537, 0.0103983, -0.0171745, -0.0519782, 0.206837, -2.18785, 0.183407, 7.3896 )
+transform = Transform( 1, 0, 0, 0, 1, -1.86265e-09, 0, 0, 0.207148, -2.18785, -0.179812, 7.3896 )
 
 [node name="LongBox4" parent="BoxV3/Playfield" instance=ExtResource( 7 )]
 transform = Transform( 0.884939, -0.0198197, -0.0963822, 0.0184204, 0.999802, -0.00156481, 0.465342, -0.00188576, 0.183352, 3.19489, 0.014817, 4.28561 )
@@ -178,9 +208,6 @@ transform = Transform( 1.69137, 0, 0, 0, 1, 0, 0, 0, 4.64051, -4.51105, -0.00038
 [node name="SimpleSlope_R" parent="BoxV3/Playfield" instance=ExtResource( 19 )]
 transform = Transform( -1.8201, 3.0022e-09, -2.14577e-06, 6.89776e-09, 1, 2.98023e-07, 7.78404e-07, 0, -5.12814, -4.50098, -1.23978e-05, 1.54182 )
 
-[node name="TurretTeleporterEntrance" parent="BoxV3/Playfield" instance=ExtResource( 22 )]
-transform = Transform( 0.836076, 1.09091e-07, -0.548615, -4.84288e-08, 1, 8.9407e-08, 0.548615, -5.96046e-08, 0.836077, 3.34856, -1.96081, -1.1688 )
-
 [node name="MysteryTeleporterEntrance" parent="BoxV3/Playfield" instance=ExtResource( 22 )]
 transform = Transform( 0.912734, 1.37792e-07, -0.408555, -1.00583e-07, 1, 7.45058e-08, 0.408555, -4.47035e-08, 0.912737, 3.1719, -0.157759, -3.7935 )
 exit_1_chance = 0.0
@@ -203,9 +230,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115225, -7.43866e-05, 1.8043
 
 [node name="Storm" parent="BoxV3/Playfield" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.34299 )
+visible = false
 
 [node name="PlayerShip" parent="BoxV3/Playfield" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.165019, 2.38419e-06, 8.28379 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.165019, 2.14577e-06, 8.28379 )
 
 [node name="TemporaryFlipper" parent="BoxV3/Playfield" instance=ExtResource( 32 )]
 transform = Transform( -0.467807, 0, -0.883831, -2.23517e-08, 1, 0, 0.883831, 0, -0.467807, 2.78833, -0.000354052, -0.622326 )
@@ -246,22 +274,36 @@ margin_bottom = -439.0
 margin_right = -369.0
 margin_bottom = -450.0
 
+[node name="PostGameHud" parent="BoxV3/Playfield/CentralHUD/Viewport" index="3" instance=ExtResource( 47 )]
+margin_left = 43.4249
+margin_top = 10.0211
+margin_right = -458.575
+margin_bottom = -439.979
+
 [node name="StageOneEntryRamp" parent="BoxV3/Playfield" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.84772, 4.76837e-07, 0.0152724 )
 
 [node name="StageTwoEntryRamp" parent="BoxV3/Playfield" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00938, 9.53674e-07, -5.7332 )
 
-[node name="TransmissionHUD3D" parent="BoxV3" instance=ExtResource( 33 )]
-pause_mode = 0
-transform = Transform( 0.9, 0, 0, 0, -4.47035e-08, 1, 0, -0.9, -4.47035e-08, -2.53694, -1, 6.63548 )
+[node name="BlackHole" parent="BoxV3/Playfield" instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48455, 0.42838, 2.29841 )
 
-[node name="TransmissionHUD" parent="BoxV3/TransmissionHUD3D/Viewport" index="0" instance=ExtResource( 36 )]
+[node name="TransmissionHUD3D" parent="BoxV3/Playfield" instance=ExtResource( 33 )]
+pause_mode = 1
+transform = Transform( 0.9, 0, 0, 0, -1.46629e-07, 1, 0, -0.900001, -1.62921e-07, -2.53694, 0.92938, 6.2195 )
 
-[node name="PlayerStatsHUD3D" parent="BoxV3" instance=ExtResource( 33 )]
-transform = Transform( 0.9, 0, 0, 0, -4.47035e-08, 1, 0, -0.9, -4.47035e-08, 2.05909, -1, 6.66311 )
+[node name="TransmissionHUD" parent="BoxV3/Playfield/TransmissionHUD3D/Viewport" index="0" instance=ExtResource( 36 )]
+pause_mode = 1
 
-[node name="PlayerStatsHUD" parent="BoxV3/PlayerStatsHUD3D/Viewport" index="0" instance=ExtResource( 37 )]
+[node name="PlayerStatsHUD3D" parent="BoxV3/Playfield" instance=ExtResource( 33 )]
+transform = Transform( 0.9, 0, 0, 0, -1.63913e-07, 1, 0, -0.900001, -1.63913e-07, 2.03268, 0.671792, 6.38424 )
+flip_v = true
+
+[node name="Viewport" parent="BoxV3/Playfield/PlayerStatsHUD3D" index="0"]
+render_target_v_flip = false
+
+[node name="PlayerStatsHUD" parent="BoxV3/Playfield/PlayerStatsHUD3D/Viewport" index="0" instance=ExtResource( 37 )]
 
 [node name="Reference" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, -0.192215, -2.62545, 0.214347 )
@@ -271,13 +313,13 @@ texture = ExtResource( 2 )
 [node name="NormalCamera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, -9.53674e-07, 10.0877, 4.53164 )
 [connection signal="released" from="BoxV3/Playfield/Plunger" to="BoxV3/Playfield/PlayerTurret" method="_on_Plunger_released"]
-[connection signal="ball_entered_1" from="BoxV3/Playfield/TurretTeleporterEntrance" to="BoxV3/Playfield/PlayerTurret" method="_on_TeleporterEntrance_ball_entered"]
-[connection signal="ball_entered_2" from="BoxV3/Playfield/TurretTeleporterEntrance" to="BoxV3/Playfield/PlayerTurret" method="_on_TeleporterEntrance_ball_entered"]
-[connection signal="ball_entered_3" from="BoxV3/Playfield/TurretTeleporterEntrance" to="BoxV3/Playfield/PlayerTurret" method="_on_TeleporterEntrance_ball_entered"]
+[connection signal="black_hole_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/BlackHole" method="set_active" binds= [ true ]]
+[connection signal="laser_trex_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/LaserTrex" method="set_alive" binds= [ true ]]
+[connection signal="solar_eclipse_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/BlackHole" method="expand"]
 [connection signal="ball_entered_1" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/MysteryTeleporterExit" method="_on_TeleporterEntrance_ball_entered"]
 [connection signal="ball_entered_2" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/MysteryTeleporterExit2" method="_on_TeleporterEntrance_ball_entered"]
 [connection signal="ball_entered_3" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/PlayerTurret" method="_on_TeleporterEntrance_ball_entered"]
-[connection signal="health_changed" from="BoxV3/Playfield/PlayerShip" to="BoxV3/PlayerStatsHUD3D/Viewport/PlayerStatsHUD" method="_on_PlayerShip_health_changed"]
+[connection signal="health_changed" from="BoxV3/Playfield/PlayerShip" to="BoxV3/Playfield/PlayerStatsHUD3D/Viewport/PlayerStatsHUD" method="_on_PlayerShip_health_changed"]
 [connection signal="menu_triggered" from="BoxV3/Playfield/Shop" to="BoxV3/Playfield/CentralHUD" method="_on_Shop_menu_triggered"]
 [connection signal="bought_flipper" from="BoxV3/Playfield/CentralHUD/Viewport/ShopMenu" to="BoxV3/Playfield/TemporaryFlipper" method="_on_ShopMenu_bought_flipper"]
 [connection signal="bought_remote_control" from="BoxV3/Playfield/CentralHUD/Viewport/ShopMenu" to="RemoteBallControlTimer" method="_on_ShopMenu_bought_remote_control"]
@@ -289,6 +331,6 @@ transform = Transform( 1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, -9.
 
 [editable path="BoxV3/Playfield/CentralHUD"]
 
-[editable path="BoxV3/TransmissionHUD3D"]
+[editable path="BoxV3/Playfield/TransmissionHUD3D"]
 
-[editable path="BoxV3/PlayerStatsHUD3D"]
+[editable path="BoxV3/Playfield/PlayerStatsHUD3D"]

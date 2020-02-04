@@ -12,7 +12,10 @@ extents = Vector3( 0.63, 0.5, 0.774303 )
 
 [node name="PlayerShip" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-max_health = 10.0
+max_health = 100.0
+bomb_explosion_damage = 10.0
+missile_explosion_damage = 10.0
+static_impact_damage = 5.0
 gives_money = false
 
 [node name="MeshInstance" parent="." index="0"]
@@ -33,4 +36,5 @@ collision_mask = 257
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.113604 )
 shape = SubResource( 2 )
+[connection signal="death_by_damage" from="." to="." method="_on_PlayerShip_death_by_damage"]
 [connection signal="body_entered" from="HitboxArea" to="." method="_on_PlayerHitboxArea_body_entered" flags=3]

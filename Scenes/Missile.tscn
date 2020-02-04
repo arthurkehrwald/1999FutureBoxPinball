@@ -11,15 +11,14 @@
 [ext_resource path="res://Scenes/Explosion.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
-radius = 0.196949
-height = 0.266283
+radius = 0.375482
+height = 0.511514
 
 [node name="Missile" type="Area"]
-transform = Transform( 0.999999, 0, 0, 0, 0.121869, -0.992546, 0, 0.992546, 0.121869, 0, 0, 0 )
+transform = Transform( 0.802816, -0.596225, 0, 0.44618, 0.600782, -0.663312, 0.395483, 0.532519, 0.748342, 0.695611, 1.67738, -0.255716 )
 collision_layer = 128
-collision_mask = 16385
+collision_mask = 20481
 script = ExtResource( 1 )
-speed = 3.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
@@ -35,10 +34,12 @@ script = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "missile_animation_01"
+playback_speed = 3.0
 anims/missile_animation_01 = ExtResource( 8 )
 anims/missile_animation_02 = ExtResource( 7 )
 anims/missile_animation_03 = ExtResource( 9 )
 
 [node name="Explosion" parent="." instance=ExtResource( 10 )]
+type = 1
 [connection signal="body_entered" from="." to="." method="_on_Missile_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

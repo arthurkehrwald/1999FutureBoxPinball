@@ -30,7 +30,7 @@ script = ExtResource( 3 )
 [node name="Area" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0665345, 0, 0 )
 space_override = 3
-gravity_vec = Vector3( 0, -0.3, 0 )
+gravity_vec = Vector3( 0, -0.8, 0 )
 gravity = 1.0
 linear_damp = 0.0
 angular_damp = 0.0

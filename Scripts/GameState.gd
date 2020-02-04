@@ -12,10 +12,13 @@ signal stage_changed(new_stage, is_debug_skip)
 
 signal objective_one_completed
 signal objective_two_completed
+signal victory
+signal defeat
 
 signal paused
 signal unpaused
 
+signal player_did_something
 signal player_money_changed(new_player_money)
 signal player_coolness_changed(new_player_coolness)
 signal player_coolness_maxed
@@ -52,6 +55,8 @@ var ultraviolet_additive = preload("res://Materials/ultraviolet_additive.tres")
 var white_unlit = preload("res://Materials/white_unlit.tres")
 var black_unlit = preload("res://Materials/black_unlit.tres")
 var light_blue = preload("res://Materials/light_blue_test.tres")
+var global_non_wireframe_mat = preload("res://Materials/global_non_wireframe_material.tres")
+var global_wireframe_mat = preload("res://Materials/global_wireframe_material.tres")
 
 var collision_object_materials = [white_unlit, black_unlit, light_blue]
 var current_collision_object_material_index = 0
@@ -85,24 +90,33 @@ func global_init():
 			
 func set_stage(new_stage, is_debug_skip):
 	print("GameState: set stage to: ", new_stage)
-	if new_stage == stage.PREGAME:
-		set_player_money(START_PLAYER_MONEY)
-	elif new_stage == stage.ENEMY_FLEET:
-		has_player_used_shop = false
-		is_fleet_defeated = false
+	match new_stage:
+		stage.PREGAME:
+			set_player_money(START_PLAYER_MONEY)
+			set_global_solar_eclipse_materials(false)
+		stage.ENEMY_FLEET:
+			has_player_used_shop = false
+			is_fleet_defeated = false
+		stage.SOLAR_ECLIPSE:
+			set_global_solar_eclipse_materials(true)
+	if is_debug_skip and new_stage != stage.SOLAR_ECLIPSE:
+		set_global_solar_eclipse_materials(false)
 	current_stage = new_stage
 	emit_signal("stage_changed", new_stage, is_debug_skip)
 		
 func on_TransmissionHUD_finished():
 	if current_stage == stage.EXPOSITION:
+		print("GameState: exposition transmission finished")
 		set_stage(stage.ENEMY_FLEET, false)
 		
 func on_PlayerShip_ball_drained(ball, player_health):
 	if player_health > 0:
-		if balls_on_field == 1:
+		print("GameState: balls on field - ", balls_on_field)
+		if balls_on_field <= 1:
 			ball.set_visible(true)
 			ball.set_locked(false)
 			ball.delayed_teleport(ball_spawn_pos)
+			balls_on_field = 1
 		else:
 			ball.delete()	
 	
@@ -122,14 +136,30 @@ func on_ShopMenu_player_bought_anything():
 		if is_fleet_defeated:
 			set_stage(stage.BOSS_BEGIN, false)		
 			
-func on_Boss_hit_solar_eclipse_threshold():
+func on_BlackHole_fully_expanded():
 	set_stage(stage.SOLAR_ECLIPSE, false)
 
+func on_player_did_anything_at_all():
+	emit_signal("player_did_something")
+
 func on_PlayerShip_death():
-	pass
+	emit_signal("defeat")
 	
 func on_Boss_death():
-	pass
+	emit_signal("victory")
+	
+func on_PostGameHUD_finished():
+	set_stage(stage.PREGAME, false)
+	
+func set_global_solar_eclipse_materials(is_solar_eclipse):
+	if is_solar_eclipse:
+		global_non_wireframe_mat.albedo_color = Color.black
+		global_wireframe_mat.albedo_color = Color(133, 0, 255, 255)
+		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_ADD)
+	else:
+		global_non_wireframe_mat.albedo_color = Color.white
+		global_wireframe_mat.albedo_color = Color(0, 255, 58, 255)
+		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_SUB)
 	
 func set_paused(is_paused):
 	get_tree().paused = is_paused
@@ -164,12 +194,25 @@ func processDebugInput():
 	if Input.is_action_just_pressed("debug_goto_exposition"):
 		set_stage(stage.EXPOSITION, true)
 		
+	if Input.is_action_just_pressed("debug_goto_fleet"):
+		set_stage(stage.ENEMY_FLEET, true)
+		
+	if Input.is_action_just_pressed("debug_goto_boss_begin"):
+		set_stage(stage.BOSS_BEGIN, true)	
+		
+	if Input.is_action_just_pressed("debug_goto_solar_eclipse"):
+		set_stage(stage.SOLAR_ECLIPSE, true)		
+
 	if Input.is_action_just_pressed("test_cycle_materials"):
-		if current_collision_object_material_index < collision_object_materials.size() - 1:
-			current_collision_object_material_index += 1
-		else:
-			current_collision_object_material_index = 0
-		emit_signal("set_collision_object_material", collision_object_materials[current_collision_object_material_index])
+		global_non_wireframe_mat.albedo_color = Color.black
+		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_SUB)
+		global_wireframe_mat.albedo_color = Color(0, 255, 58, 255)
+		
+#		if current_collision_object_material_index < collision_object_materials.size() - 1:
+#			current_collision_object_material_index += 1
+#		else:
+#			current_collision_object_material_index = 0
+#		emit_signal("set_collision_object_material", collision_object_materials[current_collision_object_material_index])
 	
 	if Input.is_action_just_pressed("test_cycle_wireframe_materials"):
 		if current_wireframe_material_index < wireframe_materials.size() - 1:
@@ -183,4 +226,5 @@ func processDebugInput():
 		emit_signal("toggle_nightmode", nightmode_enabled)
 
 	if Input.is_action_just_pressed("debug_spawn_ball"):
+		balls_on_field = 0
 		emit_signal("spawn_ball")
