@@ -55,7 +55,7 @@ pause_mode = 2
 [node name="MusicPlayer" parent="." instance=ExtResource( 34 )]
 
 [node name="BoxV3" parent="." instance=ExtResource( 36 )]
-transform = Transform( 1, 0, 0, 0, 0.987689, -0.156435, 0, 0.156435, 0.987689, -0.231, -0.679, -0.068 )
+transform = Transform( 1, 0, 0, 0, 0.987689, -0.156435, 0, 0.156435, 0.987689, -0.496422, -0.679, 0.153185 )
 
 [node name="WeirdCamera" parent="BoxV3" instance=ExtResource( 39 )]
 pause_mode = 2
@@ -246,7 +246,7 @@ visible = false
 texture = ExtResource( 17 )
 
 [node name="NormalCamera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, -9.53674e-07, 10.0877, 4.53164 )
+transform = Transform( 1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, -0.265423, 10.0877, 4.75283 )
 
 [node name="GlitchShaderFullscreen" parent="." instance=ExtResource( 13 )]
 visible = false
