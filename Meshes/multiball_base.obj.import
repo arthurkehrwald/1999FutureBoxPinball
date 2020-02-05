@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/multiball_base.obj-09ad92aa739ac0ef0c7f80e1b5bfd02b.mesh"
+
+[deps]
+
+files=[ "res://.import/multiball_base.obj-09ad92aa739ac0ef0c7f80e1b5bfd02b.mesh" ]
+
+source_file="res://Meshes/multiball_base.obj"
+dest_files=[ "res://.import/multiball_base.obj-09ad92aa739ac0ef0c7f80e1b5bfd02b.mesh", "res://.import/multiball_base.obj-09ad92aa739ac0ef0c7f80e1b5bfd02b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

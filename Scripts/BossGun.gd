@@ -6,6 +6,7 @@ signal was_hit_bomb_explosion
 export var shoot_on_ready = false
 export var base_firing_rate = 3
 
+export var is_stunnable = false
 export var impact_velocity_stun_duration_conversion_rate = .25
 export var min_impact_velocity_for_stun = 5.0
 export var max_impact_stun_duration = 5.0
@@ -22,17 +23,19 @@ func _ready():
 		$ShotTimer.start()
 
 func _on_HitboxArea_body_entered(body):
-	if body.get_linear_velocity().length() > min_impact_velocity_for_stun:
+	if is_stunnable and body.get_linear_velocity().length() > min_impact_velocity_for_stun:
 		var stun_duration = min(max_impact_stun_duration, body.get_linear_velocity().length() * impact_velocity_stun_duration_conversion_rate)
 		set_stunned(stun_duration)
 	emit_signal("was_hit_directly", body.get_linear_velocity().length())	
 
 func _on_Bomb_explosion_hit():
-	set_stunned(bomb_explosion_stun_duration)
+	if is_stunnable:
+		set_stunned(bomb_explosion_stun_duration)
 	emit_signal("was_hit_bomb_explosion")
 	
 func on_Explosion_hit():
-	set_stunned(bomb_explosion_stun_duration)
+	if is_stunnable:
+		set_stunned(bomb_explosion_stun_duration)
 	emit_signal("was_hit_bomb_explosion")
 	
 func set_stunned(stun_duration):

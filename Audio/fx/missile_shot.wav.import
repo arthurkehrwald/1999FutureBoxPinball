@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/missile_shot.wav-ade835a49d841cb9fb897432a17cdbbd.sample"
+
+[deps]
+
+source_file="res://Audio/fx/missile_shot.wav"
+dest_files=[ "res://.import/missile_shot.wav-ade835a49d841cb9fb897432a17cdbbd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0

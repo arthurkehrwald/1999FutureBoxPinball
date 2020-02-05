@@ -7,7 +7,7 @@
 [ext_resource path="res://Meshes/Collision/cuved_ramp_collision_v3.tres" type="Shape" id=5]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.654631, 0.4, 1.85 )
+extents = Vector3( 0.400371, 0.4, 1.85 )
 
 [node name="CurvedRamp" type="StaticBody"]
 transform = Transform( 0.594161, 0, 0.0835039, 0, 0.6, 0, -0.0835039, 0, 0.594161, 0, 0, 0 )
@@ -38,5 +38,5 @@ collision_layer = 8192
 collision_mask = 257
 
 [node name="CollisionShape2" type="CollisionShape" parent="Area"]
-transform = Transform( 0.901649, 0.39648, -0.172719, -0.428179, 0.874528, -0.227734, 0.0607554, 0.27929, 0.958283, 0.142376, 0.709334, 0.0654343 )
+transform = Transform( 0.977219, -0.0406902, -0.208297, -0.0223185, 0.956304, -0.291519, 0.211057, 0.289526, 0.933612, -0.0435278, 0.709334, 0.0393072 )
 shape = SubResource( 1 )

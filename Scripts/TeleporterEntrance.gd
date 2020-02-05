@@ -16,6 +16,7 @@ func set_active(is_active):
 	$CollisionShape.set_deferred("disabled", !is_active)
 
 func _on_TeleporterEntrance_body_entered(body):
+	$AudioStreamPlayer.play()
 	var random = randf()
 	if random > exit_2_chance:
 		emit_signal("ball_entered_1", body, self)

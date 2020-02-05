@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=2]
+[ext_resource path="res://Materials/global_non_wireframe_material.tres" type="Material" id=3]
+[ext_resource path="res://Meshes/Wireframe/cube_wireframe.obj" type="ArrayMesh" id=4]
+
+[sub_resource type="CubeMesh" id=1]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 0.48192, -6.94009e-09, -0.0266482, -0.133241, -5.11451e-08, -0.096384, -1.15668e-08, 0.3, -1.70484e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 3 )
+script = ExtResource( 2 )
+
+[node name="Wireframe" type="MeshInstance" parent="MeshInstance2"]
+transform = Transform( 1, 0, -1.77636e-16, 0, 1, 0, 4.44089e-15, 0, 1, 0, 0, 0 )
+mesh = ExtResource( 4 )
+material/0 = null
+script = ExtResource( 1 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.3, 0, 0, 0, 0.1, 0, 0.2, 0.4 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 3 )
+script = ExtResource( 2 )
+
+[node name="Wireframe" type="MeshInstance" parent="MeshInstance3"]
+transform = Transform( 1, 0, -1.77636e-16, 0, 1, 0, 4.44089e-15, 0, 1, 0, 0, 0 )
+mesh = ExtResource( 4 )
+material/0 = null
+script = ExtResource( 1 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.3, 0, 0, 0, 0.1, 0, 0.2, -0.4 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 3 )
+script = ExtResource( 2 )
+
+[node name="Wireframe" type="MeshInstance" parent="MeshInstance4"]
+transform = Transform( 1, 0, -1.77636e-16, 0, 1, 0, 4.44089e-15, 0, 1, 0, 0, 0 )
+mesh = ExtResource( 4 )
+material/0 = null
+script = ExtResource( 1 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="."]
+transform = Transform( -8.14603e-08, 0, 0.1, 0, 0.3, 0, -0.5, 0, -1.62921e-08, -0.4, 0.2, 5.96046e-08 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 3 )
+script = ExtResource( 2 )
+
+[node name="Wireframe" type="MeshInstance" parent="MeshInstance5"]
+transform = Transform( 1, 0, -1.77636e-16, 0, 1, 0, 4.44089e-15, 0, 1, 0, 0, 0 )
+mesh = ExtResource( 4 )
+material/0 = null
+script = ExtResource( 1 )

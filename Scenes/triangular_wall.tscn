@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Meshes/triangle_wall.obj" type="ArrayMesh" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.1, 0.3, 1 )
+
+[node name="triangular_wall" type="StaticBody"]
+collision_layer = 2
+collision_mask = 257
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.924273, 0, -0.381732, 0, 1, 0, 0.381732, 0, 0.924273, -0.118087, 0.3, 0.801424 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( -1.5205e-07, -0.933274, -0.359166, 1, -1.62921e-07, 0, -5.85156e-08, -0.359166, 0.933274, -0.443583, 0.572338, 0.745985 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( -1.93439e-07, -0.92846, 0.371433, 1, -1.62921e-07, 1.13542e-07, -4.49053e-08, 0.371433, 0.92846, -0.406862, 0.572338, -0.915273 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 0.924446, 0, 0.381312, 0, 1, 0, -0.381312, 0, 0.924446, -0.131434, 0.3, -0.920407 )
+shape = SubResource( 1 )

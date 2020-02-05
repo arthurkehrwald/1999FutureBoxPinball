@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/transmission.wav-e70914f021175ea1d1b2c80de35aecd8.sample"
+
+[deps]
+
+source_file="res://Audio/fx/transmission.wav"
+dest_files=[ "res://.import/transmission.wav-e70914f021175ea1d1b2c80de35aecd8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

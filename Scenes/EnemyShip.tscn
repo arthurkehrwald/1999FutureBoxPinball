@@ -1,12 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Damageable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/EnemyShip.gd" type="Script" id=2]
+[ext_resource path="res://Audio/fx/bumper.wav" type="AudioStream" id=3]
 [ext_resource path="res://Scenes/Bar3D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Meshes/Pyramide_01.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://Materials/ball.tres" type="Material" id=6]
+[ext_resource path="res://Materials/cyan_unlit.tres" type="Material" id=7]
+[ext_resource path="res://Materials/blue_test.tres" type="Material" id=8]
+[ext_resource path="res://Materials/mat_wireframe.tres" type="Material" id=9]
+[ext_resource path="res://Materials/green_test.tres" type="Material" id=10]
+[ext_resource path="res://Materials/red_test.tres" type="Material" id=11]
+[ext_resource path="res://Materials/bomb.tres" type="Material" id=12]
+[ext_resource path="res://Materials/light_blue_test.tres" type="Material" id=13]
 
-[sub_resource type="CylinderMesh" id=1]
-
-[sub_resource type="CylinderShape" id=2]
+[sub_resource type="CylinderShape" id=1]
 radius = 0.5
 height = 0.6
 
@@ -16,12 +24,20 @@ money_yield_is_damage_based = false
 flat_money_yield = 20.0
 
 [node name="MeshInstance" parent="." index="0"]
-transform = Transform( 0.5, 0, 0, 0, 0.3, 0, 0, 0, 0.5, 0, 0.3, 0 )
-mesh = SubResource( 1 )
+transform = Transform( 0.659469, 0, 0, 0, 0.395681, 0, 0, 0, 0.659469, 0, 0.00901577, 0 )
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 6 )
+material/1 = ExtResource( 12 )
+material/2 = ExtResource( 8 )
+material/3 = ExtResource( 7 )
+material/4 = ExtResource( 10 )
+material/5 = ExtResource( 9 )
+material/6 = ExtResource( 11 )
+material/7 = ExtResource( 13 )
 
 [node name="HitboxShape" parent="HitboxArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Bar3D" parent="." index="2" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
@@ -31,8 +47,12 @@ tint_progress = Color( 1, 0, 0, 1 )
 
 [node name="MoneyTextPos" parent="." index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28796, 0 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource( 3 )
 [connection signal="came_to_life" from="." to="." method="_on_EnemyShip_came_to_life"]
 [connection signal="death" from="." to="." method="_on_EnemyShip_death"]
+[connection signal="health_changed" from="." to="." method="_on_EnemyShip_health_changed"]
 [connection signal="health_changed" from="." to="Bar3D" method="_on_value_changed"]
 [connection signal="body_entered" from="HitboxArea" to="." method="_on_EnemyShipHitboxArea_body_entered"]
 

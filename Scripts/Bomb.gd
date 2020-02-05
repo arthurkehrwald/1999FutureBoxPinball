@@ -28,10 +28,6 @@ func _on_Bomb_explosion_hit(_explosion_pos):
 		$Timer.set_wait_time(chain_explosion_delay)
 		$Timer.start()
 
-func _on_LaserTrex_hit():
-	if !is_exploding:
-		explode()
-
 func explode():
 	set_locked(true)
 	$Explosion.explode()

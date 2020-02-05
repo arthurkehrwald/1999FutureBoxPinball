@@ -42,10 +42,10 @@ wait_time = 10.0
 one_shot = true
 
 [node name="TimeRemainingBar" type="TextureProgress" parent="."]
-margin_left = 265.032
-margin_top = 312.489
-margin_right = 313.032
-margin_bottom = 360.489
+margin_left = 261.881
+margin_top = 205.347
+margin_right = 309.881
+margin_bottom = 253.347
 value = 90.0
 texture_progress = ExtResource( 3 )
 fill_mode = 5
@@ -54,10 +54,10 @@ __meta__ = {
 }
 
 [node name="TimeRemainingLabel" type="Label" parent="."]
-margin_left = 276.679
-margin_top = 319.136
-margin_right = 301.679
-margin_bottom = 355.136
+margin_left = 273.528
+margin_top = 211.994
+margin_right = 298.528
+margin_bottom = 247.994
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "5"
@@ -68,24 +68,30 @@ __meta__ = {
 }
 
 [node name="ResultLabel" type="Label" parent="."]
-margin_left = 159.917
-margin_top = 108.681
-margin_right = 407.917
-margin_bottom = 157.681
+margin_left = 165.061
+margin_top = 47.8074
+margin_right = 413.061
+margin_bottom = 96.8074
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "Victory!"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DescriptionLabel" type="Label" parent="."]
-margin_left = 166.403
-margin_top = 257.861
-margin_right = 414.403
-margin_bottom = 306.861
+margin_left = 60.3383
+margin_top = 204.183
+margin_right = 308.338
+margin_bottom = 253.183
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "restarting in:"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="RestartTimer" to="." method="_on_RestartTimer_timeout"]

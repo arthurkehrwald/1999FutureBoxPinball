@@ -41,6 +41,7 @@ func _process(_delta):
 				selected_item = 1
 				
 		if previously_selected != selected_item:
+			$AudioStreamPlayer.play()
 			emit_signal("panel_changed")
 			match selected_item:
 				1:

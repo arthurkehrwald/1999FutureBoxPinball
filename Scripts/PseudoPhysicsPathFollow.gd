@@ -39,7 +39,6 @@ func _ready():
 func _on_EntranceArea_body_entered(body):
 	if looping_body == null:
 		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(entrance_transform.basis.z), 3) + 1)
-		print("WireRamp: angle_factor - ", angle_factor)
 		speed = angle_factor * body.get_linear_velocity().length() * start_velocity_multiplier
 		if speed > 0:
 			looping_body = weakref(body)
@@ -52,7 +51,6 @@ func _on_EntranceArea_body_entered(body):
 func _on_ExitArea_body_entered(body):
 	if looping_body == null:
 		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(exit_transform.basis.z), 3) + 1)
-		print("WireRamp: angle_factor - ", angle_factor)
 		speed = angle_factor * body.get_linear_velocity().length() * -start_velocity_multiplier
 		if speed < 0:
 			looping_body = weakref(body)
@@ -85,7 +83,6 @@ func _physics_process(delta):
 		var reached_exit = speed > 0 and get_unit_offset() == 1
 		if reached_exit or reached_entrance:
 			looping_body.get_ref().set_locked(false)
-			print("Wire Ramp finished")
 			if reached_exit:
 				looping_body.get_ref().apply_central_impulse(-exit_transform.basis.z.normalized() * speed / start_velocity_multiplier)
 			if reached_entrance:
@@ -104,7 +101,6 @@ func _physics_process(delta):
 				looping_body.get_ref().delayed_teleport(entrance_transform.origin)
 				looping_body_waiting_status = states.AT_ENTRANCE
 	else:
-		print("WireRamp: looping body was deleted, resetting")
 		#that means the bomb exploded while it was on the rail
 		reset(true)
 	emit_signal("debug_info_update", incline, speed, acceleration)
@@ -122,7 +118,6 @@ func start_follow():
 	entrance_area.set_deferred("monitorable", false)
 	exit_area.set_deferred("monitoring", false)
 	exit_area.set_deferred("monitorable", false)
-	print("wire ramp: start follow")
 	set_physics_process(true)
 
 func reset(is_active):

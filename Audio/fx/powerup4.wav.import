@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/powerup4.wav-0cf9fd145b5588c1216c1ed851d10f75.sample"
+
+[deps]
+
+source_file="res://Audio/fx/powerup4.wav"
+dest_files=[ "res://.import/powerup4.wav-0cf9fd145b5588c1216c1ed851d10f75.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

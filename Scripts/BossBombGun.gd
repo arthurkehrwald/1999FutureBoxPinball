@@ -20,6 +20,7 @@ func _on_ShotTimer_timeout():
 
 func shoot_bomb():
 	print("BombGun: shoot")
+	$AudioStreamPlayer.play()
 	var bomb_instance = bomb_scene.instance()
 	bomb_instance.set_transform($Muzzle.get_transform())
 	#bomb_instance.get_node("Rigidbody").add_collision_exception_with(self)

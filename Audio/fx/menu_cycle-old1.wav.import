@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/menu_cycle-old1.wav-dbb266f0fab4ff2e0f8ab4952c61625d.sample"
+
+[deps]
+
+source_file="res://Audio/fx/menu_cycle-old1.wav"
+dest_files=[ "res://.import/menu_cycle-old1.wav-dbb266f0fab4ff2e0f8ab4952c61625d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

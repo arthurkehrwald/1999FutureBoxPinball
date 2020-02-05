@@ -3,6 +3,8 @@ extends KinematicBody
 export var IS_RIGHT_FLIPPER = false
 export var MAX_TURN_ANGLE = 60
 export var TURN_SPEED = 500
+export var forward_impulse_strength = 400
+export var sideways_impulse_strength = 200
 
 var start_transform = Transform()
 var max_transform = Transform()
@@ -22,8 +24,13 @@ func _physics_process(delta):
 	if Input.is_action_pressed(input_code):
 		if rotation_progress < 1:
 			rotation_progress += TURN_SPEED / MAX_TURN_ANGLE * delta
+			for body in $Area.get_overlapping_bodies():
+				body.apply_central_impulse(-get_global_transform().basis.z.normalized() - body.get_linear_velocity().normalized() * sideways_impulse_strength * delta)
+				body.apply_central_impulse(-get_global_transform().basis.z.normalized() * forward_impulse_strength * delta)
 	elif rotation_progress > 0:
 		rotation_progress -= TURN_SPEED / MAX_TURN_ANGLE * delta
 	
 	var new_rotation = Quat(start_transform.basis.orthonormalized()).slerp(max_transform.basis.orthonormalized(), rotation_progress)
 	set_transform(Transform(new_rotation, get_transform().origin))
+
+		

@@ -19,7 +19,7 @@ albedo_color = Color( 0.137255, 0.960784, 0.901961, 1 )
 collision_mask = 28575
 script = ExtResource( 3 )
 airborne_gravity_scale_multiplier = 0.5
-remote_control_strength = 0.2
+remote_control_strength = 0.3
 
 [node name="BallMesh" parent="Rigidbody" index="2" instance=ExtResource( 1 )]
 

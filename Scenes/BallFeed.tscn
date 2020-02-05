@@ -1,81 +1,28 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Meshes/Wireframe/cube_wireframe.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=2]
-[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/BallSpawn.gd" type="Script" id=4]
 
-[sub_resource type="CubeMesh" id=1]
-
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.3, 0.5, 0.1 )
 
 [node name="Ball Feed" type="StaticBody"]
 collision_layer = 2
 
-[node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 0.48192, -6.94009e-09, -0.0266482, -0.133241, -5.11451e-08, -0.096384, -1.15668e-08, 0.3, -1.70484e-08, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = null
-script = ExtResource( 2 )
-
-[node name="Wireframe" type="MeshInstance" parent="MeshInstance2"]
-transform = Transform( 1, 0, -1.77636e-16, 0, 1, 0, 4.44089e-15, 0, 1, 0, 0, 0 )
-mesh = ExtResource( 1 )
-material/0 = null
-script = ExtResource( 3 )
-
-[node name="MeshInstance3" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.3, 0, 0, 0, 0.1, 0, 0.2, 0.4 )
-mesh = SubResource( 1 )
-material/0 = null
-script = ExtResource( 2 )
-
-[node name="Wireframe" type="MeshInstance" parent="MeshInstance3"]
-transform = Transform( 1, 0, -1.77636e-16, 0, 1, 0, 4.44089e-15, 0, 1, 0, 0, 0 )
-mesh = ExtResource( 1 )
-material/0 = null
-script = ExtResource( 3 )
-
-[node name="MeshInstance4" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.3, 0, 0, 0, 0.1, 0, 0.2, -0.4 )
-mesh = SubResource( 1 )
-material/0 = null
-script = ExtResource( 2 )
-
-[node name="Wireframe" type="MeshInstance" parent="MeshInstance4"]
-transform = Transform( 1, 0, -1.77636e-16, 0, 1, 0, 4.44089e-15, 0, 1, 0, 0, 0 )
-mesh = ExtResource( 1 )
-material/0 = null
-script = ExtResource( 3 )
-
-[node name="MeshInstance5" type="MeshInstance" parent="."]
-transform = Transform( -8.14603e-08, 0, 0.1, 0, 0.3, 0, -0.5, 0, -1.62921e-08, -0.4, 0.2, 5.96046e-08 )
-mesh = SubResource( 1 )
-material/0 = null
-script = ExtResource( 2 )
-
-[node name="Wireframe" type="MeshInstance" parent="MeshInstance5"]
-transform = Transform( 1, 0, -1.77636e-16, 0, 1, 0, 4.44089e-15, 0, 1, 0, 0, 0 )
-mesh = ExtResource( 1 )
-material/0 = null
-script = ExtResource( 3 )
-
 [node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( 8.94602e-09, 0.965926, 0.258819, -2.26267e-08, -0.258819, 0.965926, 1, -1.44974e-08, 1.95403e-08, 0.022, 0, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.0223542, 0.241935, 0.395403 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.0223542, 0.241935, -0.404597 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape5" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, 4.37114e-08, 1, 1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 1, -4.37114e-08, -0.377646, 0.241935, -0.00459665 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="BallSpawn" type="Spatial" parent="."]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0.25, 0.335648, 0 )

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/MoonGate.gd" type="Script" id=1]
-[ext_resource path="res://Meshes/Wireframe/moon_wireframe.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Meshes/moon.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Materials/ultraviolet_additive.tres" type="Material" id=3]
 [ext_resource path="res://Animations/moon_spectral_transition.tres" type="Animation" id=4]
 [ext_resource path="res://Materials/moon_gate_mat.tres" type="Material" id=5]
@@ -17,7 +17,7 @@ gives_money = false
 impulse_strength = 8.0
 
 [node name="MeshInstance" parent="." index="0"]
-transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 5 )
 material/1 = ExtResource( 3 )

@@ -28,6 +28,7 @@ func _on_GameState_player_coolness_changed(new_player_coolness):
 func _on_PlayerShip_health_changed(new_health, max_health, old_health):
 	if new_health < old_health:
 		Announcer.say("ouch")
+		$AudioStreamPlayer.play()
 	$Background/PlayerHealthBar.max_value = max_health
 	$Background/PlayerHealthBar.value = new_health
 	$Background/PlayerHealthLabel.text = str(round(new_health / max_health * 100)) + "%"

@@ -25,6 +25,9 @@ func _process(delta):
 		set_process(false)
 	
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
+	$Track1.volume_db = target_volume
+	$Track2.volume_db = target_volume
+	$Track3.volume_db = target_volume
 	match new_stage:
 		GameState.stage.PREGAME:
 			$Track1.play()

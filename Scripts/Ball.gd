@@ -42,7 +42,7 @@ func set_remote_controlled(_is_remote_controlled):
 func set_remote_control_blocked(is_blocked):
 	is_remote_control_blocked = is_blocked
 	
-func _on_LaserTrex_hit():
+func _on_destroyed():
 	GameState.set_player_money(GameState.player_money - GameState.BALL_DESTROYED_COST)
 	if GameState.balls_on_field > 1:
 		delete()

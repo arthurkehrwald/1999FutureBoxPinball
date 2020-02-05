@@ -26,7 +26,7 @@ func _ready():
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	if is_debug_skip or new_stage == GameState.stage.PREGAME:
 		pass
-		#owner.queue_free()
+		owner.queue_free()
 	
 func teleport(destination, maintain_velocity, impulse_on_exit):
 	print("BallBombCommon: teleporting to - ", destination)
@@ -100,6 +100,6 @@ func _physics_process(_delta):
 		set_gravity_scale_based_on_speed()
 	
 func set_gravity_scale_based_on_speed():
-		#gravity_scale = clamp(-.2 * pow(.2 * get_linear_velocity().length(), 2.7) + 15, 1, 20)
-		gravity_scale = -get_linear_velocity().length() + 20
+		gravity_scale = clamp(-.2 * pow(.2 * get_linear_velocity().length(), 2.7) + 15, 1, 20)
+		#gravity_scale = -get_linear_velocity().length() + 20
 		emit_signal("physics_debug_info_update", get_linear_velocity().length(), gravity_scale)

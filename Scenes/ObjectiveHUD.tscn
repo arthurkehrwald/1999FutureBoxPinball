@@ -14,12 +14,13 @@ use_filter = true
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 25
+size = 24
 use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 25
+size = 24
+outline_color = Color( 0, 1, 0.811765, 1 )
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -80,10 +81,10 @@ __meta__ = {
 }
 
 [node name="HeadingLabel" type="Label" parent="."]
-margin_left = 188.355
-margin_top = 71.9454
-margin_right = 376.355
-margin_bottom = 126.945
+margin_left = 193.662
+margin_top = 48.7257
+margin_right = 381.662
+margin_bottom = 103.725
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "Objectives"
@@ -94,15 +95,15 @@ __meta__ = {
 }
 
 [node name="ObjectiveCheckBox1" type="CheckBox" parent="."]
-margin_left = 85.0
+margin_left = 85.8953
 margin_top = 150.0
-margin_right = 496.0
-margin_bottom = 208.0
+margin_right = 495.105
+margin_bottom = 211.0
 custom_icons/checked = ExtResource( 5 )
 custom_icons/unchecked = ExtResource( 3 )
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
-custom_colors/font_color_pressed = Color( 0, 0.211765, 0.258824, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 shortcut_in_tooltip = false
 button_mask = 0
 text = "Destroy enemy fleet"
@@ -118,8 +119,8 @@ margin_bottom = 277.791
 custom_icons/checked = ExtResource( 5 )
 custom_icons/unchecked = ExtResource( 3 )
 custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
-custom_colors/font_color_pressed = Color( 0, 0.211765, 0.258824, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 shortcut_in_tooltip = false
 button_mask = 0
 text = "Buy something at the shop"
@@ -129,10 +130,10 @@ __meta__ = {
 
 [node name="ObjectiveCompleteLabel" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 93.1557
-margin_top = 182.67
-margin_right = 486.156
-margin_bottom = 237.67
+margin_left = 94.7847
+margin_top = 150.0
+margin_right = 487.785
+margin_bottom = 205.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )

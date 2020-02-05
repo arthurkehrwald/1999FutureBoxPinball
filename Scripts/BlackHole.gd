@@ -30,11 +30,14 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 
 func _on_NomArea_body_entered(body):
 	if body.get_collision_layer_bit(0) == true:
-		body.delete()
+		body.on_destroyed()
 	elif body.get_collision_layer_bit(8) == true:
 		body.owner.queue_free()
 
 func set_active(is_active):
+	print("Black Hole: active - ", is_active)
+	if is_active:
+		Announcer.say("black_hoe", true)
 	set_visible(is_active)
 	set_process(is_active)
 	$GravitationalField/CollisionShape.set_deferred("disabled", !is_active)
@@ -43,7 +46,13 @@ func set_active(is_active):
 		$AnimationPlayer.play("black_hole_appear_anim")
 		
 func expand():
+	print("Black Hole: expanding")
 	$AnimationPlayer.play("black_hole_expand_anim")
 	yield($AnimationPlayer, "animation_finished")
 	GameState.on_BlackHole_fully_expanded()
 	set_active(false)
+
+
+func _on_Boss_black_hole_health_threshold_reached():
+	print("Black Hole: boss health threshold reached")
+	set_active(true)

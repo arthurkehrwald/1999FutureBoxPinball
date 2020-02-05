@@ -9,6 +9,9 @@ func explode():
 	set_deferred("monitoring", true)
 	set_deferred("monitorable", false)
 	$Timer.start()
+	$AudioStreamPlayer.play()
+	yield($AudioStreamPlayer, "finished")
+	emit_signal("exploded")
 
 func _on_Explosion_body_entered(body):
 	print("Explosion hit: ", body.owner.name, " at pos: ", body.get_global_transform().origin)
@@ -19,5 +22,4 @@ func _on_Explosion_body_entered(body):
 			body.owner.on_Explosion_hit(type, get_global_transform().origin)
 		
 func _on_Timer_timeout():
-	emit_signal("exploded")
-	queue_free()
+	set_deferred("monitoring", false)

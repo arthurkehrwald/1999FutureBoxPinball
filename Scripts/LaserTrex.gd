@@ -20,16 +20,18 @@ func _process(delta):
 		
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	if is_debug_skip or new_stage != GameState.stage.SOLAR_ECLIPSE:
+		print(GameState.current_stage)
 		set_alive(false)
 		
 func _on_LaserTrex_came_to_life():
-	Announcer.say("trex_active")
+	Announcer.say("trex_active", true)
 	set_active(true)
 
 func _on_LaserTrex_death():
 	set_active(false)
 
 func set_active(is_active):
+	print("Laser Trex: is_active - ", is_active)
 	set_target_gate_open(!is_active)
 	$HitboxArea.set_deferred("monitoring", is_active)
 	$HitboxArea.set_deferred("monitorable", is_active)
@@ -47,8 +49,10 @@ func laser_set_active(is_active):
 	#print("LaserTrex: laser active - ", is_active)
 
 func _on_LaserArea_body_entered(body):
-	if body.has_method("_on_LaserTrex_hit"):
-		body._on_LaserTrex_hit()
+	if body.has_method("_on_destroyed"):
+		body._on_destroyed()
+	elif body.has_method("explode"):
+		body.explode()
 		
 func set_target_gate_open(is_open):
 	$StaticBody/BottomCollisionShape.set_deferred("disabled", is_open)
@@ -61,4 +65,4 @@ func set_target_gate_open(is_open):
 
 
 func _on_LaserTrex_death_by_damage():
-	Announcer.say("trex_defeat")
+	Announcer.say("trex_defeat", true)

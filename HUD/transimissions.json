@@ -1,7 +1,7 @@
 {
   "exposition": [
     {
-      "name": "Allies",
+      "name": "Cap'n Multiball",
       "text": "Rex, are you alive?",
       "duration": 3
     },
@@ -11,7 +11,7 @@
       "duration": 2
     },
     {
-      "name": "Allies",
+      "name": "Cap'n Multiball",
       "text": "The Emperor's soldiers are locking down the system. You must...",
       "duration": 5
     }
@@ -23,7 +23,7 @@
       "duration": 3
     },
     {
-      "name": "Allies",
+      "name": "Cap'n Multiball",
       "text": "Oh golly, here they come. Good luck, Rex!",
       "duration": 3
     },
@@ -34,27 +34,34 @@
     }
   ],
   "enemy_fleet_defeated": [
-	{
-		"name": "Emperor",
-		"text": "Infidels! Must I do everything myself?",
-		"duration": 4
-	},
-	{
-		"name": "Rex";
-		"text:" "Come at me bro!"
-		"duration": 2
-	}
+    {
+      "name": "Emperor",
+      "text": "Infidels! Must I do everything myself?",
+      "duration": 4
+    },
+    {
+      "name": "Rex",
+      "text": "Come at me bro!",
+      "duration": 2
+    }
   ],
   "laser_trex_appears": [
-	{
-		"name": "LaZer Trex",
-		"text": "*trex noises*"
-		"duration": 3
-	},
-	{
-		"name": "Rex",
-		"text": "What in the..."
-		"duration": 2
-	}
+    {
+      "name": "LaZer Trex",
+      "text": "*trex noises*",
+      "duration": 3
+    },
+    {
+      "name": "Rex",
+      "text": "What in the...",
+      "duration": 3
+    }
+  ],
+  "laser_trex_defeated": [
+    {
+      "name": "Rex",
+      "text": "Gotcha, big lizard!",
+      "duration": 5
+    }
   ]
 }

@@ -13,6 +13,7 @@ func _on_ShotTimer_timeout():
 		shoot_missile(rng.randi_range(1,3))
 
 func shoot_missile(animation_index):
+	$AudioStreamPlayer.play()
 	print("BossMissileGun: shot")
 	var missile_instance = missile_scene.instance()
 	missile_instance.set_transform($Muzzle.get_transform())

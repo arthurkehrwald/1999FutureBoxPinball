@@ -17,3 +17,8 @@ func set_active(is_active):
 func _on_EnemyShipHitboxArea_body_entered(body):
 	body.set_linear_velocity(Vector3(0,0,0))
 	body.apply_central_impulse((body.get_global_transform().origin - (get_global_transform().origin  + Vector3(0, .2, 0))).normalized() * bump_force)
+
+
+func _on_EnemyShip_health_changed(new_health, _max_health, old_health):
+	if new_health < old_health:
+		$AudioStreamPlayer.play()

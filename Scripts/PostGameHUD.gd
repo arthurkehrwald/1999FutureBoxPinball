@@ -25,7 +25,7 @@ func set_result(has_player_won):
 		$ResultLabel.text = "Game Over!"
 	$RestartTimer.start()
 	
-func _process(delta):
+func _process(_delta):
 	$TimeRemainingLabel.text = str(round($RestartTimer.time_left))
 	$TimeRemainingBar.value = $RestartTimer.time_left * 100
 	

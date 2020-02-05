@@ -3,7 +3,7 @@ extends Node
 # Balancing variables---------------------
 const START_PLAYER_MONEY = 0
 const MAX_PLAYER_MONEY = 1000
-const PLAYER_COOLNESS_DECAY_PER_SEC = 10.0
+const PLAYER_COOLNESS_DECAY_PER_SEC = 1.0
 const BALL_DESTROYED_COST = 200
 const BALL_RESET_DELAY = 1.0
 #-----------------------------------------
@@ -90,8 +90,11 @@ func global_init():
 			
 func set_stage(new_stage, is_debug_skip):
 	print("GameState: set stage to: ", new_stage)
+	if is_debug_skip:
+		balls_on_field = 0
 	match new_stage:
 		stage.PREGAME:
+			balls_on_field = 0
 			set_player_money(START_PLAYER_MONEY)
 			set_global_solar_eclipse_materials(false)
 		stage.ENEMY_FLEET:
