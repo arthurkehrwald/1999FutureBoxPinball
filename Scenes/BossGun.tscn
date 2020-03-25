@@ -9,6 +9,7 @@ extents = Vector3( 0.953087, 0.276507, 0.6 )
 [node name="BossGun" type="StaticBody"]
 collision_layer = 1024
 script = ExtResource( 2 )
+is_stunnable = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

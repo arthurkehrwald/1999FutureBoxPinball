@@ -17,7 +17,7 @@ gives_money = false
 impulse_strength = 8.0
 
 [node name="MeshInstance" parent="." index="0"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0 )
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 5 )
 material/1 = ExtResource( 3 )

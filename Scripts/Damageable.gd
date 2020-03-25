@@ -36,9 +36,7 @@ func _on_Bomb_explosion_hit(explosion_pos):
 	$RayCast.set_cast_to(explosion_pos - $RayCast.get_global_transform().origin)
 	$RayCast.force_raycast_update()
 	$RayCast.enabled = true
-	if $RayCast.is_colliding():
-		print("Damageable: explosion blocked")
-	else:
+	if !$RayCast.is_colliding():
 		take_damage(bomb_explosion_damage)
 
 func _on_Missile_explosion_hit(_explosion_pos):
@@ -71,8 +69,8 @@ func set_alive(_is_alive):
 func calc_damage(impact_speed):
 	var damage = 0.0
 	if use_speed_based_impact_damage:
-			if impact_speed > min_impact_speed_for_damage:
-				damage = min(max_impact_damage, impact_speed * impact_speed_damage_conversion_rate)
+		if impact_speed > min_impact_speed_for_damage:
+			damage = min(max_impact_damage, impact_speed * impact_speed_damage_conversion_rate)
 	else:
 		damage = static_impact_damage
 	return damage
@@ -86,7 +84,9 @@ func take_damage(damage):
 			else:
 				money_yield = flat_money_yield
 			if money_yield != 0:
-				GameState.set_player_money(GameState.player_money + money_yield)
+				#GameState.set_player_money(GameState.player_money + money_yield)
+				print(name, " took ", damage, ", money yield - ", money_yield)
+				GameState.add_player_money(money_yield)
 				var money_text_3d_instance = money_text_3d_scene.instance()
 				money_text_3d_instance.set_money_amount(money_yield)
 				$MoneyTextPos.add_child(money_text_3d_instance)

@@ -16,7 +16,7 @@ func _enter_tree():
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	match new_stage:
 		GameState.stage.BOSS_BEGIN:
-			print("Boss: bossfight began")
+			#2print("Boss: bossfight began")
 			set_alive(true)
 			$BossBombGun.set_firing(true)
 			yield(get_tree().create_timer($BossBombGun.base_firing_rate * .5), "timeout")

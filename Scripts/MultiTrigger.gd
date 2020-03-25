@@ -17,7 +17,7 @@ func _on_ChildTrigger_hit():
 	child_triggers_hit += 1
 	if child_triggers_hit == child_trigger_count:
 		$ResetTimer.start()
-		GameState.set_player_money(GameState.player_money + money_value)
+		GameState.add_player_money(money_value)
 		emit_signal("all_hit", all_hit_color)
 
 func _on_ChildTrigger_reset():

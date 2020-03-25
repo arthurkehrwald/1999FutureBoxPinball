@@ -20,16 +20,16 @@ func _enter_tree():
 	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 
 func _ready():
-	raycast = get_node("../StuckToRigidbody/RayCast")
+	raycast = get_node("RotationCancel/RayCast")
 	set_process(false)
 	
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	if is_debug_skip or new_stage == GameState.stage.PREGAME:
+		queue_free()
 		pass
-		owner.queue_free()
 	
 func teleport(destination, maintain_velocity, impulse_on_exit):
-	print("BallBombCommon: teleporting to - ", destination)
+	print("Ball or Bomb: teleporting to - ", destination)
 	
 	var t = get_transform()
 	t.origin = destination
@@ -96,10 +96,10 @@ func _physics_process(_delta):
 		else:
 			gravity_scale /= airborne_gravity_scale_multiplier
 			emit_signal("physics_debug_info_update", 0, 1)
-	if speed_based_gravity_scale and !is_airborne:
+	if speed_based_gravity_scale:
 		set_gravity_scale_based_on_speed()
 	
 func set_gravity_scale_based_on_speed():
-		gravity_scale = clamp(-.2 * pow(.2 * get_linear_velocity().length(), 2.7) + 15, 1, 20)
+		gravity_scale = clamp(-.2 * pow(.2 * get_linear_velocity().length(), 2.7) + 15, 1, 15)
 		#gravity_scale = -get_linear_velocity().length() + 20
 		emit_signal("physics_debug_info_update", get_linear_velocity().length(), gravity_scale)

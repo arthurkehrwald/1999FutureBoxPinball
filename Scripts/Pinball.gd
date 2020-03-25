@@ -1,7 +1,10 @@
-extends "res://Scripts/BallBombCommon.gd"
-	
+extends "res://Scripts/AbstractBall.gd"
+
 export var remote_control_strength = 1.0
+
+signal became_inaccessible
 	
+var is_accessible_to_player = true
 var is_remote_controlled = false	
 var is_remote_control_blocked = false
 
@@ -10,7 +13,7 @@ var remote_control_time_bar = Sprite3D
 var indicator = Sprite3D
 
 func _ready():
-	remote_control_time_bar = get_node("../StuckToRigidbody/Bar3D")
+	remote_control_time_bar = get_node("RotationCancel/RemoteControlTimeBar")
 	remote_control_timer = get_node_or_null("/root/Main/RemoteBallControlTimer")
 	if remote_control_timer == null:
 		print("Ball: could not find remote control timer")
@@ -20,7 +23,7 @@ func _ready():
 		remote_control_timer.connect("timeout", self, "_on_RemoteControlTimer_timeout")
 		remote_control_timer.connect("time_left_changed", remote_control_time_bar, "_on_value_changed", [1, 0])
 		set_remote_controlled(!remote_control_timer.is_stopped())
-	indicator = get_node("../StuckToRigidbody/Indicator")
+	indicator = get_node("RotationCancel/ArrowIndicator")
 	indicator_set_visible(false)
 		
 func _physics_process(_delta):
@@ -32,7 +35,8 @@ func _physics_process(_delta):
 
 func delete():
 	GameState.balls_on_field -= 1
-	owner.queue_free()
+	set_accessible_to_player(false)
+	queue_free()
 	
 func set_remote_controlled(_is_remote_controlled):
 	remote_control_time_bar.set_visible(_is_remote_controlled)
@@ -43,7 +47,7 @@ func set_remote_control_blocked(is_blocked):
 	is_remote_control_blocked = is_blocked
 	
 func _on_destroyed():
-	GameState.set_player_money(GameState.player_money - GameState.BALL_DESTROYED_COST)
+	GameState.add_player_money(-GameState.BALL_DESTROYED_COST)
 	if GameState.balls_on_field > 1:
 		delete()
 	else:
@@ -57,3 +61,8 @@ func _on_RemoteControlTimer_timeout():
 
 func indicator_set_visible(is_visible):
 	indicator.set_visible(is_visible)
+	
+func set_accessible_to_player(_is_accessible):
+	is_accessible_to_player = _is_accessible
+	if !_is_accessible:
+		emit_signal("became_inaccessible")

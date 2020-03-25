@@ -2,7 +2,7 @@ extends Node
 
 # Balancing variables---------------------
 const START_PLAYER_MONEY = 0
-const MAX_PLAYER_MONEY = 1000
+const MAX_PLAYER_MONEY = 999
 const PLAYER_COOLNESS_DECAY_PER_SEC = 1.0
 const BALL_DESTROYED_COST = 200
 const BALL_RESET_DELAY = 1.0
@@ -39,10 +39,11 @@ var current_stage = stage.NONE
 
 var ball_spawn_pos = Vector3(0, 0, 0)
 
-var player_money = 0 setget set_player_money
+var player_money = 0
 var player_coolness = 0 setget set_player_coolness
 var nightmode_enabled = false
 var balls_on_field = 0
+var player_ship = null
 
 var is_fleet_defeated = false
 var has_player_used_shop = false
@@ -55,8 +56,8 @@ var ultraviolet_additive = preload("res://Materials/ultraviolet_additive.tres")
 var white_unlit = preload("res://Materials/white_unlit.tres")
 var black_unlit = preload("res://Materials/black_unlit.tres")
 var light_blue = preload("res://Materials/light_blue_test.tres")
-var global_non_wireframe_mat = preload("res://Materials/global_non_wireframe_material.tres")
-var global_wireframe_mat = preload("res://Materials/global_wireframe_material.tres")
+var global_non_wireframe_mat = preload("res://Materials/mat_for_3d_prints.tres")
+var global_wireframe_mat = preload("res://Materials/wireframe_material.tres")
 
 var collision_object_materials = [white_unlit, black_unlit, light_blue]
 var current_collision_object_material_index = 0
@@ -84,7 +85,6 @@ func global_init():
 	emit_signal("set_wireframe_material", pink_unlit)
 	emit_signal("set_collision_object_material", light_blue)
 	emit_signal("toggle_nightmode", false)
-	set_player_money(START_PLAYER_MONEY)
 	nightmode_enabled = false
 	set_stage(stage.PREGAME, false)
 			
@@ -95,7 +95,7 @@ func set_stage(new_stage, is_debug_skip):
 	match new_stage:
 		stage.PREGAME:
 			balls_on_field = 0
-			set_player_money(START_PLAYER_MONEY)
+			player_money = START_PLAYER_MONEY
 			set_global_solar_eclipse_materials(false)
 		stage.ENEMY_FLEET:
 			has_player_used_shop = false
@@ -170,9 +170,9 @@ func set_paused(is_paused):
 		emit_signal("paused")
 	else:
 		emit_signal("unpaused")
-	
-func set_player_money(new_player_money):
-	player_money = clamp(new_player_money, 0, MAX_PLAYER_MONEY)
+
+func add_player_money(amount):
+	player_money = clamp(player_money + amount, 0, MAX_PLAYER_MONEY)
 	emit_signal("player_money_changed", player_money)
 
 func set_player_coolness(new_player_coolness):

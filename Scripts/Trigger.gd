@@ -25,7 +25,7 @@ func _on_Trigger_body_entered(body):
 		can_be_triggered = false
 		$ResetTimer.start()
 		emit_signal("hit")
-		GameState.set_player_money(GameState.player_money + money_value)
+		GameState.add_player_money(money_value)
 
 func _on_ResetTimer_timeout():
 	$ResetTimer.stop()

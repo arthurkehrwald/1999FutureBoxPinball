@@ -35,7 +35,7 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 			set_active(false)		
 
 func _on_MoonGate_came_to_life(): 
-	#print("MoonGate: came to life, was flying - ", is_flying)
+	print("MoonGate: came to life, was flying - ", is_flying)
 	if not is_spinning:
 		if is_flying:
 			$AnimationPlayer.play_backwards("moon_spectral_transition")
@@ -44,13 +44,13 @@ func _on_MoonGate_came_to_life():
 	is_flying = false
 
 func _on_MoonGate_death():
-	#print("MoonGate: died")
+	print("MoonGate: died")
 	Announcer.say("moon_destroyed")
 	set_visible(true)
 	set_deferred("is_flying", true)
 
 func _on_MoonGateHitboxArea_body_entered(body):
-	#print("MoonGate: hit")
+	print("MoonGate: hit")
 	if !is_flying:
 		Announcer.say("moon_dmg")
 	
@@ -75,7 +75,7 @@ func _process(delta):
 	if current_spin_speed > 0:
 		$MeshInstance.set_transform($MeshInstance.get_transform().rotated(spin_axis, current_spin_speed * delta))
 	else:
-		#print("spin speed 0")
+		print("spin speed 0")
 		is_spinning = false
 		if not is_flying:
 			$AnimationPlayer.play_backwards("moon_spectral_transition")
@@ -88,10 +88,10 @@ func _on_MoonAnimationPlayer_animation_finished(_anim_name):
 #called when moongate is done scaling
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	if is_spinning:
-		#print("MoonGate: done scaling up")
+		print("MoonGate: done scaling up")
 		set_visible(true)
 	else:
-		#print("MoonGate: done scaling down")
+		print("MoonGate: done scaling down")
 		if not is_flying:
 			set_visible(false)
 

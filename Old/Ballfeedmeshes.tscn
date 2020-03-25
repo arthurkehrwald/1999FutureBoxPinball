@@ -2,8 +2,9 @@
 
 [ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=2]
-[ext_resource path="res://Materials/global_non_wireframe_material.tres" type="Material" id=3]
+[ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=3]
 [ext_resource path="res://Meshes/Wireframe/cube_wireframe.obj" type="ArrayMesh" id=4]
+
 
 [sub_resource type="CubeMesh" id=1]
 

@@ -12,7 +12,6 @@ func _enter_tree():
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	match new_stage:
 		GameState.stage.PREGAME:
-			print("ObjectiveHUD: pregame began")
 			reset()
 			turn_off()
 		GameState.stage.EXPOSITION:

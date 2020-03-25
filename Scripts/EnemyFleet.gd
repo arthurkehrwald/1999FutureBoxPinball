@@ -23,7 +23,6 @@ func _on_GameState_stage_changed(new_stage, _is_debug_skip):
 
 func set_active(_is_active):
 	is_active = _is_active
-	print("EnemyFleet: active -", _is_active)
 	emit_signal("was_set_active", _is_active)
 	if $AnimationPlayer.is_playing():
 		$AnimationPlayer.stop()

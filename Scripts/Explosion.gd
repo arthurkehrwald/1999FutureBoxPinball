@@ -14,12 +14,12 @@ func explode():
 	emit_signal("exploded")
 
 func _on_Explosion_body_entered(body):
-	print("Explosion hit: ", body.owner.name, " at pos: ", body.get_global_transform().origin)
-	if not (type == explosion_type.MISSILE and body.get_collision_layer_bit(10)):		
+	#print("Explosion hit: ", body.owner.name, " at pos: ", body.get_global_transform().origin)
+	if not (type == explosion_type.MISSILE and body.is_in_group("Bombs")):		
 		if body.has_method("on_Explosion_hit"):
 			body.on_Explosion_hit(type, get_global_transform().origin)
-		elif body.owner.has_method("on_Explosion_hit"):
-			body.owner.on_Explosion_hit(type, get_global_transform().origin)
+		elif body.get_parent().has_method("on_Explosion_hit"):
+			body.get_parent().on_Explosion_hit(type, get_global_transform().origin)
 		
 func _on_Timer_timeout():
 	set_deferred("monitoring", false)

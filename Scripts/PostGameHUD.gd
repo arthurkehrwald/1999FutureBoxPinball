@@ -38,7 +38,7 @@ func _process(_delta):
 #		$RestartTimer.stop()
 
 func _on_RestartTimer_timeout():
-	print("PostGameHud: timer ran out")
+	#print("PostGameHud: timer ran out")
 	if !was_restarted_already:
 		get_tree().paused = false
 		set_visible(false)

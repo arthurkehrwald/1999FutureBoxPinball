@@ -19,7 +19,6 @@ func _on_ShotTimer_timeout():
 #		remove_collision_exception_with(body)
 
 func shoot_bomb():
-	print("BombGun: shoot")
 	$AudioStreamPlayer.play()
 	var bomb_instance = bomb_scene.instance()
 	bomb_instance.set_transform($Muzzle.get_transform())
@@ -28,4 +27,4 @@ func shoot_bomb():
 #	$HitboxArea.connect("body_exited", bomb_instance.get_node("Rigidbody"), "_on_GunHitboxArea_body_exited", [self], 4)	
 	add_child(bomb_instance)
 	bomb_instance.set_global_transform(Transform(Basis.IDENTITY, $Muzzle.get_global_transform().origin))
-	bomb_instance.get_node("Rigidbody").apply_central_impulse(-$Muzzle.get_global_transform().rotated($Muzzle.get_global_transform().basis.y.normalized(), deg2rad(rng.randf_range(-random_direction_range, random_direction_range))).basis.z.normalized() * bomb_muzzle_velocity)
+	bomb_instance.apply_central_impulse(-$Muzzle.get_global_transform().rotated($Muzzle.get_global_transform().basis.y.normalized(), deg2rad(rng.randf_range(-random_direction_range, random_direction_range))).basis.z.normalized() * bomb_muzzle_velocity)

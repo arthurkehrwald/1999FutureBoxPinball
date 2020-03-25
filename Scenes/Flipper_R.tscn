@@ -17,3 +17,6 @@ transform = Transform( 0.997855, 0, 0.0654728, 0, 1, 0, -0.0654728, 0, 0.997855,
 
 [node name="CollisionShape3" parent="." index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09545, 0.15, 0 )
+
+[node name="CollisionShape" parent="Area" index="0"]
+transform = Transform( 0.992, 0, 0.126233, 0, 1, 0, -0.126233, 0, 0.992, -0.504739, 0, 0.132926 )

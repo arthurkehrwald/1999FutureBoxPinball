@@ -1,4 +1,4 @@
-extends "res://Scripts/BallBombCommon.gd"
+extends "res://Scripts/AbstractBall.gd"
 
 export var fuse_time = 5.0
 export var chain_explosions_enabled = true
@@ -12,7 +12,9 @@ func _ready():
 	$Timer.set_wait_time(fuse_time)
 	$Timer.start()
 	yield(get_tree().create_timer(COLLISION_LAYER_SWITCH_DELAY), "timeout")
+	# enable collisions with the boss
 	set_collision_mask_bit(10, true)
+	# enable collisions with the boss shield
 	set_collision_mask_bit(14, true)
 	$Area.set_deferred("monitoring", true)
 #func _on_GunHitboxArea_body_exited(body, gun_static_body):
@@ -33,7 +35,7 @@ func explode():
 	$Explosion.explode()
 	$BombMesh.set_visible(false)
 	yield($Explosion, "exploded")
-	owner.queue_free()
+	queue_free()
 
 #func _on_Explosion_body_entered(body):
 #	print("Explosion hit: ", body.owner.name, " at pos: ", body.get_global_transform().origin)
@@ -47,6 +49,5 @@ func explode():
 #	else:
 #		print("Explosion: raycast hit")
 
-func _on_Area_body_entered(body):
-	print(body.owner.name)
+func _on_Area_body_entered(_body):
 	explode()

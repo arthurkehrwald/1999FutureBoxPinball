@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Scenes/triangular_wall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Shop.tscn" type="PackedScene" id=3]
@@ -36,7 +36,6 @@
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=37]
 [ext_resource path="res://Scenes/TeleporterEntrance.tscn" type="PackedScene" id=38]
 [ext_resource path="res://Scenes/WeirdCamera.tscn" type="PackedScene" id=39]
-[ext_resource path="res://Scenes/SimpleSlope_R.tscn" type="PackedScene" id=40]
 [ext_resource path="res://Scenes/TeleporterExit.tscn" type="PackedScene" id=41]
 [ext_resource path="res://Scenes/GlitchShader.tscn" type="PackedScene" id=42]
 [ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=43]
@@ -68,15 +67,18 @@ transform = Transform( 1, 0, 0, 0, 0.998629, 0.0523353, 0, -0.0523353, 0.998629,
 [node name="PortReader" parent="BoxV3/Playfield" instance=ExtResource( 28 )]
 
 [node name="Flipper" parent="BoxV3/Playfield" instance=ExtResource( 20 )]
-transform = Transform( 0.819152, 0, -0.573577, -2.98023e-08, 1, 7.45058e-09, 0.573577, 0, 0.819152, -1.74427, 6.84261e-05, 6.52426 )
+transform = Transform( 0.819152, 0, -0.573577, -2.6077e-08, 1, 7.45058e-09, 0.573577, 0, 0.819152, -1.74427, 6.84261e-05, 6.52426 )
+TURN_SPEED = 1000
+sideways_impulse_strength = 0
 
 [node name="Flipper_R" parent="BoxV3/Playfield" instance=ExtResource( 26 )]
 transform = Transform( 0.819152, 0, 0.573577, 2.98023e-08, 1, 0, -0.573577, 0, 0.819152, 0.942751, -0.000406027, 6.53826 )
 collision_mask = 1
 TURN_SPEED = 1000
+sideways_impulse_strength = 0
 
 [node name="Plunger" parent="BoxV3/Playfield" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1, 7.15256e-07, 6.22101 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09212, 0.00796008, 6.21758 )
 release_speed = 30.0
 
 [node name="PlayerTurret" parent="BoxV3/Playfield" instance=ExtResource( 21 )]
@@ -102,7 +104,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14589, 4.76837e-07, 1.11051
 transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 0.176186, 3.73275, -1.19209e-06, 7.03805 )
 
 [node name="BumperCage2" parent="BoxV3/Playfield" instance=ExtResource( 32 )]
-transform = Transform( 0.362242, 2.18455e-09, 0.932084, -4.47035e-08, 1, 0, -0.932084, -7.45058e-08, 0.362242, -2.34837, 0.00204873, -3.79035 )
+transform = Transform( 0.362242, 2.18455e-09, 0.932084, -5.21541e-08, 1, 3.72529e-09, -0.932084, -7.45058e-08, 0.362242, -2.05152, 0.00204849, -4.64861 )
 
 [node name="BumperCage3" parent="BoxV3/Playfield" instance=ExtResource( 32 )]
 transform = Transform( -0.242787, -7.06477e-09, 0.97008, -5.21541e-08, 1, -5.58794e-09, -0.97008, -5.21541e-08, -0.242787, -2.09849, 0.00210643, -1.30236 )
@@ -120,7 +122,7 @@ transform = Transform( 0.594161, 0, -0.0835039, 0, 0.6, -2.98023e-08, 0.0835039,
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59964, 0.245859, 0.0462199 )
 
 [node name="MultiballShip" parent="BoxV3/Playfield" instance=ExtResource( 37 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.17987, 0.0278032, -5.79862 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25363, 0.0278029, -5.79861 )
 
 [node name="LongBox2" parent="BoxV3/Playfield" instance=ExtResource( 46 )]
 transform = Transform( 0.520905, 0, -0.176824, -7.45058e-08, 1, -8.3819e-09, 0.853616, 0, 0.107904, 2.11681, 0.000596285, 5.65028 )
@@ -150,16 +152,14 @@ transform = Transform( 0.543511, 0, 0.173879, 2.98023e-08, 0.66107, -3.72529e-09
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 1.77636e-15, -1, 0, -4.37114e-08, 3.516, 0, 0.798 )
 
 [node name="MysteryTeleporterEntrance" parent="BoxV3/Playfield" instance=ExtResource( 38 )]
-transform = Transform( 0.938167, 1.24675e-07, -0.346185, -1.19209e-07, 1, 7.45058e-08, 0.346184, -5.21541e-08, 0.93817, 2.9215, 0.0508459, -3.03815 )
+transform = Transform( 0.938167, 1.24675e-07, -0.346185, -1.11759e-07, 1, 7.45058e-08, 0.346184, -5.21541e-08, 0.93817, 2.9215, 0.0508459, -3.03815 )
+collision_mask = 257
 
 [node name="MysteryTeleporterExit" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
 transform = Transform( 0.957024, 0.0454007, 0.286431, -0.0464535, 0.998917, -0.00312243, -0.286262, -0.0103176, 0.958097, -3.83971, 0.422765, 2.53143 )
 
 [node name="MysteryTeleporterExit2" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
 transform = Transform( 0.997945, 0.0337795, -0.0544518, -0.035458, 0.998916, -0.0301592, 0.053374, 0.032028, 0.998062, 3.09049, 0.34231, 2.08743 )
-
-[node name="SimpleSlope_R2" parent="BoxV3/Playfield" instance=ExtResource( 40 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50766, 0.000474215, -7.71008 )
 
 [node name="LoopingLouiesLooping" parent="BoxV3/Playfield" instance=ExtResource( 43 )]
 transform = Transform( 0.860378, 0, -0.509658, -3.72529e-08, 1, 0, 0.509657, 0, 0.860378, -2.37255, 0.655235, -2.41056 )
@@ -250,19 +250,20 @@ transform = Transform( 1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, -0.
 
 [node name="GlitchShaderFullscreen" parent="." instance=ExtResource( 13 )]
 visible = false
-[connection signal="released" from="BoxV3/Playfield/Plunger" to="BoxV3/Playfield/PlayerTurret" method="_on_Plunger_released"]
+[connection signal="released" from="BoxV3/Playfield/Plunger" to="BoxV3/Playfield/PlayerTurret" method="shoot"]
 [connection signal="black_hole_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/BlackHole" method="_on_Boss_black_hole_health_threshold_reached"]
 [connection signal="laser_trex_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/LaserTrex" method="set_alive" binds= [ true ]]
 [connection signal="solar_eclipse_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/BlackHole" method="expand"]
-[connection signal="ball_entered_1" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/MysteryTeleporterExit" method="_on_TeleporterEntrance_ball_entered"]
-[connection signal="ball_entered_2" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/MysteryTeleporterExit2" method="_on_TeleporterEntrance_ball_entered"]
-[connection signal="ball_entered_3" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/PlayerTurret" method="_on_TeleporterEntrance_ball_entered"]
+[connection signal="ball_entered_1" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/MysteryTeleporterExit" method="teleport_here"]
+[connection signal="ball_entered_2" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/MysteryTeleporterExit2" method="teleport_here"]
+[connection signal="ball_entered_3" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/PlayerTurret" method="insert_ball"]
 [connection signal="health_changed" from="BoxV3/Playfield/PlayerShip" to="BoxV3/Playfield/PlayerStatsHUD3D/Viewport/PlayerStatsHUD" method="_on_PlayerShip_health_changed"]
 [connection signal="menu_triggered" from="BoxV3/Playfield/Shop" to="BoxV3/Playfield/CentralHUD" method="_on_Shop_menu_triggered"]
+[connection signal="player_bought_turret_shot" from="BoxV3/Playfield/Shop" to="BoxV3/Playfield/PlayerTurret" method="insert_ball"]
 [connection signal="bought_flipper" from="BoxV3/Playfield/CentralHUD/Viewport/ShopMenu" to="BoxV3/Playfield/TemporaryFlipper" method="_on_ShopMenu_bought_flipper"]
 [connection signal="bought_remote_control" from="BoxV3/Playfield/CentralHUD/Viewport/ShopMenu" to="RemoteBallControlTimer" method="_on_ShopMenu_bought_remote_control"]
 [connection signal="bought_repair" from="BoxV3/Playfield/CentralHUD/Viewport/ShopMenu" to="BoxV3/Playfield/PlayerShip" method="_on_ShopMenu_bought_repair"]
-[connection signal="bought_turret_shot" from="BoxV3/Playfield/CentralHUD/Viewport/ShopMenu" to="BoxV3/Playfield/PlayerTurret" method="_on_ShopMenu_bought_turret_shot"]
+[connection signal="bought_turret_shot" from="BoxV3/Playfield/CentralHUD/Viewport/ShopMenu" to="BoxV3/Playfield/Shop" method="_on_ShopMenu_bought_turret_shot"]
 [connection signal="closed" from="BoxV3/Playfield/CentralHUD/Viewport/ShopMenu" to="BoxV3/Playfield/CentralHUD" method="_on_ShopMenu_closed"]
 [connection signal="panel_changed" from="BoxV3/Playfield/CentralHUD/Viewport/ShopMenu" to="BoxV3/Playfield/CentralHUD" method="_on_Any_panel_changed"]
 [connection signal="panel_changed" from="BoxV3/Playfield/CentralHUD/Viewport/ObjectiveHUD" to="BoxV3/Playfield/CentralHUD" method="_on_Any_panel_changed"]

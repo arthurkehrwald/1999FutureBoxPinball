@@ -2,6 +2,7 @@
 
 [ext_resource path="res://Scripts/BlackHole.gd" type="Script" id=1]
 [ext_resource path="res://Textures/black_hole_main.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/BlackHole.tres" type="Animation" id=3]
 
 [sub_resource type="SphereShape" id=1]
 radius = 2.0
@@ -24,34 +25,6 @@ params_billboard_keep_scale = true
 radius = 0.2
 
 [sub_resource type="Animation" id=6]
-resource_name = "black_hole_appear_anim"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("GravitationalField/MeshInstance/Sprite3D:material_override:flags_no_depth_test")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("GravitationalField/MeshInstance:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.001, 0.001, 0.001 ), Vector3( 0.5, 0.5, 0.5 ) ]
-}
-
-[sub_resource type="Animation" id=7]
 resource_name = "black_hole_expand_anim"
 length = 5.0
 tracks/0/type = "value"
@@ -127,6 +100,6 @@ collision_mask = 257
 shape = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/black_hole_appear_anim = SubResource( 6 )
-anims/black_hole_expand_anim = SubResource( 7 )
+anims/black_hole_appear_anim = ExtResource( 3 )
+anims/black_hole_expand_anim = SubResource( 6 )
 [connection signal="body_entered" from="GravitationalField/NomArea" to="." method="_on_NomArea_body_entered"]

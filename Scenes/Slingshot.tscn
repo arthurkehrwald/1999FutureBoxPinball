@@ -1,10 +1,12 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Meshes/slingshot_l.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Materials/global_non_wireframe_material.tres" type="Material" id=2]
+[ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=2]
 [ext_resource path="res://Scenes/SlingshotTrigger.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Materials/global_wireframe_material.tres" type="Material" id=4]
+[ext_resource path="res://Materials/wireframe_material.tres" type="Material" id=4]
 [ext_resource path="res://Meshes/Wireframe/slingshot_wireframe.obj" type="ArrayMesh" id=5]
+
+
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.119733

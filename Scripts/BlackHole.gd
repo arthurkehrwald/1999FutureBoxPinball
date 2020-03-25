@@ -17,7 +17,6 @@ func _ready():
 	current_scale_vector = base_scale_vector
 	rng.randomize()
 	set_process(false)
-	#set_active(true)
 	
 func _process(_delta):
 	if $AnimationPlayer.is_playing():
@@ -29,22 +28,22 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 		set_active(false)
 
 func _on_NomArea_body_entered(body):
-	if body.get_collision_layer_bit(0) == true:
-		body.on_destroyed()
-	elif body.get_collision_layer_bit(8) == true:
-		body.owner.queue_free()
+	if body.is_in_group("Pinballs"):
+		body._on_destroyed()
+	elif body.is_in_group("Bombs"):
+		body.queue_free()
 
 func set_active(is_active):
 	print("Black Hole: active - ", is_active)
 	if is_active:
 		Announcer.say("black_hoe", true)
 	set_visible(is_active)
-	set_process(is_active)
+	#set_process(is_active)
 	$GravitationalField/CollisionShape.set_deferred("disabled", !is_active)
 	$GravitationalField/NomArea/CollisionShape.set_deferred("disabled", !is_active)
 	if is_active:
 		$AnimationPlayer.play("black_hole_appear_anim")
-		
+
 func expand():
 	print("Black Hole: expanding")
 	$AnimationPlayer.play("black_hole_expand_anim")
@@ -52,7 +51,6 @@ func expand():
 	GameState.on_BlackHole_fully_expanded()
 	set_active(false)
 
-
 func _on_Boss_black_hole_health_threshold_reached():
-	print("Black Hole: boss health threshold reached")
+	print("Black Hole: activation boss health threshold reached")
 	set_active(true)

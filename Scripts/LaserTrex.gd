@@ -31,7 +31,6 @@ func _on_LaserTrex_death():
 	set_active(false)
 
 func set_active(is_active):
-	print("Laser Trex: is_active - ", is_active)
 	set_target_gate_open(!is_active)
 	$HitboxArea.set_deferred("monitoring", is_active)
 	$HitboxArea.set_deferred("monitorable", is_active)

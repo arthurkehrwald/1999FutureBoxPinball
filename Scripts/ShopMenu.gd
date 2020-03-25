@@ -7,8 +7,7 @@ signal bought_remote_control
 signal panel_changed
 signal closed
 
-export var decision_time = 5.0
-export var price_for_all_items = 200
+export var DECISION_TIME = 5.0
 
 var item_01_texture = preload("res://HUD/shop_item_01.png")
 var item_02_texture = preload("res://HUD/shop_item_02.png")
@@ -18,13 +17,13 @@ var item_04_texture = preload("res://HUD/shop_item_04.png")
 var selected_item = 1
 
 func _ready():
-	$DecisionTimer.set_wait_time(decision_time)
-	$TimeRemainingBar.max_value = decision_time * 100
+	$DecisionTimer.set_wait_time(DECISION_TIME)
+	$TimeRemainingBar.max_value = DECISION_TIME * 100
 
 func _process(_delta):
 	$TimeRemainingLabel.text = str(round($DecisionTimer.time_left))
 	$TimeRemainingBar.value = $DecisionTimer.time_left * 100
-	if $DecisionTimer.time_left <= decision_time - 1 and Input.is_action_just_pressed("shop_confirm"):
+	if $DecisionTimer.time_left <= DECISION_TIME - 1 and Input.is_action_just_pressed("shop_confirm"):
 		$DecisionTimer.stop()
 		buy_item(selected_item)
 		set_active(false)
@@ -72,7 +71,8 @@ func _on_DecisionTimer_timeout():
 
 func buy_item(item_index):
 	#print("ShopMenu: player bought a thing")
-	GameState.set_player_money(GameState.player_money - price_for_all_items)
+	#GameState.set_player_money(GameState.player_money - PRICE_FOR_ALL_ITEMS)
+	GameState.add_player_money(-Globals.PRICE_FOR_ALL_ITEMS_IN_SHOP)
 	GameState.on_ShopMenu_player_bought_anything()
 	match item_index:
 		1:

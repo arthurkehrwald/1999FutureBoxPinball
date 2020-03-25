@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/CurvedRamp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/BoxV2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/SimpleCube.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Testing/DebugOutputLabel.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Pinball.tscn" type="PackedScene" id=9]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -91,8 +91,8 @@ shape = SubResource( 1 )
 [node name="OmniLight" type="OmniLight" parent="BoxV2/BoardAligned"]
 transform = Transform( 1, 0, 0, 0, 1, -9.68575e-08, 0, 1.04308e-07, 1, 0.407623, 2.14865, 2.14743 )
 
-[node name="BallParent" parent="BoxV2/BoardAligned" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 1.56042, 0.274595, 3.17961 )
+[node name="MultiballShip" parent="BoxV2/BoardAligned" instance=ExtResource( 2 )]
+transform = Transform( 0.990068, 4.44089e-16, -0.14059, -6.51926e-09, 1, -3.72529e-08, 0.14059, 4.47035e-08, 0.990068, 0.964844, 0, -3.99915 )
 
-[node name="CurvedRamp" parent="BoxV2/BoardAligned" instance=ExtResource( 2 )]
-transform = Transform( 0.599869, 0, -0.0125654, 0, 0.6, -3.72529e-09, 0.0125654, 7.45058e-09, 0.599869, 0, 0, 0 )
+[node name="Pinball" parent="BoxV2/BoardAligned" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 1.38023, 3.57575 )
