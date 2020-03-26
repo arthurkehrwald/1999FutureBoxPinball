@@ -13,17 +13,13 @@ radius = 0.5
 height = 0.4
 
 [node name="BossBombGun" instance=ExtResource( 2 )]
-collision_mask = 257
 script = ExtResource( 3 )
-base_firing_rate = 30
+SECONDS_BETWEEN_SHOTS = 10
 random_direction_range = 20.0
 
 [node name="CollisionShape" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 6.51684e-08, -0.4 )
 shape = SubResource( 1 )
-
-[node name="HitboxArea" parent="." index="2"]
-collision_mask = 1
 
 [node name="HitboxShape" parent="HitboxArea" index="0"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 6.51684e-08, -0.4 )
@@ -31,4 +27,6 @@ shape = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource( 1 )
-[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
+
+[node name="RadialBar3D" parent="." index="7"]
+transform = Transform( -1.95553, 0, -3.25841e-07, 0, 1.95553, 0, 6.37193e-07, 0, -1, -2.28395e-07, 0, -0.70094 )

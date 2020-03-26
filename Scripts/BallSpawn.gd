@@ -24,7 +24,6 @@ func spawn_ball():
 
 func on_Ball_became_inaccessible():
 	print("BallSpawn: ball became inaccessible")
-	var balls_accessible_to_player = 0
 	print("BallSpawn: child count - ", get_child_count())
 	for child in get_children():
 		if child.is_in_group("Pinballs") and child.is_accessible_to_player:

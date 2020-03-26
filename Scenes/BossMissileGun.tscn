@@ -6,7 +6,6 @@
 
 [node name="BossMissileGun" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
-base_firing_rate = 10
 
 [node name="CollisionShape" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
@@ -17,9 +16,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.342285 )
 [node name="HitboxShape" parent="HitboxArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
 
-[node name="Sprite3D" parent="." index="5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.408925, -0.000601649 )
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource( 1 )
-[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
+
+[node name="RadialBar3D" parent="." index="7"]
+transform = Transform( 1.00426, 0, 0, 0, -0.733622, 0.685815, 0, -0.685815, -0.733622, 0.0224609, 0.381438, -0.171417 )

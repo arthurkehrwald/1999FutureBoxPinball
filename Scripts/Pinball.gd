@@ -21,7 +21,7 @@ func _ready():
 	else:
 		remote_control_timer.connect("start", self, "_on_RemoteControlTimer_start")
 		remote_control_timer.connect("timeout", self, "_on_RemoteControlTimer_timeout")
-		remote_control_timer.connect("time_left_changed", remote_control_time_bar, "_on_value_changed", [1, 0])
+		remote_control_timer.connect("time_left_changed", remote_control_time_bar, "update_value", [1, 0])
 		set_remote_controlled(!remote_control_timer.is_stopped())
 	indicator = get_node("RotationCancel/ArrowIndicator")
 	indicator_set_visible(false)

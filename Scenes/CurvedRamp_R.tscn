@@ -1,8 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Meshes/curved_ramp_r.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=2]
-[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=3]
 [ext_resource path="res://Meshes/Wireframe/curved_ramp_wireframe_r.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=5]
 
@@ -21,12 +19,10 @@ shape = SubResource( 1 )
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 5 )
-script = ExtResource( 2 )
 
 [node name="Wireframe" type="MeshInstance" parent="MeshInstance"]
 mesh = ExtResource( 4 )
 material/0 = null
-script = ExtResource( 3 )
 
 [node name="Area" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0665345, 0, 0 )

@@ -11,7 +11,6 @@ func _enter_tree():
 
 func _ready():
 	set_process(false)
-	#set_alive(true)
 
 func _process(delta):
 	time_until_laser_toggle -= delta
@@ -21,23 +20,24 @@ func _process(delta):
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	if is_debug_skip or new_stage != GameState.stage.SOLAR_ECLIPSE:
 		print(GameState.current_stage)
-		set_alive(false)
-		
-func _on_LaserTrex_came_to_life():
-	Announcer.say("trex_active", true)
-	set_active(true)
+		set_active(false)
 
-func _on_LaserTrex_death():
-	set_active(false)
-
-func set_active(is_active):
+func _on_is_active_changed():
+	if(is_active):
+		Announcer.say("trex_active", true);
 	set_target_gate_open(!is_active)
 	$HitboxArea.set_deferred("monitoring", is_active)
 	$HitboxArea.set_deferred("monitorable", is_active)
-	$Bar3D.set_visible(is_active)
+	$HealthBar3D.set_visible(is_active)
 	laser_set_active(false)
 	set_process(is_active)
 	#print("LaserTrex: active - ", is_active)
+	
+func _on_health_changed(_old_health):
+	$HealthBar3D/Viewport/Bar.update_value(current_health, MAX_HEALTH)
+	
+func _on_death():
+	Announcer.say("trex_defeat", true)
 
 func laser_set_active(is_active):
 	$LaserArea.set_deferred("monitoring", is_active)
@@ -63,5 +63,5 @@ func set_target_gate_open(is_open):
 		$AnimationPlayer.play_backwards("gate_open_anim")
 
 
-func _on_LaserTrex_death_by_damage():
-	Announcer.say("trex_defeat", true)
+func _on_Boss_laser_trex_health_threshold_reached():
+	set_active(true)

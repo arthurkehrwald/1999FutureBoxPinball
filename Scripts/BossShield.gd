@@ -1,17 +1,13 @@
 extends "res://Scripts/Damageable.gd"
 
-export var regeneration_time = 20.0
+export var REGENERATION_TIME = 20.0
+
 
 func _ready():
 	set_process(false)
-		
-func _on_BossShield_came_to_life():
-	set_active(true)
 
-func _on_BossShield_death():
-	set_active(false)
 
-func set_active(is_active):
+func is_active_changed():
 	if is_active:
 		set_visible(true)
 	#print("boss shield: active - ", is_active)
@@ -20,10 +16,14 @@ func set_active(is_active):
 	$HitboxArea.set_deferred("monitoring", is_active)
 	$HitboxArea.set_deferred("monitorable", is_active)
 	set_process(!is_active)
-	
+
+
+func health_changed(_old_health):
+	$HealthBar3D/Viewport/Bar.update_value(current_health)
+
+
 func _process(delta):
-	if regeneration_time == 0:
-		set_alive(true)
-		return
-		
-	set_health(current_health + delta / regeneration_time)
+	if REGENERATION_TIME == 0:
+		set_active(true)
+		return	
+	set_health(current_health + delta / REGENERATION_TIME)

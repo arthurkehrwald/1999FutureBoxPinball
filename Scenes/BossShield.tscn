@@ -16,10 +16,6 @@ extents = Vector3( 2, 1, 0.1 )
 
 [node name="BossShield" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-max_health = 30.0
-bomb_explosion_damage = 15.0
-missile_explosion_damage = 0.0
-static_impact_damage = 0.0
 
 [node name="MeshInstance" parent="." index="0"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 1, 0 )
@@ -32,11 +28,8 @@ collision_mask = 1
 [node name="HitboxShape" parent="HitboxArea" index="0"]
 shape = SubResource( 2 )
 
-[node name="Bar3D" parent="." index="2" instance=ExtResource( 3 )]
+[node name="HealthBar3D" parent="." index="2" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55676, 0 )
-
-[node name="Bar" parent="Bar3D/Viewport" index="0"]
-tint_progress = Color( 0, 0.180392, 1, 1 )
 
 [node name="StaticBody" type="StaticBody" parent="." index="3"]
 collision_layer = 50176
@@ -44,8 +37,3 @@ collision_layer = 50176
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 shape = SubResource( 3 )
-[connection signal="came_to_life" from="." to="." method="_on_BossShield_came_to_life"]
-[connection signal="death" from="." to="." method="_on_BossShield_death"]
-[connection signal="health_changed" from="." to="Bar3D" method="_on_value_changed"]
-
-[editable path="Bar3D"]

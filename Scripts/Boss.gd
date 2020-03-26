@@ -4,71 +4,78 @@ signal laser_trex_health_threshold_reached
 signal black_hole_health_threshold_reached
 signal solar_eclipse_health_threshold_reached
 
-export var missiles_health_percent = 80.0
-export var laser_trex_health_percent = 60.0
-export var black_hole_health_percent = 40.0
-export var solar_eclipse_health_percent = 20.0
+export var MISSILES_HEALTH_PERCENT = 80.0
+export var LASER_TREX_HEALTH_PERCENT = 60.0
+export var BLACK_HOLE_HEALTH_PERCENT = 40.0
+export var SOLAR_ECLIPSE_HEALTH_PERCENT = 20.0
+
 
 func _enter_tree():
 	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
-	connect("death_by_damage", GameState, "on_Boss_death")
-	
+	connect("death", GameState, "on_Boss_death")
+
+
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	match new_stage:
 		GameState.stage.BOSS_BEGIN:
-			#2print("Boss: bossfight began")
-			set_alive(true)
-			$BossBombGun.set_firing(true)
-			yield(get_tree().create_timer($BossBombGun.base_firing_rate * .5), "timeout")
-			$BossBombGun2.set_firing(true)
-			$BossShield.set_alive(true)
+			print("Boss: bossfight began")
+			set_active(true)
+			$BossBombGun.set_shooting(true)
+			
+			yield(get_tree().create_timer($BossBombGun.SECONDS_BETWEEN_SHOTS * .5), "timeout")
+			
+			$BossBombGun2.set_shooting(true)
+			$BossShield.set_active(true)
 			$BossShield.set_visible(true)
 			if is_debug_skip:
-				$BossMissileGun.set_firing(false)
+				$BossMissileGun.set_shooting(false)
 		GameState.stage.SOLAR_ECLIPSE:
 			if is_debug_skip:
-				set_alive(true)
-				$BossBombGun.set_firing(true)
-				yield(get_tree().create_timer($BossBombGun.base_firing_rate * .5), "timeout")
-				$BossBombGun2.set_firing(true)
-				$BossMissileGun.set_firing(true)
-				$BossShield.set_alive(true)
+				set_active(true)
+				$BossBombGun.set_shooting(true)
+				
+				yield(get_tree().create_timer($BossBombGun.SECONDS_BETWEEN_SHOTS * .5), "timeout")
+				
+				$BossBombGun2.set_shooting(true)
+				$BossMissileGun.set_shooting(true)
+				$BossShield.set_active(true)
 				$BossShield.set_visible(true)
 		_:
-			#print("Boss: disabled based on stage")
-			set_alive(false)
-			$BossBombGun.set_firing(false)
-			$BossBombGun2.set_firing(false)
-			$BossMissileGun.set_firing(false)
-			$BossShield.set_alive(false)
+			print("Boss: disabled based on stage")
+			set_active(false)
+			$BossBombGun.set_shooting(false)
+			$BossBombGun2.set_shooting(false)
+			$BossMissileGun.set_shooting(false)
+			$BossShield.set_active(false)
 			$BossShield.set_visible(false)
 			$BossShield.set_process(false)
 
+
 func _on_BossGun_was_hit_directly(impact_speed):
-	take_damage(calc_damage(impact_speed))
+	if is_active:
+		take_damage(calc_damage(impact_speed))
 
 func _on_BossGun_was_hit_bomb_explosion():
-	take_damage(bomb_explosion_damage)
+	if is_active:
+		take_damage(BOMB_EXPLOSION_DAMAGE)
 
-func _on_Boss_came_to_life():
-	$Bar3D.set_visible(true)
 
-func _on_Boss_death():
-	$Bar3D.set_visible(false)
+func _on_is_active_changed():
+	$HealthBar3D/Viewport/Bar.set_visible(is_active)
 
-func _on_Boss_health_changed(new_health, max_health, old_health):
-	if not old_health / max_health * 100 <= missiles_health_percent:
-		if new_health / max_health * 100 <= missiles_health_percent:
-			$BossMissileGun.set_firing(true)
-	if not old_health / max_health * 100 <= laser_trex_health_percent:
-		if new_health / max_health * 100 <= laser_trex_health_percent:
+
+func _on_health_changed(old_health):
+	print("Boss: health changed, current health = ", current_health, ", old health = ", old_health)
+	$HealthBar3D/Viewport/Bar.update_value(current_health, MAX_HEALTH)
+	if old_health / MAX_HEALTH * 100 > MISSILES_HEALTH_PERCENT:
+		if current_health / MAX_HEALTH * 100 <= MISSILES_HEALTH_PERCENT:
+			$BossMissileGun.set_shooting(true)
+	if old_health / MAX_HEALTH * 100 > LASER_TREX_HEALTH_PERCENT:
+		if current_health / MAX_HEALTH * 100 <= LASER_TREX_HEALTH_PERCENT:
 			emit_signal("laser_trex_health_threshold_reached")
-	if not old_health / max_health * 100 <= black_hole_health_percent:
-		if new_health / max_health * 100 <= black_hole_health_percent:
+	if old_health / MAX_HEALTH * 100 > BLACK_HOLE_HEALTH_PERCENT:
+		if current_health / MAX_HEALTH * 100 <= BLACK_HOLE_HEALTH_PERCENT:
 			emit_signal("black_hole_health_threshold_reached")
-	if not old_health / max_health * 100 <= solar_eclipse_health_percent:
-		if new_health / max_health * 100 <= solar_eclipse_health_percent:
+	if old_health / MAX_HEALTH * 100 > SOLAR_ECLIPSE_HEALTH_PERCENT:
+		if current_health / MAX_HEALTH * 100 <= SOLAR_ECLIPSE_HEALTH_PERCENT:
 			emit_signal("solar_eclipse_health_threshold_reached")
-
-func _on_Boss_death_by_damage():
-	GameState.on_Boss_death()

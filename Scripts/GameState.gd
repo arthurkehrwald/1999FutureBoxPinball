@@ -23,12 +23,6 @@ signal player_money_changed(new_player_money)
 signal player_coolness_changed(new_player_coolness)
 signal player_coolness_maxed
 signal spawn_ball
-#signal laser_trex_set_alive(is_alive)
-#signal boss_shield_set_alive(is_alive)
-#signal enemy_fleet_set_active(is_active)
-#signal storm_set_active(is_active)
-#signal moon_gate_set_active(is_active)
-#signal objective_changed(new_objective_one, new_objective_two)
 
 signal set_wireframe_material( material)
 signal set_collision_object_material(material)
@@ -106,12 +100,14 @@ func set_stage(new_stage, is_debug_skip):
 		set_global_solar_eclipse_materials(false)
 	current_stage = new_stage
 	emit_signal("stage_changed", new_stage, is_debug_skip)
-		
+
+
 func on_TransmissionHUD_finished():
 	if current_stage == stage.EXPOSITION:
 		print("GameState: exposition transmission finished")
 		set_stage(stage.ENEMY_FLEET, false)
-		
+
+
 func on_PlayerShip_ball_drained(ball, player_health):
 	if player_health > 0:
 		print("GameState: balls on field - ", balls_on_field)
@@ -122,7 +118,8 @@ func on_PlayerShip_ball_drained(ball, player_health):
 			balls_on_field = 1
 		else:
 			ball.delete()	
-	
+
+
 func on_EnemyFleet_defeated():
 	if current_stage == stage.ENEMY_FLEET:
 		if not is_fleet_defeated:
@@ -131,6 +128,7 @@ func on_EnemyFleet_defeated():
 		if has_player_used_shop:
 			set_stage(stage.BOSS_BEGIN, false)
 
+
 func on_ShopMenu_player_bought_anything():
 	if current_stage == stage.ENEMY_FLEET:
 		if not has_player_used_shop:
@@ -138,22 +136,28 @@ func on_ShopMenu_player_bought_anything():
 			emit_signal("objective_two_completed")
 		if is_fleet_defeated:
 			set_stage(stage.BOSS_BEGIN, false)		
-			
+
+
 func on_BlackHole_fully_expanded():
 	set_stage(stage.SOLAR_ECLIPSE, false)
+
 
 func on_player_did_anything_at_all():
 	emit_signal("player_did_something")
 
+
 func on_PlayerShip_death():
 	emit_signal("defeat")
-	
+
+
 func on_Boss_death():
 	emit_signal("victory")
-	
+
+
 func on_PostGameHUD_finished():
 	set_stage(stage.PREGAME, false)
-	
+
+
 func set_global_solar_eclipse_materials(is_solar_eclipse):
 	if is_solar_eclipse:
 		global_non_wireframe_mat.albedo_color = Color.black
@@ -163,7 +167,8 @@ func set_global_solar_eclipse_materials(is_solar_eclipse):
 		global_non_wireframe_mat.albedo_color = Color.white
 		global_wireframe_mat.albedo_color = Color(0, 255, 58, 255)
 		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_SUB)
-	
+
+
 func set_paused(is_paused):
 	get_tree().paused = is_paused
 	if is_paused:
@@ -171,9 +176,11 @@ func set_paused(is_paused):
 	else:
 		emit_signal("unpaused")
 
+
 func add_player_money(amount):
 	player_money = clamp(player_money + amount, 0, MAX_PLAYER_MONEY)
 	emit_signal("player_money_changed", player_money)
+
 
 func set_player_coolness(new_player_coolness):
 	if player_coolness < 100 and new_player_coolness >= 100:
@@ -181,31 +188,33 @@ func set_player_coolness(new_player_coolness):
 	player_coolness = clamp(new_player_coolness, 0, 100)
 	emit_signal("player_coolness_changed", player_coolness)
 
+
 func _on_MultiballShip_ball_locked():
 	if balls_on_field <= 0:
 		emit_signal("spawn_ball")
-	
+
+
 func processDebugInput():
 	if Input.is_action_just_pressed("test_reload_scene"):
 		get_tree().reload_current_scene()
 		global_init()
-		
+	
 	if Input.is_action_just_pressed("debug_goto_pregame"):
 		print("Gamestage: global reset")
 		global_init()
-		
+	
 	if Input.is_action_just_pressed("debug_goto_exposition"):
 		set_stage(stage.EXPOSITION, true)
-		
+	
 	if Input.is_action_just_pressed("debug_goto_fleet"):
 		set_stage(stage.ENEMY_FLEET, true)
-		
+	
 	if Input.is_action_just_pressed("debug_goto_boss_begin"):
 		set_stage(stage.BOSS_BEGIN, true)	
-		
+	
 	if Input.is_action_just_pressed("debug_goto_solar_eclipse"):
 		set_stage(stage.SOLAR_ECLIPSE, true)		
-
+	
 	if Input.is_action_just_pressed("test_cycle_materials"):
 		global_non_wireframe_mat.albedo_color = Color.black
 		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_SUB)
@@ -227,7 +236,7 @@ func processDebugInput():
 	if Input.is_action_just_pressed("toggle_nightmode"):
 		nightmode_enabled = !nightmode_enabled
 		emit_signal("toggle_nightmode", nightmode_enabled)
-
+	
 	if Input.is_action_just_pressed("debug_spawn_ball"):
 		balls_on_field = 0
 		emit_signal("spawn_ball")

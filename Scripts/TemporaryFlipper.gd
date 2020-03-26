@@ -9,7 +9,7 @@ func _ready():
 	$Timer.set_wait_time(duration)
 
 func _process(_delta):
-	$Bar3D._on_value_changed($Timer.time_left, duration, 69)
+	$Bar3D.update_value($Timer.time_left, duration)
 	
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	if is_debug_skip or new_stage == GameState.stage.PREGAME:

@@ -34,7 +34,7 @@ func _on_NomArea_body_entered(body):
 		body.queue_free()
 
 func set_active(is_active):
-	print("Black Hole: active - ", is_active)
+	#print("Black Hole: active - ", is_active)
 	if is_active:
 		Announcer.say("black_hoe", true)
 	set_visible(is_active)
@@ -47,10 +47,21 @@ func set_active(is_active):
 func expand():
 	print("Black Hole: expanding")
 	$AnimationPlayer.play("black_hole_expand_anim")
+	
 	yield($AnimationPlayer, "animation_finished")
+	
 	GameState.on_BlackHole_fully_expanded()
+	$AnimationPlayer.play("black_hole_fade")
+	
+	yield($AnimationPlayer, "animation_finished")
+	
 	set_active(false)
+
 
 func _on_Boss_black_hole_health_threshold_reached():
 	print("Black Hole: activation boss health threshold reached")
 	set_active(true)
+
+
+func _on_Boss_solar_eclipse_health_threshold_reached():
+	expand()

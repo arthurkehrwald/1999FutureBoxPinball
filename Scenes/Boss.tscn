@@ -13,23 +13,16 @@
 extents = Vector3( 0.7, 0.7, 1.2 )
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.617629, 0.240758, 0.370728 )
+extents = Vector3( 0.617629, 0.240758, 0.569582 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1.3624, 0.5, 0.973335 )
 
 [node name="Boss" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-max_health = 100.0
-bomb_explosion_damage = 10.0
-missile_explosion_damage = 0.0
-use_speed_based_impact_damage = true
-impact_speed_damage_conversion_rate = 4.0
-min_impact_speed_for_damage = 0.5
-max_impact_damage = 25.0
-damage_to_money_rate = 10.0
-black_hole_health_percent = 45.0
-solar_eclipse_health_percent = 30.0
+MAX_HEALTH = 30.0
+USE_SPEED_BASED_IMPACT_DAMAGE = true
+FLAT_IMPACT_DAMAGE = 0.5
 
 [node name="MeshInstance" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.743335 )
@@ -45,13 +38,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.6 )
 
 [node name="BossShield" parent="." index="2" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.63114, -1.57264 )
-max_health = 15.0
 
-[node name="Bar3D" parent="." index="3" instance=ExtResource( 3 )]
+[node name="HealthBar3D" parent="." index="3" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57968, 0 )
-
-[node name="Bar" parent="Bar3D/Viewport" index="0"]
-tint_progress = Color( 1, 0.00392157, 0.00392157, 1 )
 
 [node name="StaticBody" type="StaticBody" parent="." index="4"]
 collision_layer = 17408
@@ -62,7 +51,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.6 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="StaticBody" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42606, 0.457508 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42606, 0.845905 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="StaticBody" index="2"]
@@ -74,26 +63,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.81904, 0 )
 
 [node name="BossBombGun" parent="." index="7" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.899497, -0.436927, 0, 0.436927, 0.899497, -1.40748, 0.81009, -0.225606 )
-max_impact_stun_duration = 10.0
-bomb_explosion_stun_duration = 15.0
 
 [node name="BossBombGun2" parent="." index="8" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.899497, -0.436927, 0, 0.436927, 0.899497, 1.3988, 0.833789, -0.254411 )
-is_stunnable = false
 
 [node name="BossMissileGun" parent="." index="9" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 1.58227, 1.53787 )
-is_stunnable = false
-[connection signal="came_to_life" from="." to="." method="_on_Boss_came_to_life"]
-[connection signal="death" from="." to="." method="_on_Boss_death"]
-[connection signal="death_by_damage" from="." to="." method="_on_Boss_death_by_damage"]
-[connection signal="health_changed" from="." to="Bar3D" method="_on_value_changed"]
-[connection signal="health_changed" from="." to="." method="_on_Boss_health_changed"]
 [connection signal="was_hit_bomb_explosion" from="BossBombGun" to="." method="_on_BossGun_was_hit_bomb_explosion"]
 [connection signal="was_hit_directly" from="BossBombGun" to="." method="_on_BossGun_was_hit_directly"]
 [connection signal="was_hit_bomb_explosion" from="BossBombGun2" to="." method="_on_BossGun_was_hit_bomb_explosion"]
 [connection signal="was_hit_directly" from="BossBombGun2" to="." method="_on_BossGun_was_hit_directly"]
 [connection signal="was_hit_bomb_explosion" from="BossMissileGun" to="." method="_on_BossGun_was_hit_bomb_explosion"]
 [connection signal="was_hit_directly" from="BossMissileGun" to="." method="_on_BossGun_was_hit_directly"]
-
-[editable path="Bar3D"]

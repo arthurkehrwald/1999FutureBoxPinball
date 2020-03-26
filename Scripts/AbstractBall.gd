@@ -100,6 +100,7 @@ func _physics_process(_delta):
 		set_gravity_scale_based_on_speed()
 	
 func set_gravity_scale_based_on_speed():
-		gravity_scale = clamp(-.2 * pow(.2 * get_linear_velocity().length(), 2.7) + 15, 1, 15)
+		#gravity_scale = clamp(-.2 * pow(.2 * get_linear_velocity().length(), 2.7) + 15, 1, 15)
+		gravity_scale = clamp(-.1 * pow(.2 * get_linear_velocity().length(), 2.5) + 15, 5, 15)
 		#gravity_scale = -get_linear_velocity().length() + 20
 		emit_signal("physics_debug_info_update", get_linear_velocity().length(), gravity_scale)

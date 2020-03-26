@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://Scenes/RadialBar3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/BossGun.gd" type="Script" id=2]
 [ext_resource path="res://HUD/ball_indicator.png" type="Texture" id=5]
 
@@ -9,7 +10,7 @@ extents = Vector3( 0.953087, 0.276507, 0.6 )
 [node name="BossGun" type="StaticBody"]
 collision_layer = 1024
 script = ExtResource( 2 )
-is_stunnable = true
+IS_STUNNABLE = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
@@ -19,7 +20,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8 )
 
 [node name="HitboxArea" type="Area" parent="."]
 collision_layer = 1024
-collision_mask = 257
 
 [node name="HitboxShape" type="CollisionShape" parent="HitboxArea"]
 shape = SubResource( 1 )
@@ -29,10 +29,13 @@ one_shot = true
 
 [node name="ShotTimer" type="Timer" parent="."]
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="StunnedIndicator" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
 visible = false
 modulate = Color( 1, 0, 0, 1 )
 texture = ExtResource( 5 )
+
+[node name="RadialBar3D" parent="." instance=ExtResource( 1 )]
 [connection signal="body_entered" from="HitboxArea" to="." method="_on_HitboxArea_body_entered"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/coolness_bar_fill.png" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://HUD/player_lifebar_outline.png" type="Texture" id=4]
 [ext_resource path="res://HUD/panel_right.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/PlayerStatsHUD.gd" type="Script" id=6]
-[ext_resource path="res://Audio/fx/damage_taken.wav" type="AudioStream" id=7]
 [ext_resource path="res://Scenes/GlitchShader.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
@@ -136,7 +135,3 @@ margin_left = -1.18549
 margin_top = -6.0
 margin_right = 598.815
 margin_bottom = 416.0
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-volume_db = -17.255

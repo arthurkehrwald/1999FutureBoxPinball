@@ -152,7 +152,7 @@ transform = Transform( 0.543511, 0, 0.173879, 2.98023e-08, 0.66107, -3.72529e-09
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 1.77636e-15, -1, 0, -4.37114e-08, 3.516, 0, 0.798 )
 
 [node name="MysteryTeleporterEntrance" parent="BoxV3/Playfield" instance=ExtResource( 38 )]
-transform = Transform( 0.938167, 1.24675e-07, -0.346185, -1.11759e-07, 1, 7.45058e-08, 0.346184, -5.21541e-08, 0.93817, 2.9215, 0.0508459, -3.03815 )
+transform = Transform( 0.983766, 1.29738e-07, -0.179457, -1.17347e-07, 1, 7.45058e-08, 0.179456, -5.21541e-08, 0.983769, 3.33173, 0.0509901, -6.33467 )
 collision_mask = 257
 
 [node name="MysteryTeleporterExit" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
@@ -172,7 +172,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.34299 )
 visible = false
 
 [node name="PlayerShip" parent="BoxV3/Playfield" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.165019, 2.14577e-06, 8.28379 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.165019, 2.14577e-06, 7.79239 )
 
 [node name="TemporaryFlipper" parent="BoxV3/Playfield" instance=ExtResource( 8 )]
 transform = Transform( -0.467807, 0, -0.883831, -2.23517e-08, 1, 0, 0.883831, 0, -0.467807, 2.78833, -0.000354052, -0.622326 )
@@ -252,8 +252,8 @@ transform = Transform( 1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, -0.
 visible = false
 [connection signal="released" from="BoxV3/Playfield/Plunger" to="BoxV3/Playfield/PlayerTurret" method="shoot"]
 [connection signal="black_hole_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/BlackHole" method="_on_Boss_black_hole_health_threshold_reached"]
-[connection signal="laser_trex_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/LaserTrex" method="set_alive" binds= [ true ]]
-[connection signal="solar_eclipse_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/BlackHole" method="expand"]
+[connection signal="laser_trex_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/LaserTrex" method="_on_Boss_laser_trex_health_threshold_reached"]
+[connection signal="solar_eclipse_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/BlackHole" method="_on_Boss_solar_eclipse_health_threshold_reached"]
 [connection signal="ball_entered_1" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/MysteryTeleporterExit" method="teleport_here"]
 [connection signal="ball_entered_2" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/MysteryTeleporterExit2" method="teleport_here"]
 [connection signal="ball_entered_3" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/PlayerTurret" method="insert_ball"]

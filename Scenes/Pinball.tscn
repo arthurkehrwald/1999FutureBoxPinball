@@ -11,6 +11,7 @@
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 airborne_gravity_scale_multiplier = 0.4
+speed_based_gravity_scale = true
 
 [node name="RotationCancel" parent="." index="2"]
 transform = Transform( 0.999943, -0.00603688, 0.00879337, 0.0059579, 0.999942, 0.00898212, -0.00884708, -0.00892923, 0.999921, 0, 0, 0 )

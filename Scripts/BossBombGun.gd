@@ -10,15 +10,11 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	rng.randomize()
 
-func _on_ShotTimer_timeout():
-	if !stunned and is_firing:
-		shoot_bomb()
-
 #func _on_HitboxArea_body_exited(body):
 #	if get_collision_exceptions().has(body):
 #		remove_collision_exception_with(body)
 
-func shoot_bomb():
+func _shoot():
 	$AudioStreamPlayer.play()
 	var bomb_instance = bomb_scene.instance()
 	bomb_instance.set_transform($Muzzle.get_transform())

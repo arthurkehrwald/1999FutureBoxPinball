@@ -1,13 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Bar.gd" type="Script" id=1]
-[ext_resource path="res://HUD/lifebar_fill.png" type="Texture" id=2]
-[ext_resource path="res://HUD/lifebar_bg.png" type="Texture" id=3]
+[ext_resource path="res://HUD/shop_time_left_bar_fill.png" type="Texture" id=2]
 
 [node name="Bar" type="TextureProgress"]
 step = 0.1
 value = 100.0
-texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {

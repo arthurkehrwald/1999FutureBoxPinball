@@ -1,9 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scenes/GlitchShader.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/GlitchShader.gd" type="Script" id=1]
 [ext_resource path="res://Materials/GlitchShader.tres" type="Material" id=2]
 [ext_resource path="res://Textures/shader_texture_01.png" type="Texture" id=3]
 [ext_resource path="res://Textures/checkerboard.png" type="Texture" id=4]
+
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;

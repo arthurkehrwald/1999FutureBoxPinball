@@ -2,46 +2,49 @@ extends Spatial
 
 var money_text_3d_scene = preload("res://Scenes/MoneyText3D.tscn")
 
-signal came_to_life
-signal health_changed(new_health, max_health, old_health)
+signal is_active_changed(_is_active)
+signal health_changed(new_health, MAX_HEALTH)
 signal death
-signal death_by_damage
 
-export var max_health = 3.0
-export var bomb_explosion_damage = 3.0
-export var missile_explosion_damage = 2.0
-export var static_impact_damage = 1.0
-export var use_speed_based_impact_damage = false
-export var impact_speed_damage_conversion_rate = 1.0
-export var min_impact_speed_for_damage = 5.0
-export var max_impact_damage = 15.0
-export var gives_money = true
-export var money_yield_is_damage_based = true
-export var flat_money_yield = 10.0
-export var damage_to_money_rate = 1.0
+export var MAX_HEALTH = 3.0
+export var BOMB_EXPLOSION_DAMAGE = 3.0
+export var MISSILE_EXPLOSION_DAMAGE = 2.0
+export var USE_SPEED_BASED_IMPACT_DAMAGE = false
+export var FLAT_IMPACT_DAMAGE = 1.0
+export var IMPACT_SPEED_DAMAGE_CONVERSION_RATE = 1.0
+export var MIN_IMPACT_SPEED_FOR_DAMAGE = 5.0
+export var MAX_IMPACT_DAMAGE = 15.0
+export var MOENY_YIELD_IS_DAMAGE_BASED = true
+export var FLAT_MONEY_YIELD = 10.0
+export var DAMAGE_TO_MONEY_RATE = 1.0
 
-var current_health = 3
-var is_alive = false
+var current_health = 0
+var is_active = false
+
 
 func _ready():
 	$RayCast.set_global_transform(Transform(Basis.IDENTITY, get_global_transform().origin))
 
+
 func _on_HitboxArea_body_entered(body):
-	if is_alive:
+	if is_active:
 		var damage = calc_damage(body.get_linear_velocity().length())
 		if damage > 0:		
 			take_damage(damage)
+
 
 func _on_Bomb_explosion_hit(explosion_pos):
 	$RayCast.set_cast_to(explosion_pos - $RayCast.get_global_transform().origin)
 	$RayCast.force_raycast_update()
 	$RayCast.enabled = true
 	if !$RayCast.is_colliding():
-		take_damage(bomb_explosion_damage)
+		take_damage(BOMB_EXPLOSION_DAMAGE)
+
 
 func _on_Missile_explosion_hit(_explosion_pos):
-	take_damage(missile_explosion_damage)
-	
+	take_damage(MISSILE_EXPLOSION_DAMAGE)
+
+
 func on_Explosion_hit(type, explosion_pos):
 	$RayCast.set_cast_to(explosion_pos - $RayCast.get_global_transform().origin)
 	$RayCast.force_raycast_update()
@@ -51,56 +54,71 @@ func on_Explosion_hit(type, explosion_pos):
 	else:
 		match type:
 			0:
-				take_damage(bomb_explosion_damage)
+				take_damage(BOMB_EXPLOSION_DAMAGE)
 			1:
-				take_damage(missile_explosion_damage)
-	
-func set_alive(_is_alive):
-	#print("Damageable (", name, "): alive - ", _is_alive)
-	is_alive = _is_alive
-	if _is_alive:
-		current_health = max_health
-		emit_signal("came_to_life")
+				take_damage(MISSILE_EXPLOSION_DAMAGE)
+
+
+func set_active(_is_active):
+	#print("Damageable (", name, "): alive - ", _is_active)
+	is_active = _is_active
+	var old_health = current_health
+	if _is_active:
+		current_health = MAX_HEALTH
 	else:
 		current_health = 0
-		emit_signal("death")
-	emit_signal("health_changed", current_health, max_health, 0.0)
-	
+	_on_is_active_changed()
+	emit_signal("is_active_changed", _is_active)
+	_on_health_changed(old_health)
+	emit_signal("health_changed", current_health, MAX_HEALTH)
+
+
 func calc_damage(impact_speed):
 	var damage = 0.0
-	if use_speed_based_impact_damage:
-		if impact_speed > min_impact_speed_for_damage:
-			damage = min(max_impact_damage, impact_speed * impact_speed_damage_conversion_rate)
+	if USE_SPEED_BASED_IMPACT_DAMAGE:
+		if impact_speed > MIN_IMPACT_SPEED_FOR_DAMAGE:
+			damage = min(MAX_IMPACT_DAMAGE, impact_speed * IMPACT_SPEED_DAMAGE_CONVERSION_RATE)
 	else:
-		damage = static_impact_damage
+		damage = FLAT_IMPACT_DAMAGE
 	return damage
+
 
 func take_damage(damage):
 	GameState.on_player_did_anything_at_all()
-	if gives_money:	
-			var money_yield = 0.0
-			if money_yield_is_damage_based:
-				money_yield = damage * damage_to_money_rate
-			else:
-				money_yield = flat_money_yield
-			if money_yield != 0:
-				#GameState.set_player_money(GameState.player_money + money_yield)
-				print(name, " took ", damage, ", money yield - ", money_yield)
-				GameState.add_player_money(money_yield)
-				var money_text_3d_instance = money_text_3d_scene.instance()
-				money_text_3d_instance.set_money_amount(money_yield)
-				$MoneyTextPos.add_child(money_text_3d_instance)
-				
+	var money_yield = 0.0
+	if MOENY_YIELD_IS_DAMAGE_BASED:
+		money_yield = damage * DAMAGE_TO_MONEY_RATE
+	else:
+		money_yield = FLAT_MONEY_YIELD
+	if money_yield != 0:
+		#GameState.set_player_money(GameState.player_money + money_yield)
+		#print(name, " took ", damage, ", money yield - ", money_yield)
+		GameState.add_player_money(money_yield)
+		var money_text_3d_instance = money_text_3d_scene.instance()
+		money_text_3d_instance.set_money_amount(money_yield)
+		$MoneyTextPos.add_child(money_text_3d_instance)
 	set_health(current_health - damage)
+
 
 func set_health(new_health):
 	var old_health = current_health
 	current_health = new_health
 	if current_health <= 0:
-		emit_signal("death_by_damage")
-		set_alive(false)
-	elif current_health >= max_health:
-		set_alive(true)
+		emit_signal("death")
+		_on_death()
+		set_active(false)
 	else:
-		emit_signal("health_changed", current_health, max_health, old_health)
-	
+		_on_health_changed(old_health)
+		emit_signal("health_changed", current_health, MAX_HEALTH)
+
+
+func _on_is_active_changed():
+	pass
+
+
+func _on_health_changed(_old_health):
+	pass
+
+
+func _on_death():
+	pass
