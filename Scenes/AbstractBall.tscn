@@ -18,7 +18,6 @@ gravity_scale = 15.0
 continuous_cd = true
 can_sleep = false
 script = ExtResource( 1 )
-airborne_gravity_scale_multiplier = 1.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 2 )

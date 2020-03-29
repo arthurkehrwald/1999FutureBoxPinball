@@ -54,7 +54,7 @@ pause_mode = 2
 [node name="MusicPlayer" parent="." instance=ExtResource( 34 )]
 
 [node name="BoxV3" parent="." instance=ExtResource( 36 )]
-transform = Transform( 1, 0, 0, 0, 0.987689, -0.156435, 0, 0.156435, 0.987689, -0.496422, -0.679, 0.153185 )
+transform = Transform( 1, 0, 0, 0, 0.987689, -0.156435, 0, 0.156435, 0.987689, -0.503186, -0.666515, 0.128269 )
 
 [node name="WeirdCamera" parent="BoxV3" instance=ExtResource( 39 )]
 pause_mode = 2
@@ -107,7 +107,7 @@ transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 0.176186, 3.73275, -1.
 transform = Transform( 0.362242, 2.18455e-09, 0.932084, -5.21541e-08, 1, 3.72529e-09, -0.932084, -7.45058e-08, 0.362242, -2.05152, 0.00204849, -4.64861 )
 
 [node name="BumperCage3" parent="BoxV3/Playfield" instance=ExtResource( 32 )]
-transform = Transform( -0.242787, -7.06477e-09, 0.97008, -5.21541e-08, 1, -5.58794e-09, -0.97008, -5.21541e-08, -0.242787, -2.09849, 0.00210643, -1.30236 )
+transform = Transform( -0.626238, -7.02719e-09, 0.779633, -4.47035e-08, 1, -2.23517e-08, -0.779633, -5.21541e-08, -0.626238, -2.09849, 0.00210643, -1.30236 )
 
 [node name="Boss" parent="BoxV3/Playfield" instance=ExtResource( 23 )]
 transform = Transform( -0.8, -6.20542e-15, -3.11531e-07, -7.10543e-15, 0.8, 7.45058e-09, 3.11532e-07, 7.45058e-09, -0.8, 0.71656, 0.127957, -5.34779 )
@@ -152,7 +152,7 @@ transform = Transform( 0.543511, 0, 0.173879, 2.98023e-08, 0.66107, -3.72529e-09
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 1.77636e-15, -1, 0, -4.37114e-08, 3.516, 0, 0.798 )
 
 [node name="MysteryTeleporterEntrance" parent="BoxV3/Playfield" instance=ExtResource( 38 )]
-transform = Transform( 0.983766, 1.29738e-07, -0.179457, -1.17347e-07, 1, 7.45058e-08, 0.179456, -5.21541e-08, 0.983769, 3.33173, 0.0509901, -6.33467 )
+transform = Transform( 0.983766, 1.29738e-07, -0.179457, -1.17347e-07, 1, 7.45058e-08, 0.179456, -5.21541e-08, 0.983769, 3.07829, 0.0509901, -6.13414 )
 collision_mask = 257
 
 [node name="MysteryTeleporterExit" parent="BoxV3/Playfield" instance=ExtResource( 41 )]

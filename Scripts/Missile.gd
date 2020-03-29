@@ -10,8 +10,7 @@ func _ready():
 	$AnimationPlayer.playback_speed = speed
 
 func _on_Missile_body_entered(body):
-	if !body.get_collision_layer_bit(10):
-		explode()
+	explode()
 	
 func _on_Bomb_explosion_hit():
 	explode()

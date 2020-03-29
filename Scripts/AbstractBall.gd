@@ -3,8 +3,8 @@ extends RigidBody
 signal teleport_physics_cooldown_buffer_expired
 signal physics_debug_info_update(speed, gravity)
 
-export var airborne_gravity_scale_multiplier = .4
-export var speed_based_gravity_scale = false
+export var AIRBORNE_GRAVITY_SCALE_MULTIPLIER = .4
+export var SPEED_BASED_GRAVITY_SCALE = false
 
 var is_airborne = false
 var raycast = RayCast
@@ -25,7 +25,7 @@ func _ready():
 	
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	if is_debug_skip or new_stage == GameState.stage.PREGAME:
-		queue_free()
+		#queue_free()
 		pass
 	
 func teleport(destination, maintain_velocity, impulse_on_exit):
@@ -91,16 +91,20 @@ func _physics_process(_delta):
 	if is_airborne == raycast.is_colliding():
 		is_airborne = !is_airborne
 		if is_airborne:
-			gravity_scale *= airborne_gravity_scale_multiplier
+			if not SPEED_BASED_GRAVITY_SCALE:
+				gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
 			emit_signal("physics_debug_info_update", 1, 0)
 		else:
-			gravity_scale /= airborne_gravity_scale_multiplier
+			if not SPEED_BASED_GRAVITY_SCALE:
+				gravity_scale /= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
 			emit_signal("physics_debug_info_update", 0, 1)
-	if speed_based_gravity_scale:
+	if SPEED_BASED_GRAVITY_SCALE:
 		set_gravity_scale_based_on_speed()
 	
 func set_gravity_scale_based_on_speed():
 		#gravity_scale = clamp(-.2 * pow(.2 * get_linear_velocity().length(), 2.7) + 15, 1, 15)
 		gravity_scale = clamp(-.1 * pow(.2 * get_linear_velocity().length(), 2.5) + 15, 5, 15)
+		if is_airborne:
+			gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
 		#gravity_scale = -get_linear_velocity().length() + 20
 		emit_signal("physics_debug_info_update", get_linear_velocity().length(), gravity_scale)

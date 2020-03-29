@@ -14,9 +14,8 @@ radius = 0.2
 collision_layer = 256
 collision_mask = 11167
 script = ExtResource( 1 )
-airborne_gravity_scale_multiplier = 0.4
-speed_based_gravity_scale = true
-fuse_time = 5.0
+AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 0.1
+SPEED_BASED_GRAVITY_SCALE = true
 
 [node name="Explosion" parent="." index="3" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00263047, 0.00765622, 0.00206661 )

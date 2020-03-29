@@ -16,8 +16,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.342285 )
 [node name="HitboxShape" parent="HitboxArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
 
+[node name="ShotTimeBar" parent="ShootingState" index="1"]
+transform = Transform( -1, 2.72338e-07, -2.78345e-07, 0, 0.714778, 0.699352, 3.89414e-07, 0.699352, -0.714778, -9.98901e-08, 0.250978, -0.256514 )
+
+[node name="StunnedIndicator" parent="StunnedState" index="0"]
+transform = Transform( 1, 0, 0, 0, 0.844459, -0.535621, 0, 0.535621, 0.844459, 0, 0.271973, -0.243469 )
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource( 1 )
-
-[node name="RadialBar3D" parent="." index="7"]
-transform = Transform( 1.00426, 0, 0, 0, -0.733622, 0.685815, 0, -0.685815, -0.733622, 0.0224609, 0.381438, -0.171417 )

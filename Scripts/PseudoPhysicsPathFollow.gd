@@ -108,7 +108,7 @@ func _physics_process(delta):
 func start_follow():
 	looping_body.get_ref().set_visible(false)
 	looping_body.get_ref().set_locked(true)
-	if looping_body.get_ref().get_collision_layer() == 1:
+	if looping_body.get_ref().is_in_group("Pinballs")
 		$BallReplica.set_visible(true)
 		looping_body_is_bomb = false
 	else:

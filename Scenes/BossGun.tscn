@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/RadialBar3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/BossGun.gd" type="Script" id=2]
-[ext_resource path="res://HUD/ball_indicator.png" type="Texture" id=5]
+[ext_resource path="res://HUD/diagonal_cross.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/BossGunStunnedState.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/BossGunShootingState.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/BossGunIdleState.gd" type="Script" id=6]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.953087, 0.276507, 0.6 )
+extents = Vector3( 0.5, 0.5, 0.5 )
 
 [node name="BossGun" type="StaticBody"]
 collision_layer = 1024
@@ -16,7 +19,7 @@ IS_STUNNABLE = true
 shape = SubResource( 1 )
 
 [node name="Muzzle" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
 
 [node name="HitboxArea" type="Area" parent="."]
 collision_layer = 1024
@@ -24,18 +27,29 @@ collision_layer = 1024
 [node name="HitboxShape" type="CollisionShape" parent="HitboxArea"]
 shape = SubResource( 1 )
 
-[node name="StunTimer" type="Timer" parent="."]
-one_shot = true
+[node name="IdleState" type="Spatial" parent="."]
+script = ExtResource( 6 )
 
-[node name="ShotTimer" type="Timer" parent="."]
+[node name="ShootingState" type="Spatial" parent="."]
+script = ExtResource( 5 )
 
-[node name="StunnedIndicator" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+[node name="ShotTimer" type="Timer" parent="ShootingState"]
+
+[node name="ShotTimeBar" parent="ShootingState" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6 )
+visible = false
+
+[node name="StunnedState" type="Spatial" parent="."]
+script = ExtResource( 4 )
+
+[node name="StunnedIndicator" type="Sprite3D" parent="StunnedState"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6 )
 visible = false
 modulate = Color( 1, 0, 0, 1 )
-texture = ExtResource( 5 )
+texture = ExtResource( 3 )
 
-[node name="RadialBar3D" parent="." instance=ExtResource( 1 )]
+[node name="StunTimer" type="Timer" parent="StunnedState"]
+one_shot = true
 [connection signal="body_entered" from="HitboxArea" to="." method="_on_HitboxArea_body_entered"]
-[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
-[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
+[connection signal="timeout" from="ShootingState/ShotTimer" to="ShootingState" method="_on_ShotTimer_timeout"]
+[connection signal="timeout" from="StunnedState/StunTimer" to="StunnedState" method="_on_StunTimer_timeout"]

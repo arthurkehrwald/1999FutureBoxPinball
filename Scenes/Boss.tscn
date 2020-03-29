@@ -63,9 +63,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.81904, 0 )
 
 [node name="BossBombGun" parent="." index="7" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.899497, -0.436927, 0, 0.436927, 0.899497, -1.40748, 0.81009, -0.225606 )
+SECONDS_BETWEEN_SHOTS = 3.0
 
 [node name="BossBombGun2" parent="." index="8" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.899497, -0.436927, 0, 0.436927, 0.899497, 1.3988, 0.833789, -0.254411 )
+SECONDS_BETWEEN_SHOTS = 3.0
 
 [node name="BossMissileGun" parent="." index="9" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 1.58227, 1.53787 )

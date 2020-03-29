@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/player_lifebar_fill.png-69787ece0c0ca8b6d0b7d81be6b5500c.s3tc.stex"
-path.etc2="res://.import/player_lifebar_fill.png-69787ece0c0ca8b6d0b7d81be6b5500c.etc2.stex"
+path.s3tc="res://.import/diagonal_cross.png-11e37166bd3f670e67ff4df669c9c619.s3tc.stex"
+path.etc2="res://.import/diagonal_cross.png-11e37166bd3f670e67ff4df669c9c619.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://HUD/player_lifebar_fill.png"
-dest_files=[ "res://.import/player_lifebar_fill.png-69787ece0c0ca8b6d0b7d81be6b5500c.s3tc.stex", "res://.import/player_lifebar_fill.png-69787ece0c0ca8b6d0b7d81be6b5500c.etc2.stex" ]
+source_file="res://HUD/diagonal_cross.png"
+dest_files=[ "res://.import/diagonal_cross.png-11e37166bd3f670e67ff4df669c9c619.s3tc.stex", "res://.import/diagonal_cross.png-11e37166bd3f670e67ff4df669c9c619.etc2.stex" ]
 
 [params]
 
