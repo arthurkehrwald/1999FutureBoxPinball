@@ -18,8 +18,7 @@ extents = Vector3( 0.482404, 0.557697, 0.15075 )
 extents = Vector3( 0.380734, 0.462911, 1.13464 )
 
 [node name="MultiballShip" type="StaticBody"]
-collision_layer = 2
-collision_mask = 257
+collision_layer = 32
 script = ExtResource( 2 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
@@ -37,6 +36,7 @@ material/0 = ExtResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692147, 0.677727, 0.0350476 )
 monitorable = false
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 0.988827, 0, -0.149069, 0, 1, 0, 0.149069, 0, 0.988827, 0, 0.406769, 0.118661 )
@@ -58,6 +58,7 @@ material/0 = ExtResource( 4 )
 [node name="Area2" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.885259, 0.466593, 0.882881 )
 gravity_vec = Vector3( -0.1, -0.5, 0 )
+collision_layer = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Area2"]
 shape = SubResource( 4 )

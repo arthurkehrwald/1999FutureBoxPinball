@@ -2,7 +2,7 @@ extends Spatial
 
 var money_text_3d_scene = preload("res://Scenes/MoneyText3D.tscn")
 
-signal is_active_changed(_is_active)
+signal is_active_changed(value)
 signal health_changed(new_health, MAX_HEALTH)
 signal death
 
@@ -17,63 +17,65 @@ export var MAX_IMPACT_DAMAGE = 15.0
 export var MOENY_YIELD_IS_DAMAGE_BASED = true
 export var FLAT_MONEY_YIELD = 10.0
 export var DAMAGE_TO_MONEY_RATE = 1.0
+export var MONEY_TEXT_HEIGHT = .5
 
 var current_health = 0
 var is_active = false
 
 
-func _ready():
-	$RayCast.set_global_transform(Transform(Basis.IDENTITY, get_global_transform().origin))
+#func _ready():
+#	$RayCast.set_global_transform(Transform(Basis.IDENTITY, get_global_transform().origin))
 
 
-func _on_HitboxArea_body_entered(body):
-	if is_active:
-		var damage = calc_damage(body.get_linear_velocity().length())
-		if damage > 0:		
-			take_damage(damage)
+#func _on_HitboxArea_body_entered(body):
+#	if is_active:
+#		var damage = _calc_damage(body.get_linear_velocity().length())
+#		if damage > 0:		
+#			_take_damage(damage)
 
 
-func _on_Bomb_explosion_hit(explosion_pos):
-	$RayCast.set_cast_to(explosion_pos - $RayCast.get_global_transform().origin)
-	$RayCast.force_raycast_update()
-	$RayCast.enabled = true
-	if !$RayCast.is_colliding():
-		take_damage(BOMB_EXPLOSION_DAMAGE)
+#func _on_Bomb_explosion_hit(explosion_pos):
+#	$RayCast.set_cast_to(explosion_pos - $RayCast.get_global_transform().origin)
+#	$RayCast.force_raycast_update()
+#	$RayCast.enabled = true
+#	if !$RayCast.is_colliding():
+#		_take_damage(BOMB_EXPLOSION_DAMAGE)
 
 
-func _on_Missile_explosion_hit(_explosion_pos):
-	take_damage(MISSILE_EXPLOSION_DAMAGE)
+#func _on_Missile_explosion_hit(_explosion_pos):
+#	_take_damage(MISSILE_EXPLOSION_DAMAGE)
 
 
-func on_Explosion_hit(type, explosion_pos):
-	$RayCast.set_cast_to(explosion_pos - $RayCast.get_global_transform().origin)
-	$RayCast.force_raycast_update()
-	$RayCast.enabled = true
-	if $RayCast.is_colliding():
-		print("Damageable: explosion blocked")
-	else:
-		match type:
-			0:
-				take_damage(BOMB_EXPLOSION_DAMAGE)
-			1:
-				take_damage(MISSILE_EXPLOSION_DAMAGE)
+#func on_Explosion_hit(type, explosion_pos):
+#	$RayCast.set_cast_to(explosion_pos - $RayCast.get_global_transform().origin)
+#	$RayCast.force_raycast_update()
+#	$RayCast.enabled = true
+#	if $RayCast.is_colliding():
+#		print("Damageable: explosion blocked")
+#	else:
+#		match type:
+#			0:
+#				_take_damage(BOMB_EXPLOSION_DAMAGE)
+#			1:
+#				_take_damage(MISSILE_EXPLOSION_DAMAGE)
 
 
-func set_active(_is_active):
-	#print("Damageable (", name, "): alive - ", _is_active)
-	is_active = _is_active
+func set_is_active(value):
+	is_active = value
 	var old_health = current_health
-	if _is_active:
-		current_health = MAX_HEALTH
-	else:
-		current_health = 0
+	current_health = MAX_HEALTH if value else 0
 	_on_is_active_changed()
-	emit_signal("is_active_changed", _is_active)
+	emit_signal("is_active_changed", value)
 	_on_health_changed(old_health)
 	emit_signal("health_changed", current_health, MAX_HEALTH)
 
 
-func calc_damage(impact_speed):
+func on_hit_by_projectile(body):
+	if is_active:
+		_take_damage(_calc_damage(body.get_linear_velocity().length()))
+
+
+func _calc_damage(impact_speed):
 	var damage = 0.0
 	if USE_SPEED_BASED_IMPACT_DAMAGE:
 		if impact_speed > MIN_IMPACT_SPEED_FOR_DAMAGE:
@@ -83,7 +85,7 @@ func calc_damage(impact_speed):
 	return damage
 
 
-func take_damage(damage):
+func _take_damage(damage):
 	GameState.on_player_did_anything_at_all()
 	var money_yield = 0.0
 	if MOENY_YIELD_IS_DAMAGE_BASED:
@@ -96,17 +98,18 @@ func take_damage(damage):
 		GameState.add_player_money(money_yield)
 		var money_text_3d_instance = money_text_3d_scene.instance()
 		money_text_3d_instance.set_money_amount(money_yield)
-		$MoneyTextPos.add_child(money_text_3d_instance)
-	set_health(current_health - damage)
+		add_child(money_text_3d_instance)
+		money_text_3d_instance.translate(Vector3(0, MONEY_TEXT_HEIGHT, 0))
+	_set_health(current_health - damage)
 
 
-func set_health(new_health):
+func _set_health(new_health):
 	var old_health = current_health
 	current_health = new_health
 	if current_health <= 0:
 		emit_signal("death")
 		_on_death()
-		set_active(false)
+		set_is_active(false)
 	else:
 		_on_health_changed(old_health)
 		emit_signal("health_changed", current_health, MAX_HEALTH)

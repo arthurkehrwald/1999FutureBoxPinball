@@ -9,7 +9,7 @@ func enter():
 	$ShotTimeBar.set_visible(true)
 	set_process(true)
 
-func handle_input(var input, var input_strength = NAN):
+func handle_input(var input, var opt_info = null):
 	match input:
 		boss_gun.In.SHOT_TIMER_TIMEOUT:
 			boss_gun._shoot()
@@ -18,10 +18,11 @@ func handle_input(var input, var input_strength = NAN):
 			idle_state.enter()
 			boss_gun.state = idle_state
 		boss_gun.In.HIT_DIRECTLY:
-			assert(input_strength != NAN)
-			if boss_gun.IS_STUNNABLE and input_strength > boss_gun.MIN_IMPACT_SPEED_FOR_STUN:
+			assert(opt_info != null)
+			var impact_speed = opt_info.get_linear_velocity().length
+			if boss_gun.IS_STUNNABLE and impact_speed > boss_gun.MIN_IMPACT_SPEED_FOR_STUN:
 				exit()
-				stunned_state.enter(stunned_state.ImpactType.DIRECT, input_strength)
+				stunned_state.enter(stunned_state.ImpactType.DIRECT, impact_speed)
 				boss_gun.state = stunned_state
 		boss_gun.In.HIT_EXPLOSION:
 			if boss_gun.IS_STUNNABLE:

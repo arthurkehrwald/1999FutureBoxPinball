@@ -34,10 +34,3 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1.6 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/enemy_fleet_appear_anim = ExtResource( 3 )
 anims/enemy_fleet_idle_anim = ExtResource( 5 )
-[connection signal="death" from="ParentForAnimation/EnemyShip" to="." method="_on_EnemyShip_death"]
-[connection signal="death" from="ParentForAnimation/EnemyShip2" to="." method="_on_EnemyShip_death"]
-[connection signal="death" from="ParentForAnimation/EnemyShip3" to="." method="_on_EnemyShip_death"]
-[connection signal="death" from="ParentForAnimation/EnemyShip4" to="." method="_on_EnemyShip_death"]
-[connection signal="death" from="ParentForAnimation/EnemyShip5" to="." method="_on_EnemyShip_death"]
-[connection signal="death" from="ParentForAnimation/EnemyShip7" to="." method="_on_EnemyShip_death"]
-[connection signal="death" from="ParentForAnimation/EnemyShip6" to="." method="_on_EnemyShip_death"]

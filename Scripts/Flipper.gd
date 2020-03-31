@@ -25,6 +25,7 @@ func _physics_process(delta):
 		if rotation_progress < 1:
 			rotation_progress += TURN_SPEED / MAX_TURN_ANGLE * delta
 			for body in $Area.get_overlapping_bodies():
+				print(body.name)
 				body.apply_central_impulse(-get_global_transform().basis.z.normalized() - body.get_linear_velocity().normalized() * sideways_impulse_strength * delta)
 				body.apply_central_impulse(-get_global_transform().basis.z.normalized() * forward_impulse_strength * delta)
 	elif rotation_progress > 0:

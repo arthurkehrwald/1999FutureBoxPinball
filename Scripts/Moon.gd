@@ -24,3 +24,5 @@ func _on_MoonGate_came_to_life():
 func _on_MoonGate_death():
 	#print("Moon: moon gate died")
 	set_flying(true)
+
+

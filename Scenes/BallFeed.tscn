@@ -6,7 +6,7 @@
 extents = Vector3( 0.3, 0.5, 0.1 )
 
 [node name="Ball Feed" type="StaticBody"]
-collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( 8.94602e-09, 0.965926, 0.258819, -2.26267e-08, -0.258819, 0.965926, 1, -1.44974e-08, 1.95403e-08, 0.022, 0, 0 )

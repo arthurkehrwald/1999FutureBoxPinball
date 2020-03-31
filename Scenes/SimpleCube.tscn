@@ -10,7 +10,7 @@
 [sub_resource type="CubeMesh" id=2]
 
 [node name="SimpleCube" type="StaticBody"]
-collision_layer = 2
+collision_layer = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.2, 0 )

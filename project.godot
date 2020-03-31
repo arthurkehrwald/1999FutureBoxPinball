@@ -8,9 +8,56 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Area",
+"class": "Explosion",
+"language": "GDScript",
+"path": "res://Scripts/Explosion.gd"
+}, {
+"base": "StaticBody",
+"class": "Gate",
+"language": "GDScript",
+"path": "res://Scripts/Gate.gd"
+}, {
+"base": "Area",
+"class": "NoRemoteCotrolArea",
+"language": "GDScript",
+"path": "res://Scripts/NoRemoteControlArea.gd"
+}, {
+"base": "RigidBody",
+"class": "Pinball",
+"language": "GDScript",
+"path": "res://Scripts/Pinball.gd"
+}, {
+"base": "RigidBody",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://Scripts/Projectile.gd"
+}, {
+"base": "RigidBody",
+"class": "Roller",
+"language": "GDScript",
+"path": "res://Scripts/Roller.gd"
+}, {
+"base": "Spatial",
+"class": "RotationStabiliser",
+"language": "GDScript",
+"path": "res://Scripts/RotationStabiliser.gd"
+}, {
+"base": "Area",
+"class": "Shop",
+"language": "GDScript",
+"path": "res://Scripts/Shop.gd"
+} ]
 _global_script_class_icons={
-
+"Explosion": "",
+"Gate": "",
+"NoRemoteCotrolArea": "",
+"Pinball": "",
+"Projectile": "",
+"Roller": "",
+"RotationStabiliser": "",
+"Shop": ""
 }
 
 [application]
@@ -162,22 +209,12 @@ debug_goto_solar_eclipse={
 
 [layer_names]
 
-3d_physics/layer_1="ball"
-3d_physics/layer_2="static"
-3d_physics/layer_3="flippers"
-3d_physics/layer_4="plunger"
-3d_physics/layer_5="bumpers"
-3d_physics/layer_6="rollovers"
-3d_physics/layer_7="drain"
-3d_physics/layer_8="missiles"
-3d_physics/layer_9="bombs"
-3d_physics/layer_10="player_ship"
-3d_physics/layer_11="boss"
-3d_physics/layer_12="enemy_ships"
-3d_physics/layer_13="explosions"
-3d_physics/layer_14="force_fields"
-3d_physics/layer_15="damageable"
-3d_physics/layer_16="shield"
+3d_physics/layer_1="moving_bodies"
+3d_physics/layer_2="pinball_areas"
+3d_physics/layer_3="bomb_areas"
+3d_physics/layer_4="missile_areas"
+3d_physics/layer_5="explosions"
+3d_physics/layer_6="ground"
 
 [physics]
 

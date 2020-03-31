@@ -6,8 +6,6 @@
 [ext_resource path="res://Materials/wireframe_material.tres" type="Material" id=4]
 [ext_resource path="res://Meshes/Wireframe/slingshot_wireframe_r.obj" type="ArrayMesh" id=5]
 
-
-
 [sub_resource type="CylinderShape" id=1]
 radius = 0.119733
 height = 0.5
@@ -21,7 +19,7 @@ points = PoolVector3Array( 0.06, 0, 0.11, -0.62, 0, 0.95, 1.55, 0, 0.12, 0.06, 0
 
 [node name="Slingshot_R" type="StaticBody"]
 transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0 )
-collision_layer = 2
+collision_layer = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
@@ -47,5 +45,5 @@ shape = SubResource( 2 )
 transform = Transform( 4.37114e-08, 3.82137e-15, -1, 8.74228e-08, -1, 0, -1, -8.74228e-08, -4.37114e-08, 1.91069e-15, 0.5, 4.37114e-08 )
 shape = SubResource( 3 )
 
-[node name="SlingshotTrigger3" parent="." instance=ExtResource( 3 )]
+[node name="SlingshotTrigger" parent="." instance=ExtResource( 3 )]
 transform = Transform( -0.379128, 0, -0.0652406, 0, 0.25, 0, 0.974927, 0, -0.0253707, -0.58, 0.25, -0.501 )

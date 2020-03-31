@@ -10,8 +10,7 @@ extents = Vector3( 0.400371, 0.4, 1.85 )
 
 [node name="CurvedRamp" type="StaticBody"]
 transform = Transform( 0.594161, 0, 0.0835039, 0, 0.6, 0, -0.0835039, 0, 0.594161, 0, 0, 0 )
-collision_layer = 2
-collision_mask = 257
+collision_layer = 32
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = ExtResource( 5 )
@@ -31,8 +30,7 @@ gravity_vec = Vector3( 0, -0.8, 0 )
 gravity = 1.0
 linear_damp = 0.0
 angular_damp = 0.0
-collision_layer = 8192
-collision_mask = 257
+collision_layer = 0
 
 [node name="CollisionShape2" type="CollisionShape" parent="Area"]
 transform = Transform( 0.977219, -0.0406902, -0.208297, -0.0223185, 0.956304, -0.291519, 0.211057, 0.289526, 0.933612, -0.0435278, 0.709334, 0.0393072 )

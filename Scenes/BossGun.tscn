@@ -11,7 +11,8 @@
 extents = Vector3( 0.5, 0.5, 0.5 )
 
 [node name="BossGun" type="StaticBody"]
-collision_layer = 1024
+collision_layer = 0
+collision_mask = 23
 script = ExtResource( 2 )
 IS_STUNNABLE = true
 
@@ -22,7 +23,8 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
 
 [node name="HitboxArea" type="Area" parent="."]
-collision_layer = 1024
+collision_layer = 0
+collision_mask = 0
 
 [node name="HitboxShape" type="CollisionShape" parent="HitboxArea"]
 shape = SubResource( 1 )

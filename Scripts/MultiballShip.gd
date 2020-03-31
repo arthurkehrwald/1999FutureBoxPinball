@@ -25,7 +25,7 @@ func _on_Area_body_entered(body):
 	body.set_visible(false)
 	body.set_locked(true)
 	body.delayed_teleport(muzzle_transforms[balls_locked].origin)
-	body.set_accessible_to_player(false)
+	body.set_is_accessible_to_player(false)
 	GameState.balls_on_field -= 1	
 	balls_locked += 1
 	if balls_locked >= 3:
@@ -35,7 +35,7 @@ func _on_Area_body_entered(body):
 				loaded_balls[i].get_ref().set_visible(true)
 				loaded_balls[i].get_ref().set_locked(false)
 				loaded_balls[i].get_ref().apply_central_impulse(-muzzle_transforms[i].basis.z.normalized() * muzzle_velocity)
-				loaded_balls[i].get_ref().set_accessible_to_player(true)
+				loaded_balls[i].get_ref().set_is_accessible_to_player(true)
 		GameState.balls_on_field += 3
 		Announcer.say("multiball")
 	else:

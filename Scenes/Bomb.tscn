@@ -1,38 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/Bomb.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/BombMesh.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Explosion.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/AbstractBall.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Roller.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Materials/bomb.tres" type="Material" id=2]
+[ext_resource path="res://Scripts/Bomb.gd" type="Script" id=3]
 
-[sub_resource type="SphereShape" id=1]
-radius = 0.2
+[node name="Bomb" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
 
-[node name="Bomb" groups=[
-"Bombs",
-] instance=ExtResource( 4 )]
-collision_layer = 256
-collision_mask = 11167
-script = ExtResource( 1 )
-AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 0.1
-SPEED_BASED_GRAVITY_SCALE = true
-
-[node name="Explosion" parent="." index="3" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00263047, 0.00765622, 0.00206661 )
-
-[node name="BombMesh" parent="." index="4" instance=ExtResource( 2 )]
+[node name="MeshInstance" parent="." index="2"]
+material/0 = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="." index="5"]
 one_shot = true
-
-[node name="HitboxArea" type="Area" parent="." index="6"]
-linear_damp = -1.0
-angular_damp = -1.0
-monitorable = false
-collision_layer = 0
-collision_mask = 16896
-
-[node name="CollisionShape" type="CollisionShape" parent="HitboxArea" index="0"]
-shape = SubResource( 1 )
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="body_entered" from="HitboxArea" to="." method="_on_HitboxArea_body_entered"]

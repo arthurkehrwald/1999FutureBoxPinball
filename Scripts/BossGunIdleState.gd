@@ -7,7 +7,7 @@ onready var stunned_state = get_node("../StunnedState")
 func enter():
 	pass
 
-func handle_input(var input, var _input_strength = NAN):
+func handle_input(var input, var _opt_info = null):
 	if input == boss_gun.In.BOSS_SHOOT_COMMAND:
 		exit()
 		boss_gun.state = get_node("../ShootingState")

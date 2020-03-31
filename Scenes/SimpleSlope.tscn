@@ -12,7 +12,7 @@ points = PoolVector3Array( 0, 0, 0, 0.4, 0, 0, 0, 0, 0.4, 0, 0.4, 0, 0.4, 0.4, 0
 [sub_resource type="SpatialMaterial" id=2]
 
 [node name="SimpleSlope" type="StaticBody"]
-collision_layer = 2
+collision_layer = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

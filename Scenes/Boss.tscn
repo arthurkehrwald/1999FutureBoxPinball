@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Boss.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Damageable.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Bar3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Meshes/boss.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=5]
@@ -18,59 +17,50 @@ extents = Vector3( 0.617629, 0.240758, 0.569582 )
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1.3624, 0.5, 0.973335 )
 
-[node name="Boss" instance=ExtResource( 2 )]
+[node name="Boss" type="StaticBody"]
+collision_layer = 0
+collision_mask = 23
 script = ExtResource( 1 )
 MAX_HEALTH = 30.0
 USE_SPEED_BASED_IMPACT_DAMAGE = true
 FLAT_IMPACT_DAMAGE = 0.5
 
-[node name="MeshInstance" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.743335 )
+[node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 4 )
 material/0 = ExtResource( 5 )
 
-[node name="HitboxArea" parent="." index="1"]
-collision_layer = 17408
-collision_mask = 1
-
-[node name="HitboxShape" parent="HitboxArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.6 )
-
-[node name="BossShield" parent="." index="2" instance=ExtResource( 8 )]
+[node name="BossShield" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.63114, -1.57264 )
 
-[node name="HealthBar3D" parent="." index="3" instance=ExtResource( 3 )]
+[node name="HealthBar3D" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57968, 0 )
 
-[node name="StaticBody" type="StaticBody" parent="." index="4"]
-collision_layer = 17408
-collision_mask = 257
+[node name="BossBombGun" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.899497, -0.436927, 0, 0.436927, 0.899497, -1.40748, 0.81009, -0.225606 )
+collision_layer = 1024
+collision_mask = 1
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.6 )
+[node name="BossBombGun2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.899497, -0.436927, 0, 0.436927, 0.899497, 1.3988, 0.833789, -0.254411 )
+collision_layer = 1024
+collision_mask = 1
+
+[node name="BossMissileGun" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 1.58227, 1.53787 )
+collision_layer = 1024
+collision_mask = 1
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.200293 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2" type="CollisionShape" parent="StaticBody" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42606, 0.845905 )
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42606, 0.045612 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape3" type="CollisionShape" parent="StaticBody" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00231123, 0.513669, 1.1778 )
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00231123, 0.513669, 0.377507 )
 shape = SubResource( 3 )
-
-[node name="RayCast" parent="." index="6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.81904, 0 )
-
-[node name="BossBombGun" parent="." index="7" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 0.899497, -0.436927, 0, 0.436927, 0.899497, -1.40748, 0.81009, -0.225606 )
-SECONDS_BETWEEN_SHOTS = 3.0
-
-[node name="BossBombGun2" parent="." index="8" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 0.899497, -0.436927, 0, 0.436927, 0.899497, 1.3988, 0.833789, -0.254411 )
-SECONDS_BETWEEN_SHOTS = 3.0
-
-[node name="BossMissileGun" parent="." index="9" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 1.58227, 1.53787 )
 [connection signal="was_hit_bomb_explosion" from="BossBombGun" to="." method="_on_BossGun_was_hit_bomb_explosion"]
 [connection signal="was_hit_directly" from="BossBombGun" to="." method="_on_BossGun_was_hit_directly"]
 [connection signal="was_hit_bomb_explosion" from="BossBombGun2" to="." method="_on_BossGun_was_hit_bomb_explosion"]

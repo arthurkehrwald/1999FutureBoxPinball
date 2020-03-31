@@ -34,14 +34,18 @@ func _ready():
 	$ShootingState/ShotTimer.set_wait_time(SECONDS_BETWEEN_SHOTS)
 
 
-func handle_input(input, input_strength = NAN):
-	state.handle_input(input, input_strength)
+func handle_input(input, opt_info = null):
+	state.handle_input(input, opt_info)
 
 
 func _on_HitboxArea_body_entered(body):
 	handle_input(In.HIT_DIRECTLY, body.get_linear_velocity().length())
 	emit_signal("was_hit_directly", body.get_linear_velocity().length())	
 	print("BossGun: was hit directly.")
+
+
+func _on_impact(body):
+	handle_input(In.HIT_DIRECTLY, body)
 
 
 func _on_Bomb_explosion_hit():

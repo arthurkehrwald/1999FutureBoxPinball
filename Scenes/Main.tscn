@@ -73,7 +73,6 @@ sideways_impulse_strength = 0
 
 [node name="Flipper_R" parent="BoxV3/Playfield" instance=ExtResource( 26 )]
 transform = Transform( 0.819152, 0, 0.573577, 2.98023e-08, 1, 0, -0.573577, 0, 0.819152, 0.942751, -0.000406027, 6.53826 )
-collision_mask = 1
 TURN_SPEED = 1000
 sideways_impulse_strength = 0
 
@@ -113,7 +112,7 @@ transform = Transform( -0.626238, -7.02719e-09, 0.779633, -4.47035e-08, 1, -2.23
 transform = Transform( -0.8, -6.20542e-15, -3.11531e-07, -7.10543e-15, 0.8, 7.45058e-09, 3.11532e-07, 7.45058e-09, -0.8, 0.71656, 0.127957, -5.34779 )
 
 [node name="CurvedRamp" parent="BoxV3/Playfield" instance=ExtResource( 35 )]
-transform = Transform( 0.594161, 0, 0.083504, 0, 0.600001, -2.23517e-08, -0.0835039, 3.72529e-09, 0.594162, -0.547634, -0.00720787, -2.98918 )
+transform = Transform( 0.594161, 0, 0.083504, 0, 0.600001, -2.23517e-08, -0.0835039, -3.72529e-09, 0.594162, -0.547634, -0.00720787, -2.98918 )
 
 [node name="CurvedRamp_R" parent="BoxV3/Playfield" instance=ExtResource( 27 )]
 transform = Transform( 0.594161, 0, -0.0835039, 0, 0.6, -2.98023e-08, 0.0835039, 3.72529e-09, 0.594161, 1.9, 0.001, -3 )
@@ -176,6 +175,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.165019, 2.14577e-06, 7.7923
 
 [node name="TemporaryFlipper" parent="BoxV3/Playfield" instance=ExtResource( 8 )]
 transform = Transform( -0.467807, 0, -0.883831, -2.23517e-08, 1, 0, 0.883831, 0, -0.467807, 2.78833, -0.000354052, -0.622326 )
+collision_layer = 4
+collision_mask = 257
 IS_RIGHT_FLIPPER = true
 
 [node name="NoRemoteControlArea" parent="BoxV3/Playfield" instance=ExtResource( 16 )]
@@ -251,13 +252,9 @@ transform = Transform( 1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, -0.
 [node name="GlitchShaderFullscreen" parent="." instance=ExtResource( 13 )]
 visible = false
 [connection signal="released" from="BoxV3/Playfield/Plunger" to="BoxV3/Playfield/PlayerTurret" method="shoot"]
-[connection signal="black_hole_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/BlackHole" method="_on_Boss_black_hole_health_threshold_reached"]
-[connection signal="laser_trex_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/LaserTrex" method="_on_Boss_laser_trex_health_threshold_reached"]
-[connection signal="solar_eclipse_health_threshold_reached" from="BoxV3/Playfield/Boss" to="BoxV3/Playfield/BlackHole" method="_on_Boss_solar_eclipse_health_threshold_reached"]
 [connection signal="ball_entered_1" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/MysteryTeleporterExit" method="teleport_here"]
 [connection signal="ball_entered_2" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/MysteryTeleporterExit2" method="teleport_here"]
 [connection signal="ball_entered_3" from="BoxV3/Playfield/MysteryTeleporterEntrance" to="BoxV3/Playfield/PlayerTurret" method="insert_ball"]
-[connection signal="health_changed" from="BoxV3/Playfield/PlayerShip" to="BoxV3/Playfield/PlayerStatsHUD3D/Viewport/PlayerStatsHUD" method="_on_PlayerShip_health_changed"]
 [connection signal="menu_triggered" from="BoxV3/Playfield/Shop" to="BoxV3/Playfield/CentralHUD" method="_on_Shop_menu_triggered"]
 [connection signal="player_bought_turret_shot" from="BoxV3/Playfield/Shop" to="BoxV3/Playfield/PlayerTurret" method="insert_ball"]
 [connection signal="bought_flipper" from="BoxV3/Playfield/CentralHUD/Viewport/ShopMenu" to="BoxV3/Playfield/TemporaryFlipper" method="_on_ShopMenu_bought_flipper"]

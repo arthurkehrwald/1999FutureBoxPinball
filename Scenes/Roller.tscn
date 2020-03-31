@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Roller.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Projectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/RotationStabiliser.gd" type="Script" id=3]
+[ext_resource path="res://Meshes/Collision/roller.tres" type="Shape" id=4]
+
+[sub_resource type="SphereMesh" id=1]
+radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 8
+
+[node name="Roller" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" parent="." index="0"]
+shape = ExtResource( 4 )
+
+[node name="CollisionShape" parent="Area" index="0"]
+shape = ExtResource( 4 )
+
+[node name="MeshInstance" parent="." index="2"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="RotationStabiliser" type="Spatial" parent="." index="3"]
+script = ExtResource( 3 )
+
+[node name="RayCast" type="RayCast" parent="RotationStabiliser" index="0"]
+enabled = true
+cast_to = Vector3( 0, -0.4, 0 )
+collision_mask = 32
+
+[node name="OmniLight" type="OmniLight" parent="." index="4"]
+omni_range = 1.0

@@ -8,9 +8,8 @@ radius = 2.0
 
 [node name="Explosion" type="Area"]
 monitoring = false
-monitorable = false
-collision_layer = 4096
-collision_mask = 16384
+collision_layer = 16
+collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="ExplosionShape" type="CollisionShape" parent="."]
@@ -18,8 +17,15 @@ shape = SubResource( 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+autoplay = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.3
 one_shot = true
+autostart = true
+
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+collision_mask = 0
 [connection signal="body_entered" from="." to="." method="_on_Explosion_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
