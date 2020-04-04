@@ -1,8 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Meshes/slope_mesh.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=4]
 [ext_resource path="res://Meshes/Wireframe/slope_mesh_wireframe.obj" type="ArrayMesh" id=5]
 
 [sub_resource type="ConvexPolygonShape" id=1]
@@ -21,9 +19,7 @@ shape = SubResource( 1 )
 transform = Transform( -0.2, 1.74846e-08, 7.64274e-16, 0, -8.74228e-09, 0.2, 1.74846e-08, 0.2, 8.74228e-09, 0.2, 0.2, 0.2 )
 mesh = ExtResource( 1 )
 material/0 = SubResource( 2 )
-script = ExtResource( 3 )
 
 [node name="WireframeMesh" type="MeshInstance" parent="MeshInstance"]
 mesh = ExtResource( 5 )
 material/0 = null
-script = ExtResource( 4 )

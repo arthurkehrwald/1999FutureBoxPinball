@@ -12,10 +12,10 @@ func _process(_delta):
 	$Bar3D.update_value($Timer.time_left, duration)
 	
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage == GameState.stage.PREGAME:
-		set_active(false)
+	if is_debug_skip or new_stage == GameState.PREGAME:
+		set_is_active(false)
 
-func set_active(is_active):
+func set_is_active(is_active):
 	set_physics_process(is_active)
 	set_process(is_active)
 	set_visible(is_active)
@@ -30,10 +30,10 @@ func set_active(is_active):
 	
 func _on_ShopMenu_bought_flipper():
 	if $Timer.is_stopped():
-		set_active(true)
+		set_is_active(true)
 	else:
 		$Timer.stop()
 		$Timer.start()
 
 func _on_Timer_timeout():
-	set_active(false)
+	set_is_active(false)

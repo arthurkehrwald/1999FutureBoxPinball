@@ -46,7 +46,7 @@ func delete():
 
 
 func on_visibility_changed(value):
-	wallhack_marker.set_visible(value)
+	wallhack_marker.set_visible(!value)
 
 
 func set_is_accessible_to_player(value):
@@ -74,3 +74,15 @@ func _on_RemoteControlTimer_start():
 
 func _on_RemoteControlTimer_timeout():
 	set_is_remote_controlled(false)
+
+
+func _on_HitregArea_area_entered(area):
+	if area.has_method("on_hit_by_pinball_directly"):
+		area.on_hit_by_pinball_directly(get_global_transform().origin,
+				get_linear_velocity())
+
+
+func _on_HitregArea_body_entered(body):
+	if body.has_method("on_hit_by_pinball_directly"):
+		body.on_hit_by_pinball_directly(get_global_transform().origin,
+				get_linear_velocity())

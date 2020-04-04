@@ -1,4 +1,5 @@
-extends Spatial
+class_name MoonGateScalingDownState
+extends "res://Scripts/State.gd"
 
 onready var moon_gate = get_node("../..")
 

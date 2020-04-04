@@ -53,7 +53,7 @@ func _on_Shop_body_exited(body):
 
 
 func _on_GameState_stage_changed(new_stage, _is_debug_skip):
-	if new_stage == GameState.stage.PREGAME:
+	if new_stage == GameState.PREGAME:
 		set_is_open(false)
 
 

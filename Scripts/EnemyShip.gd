@@ -10,11 +10,10 @@ func _on_is_active_changed():
 	collision_shape.set_deferred("disabled", not is_active)
 
 
-func _on_impact(body):
-	._on_impact(body)
+func _on_hit_by_projectile(projectile):
 	if (IS_BUMPER):
-		body.set_linear_velocity(Vector3(0,0,0))
-		body.apply_central_impulse((body.get_global_transform().origin - (get_global_transform().origin  + Vector3(0, .2, 0))).normalized() * BUMP_FORCE)
+		projectile.set_linear_velocity(Vector3(0,0,0))
+		projectile.apply_central_impulse((projectile.get_global_transform().origin - (get_global_transform().origin  + Vector3(0, .2, 0))).normalized() * BUMP_FORCE)
 
 
 func _on_health_changed(old_health):

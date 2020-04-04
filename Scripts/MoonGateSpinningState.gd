@@ -1,15 +1,15 @@
-extends Spatial
+extends "res://Scripts/State"
 
 onready var moon_gate = get_node("../..")
 
 var spin_speed = 0.0
 var spin_axis = Vector3(0, 0, 0)
 
-func enter(var impact_body):
+func enter(var colliding_projectile):
 	moon_gate.movement_state = self
-	var body_to_moon = moon_gate.get_global_transform().origin - impact_body.get_global_transform().origin
-	spin_axis = impact_body.get_linear_velocity().cross(body_to_moon).normalized()
-	var impact_speed = impact_body.get_linear_velocity().length()
+	var body_to_moon = moon_gate.get_global_transform().origin - colliding_projectile.get_global_transform().origin
+	spin_axis = colliding_projectile.get_linear_velocity().cross(body_to_moon).normalized()
+	var impact_speed = colliding_projectile.get_linear_velocity().length()
 	spin_speed = impact_speed * moon_gate.SPIN_SPEED_MULTIPLIER
 	set_process(true)
 
@@ -19,6 +19,9 @@ func handle_input(var input, var opt_info = null):
 		moon_gate.In.IMPACT:
 			assert(opt_info != null)
 			enter(opt_info)
+		moon_gate.In.STOPPED_SPINNING:
+			exit()
+			enter(moon_gate.get_node("SpinStates/Still"))
 
 
 func exit():

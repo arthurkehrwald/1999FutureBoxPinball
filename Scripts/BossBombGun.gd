@@ -1,6 +1,6 @@
 extends "res://Scripts/BossGun.gd"
 
-var bomb_scene = preload("res://Scenes/Bomb.tscn")
+const BOMB_SCENE = preload("res://Scenes/Bomb.tscn")
 
 export var MUZZLE_SPEED = 5.0
 export var SPREAD_DEG = 5.0
@@ -16,7 +16,7 @@ func _ready():
 
 func _shoot():
 	$AudioStreamPlayer.play()
-	var bomb_instance = bomb_scene.instance()
+	var bomb_instance = BOMB_SCENE.instance()
 	bomb_instance.set_transform($Muzzle.get_transform())
 	#bomb_instance.get_node("Rigidbody").add_collision_exception_with(self)
 #	self.add_collision_exception_with(bomb_instance.get_node("Rigidbody"))

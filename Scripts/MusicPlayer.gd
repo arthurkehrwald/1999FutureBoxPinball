@@ -29,21 +29,21 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	$Track2.volume_db = target_volume
 	$Track3.volume_db = target_volume
 	match new_stage:
-		GameState.stage.PREGAME:
+		GameState.PREGAME:
 			$Track1.play()
 			$Track2.stop()
 			$Track3.stop()
-		GameState.stage.EXPOSITION:
+		GameState.EXPOSITION:
 			if is_debug_skip:
 				$Track1.play()
 				$Track2.stop()
 				$Track3.stop()
-		GameState.stage.ENEMY_FLEET:
+		GameState.ENEMY_FLEET:
 			if is_debug_skip:
 				$Track1.play()
 				$Track2.stop()
 				$Track3.stop()
-		GameState.stage.BOSS_BEGIN:
+		GameState.BOSS_BEGIN:
 			if is_debug_skip:
 				$Track1.stop()
 				$Track2.play()
@@ -55,7 +55,7 @@ func _on_GameState_stage_changed(new_stage, is_debug_skip):
 			fade_in_player = $Track2
 			fade_progress = 0
 			set_process(true)
-		GameState.stage.SOLAR_ECLIPSE:
+		GameState.ECLIPSE:
 			if is_debug_skip:
 				$Track1.stop()
 				$Track2.stop()

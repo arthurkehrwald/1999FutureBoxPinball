@@ -1,57 +1,46 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/RadialBar3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/BossGun.gd" type="Script" id=2]
 [ext_resource path="res://HUD/diagonal_cross.png" type="Texture" id=3]
-[ext_resource path="res://Scripts/BossGunStunnedState.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/BossGunShootingState.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/BossGunIdleState.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/BossGunStunned.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/BossGunShooting.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/BossGunIdle.gd" type="Script" id=6]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.5, 0.5, 0.5 )
-
-[node name="BossGun" type="StaticBody"]
+[node name="BossGun" type="Area"]
+monitoring = false
 collision_layer = 0
-collision_mask = 23
+collision_mask = 30
 script = ExtResource( 2 )
+initial_state = NodePath("IdleState")
 IS_STUNNABLE = true
+STUN_DURATION_IS_IMPACT_SPEED_BASED = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 1 )
 
 [node name="Muzzle" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
 
-[node name="HitboxArea" type="Area" parent="."]
-collision_layer = 0
-collision_mask = 0
+[node name="ShotTimeBar3D" parent="." instance=ExtResource( 1 )]
 
-[node name="HitboxShape" type="CollisionShape" parent="HitboxArea"]
-shape = SubResource( 1 )
-
-[node name="IdleState" type="Spatial" parent="."]
-script = ExtResource( 6 )
-
-[node name="ShootingState" type="Spatial" parent="."]
-script = ExtResource( 5 )
-
-[node name="ShotTimer" type="Timer" parent="ShootingState"]
-
-[node name="ShotTimeBar" parent="ShootingState" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6 )
+[node name="Bar" parent="ShotTimeBar3D/Viewport" index="0"]
 visible = false
 
-[node name="StunnedState" type="Spatial" parent="."]
-script = ExtResource( 4 )
+[node name="Timer" type="Timer" parent="."]
 
-[node name="StunnedIndicator" type="Sprite3D" parent="StunnedState"]
+[node name="StunnedSprite" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6 )
 visible = false
 modulate = Color( 1, 0, 0, 1 )
 texture = ExtResource( 3 )
 
-[node name="StunTimer" type="Timer" parent="StunnedState"]
-one_shot = true
-[connection signal="body_entered" from="HitboxArea" to="." method="_on_HitboxArea_body_entered"]
-[connection signal="timeout" from="ShootingState/ShotTimer" to="ShootingState" method="_on_ShotTimer_timeout"]
-[connection signal="timeout" from="StunnedState/StunTimer" to="StunnedState" method="_on_StunTimer_timeout"]
+[node name="IdleState" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="ShootingState" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="StunnedState" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[editable path="ShotTimeBar3D"]

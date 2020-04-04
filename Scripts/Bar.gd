@@ -1,5 +1,5 @@
 extends TextureProgress
 
-func update_value(_value, _max_value):
-	max_value = _max_value
-	value = _value
+func update_value(new, _old, maximum):
+	max_value = maximum
+	value = new

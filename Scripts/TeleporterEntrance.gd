@@ -17,7 +17,7 @@ func _ready():
 	current_exit_2_chance = exit_2_chance
 	rng.randomize()
 
-func set_active(is_active):
+func set_is_active(is_active):
 	$CollisionShape.set_deferred("disabled", !is_active)
 
 func _on_TeleporterEntrance_body_entered(body):

@@ -1,6 +1,8 @@
-extends Spatial
+class_name MoonGateBigState
+extends "res://Scripts/State.gd"
 
 onready var moon_gate = get_node("../..")
+onready var _general_state_machine = get_node("..")
 
 func enter():
 	moon_gate.movement_state = self

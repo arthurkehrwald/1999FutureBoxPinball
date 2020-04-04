@@ -1,9 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Trigger.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/Wireframe/cube_wireframe.obj" type="ArrayMesh" id=2]
-[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/CollisionObjectMaterialSwitcher.gd" type="Script" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.3, 0.05, 0.3 )
@@ -26,12 +24,10 @@ shape = SubResource( 1 )
 transform = Transform( 0.3, 0, 0, 0, 0.05, 0, 0, 0, 0.3, 0, 0.05, 0 )
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
-script = ExtResource( 4 )
 
 [node name="Wireframe" type="MeshInstance" parent="MeshInstance"]
 mesh = ExtResource( 2 )
 material/0 = null
-script = ExtResource( 3 )
 
 [node name="ResetTimer" type="Timer" parent="."]
 [connection signal="body_entered" from="." to="." method="_on_Trigger_body_entered"]

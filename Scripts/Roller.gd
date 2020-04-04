@@ -17,10 +17,8 @@ var _teleport_physics_cooldown_time_remaining = 0
 
 onready var _ray_cast = get_node("RotationStabiliser/RayCast")
 
-
 func _enter_tree():
-	GameState.connect("toggle_nightmode", self, "_on_GameState_toggle_nightmode")
-	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
+	GameState.connect("state_changed", self, "_on_GameState_changed")
 
 
 func _ready():
@@ -112,22 +110,16 @@ func _set_gravity_scale_based_on_speed():
 				gravity_scale)
 
 
-func _on_GameState_stage_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage == GameState.stage.PREGAME:
-		#queue_free()
-		pass
-
-
-func _on_GameState_toggle_nightmode(toggle):
-	if toggle:
-		$OmniLight.hide()
+func _on_GameState_changed(new_state, is_debug_skip):
+	if is_debug_skip or new_state == GameState.PREGAME:
+		queue_free()
 	else:
-		$OmniLight.hide()
+		_omni_light.set_visible(new_state == GameState.ECLIPSE)
 
 
-func _on_hit_area(area):
+func _on_HitregArea_area_entered(_area):
 	pass
 
 
-func _on_hit_body(body):
+func _on_HitregArea_body_entered(_body):
 	pass

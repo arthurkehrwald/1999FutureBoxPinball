@@ -2,12 +2,12 @@
 
 [ext_resource path="res://HUD/objective_01.png" type="Texture" id=1]
 [ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://HUD/shop_time_left_bar_fill.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/RadialBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/PostGameHUD.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
-size = 30
+size = 60
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -15,11 +15,12 @@ size = 40
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 20
+size = 30
 font_data = ExtResource( 2 )
 
 [node name="PostGameHud" type="Control"]
 pause_mode = 2
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -502.0
@@ -41,23 +42,11 @@ __meta__ = {
 wait_time = 10.0
 one_shot = true
 
-[node name="TimeRemainingBar" type="TextureProgress" parent="."]
-margin_left = 261.881
-margin_top = 205.347
-margin_right = 309.881
-margin_bottom = 253.347
-value = 90.0
-texture_progress = ExtResource( 3 )
-fill_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="TimeRemainingLabel" type="Label" parent="."]
-margin_left = 273.528
-margin_top = 211.994
-margin_right = 298.528
-margin_bottom = 247.994
+margin_left = 184.033
+margin_top = 217.036
+margin_right = 217.033
+margin_bottom = 290.036
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "5"
@@ -82,10 +71,10 @@ __meta__ = {
 }
 
 [node name="DescriptionLabel" type="Label" parent="."]
-margin_left = 60.3383
-margin_top = 204.183
-margin_right = 308.338
-margin_bottom = 253.183
+margin_left = 76.0945
+margin_top = 140.528
+margin_right = 324.094
+margin_bottom = 189.528
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "restarting in:"
@@ -94,4 +83,10 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="timeout" from="RestartTimer" to="." method="_on_RestartTimer_timeout"]
+
+[node name="TimeRemainingBar" parent="." instance=ExtResource( 3 )]
+margin_left = 153.151
+margin_top = 203.571
+margin_right = 201.151
+margin_bottom = 251.571
+rect_scale = Vector2( 2, 2 )

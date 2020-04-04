@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Plunger.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/car.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Meshes/Wireframe/cube_wireframe.obj" type="ArrayMesh" id=3]
-[ext_resource path="res://Scripts/WireframeMesh.gd" type="Script" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.4, 0.5, 2 )
@@ -26,4 +25,3 @@ material/0 = null
 visible = false
 mesh = ExtResource( 3 )
 material/0 = null
-script = ExtResource( 4 )

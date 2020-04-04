@@ -15,7 +15,7 @@ func _physics_process(_delta):
 		louie_active = true
 		
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage == GameState.stage.PREGAME:
+	if is_debug_skip or new_stage == GameState.PREGAME:
 		reset(true)
 	
 func _on_LoopingLouie_landed():

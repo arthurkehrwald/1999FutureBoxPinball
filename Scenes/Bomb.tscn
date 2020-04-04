@@ -7,6 +7,9 @@
 [node name="Bomb" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
+[node name="HitregArea" parent="." index="1"]
+collision_layer = 4
+
 [node name="MeshInstance" parent="." index="2"]
 material/0 = ExtResource( 2 )
 

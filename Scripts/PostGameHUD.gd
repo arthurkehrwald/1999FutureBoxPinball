@@ -1,46 +1,58 @@
 extends Control
 
-var was_restarted_already = false
+enum Result {VICTORY, DEFEAT}
 
-func _enter_tree():
-	#GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
+export var RESTART_DELAY = 10.0
+
+onready var _restart_timer = get_node("RestartTimer")
+onready var _time_remaining_bar = get_node("TimeRemainingBar")
+onready var _time_remaining_label = get_node("TimeRemainingLabel")
+onready var _result_label = get_node("ResultLabel")
+
+var is_active = false
+
+func _ready():
+	GameState.connect("state_changed", self, "_on_GameState_changed")
 	GameState.connect("victory", self, "set_result", [true])
 	GameState.connect("defeat", self, "set_result", [false])
-	pass
-	
-func _ready():
-	$TimeRemainingBar.max_value = 1000
+	_time_remaining_bar.max_value = RESTART_DELAY * 100
 	set_process(false)
-	set_visible(false)
-	
-func set_result(has_player_won):
-	get_tree().paused = true
-	set_visible(true)
-	set_process(true)
+
+
+func _set_is_active(value):
+	is_active = value
+	get_tree().paused = value
+	set_visible(value)
+	set_process(value)
+	_restart_timer.start(RESTART_DELAY)
+
+
+func _display_result(has_player_won):
 	if has_player_won:
 		Announcer.say("victory")
-		$ResultLabel.text = "Victory!"
+		_result_label.text = "Victory!"
 	else:
 		Announcer.say("sux")
-		$ResultLabel.text = "Game Over!"
-	$RestartTimer.start()
-	
+		_result_label.text = "You Lose!"
+	_restart_timer.start()
+
+
 func _process(_delta):
-	$TimeRemainingLabel.text = str(round($RestartTimer.time_left))
-	$TimeRemainingBar.value = $RestartTimer.time_left * 100
-	
-#func _on_GameState_stage_changed(new_stage, is_debug_skip):
-#	if is_debug_skip or new_stage == GameState.stage.PREGAME:
-#		get_tree().paused = false
-#		set_visible(false)
-#		set_process(false)
-#		was_restarted_already = true
-#		$RestartTimer.stop()
+	_time_remaining_label.text = str(round(_restart_timer.time_left))
+	_time_remaining_bar.value = _restart_timer.time_left * 100
+
 
 func _on_RestartTimer_timeout():
-	#print("PostGameHud: timer ran out")
-	if !was_restarted_already:
-		get_tree().paused = false
-		set_visible(false)
-		set_process(false)
-		GameState.on_PostGameHUD_finished()
+	_set_is_active(false)
+	GameState.handle_event(GameState.Event.POSTGAME_FINISHED)
+
+
+func _on_GameState_changed(new_state, is_debug_skip):
+	if new_state == GameState.VICTORY:
+		_display_result(Result.VICTORY)
+		_set_is_active(true)
+	elif new_state == GameState.DEFEAT:
+		_display_result(Result.DEFEAT)
+		_set_is_active(true)
+	elif new_state == GameState.PREGAME or is_debug_skip:
+		_set_is_active(false)

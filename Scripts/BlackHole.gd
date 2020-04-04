@@ -24,8 +24,8 @@ func _process(_delta):
 	$GravitationalField/MeshInstance.set_transform(Transform.IDENTITY.scaled(current_scale_vector * rng.randfn(1, .1)))
 	
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage == GameState.stage.PREGAME:
-		set_active(false)
+	if is_debug_skip or new_stage == GameState.PREGAME:
+		set_is_active(false)
 
 func _on_NomArea_body_entered(body):
 	if body.is_in_group("Pinballs"):
@@ -33,7 +33,7 @@ func _on_NomArea_body_entered(body):
 	elif body.is_in_group("Bombs"):
 		body.queue_free()
 
-func set_active(is_active):
+func set_is_active(is_active):
 	#print("Black Hole: active - ", is_active)
 	if is_active:
 		Announcer.say("black_hoe", true)
@@ -55,13 +55,13 @@ func expand():
 	
 	yield($AnimationPlayer, "animation_finished")
 	
-	set_active(false)
+	set_is_active(false)
 
 
 func _on_Boss_black_hole_health_threshold_reached():
 	print("Black Hole: activation boss health threshold reached")
-	set_active(true)
+	set_is_active(true)
 
 
-func _on_Boss_solar_eclipse_health_threshold_reached():
+func _on_Boss_ECLIPSE_health_threshold_reached():
 	expand()

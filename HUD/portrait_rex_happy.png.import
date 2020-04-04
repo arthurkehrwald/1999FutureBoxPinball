@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/portrait_rex_defeat.png-edb7d129304739e5f5a3be3bcd61f111.stex"
+path="res://.import/portrait_rex_happy.png-23442caf19f2bb9ee61d90e4b2b63bf7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/portrait_rex_defeat.png"
-dest_files=[ "res://.import/portrait_rex_defeat.png-edb7d129304739e5f5a3be3bcd61f111.stex" ]
+source_file="res://HUD/portrait_rex_happy.png"
+dest_files=[ "res://.import/portrait_rex_happy.png-23442caf19f2bb9ee61d90e4b2b63bf7.stex" ]
 
 [params]
 

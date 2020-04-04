@@ -9,9 +9,6 @@
 [node name="Pinball" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 
-[node name="Area" parent="." index="1"]
-collision_layer = 2
-
 [node name="MeshInstance" parent="." index="2"]
 material/0 = ExtResource( 5 )
 

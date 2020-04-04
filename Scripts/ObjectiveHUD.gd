@@ -11,18 +11,18 @@ func _enter_tree():
 	
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	match new_stage:
-		GameState.stage.PREGAME:
+		GameState.PREGAME:
 			reset()
 			turn_off()
-		GameState.stage.EXPOSITION:
+		GameState.EXPOSITION:
 			if is_debug_skip:
 				reset()
 				turn_off()
-		GameState.stage.ENEMY_FLEET:
+		GameState.ENEMY_FLEET:
 			change_objective("Defeat the enemy fleet!", "Buy something at the shop!")
-		GameState.stage.BOSS_BEGIN:
+		GameState.BOSS_BEGIN:
 			change_objective("Defeat the emperor!", "")
-		GameState.stage.SOLAR_ECLIPSE:
+		GameState.ECLIPSE:
 			if is_debug_skip:
 				change_objective("Defeat the emperor!", "")
 

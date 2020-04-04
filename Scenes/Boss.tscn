@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Boss.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/HitNotifier.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Bar3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Meshes/boss.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=5]
 [ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/BossMissileGun.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/BossShield.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/Damageable.gd" type="Script" id=9]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.7, 0.7, 1.2 )
@@ -15,15 +17,14 @@ extents = Vector3( 0.7, 0.7, 1.2 )
 extents = Vector3( 0.617629, 0.240758, 0.569582 )
 
 [sub_resource type="BoxShape" id=3]
-extents = Vector3( 1.3624, 0.5, 0.973335 )
+extents = Vector3( 1.3624, 0.5, 0.587153 )
 
-[node name="Boss" type="StaticBody"]
-collision_layer = 0
-collision_mask = 23
+[sub_resource type="CylinderShape" id=4]
+radius = 0.449074
+height = 0.461056
+
+[node name="Boss" type="Spatial"]
 script = ExtResource( 1 )
-MAX_HEALTH = 30.0
-USE_SPEED_BASED_IMPACT_DAMAGE = true
-FLAT_IMPACT_DAMAGE = 0.5
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 4 )
@@ -49,21 +50,37 @@ collision_mask = 1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 1.58227, 1.53787 )
 collision_layer = 1024
 collision_mask = 1
+SECONDS_BETWEEN_SHOTS = 3.0
+FLAT_STUN_DURATION = 10.0
+IMPACT_SPEED_TO_STUN_DURATION_RATE = 0.25
+MIN_IMPACT_SPEED_FOR_STUN = 5.0
+MAX_IMPACT_SPEED_BASED_STUN_DURATION = 5.0
+EXPLOSION_STUN_DURATION = 10.0
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="HitNotifier" type="StaticBody" parent="."]
+collision_layer = 0
+collision_mask = 31
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="HitNotifier"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.200293 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2" type="CollisionShape" parent="."]
+[node name="CollisionShape2" type="CollisionShape" parent="HitNotifier"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42606, 0.045612 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape3" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00231123, 0.513669, 0.377507 )
+[node name="CollisionShape3" type="CollisionShape" parent="HitNotifier"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00231123, 0.513669, 0.814397 )
 shape = SubResource( 3 )
-[connection signal="was_hit_bomb_explosion" from="BossBombGun" to="." method="_on_BossGun_was_hit_bomb_explosion"]
-[connection signal="was_hit_directly" from="BossBombGun" to="." method="_on_BossGun_was_hit_directly"]
-[connection signal="was_hit_bomb_explosion" from="BossBombGun2" to="." method="_on_BossGun_was_hit_bomb_explosion"]
-[connection signal="was_hit_directly" from="BossBombGun2" to="." method="_on_BossGun_was_hit_directly"]
-[connection signal="was_hit_bomb_explosion" from="BossMissileGun" to="." method="_on_BossGun_was_hit_bomb_explosion"]
-[connection signal="was_hit_directly" from="BossMissileGun" to="." method="_on_BossGun_was_hit_directly"]
+
+[node name="CollisionShape4" type="CollisionShape" parent="HitNotifier"]
+transform = Transform( 1, 0, 0, 0, 0.446088, 0.894989, 0, -0.894989, 0.446088, 1.43983, 0.952355, -1.30347 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="HitNotifier"]
+transform = Transform( 1, 0, 0, 0, 0.446088, 0.894989, 0, -0.894989, 0.446088, -1.41039, 0.952355, -1.30347 )
+shape = SubResource( 4 )
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource( 9 )

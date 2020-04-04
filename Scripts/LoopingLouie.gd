@@ -23,7 +23,7 @@ func _process(delta):
 		$PathFollow.set_offset($PathFollow.get_offset() + speed * delta)
 
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage == GameState.stage.PREGAME:
+	if is_debug_skip or new_stage == GameState.PREGAME:
 		land()
 
 func _on_PathFollow_louie_triggered():

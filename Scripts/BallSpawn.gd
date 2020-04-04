@@ -10,7 +10,7 @@ func _enter_tree():
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	if is_debug_skip:
 		spawn_ball()
-	elif new_stage == GameState.stage.EXPOSITION:
+	elif new_stage == GameState.EXPOSITION:
 		spawn_ball()
 		
 func spawn_ball():

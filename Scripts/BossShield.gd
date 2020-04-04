@@ -24,6 +24,6 @@ func health_changed(_old_health):
 
 func _process(delta):
 	if REGENERATION_TIME == 0:
-		set_active(true)
+		set_is_active(true)
 		return	
 	set_health(current_health + delta / REGENERATION_TIME)

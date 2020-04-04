@@ -4,12 +4,12 @@ func _enter_tree():
 	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
 	
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
-	if new_stage == GameState.stage.PREGAME:
+	if new_stage == GameState.PREGAME:
 		reset(true)
-	elif new_stage == GameState.stage.BOSS_BEGIN:
+	elif new_stage == GameState.BOSS_BEGIN:
 		reset(false)
 	elif is_debug_skip:
-		if new_stage == GameState.stage.EXPOSITION or new_stage == GameState.stage.ENEMY_FLEET:
+		if new_stage == GameState.EXPOSITION or new_stage == GameState.ENEMY_FLEET:
 			reset(true)
 		else:
 			reset(false)

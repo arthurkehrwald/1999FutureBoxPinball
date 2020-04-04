@@ -5,17 +5,17 @@ func _enter_tree():
 
 func _on_GameState_stage_changed(new_stage, is_debug_skip):
 	match new_stage:
-		GameState.stage.PREGAME:
-			set_active(true)
-		GameState.stage.BOSS_BEGIN:
-			set_active(false)
+		GameState.PREGAME:
+			set_is_active(true)
+		GameState.BOSS_BEGIN:
+			set_is_active(false)
 	if is_debug_skip:
-		if new_stage == GameState.stage.EXPOSITION or new_stage == GameState.stage.ENEMY_FLEET:
-			set_active(true)
+		if new_stage == GameState.EXPOSITION or new_stage == GameState.ENEMY_FLEET:
+			set_is_active(true)
 		else:
-			set_active(false)
+			set_is_active(false)
 	
-func set_active(is_active):
+func set_is_active(is_active):
 	set_visible(is_active)
 	set_deferred("monitoring", is_active)
 	set_deferred("monitorable", is_active)

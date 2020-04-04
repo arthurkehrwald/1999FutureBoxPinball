@@ -1,4 +1,5 @@
-extends Spatial
+class_name MoonGateSmallState
+extends "res://Scripts/State.gd"
 
 onready var moon_gate = get_node("../..")
 
@@ -9,9 +10,8 @@ func enter():
 
 func handle_input(var input, var _opt_info = null):
 	match input:
-		moon_gate.In.DAMAGED:
-			exit()
-			moon_gate.get_node("ScaleStates/ScalingUp").enter()
+		_state_machine.In.DAMAGED:
+			_state_machine.transition_to("ScalingUpState")
 
 
 func exit():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Audio/fx/bomb_shot.wav" type="AudioStream" id=1]
 [ext_resource path="res://Scenes/BossGun.tscn" type="PackedScene" id=2]
@@ -8,13 +8,9 @@
 radius = 0.5
 height = 0.4
 
-[sub_resource type="CylinderShape" id=2]
-radius = 0.5
-height = 0.4
-
 [node name="BossBombGun" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
-SHOOT_ON_READY = true
+initial_state = NodePath("ShootingState")
 
 [node name="CollisionShape" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -23,15 +19,13 @@ shape = SubResource( 1 )
 [node name="Muzzle" parent="." index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2 )
 
-[node name="HitboxShape" parent="HitboxArea" index="0"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 2 )
+[node name="ShotTimeBar3D" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.307373 )
 
-[node name="ShotTimeBar" parent="ShootingState" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3 )
-
-[node name="StunnedIndicator" parent="StunnedState" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3 )
+[node name="StunnedSprite" parent="." index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.578909 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource( 1 )
+
+[editable path="ShotTimeBar3D"]
