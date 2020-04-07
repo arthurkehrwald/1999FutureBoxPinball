@@ -15,11 +15,6 @@ _global_script_classes=[ {
 "path": "res://Scripts/Boss.gd"
 }, {
 "base": "Node",
-"class": "BossGun",
-"language": "GDScript",
-"path": "res://Scripts/BossGun.gd"
-}, {
-"base": "Node",
 "class": "BossGunIdle",
 "language": "GDScript",
 "path": "res://Scripts/BossGunIdle.gd"
@@ -38,16 +33,6 @@ _global_script_classes=[ {
 "class": "Damageable",
 "language": "GDScript",
 "path": "res://Scripts/Damageable.gd"
-}, {
-"base": "Node",
-"class": "DamageableState",
-"language": "GDScript",
-"path": "res://Scripts/DamageableState.gd"
-}, {
-"base": "Node",
-"class": "DamageableStateMachine",
-"language": "GDScript",
-"path": "res://Scripts/DamageableStateMachine.gd"
 }, {
 "base": "Area",
 "class": "Explosion",
@@ -68,61 +53,6 @@ _global_script_classes=[ {
 "class": "MoonGate",
 "language": "GDScript",
 "path": "res://Scripts/MoonGate.gd"
-}, {
-"base": "Node",
-"class": "MoonGateBigState",
-"language": "GDScript",
-"path": "res://Scripts/MoonGateBigState.gd"
-}, {
-"base": "Node",
-"class": "MoonGateFlyingState",
-"language": "GDScript",
-"path": "res://Scripts/MoonGateFlyingState.gd"
-}, {
-"base": "Node",
-"class": "MoonGateGeneralStateMachine",
-"language": "GDScript",
-"path": "res://Scripts/MoonGateGeneralStateMachine.gd"
-}, {
-"base": "Node",
-"class": "MoonGateInactiveState",
-"language": "GDScript",
-"path": "res://Scripts/MoonGateInactiveState.gd"
-}, {
-"base": "Node",
-"class": "MoonGateNotSpinningState",
-"language": "GDScript",
-"path": "res://Scripts/MoonGateNotSpinningState.gd"
-}, {
-"base": "Node",
-"class": "MoonGateScaleStateMachine",
-"language": "GDScript",
-"path": "res://Scripts/MoonGateScaleStateMachine.gd"
-}, {
-"base": "Node",
-"class": "MoonGateScalingDownState",
-"language": "GDScript",
-"path": "res://Scripts/MoonGateScalingDownState.gd"
-}, {
-"base": "Node",
-"class": "MoonGateScalingUpState",
-"language": "GDScript",
-"path": "res://Scripts/MoonGateScalingUpState.gd"
-}, {
-"base": "Node",
-"class": "MoonGateSmallState",
-"language": "GDScript",
-"path": "res://Scripts/MoonGateSmallState.gd"
-}, {
-"base": "",
-"class": "MoonGateSpinState",
-"language": "GDScript",
-"path": "res://Scripts/MoonGateSpinState.gd"
-}, {
-"base": "Node",
-"class": "MoonGateSpinStateMachine",
-"language": "GDScript",
-"path": "res://Scripts/MoonGateSpinStateMachine.gd"
 }, {
 "base": "Area",
 "class": "NoRemoteCotrolArea",
@@ -171,28 +101,14 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Boss": "",
-"BossGun": "",
 "BossGunIdle": "",
 "BossGunShooting": "",
 "BossGunStunned": "",
 "Damageable": "",
-"DamageableState": "",
-"DamageableStateMachine": "",
 "Explosion": "",
 "Gate": "",
 "HitNotifier": "",
 "MoonGate": "",
-"MoonGateBigState": "",
-"MoonGateFlyingState": "",
-"MoonGateGeneralStateMachine": "",
-"MoonGateInactiveState": "",
-"MoonGateNotSpinningState": "",
-"MoonGateScaleStateMachine": "",
-"MoonGateScalingDownState": "",
-"MoonGateScalingUpState": "",
-"MoonGateSmallState": "",
-"MoonGateSpinState": "",
-"MoonGateSpinStateMachine": "",
 "NoRemoteCotrolArea": "",
 "Pinball": "",
 "PlayerShip": "",
@@ -353,12 +269,9 @@ debug_goto_solar_eclipse={
 
 [layer_names]
 
-3d_physics/layer_1="moving_bodies"
-3d_physics/layer_2="pinball_areas"
-3d_physics/layer_3="bomb_areas"
-3d_physics/layer_4="missile_areas"
-3d_physics/layer_5="explosions"
-3d_physics/layer_6="ground"
+3d_physics/layer_1="immobile_bodies"
+3d_physics/layer_2="mobile_bodies"
+3d_physics/layer_3="mobile_areas"
 
 [physics]
 

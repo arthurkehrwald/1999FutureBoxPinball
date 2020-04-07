@@ -5,27 +5,25 @@
 [ext_resource path="res://Scripts/BossBombGun.gd" type="Script" id=3]
 
 [sub_resource type="CylinderShape" id=1]
-radius = 0.5
-height = 0.4
+radius = 0.533541
+height = 0.231119
 
 [node name="BossBombGun" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
-initial_state = NodePath("ShootingState")
+BOMB_DIRECT_HIT_BASE_STUN_DUR = 0.0
 
-[node name="CollisionShape" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-shape = SubResource( 1 )
-
-[node name="Muzzle" parent="." index="1"]
+[node name="Muzzle" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2 )
 
-[node name="ShotTimeBar3D" parent="." index="2"]
+[node name="ShotTimeBar3D" parent="." index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.307373 )
 
-[node name="StunnedSprite" parent="." index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.578909 )
+[node name="StunnedIndicator" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.289551 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
+[node name="CollisionShape" parent="HitNotifier" index="0"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 2.28511e-08, -0.140259 )
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource( 1 )
-
-[editable path="ShotTimeBar3D"]

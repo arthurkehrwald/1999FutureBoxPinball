@@ -40,13 +40,13 @@ onready var _mesh_instance = get_node("MeshInstance")
 
 
 func _enter_tree():
-	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
+	GameState.connect("state_changed", self, "_on_GameState_changed")
 
 
 func _ready():
-	_hit_notifier.connect("hit_by_pinball_directly", self, "_on_hit_by_projectile")
-	_hit_notifier.connect("hit_by_bomb_directly", self, "_on_hit_by_projectile")
-	_hit_notifier.connect("hit_by_missile_directly", self, "_on_hit_by_projectile")
+	_hit_notifier.connect("hit_by_pinball_directly", self, "on_hit_by_projectile")
+	_hit_notifier.connect("hit_by_bomb_directly", self, "on_hit_by_projectile")
+	_hit_notifier.connect("hit_by_missile_directly", self, "on_hit_by_projectile")
 	_damageable.connect("health_changed", self, "_on_Damageable_health_changed")
 	_damageable.connect("death", self, "_on_Damageable_death")
 	_scale_anim_player.connect("animation_finished", self, "_on_ScaleAnimPlayer_animation_finished")
@@ -55,10 +55,18 @@ func _ready():
 
 
 func _process(delta):
-	_spin(delta)
-	if _spin_speed <= 0:
+	if _spin_speed > 0:
+		_spin(delta)
+	else:
 		_is_spinning = false
 		set_process(false)
+		if _scale_state == ScaleState.BIG or _scale_state == ScaleState.SCALING_UP:
+			if not _is_flying:
+				_scale_down()
+
+
+func on_hit_by_projectile(var projectile_pos, var projectile_vel):
+	_start_spinning(projectile_pos, projectile_vel)
 
 
 func _start_spinning(var projectile_pos, var projectile_vel):
@@ -70,14 +78,9 @@ func _start_spinning(var projectile_pos, var projectile_vel):
 
 
 func _spin(var delta):
-	_spin_speed -= SPIN_SPEED_FALLOFF * delta
-	if _spin_speed > 0:
-		_mesh_instance.set_transform(
+	_mesh_instance.set_transform(
 			_mesh_instance.get_transform().rotated(_spin_axis, _spin_speed * delta))
-	else:
-		if _scale_state == ScaleState.BIG or _scale_state == ScaleState.SCALING_UP:
-			if not _is_flying:
-				_scale_down()
+	_spin_speed -= SPIN_SPEED_FALLOFF * delta
 
 
 func _start_flying():
@@ -96,16 +99,9 @@ func _scale_down():
 	_scale_anim_player.play_backwards("moon_scale")
 
 
-func _on_hit_by_projectile(var projectile_pos, var projectile_vel):
-	_start_spinning(projectile_pos, projectile_vel)
-
-
 func _on_Damageable_health_changed(current_health, old_health, _max_health):
-	print("health changed")
 	if current_health < old_health:
-		print("damage taken")
 		if _scale_state == ScaleState.SMALL or _scale_state == ScaleState.SCALING_DOWN:
-			print("scaling up")
 			_scale_up()
 
 
@@ -134,9 +130,11 @@ func _on_FlyAnimPlayer_animation_finished(_anim_name):
 		_scale_down()
 
 
-func _on_GameState_stage_changed(new_stage, is_debug_skip):
-	if new_stage == GameState.PREGAME or is_debug_skip:
+func _on_GameState_changed(new_state, is_debug_skip):
+	if new_state == GameState.PREGAME or is_debug_skip:
 		_is_flying = false
 		_is_spinning = false
 		_scale_state = ScaleState.SMALL
+		_scale_anim_player.stop()
+		_fly_anim_player.stop()
 		set_visible(false)

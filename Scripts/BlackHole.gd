@@ -10,7 +10,7 @@ var current_scale_vector = Vector3(1, 1, 1)
 var scale_interp_value = 1
 
 func _enter_tree():
-	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
+	GameState.connect("state_changed", self, "_on_GameState_changed")
 
 func _ready():
 	base_scale_vector = $GravitationalField/MeshInstance.get_transform().basis.get_scale()
@@ -23,7 +23,7 @@ func _process(_delta):
 		current_scale_vector = $GravitationalField/MeshInstance.get_transform().basis.get_scale()
 	$GravitationalField/MeshInstance.set_transform(Transform.IDENTITY.scaled(current_scale_vector * rng.randfn(1, .1)))
 	
-func _on_GameState_stage_changed(new_stage, is_debug_skip):
+func _on_GameState_changed(new_stage, is_debug_skip):
 	if is_debug_skip or new_stage == GameState.PREGAME:
 		set_is_active(false)
 

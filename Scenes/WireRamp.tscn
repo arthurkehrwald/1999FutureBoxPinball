@@ -31,6 +31,7 @@ visible = false
 [node name="EntranceArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.632, 0.0216143, 1.954 )
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="EntranceArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2 )
@@ -39,6 +40,7 @@ shape = SubResource( 1 )
 [node name="ExitArea" type="Area" parent="."]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, -2 )
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="ExitArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2 )

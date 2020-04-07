@@ -5,10 +5,13 @@
 [ext_resource path="res://Scripts/Bomb.gd" type="Script" id=3]
 
 [node name="Bomb" instance=ExtResource( 1 )]
+collision_mask = 0
 script = ExtResource( 3 )
 
 [node name="HitregArea" parent="." index="1"]
-collision_layer = 4
+monitoring = false
+monitorable = false
+collision_mask = 0
 
 [node name="MeshInstance" parent="." index="2"]
 material/0 = ExtResource( 2 )

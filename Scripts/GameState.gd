@@ -65,11 +65,11 @@ var global_wireframe_mat = preload("res://Materials/wireframe_material.tres")
 
 func _ready():
 	set_pause_mode(Node.PAUSE_MODE_PROCESS)
-	yield (get_tree().create_timer(1, true), "timeout")
+	#yield (get_tree().create_timer(1, true), "timeout")
 	if get_node_or_null("/root/Main") == null:
-		_set_state(NONE)
+		call_deferred("_set_state", NONE)
 	else:
-		_set_state(PREGAME)
+		call_deferred("_set_state", PREGAME)
 
 
 func _process(delta):

@@ -79,7 +79,7 @@ IS_VULNERABLE_PER_STAGE = {
 [node name="HitNotifier" type="Area" parent="MoonGatePivot/MoonGate"]
 monitoring = false
 collision_layer = 0
-collision_mask = 14
+collision_mask = 4
 script = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="MoonGatePivot/MoonGate/HitNotifier"]

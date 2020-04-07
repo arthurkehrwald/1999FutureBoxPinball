@@ -1,29 +1,29 @@
-extends "res://Scripts/Damageable.gd"
+extends Spatial
 
-export var REGENERATION_TIME = 20.0
+export var REGENERATION_TIME = 10.0
+
+onready var _damageable = get_node("Damageable")
+onready var _health_bar = get_node("HealthBar3D/Viewport/Bar")
+onready var _timer = get_node("Timer")
+onready var _collision_shape = get_node("HitNotifier/CollisionShape")
 
 
 func _ready():
-	set_process(false)
+	_damageable.connect("is_vulnerable_changed", self, "_on_Damageable_is_vulnerable_changed")
+	_damageable.connect("death", self, "_on_Damageable_death")
+	_damageable.connect("health_changed", _health_bar, "update_value")
+	_timer.connect("timeout", self, "_on_Timer_timeout")
 
 
-func is_active_changed():
-	if is_active:
-		set_visible(true)
-	#print("boss shield: active - ", is_active)
-	$MeshInstance.set_visible(is_active)
-	$StaticBody/CollisionShape.set_deferred("disabled", !is_active)
-	$HitboxArea.set_deferred("monitoring", is_active)
-	$HitboxArea.set_deferred("monitorable", is_active)
-	set_process(!is_active)
+func _on_Damageable_is_vulnerable_changed(value):
+	set_visible(value)
+	_collision_shape.set_deferred("disabled", !value)
 
 
-func health_changed(_old_health):
-	$HealthBar3D/Viewport/Bar.update_value(current_health)
+func _on_Damageable_death():
+	_timer.start(REGENERATION_TIME)
 
 
-func _process(delta):
-	if REGENERATION_TIME == 0:
-		set_is_active(true)
-		return	
-	set_health(current_health + delta / REGENERATION_TIME)
+func _on_Timer_timeout():
+	_damageable.set_health(_damageable.MAX_HEALTH)
+	_damageable.set_is_vulnerable(true)

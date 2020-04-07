@@ -24,6 +24,10 @@ onready var _time_remaining_bar = get_node("TimeRemainingBar")
 onready var _audio_player = get_node("AudioStreamPlayer")
 
 
+func _enter_tree():
+	Globals.shop_menu = self
+
+
 func _ready():
 	_decision_timer.set_wait_time(DECISION_TIME)
 	_time_remaining_bar.max_value = DECISION_TIME * 100
@@ -71,8 +75,7 @@ func set_is_active(is_active):
 		Announcer.say("choose_purchase")
 		_decision_timer.start()
 	set_process(is_active)
-	GameState.set_paused(is_active)
-
+	get_tree().paused = is_active
 
 func _on_DecisionTimer_timeout():
 	#print("ShopMenu: decision timer timeout")

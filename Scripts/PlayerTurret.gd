@@ -17,7 +17,7 @@ var dotted_line_start_transform = Transform()
 var ball_scene = preload("res://Scenes/Pinball.tscn")
 
 func _enter_tree():
-	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
+	GameState.connect("state_changed", self, "_on_GameState_changed")
 
 func _ready():
 	start_transform = get_transform()
@@ -52,8 +52,8 @@ func _process(delta):
 	var new_rotation = Quat(min_transform.basis.slerp(max_transform.basis.orthonormalized(), rotation_progress))
 	set_transform(Transform(new_rotation, get_transform().origin))	
 
-func _on_GameState_stage_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage == GameState.PREGAME:
+func _on_GameState_changed(new_state, is_debug_skip):
+	if is_debug_skip or new_state == GameState.PREGAME:
 		$TeleporterExit/DottedLine.set_visible(false)
 		ball_to_shoot = null
 		set_process(false)

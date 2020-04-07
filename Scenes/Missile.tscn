@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Meshes/boss_missile.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Scenes/Projectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Missile.gd" type="Script" id=3]
+[ext_resource path="res://Animations/missile_launch.tres" type="Animation" id=4]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.819608, 0.231373, 0.231373, 1 )
+
+[node name="Missile" instance=ExtResource( 2 )]
+collision_mask = 2
+mode = 3
+gravity_scale = 0.0
+script = ExtResource( 3 )
+SPEED = 15.0
+
+[node name="CollisionShape" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="HitregArea" parent="." index="1"]
+monitoring = false
+
+[node name="CollisionShape" parent="HitregArea" index="0"]
+shape = SubResource( 2 )
+
+[node name="MeshInstance" parent="." index="2"]
+mesh = ExtResource( 1 )
+material/0 = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+playback_process_mode = 0
+playback_speed = 0.1
+anims/missile_launch = ExtResource( 4 )

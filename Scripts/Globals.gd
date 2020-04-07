@@ -1,6 +1,7 @@
 extends Node
 
 const PRICE_FOR_ALL_ITEMS_IN_SHOP = 200
+const ROLLER_TOPSPEED = 20.0
 
 var shop_menu = null setget set_shop_menu, get_shop_menu
 

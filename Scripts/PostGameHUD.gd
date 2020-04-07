@@ -13,8 +13,6 @@ var is_active = false
 
 func _ready():
 	GameState.connect("state_changed", self, "_on_GameState_changed")
-	GameState.connect("victory", self, "set_result", [true])
-	GameState.connect("defeat", self, "set_result", [false])
 	_time_remaining_bar.max_value = RESTART_DELAY * 100
 	set_process(false)
 

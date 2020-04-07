@@ -3,14 +3,15 @@ extends "res://Scripts/State.gd"
 # Interrupts shooting and dispays the stunned indicator when the boss gun gets
 # stunned.
 
+
 onready var _boss_gun = get_node("..")
 onready var _timer = get_node("../Timer")
-onready var _stunned_sprite = get_node("../StunnedSprite")
+onready var _stunned_indicator = get_node("../StunnedIndicator")
 
 func _enter(var info = {}):
 	assert(info != {})
 	_timer.start(info["stun_duration"])
-	_stunned_sprite.set_visible(true)
+	_stunned_indicator.set_visible(true)
 
 
 func _handle_input(var input, var info = {}):
@@ -29,4 +30,4 @@ func _handle_input(var input, var info = {}):
 
 func _exit():
 	_timer.stop()
-	_stunned_sprite.set_visible(false)
+	_stunned_indicator.set_visible(false)

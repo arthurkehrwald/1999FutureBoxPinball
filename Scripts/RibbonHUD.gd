@@ -6,7 +6,8 @@ var announcer_lines = []
 var rng = RandomNumberGenerator.new()
 
 func _enter_tree():
-	GameState.connect("player_did_something", self, "show_sign")
+	#GameState.connect("player_did_something", self, "show_sign")
+	pass
 
 func _ready():
 	sign_textures.resize(12)

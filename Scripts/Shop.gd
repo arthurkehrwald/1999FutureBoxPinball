@@ -12,7 +12,7 @@ var _balls_inside = []
 
 
 func _enter_tree():
-	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
+	GameState.connect("state_changed", self, "_on_GameState_changed")
 	GameState.connect("player_money_changed", self, "_on_GameState_player_money_changed")
 
 
@@ -52,7 +52,7 @@ func _on_Shop_body_exited(body):
 		set_process(false) 
 
 
-func _on_GameState_stage_changed(new_stage, _is_debug_skip):
+func _on_GameState_changed(new_stage, _is_debug_skip):
 	if new_stage == GameState.PREGAME:
 		set_is_open(false)
 

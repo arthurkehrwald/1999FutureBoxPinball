@@ -1,17 +1,19 @@
 extends "res://Scripts/BossGun.gd"
 
 var missile_scene = preload("res://Scenes/Missile.tscn")
-var missile_animation_format_string = "missile_animation_0%s"
 
-var rng = RandomNumberGenerator.new()
+onready var missile_basis_node = _muzzle
 
 func _ready():
-		rng.randomize()
+	var parent = get_node_or_null("..")
+	if parent != null and parent.name == "Boss":
+		missile_basis_node = parent
 
 func _shoot():
-	var animation_index = rng.randi_range(1,3)
 	$AudioStreamPlayer.play()
 	var missile_instance = missile_scene.instance()
-	missile_instance.set_transform($Muzzle.get_transform())
-	$Muzzle.add_child(missile_instance)
-	missile_instance.get_node("AnimationPlayer").play(missile_animation_format_string % animation_index)
+	var missile_parent = Spatial.new()
+	var t = Transform(missile_basis_node.get_global_transform().basis, _muzzle.get_global_transform().origin)
+	missile_parent.set_global_transform(t)
+	get_node("/root").add_child(missile_parent)
+	missile_parent.add_child(missile_instance)

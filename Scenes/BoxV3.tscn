@@ -13,7 +13,7 @@ extents = Vector3( 6.5, 3.08219, 1 )
 extents = Vector3( 1, 2.9607, 10 )
 
 [node name="BoxV3" type="StaticBody"]
-collision_layer = 32
+collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )

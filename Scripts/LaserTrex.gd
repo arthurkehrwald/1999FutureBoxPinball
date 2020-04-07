@@ -1,16 +1,24 @@
-extends "res://Scripts/Damageable.gd"
+extends Spatial
 
-export var laser_uptime = 3.0
-export var laser_downtime = 5.0
+export var LASER_UPTIME = 3.0
+export var LASER_DOWNTIME = 5.0
 
 var laser_is_active = false
 var time_until_laser_toggle = 0.0
 
-func _enter_tree():
-	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
+onready var _damageable = get_node("Damageable")
+onready var _health_bar = get_node("HealthBar3D/Viewport/Bar")
+onready var _gate_collision_shape = get_node("HitNotifier/GateCollisionShape")
+onready var _laser_area = get_node("LaserArea")
+onready var _timer = get_node("Timer")
+onready var _animation_player = get_node("AnimationPlayer")
 
 
 func _ready():
+	_damageable.connect("health_changed", _health_bar, "update_value")
+	_damageable.connect("is_vulnerable_changed", _health_bar, "set_visible")
+	_damageable.connect("is_vulnerable_changed", self, "_on_Damageable_is_vulnerable_changed")
+	_damageable.connect("death", self, "_on_Damageable_death")
 	set_process(false)
 
 
@@ -20,37 +28,26 @@ func _process(delta):
 		laser_set_is_active(!laser_is_active)
 
 
-func _on_GameState_stage_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage != GameState.ECLIPSE:
-		print(GameState.current_stage)
-		set_is_active(false)
-
-
-func _on_is_active_changed():
-	if(is_active):
+func _on_Damageable_is_vulnerable_changed(value):
+	if(value):
 		Announcer.say("trex_active", true);
-	set_target_gate_open(!is_active)
-	$HealthBar3D.set_visible(is_active)
+	set_target_gate_open(!value)
 	laser_set_is_active(false)
-	set_process(is_active)
+	set_process(value)
 	#print("LaserTrex: active - ", is_active)
 
 
-func _on_health_changed(_old_health):
-	$HealthBar3D/Viewport/Bar.update_value(current_health, MAX_HEALTH)
-
-
-func _on_death():
+func _on_Damageable_death():
 	Announcer.say("trex_defeat", true)
 
 
-func laser_set_is_active(is_active):
-	$LaserArea.set_deferred("monitoring", is_active)
-	$LaserArea.set_deferred("monitorable", is_active)
-	$LaserArea.set_visible(is_active)
-	time_until_laser_toggle = laser_uptime if is_active else laser_downtime
-	laser_is_active = is_active
-	#print("LaserTrex: laser active - ", is_active)
+func laser_set_is_active(value):
+	_laser_area.set_deferred("monitoring", value)
+	_laser_area.set_deferred("monitorable", value)
+	_laser_area.set_visible(value)
+	_timer.start(LASER_UPTIME if value else LASER_DOWNTIME)
+	laser_is_active = value
+	#print("LaserTrex: laser active - ", value)
 
 
 func _on_LaserArea_body_entered(body):
@@ -61,14 +58,10 @@ func _on_LaserArea_body_entered(body):
 
 
 func set_target_gate_open(is_open):
-	$BottomCollisionShape.set_deferred("disabled", is_open)
-	if $AnimationPlayer.is_playing():
-		$AnimationPlayer.stop()
+	_gate_collision_shape.set_deferred("disabled", is_open)
+	if _animation_player.is_playing():
+		_animation_player.stop()
 	if is_open:
-		$AnimationPlayer.play("gate_open_anim")
+		_animation_player.play("gate_open_anim")
 	else:
-		$AnimationPlayer.play_backwards("gate_open_anim")
-
-
-func _on_Boss_laser_trex_health_threshold_reached():
-	set_is_active(true)
+		_animation_player.play_backwards("gate_open_anim")

@@ -7,13 +7,13 @@ export var remote_control_duration = 15.0
 export var time_left_report_rate = .1
 
 func _enter_tree():
-	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
+	GameState.connect("state_changed", self, "_on_GameState_changed")
 
 func _ready():
 	set_wait_time(remote_control_duration)
 	$ReportTimer.set_wait_time(time_left_report_rate)
 	
-func _on_GameState_stage_changed(_new_stage, _is_debug_skip):
+func _on_GameState_changed(_new_state, _is_debug_skip):
 	if !is_stopped():
 		$ReportTimer.stop()
 		stop()

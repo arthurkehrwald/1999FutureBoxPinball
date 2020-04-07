@@ -7,8 +7,6 @@
 [ext_resource path="res://HUD/portrait_rex_neutral.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/GlitchShader.tscn" type="PackedScene" id=6]
 
-
-
 [sub_resource type="DynamicFont" id=1]
 size = 40
 font_data = ExtResource( 2 )
@@ -24,7 +22,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-transmissions_file_path = "res://HUD/transimissions.json"
+TRANSMISSIONS_FILE_PATH = "res://HUD/transimissions.json"
 
 [node name="Background" type="TextureRect" parent="."]
 margin_top = 2.43396

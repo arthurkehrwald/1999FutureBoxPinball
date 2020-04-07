@@ -1,21 +1,18 @@
 extends "res://Scripts/Roller.gd"
 
-const EXPLOSION_SCENE = preload("res://Scenes/Explosion.tscn")
+const EXPLOSION_SCENE = preload("res://Scenes/BombExplosion.tscn")
 const COLLISION_MASK_SWITCH_DELAY = .7
 
 export var FUSE_TIME = 5.0
-export var CHAIN_EXPLOSIONS_ENABLED = true
-export var CHAIN_EXPLOSION_DELAY = .2
 
 onready var _timer = get_node("Timer")
 
 
 func _ready():
-	_hitreg_area.set_deferred("monitoring", false)
 	_timer.connect("timeout", self, "_on_Timer_timeout")
 	_timer.start(FUSE_TIME)
 	var switch_timer = get_tree().create_timer(COLLISION_MASK_SWITCH_DELAY)
-	switch_timer.connect("timeout", self, "enable_collisions_with_boss")
+	switch_timer.connect("timeout", _hitreg_area, "set_monitoring", [true])
 #	yield(get_tree().create_timer(COLLISION_LAYER_SWITCH_DELAY), "timeout")
 #	# enable collisions with the boss
 #	print("Bomb: switched collision layers; can now collide with boss")
@@ -28,17 +25,10 @@ func _ready():
 #		remove_collision_exception_with(gun_static_body)
 
 
-func enable_collisions_with_boss():
-	_hitreg_area.set_deferred("monitoring", true)	
-
-
-func on_hit_by_explosion():
-	if CHAIN_EXPLOSIONS_ENABLED:
-		_timer.start(CHAIN_EXPLOSION_DELAY)
-
-
 func _explode():
-	get_parent().add_child(EXPLOSION_SCENE.instance())
+	var explosion_instance = EXPLOSION_SCENE.instance()
+	explosion_instance.set_transform(Transform(Basis.IDENTITY, get_transform().origin))
+	get_parent().add_child(explosion_instance)
 	queue_free()
 
 

@@ -1,4 +1,4 @@
-extends StaticBody
+extends Spatial
 
 export var muzzle_velocity = 10
 

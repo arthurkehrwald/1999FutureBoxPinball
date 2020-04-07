@@ -9,7 +9,7 @@ var fade_progress = 0
 var target_volume
 
 func _enter_tree():
-	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
+	GameState.connect("state_changed", self, "_on_GameState_changed")
 	
 func _ready():
 	target_volume = $Track1.volume_db
@@ -24,11 +24,11 @@ func _process(delta):
 		fade_out_player.stop()
 		set_process(false)
 	
-func _on_GameState_stage_changed(new_stage, is_debug_skip):
+func _on_GameState_changed(new_state, is_debug_skip):
 	$Track1.volume_db = target_volume
 	$Track2.volume_db = target_volume
 	$Track3.volume_db = target_volume
-	match new_stage:
+	match new_state:
 		GameState.PREGAME:
 			$Track1.play()
 			$Track2.stop()

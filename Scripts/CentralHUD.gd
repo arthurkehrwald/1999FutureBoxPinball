@@ -1,13 +1,13 @@
 extends Sprite3D
 
 func _enter_tree():
-	GameState.connect("stage_changed", self, "_on_GameState_stage_changed")
+	GameState.connect("state_changed", self, "_on_GameState_changed")
 
 func _ready():
 	texture = $Viewport.get_texture()
 	pass
 
-func _on_GameState_stage_changed(new_stage, is_debug_skip):
+func _on_GameState_changed(new_stage, is_debug_skip):
 	if is_debug_skip or new_stage == GameState.PREGAME:
 		$Viewport/ShopMenu.set_is_active(false)
 
