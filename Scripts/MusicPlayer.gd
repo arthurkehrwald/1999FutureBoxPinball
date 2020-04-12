@@ -1,69 +1,57 @@
 extends Node
 
-export var crossfade_duration = 5.0
-export var fade_out_volume_lower_amount = 50
+const FADE_DB_REDUCTION = 50
 
-var fade_out_player
-var fade_in_player
+export var crossfade_duration = 5.0
+
+var active_player = null
+var fade_out_player = null
 var fade_progress = 0
-var target_volume
+var active_player_normal_db = 0
+var fade_out_normal_db = 0
+
+onready var track_1_player = get_node("Track1Player")
+onready var track_2_player = get_node("Track2Player")
+onready var track_3_player = get_node("Track3Player")
+onready var active_player_in_state = {
+	GameState.TESTING: null,
+	GameState.PREGAME: track_1_player,
+	GameState.EXPOSITION: track_1_player,
+	GameState.ENEMY_FLEET: track_1_player,
+	GameState.BOSS_APPEARS: track_2_player,
+	GameState.MISSILES: track_2_player,
+	GameState.TREX: track_3_player,
+	GameState.BLACK_HOLE: track_3_player,
+	GameState.ECLIPSE: track_3_player,
+	GameState.VICTORY: track_3_player,
+	GameState.DEFEAT: track_3_player
+}
+
 
 func _enter_tree():
-	GameState.connect("state_changed", self, "_on_GameState_changed")
-	
+	GameState.connect("state_changed", self, "on_GameState_changed")
+
+
 func _ready():
-	target_volume = $Track1.volume_db
 	set_process(false)
-	
+
+
 func _process(delta):
 	fade_progress += delta / crossfade_duration
 	if fade_progress < 1.0:
-		fade_in_player.volume_db = lerp(target_volume - fade_out_volume_lower_amount, target_volume, fade_progress)
-		fade_out_player.volume_db = lerp(target_volume, target_volume - fade_out_volume_lower_amount, fade_progress)
+		active_player.volume_db = lerp(active_player_normal_db - FADE_DB_REDUCTION, active_player_normal_db, fade_progress)
+		fade_out_player.volume_db = lerp(fade_out_normal_db, fade_out_normal_db - FADE_DB_REDUCTION, fade_progress)
 	else:
 		fade_out_player.stop()
+		fade_out_player = null
+		fade_progress = 0
 		set_process(false)
-	
-func _on_GameState_changed(new_state, is_debug_skip):
-	$Track1.volume_db = target_volume
-	$Track2.volume_db = target_volume
-	$Track3.volume_db = target_volume
-	match new_state:
-		GameState.PREGAME:
-			$Track1.play()
-			$Track2.stop()
-			$Track3.stop()
-		GameState.EXPOSITION:
-			if is_debug_skip:
-				$Track1.play()
-				$Track2.stop()
-				$Track3.stop()
-		GameState.ENEMY_FLEET:
-			if is_debug_skip:
-				$Track1.play()
-				$Track2.stop()
-				$Track3.stop()
-		GameState.BOSS_BEGIN:
-			if is_debug_skip:
-				$Track1.stop()
-				$Track2.play()
-				$Track3.stop()
-			$Track1.volume_db = target_volume
-			$Track2.volume_db = target_volume - fade_out_volume_lower_amount
-			$Track2.play()
-			fade_out_player = $Track1
-			fade_in_player = $Track2
-			fade_progress = 0
-			set_process(true)
-		GameState.ECLIPSE:
-			if is_debug_skip:
-				$Track1.stop()
-				$Track2.stop()
-				$Track3.play()
-			$Track2.volume_db = target_volume
-			$Track3.volume_db = target_volume - fade_out_volume_lower_amount
-			$Track3.play()
-			fade_out_player = $Track2
-			fade_in_player = $Track3
-			fade_progress = 0
-			set_process(true)
+
+
+func on_GameState_changed(new_state, _is_debug_skip):
+	if active_player != active_player_in_state[new_state]:
+		fade_out_player = active_player 
+		fade_out_normal_db = active_player.volume_db
+		active_player = active_player_in_state[new_state]
+		active_player_normal_db = active_player.volume_db
+	set_process(true)

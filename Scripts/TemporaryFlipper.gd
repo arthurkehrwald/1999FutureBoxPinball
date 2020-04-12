@@ -1,39 +1,51 @@
 extends "res://Scripts/Flipper.gd"
 
-export var duration = 15.0
+export var DURATION = 15.0
 
-func _enter_tree():
-	GameState.connect("state_changed", self, "_on_GameState_changed")
+onready var active_timer = get_node("ActiveTimer")
+onready var active_time_bar = get_node("ActiveTimeBar3D/Viewport/Bar")
+onready var collision_shape_1 = get_node("CollisionShape")
+onready var collision_shape_2 = get_node("CollisionShape2")
+onready var collision_shape_3 = get_node("CollisionShape3")
+onready var collision_shape_4 = get_node("CollisionShape4")
+
 
 func _ready():
-	$Timer.set_wait_time(duration)
+	GameState.connect("state_changed", self, "on_GameState_changed")
+	active_timer.connect("timeout", self, "on_ActiveTimer_timeout")
+	active_time_bar.max_value = DURATION
+	set_process(false)
+
 
 func _process(_delta):
-	$Bar3D.update_value($Timer.time_left, duration)
-	
-func _on_GameState_changed(new_stage, is_debug_skip):
+	active_time_bar.value = active_timer.time_left
+
+
+func on_GameState_changed(new_stage, is_debug_skip):
 	if is_debug_skip or new_stage == GameState.PREGAME:
 		set_is_active(false)
 
+
 func set_is_active(is_active):
-	set_physics_process(is_active)
 	set_process(is_active)
 	set_visible(is_active)
 	if is_active:
-		$Timer.start()
+		active_timer.start()
 	else:
-		$Timer.stop()
-	$CollisionShape.set_deferred("disabled", !is_active)
-	$CollisionShape2.set_deferred("disabled", !is_active)
-	$CollisionShape3.set_deferred("disabled", !is_active)
-	$CollisionShape4.set_deferred("disabled", !is_active)
-	
+		active_timer.stop()
+	collision_shape_1.set_deferred("disabled", !is_active)
+	collision_shape_2.set_deferred("disabled", !is_active)
+	collision_shape_3.set_deferred("disabled", !is_active)
+	collision_shape_4.set_deferred("disabled", !is_active)
+
+
 func _on_ShopMenu_bought_flipper():
-	if $Timer.is_stopped():
+	if active_timer.is_stopped():
 		set_is_active(true)
 	else:
-		$Timer.stop()
-		$Timer.start()
+		active_timer.stop()
+		active_timer.start()
 
-func _on_Timer_timeout():
+
+func on_ActiveTimer_timeout():
 	set_is_active(false)

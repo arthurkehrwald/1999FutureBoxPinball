@@ -1,31 +1,25 @@
 extends Spatial
 
-var ball_scene = preload("res://Scenes/Pinball.tscn")
+const BALL_SCENE = preload("res://Scenes/Pinball.tscn")
 
-func _enter_tree():
-	GameState.connect("state_changed", self, "_on_GameState_changed")
-	GameState.connect("spawn_ball", self, "spawn_ball")	
+var accessible_balls = 0
 
 
-func _on_GameState_changed(new_stage, is_debug_skip):
-	if is_debug_skip:
-		spawn_ball()
-	elif new_stage == GameState.EXPOSITION:
-		spawn_ball()
-		
+func _ready():
+	spawn_ball()
+
+
 func spawn_ball():
-	var ball_instance = ball_scene.instance()
+	var ball_instance = BALL_SCENE.instance()
 	add_child(ball_instance)
 	var t = ball_instance.get_global_transform()
 	t.origin = get_global_transform().origin
 	ball_instance.set_global_transform(t)
 	ball_instance.connect("became_inaccessible", self, "on_Ball_became_inaccessible")
-	GameState.balls_on_field += 1
+	accessible_balls += 1
+
 
 func on_Ball_became_inaccessible():
-	print("BallSpawn: ball became inaccessible")
-	print("BallSpawn: child count - ", get_child_count())
-	for child in get_children():
-		if child.is_in_group("Pinballs") and child.is_accessible_to_player:
-			return
-	spawn_ball()
+	accessible_balls -= 1
+	if accessible_balls < 1:
+		spawn_ball()

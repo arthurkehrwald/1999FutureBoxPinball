@@ -6,10 +6,10 @@ enum State {
 	STUNNED
 }
 
-const RAND_REL_SHOT_DELAY = .3
+const RAND_REL_SHOT_DELAY = .5
 
 export var SECONDS_BETWEEN_SHOTS = 3.0
-export var IS_STUNNABLE = false
+export var IS_STUNNABLE = true
 export var PINBALL_DIRECT_HIT_BASE_STUN_DUR = 10.0
 export var BOMB_DIRECT_HIT_BASE_STUN_DUR = 10.0
 export var MISSILE_DIRECT_HIT_BASE_STUN_DUR = 10.0
@@ -17,147 +17,138 @@ export var DIRECT_HIT_SPEED_RELEVANCE = 0.5
 export var BOMB_EXPLOSION_BASE_STUN_DUR = 10.0
 export var MISSILE_EXPLOSION_BASE_STUN_DUR = 10.0
 export var EXPLOSION_DISTANCE_RELEVANCE = 0.5
-export var  IS_SHOOTING_PER_STAGE = {
-	"Testing": true,
-	"Pregame": false,
-	"Exposition": false,
-	"EnemyFleet": false,
-	"BossAppears": true,
-	"Missiles": true,
-	"Trex": true,
-	"BlackHole": true,
-	"Eclipse": true,
-	"Victory": false,
-	"Defeat": false
+export var IS_SHOOTING_PER_STAGE = {
+	"0-Testing": true,
+	"1-Pregame": true,
+	"2-Exposition": true,
+	"3-EnemyFleet": true,
+	"4-BossAppears": true,
+	"5-Missiles": true,
+	"6-Trex": true,
+	"7-BlackHole": true,
+	"8-Eclipse": true,
+	"9-Victory": true,
+	"10-Defeat": true
 }
 
-var EXPORT_STRING_TO_STATE_ENUM = {
-	"Testing": GameState.NONE,
-	"Pregame": GameState.PREGAME,
-	"Exposition": GameState.EXPOSITION,
-	"EnemyFleet": GameState.ENEMY_FLEET,
-	"BossAppears": GameState.BOSS_APPEARS,
-	"Missiles": GameState.MISSILES,
-	"Trex": GameState.TREX,
-	"BlackHole": GameState.BLACK_HOLE,
-	"Eclipse": GameState.ECLIPSE,
-	"Victory": GameState.VICTORY,
-	"Defeat": GameState.DEFEAT
-}
 var IS_SHOOTING_PER_GAME_STATE = {}
-var _state = State.IDLE
+var state = State.IDLE
+var ignored_projectiles = []
 
-onready var _hit_notifier = get_node("HitNotifier")
-onready var _timer = get_node("Timer")
-onready var _shot_time_bar = get_node("ShotTimeBar3D/Viewport/Bar")
-onready var _stunned_indicator = get_node("StunnedIndicator")
-onready var _muzzle = get_node("Muzzle")
+onready var timer = get_node("Timer")
+onready var shot_time_bar = get_node("ShotTimeBar3D/Viewport/Bar")
+onready var stunned_indicator = get_node("StunnedIndicator")
+onready var muzzle = get_node("Muzzle")
 onready var rng = RandomNumberGenerator.new()
+onready var boss = Globals.boss
 
 
 func _ready():
+	if boss == null:
+		push_warning("Boss Gun: Reference to boss not set in Globals!")
 	rng.randomize()
 	for string_key in IS_SHOOTING_PER_STAGE.keys():
-		var game_state = EXPORT_STRING_TO_STATE_ENUM[string_key]
+		var game_state = GameState.NAME_STATE_DICT[string_key]
 		IS_SHOOTING_PER_GAME_STATE[game_state] = IS_SHOOTING_PER_STAGE[string_key]
-	GameState.connect("state_changed", self, "_on_GameState_changed")
-	_timer.connect("timeout", self, "_on_Timer_timeout")
-	_hit_notifier.connect("hit_by_pinball_directly", self, "_on_HitNotifier_hit_by_pinball_directly")
-	_hit_notifier.connect("hit_by_bomb_directly", self, "_on_HitNotifier_hit_by_bomb_directly")
-	_hit_notifier.connect("hit_by_missile_directly", self, "_on_HitNotifier_hit_by_missile_directly")
-	_hit_notifier.connect("hit_by_bomb_explosion", self, "_on_HitNotifier_hit_by_bomb_explosion")
-	_hit_notifier.connect("hit_by_missile_explosion", self, "_on_HitNotifier_hit_by_missile_explosion")
+	GameState.connect("state_changed", self, "on_GameState_changed")
+	timer.connect("timeout", self, "on_Timer_timeout")
+	connect("body_entered", self, "on_hit_by_projectile")
+	set_process(false)
 
 
 func _process(_delta):
-	_shot_time_bar.value = _timer.time_left
+	shot_time_bar.value = timer.time_left
 
 
-func _shoot():
+func shoot():
 	pass
 
 
-func _enter_idle_state():
-	_state = State.IDLE
-	_shot_time_bar.set_visible(false)
-	_stunned_indicator.set_visible(false)
+func enter_idle_state():
+	print("idle")
+	state = State.IDLE
+	shot_time_bar.set_visible(false)
+	stunned_indicator.set_visible(false)
 	set_process(false)
-	_timer.stop()
+	timer.stop()
 
 
-func _enter_shooting_state():
-	_state = State.SHOOTING
-	_shot_time_bar.set_visible(true)
-	_stunned_indicator.set_visible(false)
+func enter_shooting_state():
+	state = State.SHOOTING
+	shot_time_bar.set_visible(true)
+	stunned_indicator.set_visible(false)
 	set_process(true)
 	var r_spread = rng.randf_range(-RAND_REL_SHOT_DELAY, RAND_REL_SHOT_DELAY)
 	var r_shot_delay = SECONDS_BETWEEN_SHOTS + SECONDS_BETWEEN_SHOTS * r_spread
-	_shot_time_bar.max_value = r_shot_delay
-	_timer.start(r_shot_delay)
+	shot_time_bar.max_value = r_shot_delay
+	timer.start(r_shot_delay)
 
 
-func _enter_stunned_state(var stun_duration):
+func enter_stunned_state(var stun_duration):
+	print("stunned")
 	if stun_duration <= 0:
 		return
-	_state = State.STUNNED
-	_shot_time_bar.set_visible(false)
-	_stunned_indicator.set_visible(true)
+	state = State.STUNNED
+	shot_time_bar.set_visible(false)
+	stunned_indicator.set_visible(true)
 	set_process(false)
-	_timer.start(stun_duration)
+	timer.start(stun_duration)
 
 
-func _calc_direct_hit_stun_dur(var base_stun_dur, var projectile_vel):
-	var normalized_projectile_speed = projectile_vel.length() / Globals.ROLLER_TOPSPEED
+func calc_direct_hit_stun_dur(var base_stun_dur, var projectile_speed):
+	var normalized_projectile_speed = projectile_speed / Globals.ROLLER_TOPSPEED
 	normalized_projectile_speed = clamp(normalized_projectile_speed, 0, 1)
 	return base_stun_dur * DIRECT_HIT_SPEED_RELEVANCE * sin(PI * normalized_projectile_speed - PI / 2) + base_stun_dur
 
 
-func _calc_explosion_stun_dur(var base_stun_dur, var explosion_pos, var blast_radius):
+func calc_explosion_stun_dur(var base_stun_dur, var explosion_pos, var blast_radius):
 	var dist_to_center = (explosion_pos - get_global_transform().origin).length()
 	var normalized_blast_force = 1 - dist_to_center / blast_radius
 	return base_stun_dur * EXPLOSION_DISTANCE_RELEVANCE * sin(PI * normalized_blast_force - PI / 2) + base_stun_dur
 
 
-func _on_Timer_timeout():
-	if _state == State.SHOOTING:
-		_shoot()
+func on_Timer_timeout():
+	if state == State.SHOOTING:
+		shoot()
 		var r_spread = rng.randf_range(-RAND_REL_SHOT_DELAY, RAND_REL_SHOT_DELAY)
 		var r_shot_delay = SECONDS_BETWEEN_SHOTS + SECONDS_BETWEEN_SHOTS * r_spread
-		_shot_time_bar.max_value = r_shot_delay
-		_timer.start(r_shot_delay)
-	elif _state == State.STUNNED:
-		_enter_shooting_state()
+		shot_time_bar.max_value = r_shot_delay
+		timer.start(r_shot_delay)
+	elif state == State.STUNNED:
+		enter_shooting_state()
 
 
-func _on_GameState_changed(new_state, _is_debug_skip):
-	if _state == State.IDLE:
-		if IS_SHOOTING_PER_GAME_STATE[new_state]:
-			_enter_shooting_state()
+func on_GameState_changed(new_state, _is_debug_skip):
+	if state == State.IDLE and IS_SHOOTING_PER_GAME_STATE[new_state]:
+		enter_shooting_state()
+	elif state != State.IDLE and not IS_SHOOTING_PER_GAME_STATE[new_state]:
+		enter_idle_state()
+
+
+func on_hit_by_projectile(projectile):
+	if !IS_STUNNABLE or ignored_projectiles.has(projectile):
+		return
+	var base_stun_dur = 0
+	if projectile.is_in_group("pinballs"):
+		base_stun_dur = PINBALL_DIRECT_HIT_BASE_STUN_DUR
+	elif projectile.is_in_group("bombs"):
+		base_stun_dur = BOMB_DIRECT_HIT_BASE_STUN_DUR
+	elif projectile.is_in_group("missiles"):
+		base_stun_dur = MISSILE_DIRECT_HIT_BASE_STUN_DUR
 	else:
-		if not IS_SHOOTING_PER_GAME_STATE[new_state]:
-			_enter_idle_state()
+		return
+	enter_stunned_state(calc_direct_hit_stun_dur(
+			base_stun_dur,
+			projectile.get_linear_velocity().length()))
 
 
-func _on_HitNotifier_hit_by_pinball_directly(_pinball_pos, pinball_vel):
-	_enter_stunned_state(_calc_direct_hit_stun_dur(PINBALL_DIRECT_HIT_BASE_STUN_DUR,
-			pinball_vel.length()))
-
-
-func _on_HitNotifier_hit_by_bomb_directly(_bomb_pos, bomb_vel):
-	_enter_stunned_state(_calc_direct_hit_stun_dur(BOMB_DIRECT_HIT_BASE_STUN_DUR,
-			bomb_vel))
-
-
-func _on_HitNotifier_hit_by_missile_directly(_missile_pos, missile_vel):
-	_enter_stunned_state(_calc_direct_hit_stun_dur(MISSILE_DIRECT_HIT_BASE_STUN_DUR,
-			missile_vel))
-
-
-func _on_HitNotifier_hit_by_bomb_explosion(explosion_pos, blast_radius):
-	_enter_stunned_state(_calc_explosion_stun_dur(BOMB_EXPLOSION_BASE_STUN_DUR,
-			explosion_pos, blast_radius))
-
-
-func _on_HitNotifier_hit_by_missile_explosion(explosion_pos, blast_radius):
-	_enter_stunned_state(_calc_explosion_stun_dur(MISSILE_EXPLOSION_BASE_STUN_DUR,
-			explosion_pos, blast_radius))
+func on_hit_by_explosion(explosion):
+	var base_stun_dur = 0
+	if explosion.is_in_group("bomb_explosions"):
+		base_stun_dur = BOMB_EXPLOSION_BASE_STUN_DUR
+	elif explosion.is_in_group("missile_explosions"):
+		base_stun_dur = MISSILE_EXPLOSION_BASE_STUN_DUR
+	enter_stunned_state(calc_explosion_stun_dur(
+			base_stun_dur,
+			explosion.get_global_transform().origin,
+			explosion.blast_radius))

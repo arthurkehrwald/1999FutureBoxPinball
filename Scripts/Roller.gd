@@ -11,64 +11,66 @@ const TELEPORT_PHYSICS_COOLDOWN_BUFFER = .02
 export var AIRBORNE_GRAVITY_SCALE_MULTIPLIER = .4
 export var SPEED_BASED_GRAVITY_SCALE = false
 
-var _is_airborne = false
-var _teleporting = false
-var _teleport_physics_cooldown_time_remaining = 0
-
-onready var _ray_cast = get_node("RotationStabiliser/RayCast")
-
-func _enter_tree():
-	GameState.connect("state_changed", self, "_on_GameState_changed")
+var is_airborne = false
+var teleporting = false
+var teleport_physics_cooldown_time_remaining = 0
 
 
 func _ready():
+	$Timer.connect("timeout", self, "report_contacts")
+	add_to_group("rollers")
 	set_process(false)
 
 
 func _process(delta):
-	_teleport_physics_cooldown_time_remaining -= delta
-	if _teleport_physics_cooldown_time_remaining <= 0:
+	teleport_physics_cooldown_time_remaining -= delta
+	if teleport_physics_cooldown_time_remaining <= 0:
 		set_process(false)
 		emit_signal("teleport_physics_cooldown_buffer_expired")
 
 
 func _physics_process(_delta):
-	if _is_airborne == _ray_cast.is_colliding():
-		_is_airborne = !_is_airborne
-		if _is_airborne:
+	var was_airborne = is_airborne
+	if was_airborne and not get_colliding_bodies().empty():
+		for body in get_colliding_bodies():
+			if not body.is_in_group("projectiles"):
+				is_airborne = false
+	elif not was_airborne and get_colliding_bodies().empty():
+		is_airborne = true
+	if is_airborne != was_airborne:
+		print("Roller airborne ", is_airborne)
+		if is_airborne:
 			if not SPEED_BASED_GRAVITY_SCALE:
 				gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
-			emit_signal("physics_debug_info_update", 1, 0)
 		else:
 			if not SPEED_BASED_GRAVITY_SCALE:
 				gravity_scale /= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
-			emit_signal("physics_debug_info_update", 0, 1)
 	if SPEED_BASED_GRAVITY_SCALE:
-		_set_gravity_scale_based_on_speed()
+		set_gravity_scale_based_on_speed()
 
 
-func teleport(destination, maintain_velocity, impulse_on_exit):
-	print("Ball or Bomb: _teleporting to - ", destination)
+func bid_farewell():
+	pass
+
+
+func teleport(destination):
+	set_global_transform(Transform(get_global_transform().basis, destination))
 	
-	var t = get_transform()
-	t.origin = destination
-	set_global_transform(t)
-
-	set_sleeping(false)
-	if !maintain_velocity:
-		set_linear_velocity(Vector3(0,0,0))
-		set_angular_velocity(Vector3(0,0,0))
-	apply_central_impulse(impulse_on_exit)
+	if not is_airborne:
+		print("Roller airborne ", is_airborne)
+		is_airborne = true
+		if not SPEED_BASED_GRAVITY_SCALE:
+			gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
 
 
 func delayed_teleport(destination, impulse_on_exit = Vector3(0, 0, 0)):
-	if _teleporting:
+	if teleporting:
 		return
 	
-	_teleporting = true
+	teleporting = true
 	set_physics_process(false)
 	
-	_teleport_physics_cooldown_time_remaining = TELEPORT_PHYSICS_COOLDOWN_BUFFER
+	teleport_physics_cooldown_time_remaining = TELEPORT_PHYSICS_COOLDOWN_BUFFER
 	set_process(true)
 	yield(self, "teleport_physics_cooldown_buffer_expired")
 	
@@ -76,16 +78,21 @@ func delayed_teleport(destination, impulse_on_exit = Vector3(0, 0, 0)):
 	t.origin = destination
 	set_global_transform(t)
 	
-	_teleport_physics_cooldown_time_remaining = TELEPORT_PHYSICS_COOLDOWN_BUFFER
+	teleport_physics_cooldown_time_remaining = TELEPORT_PHYSICS_COOLDOWN_BUFFER
 	set_process(true)
 	yield(self, "teleport_physics_cooldown_buffer_expired")
 	
 	set_physics_process(true)
-	_teleporting = false
+	teleporting = false
 	
 	set_linear_velocity(Vector3(0,0,0))
 	set_angular_velocity(Vector3(0,0,0))
 	apply_central_impulse(impulse_on_exit)
+	
+	if not is_airborne:
+		is_airborne = true
+		if not SPEED_BASED_GRAVITY_SCALE:
+			gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
 
 
 func set_locked(is_locked):
@@ -97,12 +104,12 @@ func set_locked(is_locked):
 	axis_lock_angular_z = is_locked
 
 
-func _set_gravity_scale_based_on_speed():
+func set_gravity_scale_based_on_speed():
 		#gravity_scale = clamp(-.2 * pow(.2 * get_linear_velocity().length(),
 		#		2.7) + 15, 1, 15)
 		gravity_scale = clamp(-.1 * pow(.2 * get_linear_velocity().length(),
 				2.5) + 15, 5, 15)
-		if _is_airborne:
+		if is_airborne:
 			gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
 		#gravity_scale = -get_linear_velocity().length() + 20
 		emit_signal("physics_debug_info_update",
@@ -110,16 +117,9 @@ func _set_gravity_scale_based_on_speed():
 				gravity_scale)
 
 
-func _on_GameState_changed(new_state, is_debug_skip):
-	if is_debug_skip or new_state == GameState.PREGAME:
-		queue_free()
-	else:
-		_omni_light.set_visible(new_state == GameState.ECLIPSE)
+func on_entered_laser_area():
+	.on_entered_laser_area()
 
 
-func _on_HitregArea_area_entered(_area):
-	pass
-
-
-func _on_HitregArea_body_entered(_body):
-	pass
+func report_contacts():
+	print(get_colliding_bodies())

@@ -1,42 +1,85 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Meshes/boss_missile.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scenes/Projectile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Missile.gd" type="Script" id=3]
 [ext_resource path="res://Animations/missile_launch.tres" type="Animation" id=4]
+[ext_resource path="res://Meshes/missile_exhaust_flame.obj" type="ArrayMesh" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.25
 height = 0.5
 
-[sub_resource type="CapsuleShape" id=2]
-radius = 0.25
-height = 0.5
-
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.819608, 0.231373, 0.231373, 1 )
 
+[sub_resource type="SpatialMaterial" id=3]
+flags_unshaded = true
+albedo_color = Color( 0.878431, 0.494118, 0.286275, 1 )
+
+[sub_resource type="PrismMesh" id=4]
+size = Vector3( 0.2, 0.2, 0.2 )
+
 [node name="Missile" instance=ExtResource( 2 )]
-collision_mask = 2
-mode = 3
+transform = Transform( 1, 0, 0, 0, 0.636078, -0.771625, 0, 0.771625, 0.636078, 0, 0, 0 )
+mass = 5.0
 gravity_scale = 0.0
+linear_damp = 0.4
+angular_damp = 0.0
 script = ExtResource( 3 )
-SPEED = 15.0
+SPEED = 2.0
+TURN_FORCE = 0.3
 
 [node name="CollisionShape" parent="." index="0"]
 shape = SubResource( 1 )
+disabled = true
 
-[node name="HitregArea" parent="." index="1"]
-monitoring = false
-
-[node name="CollisionShape" parent="HitregArea" index="0"]
-shape = SubResource( 2 )
-
-[node name="MeshInstance" parent="." index="2"]
+[node name="MeshInstance" parent="." index="1"]
 mesh = ExtResource( 1 )
-material/0 = SubResource( 3 )
+material/0 = SubResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 playback_process_mode = 0
 playback_speed = 0.1
 anims/missile_launch = ExtResource( 4 )
+
+[node name="MainExhaustFlame" type="MeshInstance" parent="." index="4"]
+transform = Transform( 0.15, 0, 0, 0, -6.55671e-09, 0.15, 0, -0.15, -6.55671e-09, 0, 0, 0.350464 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 3 )
+
+[node name="BottomExhaustFlame" type="MeshInstance" parent="." index="5"]
+transform = Transform( 0.07, 0, 0, 0, 0.0699999, 0, 0, 0, 0.0699999, 0, -0.15, -0.3 )
+visible = false
+mesh = ExtResource( 5 )
+material/0 = SubResource( 3 )
+
+[node name="TopExhaustFlame" type="MeshInstance" parent="." index="6"]
+transform = Transform( -0.07, 2.28089e-08, 0, -2.28089e-08, -0.0699999, 0, 0, 0, 0.0699999, 0, 0.15, -0.3 )
+visible = false
+mesh = ExtResource( 5 )
+material/0 = SubResource( 3 )
+
+[node name="LeftExhaustFlame" type="MeshInstance" parent="." index="7"]
+transform = Transform( 2.58687e-08, 0.0699999, 0, -0.07, 2.58686e-08, 0, 0, 0, 0.0699998, -0.15, -4.47035e-08, -0.3 )
+visible = false
+mesh = ExtResource( 5 )
+material/0 = SubResource( 3 )
+
+[node name="RightExhaustFlame" type="MeshInstance" parent="." index="8"]
+transform = Transform( -3.19883e-08, -0.0699999, 0, 0.0699999, -3.19882e-08, 0, 0, 0, 0.0699998, 0.15, -4.47035e-08, -0.3 )
+visible = false
+mesh = ExtResource( 5 )
+material/0 = SubResource( 3 )
+
+[node name="TargetPointer" type="Spatial" parent="." index="9"]
+
+[node name="MeshInstance" type="MeshInstance" parent="TargetPointer" index="0"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.65 )
+visible = false
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="GuidanceUpdateTimer" type="Timer" parent="." index="10"]
+process_mode = 0
+wait_time = 0.1

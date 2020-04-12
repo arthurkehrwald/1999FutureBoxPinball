@@ -1,23 +1,24 @@
 extends Spatial
 
-export var force = 10.0
-export var money_value = 100
+export var BUMP_FORCE = 10.0
+export var MONEY_PER_BUMP = 100
+export var MONEY_TEXT_HEIGHT = 0.5
 
 var money_text_3d_scene = preload("res://Scenes/MoneyText3D.tscn")
 
-onready var _hit_notifier = get_node("HitNotifier")
-
-func _ready():
-	_hit_notifier.connect("hit_by_pinball_directly", self, "_on_HitNotifier_hit_by_roller")
-	_hit_notifier.connect("hit_by_bomb_directly", self, "_on_HitNotifier_hit_by_roller")
+onready var audio_player = get_node("AudioStreamPlayer")
 
 
-func _on_HitNotifier_hit_by_roller(roller):
-	$AudioStreamPlayer.play()
-	roller.set_linear_velocity(Vector3(0,0,0))
-	roller.apply_central_impulse((roller.get_global_transform().origin - (get_global_transform().origin  + Vector3(0, .2, 0))).normalized() * force)
-	#GameState.set_player_money(GameState.player_money + money_value)
-	GameState.add_player_money(money_value)
+func on_hit_by_projectile(projectile):
+	if not projectile.is_in_group("rollers"):
+		return
+	audio_player.play()
+	projectile.set_linear_velocity(Vector3(0,0,0))
+	var impulse_origin = get_global_transform().origin  + Vector3(0, .2, 0)
+	var projectile_pos = projectile.get_global_transform().origin
+	projectile.apply_central_impulse((projectile_pos - impulse_origin).normalized() * BUMP_FORCE)
+	GameState.add_player_money(MONEY_PER_BUMP)
 	var money_text_3d_instance = money_text_3d_scene.instance()
-	money_text_3d_instance.set_money_amount(money_value)
-	$MoneyTextPos.add_child(money_text_3d_instance)
+	money_text_3d_instance.set_money_amount(MONEY_PER_BUMP)
+	add_child(money_text_3d_instance)
+	money_text_3d_instance.translate(Vector3(0, MONEY_TEXT_HEIGHT, 0))

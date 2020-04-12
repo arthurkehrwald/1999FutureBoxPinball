@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Shop.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/RemoteBallControlTimer.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/MultiTrigger.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/CurvedRamp.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=11]
@@ -24,7 +25,6 @@
 [ext_resource path="res://Scenes/BoxV2.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/PlayerTurret.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Slingshot.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Scenes/RemoteBallControlTimer.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/TemporaryFlipper.tscn" type="PackedScene" id=29]
 
@@ -39,7 +39,10 @@ environment = SubResource( 1 )
 current = true
 fov = 80.0
 
-[node name="RemoteBallControlTimer" parent="." instance=ExtResource( 27 )]
+[node name="RemoteBallControlTimer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+script = ExtResource( 8 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 

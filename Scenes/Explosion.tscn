@@ -4,25 +4,24 @@
 [ext_resource path="res://Audio/fx/explosion.wav" type="AudioStream" id=2]
 
 [sub_resource type="SphereShape" id=1]
-radius = 4.58
+radius = 1.5
 
 [node name="Explosion" type="Area"]
 monitorable = false
-collision_layer = 4
-collision_mask = 2
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="SoundEffectPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 autoplay = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="SelfDeleteTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
 autostart = true
 
-[node name="RayCast" type="RayCast" parent="."]
+[node name="HitregRaycast" type="RayCast" parent="."]
 enabled = true
+collide_with_areas = true

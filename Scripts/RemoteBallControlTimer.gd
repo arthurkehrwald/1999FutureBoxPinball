@@ -1,31 +1,22 @@
 extends Timer
 
 signal start
-signal time_left_changed(new_time_left)
 
 export var remote_control_duration = 15.0
 export var time_left_report_rate = .1
 
 func _enter_tree():
-	GameState.connect("state_changed", self, "_on_GameState_changed")
+	GameState.connect("state_changed", self, "on_GameState_changed")
+	Globals.remote_control_timer = self
+	if Globals.shop_menu != null:
+		Globals.shop_menu.connect("bought_remote_control", self, "on_ShopMenu_bought_remote_control")
 
-func _ready():
-	set_wait_time(remote_control_duration)
-	$ReportTimer.set_wait_time(time_left_report_rate)
-	
-func _on_GameState_changed(_new_state, _is_debug_skip):
-	if !is_stopped():
-		$ReportTimer.stop()
-		stop()
 
-func _on_ShopMenu_bought_remote_control():
-	stop()
-	$ReportTimer.stop()
-	set_process(true)
-	start()
+func on_ShopMenu_bought_remote_control(var duration):
+	start(duration)
 	emit_signal("start")
-	$ReportTimer.start()
-	
-func _on_ReportTimer_timeout():
-	emit_signal("time_left_changed", time_left / remote_control_duration)
-	$ReportTimer.start()
+
+
+func on_GameState_changed(new_state, is_debug_skip):
+	if new_state == GameState.PREGAME or is_debug_skip:
+		stop()

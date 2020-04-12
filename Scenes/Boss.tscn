@@ -1,14 +1,13 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Boss.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/HitNotifier.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Bar3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Meshes/boss.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=5]
 [ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/BossMissileGun.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/BossShield.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scripts/Damageable.gd" type="Script" id=9]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.7, 0.7, 1.2 )
@@ -26,128 +25,150 @@ height = 0.461056
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 0.342589, 0.1, 0.457196 )
 
-[node name="Boss" type="Spatial"]
+[node name="Boss" type="StaticBody"]
 script = ExtResource( 1 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 4 )
 material/0 = ExtResource( 5 )
 
 [node name="BossShield" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.07404 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.37602 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": true
+}
 
 [node name="HealthBar3D" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57968, 0 )
 
 [node name="BossBombGun" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 0.898794, -0.438371, 0, 0.438371, 0.898794, -1.40748, 1.01787, -1.39772 )
+transform = Transform( 1, 0, 0, 0, 0.898794, -0.438371, 0, 0.438371, 0.898794, -1.40748, 1.16619, -1.59755 )
 IS_SHOOTING_PER_STAGE = {
-"BlackHole": true,
-"BossAppears": true,
-"Defeat": false,
-"Eclipse": true,
-"EnemyFleet": false,
-"Exposition": false,
-"Missiles": true,
-"Pregame": false,
-"Testing": true,
-"Trex": true,
-"Victory": false
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
 }
 
 [node name="BossBombGun2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 0.898794, -0.438371, 0, 0.438371, 0.898794, 1.43817, 0.988917, -1.36934 )
+transform = Transform( 1, 0, 0, 0, 0.898794, -0.438371, 0, 0.438371, 0.898794, 1.43817, 1.13367, -1.58522 )
 IS_SHOOTING_PER_STAGE = {
-"BlackHole": true,
-"BossAppears": true,
-"Defeat": false,
-"Eclipse": true,
-"EnemyFleet": false,
-"Exposition": false,
-"Missiles": true,
-"Pregame": false,
-"Testing": true,
-"Trex": true,
-"Victory": false
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
 }
 
 [node name="BossMissileGun" parent="." instance=ExtResource( 7 )]
-transform = Transform( 0.964867, -0.0196691, 0.262003, -0.15927, 0.749305, 0.642788, -0.208963, -0.661933, 0.719846, 0.644636, 1.96691, 1.08823 )
+transform = Transform( 0.972824, 0.140383, 0.184138, -0.136843, 0.99008, -0.0318596, -0.186784, 0.00579588, 0.982384, 0.626045, 1.97672, 1.0126 )
+collision_mask = 2
 IS_SHOOTING_PER_STAGE = {
-"BlackHole": true,
-"BossAppears": false,
-"Defeat": false,
-"Eclipse": true,
-"EnemyFleet": false,
-"Exposition": false,
-"Missiles": true,
-"Pregame": false,
-"Testing": true,
-"Trex": true,
-"Victory": false
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": false,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
 }
 
 [node name="BossMissileGun2" parent="." instance=ExtResource( 7 )]
-transform = Transform( 0.964867, 0.0196691, -0.262003, 0.15927, 0.749305, 0.642788, 0.208963, -0.661933, 0.719846, -0.616472, 1.95373, 1.09139 )
+transform = Transform( 0.958071, -0.183726, -0.219875, 0.184271, 0.982707, -0.0182111, 0.219419, -0.023069, 0.975358, -0.616472, 1.98681, 1.03998 )
 IS_SHOOTING_PER_STAGE = {
-"BlackHole": true,
-"BossAppears": false,
-"Defeat": false,
-"Eclipse": true,
-"EnemyFleet": false,
-"Exposition": false,
-"Missiles": true,
-"Pregame": false,
-"Testing": true,
-"Trex": true,
-"Victory": false
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": false,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
 }
 
-[node name="HitNotifier" type="StaticBody" parent="."]
-collision_layer = 0
-collision_mask = 7
-script = ExtResource( 2 )
-
-[node name="CollisionShape" type="CollisionShape" parent="HitNotifier"]
+[node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.200293 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2" type="CollisionShape" parent="HitNotifier"]
+[node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39219, 0.045612 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape3" type="CollisionShape" parent="HitNotifier"]
+[node name="CollisionShape3" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00231123, 0.513669, 0.814397 )
 shape = SubResource( 3 )
 
-[node name="CollisionShape4" type="CollisionShape" parent="HitNotifier"]
+[node name="CollisionShape4" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.446088, 0.894989, 0, -0.894989, 0.446088, 1.43983, 0.952355, -1.30347 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape5" type="CollisionShape" parent="HitNotifier"]
+[node name="CollisionShape5" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.446088, 0.894989, 0, -0.894989, 0.446088, -1.41039, 0.952355, -1.30347 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape6" type="CollisionShape" parent="HitNotifier"]
+[node name="CollisionShape6" type="CollisionShape" parent="."]
 transform = Transform( 0.971484, -0.0135127, 0.236721, -0.146168, 0.75197, 0.642788, -0.186693, -0.659059, 0.728551, 0.589457, 1.69406, 0.992417 )
 shape = SubResource( 5 )
 
-[node name="CollisionShape7" type="CollisionShape" parent="HitNotifier"]
+[node name="CollisionShape7" type="CollisionShape" parent="."]
 transform = Transform( 0.964376, 0.0365053, -0.262003, 0.146168, 0.75197, 0.642788, 0.220483, -0.658186, 0.719846, -0.55, 1.7, 1 )
 shape = SubResource( 5 )
 
-[node name="Damageable" type="Node" parent="."]
-script = ExtResource( 9 )
+[node name="PlayerShip" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54874, 3.9343, -11.3802 )
 IS_VULNERABLE_PER_STAGE = {
-"BlackHole": true,
-"BossAppears": true,
-"Defeat": false,
-"Eclipse": true,
-"EnemyFleet": false,
-"Exposition": false,
-"Missiles": true,
-"Pregame": false,
-"Testing": true,
-"Trex": true,
-"Victory": false
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": true,
+"3-EnemyFleet": true,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
 }

@@ -1,4 +1,4 @@
-extends PathFollow
+extends Path
 
 signal debug_info_update(angle, speed, acceleration)
 
@@ -18,10 +18,11 @@ var speed = 0
 var looping_body_waiting_status = states.NONE
 var looping_body_entered_status = states.NONE
 
-onready var entrance_area = get_node("../EntranceArea")
-onready var exit_area = get_node("../ExitArea")
-onready var ball_replica = get_node("BallReplica")
-onready var bomb_replica = get_node("BombReplica")
+onready var path_follow = get_node("PathFollow")
+onready var entrance_area = get_node("EntranceArea")
+onready var exit_area = get_node("ExitArea")
+onready var ball_replica = get_node("PathFollow/BallReplica")
+onready var bomb_replica = get_node("PathFollow/BombReplica")
 
 
 func _ready():
@@ -39,7 +40,7 @@ func on_EntranceArea_body_entered(body):
 	if speed > 0:
 		looping_body = weakref(body)
 		looping_body.get_ref().delayed_teleport(entrance_area.get_global_transform().origin)
-		set_unit_offset(0.0)
+		path_follow.set_unit_offset(0.0)
 		looping_body_waiting_status = states.AT_ENTRANCE
 		looping_body_entered_status = states.AT_ENTRANCE
 		start_follow()
@@ -52,7 +53,7 @@ func on_ExitArea_body_entered(body):
 		if speed < 0:
 			looping_body = weakref(body)
 			looping_body.get_ref().delayed_teleport(exit_area.get_global_transform().origin)
-			set_unit_offset(1.0)
+			path_follow.set_unit_offset(1.0)
 			looping_body_waiting_status = states.AT_EXIT
 			looping_body_entered_status = states.AT_EXIT
 			start_follow()
@@ -77,8 +78,8 @@ func _physics_process(delta):
 	if looping_body.get_ref():
 		speed += acceleration * delta
 		speed *= 1 - friction * delta
-		var reached_entrance = speed < 0 and get_unit_offset() == 0
-		var reached_exit = speed > 0 and get_unit_offset() == 1
+		var reached_entrance = speed < 0 and path_follow.get_unit_offset() == 0
+		var reached_exit = speed > 0 and path_follow.get_unit_offset() == 1
 		if reached_exit or reached_entrance:
 			looping_body.get_ref().set_locked(false)
 			var impulse_dir = Vector3.ZERO
@@ -92,15 +93,15 @@ func _physics_process(delta):
 			looping_body.get_ref().apply_central_impulse(impulse)
 			reset(true)
 		else:
-			set_offset(get_offset() + speed * delta)
+			path_follow.set_offset(path_follow.get_offset() + speed * delta)
 			if looping_body_is_bomb:
 				bomb_replica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
 			else:
 				ball_replica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
-			if looping_body_waiting_status == states.AT_ENTRANCE and get_unit_offset() > .6:
+			if looping_body_waiting_status == states.AT_ENTRANCE and path_follow.get_unit_offset() > .6:
 				looping_body.get_ref().delayed_teleport(exit_area.get_global_transform().origin)
 				looping_body_waiting_status = states.AT_EXIT
-			elif looping_body_waiting_status == states.AT_EXIT and get_unit_offset() < .4:
+			elif looping_body_waiting_status == states.AT_EXIT and path_follow.get_unit_offset() < .4:
 				looping_body.get_ref().delayed_teleport(entrance_area.get_global_transform().origin)
 				looping_body_waiting_status = states.AT_ENTRANCE
 	else:
@@ -133,7 +134,7 @@ func start_follow():
 
 func reset(is_active):
 	set_physics_process(false)
-	set_unit_offset(0.0)
+	path_follow.set_unit_offset(0.0)
 	ball_replica.set_visible(false)
 	bomb_replica.set_visible(false)
 	entrance_area.set_deferred("monitoring", is_active)

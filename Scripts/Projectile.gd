@@ -7,12 +7,21 @@ extends RigidBody
 export var EXPLOSION_BASE_KNOCKBACK_STRENGTH = 10.0
 export var EXPLOSION_DISTANCE_RELEVANCE = .5
 
-onready var _hitreg_area = get_node("HitregArea")
-onready var _omni_light = get_node("OmniLight")
+onready var omni_light = get_node("OmniLight")
 
 func _ready():
-	_hitreg_area.connect("area_entered", self, "_on_HitregArea_area_entered")
-	_hitreg_area.connect("body_entered", self, "_on_HitregArea_body_entered")
+	add_to_group("projectiles")
+	connect("body_entered", self, "on_body_entered")
+	GameState.connect("state_changed", self, "on_GameState_changed")
+
+
+func bid_farewell():
+	pass
+
+
+func on_body_entered(body):
+	if body.has_method("on_hit_by_projectile"):
+		body.on_hit_by_projectile(self)
 
 
 func on_hit_by_bomb_explosion(var explosion_pos, var _blast_radius):
@@ -25,9 +34,13 @@ func on_hit_by_missile_explosion(var explosion_pos, var _blast_radius):
 	apply_impulse(explosion_pos, impulse_direction * EXPLOSION_BASE_KNOCKBACK_STRENGTH)
 
 
-func _on_HitregArea_area_entered(_area):
-	pass
+func on_entered_laser_area():
+	bid_farewell()
 
 
-func _on_HitregArea_body_entered(_body):
-	pass
+func on_GameState_changed(new_state, is_debug_skip):
+	if is_debug_skip or new_state == GameState.PREGAME:
+		bid_farewell()
+		queue_free()
+	else:
+		omni_light.set_visible(new_state == GameState.ECLIPSE)

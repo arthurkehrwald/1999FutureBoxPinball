@@ -4,38 +4,38 @@
 [ext_resource path="res://Scenes/BossGun.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/BossMissileGun.gd" type="Script" id=3]
 
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 0.342589, 0.1, 0.457196 )
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.4, 0.4, 0.1 )
 
 [node name="BossMissileGun" instance=ExtResource( 2 )]
-transform = Transform( 0.830742, 0, -0.556658, 0, 1, 0, 0.556658, 0, 0.830742, 0, 0, 0 )
 script = ExtResource( 3 )
 IS_SHOOTING_PER_STAGE = {
-"BlackHole": true,
-"BossAppears": false,
-"Defeat": false,
-"Eclipse": true,
-"EnemyFleet": false,
-"Exposition": false,
-"Missiles": true,
-"Pregame": false,
-"Testing": true,
-"Trex": true,
-"Victory": false
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": false,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
 }
 
-[node name="Muzzle" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.431976, 0 )
+[node name="CollisionShape" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 0.636078, -0.771625, 0, 0.771625, 0.636078, 0, -0.0372558, -0.0451949 )
+shape = SubResource( 1 )
 
-[node name="ShotTimeBar3D" parent="." index="1"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.2, 0 )
+[node name="Muzzle" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.382814, 0.313748 )
 
-[node name="StunnedIndicator" parent="." index="3"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.2, 0 )
+[node name="ShotTimeBar3D" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 0.636078, -0.771625, 0, 0.771625, 0.636078, 0, 0.118884, -0.07096 )
 
-[node name="CollisionShape" parent="HitNotifier" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1 )
-shape = SubResource( 5 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 1 )
+bus = "Effects"
+
+[node name="StunnedIndicator" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 0.636078, -0.771625, 0, 0.771625, 0.636078, 0, 0.120841, -0.0725729 )

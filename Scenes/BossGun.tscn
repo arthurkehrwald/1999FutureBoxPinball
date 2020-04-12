@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/RadialBar3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/BossGun.gd" type="Script" id=2]
 [ext_resource path="res://HUD/diagonal_cross.png" type="Texture" id=3]
-[ext_resource path="res://Scripts/HitNotifier.gd" type="Script" id=4]
 
-[node name="BossGun" type="Spatial"]
+[node name="BossGun" type="Area"]
 script = ExtResource( 2 )
-SECONDS_BETWEEN_SHOTS = 0.5
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
 
 [node name="Muzzle" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
@@ -20,10 +20,3 @@ one_shot = true
 [node name="StunnedIndicator" type="Sprite3D" parent="."]
 modulate = Color( 1, 0, 0, 1 )
 texture = ExtResource( 3 )
-
-[node name="HitNotifier" type="Area" parent="."]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource( 4 )
-
-[node name="CollisionShape" type="CollisionShape" parent="HitNotifier"]

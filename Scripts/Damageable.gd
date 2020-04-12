@@ -1,5 +1,5 @@
 class_name Damageable
-extends Node
+extends CollisionObject
 
 signal is_vulnerable_changed(value)
 signal health_changed(health, old_health, max_health)
@@ -17,51 +17,32 @@ export var MISSILE_EXPLOSION_BASE_DAMAGE = 10.0
 export var EXPLOSION_DISTANCE_RELEVANCE = 0.5
 export var MONEY_YIELD_PER_DAMAGE = 1.0
 export var MONEY_TEXT_HEIGHT = 0.5
-export var  IS_VULNERABLE_PER_STAGE = {
-	"Testing": true,
-	"Pregame": false,
-	"Exposition": true,
-	"EnemyFleet": true,
-	"BossAppears": true,
-	"Missiles": true,
-	"Trex": true,
-	"BlackHole": true,
-	"Eclipse": true,
-	"Victory": false,
-	"Defeat": false
+export var IS_VULNERABLE_PER_STAGE = {
+	"0-Testing": true,
+	"1-Pregame": true,
+	"2-Exposition": true,
+	"3-EnemyFleet": true,
+	"4-BossAppears": true,
+	"5-Missiles": true,
+	"6-Trex": true,
+	"7-BlackHole": true,
+	"8-Eclipse": true,
+	"9-Victory": true,
+	"10-Defeat": true
 }
 
-var EXPORT_STRING_TO_STATE_ENUM = {
-	"Testing": GameState.NONE,
-	"Pregame": GameState.PREGAME,
-	"Exposition": GameState.EXPOSITION,
-	"EnemyFleet": GameState.ENEMY_FLEET,
-	"BossAppears": GameState.BOSS_APPEARS,
-	"Missiles": GameState.MISSILES,
-	"Trex": GameState.TREX,
-	"BlackHole": GameState.BLACK_HOLE,
-	"Eclipse": GameState.ECLIPSE,
-	"Victory": GameState.VICTORY,
-	"Defeat": GameState.DEFEAT
-}
+
 var IS_VULNERABLE_PER_GAME_STATE = {}
 var health = MAX_HEALTH setget set_health
 var is_vulnerable = true setget set_is_vulnerable
 
-onready var _hit_notifier = get_node("../HitNotifier")
-
 
 func _ready():
 	for string_key in IS_VULNERABLE_PER_STAGE.keys():
-		var game_state = EXPORT_STRING_TO_STATE_ENUM[string_key]
+		var game_state = GameState.NAME_STATE_DICT[string_key]
 		IS_VULNERABLE_PER_GAME_STATE[game_state] = IS_VULNERABLE_PER_STAGE[string_key]
 	DIRECT_HIT_SPEED_RELEVANCE = clamp(DIRECT_HIT_SPEED_RELEVANCE, 0, 1)
-	GameState.connect("state_changed", self, "_on_GameState_changed")
-	_hit_notifier.connect("hit_by_pinball_directly", self, "_on_HitNotifier_hit_by_pinball_directly")
-	_hit_notifier.connect("hit_by_bomb_directly", self, "_on_HitNotifier_hit_by_bomb_directly")
-	_hit_notifier.connect("hit_by_missile_directly", self, "_on_HitNotifier_hit_by_missile_directly")
-	_hit_notifier.connect("hit_by_bomb_explosion", self, "_on_HitNotifier_hit_by_bomb_explosion")
-	_hit_notifier.connect("hit_by_missile_explosion", self, "_on_HitNotifier_hit_by_missile_explosion")
+	GameState.connect("state_changed", self, "on_GameState_changed")
 
 
 func set_is_vulnerable(value):
@@ -96,42 +77,45 @@ func take_damage(damage):
 			money_text_3d_instance.translate(Vector3(0, MONEY_TEXT_HEIGHT, 0))
 
 
-func _on_GameState_changed(new_state, _is_debug_skip):
+func on_GameState_changed(new_state, _is_debug_skip):
 	set_is_vulnerable(IS_VULNERABLE_PER_GAME_STATE[new_state])
 
 
-func _calc_direct_hit_damage(var base_damage, var projectile_vel):
-	var normalized_projectile_speed = projectile_vel.length() / Globals.ROLLER_TOPSPEED
+func calc_direct_hit_damage(var base_damage, var projectile_speed):
+	var normalized_projectile_speed = projectile_speed / Globals.ROLLER_TOPSPEED
 	normalized_projectile_speed = clamp(normalized_projectile_speed, 0, 1)
 	return base_damage * DIRECT_HIT_SPEED_RELEVANCE * sin(PI * normalized_projectile_speed - PI / 2) + base_damage
 
 
-func _calc_explosion_damage(var base_damage, var explosion_pos, var blast_radius):
-	var dist_to_center = (explosion_pos - _hit_notifier.get_global_transform().origin).length()
+func calc_explosion_damage(var base_damage, var explosion_pos, var blast_radius):
+	var dist_to_center = (explosion_pos - get_global_transform().origin).length()
 	var normalized_blast_force = 1 - dist_to_center / blast_radius
 	return base_damage * EXPLOSION_DISTANCE_RELEVANCE * sin(PI * normalized_blast_force - PI / 2) + base_damage
 
 
-func _on_HitNotifier_hit_by_pinball_directly(_pinball_pos, pinball_vel):
-	take_damage(_calc_direct_hit_damage(PINBALL_DIRECT_HIT_BASE_DAMAGE,
-			pinball_vel.length()))
+func on_hit_by_projectile(projectile):
+	var base_damage = 0
+	if projectile.is_in_group("pinballs"):
+		base_damage = PINBALL_DIRECT_HIT_BASE_DAMAGE
+	elif projectile.is_in_group("bombs"):
+		base_damage = BOMB_DIRECT_HIT_BASE_DAMAGE
+	elif projectile.is_in_group("missiles"):
+		base_damage = MISSILE_DIRECT_HIT_BASE_DAMAGE
+	else:
+		return
+	take_damage(calc_direct_hit_damage(
+			base_damage,
+			projectile.get_linear_velocity().length()))
 
 
-func _on_HitNotifier_hit_by_bomb_directly(_bomb_pos, bomb_vel):
-	take_damage(_calc_direct_hit_damage(BOMB_DIRECT_HIT_BASE_DAMAGE,
-			bomb_vel))
-
-
-func _on_HitNotifier_hit_by_missile_directly(_missile_pos, missile_vel):
-	take_damage(_calc_direct_hit_damage(MISSILE_DIRECT_HIT_BASE_DAMAGE,
-			missile_vel))
-
-
-func _on_HitNotifier_hit_by_bomb_explosion(explosion_pos, blast_radius):
-	take_damage(_calc_explosion_damage(BOMB_EXPLOSION_BASE_DAMAGE,
-			explosion_pos, blast_radius))
-
-
-func _on_HitNotifier_hit_by_missile_explosion(explosion_pos, blast_radius):
-	take_damage(_calc_explosion_damage(MISSILE_EXPLOSION_BASE_DAMAGE,
-			explosion_pos, blast_radius))
+func on_hit_by_explosion(explosion):
+	var base_damage = 0
+	if explosion.is_in_group("bomb_explosions"):
+		base_damage = BOMB_EXPLOSION_BASE_DAMAGE
+	elif explosion.is_in_group("missile_explosions"):
+		print(name + " was hit by missile explosion")
+		base_damage = MISSILE_EXPLOSION_BASE_DAMAGE
+	take_damage(calc_explosion_damage(
+			base_damage,
+			explosion.get_global_transform().origin,
+			explosion.blast_radius))

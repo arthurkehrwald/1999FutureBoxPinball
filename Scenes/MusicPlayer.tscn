@@ -8,20 +8,20 @@
 [node name="MusicPlayer" type="Node"]
 script = ExtResource( 4 )
 
-[node name="Track1" type="AudioStreamPlayer" parent="."]
+[node name="Track1Player" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 1 )
 volume_db = -9.343
-autoplay = true
+bus = "Music"
 
-[node name="Track2" type="AudioStreamPlayer" parent="."]
+[node name="Track2Player" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 3 )
 volume_db = -9.343
-autoplay = true
+bus = "Music"
 
-[node name="Track3" type="AudioStreamPlayer" parent="."]
+[node name="Track3Player" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 2 )
 volume_db = -9.343
-autoplay = true
+bus = "Music"

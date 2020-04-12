@@ -21,7 +21,7 @@ extents = Vector3( 0.604309, 0.15329, 0.0718273 )
 [node name="Flipper" type="KinematicBody"]
 transform = Transform( 0.819152, 0, -0.573577, 0, 1, 0, 0.573577, 0, 0.819152, 0, 0, 0 )
 collision_layer = 0
-collision_mask = 2
+collision_mask = 14
 script = ExtResource( 1 )
 MAX_TURN_ANGLE = 50
 TURN_SPEED = 800
@@ -50,7 +50,7 @@ shape = SubResource( 3 )
 [node name="Area" type="Area" parent="."]
 transform = Transform( 0.99639, 0, -0.0848953, 0, 1, 0, 0.0848953, 0, 0.99639, 0.471379, 0.2, -0.184613 )
 collision_layer = 0
-collision_mask = 2
+collision_mask = 6
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 4 )

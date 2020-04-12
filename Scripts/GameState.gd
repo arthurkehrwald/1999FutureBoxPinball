@@ -16,10 +16,9 @@ signal objective_two_completed
 signal player_money_changed(new_player_money)
 signal player_coolness_changed(new_player_coolness)
 signal player_coolness_maxed
-signal spawn_ball
 
 enum {
-	NONE,
+	TESTING,
 	PREGAME,
 	EXPOSITION,
 	ENEMY_FLEET,
@@ -46,18 +45,24 @@ enum Event {
 	POSTGAME_FINISHED
 }
 
-var current_state = NONE
+const NAME_STATE_DICT = {
+	"0-Testing": TESTING,
+	"1-Pregame": PREGAME,
+	"2-Exposition": EXPOSITION,
+	"3-EnemyFleet": ENEMY_FLEET,
+	"4-BossAppears": BOSS_APPEARS,
+	"5-Missiles": MISSILES,
+	"6-Trex": TREX,
+	"7-BlackHole": BLACK_HOLE,
+	"8-Eclipse": ECLIPSE,
+	"9-Victory": VICTORY,
+	"10-Defeat": DEFEAT
+}
 
-var player_money = 0
-var player_coolness = 0 setget set_player_coolness
-var nightmode_enabled = false
-var balls_on_field = 0
-var player_ship = null
+var current_state = TESTING
 
-var _is_fleet_defeated = false
-var _has_player_used_shop = false
-
-var plunger_progress = 0.0
+var is_fleet_defeated = false
+var has_player_used_shop = false
 
 var global_non_wireframe_mat = preload("res://Materials/mat_for_3d_prints.tres")
 var global_wireframe_mat = preload("res://Materials/wireframe_material.tres")
@@ -67,79 +72,94 @@ func _ready():
 	set_pause_mode(Node.PAUSE_MODE_PROCESS)
 	#yield (get_tree().create_timer(1, true), "timeout")
 	if get_node_or_null("/root/Main") == null:
-		call_deferred("_set_state", NONE)
+		call_deferred("set_state", TESTING)
 	else:
-		call_deferred("_set_state", PREGAME)
+		call_deferred("set_state", PREGAME)
 
 
-func _process(delta):
-	if Input.is_action_just_pressed("start"):
-		handle_event(Event.START_INPUT)
-	processDebugInput()
-	if player_coolness > 0:
-		set_player_coolness(player_coolness - PLAYER_COOLNESS_DECAY_PER_SEC * delta)
-
-
-func global_init():
-	nightmode_enabled = false
-	_set_state(PREGAME, false)
+func _input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			match event.scancode:
+				KEY_0:
+					set_state(TESTING, true)
+				KEY_1:
+					set_state(PREGAME, true)
+				KEY_2:
+					set_state(EXPOSITION, true)
+				KEY_3:
+					set_state(ENEMY_FLEET, true)
+				KEY_4:
+					set_state(BOSS_APPEARS, true)
+				KEY_5:
+					set_state(MISSILES, true)
+				KEY_6:
+					set_state(TREX, true)
+				KEY_7:
+					set_state(BLACK_HOLE, true)
+				KEY_8:
+					set_state(ECLIPSE, true)
+				KEY_9:
+					set_state(VICTORY, true)
+				_:
+					handle_event(Event.START_INPUT)
 
 
 func handle_event(var event):
 	match current_state:
-		NONE:
+		TESTING:
 			pass
 		PREGAME:
 			if event == Event.START_INPUT:
-				_set_state(EXPOSITION)
+				set_state(EXPOSITION)
 		EXPOSITION:
 			if event == Event.TRANSMISSION_FINISHED:
-				_set_state(ENEMY_FLEET)
+				set_state(ENEMY_FLEET)
 		ENEMY_FLEET:
 			if event == Event.FLEET_DEFEATED:
-				_is_fleet_defeated = true
+				is_fleet_defeated = true
 				emit_signal("objective_one_completed")
-				if _has_player_used_shop:
-					_set_state(BOSS_APPEARS)
+				if has_player_used_shop:
+					set_state(BOSS_APPEARS)
 			if event == Event.USED_SHOP:
-				_has_player_used_shop = true
+				has_player_used_shop = true
 				emit_signal("objective_two_completed")
-				if _is_fleet_defeated:
-					_set_state(BOSS_APPEARS)
+				if is_fleet_defeated:
+					set_state(BOSS_APPEARS)
 		BOSS_APPEARS:
 			if event == Event.BOSS_MISSILES_THRESHOLD:
-				_set_state(MISSILES)
+				set_state(MISSILES)
 		MISSILES:
 			if event == Event.BOSS_TREX_THRESHOLD:
-				_set_state(TREX)
+				set_state(TREX)
 		TREX:
 			if event == Event.BOSS_BLACK_HOLE_THRESHOLD:
-				_set_state(BLACK_HOLE)
+				set_state(BLACK_HOLE)
 		BLACK_HOLE:
 			if event == Event.BOSS_ECLIPSE_THRESHOLD:
-				_set_state(ECLIPSE)
+				set_state(ECLIPSE)
 		ECLIPSE:
 			pass
 		VICTORY:
 			if event == Event.POSTGAME_FINISHED:
-				_set_state(PREGAME)
+				set_state(PREGAME)
 		DEFEAT:
 			if event == Event.POSTGAME_FINISHED:
-				_set_state(PREGAME)
+				set_state(PREGAME)
 
 
-func _set_state(new_state, is_debug_skip = false):
+func set_state(new_state, is_debug_skip = false):
 	print("GameState: set to ", new_state)
 	set_global_eclipse_materials(new_state == ECLIPSE)
 	if new_state == ENEMY_FLEET:
-		_has_player_used_shop = false
-		_is_fleet_defeated = false
+		has_player_used_shop = false
+		is_fleet_defeated = false
 	current_state = new_state
 	emit_signal("state_changed", new_state, is_debug_skip)
 
 
-func set_global_eclipse_materials(is_ECLIPSE):
-	if is_ECLIPSE:
+func set_global_eclipse_materials(is_eclipse):
+	if is_eclipse:
 		global_non_wireframe_mat.albedo_color = Color.black
 		global_wireframe_mat.albedo_color = Color(133, 0, 255, 255)
 		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_ADD)
@@ -149,39 +169,13 @@ func set_global_eclipse_materials(is_ECLIPSE):
 		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_SUB)
 
 
-func add_player_money(amount):
-	player_money = clamp(player_money + amount, 0, MAX_PLAYER_MONEY)
+func set_player_money(value):
+	player_money = clamp(value, 0, MAX_PLAYER_MONEY)
 	emit_signal("player_money_changed", player_money)
 
 
-func set_player_coolness(new_player_coolness):
-	if player_coolness < 100 and new_player_coolness >= 100:
+func set_player_coolness(value):
+	if player_coolness < 100 and value >= 100:
 		emit_signal("player_coolness_maxed")
-	player_coolness = clamp(new_player_coolness, 0, 100)
+	player_coolness = clamp(value, 0, 100)
 	emit_signal("player_coolness_changed", player_coolness)
-
-
-func processDebugInput():
-	if Input.is_action_just_pressed("pause"):
-		get_tree().is_paused = !get_tree().is_paused()
-	
-	if Input.is_action_just_pressed("test_reload_scene"):
-		get_tree().reload_current_scene()
-	
-	if Input.is_action_just_pressed("debug_goto_pregame"):
-		_set_state(PREGAME, true)
-	
-	if Input.is_action_just_pressed("debug_goto_exposition"):
-		_set_state(EXPOSITION, true)
-	
-	if Input.is_action_just_pressed("debug_goto_fleet"):
-		_set_state(ENEMY_FLEET, true)
-	
-	if Input.is_action_just_pressed("debug_goto_boss_begin"):
-		_set_state(BOSS_APPEARS, true)	
-	
-	if Input.is_action_just_pressed("debug_goto_ECLIPSE"):
-		_set_state(ECLIPSE, true)		
-	
-	if Input.is_action_just_pressed("debug_spawn_ball"):
-		emit_signal("spawn_ball")

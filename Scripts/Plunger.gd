@@ -28,7 +28,6 @@ func _physics_process(delta):
 		move_progress -= release_speed / max_distance * delta
 		if move_progress < 0:
 			move_progress = 0
-	GameState.plunger_progress = move_progress
 	
 	if Input.is_action_just_released("plunger"):
 		emit_signal("released", move_progress)

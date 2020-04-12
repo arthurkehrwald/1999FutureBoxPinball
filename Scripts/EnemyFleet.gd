@@ -4,16 +4,16 @@ var total_ship_count = 0
 var remaining_ship_count = 0
 var is_active = false
 
-onready var _ship_parent = get_node("ParentForAnimation")
-onready var _animation_player = get_node("AnimationPlayer")
+onready var ship_parent = get_node("ParentForAnimation")
+onready var animation_player = get_node("AnimationPlayer")
 
 
 func _ready():
 	GameState.connect("state_changed", self, "_on_GameState_changed")
-	total_ship_count = _ship_parent.get_child_count()
+	total_ship_count = ship_parent.get_child_count()
 	remaining_ship_count = total_ship_count
-	for ship in _ship_parent.get_children():
-		ship.get_node("Damageable").connect("death", self, "_on_EnemyShip_death")
+	for ship in ship_parent.get_children():
+		ship.connect("death", self, "_on_EnemyShip_death")
 
 
 func _on_GameState_changed(new_state, _is_debug_skip):
@@ -22,16 +22,16 @@ func _on_GameState_changed(new_state, _is_debug_skip):
 
 func set_is_active(value):
 	is_active = value
-	for ship in _ship_parent.get_children():
+	for ship in ship_parent.get_children():
 		if value:
-			ship.get_node("Damageable").set_health(ship.get_node("Damageable").MAX_HEALTH)
-		ship.get_node("Damageable").set_is_vulnerable(value)
-	if _animation_player.is_playing():
-		_animation_player.stop()
+			ship.set_health(ship.MAX_HEALTH)
+		ship.set_is_vulnerable(value)
+	if animation_player.is_playing():
+		animation_player.stop()
 	if value:
 		remaining_ship_count = total_ship_count
-		_animation_player.play("enemy_fleet_appear_anim")
-		_animation_player.queue("enemy_fleet_idle_anim")
+		animation_player.play("enemy_fleet_appear_anim")
+		animation_player.queue("enemy_fleet_idle_anim")
 
 
 func _on_EnemyShip_death():

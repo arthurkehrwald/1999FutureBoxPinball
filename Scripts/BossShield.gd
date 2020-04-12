@@ -1,29 +1,50 @@
-extends Spatial
+extends "res://Scripts/Damageable.gd"
 
 export var REGENERATION_TIME = 10.0
 
-onready var _damageable = get_node("Damageable")
-onready var _health_bar = get_node("HealthBar3D/Viewport/Bar")
-onready var _timer = get_node("Timer")
-onready var _collision_shape = get_node("HitNotifier/CollisionShape")
+onready var health_bar = get_node("HealthBar3D/Viewport/Bar")
+onready var regeneration_timer = get_node("RegenerationTimer")
+onready var collision_shape = get_node("CollisionShape")
+onready var front_area = get_node("FrontArea")
+onready var behind_area = get_node("BehindArea")
 
 
 func _ready():
-	_damageable.connect("is_vulnerable_changed", self, "_on_Damageable_is_vulnerable_changed")
-	_damageable.connect("death", self, "_on_Damageable_death")
-	_damageable.connect("health_changed", _health_bar, "update_value")
-	_timer.connect("timeout", self, "_on_Timer_timeout")
+	connect("is_vulnerable_changed", self, "on_is_vulnerable_changed")
+	connect("death", self, "on_death")
+	connect("health_changed", health_bar, "update_value")
+	regeneration_timer.connect("timeout", self, "on_RegenerationTimer_timeout")
+	front_area.connect("body_exited", self, "on_FrontArea_body_exited")
+	behind_area.connect("body_entered", self, "on_BehindArea_body_entered")
 
 
-func _on_Damageable_is_vulnerable_changed(value):
+func on_is_vulnerable_changed(value):
 	set_visible(value)
-	_collision_shape.set_deferred("disabled", !value)
+	collision_shape.set_deferred("disabled", !value)
+	front_area.set_deferred("monitoring", value)
+	behind_area.set_deferred("monitoring", value)
 
 
-func _on_Damageable_death():
-	_timer.start(REGENERATION_TIME)
+func on_death():
+	regeneration_timer.start(REGENERATION_TIME)
 
 
-func _on_Timer_timeout():
-	_damageable.set_health(_damageable.MAX_HEALTH)
-	_damageable.set_is_vulnerable(true)
+func on_RegenerationTimer_timeout():
+	set_health(MAX_HEALTH)
+	set_is_vulnerable(true)
+
+
+func on_FrontArea_body_entered(body):
+	if !body.get_colliding_bodies().has(self):
+		call("remove_collision_exception_with", body)
+		body.remove_collision_exception_with(self)
+
+
+func on_FrontArea_body_exited(body):
+	call("remove_collision_exception_with", body)
+	body.remove_collision_exception_with(self)
+
+
+func on_BehindArea_body_entered(body):
+	call("add_collision_exception_with", body)
+	body.add_collision_exception_with(self)

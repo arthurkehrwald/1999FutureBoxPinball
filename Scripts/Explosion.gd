@@ -3,38 +3,32 @@ extends Area
 # Notifies any intersecting bodies / areas that are not hit by the ray cast.
 # Deletes itself after a split second.
 
-const HITREG_DELAY = 0.1
+const LIFETIME = 0.1
 
-onready var _blast_radius = get_node("CollisionShape").shape.radius
-onready var _ray_cast = get_node("RayCast")
-onready var _timer = get_node("Timer")
+onready var blast_radius = get_node("CollisionShape").shape.radius
+onready var hitreg_raycast = get_node("HitregRaycast")
+onready var self_delete_timer = get_node("SelfDeleteTimer")
 
 
 func _ready():
-	_timer.connect("timeout", self, "_on_Timer_timeout")
-	_timer.start(HITREG_DELAY)
+	self_delete_timer.connect("timeout", self, "on_SelfDeleteTimer_timeout")
+	self_delete_timer.start(LIFETIME)
 
 
-func _is_behind_cover(var node):
-	_ray_cast.cast_to = node.get_global_transform().origin - get_global_transform().origin
-	_ray_cast.set_global_transform(Transform(Basis.IDENTITY, _ray_cast.get_global_transform().origin))
-	_ray_cast.force_raycast_update()
-	return _ray_cast.is_colliding() and _ray_cast.get_collider() != node
+func is_behind_cover(var node):
+	hitreg_raycast.cast_to = node.get_global_transform().origin - get_global_transform().origin
+	hitreg_raycast.set_global_transform(Transform(Basis.IDENTITY, hitreg_raycast.get_global_transform().origin))
+	hitreg_raycast.force_raycast_update()
+	return hitreg_raycast.is_colliding() and hitreg_raycast.get_collider() != node
 
 
-func _register_hits():
-	for hit_area in get_overlapping_areas():
-		if not _is_behind_cover(hit_area):
-			_notify_hit_node(hit_area)
-	for hit_body in get_overlapping_bodies():
-		if not _is_behind_cover(hit_body):
-			_notify_hit_node(hit_body)
+func register_hits():
+	for hit_object in get_overlapping_bodies() + get_overlapping_areas():
+		if not is_behind_cover(hit_object):
+			if hit_object.has_method("on_hit_by_explosion"):
+				hit_object.on_hit_by_explosion(self)
 
 
-func _on_Timer_timeout():
-	_register_hits()
+func on_SelfDeleteTimer_timeout():
+	register_hits()
 	queue_free()
-
-
-func _notify_hit_node(_node):
-	pass

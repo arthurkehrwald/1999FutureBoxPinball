@@ -1,25 +1,51 @@
 class_name PlayerShip
-extends Spatial
+extends "res://Scripts/Damageable.gd"
 
-export(NodePath) var PATH_TO_SHOP
+signal money_changed(value)
+signal coolness_changed(value)
 
-onready var _shop_menu = Globals.shop_menu
-onready var _damageable = get_node("Damageable")
-onready var _audio_player = get_node("AudioStreamPlayer")
+export var SHOP_REPAIR_HEALTH_GAIN = 50.0
+export var COOLNESS_DECAY_PER_SEC = .1
+export var PATH_TO_SHOP_MENU = "../ShopMenu"
+
+var money = 0 setget set_money
+var coolness = 0 setget set_coolness
+
+onready var shop_menu = get_node_or_null(PATH_TO_SHOP_MENU)
+onready var audio_player = get_node("AudioStreamPlayer")
 
 
 func _ready():
-	GameState.player_ship = self
-	_shop_menu.connect("bought_repair", self, "_on_ShopMenu_bought_repair")
-	_damageable.connect("health_changed", self, "_on_Damageable_health_changed")
-	_damageable.connect("death", GameState, "on_PlayerShip_death")
+	if shop_menu != null:
+		shop_menu.connect("bought_repair", self, "on_ShopMenu_bought_repair")
+	else:
+		push_warning("PlayerShip: Could not find shop menu! ")
+	connect("body_entered", self, "on_body_entered")
+	connect("health_changed", self, "on_health_changed")
+	connect("death", GameState, "handle_event", [GameState.Event.PLAYER_DIED])
 
 
-func _on_ShopMenu_bought_repair(var heal_percent):
-	_damageable.heal(_damageable.MAX_HEALTH * .01 * heal_percent)
+func set_money(value):
+	money = value
+	emit_signal("money_changed", value)
 
 
-func _on_Damageable_health_changed(current_health, old_health, _max_health):
+func set_coolness(value):
+	coolness = value
+	emit_signal("coolness_changed", value)
+
+
+func on_ShopMenu_bought_repair():
+	heal(SHOP_REPAIR_HEALTH_GAIN)
+
+
+func on_health_changed(current_health, old_health, _max_health):
 	if current_health < old_health:
 		Announcer.say("ouch")
-		_audio_player.play()
+		audio_player.play()
+
+
+func on_body_entered(body):
+	if not body.is_in_group("projectiles"):
+		return
+	on_hit_by_projectile(body)

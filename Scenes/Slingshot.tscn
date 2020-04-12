@@ -19,7 +19,7 @@ points = PoolVector3Array( 0.06, 0, 0.11, -0.62, 0, 0.95, 1.55, 0, 0.12, 0.06, 0
 
 [node name="Slingshot" type="StaticBody"]
 transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0 )
-collision_mask = 2
+collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
@@ -47,4 +47,5 @@ shape = SubResource( 3 )
 
 [node name="SlingshotTrigger" parent="." instance=ExtResource( 3 )]
 transform = Transform( -0.375377, 0, 0.0652408, 0, 0.25, 0, -0.965304, 0, -0.0253701, 0.580276, 0.25, -0.501094 )
-collision_mask = 2
+collision_layer = 1
+collision_mask = 0

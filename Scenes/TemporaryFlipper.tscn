@@ -7,10 +7,7 @@
 [node name="TemporaryFlipper" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="Timer" type="Timer" parent="." index="5"]
+[node name="ActiveTimer" type="Timer" parent="." index="5"]
 
-[node name="Bar3D" parent="." index="6" instance=ExtResource( 3 )]
+[node name="ActiveTimeBar3D" parent="." index="6" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.709345, 0 )
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-
-[editable path="Bar3D"]

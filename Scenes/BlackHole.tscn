@@ -99,6 +99,7 @@ gravity_point = true
 gravity_distance_scale = 0.2
 gravity = 2.67333
 collision_layer = 0
+collision_mask = 14
 
 [node name="CollisionShape" type="CollisionShape" parent="GravitationalField"]
 shape = SubResource( 1 )
@@ -119,6 +120,7 @@ texture = ExtResource( 2 )
 [node name="NomArea" type="Area" parent="GravitationalField"]
 transform = Transform( 2.94118, 0, 0, 0, 2.94118, 0, 0, 0, 2.94118, 0, 0, 0 )
 collision_layer = 0
+collision_mask = 14
 
 [node name="CollisionShape" type="CollisionShape" parent="GravitationalField/NomArea"]
 shape = SubResource( 5 )

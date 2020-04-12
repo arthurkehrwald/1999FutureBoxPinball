@@ -30,6 +30,7 @@ func _on_TeleporterEntrance_body_entered(body):
 	else:
 		emit_signal("ball_entered_3", body)
 
+
 func set_turret_exit_enabled(var enable):
 	if enable:
 		current_exit_1_chance = exit_1_chance

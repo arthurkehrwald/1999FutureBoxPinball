@@ -11,7 +11,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.31, 0.999956, 1 )
+"times": PoolRealArray( 0, 0.35, 0.999956, 1 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath(".:translation:y")
@@ -20,8 +20,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, -0.194318, 0.00384545, 0.194318, -0.00384545, 0.605767, -0.081051, -0.358589, 0.0584348, 0.258529, 1.41739, -0.116993, -0.0054872, 0.18699, 0.00877021, -1.3, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.31, 0.52, 1 )
+"points": PoolRealArray( 0, -0.194318, 0.00384545, 0.168723, 0.00377429, 0.595392, -0.0457346, -0.233462, 0.100628, 0.513676, 1.41739, -0.116993, -0.0054872, 0.322062, -0.0120448, -1.3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.35, 0.56, 1 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath(".:translation:z")
@@ -30,8 +30,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.212596, -0.0221163, -0.49626, -0.0281426, 0.0989385, 0.237361, -0.83447, -5, -0.179063, 1.0818, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.31, 1 )
+"points": PoolRealArray( 0, -0.25, 0, 0.180243, 0.0125098, -0.490803, -0.0477674, 0.188835, 0.25, -0.988303, -5, -0.127702, 1.60466, 0.292172, -0.037612 ),
+"times": PoolRealArray( 0, 0.35, 1 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath(".:rotation_degrees:x")
@@ -40,17 +40,65 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 47.87, -0.25, -0.976623, 0.064452, 0.251781, 48.4567, -0.0793055, 0.865979, 0.0996206, -1.08781, -36.567, -0.297603, -0.229393, 0.168468, 0.129856, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.31, 0.7, 1 )
+"points": PoolRealArray( 50.5, -0.25, 0, 0.25, 0, 50.5, -0.249999, 1.59308, 0.184469, -1.1755, -36.567, -0.165997, 0.532692, 0.168468, -0.540621, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.35, 0.74, 1 )
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("HitregArea:monitoring")
+tracks/4/path = NodePath("CollisionShape:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.42 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("MainExhaustFlame:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.42, 0.58 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TopExhaustFlame:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.46, 0.52 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("BottomExhaustFlame:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.74, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath(".:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]

@@ -1,6 +1,6 @@
 extends Control
 
-signal bought_repair(heal_percent)
+signal bought_repair (heal_percent)
 signal bought_flipper
 signal bought_turret_shot
 signal bought_remote_control
@@ -8,7 +8,6 @@ signal panel_changed
 signal closed
 
 export var DECISION_TIME = 5.0
-export var REPAIR_HEAL_PERCENT = 50.0
 
 var item_01_texture = preload("res://HUD/shop_item_01.png")
 var item_02_texture = preload("res://HUD/shop_item_02.png")
@@ -77,6 +76,7 @@ func set_is_active(is_active):
 	set_process(is_active)
 	get_tree().paused = is_active
 
+
 func _on_DecisionTimer_timeout():
 	#print("ShopMenu: decision timer timeout")
 	buy_item(selected_item)
@@ -91,7 +91,7 @@ func buy_item(item_index):
 	GameState.handle_event(GameState.Event.SHOP_USED)
 	match item_index:
 		1:
-			emit_signal("bought_repair", REPAIR_HEAL_PERCENT)
+			emit_signal("bought_repair")
 		2:
 			emit_signal("bought_flipper")
 		3:

@@ -1,12 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Materials/ultraviolet_additive.tres" type="Material" id=1]
 [ext_resource path="res://Scripts/MoonGate.gd" type="Script" id=2]
 [ext_resource path="res://Animations/moon_scale.tres" type="Animation" id=3]
-[ext_resource path="res://Scripts/HitNotifier.gd" type="Script" id=4]
 [ext_resource path="res://Meshes/moon.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://Materials/moon_gate_mat.tres" type="Material" id=6]
-[ext_resource path="res://Scripts/Damageable.gd" type="Script" id=7]
 
 [sub_resource type="CylinderMesh" id=1]
 
@@ -41,10 +39,25 @@ material/0 = null
 [node name="MoonGatePivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.56, 0 )
 
-[node name="MoonGate" type="Spatial" parent="MoonGatePivot"]
+[node name="MoonGate" type="Area" parent="MoonGatePivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 0 )
 visible = false
+collision_mask = 0
 script = ExtResource( 2 )
+MAX_HEALTH = 30.0
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
 
 [node name="MeshInstance" type="MeshInstance" parent="MoonGatePivot/MoonGate"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
@@ -59,28 +72,5 @@ anims/moon_scale = ExtResource( 3 )
 [node name="FlyAnimPlayer" type="AnimationPlayer" parent="MoonGatePivot/MoonGate"]
 anims/moon_fly = SubResource( 2 )
 
-[node name="Damageable" type="Node" parent="MoonGatePivot/MoonGate"]
-script = ExtResource( 7 )
-MAX_HEALTH = 30.0
-IS_VULNERABLE_PER_STAGE = {
-"BlackHole": true,
-"BossAppears": true,
-"Defeat": false,
-"Eclipse": true,
-"EnemyFleet": false,
-"Exposition": false,
-"Missiles": true,
-"Pregame": false,
-"Testing": true,
-"Trex": true,
-"Victory": false
-}
-
-[node name="HitNotifier" type="Area" parent="MoonGatePivot/MoonGate"]
-monitoring = false
-collision_layer = 0
-collision_mask = 4
-script = ExtResource( 4 )
-
-[node name="CollisionShape" type="CollisionShape" parent="MoonGatePivot/MoonGate/HitNotifier"]
+[node name="CollisionShape" type="CollisionShape" parent="MoonGatePivot/MoonGate"]
 shape = SubResource( 3 )

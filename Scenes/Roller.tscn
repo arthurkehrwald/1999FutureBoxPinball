@@ -1,36 +1,28 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Roller.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Projectile.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/RotationStabiliser.gd" type="Script" id=3]
 [ext_resource path="res://Meshes/Collision/roller.tres" type="Shape" id=4]
 
-[sub_resource type="SphereShape" id=1]
-radius = 0.2
-
-[sub_resource type="SphereMesh" id=2]
+[sub_resource type="SphereMesh" id=1]
 radius = 0.2
 height = 0.4
 radial_segments = 16
 rings = 8
 
 [node name="Roller" instance=ExtResource( 2 )]
+gravity_scale = 8.0
+linear_damp = 0.3
+angular_damp = 0.3
 script = ExtResource( 1 )
+AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 0.001
 
 [node name="CollisionShape" parent="." index="0"]
 shape = ExtResource( 4 )
 
-[node name="CollisionShape" parent="HitregArea" index="0"]
-shape = SubResource( 1 )
-
-[node name="MeshInstance" parent="." index="2"]
-mesh = SubResource( 2 )
+[node name="MeshInstance" parent="." index="1"]
+mesh = SubResource( 1 )
 material/0 = null
 
-[node name="RotationStabiliser" type="Spatial" parent="." index="3"]
-script = ExtResource( 3 )
-
-[node name="RayCast" type="RayCast" parent="RotationStabiliser" index="0"]
-enabled = true
-cast_to = Vector3( 0, -0.4, 0 )
-collision_mask = 32
+[node name="Timer" type="Timer" parent="." index="3"]
+wait_time = 0.2
