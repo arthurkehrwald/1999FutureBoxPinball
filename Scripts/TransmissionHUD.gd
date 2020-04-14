@@ -120,7 +120,7 @@ func set_rex_mood(value):
 		glitch_overlay.super_glitch()
 
 
-func on_PlayerShip_health_changed(new_health, max_health, old_health):
+func on_PlayerShip_health_changed(new_health, old_health, max_health):
 	if old_health / max_health > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
 		if new_health / max_health < INJURED_PORTRAIT_HEALTH_PERCENTAGE:
 			set_rex_mood(RexMood.INJURED)

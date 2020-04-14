@@ -12,10 +12,9 @@ rings = 8
 
 [node name="Roller" instance=ExtResource( 2 )]
 gravity_scale = 13.0
-linear_damp = 0.3
 angular_damp = 0.3
 script = ExtResource( 1 )
-AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 0.2
+AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 0.6
 SPEED_BASED_GRAVITY_SCALE = true
 
 [node name="CollisionShape" parent="." index="0"]

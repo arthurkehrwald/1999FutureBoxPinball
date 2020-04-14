@@ -4,7 +4,7 @@ extends Area
 # enough money to buy something, 'shop_enter' input
 # is pressed, and at least one pinball is in area.
 
-signal player_bought_turret_shot(ball_to_shoot)
+signal bought_turret_shot(ball_to_shoot)
 
 var is_open = false setget set_is_open
 var balls_inside = []
@@ -24,7 +24,6 @@ func _ready():
 		push_warning("[ShopEntrance] Can't find shop menu! Menu will not show.")
 	connect("body_entered", self, "on_Shop_body_entered")
 	connect("body_exited", self, "on_Shop_body_exited")
-	set_process(false)
 
 
 func _input(event):
@@ -32,17 +31,8 @@ func _input(event):
 		for ball in balls_inside:
 			ball.set_linear_velocity(Vector3(0, 0, 0))
 		if Globals.shop_menu != null:
-			Globals.shop_menu.set_is_active(true)
+			Globals.shop_menu.set_is_active(true, balls_inside[0])
 		set_is_open(false)
-
-
-#func _process(_delta):
-#	if Input.is_action_pressed("ui_accept"):
-#		for ball in balls_inside:
-#			ball.set_linear_velocity(Vector3(0, 0, 0))
-#		if Globals.shop_menu != null:
-#			Globals.shop_menu.set_is_active(true)
-#		set_is_open(false)
 
 
 func set_is_open(value):
@@ -59,7 +49,6 @@ func on_Shop_body_entered(body):
 	body.on_visibility_changed(false)
 	if is_open:
 		balls_inside.push_back(body)
-		set_process(true)
 
 
 func on_Shop_body_exited(body):
@@ -68,8 +57,6 @@ func on_Shop_body_exited(body):
 	body.on_visibility_changed(true)
 	if balls_inside.has(body):
 		balls_inside.erase(body)
-	if balls_inside.empty():
-		set_process(false) 
 
 
 func on_GameState_changed(new_stage, _is_debug_skip):
@@ -86,7 +73,7 @@ func on_Player_money_changed(new_value, _old_value):
 
 func on_ShopMenu_bought_turret_shot():
 	assert(!balls_inside.empty())
-	emit_signal("player_bought_turret_shot", balls_inside[0])
+	emit_signal("bought_turret_shot", balls_inside[0])
 
 
 func on_ShopMenu_bought_remote_control(duration):

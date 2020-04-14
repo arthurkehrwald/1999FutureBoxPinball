@@ -47,10 +47,10 @@
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")
 
-[sub_resource type="ViewportTexture" id=3]
+[sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("BoxV3/Playfield/TransmissionHUD3D/Viewport")
 
-[sub_resource type="ViewportTexture" id=2]
+[sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("BoxV3/Playfield/PlayerStatsHUD3D/Viewport")
 
 [node name="Main" type="Spatial"]
@@ -93,7 +93,6 @@ margin_top = 11.0
 margin_right = -448.0
 margin_bottom = -439.0
 focus_mode = 2
-PRICE_FOR_EVERYTHING = 10.0
 
 [node name="ObjectiveHUD" parent="BoxV3/Playfield/CentralHUD3D/Viewport" instance=ExtResource( 14 )]
 margin_left = 54.0
@@ -116,7 +115,7 @@ transform = Transform( 0.806335, 0, 0, 0, 0.0050762, 0.85463, 0, -0.806869, -0.0
 material_override = ExtResource( 2 )
 centered = false
 offset = Vector2( 0, -40 )
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 region_enabled = true
 region_rect = Rect2( 34.6944, 0, 432.06, 380.926 )
 script = ExtResource( 5 )
@@ -140,7 +139,7 @@ transform = Transform( 0.806335, 0, 0, 0, 0.0050762, 0.85463, 0, -0.80687, -0.00
 material_override = ExtResource( 2 )
 centered = false
 offset = Vector2( -436.79, -40 )
-texture = SubResource( 2 )
+texture = SubResource( 3 )
 region_enabled = true
 region_rect = Rect2( 45.9354, 0, 425.065, 380.745 )
 script = ExtResource( 5 )
@@ -161,13 +160,13 @@ margin_right = 50.0
 [node name="RibbonHUD" parent="BoxV3/Playfield" instance=ExtResource( 28 )]
 
 [node name="Flipper" parent="BoxV3/Playfield" instance=ExtResource( 20 )]
-transform = Transform( 0.819152, 0, -0.573577, -2.6077e-08, 1, 7.45058e-09, 0.573577, 0, 0.819152, -1.74427, 6.84261e-05, 6.52426 )
-TURN_SPEED = 1000
+transform = Transform( 0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, -1.74427, 6.84261e-05, 6.52426 )
+forward_impulse_strength = 500
 sideways_impulse_strength = 0
 
 [node name="Flipper_R" parent="BoxV3/Playfield" instance=ExtResource( 26 )]
-transform = Transform( 0.819152, 0, 0.573577, 2.98023e-08, 1, 0, -0.573577, 0, 0.819152, 0.942751, -0.000406027, 6.53826 )
-TURN_SPEED = 1000
+transform = Transform( 0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, 0.942751, -0.000406027, 6.53826 )
+forward_impulse_strength = 500
 sideways_impulse_strength = 0
 
 [node name="Plunger" parent="BoxV3/Playfield" instance=ExtResource( 30 )]
@@ -177,6 +176,7 @@ release_speed = 30.0
 [node name="TemporaryFlipper" parent="BoxV3/Playfield" instance=ExtResource( 8 )]
 transform = Transform( -0.467807, 0, -0.883831, -1.49012e-08, 1, -3.72529e-09, 0.883831, 0, -0.467807, 2.78833, -0.000353813, -0.622326 )
 IS_RIGHT_FLIPPER = true
+forward_impulse_strength = 50
 
 [node name="PlayerTurret" parent="BoxV3/Playfield" instance=ExtResource( 21 )]
 transform = Transform( 0.800208, -0.214922, -0.559889, 0.0626884, 0.958443, -0.278317, 0.596437, 0.187613, 0.780427, -4.21973, 1.11634, 1.06246 )
@@ -198,7 +198,6 @@ transform = Transform( -0.389077, -6.80284e-09, 0.921206, -5.96046e-08, 1, -1.49
 
 [node name="Boss" parent="BoxV3/Playfield" instance=ExtResource( 23 )]
 transform = Transform( -0.8, -6.20542e-15, -3.11531e-07, -7.10543e-15, 0.8, 5.96046e-08, 3.11532e-07, 5.96046e-08, -0.8, 0.712752, 0.1343, -6.10326 )
-collision_mask = 0
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,

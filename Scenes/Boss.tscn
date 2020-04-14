@@ -25,6 +25,7 @@ height = 0.461056
 extents = Vector3( 0.342589, 0.1, 0.457196 )
 
 [node name="Boss" type="StaticBody"]
+collision_mask = 0
 script = ExtResource( 1 )
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,

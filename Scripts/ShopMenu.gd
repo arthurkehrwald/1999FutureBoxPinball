@@ -3,8 +3,7 @@ extends Control
 signal is_active_changed(value)
 signal bought_repair (heal_percent)
 signal bought_flipper(duration)
-signal bought_turret_shot
-signal bought_remote_control(duration)
+signal bought_turret_shot(ball_in_shop)
 
 const ITEM_01_TEXTURE = preload("res://HUD/shop_item_01.png")
 const ITEM_02_TEXTURE = preload("res://HUD/shop_item_02.png")
@@ -20,6 +19,7 @@ export var REMOTE_CONTROL_DURATION = 10.0
 
 var is_active = false
 var selected_item = 1
+var ball_in_shop = null
 
 onready var selected_item_rect = get_node("TextureRect")
 onready var decision_timer = get_node("DecisionTimer")
@@ -48,7 +48,6 @@ func _input(event):
 		decision_timer.stop()
 		buy_item(selected_item)
 		set_is_active(false)
-		emit_signal("closed")
 	else:
 		var previously_selected = selected_item
 		if event.is_action_pressed("ui_left"):
@@ -78,7 +77,8 @@ func _process(_delta):
 	time_remaining_bar.value = decision_timer.time_left * 100
 
 
-func set_is_active(value):
+func set_is_active(value, _ball_in_shop = null):
+	ball_in_shop = _ball_in_shop
 	is_active = value
 	emit_signal("is_active_changed", value)
 	selected_item = 1
@@ -96,6 +96,7 @@ func set_is_active(value):
 
 
 func on_DecisionTimer_timeout():
+	print("decision timer timeout")
 	buy_item(selected_item)
 	set_is_active(false)
 
@@ -110,6 +111,8 @@ func buy_item(item_index):
 		2:
 			emit_signal("bought_flipper", EXTRA_FLIPPER_DURATION)
 		3:
-			emit_signal("bought_turret_shot")
+			if ball_in_shop != null:
+				emit_signal("bought_turret_shot", ball_in_shop)
 		4:
-			emit_signal("bought_remote_control", REMOTE_CONTROL_DURATION)
+			if ball_in_shop != null:
+				ball_in_shop.set_is_remote_controlled(true, REMOTE_CONTROL_DURATION)

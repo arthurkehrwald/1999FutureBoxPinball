@@ -12,6 +12,7 @@ var ball_to_shoot = null
 var rotation_progress = 0.5
 var shot_charge = 0
 
+onready var muzzle = get_node("Muzzle")
 onready var dotted_line = get_node("Muzzle/DottedLine")
 onready var dotted_line_start_transform = dotted_line.get_transform()
 onready var start_transform = get_transform()
@@ -23,14 +24,16 @@ onready var max_transform = get_transform().rotated(get_transform().basis.y.norm
 
 func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
+	if Globals.shop_menu != null:
+		Globals.shop_menu.connect("bought_turret_shot", self, "insert_ball")
+	else:
+		push_warning("[Turret] can't find shop menu! Will not respond when player buys turret shot.")
 	set_process(false)
 
 
 func _input(event):
 	if ball_to_shoot != null:
-		if event.is_action_pressed("ui_down"):
-			dotted_line.set_visible(true)
-		elif event.is_action_released("ui_down"):
+		if event.is_action_released("ui_down"):
 			shoot(shot_charge)
 
 
@@ -76,9 +79,10 @@ func insert_ball(ball):
 	if ball_to_shoot != null:
 		shoot(.5)
 	Announcer.say("turret_active")
+	dotted_line.set_visible(true)
 	ball.set_visible(false)
 	ball.set_locked(true)
-	ball.delayed_teleport($TeleporterExit.get_global_transform().origin)
+	ball.delayed_teleport(muzzle.get_global_transform().origin)
 	ball_to_shoot = ball
 	emit_signal("was_loaded")
 	set_process(true)
@@ -93,7 +97,7 @@ func shoot(plunger_progress):
 	ball_to_shoot.set_visible(true)
 	var plunger_force = .15 * pow(plunger_progress - 1.7, 3) + 1
 	#print(plunger_force)
-	ball_to_shoot.apply_central_impulse(-$TeleporterExit.get_global_transform().basis.z.normalized() * MAX_SHOT_SPEED * plunger_force)
+	ball_to_shoot.apply_central_impulse(-muzzle.get_global_transform().basis.z.normalized() * MAX_SHOT_SPEED * plunger_force)
 	ball_to_shoot = null
 	shot_charge = 0
 	emit_signal("has_shot")

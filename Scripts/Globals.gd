@@ -6,6 +6,7 @@ const USELESS_COLLISION_WARNING_FORMAT_STRING = "%s registered a useless collisi
 
 var shop_menu = null
 # shop - activate the menu, know price for items
+# player turret - enter firing mode when the player buys a turret shot
 
 var boss = null
 # missile guns - shoot where boss is facing
