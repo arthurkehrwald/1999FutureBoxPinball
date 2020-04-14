@@ -10,6 +10,7 @@ height = 0.1
 
 [node name="BossBombGun" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
+SECONDS_BETWEEN_SHOTS = 15.0
 IS_SHOOTING_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,

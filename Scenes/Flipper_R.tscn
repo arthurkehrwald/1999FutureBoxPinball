@@ -19,7 +19,8 @@ transform = Transform( 0.997855, 0, 0.0654728, 0, 1, 0, -0.0654728, 0, 0.997855,
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09545, 0.15, 0 )
 
 [node name="Area" parent="." index="5"]
-transform = Transform( 0.997495, 0, 0.0707316, 0, 1, 0, -0.0707316, 0, 0.997495, -0.560916, 0, -0.194596 )
+transform = Transform( 0.997495, 0, 0.0707317, 0, 1, 0, -0.0707317, 0, 0.997495, -0.7082, 0.2, -0.184562 )
+monitorable = false
 
 [node name="CollisionShape" parent="Area" index="0"]
 transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0 )

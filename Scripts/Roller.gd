@@ -17,7 +17,6 @@ var teleport_physics_cooldown_time_remaining = 0
 
 
 func _ready():
-	$Timer.connect("timeout", self, "report_contacts")
 	add_to_group("rollers")
 	set_process(false)
 
@@ -38,7 +37,6 @@ func _physics_process(_delta):
 	elif not was_airborne and get_colliding_bodies().empty():
 		is_airborne = true
 	if is_airborne != was_airborne:
-		print("Roller airborne ", is_airborne)
 		if is_airborne:
 			if not SPEED_BASED_GRAVITY_SCALE:
 				gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
@@ -57,7 +55,6 @@ func teleport(destination):
 	set_global_transform(Transform(get_global_transform().basis, destination))
 	
 	if not is_airborne:
-		print("Roller airborne ", is_airborne)
 		is_airborne = true
 		if not SPEED_BASED_GRAVITY_SCALE:
 			gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
@@ -119,7 +116,3 @@ func set_gravity_scale_based_on_speed():
 
 func on_entered_laser_area():
 	.on_entered_laser_area()
-
-
-func report_contacts():
-	print(get_colliding_bodies())

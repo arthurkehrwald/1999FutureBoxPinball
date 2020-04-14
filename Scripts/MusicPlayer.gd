@@ -50,8 +50,9 @@ func _process(delta):
 
 func on_GameState_changed(new_state, _is_debug_skip):
 	if active_player != active_player_in_state[new_state]:
-		fade_out_player = active_player 
-		fade_out_normal_db = active_player.volume_db
+		if active_player != null:
+			fade_out_player = active_player 
+			fade_out_normal_db = active_player.volume_db
+			set_process(true)
 		active_player = active_player_in_state[new_state]
 		active_player_normal_db = active_player.volume_db
-	set_process(true)

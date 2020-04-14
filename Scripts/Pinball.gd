@@ -22,6 +22,7 @@ onready var arrow_sprite = get_node("RotationStabiliser/ArrowSprite")
 
 func _ready():
 	add_to_group("pinballs")
+	remote_control_timer.connect("timeout", self, "on_RemoteControlTimer_timeout")
 	arrow_sprite.set_visible(false)
 	remote_control_time_bar.max_value = REMOTE_CONTROL_DURATION
 	set_is_remote_controlled(IS_ALWAYS_REMOTE_CONTROLLED)
@@ -33,10 +34,10 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	if is_remote_controlled and not is_remote_control_blocked:
-		if Input.is_action_pressed("flipper_left") and not Input.is_action_pressed("flipper_right"):
+		if Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
 			var velocity_factor = clamp(abs(linear_velocity.z) * .05, 0, 1)
 			apply_central_impulse(Vector3(-1, 0, 0) * REMOTE_CONTROL_STRENGTH * velocity_factor)
-		if Input.is_action_pressed("flipper_right") and not Input.is_action_pressed("flipper_left"):
+		if Input.is_action_pressed("ui_right") and not Input.is_action_pressed("ui_left"):
 			var velocity_factor = clamp(abs(linear_velocity.z) * .05, 0, 1)
 			apply_central_impulse(Vector3(1, 0, 0) * REMOTE_CONTROL_STRENGTH * velocity_factor)
 
@@ -55,15 +56,17 @@ func set_is_accessible_to_player(value):
 		emit_signal("became_inaccessible")
 
 
-func set_is_remote_controlled(value):
+func set_is_remote_controlled(value, duration = 0):
+	if IS_ALWAYS_REMOTE_CONTROLLED or value and duration == 0:
+		return
 	is_remote_controlled = value
-	if not IS_ALWAYS_REMOTE_CONTROLLED:
-		remote_control_timer.start(REMOTE_CONTROL_DURATION)
-		remote_control_time_bar.set_visible(value)
-		set_process(value)
+	if value:
+		remote_control_timer.start(duration)
+	remote_control_time_bar.set_visible(value)
+	set_process(value)
 
 
-func _on_RemoteControlTimer_timeout():
+func on_RemoteControlTimer_timeout():
 	set_is_remote_controlled(false)
 
 

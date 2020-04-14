@@ -1,22 +1,26 @@
-extends "res://Scripts/PseudoPhysicsPathFollow.gd"
+extends "res://Scripts/WireRamp.gd"
 
-export var progress_required_to_trigger_louie = .5
+export var TRIGGER_PROGRESS = .5
 
-signal louie_triggered
+onready var looping_louie = get_node("LoopingLouie")
 
-var louie_active = false
 
-func _enter_tree():
-	GameState.connect("state_changed", self, "_on_GameState_changed")
+func _ready():
+	GameState.connect("state_changed", self, "on_GameState_changed")
+
 
 func _physics_process(_delta):
-	if !louie_active and (looping_body_entered_status == states.AT_ENTRANCE and get_unit_offset() > progress_required_to_trigger_louie) or (looping_body_entered_status == states.AT_EXIT and get_unit_offset() < progress_required_to_trigger_louie):
-		emit_signal("louie_triggered")
-		louie_active = true
-		
-func _on_GameState_changed(new_state, is_debug_skip):
+	if looping_louie.is_flying:
+		return
+	var was_triggered = false
+	if looping_body_entered_status == states.AT_ENTRANCE:
+		was_triggered = path_follow.get_unit_offset() > TRIGGER_PROGRESS
+	elif looping_body_entered_status == states.AT_EXIT:
+		was_triggered = path_follow.get_unit_offset() < TRIGGER_PROGRESS
+	if was_triggered: 
+		looping_louie.start_flying()
+
+
+func on_GameState_changed(new_state, is_debug_skip):
 	if is_debug_skip or new_state == GameState.PREGAME:
 		reset(true)
-	
-func _on_LoopingLouie_landed():
-	louie_active = false

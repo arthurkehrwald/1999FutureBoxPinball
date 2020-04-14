@@ -3,32 +3,41 @@ extends Control
 const MONEY_LABEL_FORMAT_STRING = "%s,000,000,000"
 const PLAYER_HEALTH_LABEL_FORMAT_STRING = "%s%"
 
-func _enter_tree():
-	GameState.connect("player_coolness_changed", self, "_on_GameState_player_coolness_changed")
-	GameState.connect("player_money_changed", self, "update_money_display")
-	
-func _ready():
-	update_money_display(GameState.START_PLAYER_MONEY)
-	
-func update_money_display(new_amount):
-	if new_amount == 0:
-		$Background/MoneyMaxedLabel.text = "You're broke!"	
-		$Background/MoneyLabel.text = "0"
-	else:
-		$Background/MoneyLabel.text = MONEY_LABEL_FORMAT_STRING % int(new_amount)
-		if new_amount == GameState.MAX_PLAYER_MONEY:
-			$Background/MoneyMaxedLabel.text = "CAP"
-		else:
-			$Background/MoneyMaxedLabel.text = ""
-	$GlitchShader.glitch_out()
-	
-		
-func _on_GameState_player_coolness_changed(new_player_coolness):
-	$Background/CoolnessMeter.value = new_player_coolness
-	#$GlitchShader.glitch_out()
+onready var glitch_overlay = get_node("../GlitchOverlay")
+onready var coolness_meter = get_node("Background/CoolnessMeter")
+onready var health_bar = get_node("Background/HealthBar")
+onready var money_desc_label = get_node("Background/MoneyDescLabel")
+onready var money_label = get_node("Background/MoneyLabel")
+onready var health_label = get_node("Background/HealthLabel")
 
-func _on_PlayerShip_health_changed(new_health, max_health):
-	$Background/PlayerHealthBar.max_value = max_health
-	$Background/PlayerHealthBar.value = new_health
-	$Background/PlayerHealthLabel.text = str(round(new_health / max_health * 100)) + "%"
-	$GlitchShader.glitch_out()
+
+func _ready():
+	if Globals.player_ship != null:
+		Globals.player_ship.connect("health_changed", self, "on_PlayerShip_health_changed")
+		Globals.player_ship.connect("money_changed", self, "on_PlayerShip_money_changed")
+		Globals.player_ship.connect("coolness_changed", self, "on_PlayerShip_coolness_changed")
+
+
+func on_PlayerShip_money_changed(new_value, _old_value):
+	new_value = clamp(new_value, 0, 999)
+	money_label.text = MONEY_LABEL_FORMAT_STRING % int(new_value)
+	if new_value == 0:
+		money_desc_label.text = "You're broke!"	
+	elif new_value == 999:
+			money_desc_label.text = "CAP"
+	else:
+			money_desc_label.text = ""
+	glitch_overlay.super_glitch()
+
+
+func on_PlayerShip_coolness_changed(new_value, old_value):
+	coolness_meter.value = new_value
+	if new_value > old_value:
+		glitch_overlay.super_glitch()
+
+
+func on_PlayerShip_health_changed(new_health, _old_health, max_health):
+	health_bar.max_value = max_health
+	health_bar.value = new_health
+	health_label.text = str(round(new_health / max_health * 100)) + "%"
+	glitch_overlay.super_glitch()

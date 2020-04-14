@@ -1,21 +1,10 @@
 extends Node
 
-# Balancing variables---------------------
-const START_PLAYER_MONEY = 0
-const MAX_PLAYER_MONEY = 999
-const PLAYER_COOLNESS_DECAY_PER_SEC = 1.0
-const BALL_DESTROYED_COST = 200
-const BALL_RESET_DELAY = 1.0
-#-----------------------------------------
-
 signal state_changed(new_stage, is_debug_skip)
 
 signal objective_one_completed
 signal objective_two_completed
-
-signal player_money_changed(new_player_money)
-signal player_coolness_changed(new_player_coolness)
-signal player_coolness_maxed
+signal objectives_changed(objectives)
 
 enum {
 	TESTING,
@@ -36,10 +25,11 @@ enum Event {
 	TRANSMISSION_FINISHED,
 	FLEET_DEFEATED,
 	SHOP_USED,
-	BOSS_HEALTH_PASSED_MISSILES_THRESHOLD,
-	BOSS_HEALTH_PASSED_TREX_THRESHOLD,
-	BOSS_HEALTH_PASSED_BLACK_HOLE_THRESHOLD,
-	BOSS_HEALTH_PASSED_ECLIPSE_THRESHOLD
+	BOSS_MISSILES_THRESHOLD,
+	BOSS_TREX_THRESHOLD,
+	BOSS_BLACK_HOLE_THRESHOLD,
+	BOSS_ECLIPSE_THRESHOLD,
+	BLACK_HOLE_EXPANDED,
 	BOSS_DIED,
 	PLAYER_DIED,
 	POSTGAME_FINISHED
@@ -59,53 +49,72 @@ const NAME_STATE_DICT = {
 	"10-Defeat": DEFEAT
 }
 
+const OBJECTIVES = {
+	TESTING: ["Test123", "Yes"],
+	PREGAME: ["", ""],
+	EXPOSITION: ["", ""],
+	ENEMY_FLEET: ["Destroy the enemy fleet!", "Buy something at the shop!"],
+	BOSS_APPEARS: ["Defeat the emperor!", ""],
+	MISSILES: ["Defeat the emperor!", ""],
+	TREX: ["Defeat the emperor!", ""],
+	BLACK_HOLE: ["Defeat the emperor!", ""],
+	ECLIPSE: ["Defeat the emperor!", ""],
+	VICTORY: ["", ""],
+	DEFEAT: ["", ""]
+}
+
 var current_state = TESTING
 
 var is_fleet_defeated = false
 var has_player_used_shop = false
+var is_black_hole_expanding = false
 
 var global_non_wireframe_mat = preload("res://Materials/mat_for_3d_prints.tres")
 var global_wireframe_mat = preload("res://Materials/wireframe_material.tres")
 
 
 func _ready():
+	#yield(get_tree().create_timer(.1), "timeout")
 	set_pause_mode(Node.PAUSE_MODE_PROCESS)
-	#yield (get_tree().create_timer(1, true), "timeout")
 	if get_node_or_null("/root/Main") == null:
 		call_deferred("set_state", TESTING)
 	else:
 		call_deferred("set_state", PREGAME)
+	#emit_signal("objectives_changed", OBJECTIVES[current_state])
 
 
 func _input(event):
-	if event is InputEventKey:
-		if event.pressed:
-			match event.scancode:
-				KEY_0:
-					set_state(TESTING, true)
-				KEY_1:
-					set_state(PREGAME, true)
-				KEY_2:
-					set_state(EXPOSITION, true)
-				KEY_3:
-					set_state(ENEMY_FLEET, true)
-				KEY_4:
-					set_state(BOSS_APPEARS, true)
-				KEY_5:
-					set_state(MISSILES, true)
-				KEY_6:
-					set_state(TREX, true)
-				KEY_7:
-					set_state(BLACK_HOLE, true)
-				KEY_8:
-					set_state(ECLIPSE, true)
-				KEY_9:
-					set_state(VICTORY, true)
-				_:
-					handle_event(Event.START_INPUT)
+	if event is InputEventKey and event.pressed:
+		match event.scancode:
+			KEY_0:
+				set_state(TESTING, true)
+			KEY_1:
+				set_state(PREGAME, true)
+			KEY_2:
+				set_state(EXPOSITION, true)
+			KEY_3:
+				set_state(ENEMY_FLEET, true)
+			KEY_4:
+				set_state(BOSS_APPEARS, true)
+			KEY_5:
+				set_state(MISSILES, true)
+			KEY_6:
+				set_state(TREX, true)
+			KEY_7:
+				set_state(BLACK_HOLE, true)
+			KEY_8:
+				set_state(ECLIPSE, true)
+			KEY_9:
+				set_state(VICTORY, true)
+			_:
+				handle_event(Event.START_INPUT)
 
 
 func handle_event(var event):
+	if event == Event.PLAYER_DIED:
+		set_state(DEFEAT)
+	elif event == Event.BOSS_DIED:
+		set_state(VICTORY)
 	match current_state:
 		TESTING:
 			pass
@@ -121,7 +130,7 @@ func handle_event(var event):
 				emit_signal("objective_one_completed")
 				if has_player_used_shop:
 					set_state(BOSS_APPEARS)
-			if event == Event.USED_SHOP:
+			if event == Event.SHOP_USED:
 				has_player_used_shop = true
 				emit_signal("objective_two_completed")
 				if is_fleet_defeated:
@@ -139,7 +148,8 @@ func handle_event(var event):
 			if event == Event.BOSS_ECLIPSE_THRESHOLD:
 				set_state(ECLIPSE)
 		ECLIPSE:
-			pass
+			if event == Event.BLACK_HOLE_EXPANDED:
+				set_global_eclipse_materials(true)
 		VICTORY:
 			if event == Event.POSTGAME_FINISHED:
 				set_state(PREGAME)
@@ -150,12 +160,15 @@ func handle_event(var event):
 
 func set_state(new_state, is_debug_skip = false):
 	print("GameState: set to ", new_state)
-	set_global_eclipse_materials(new_state == ECLIPSE)
+	if new_state < ECLIPSE or new_state == DEFEAT:
+		set_global_eclipse_materials(false)
 	if new_state == ENEMY_FLEET:
 		has_player_used_shop = false
 		is_fleet_defeated = false
-	current_state = new_state
+	if OBJECTIVES[current_state] != OBJECTIVES[new_state]:
+		emit_signal("objectives_changed", OBJECTIVES[new_state])
 	emit_signal("state_changed", new_state, is_debug_skip)
+	current_state = new_state
 
 
 func set_global_eclipse_materials(is_eclipse):
@@ -167,15 +180,3 @@ func set_global_eclipse_materials(is_eclipse):
 		global_non_wireframe_mat.albedo_color = Color.white
 		global_wireframe_mat.albedo_color = Color(0, 255, 58, 255)
 		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_SUB)
-
-
-func set_player_money(value):
-	player_money = clamp(value, 0, MAX_PLAYER_MONEY)
-	emit_signal("player_money_changed", player_money)
-
-
-func set_player_coolness(value):
-	if player_coolness < 100 and value >= 100:
-		emit_signal("player_coolness_maxed")
-	player_coolness = clamp(value, 0, 100)
-	emit_signal("player_coolness_changed", player_coolness)

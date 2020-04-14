@@ -1,67 +1,73 @@
 extends Spatial
 
-export var appear_time = 5
-export  var expand_scale_factor = 20
-export var expand_time = 3
+export var APPEAR_DURATION = 3.0
+export var EXPAND_DURATION = 10.0
+export var FADE_DURATION = 1.0
 
-var rng = RandomNumberGenerator.new()
-var base_scale_vector = Vector3(1, 1, 1)
-var current_scale_vector = Vector3(1, 1, 1)
+onready var rng = RandomNumberGenerator.new()
+onready var mesh = get_node("PullArea/MeshInstance")
+onready var base_scale_vector = mesh.get_transform().basis.get_scale()
+onready var current_scale_vector = base_scale_vector
+onready var animation_player = get_node("AnimationPlayer")
+onready var pull_area = get_node("PullArea")
+onready var nom_area = get_node("PullArea/NomArea")
 var scale_interp_value = 1
 
-func _enter_tree():
-	GameState.connect("state_changed", self, "_on_GameState_changed")
 
 func _ready():
-	base_scale_vector = $GravitationalField/MeshInstance.get_transform().basis.get_scale()
+	GameState.connect("state_changed", self, "on_GameState_changed")
+	nom_area.connect("body_entered", self, "on_NomArea_body_entered")
+	base_scale_vector = mesh.get_transform().basis.get_scale()
 	current_scale_vector = base_scale_vector
 	rng.randomize()
-	set_process(false)
-	
+
+
 func _process(_delta):
-	if $AnimationPlayer.is_playing():
-		current_scale_vector = $GravitationalField/MeshInstance.get_transform().basis.get_scale()
-	$GravitationalField/MeshInstance.set_transform(Transform.IDENTITY.scaled(current_scale_vector * rng.randfn(1, .1)))
-	
-func _on_GameState_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage == GameState.PREGAME:
+	if animation_player.is_playing():
+		current_scale_vector = mesh.get_transform().basis.get_scale()
+	mesh.set_transform(Transform.IDENTITY.scaled(current_scale_vector * rng.randfn(1, .1)))
+
+
+func on_GameState_changed(new_state, is_debug_skip):
+	if new_state == GameState.BLACK_HOLE:
+		Announcer.say("black_hoe", true)
+		animation_player.play("black_hole_appear_anim", -1, 1 / APPEAR_DURATION)
+		set_is_active(true)
+	elif new_state == GameState.ECLIPSE: 
+		if is_debug_skip:
+			set_is_active(true)
+		expand()
+	elif is_debug_skip or new_state == GameState.PREGAME:
 		set_is_active(false)
 
-func _on_NomArea_body_entered(body):
-	if body.is_in_group("Pinballs"):
-		body._on_destroyed()
-	elif body.is_in_group("Bombs"):
-		body.queue_free()
 
-func set_is_active(is_active):
-	#print("Black Hole: active - ", is_active)
-	if is_active:
-		Announcer.say("black_hoe", true)
-	set_visible(is_active)
-	#set_process(is_active)
-	$GravitationalField/CollisionShape.set_deferred("disabled", !is_active)
-	$GravitationalField/NomArea/CollisionShape.set_deferred("disabled", !is_active)
-	if is_active:
-		$AnimationPlayer.play("black_hole_appear_anim")
+func on_NomArea_body_entered(body):
+	if not body.is_in_group("projectiles"):
+		return
+	body.bid_farewell()
+	body.queue_free()
+
+
+func set_is_active(value):
+	set_visible(value)
+	set_process(value)
+	pull_area.set_deferred("monitoring", value)
+	nom_area.set_deferred("monitoring", value)
+
 
 func expand():
-	print("Black Hole: expanding")
-	$AnimationPlayer.play("black_hole_expand_anim")
+	set_process(false)
+	animation_player.play("black_hole_expand_anim", -1, 1 / EXPAND_DURATION)
 	
-	yield($AnimationPlayer, "animation_finished")
+	yield(animation_player, "animation_finished")
 	
-	GameState.on_BlackHole_fully_expanded()
-	$AnimationPlayer.play("black_hole_fade")
+	GameState.handle_event(GameState.Event.BLACK_HOLE_EXPANDED)
+	fade()
+
+
+func fade():
+	animation_player.play("black_hole_fade", -1, 1 / FADE_DURATION)
 	
-	yield($AnimationPlayer, "animation_finished")
+	yield(animation_player, "animation_finished")
 	
 	set_is_active(false)
-
-
-func _on_Boss_black_hole_health_threshold_reached():
-	print("Black Hole: activation boss health threshold reached")
-	set_is_active(true)
-
-
-func _on_Boss_ECLIPSE_health_threshold_reached():
-	expand()

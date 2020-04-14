@@ -15,4 +15,3 @@ shape = SubResource( 1 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 bus = "Effects"
-[connection signal="body_entered" from="." to="." method="_on_SlingshotTrigger_body_entered"]

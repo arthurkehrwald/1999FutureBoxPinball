@@ -10,7 +10,7 @@ curve = ExtResource( 3 )
 script = ExtResource( 2 )
 
 [node name="PathFollow" type="PathFollow" parent="."]
-transform = Transform( 0.998156, 0.00281458, 0.0604808, 0, 0.998919, -0.0464828, -0.0605481, 0.0463994, 0.997047, -0.0142446, 0, -8.23435e-05 )
+transform = Transform( 0.998604, 0.00248858, 0.0525439, 0, 0.99888, -0.0473051, -0.0526043, 0.0472415, 0.997457, -0.0142446, 0, -8.23435e-05 )
 rotation_mode = 4
 
 [node name="Spatial" type="Spatial" parent="PathFollow"]
@@ -22,3 +22,4 @@ material/0 = null
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "Effects"

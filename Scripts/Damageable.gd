@@ -19,7 +19,7 @@ export var MONEY_YIELD_PER_DAMAGE = 1.0
 export var MONEY_TEXT_HEIGHT = 0.5
 export var IS_VULNERABLE_PER_STAGE = {
 	"0-Testing": true,
-	"1-Pregame": true,
+	"1-Pregame": false,
 	"2-Exposition": true,
 	"3-EnemyFleet": true,
 	"4-BossAppears": true,
@@ -27,8 +27,8 @@ export var IS_VULNERABLE_PER_STAGE = {
 	"6-Trex": true,
 	"7-BlackHole": true,
 	"8-Eclipse": true,
-	"9-Victory": true,
-	"10-Defeat": true
+	"9-Victory": false,
+	"10-Defeat": false
 }
 
 
@@ -43,6 +43,9 @@ func _ready():
 		IS_VULNERABLE_PER_GAME_STATE[game_state] = IS_VULNERABLE_PER_STAGE[string_key]
 	DIRECT_HIT_SPEED_RELEVANCE = clamp(DIRECT_HIT_SPEED_RELEVANCE, 0, 1)
 	GameState.connect("state_changed", self, "on_GameState_changed")
+	if MONEY_YIELD_PER_DAMAGE != 0 and Globals.player_ship == null:
+		push_warning("[" + name + "] can't find player ship!"
+				+ " Damaging it will not yield money.")
 
 
 func set_is_vulnerable(value):
@@ -69,8 +72,8 @@ func take_damage(damage):
 	if is_vulnerable:
 		set_health(health - damage)
 		var money_yield = damage * MONEY_YIELD_PER_DAMAGE
-		if money_yield != 0:
-			GameState.add_player_money(money_yield)
+		if Globals.player_ship != null and money_yield != 0:
+			Globals.player_ship.set_money(Globals.player_ship.money + money_yield)
 			var money_text_3d_instance = MONEY_TEXT_3D_SCENE.instance()
 			money_text_3d_instance.set_money_amount(money_yield)
 			add_child(money_text_3d_instance)
@@ -113,7 +116,6 @@ func on_hit_by_explosion(explosion):
 	if explosion.is_in_group("bomb_explosions"):
 		base_damage = BOMB_EXPLOSION_BASE_DAMAGE
 	elif explosion.is_in_group("missile_explosions"):
-		print(name + " was hit by missile explosion")
 		base_damage = MISSILE_EXPLOSION_BASE_DAMAGE
 	take_damage(calc_explosion_damage(
 			base_damage,

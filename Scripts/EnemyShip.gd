@@ -23,8 +23,13 @@ func on_hit_by_projectile(projectile):
 	.on_hit_by_projectile(projectile)
 	if (IS_BUMPER):
 		projectile.set_linear_velocity(Vector3(0,0,0))
-		projectile.apply_central_impulse((projectile.get_global_transform().origin - (get_global_transform().origin  + Vector3(0, .2, 0))).normalized() * BUMP_FORCE)
-
+		#projectile.apply_central_impulse((projectile.get_global_transform().origin - (get_global_transform().origin  + Vector3(0, .2, 0))).normalized() * BUMP_FORCE)
+	var impulse_origin = get_global_transform().origin
+	impulse_origin.y = 0
+	var projectile_pos = projectile.get_global_transform().origin
+	projectile_pos.y = 0
+	#body.apply_impulse(impulse_origin + Vector3.UP * .2, )
+	projectile.apply_central_impulse((projectile_pos - impulse_origin).normalized() * BUMP_FORCE)
 
 func on_health_changed(current_health, old_health, _max_health):
 	if current_health < old_health:

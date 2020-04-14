@@ -20,6 +20,7 @@ mesh = ExtResource( 1 )
 material/0 = ExtResource( 6 )
 
 [node name="Wireframe" type="MeshInstance" parent="MeshInstance"]
+visible = false
 mesh = ExtResource( 4 )
 material/0 = null
 

@@ -5,7 +5,7 @@
 [ext_resource path="res://Scripts/Bomb.gd" type="Script" id=3]
 
 [node name="Bomb" instance=ExtResource( 1 )]
-collision_layer = 4
+contacts_reported = 1
 script = ExtResource( 3 )
 
 [node name="MeshInstance" parent="." index="1"]

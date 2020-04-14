@@ -4,7 +4,7 @@
 
 [node name="Projectile" type="RigidBody"]
 continuous_cd = true
-contacts_reported = 1
+contacts_reported = 2
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 1 )
@@ -14,4 +14,5 @@ script = ExtResource( 1 )
 [node name="MeshInstance" type="MeshInstance" parent="."]
 
 [node name="OmniLight" type="OmniLight" parent="."]
+visible = false
 omni_range = 1.0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/ShopMenu.gd" type="Script" id=1]
 [ext_resource path="res://HUD/shop_item_01.png" type="Texture" id=2]
 [ext_resource path="res://HUD/shop_time_left_bar_fill.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Audio/fx/menu_cycle.wav" type="AudioStream" id=5]
+[ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -16,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -502.0
 margin_bottom = -1522.0
+mouse_filter = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -60,4 +62,6 @@ __meta__ = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-[connection signal="timeout" from="DecisionTimer" to="." method="_on_DecisionTimer_timeout"]
+bus = "Effects"
+
+[node name="GlitchOverlay" parent="." instance=ExtResource( 6 )]

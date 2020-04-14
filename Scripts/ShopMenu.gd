@@ -1,26 +1,32 @@
 extends Control
 
+signal is_active_changed(value)
 signal bought_repair (heal_percent)
-signal bought_flipper
+signal bought_flipper(duration)
 signal bought_turret_shot
-signal bought_remote_control
-signal panel_changed
-signal closed
+signal bought_remote_control(duration)
 
+const ITEM_01_TEXTURE = preload("res://HUD/shop_item_01.png")
+const ITEM_02_TEXTURE = preload("res://HUD/shop_item_02.png")
+const ITEM_03_TEXTURE = preload("res://HUD/shop_item_03.png")
+const ITEM_04_TEXTURE = preload("res://HUD/shop_item_04.png")
+
+export var PAUSES_GAME = true
+export var PRICE_FOR_EVERYTHING = 200.0
 export var DECISION_TIME = 5.0
+export var PLAYER_REPAIR_HEAL_PERCENT = 50.0
+export var EXTRA_FLIPPER_DURATION = 20.0
+export var REMOTE_CONTROL_DURATION = 10.0
 
-var item_01_texture = preload("res://HUD/shop_item_01.png")
-var item_02_texture = preload("res://HUD/shop_item_02.png")
-var item_03_texture = preload("res://HUD/shop_item_03.png")
-var item_04_texture = preload("res://HUD/shop_item_04.png")
-
+var is_active = false
 var selected_item = 1
 
-onready var _selected_item_rect = get_node("TextureRect")
-onready var _decision_timer = get_node("DecisionTimer")
-onready var _time_remaining_label = get_node("TimeRemainingLabel")
-onready var _time_remaining_bar = get_node("TimeRemainingBar")
-onready var _audio_player = get_node("AudioStreamPlayer")
+onready var selected_item_rect = get_node("TextureRect")
+onready var decision_timer = get_node("DecisionTimer")
+onready var time_remaining_label = get_node("TimeRemainingLabel")
+onready var time_remaining_bar = get_node("TimeRemainingBar")
+onready var audio_player = get_node("AudioStreamPlayer")
+onready var glitch_overlay = get_node("../GlitchOverlay")
 
 
 func _enter_tree():
@@ -28,73 +34,82 @@ func _enter_tree():
 
 
 func _ready():
-	_decision_timer.set_wait_time(DECISION_TIME)
-	_time_remaining_bar.max_value = DECISION_TIME * 100
+	if Globals.player_ship == null:
+		push_warning("[ShopMenu] Can't find player! Can't take money away.")
+	decision_timer.connect("timeout", self, "on_DecisionTimer_timeout")
+	time_remaining_bar.max_value = DECISION_TIME * 100
+	set_is_active(false)
 
 
-func _process(_delta):
-	_time_remaining_label.text = str(round(_decision_timer.time_left))
-	_time_remaining_bar.value = _decision_timer.time_left * 100
-	if _decision_timer.time_left <= DECISION_TIME - 1 and Input.is_action_just_pressed("shop_confirm"):
-		_decision_timer.stop()
+func _input(event):
+	if not is_active:
+		return
+	if decision_timer.time_left <= DECISION_TIME - 1 and event.is_action_pressed("ui_accept"):
+		decision_timer.stop()
 		buy_item(selected_item)
 		set_is_active(false)
 		emit_signal("closed")
 	else:
 		var previously_selected = selected_item
-		if Input.is_action_just_pressed("flipper_left"):
+		if event.is_action_pressed("ui_left"):
 			selected_item -= 1
 			if selected_item < 1:
 				selected_item = 4
-		if Input.is_action_just_pressed("flipper_right"):
+		if event.is_action_pressed("ui_right"):
 			selected_item += 1
 			if selected_item > 4:
 				selected_item = 1
-				
 		if previously_selected != selected_item:
-			_audio_player.play()
-			emit_signal("panel_changed")
+			audio_player.play()
+			glitch_overlay.super_glitch()
 			match selected_item:
 				1:
-					_selected_item_rect.texture = item_01_texture
+					selected_item_rect.texture = ITEM_01_TEXTURE
 				2:
-					_selected_item_rect.texture = item_02_texture
+					selected_item_rect.texture = ITEM_02_TEXTURE
 				3:
-					_selected_item_rect.texture = item_03_texture
+					selected_item_rect.texture = ITEM_03_TEXTURE
 				4:
-					_selected_item_rect.texture = item_04_texture	
+					selected_item_rect.texture = ITEM_04_TEXTURE
 
 
-func set_is_active(is_active):
-	#print("ShopMenu: active - ", is_active)
+func _process(_delta):
+	time_remaining_label.text = str(round(decision_timer.time_left))
+	time_remaining_bar.value = decision_timer.time_left * 100
+
+
+func set_is_active(value):
+	is_active = value
+	emit_signal("is_active_changed", value)
 	selected_item = 1
-	_selected_item_rect.texture = item_01_texture
-	set_visible(is_active)
-	if is_active:
+	selected_item_rect.texture = ITEM_01_TEXTURE
+	set_visible(value)
+	if value:
 		Announcer.say("choose_purchase")
-		_decision_timer.start()
-	set_process(is_active)
-	get_tree().paused = is_active
+		decision_timer.start(DECISION_TIME)
+		glitch_overlay.super_glitch()
+		set_focus_mode(Control.FOCUS_ALL)
+		grab_focus()
+	set_process(value)
+	if PAUSES_GAME:
+		get_tree().paused = value
 
 
-func _on_DecisionTimer_timeout():
-	#print("ShopMenu: decision timer timeout")
+func on_DecisionTimer_timeout():
 	buy_item(selected_item)
-	emit_signal("closed")
 	set_is_active(false)
 
 
 func buy_item(item_index):
-	#print("ShopMenu: player bought a thing")
-	#GameState.set_player_money(GameState.player_money - PRICE_FOR_ALL_ITEMS)
-	GameState.add_player_money(-Globals.PRICE_FOR_ALL_ITEMS_IN_SHOP)
+	if Globals.player_ship != null:
+		Globals.player_ship.set_money(Globals.player_ship.money - PRICE_FOR_EVERYTHING)
 	GameState.handle_event(GameState.Event.SHOP_USED)
 	match item_index:
 		1:
-			emit_signal("bought_repair")
+			emit_signal("bought_repair", PLAYER_REPAIR_HEAL_PERCENT)
 		2:
-			emit_signal("bought_flipper")
+			emit_signal("bought_flipper", EXTRA_FLIPPER_DURATION)
 		3:
 			emit_signal("bought_turret_shot")
 		4:
-			emit_signal("bought_remote_control")
+			emit_signal("bought_remote_control", REMOTE_CONTROL_DURATION)

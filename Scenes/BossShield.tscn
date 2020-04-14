@@ -14,6 +14,7 @@ extents = Vector3( 2, 1, 0.1 )
 
 [node name="Shield" type="StaticBody"]
 script = ExtResource( 1 )
+MAX_HEALTH = 20.0
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,

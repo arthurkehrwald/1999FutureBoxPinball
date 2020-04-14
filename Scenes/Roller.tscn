@@ -11,11 +11,12 @@ radial_segments = 16
 rings = 8
 
 [node name="Roller" instance=ExtResource( 2 )]
-gravity_scale = 8.0
+gravity_scale = 13.0
 linear_damp = 0.3
 angular_damp = 0.3
 script = ExtResource( 1 )
-AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 0.001
+AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 0.2
+SPEED_BASED_GRAVITY_SCALE = true
 
 [node name="CollisionShape" parent="." index="0"]
 shape = ExtResource( 4 )
@@ -23,6 +24,3 @@ shape = ExtResource( 4 )
 [node name="MeshInstance" parent="." index="1"]
 mesh = SubResource( 1 )
 material/0 = null
-
-[node name="Timer" type="Timer" parent="." index="3"]
-wait_time = 0.2

@@ -13,7 +13,7 @@ var rotation_progress = 0.5
 var shot_charge = 0
 
 onready var dotted_line = get_node("Muzzle/DottedLine")
-onready var dotted_line_start_transform = dotted_line.get_tranform()
+onready var dotted_line_start_transform = dotted_line.get_transform()
 onready var start_transform = get_transform()
 onready var min_transform  = get_transform().rotated(get_transform().basis.y.normalized(),
 		deg2rad(-MAX_TURN_ANGLE))
@@ -28,9 +28,9 @@ func _ready():
 
 func _input(event):
 	if ball_to_shoot != null:
-		if event.is_action_pressed("turret_charge_shot"):
+		if event.is_action_pressed("ui_down"):
 			dotted_line.set_visible(true)
-		elif event.is_action_released("turret_charge_shot"):
+		elif event.is_action_released("ui_down"):
 			shoot(shot_charge)
 
 
@@ -44,13 +44,13 @@ func _process(delta):
 		else:
 			rotation_progress = max(.5, rotation_progress - TURN_SPEED * delta)
 	else:
-		if Input.is_action_pressed("turret_right"):
+		if Input.is_action_pressed("ui_right"):
 			if rotation_progress > 0:
 				rotation_progress -= TURN_SPEED * delta
-		if Input.is_action_pressed("turret_left"):
+		if Input.is_action_pressed("ui_left"):
 			if rotation_progress < 1:
 				rotation_progress += TURN_SPEED * delta
-		if Input.is_action_pressed("turret_charge_shot"):
+		if Input.is_action_pressed("ui_down"):
 			shot_charge = clamp(shot_charge + SHOT_CHARGE_SPEED * delta, 0, 1)
 			var dotted_line_scale = Vector3(1, 1, lerp(1, 4, shot_charge))
 			dotted_line.set_transform(dotted_line_start_transform.scaled(dotted_line_scale))

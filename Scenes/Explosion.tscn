@@ -16,6 +16,7 @@ shape = SubResource( 1 )
 [node name="SoundEffectPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 autoplay = true
+bus = "Effects"
 
 [node name="SelfDeleteTimer" type="Timer" parent="."]
 wait_time = 0.3

@@ -40,6 +40,7 @@ extents = Vector3( 0.966673, 0.898562, 0.331795 )
 [node name="LaserTrex" type="StaticBody"]
 collision_mask = 0
 script = ExtResource( 2 )
+MAX_HEALTH = 40.0
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,

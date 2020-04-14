@@ -13,6 +13,10 @@ onready var laser_toggle_timer = get_node("LaserToggleTimer")
 onready var animation_player = get_node("AnimationPlayer")
 
 
+func _enter_tree():
+	Globals.trex = self
+
+
 func _ready():
 	connect("health_changed", health_bar, "update_value")
 	connect("is_vulnerable_changed", health_bar, "set_visible")

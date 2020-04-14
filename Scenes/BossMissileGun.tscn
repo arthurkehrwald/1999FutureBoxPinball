@@ -9,6 +9,7 @@ extents = Vector3( 0.4, 0.4, 0.1 )
 
 [node name="BossMissileGun" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
+SECONDS_BETWEEN_SHOTS = 20.0
 IS_SHOOTING_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,

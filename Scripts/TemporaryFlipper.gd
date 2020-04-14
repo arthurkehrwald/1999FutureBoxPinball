@@ -1,19 +1,19 @@
 extends "res://Scripts/Flipper.gd"
 
-export var DURATION = 15.0
-
 onready var active_timer = get_node("ActiveTimer")
 onready var active_time_bar = get_node("ActiveTimeBar3D/Viewport/Bar")
 onready var collision_shape_1 = get_node("CollisionShape")
 onready var collision_shape_2 = get_node("CollisionShape2")
 onready var collision_shape_3 = get_node("CollisionShape3")
 onready var collision_shape_4 = get_node("CollisionShape4")
+onready var no_remote_control_area = get_node("NoRemoteControlArea")
 
 
 func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
+	if Globals.shop_menu != null:
+		Globals.shop_menu.connect("bought_flipper", self, "on_ShopMenu_bought_flipper")
 	active_timer.connect("timeout", self, "on_ActiveTimer_timeout")
-	active_time_bar.max_value = DURATION
 	set_process(false)
 
 
@@ -26,25 +26,24 @@ func on_GameState_changed(new_stage, is_debug_skip):
 		set_is_active(false)
 
 
-func set_is_active(is_active):
-	set_process(is_active)
-	set_visible(is_active)
-	if is_active:
-		active_timer.start()
+func set_is_active(value, duration = 0):
+	if value and duration == 0:
+		return
+	set_process(value)
+	set_visible(value)
+	if value:
+		active_timer.start(duration)
 	else:
 		active_timer.stop()
-	collision_shape_1.set_deferred("disabled", !is_active)
-	collision_shape_2.set_deferred("disabled", !is_active)
-	collision_shape_3.set_deferred("disabled", !is_active)
-	collision_shape_4.set_deferred("disabled", !is_active)
+	collision_shape_1.set_deferred("disabled", !value)
+	collision_shape_2.set_deferred("disabled", !value)
+	collision_shape_3.set_deferred("disabled", !value)
+	collision_shape_4.set_deferred("disabled", !value)
+	no_remote_control_area.set_deferred("monitoring", value)
 
 
-func _on_ShopMenu_bought_flipper():
-	if active_timer.is_stopped():
-		set_is_active(true)
-	else:
-		active_timer.stop()
-		active_timer.start()
+func on_ShopMenu_bought_flipper(duration):
+	set_is_active(true, duration)
 
 
 func on_ActiveTimer_timeout():

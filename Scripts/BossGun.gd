@@ -53,7 +53,7 @@ func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
 	timer.connect("timeout", self, "on_Timer_timeout")
 	connect("body_entered", self, "on_hit_by_projectile")
-	set_process(false)
+	enter_idle_state()
 
 
 func _process(_delta):

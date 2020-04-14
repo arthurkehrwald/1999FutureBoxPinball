@@ -37,9 +37,9 @@ func explode():
 
 func on_AnimationPlayer_animation_finished(_animation_name):
 	#mode = RigidBody.MODE_RIGID
-	apply_central_impulse(Vector3.FORWARD * SPEED * 5)
-	if Globals.player != null:
-#		target_pointer.look_at(Globals.player.get_global_transform().origin, Vector3.UP)
+	apply_central_impulse(-get_global_transform().basis.z * SPEED * 5)
+	if Globals.player_ship != null:
+#		target_pointer.look_at(Globals.player_ship.get_global_transform().origin, Vector3.UP)
 #		start_target_dir = -target_pointer.get_transform().basis.z.normalized()
 #		prev_backwards = get_global_transform().basis.z.normalized()
 		#set_physics_process(true)
@@ -48,13 +48,14 @@ func on_AnimationPlayer_animation_finished(_animation_name):
 
 func on_body_entered(body):
 	.on_body_entered(body)
-	explode()
+	if not body.is_in_group("box"):
+		explode()
 
 
 func on_GuidanceUpdateTimer_timeout():
 	apply_central_impulse(-get_global_transform().basis.z.normalized() * SPEED * 2 * GUIDANCE_UPDATE_RATE)
 	
-	target_pointer.look_at(Globals.player.get_global_transform().origin, Vector3.UP)
+	target_pointer.look_at(Globals.player_ship.get_global_transform().origin, Vector3.UP)
 	var target_dir = -target_pointer.get_global_transform().basis.orthonormalized().z
 	var current_dir = -get_global_transform().basis.orthonormalized().z
 	

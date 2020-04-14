@@ -23,13 +23,13 @@ func _ready():
 func on_health_changed(current_health, old_health, max_health):
 	if old_health / max_health * 100 > MISSILES_HEALTH_PERCENT:
 		if current_health / max_health * 100 <= MISSILES_HEALTH_PERCENT:
-			GameState.handle_event(GameState.Event.BOSS_HEALTH_PASSED_MISSILES_THRESHOLD)
+			GameState.handle_event(GameState.Event.BOSS_MISSILES_THRESHOLD)
 	if old_health / max_health * 100 > LASER_TREX_HEALTH_PERCENT:
 		if current_health / max_health * 100 <= LASER_TREX_HEALTH_PERCENT:
-			GameState.handle_event(GameState.Event.BOSS_HEALTH_PASSED_TREX_THRESHOLD)
+			GameState.handle_event(GameState.Event.BOSS_TREX_THRESHOLD)
 	if old_health / max_health * 100 > BLACK_HOLE_HEALTH_PERCENT:
 		if current_health / max_health * 100 <= BLACK_HOLE_HEALTH_PERCENT:
-			GameState.handle_event(GameState.Event.BOSS_HEALTH_PASSED_BLACK_HOLE_THRESHOLD)
+			GameState.handle_event(GameState.Event.BOSS_BLACK_HOLE_THRESHOLD)
 	if old_health / max_health * 100 > ECLIPSE_HEALTH_PERCENT:
 		if current_health / max_health * 100 <= ECLIPSE_HEALTH_PERCENT:
-			GameState.handle_event(GameState.Event.BOSS_HEALTH_PASSED_ECLIPSE_THRESHOLD)
+			GameState.handle_event(GameState.Event.BOSS_ECLIPSE_THRESHOLD)

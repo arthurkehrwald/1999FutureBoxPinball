@@ -18,9 +18,8 @@ font_data = ExtResource( 2 )
 size = 30
 font_data = ExtResource( 2 )
 
-[node name="PostGameHud" type="Control"]
+[node name="PostGameHUD" type="Control"]
 pause_mode = 2
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -502.0
@@ -43,9 +42,9 @@ wait_time = 10.0
 one_shot = true
 
 [node name="TimeRemainingLabel" type="Label" parent="."]
-margin_left = 184.033
+margin_left = 177.354
 margin_top = 217.036
-margin_right = 217.033
+margin_right = 210.354
 margin_bottom = 290.036
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
@@ -90,3 +89,4 @@ margin_top = 203.571
 margin_right = 201.151
 margin_bottom = 251.571
 rect_scale = Vector2( 2, 2 )
+fill_mode = 5

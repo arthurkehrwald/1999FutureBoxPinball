@@ -5,7 +5,6 @@
 [ext_resource path="res://Textures/shader_texture_01.png" type="Texture" id=3]
 [ext_resource path="res://Textures/checkerboard.png" type="Texture" id=4]
 
-
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 render_mode unshaded;
@@ -23,9 +22,9 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/brightness = 0.055
-shader_param/size = 0.648
-shader_param/offset = -0.075
+shader_param/brightness = 0.052
+shader_param/size = 0.855
+shader_param/offset = 0.108
 shader_param/screen = ExtResource( 3 )
 
 [sub_resource type="Animation" id=3]
@@ -57,7 +56,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "glitchy_glitch"
+resource_name = "super_glitch"
 tracks/0/type = "value"
 tracks/0/path = NodePath("displace:material:shader_param/dispAmt")
 tracks/0/interp = 1
@@ -92,10 +91,22 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.005, 0.05, 0.005 ]
+"values": [ 0.002, 0.02, 0.002 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("displace:material:shader_param/abberationAmtY")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.002, 0.02, 0.002 ]
 }
 
-[node name="GlitchShader" type="Control"]
+[node name="GlitchOverlay" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -107,26 +118,23 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
-position = Vector2( 346.053, 236.597 )
+position = Vector2( 12.6539, 10.4614 )
 scale = Vector2( 2.36739, 1.63641 )
 texture = ExtResource( 4 )
+centered = false
 
 [node name="displace" type="ColorRect" parent="."]
 material = ExtResource( 2 )
-margin_left = -47.0
-margin_top = -47.0
-margin_right = 1617.0
-margin_bottom = 2268.0
-rect_scale = Vector2( 0.471004, 0.249587 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
-position = Vector2( 358.737, 248.621 )
-scale = Vector2( 3.59243, 2.4959 )
 copy_mode = 2
+rect = Rect2( 0, 0, 1080, 1920 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -135,24 +143,19 @@ __meta__ = {
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -100.0
-margin_top = -100.0
-margin_right = 119.0
-margin_bottom = 467.0
-rect_scale = Vector2( 0.467468, 0.252525 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="IdleAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "glitch_idle"
 playback_speed = 0.03
 anims/glitch_idle = SubResource( 3 )
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+[node name="SuperGlitchAnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 5.0
-anims/glitchy_glitch = SubResource( 4 )
+anims/super_glitch = SubResource( 4 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="SuperGlitchTimer" type="Timer" parent="."]
 one_shot = true
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

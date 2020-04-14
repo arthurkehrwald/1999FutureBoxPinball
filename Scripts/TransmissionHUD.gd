@@ -17,80 +17,123 @@ const ENEMY_PORTRAIT = preload("res://HUD/portrait_enemy.png")
 const EMPEROR_PORTRAIT = preload("res://HUD/portrait_emperor.png")
 const TREX_PORTRAIT = preload("res://HUD/portrait_trex.png")
 
-var _transmissions : Dictionary
-var _queued_transmission = ""
-var _rex_mood = RexMood.NEUTRAL
-var _is_rex_on_display = true
+var sequences = null
+var queued_line = ""
+var rex_mood = RexMood.NEUTRAL
+var is_rex_on_display = true
+var current_sequence_key = ""
+var current_line_index = 0
+
+onready var audio_player = get_node("AudioStreamPlayer")
+onready var character_name_label = get_node("Background/CharacterNameLabel")
+onready var portrait_rect = get_node("Background/PortraitRect")
+onready var text_label = get_node("Background/TextLabel")
+onready var glitch_overlay = get_node("../GlitchOverlay")
+onready var timer = get_node("Timer")
 
 
-func _enter_tree():
+func _ready():
 	var file = File.new()
 	assert(file.file_exists(TRANSMISSIONS_FILE_PATH))
 
 	file.open(TRANSMISSIONS_FILE_PATH, file.READ)
-	_transmissions = parse_json(file.get_as_text())
-	assert (typeof(_transmissions) == TYPE_DICTIONARY and _transmissions.size() > 0)
-	GameState.connect("state_changed", self, "_on_GameState_changed")	
-	
+	sequences = parse_json(file.get_as_text())
+	assert (typeof(sequences) == TYPE_DICTIONARY and sequences.size() > 0)
+	GameState.connect("state_changed", self, "on_GameState_changed")
+	if Globals.player_ship != null:
+		Globals.player_ship.connect("health_changed", self, "on_PlayerShip_health_changed")
+	else:
+		push_warning("[lineHUD]: can't find player! Will not adjust rex"
+				+ " portrait based on health.")
+	timer.connect("timeout", self, "on_Timer_timeout")
+	if Globals.trex != null:
+		Globals.trex.connect("death", self, "play_sequence", ["trex_defeated"])
 
-func _on_GameState_changed(new_state, is_debug_skip):
+
+func on_GameState_changed(new_state, is_debug_skip):
 	if is_debug_skip or new_state == GameState.PREGAME:
-		_set_rex_mood(RexMood.NEUTRAL)
-		transmission_panel_reset()
+		set_rex_mood(RexMood.NEUTRAL)
+		timer.stop()
+		reset()
 	match new_state:
 		GameState.EXPOSITION:
-			play_dialogue("exposition")
+			play_sequence("exposition")
 		GameState.ENEMY_FLEET:
-			play_dialogue("enemy_fleet_appears")
+			play_sequence("enemy_fleet_appears")
+		GameState.BOSS_APPEARS:
+			play_sequence("boss_appears")
+		GameState.MISSILES:
+			play_sequence("missiles")
+		GameState.TREX:
+			play_sequence("trex_appears")
+		GameState.BLACK_HOLE:
+			play_sequence("black_hole_appears")
+		GameState.ECLIPSE:
+			play_sequence("eclipse")
 		GameState.VICTORY:
-			_set_rex_mood(RexMood.HAPPY)
+			set_rex_mood(RexMood.HAPPY)
 		GameState.DEFEAT:
-			_set_rex_mood(RexMood.ANGRY)
+			set_rex_mood(RexMood.ANGRY)
 
 
-func play_dialogue(key):
-	for transmission in _transmissions[key]:
-		$AudioStreamPlayer.play()
-		$Background/CharacterNameLabel.text = transmission["name"]
-		_is_rex_on_display = false
-		match transmission["name"]:
-			"Rex":
-				$Background/PortraitRect.texture = REX_PORTRAITS[_rex_mood]
-				_is_rex_on_display = true
-			"Cap'n Multiball":
-				$Background/PortraitRect.texture = CAPTAIN_PORTRAIT
-			"Enemies":
-				$Background/PortraitRect.texture = ENEMY_PORTRAIT
-			"LaZer Trex":
-				$Background/PortraitRect.texture = TREX_PORTRAIT
-			"Emperor":
-				$Background/PortraitRect.texture = EMPEROR_PORTRAIT
-		$Background/TransmissionLabel.text = transmission["text"]
-		$Background/GlitchShader.glitch_out()
-		yield(get_tree().create_timer(transmission["duration"]), "timeout")
-	transmission_panel_reset()
-	GameState.handle_event(GameState.Event.TRANSMISSION_FINISHED)
+func play_sequence(key):
+	display_line(key, 0)
+	current_sequence_key = key
+	current_line_index = 0
+	timer.start(sequences[key][0]["duration"])
 
 
-func transmission_panel_reset():
-	$Background/CharacterNameLabel.text = ""
-	$Background/TransmissionLabel.text = ""
-	$Background/PortraitRect.texture = REX_PORTRAITS[_rex_mood]
-	_is_rex_on_display = true
-	$Background/GlitchShader.glitch_out()
+func display_line(key, index):
+	var line = sequences[key][index]
+	audio_player.play()
+	character_name_label.text = line["name"]
+	match line["name"]:
+		"Rex":
+			portrait_rect.texture = REX_PORTRAITS[rex_mood]
+		"Capt'n Multiball":
+			portrait_rect.texture = CAPTAIN_PORTRAIT
+		"Enemies":
+			portrait_rect.texture = ENEMY_PORTRAIT
+		"LaZer Trex":
+			portrait_rect.texture = TREX_PORTRAIT
+		"Emperor":
+			portrait_rect.texture = EMPEROR_PORTRAIT
+		_:
+			push_warning("[TransmissionHUD] Unknown character " + line["name"])
+	is_rex_on_display = line["name"] == "Rex"
+	text_label.text = line["text"]
+	glitch_overlay.super_glitch()
 
 
-func _set_rex_mood(value):
-	_rex_mood = value
-	if _is_rex_on_display:
-		$Background/PortraitRect.texture = REX_PORTRAITS[value]
-		$Background/GlitchShader.glitch_out()
+func reset():
+	character_name_label.text = ""
+	text_label.text = ""
+	portrait_rect.texture = REX_PORTRAITS[rex_mood]
+	is_rex_on_display = true
+	glitch_overlay.super_glitch()
 
 
-func _on_PlayerShip_health_changed(new_health, max_health, old_health):
+func set_rex_mood(value):
+	rex_mood = value
+	if is_rex_on_display:
+		portrait_rect.texture = REX_PORTRAITS[value]
+		glitch_overlay.super_glitch()
+
+
+func on_PlayerShip_health_changed(new_health, max_health, old_health):
 	if old_health / max_health > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
 		if new_health / max_health < INJURED_PORTRAIT_HEALTH_PERCENTAGE:
-			_set_rex_mood(RexMood.INJURED)
+			set_rex_mood(RexMood.INJURED)
 	else:
 		if new_health / max_health > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
-			_set_rex_mood(RexMood.NEUTRAL)
+			set_rex_mood(RexMood.NEUTRAL)
+
+
+func on_Timer_timeout():
+	if current_line_index < sequences[current_sequence_key].size() - 1:
+		current_line_index += 1
+		display_line(current_sequence_key, current_line_index)
+		timer.start(sequences[current_sequence_key][current_line_index]["duration"])
+	else:
+		reset()
+		GameState.handle_event(GameState.Event.TRANSMISSION_FINISHED)

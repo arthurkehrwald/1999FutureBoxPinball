@@ -5,9 +5,17 @@ extends Area
 # flippers, this is useful near flippers, where the player likely
 # wants to just hit the pinballs directly.
 
-func _on_NoRemoteControlArea_body_entered(body):
-	body.is_remote_control_blocked = true
+
+func _ready():
+	connect("body_entered", self, "on_body_entered")
+	connect("body_exited", self, "on_body_exited")
 
 
-func _on_NoRemoteControlArea_body_exited(body):
-	body.is_remote_control_blocked = false
+func on_body_entered(body):
+	if body.is_in_group("pinballs"):
+		body.is_remote_control_blocked = true
+
+
+func on_body_exited(body):
+	if body.is_in_group("pinballs"):
+		body.is_remote_control_blocked = false

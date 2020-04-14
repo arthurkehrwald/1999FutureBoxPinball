@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/objective_01.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://HUD/objective_checkmark.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/ObjectiveHUD.gd" type="Script" id=6]
 [ext_resource path="res://Animations/objectives_complete_anim.tres" type="Animation" id=7]
+[ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -33,7 +34,7 @@ font_data = ExtResource( 4 )
 resource_name = "objective_one_complete"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("ObjectiveCheckBox1:rect_position")
+tracks/0/path = NodePath("ObjectiveOneCheckBox:rect_position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -49,7 +50,7 @@ tracks/0/keys = {
 resource_name = "objective_two_complete"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("ObjectiveCheckBox2:rect_position")
+tracks/0/path = NodePath("ObjectiveTwoCheckBox:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -58,7 +59,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 112.24, 219.791 ), Vector2( 112.24, 197 ), Vector2( 112.24, 219.791 ) ]
+"values": [ Vector2( 112.24, 219 ), Vector2( 112.24, 197 ), Vector2( 112.24, 219 ) ]
 }
 
 [node name="ObjectiveHUD" type="Control"]
@@ -94,10 +95,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ObjectiveCheckBox1" type="CheckBox" parent="."]
+[node name="ObjectiveOneCheckBox" type="CheckBox" parent="."]
 margin_left = 85.8953
 margin_top = 150.0
-margin_right = 495.105
+margin_right = 412.49
 margin_bottom = 211.0
 custom_icons/checked = ExtResource( 5 )
 custom_icons/unchecked = ExtResource( 3 )
@@ -111,11 +112,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ObjectiveCheckBox2" type="CheckBox" parent="."]
+[node name="ObjectiveTwoCheckBox" type="CheckBox" parent="."]
 margin_left = 112.24
-margin_top = 219.791
+margin_top = 219.0
 margin_right = 474.24
-margin_bottom = 277.791
+margin_bottom = 280.0
 custom_icons/checked = ExtResource( 5 )
 custom_icons/unchecked = ExtResource( 3 )
 custom_fonts/font = SubResource( 3 )
@@ -148,3 +149,5 @@ __meta__ = {
 anims/objective_one_complete = SubResource( 5 )
 anims/objective_two_complete = SubResource( 6 )
 anims/objectives_complete_anim = ExtResource( 7 )
+
+[node name="GlitchOverlay" parent="." instance=ExtResource( 8 )]

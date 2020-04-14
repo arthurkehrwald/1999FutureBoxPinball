@@ -3,7 +3,7 @@ extends "res://Scripts/BossGun.gd"
 const BOMB_SCENE = preload("res://Scenes/Bomb.tscn")
 const LAUNCH_TORQUE_SPREAD = .1
 
-export var MUZZLE_SPEED = 5.0
+export var MUZZLE_SPEED = 10.0
 export var SPREAD_DEG = 5.0
 
 #func _on_HitboxArea_body_exited(body):

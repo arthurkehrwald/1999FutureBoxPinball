@@ -36,6 +36,7 @@ func on_hit_by_missile_explosion(var explosion_pos, var _blast_radius):
 
 func on_entered_laser_area():
 	bid_farewell()
+	queue_free()
 
 
 func on_GameState_changed(new_state, is_debug_skip):

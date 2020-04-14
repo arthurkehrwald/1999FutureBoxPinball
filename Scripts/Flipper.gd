@@ -14,18 +14,18 @@ var input_code = ""
 func _ready():	
 	start_transform = get_transform()	
 	if IS_RIGHT_FLIPPER:
-		input_code = "flipper_right"
+		input_code = "ui_right"
 		max_transform = start_transform.rotated(get_transform().basis.y.normalized(), deg2rad(-MAX_TURN_ANGLE))
 	else:
-		input_code = "flipper_left"
+		input_code = "ui_left"
 		max_transform = start_transform.rotated(get_transform().basis.y.normalized(), deg2rad(MAX_TURN_ANGLE))
+
 
 func _physics_process(delta):	
 	if Input.is_action_pressed(input_code):
 		if rotation_progress < 1:
 			rotation_progress += TURN_SPEED / MAX_TURN_ANGLE * delta
 			for body in $Area.get_overlapping_bodies():
-				print(body.name)
 				body.apply_central_impulse(-get_global_transform().basis.z.normalized() - body.get_linear_velocity().normalized() * sideways_impulse_strength * delta)
 				body.apply_central_impulse(-get_global_transform().basis.z.normalized() * forward_impulse_strength * delta)
 	elif rotation_progress > 0:
@@ -33,5 +33,3 @@ func _physics_process(delta):
 	
 	var new_rotation = Quat(start_transform.basis.orthonormalized()).slerp(max_transform.basis.orthonormalized(), rotation_progress)
 	set_transform(Transform(new_rotation, get_transform().origin))
-
-		
