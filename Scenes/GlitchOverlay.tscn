@@ -11,7 +11,7 @@ render_mode unshaded;
 
 uniform sampler2D screen: hint_albedo;
 uniform float brightness: hint_range(0,.1);
-uniform float size: hint_range(0.1, 2.0);
+uniform float size: hint_range(0.1, 5.0);
 uniform float offset: hint_range(-1.0, 2.0);
 
 void fragment()
@@ -22,13 +22,14 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/brightness = 0.052
-shader_param/size = 0.855
-shader_param/offset = 0.108
+shader_param/brightness = 0.1
+shader_param/size = 0.428
+shader_param/offset = 0.55
 shader_param/screen = ExtResource( 3 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "glitch_idle"
+length = 10.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("BackBufferCopy/lines:material:shader_param/offset")
@@ -37,10 +38,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 10 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.396, -0.075 ]
+"values": [ 0.0, 0.55 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("displace:material:shader_param/dispOffset")
@@ -49,10 +50,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 10 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.647, 0.056 ]
+"values": [ 0.0, 0.4 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -149,8 +150,7 @@ __meta__ = {
 }
 
 [node name="IdleAnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "glitch_idle"
-playback_speed = 0.03
+playback_speed = 0.5
 anims/glitch_idle = SubResource( 3 )
 
 [node name="SuperGlitchAnimationPlayer" type="AnimationPlayer" parent="."]

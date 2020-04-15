@@ -33,9 +33,10 @@ export var IS_VULNERABLE_PER_STAGE = {
 
 
 var IS_VULNERABLE_PER_GAME_STATE = {}
-var health = MAX_HEALTH setget set_health
 var is_vulnerable = true setget set_is_vulnerable
 
+onready var health = MAX_HEALTH setget set_health
+onready var money_text_parent = Spatial.new()
 
 func _ready():
 	for string_key in IS_VULNERABLE_PER_STAGE.keys():
@@ -46,6 +47,8 @@ func _ready():
 	if MONEY_YIELD_PER_DAMAGE != 0 and Globals.player_ship == null:
 		push_warning("[" + name + "] can't find player ship!"
 				+ " Damaging it will not yield money.")
+	add_child(money_text_parent)
+	money_text_parent.translate(Vector3.UP * MONEY_TEXT_HEIGHT)
 
 
 func set_is_vulnerable(value):
@@ -76,12 +79,13 @@ func take_damage(damage):
 			Globals.player_ship.set_money(Globals.player_ship.money + money_yield)
 			var money_text_3d_instance = MONEY_TEXT_3D_SCENE.instance()
 			money_text_3d_instance.set_money_amount(money_yield)
-			add_child(money_text_3d_instance)
-			money_text_3d_instance.translate(Vector3(0, MONEY_TEXT_HEIGHT, 0))
+			money_text_parent.add_child(money_text_3d_instance)
 
 
-func on_GameState_changed(new_state, _is_debug_skip):
+func on_GameState_changed(new_state, is_debug_skip):
 	set_is_vulnerable(IS_VULNERABLE_PER_GAME_STATE[new_state])
+	if new_state == GameState.PREGAME or is_debug_skip:
+		set_health(MAX_HEALTH)
 
 
 func calc_direct_hit_damage(var base_damage, var projectile_speed):

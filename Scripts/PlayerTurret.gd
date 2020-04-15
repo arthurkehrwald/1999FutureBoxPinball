@@ -82,7 +82,7 @@ func insert_ball(ball):
 	dotted_line.set_visible(true)
 	ball.set_visible(false)
 	ball.set_locked(true)
-	ball.delayed_teleport(muzzle.get_global_transform().origin)
+	ball.teleport(muzzle.get_global_transform().origin)
 	ball_to_shoot = ball
 	emit_signal("was_loaded")
 	set_process(true)

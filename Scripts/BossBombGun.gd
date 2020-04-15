@@ -6,6 +6,11 @@ const LAUNCH_TORQUE_SPREAD = .1
 export var MUZZLE_SPEED = 10.0
 export var SPREAD_DEG = 5.0
 
+
+func _ready():
+	connect("body_exited", self, "on_body_exited")
+
+
 #func _on_HitboxArea_body_exited(body):
 #	if get_collision_exceptions().has(body):
 #		remove_collision_exception_with(body)
@@ -37,3 +42,5 @@ func shoot():
 
 func on_body_exited(body):
 	ignored_projectiles.erase(body)
+	boss.remove_collision_exception_with(body)
+	body.remove_collision_exception_with(boss)

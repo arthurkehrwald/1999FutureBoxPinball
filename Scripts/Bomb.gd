@@ -36,7 +36,3 @@ func explode():
 
 func on_Timer_timeout():
 	explode()
-
-
-func on_entered_laser_area():
-	explode()

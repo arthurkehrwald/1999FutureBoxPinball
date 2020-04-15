@@ -25,4 +25,5 @@ autostart = true
 
 [node name="HitregRaycast" type="RayCast" parent="."]
 enabled = true
+collision_mask = 2
 collide_with_areas = true

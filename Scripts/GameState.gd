@@ -53,7 +53,7 @@ const OBJECTIVES = {
 	TESTING: ["Test123", "Yes"],
 	PREGAME: ["", ""],
 	EXPOSITION: ["", ""],
-	ENEMY_FLEET: ["Destroy the enemy fleet!", "Buy something at the shop!"],
+	ENEMY_FLEET: ["Destroy the enemy fleet!", "Use the shop!"],
 	BOSS_APPEARS: ["Defeat the emperor!", ""],
 	MISSILES: ["Defeat the emperor!", ""],
 	TREX: ["Defeat the emperor!", ""],

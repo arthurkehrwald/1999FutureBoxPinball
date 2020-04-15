@@ -3,7 +3,6 @@ extends "res://Scripts/Projectile.gd"
 # Can teleport and adjust gravity scale based on speed and grounded
 # status. Abstract base class for 'Pinball.gd' and 'Bomb.gd'.
 
-signal teleport_physics_cooldown_buffer_expired
 signal physics_debug_info_update(speed, gravity)
 
 const TELEPORT_PHYSICS_COOLDOWN_BUFFER = .02
@@ -18,14 +17,6 @@ var teleport_physics_cooldown_time_remaining = 0
 
 func _ready():
 	add_to_group("rollers")
-	set_process(false)
-
-
-func _process(delta):
-	teleport_physics_cooldown_time_remaining -= delta
-	if teleport_physics_cooldown_time_remaining <= 0:
-		set_process(false)
-		emit_signal("teleport_physics_cooldown_buffer_expired")
 
 
 func _physics_process(_delta):
@@ -53,38 +44,6 @@ func bid_farewell():
 
 func teleport(destination):
 	set_global_transform(Transform(get_global_transform().basis, destination))
-	
-	if not is_airborne:
-		is_airborne = true
-		if not SPEED_BASED_GRAVITY_SCALE:
-			gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
-
-
-func delayed_teleport(destination, impulse_on_exit = Vector3(0, 0, 0)):
-	if teleporting:
-		return
-	
-	teleporting = true
-	set_physics_process(false)
-	
-	teleport_physics_cooldown_time_remaining = TELEPORT_PHYSICS_COOLDOWN_BUFFER
-	set_process(true)
-	yield(self, "teleport_physics_cooldown_buffer_expired")
-	
-	var t = get_global_transform()
-	t.origin = destination
-	set_global_transform(t)
-	
-	teleport_physics_cooldown_time_remaining = TELEPORT_PHYSICS_COOLDOWN_BUFFER
-	set_process(true)
-	yield(self, "teleport_physics_cooldown_buffer_expired")
-	
-	set_physics_process(true)
-	teleporting = false
-	
-	set_linear_velocity(Vector3(0,0,0))
-	set_angular_velocity(Vector3(0,0,0))
-	apply_central_impulse(impulse_on_exit)
 	
 	if not is_airborne:
 		is_airborne = true

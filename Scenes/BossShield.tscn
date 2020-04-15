@@ -13,6 +13,8 @@ albedo_color = Color( 0.231373, 0.615686, 0.717647, 0.329412 )
 extents = Vector3( 2, 1, 0.1 )
 
 [node name="Shield" type="StaticBody"]
+collision_layer = 3
+collision_mask = 0
 script = ExtResource( 1 )
 MAX_HEALTH = 20.0
 IS_VULNERABLE_PER_STAGE = {

@@ -7,6 +7,7 @@ var rng = RandomNumberGenerator.new()
 
 onready var super_glitch_timer = get_node("SuperGlitchTimer")
 onready var displacement_rect = get_node("displace")
+onready var idle_animation_player = get_node("IdleAnimationPlayer")
 onready var super_glitch_animation_player = get_node("SuperGlitchAnimationPlayer")
 
 func _ready():
@@ -17,6 +18,7 @@ func _ready():
 	if auto_glitch:
 		rng.randomize()
 		super_glitch_timer.start(rng.randf_range(auto_glitch_rate * .8, auto_glitch_rate * 1.2))
+	idle_animation_player.play("glitch_idle")
 
 
 func super_glitch():

@@ -5,6 +5,7 @@ export var MAX_TURN_ANGLE = 60
 export var TURN_SPEED = 500
 export var forward_impulse_strength = 400
 export var sideways_impulse_strength = 200
+export var forward_missile_hits_to_player = true
 
 var start_transform = Transform()
 var max_transform = Transform()
@@ -15,6 +16,7 @@ onready var impulse_area = get_node("ImpulseArea")
 
 
 func _ready():
+	add_to_group("flippers")
 	start_transform = get_transform()	
 	if IS_RIGHT_FLIPPER:
 		input_code = "ui_right"
@@ -22,7 +24,8 @@ func _ready():
 	else:
 		input_code = "ui_left"
 		max_transform = start_transform.rotated(get_transform().basis.y.normalized(), deg2rad(MAX_TURN_ANGLE))
-
+	if Globals.player_ship == null:
+		push_warning("[Flipper] can't find player! Missiles hitting this flipper will not damage the player.")
 
 #func _input(event):
 #	if event.is_action_pressed(input_code):
@@ -47,3 +50,13 @@ func _physics_process(delta):
 	
 	var new_rotation = Quat(start_transform.basis.orthonormalized()).slerp(max_transform.basis.orthonormalized(), rotation_progress)
 	set_transform(Transform(new_rotation, get_transform().origin))
+
+
+func on_hit_by_projectile(projectile):
+	if projectile.is_in_group("missiles") and Globals.player_ship != null:
+		Globals.player_ship.on_hit_by_projectile(projectile)
+
+
+func on_hit_by_explosion(explosion):
+	if Globals.player_ship != null:
+		Globals.player_ship.on_hit_by_explosion(explosion)

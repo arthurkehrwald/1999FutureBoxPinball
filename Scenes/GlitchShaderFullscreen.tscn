@@ -6,11 +6,3 @@
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 493.319, 846.21 )
-
-[node name="displace" parent="." index="1"]
-margin_right = 2476.0
-margin_bottom = 8225.0
-
-[node name="BackBufferCopy" parent="." index="2"]
-position = Vector2( 559.087, 1017.49 )
-scale = Vector2( 5.97266, 10.4928 )

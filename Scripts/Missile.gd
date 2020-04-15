@@ -6,7 +6,7 @@ const EXPLOSION_SCENE = preload("res://Scenes/Explosion.tscn")
 const GUIDANCE_UPDATE_RATE = 0.2
 
 export var SPEED = 1.0
-export var TURN_FORCE = .6
+export var TURN_FORCE = .3
 export var MAX_TURN_SPEED = 5.0
 export var VERTICAL_GUIDANCE = false
 
@@ -89,7 +89,3 @@ func on_GuidanceUpdateTimer_timeout():
 		apply_torque_impulse(Vector3.LEFT * TURN_FORCE * GUIDANCE_UPDATE_RATE)
 		top_exhaust_flame.set_visible(true)
 		bottom_exhaust_flame.set_visible(false)
-
-
-func on_entered_laser_area():
-	explode()

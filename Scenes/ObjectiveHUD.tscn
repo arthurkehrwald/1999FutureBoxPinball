@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/objective_01.png" type="Texture" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://HUD/objective_checkmark.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/ObjectiveHUD.gd" type="Script" id=6]
 [ext_resource path="res://Animations/objectives_complete_anim.tres" type="Animation" id=7]
-[ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -15,12 +14,12 @@ use_filter = true
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 24
+size = 35
 use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 24
+size = 35
 outline_color = Color( 0, 1, 0.811765, 1 )
 use_filter = true
 font_data = ExtResource( 1 )
@@ -96,9 +95,9 @@ __meta__ = {
 }
 
 [node name="ObjectiveOneCheckBox" type="CheckBox" parent="."]
-margin_left = 85.8953
+margin_left = 85.0
 margin_top = 150.0
-margin_right = 412.49
+margin_right = 538.0
 margin_bottom = 211.0
 custom_icons/checked = ExtResource( 5 )
 custom_icons/unchecked = ExtResource( 3 )
@@ -107,7 +106,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 shortcut_in_tooltip = false
 button_mask = 0
-text = "Destroy enemy fleet"
+text = "Destroy the enemy fleet"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -115,7 +114,7 @@ __meta__ = {
 [node name="ObjectiveTwoCheckBox" type="CheckBox" parent="."]
 margin_left = 112.24
 margin_top = 219.0
-margin_right = 474.24
+margin_right = 472.0
 margin_bottom = 280.0
 custom_icons/checked = ExtResource( 5 )
 custom_icons/unchecked = ExtResource( 3 )
@@ -124,17 +123,17 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 shortcut_in_tooltip = false
 button_mask = 0
-text = "Buy something at the shop"
+text = "Use the shop"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ObjectiveCompleteLabel" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 94.7847
-margin_top = 150.0
-margin_right = 487.785
-margin_bottom = 205.0
+margin_left = 95.0
+margin_top = 139.193
+margin_right = 488.0
+margin_bottom = 200.193
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
@@ -149,5 +148,3 @@ __meta__ = {
 anims/objective_one_complete = SubResource( 5 )
 anims/objective_two_complete = SubResource( 6 )
 anims/objectives_complete_anim = ExtResource( 7 )
-
-[node name="GlitchOverlay" parent="." instance=ExtResource( 8 )]

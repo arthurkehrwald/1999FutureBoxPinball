@@ -2,7 +2,6 @@ extends Spatial
 
 export var BUMP_FORCE = 10.0
 export var MONEY_PER_BUMP = 100
-export var MONEY_TEXT_HEIGHT = 2.0
 
 var money_text_3d_scene = preload("res://Scenes/MoneyText3D.tscn")
 

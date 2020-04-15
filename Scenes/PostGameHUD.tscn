@@ -38,7 +38,6 @@ __meta__ = {
 }
 
 [node name="RestartTimer" type="Timer" parent="."]
-wait_time = 10.0
 one_shot = true
 
 [node name="TimeRemainingLabel" type="Label" parent="."]

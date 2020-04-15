@@ -4,12 +4,13 @@ extends "res://Scripts/Damageable.gd"
 signal money_changed(new_value, old_value)
 signal coolness_changed(new_value, old_value)
 
-export var COOLNESS_DECAY_PER_SEC = .1
+export var COOLNESS_DECAY_TIME = 10.0
 
 var money = 0 setget set_money
 var coolness = 0 setget set_coolness
 
 onready var audio_player = get_node("AudioStreamPlayer")
+onready var coolness_tween = get_node("CoolnessTween")
 
 
 func _enter_tree():
@@ -33,6 +34,11 @@ func set_money(value):
 
 func set_coolness(value):
 	emit_signal("coolness_changed", value, coolness)
+	if value > coolness:
+		coolness_tween.remove_all()
+		coolness_tween.interpolate_property(self, "coolness", value, 0, COOLNESS_DECAY_TIME * value,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		coolness_tween.start()
 	coolness = value
 
 
@@ -58,4 +64,5 @@ func on_body_entered(body):
 func on_GameState_changed(new_state, is_debug_skip):
 	.on_GameState_changed(new_state, is_debug_skip)
 	if new_state == GameState.PREGAME or is_debug_skip:
-		set_health(MAX_HEALTH)
+		set_money(0)
+		set_coolness(0)

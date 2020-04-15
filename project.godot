@@ -134,7 +134,6 @@ Globals="*res://Scripts/Globals.gd"
 
 [debug]
 
-settings/stdout/print_fps=true
 gdscript/warnings/return_value_discarded=false
 
 [display]
@@ -154,9 +153,13 @@ ui_accept={
  ]
 }
 
+[layer_names]
+
+3d_physics/layer_2="shields"
+
 [physics]
 
-common/physics_fps=120
+common/physics_fps=200
 3d/physics_engine="Bullet"
 
 [rendering]

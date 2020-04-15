@@ -16,15 +16,21 @@ func _ready():
 		Globals.player_ship.connect("health_changed", self, "on_PlayerShip_health_changed")
 		Globals.player_ship.connect("money_changed", self, "on_PlayerShip_money_changed")
 		Globals.player_ship.connect("coolness_changed", self, "on_PlayerShip_coolness_changed")
+	else:
+		push_warning("[PlayerStatsHUD] can't find player. Will not display stats.")
+	if Globals.shop_menu == null:
+		push_warning("[PlayerStatsHUD] can't find shop menu. Will not display when the shop is open.")
 
 
 func on_PlayerShip_money_changed(new_value, _old_value):
 	new_value = clamp(new_value, 0, 999)
 	money_label.text = MONEY_LABEL_FORMAT_STRING % int(new_value)
 	if new_value == 0:
-		money_desc_label.text = "You're broke!"	
+		money_desc_label.text = "YOU'RE BROKE"
 	elif new_value == 999:
-			money_desc_label.text = "CAP"
+		money_desc_label.text = "CAP"
+	elif Globals.shop_menu != null and new_value >= Globals.shop_menu.PRICE_FOR_EVERYTHING:
+		money_desc_label.text = "SHOP OPEN"
 	else:
 			money_desc_label.text = ""
 	glitch_overlay.super_glitch()

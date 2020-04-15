@@ -33,3 +33,19 @@ func on_health_changed(current_health, old_health, max_health):
 	if old_health / max_health * 100 > ECLIPSE_HEALTH_PERCENT:
 		if current_health / max_health * 100 <= ECLIPSE_HEALTH_PERCENT:
 			GameState.handle_event(GameState.Event.BOSS_ECLIPSE_THRESHOLD)
+
+
+func on_GameState_changed(new_state, is_debug_skip):
+	set_is_vulnerable(IS_VULNERABLE_PER_GAME_STATE[new_state])
+	if is_debug_skip:
+		match new_state:
+			GameState.MISSILES:
+				set_health(MAX_HEALTH * MISSILES_HEALTH_PERCENT * .01)
+			GameState.TREX:
+				set_health(MAX_HEALTH * LASER_TREX_HEALTH_PERCENT * .01)
+			GameState.BLACK_HOLE:
+				set_health(MAX_HEALTH * BLACK_HOLE_HEALTH_PERCENT * .01)
+			GameState.ECLIPSE:
+				set_health(MAX_HEALTH * ECLIPSE_HEALTH_PERCENT * .01)
+			_:
+				set_health(MAX_HEALTH)

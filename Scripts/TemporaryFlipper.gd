@@ -32,6 +32,7 @@ func set_is_active(value, duration = 0):
 	set_process(value)
 	set_visible(value)
 	if value:
+		active_time_bar.max_value = duration
 		active_timer.start(duration)
 	else:
 		active_timer.stop()

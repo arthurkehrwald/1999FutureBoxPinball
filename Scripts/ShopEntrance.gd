@@ -4,8 +4,6 @@ extends Area
 # enough money to buy something, 'shop_enter' input
 # is pressed, and at least one pinball is in area.
 
-signal bought_turret_shot(ball_to_shoot)
-
 var is_open = false setget set_is_open
 var balls_inside = []
 
@@ -17,10 +15,7 @@ func _ready():
 	else:
 		push_warning("[ShopEntrance] Can't find player ship! Won't be able to open"
 				+ " because player's money is unknown.")
-	if Globals.shop_menu != null:
-		Globals.shop_menu.connect("bought_remote_control", self, "on_ShopMenu_bought_remote_control")
-		Globals.shop_menu.connect("bought_turret_shot", self, "on_ShopMenu_bought_turret_shot")
-	else:
+	if Globals.shop_menu == null:
 		push_warning("[ShopEntrance] Can't find shop menu! Menu will not show.")
 	connect("body_entered", self, "on_Shop_body_entered")
 	connect("body_exited", self, "on_Shop_body_exited")
@@ -71,11 +66,11 @@ func on_Player_money_changed(new_value, _old_value):
 		set_is_open(true)
 
 
-func on_ShopMenu_bought_turret_shot():
-	assert(!balls_inside.empty())
-	emit_signal("bought_turret_shot", balls_inside[0])
-
-
-func on_ShopMenu_bought_remote_control(duration):
-	if not balls_inside.empty():
-		balls_inside[0].set_is_remote_controlled(true, duration)
+#func on_ShopMenu_bought_turret_shot():
+#	assert(!balls_inside.empty())
+#	emit_signal("bought_turret_shot", balls_inside[0])
+#
+#
+#func on_ShopMenu_bought_remote_control(duration):
+#	if not balls_inside.empty():
+#		balls_inside[0].set_is_remote_controlled(true, duration)

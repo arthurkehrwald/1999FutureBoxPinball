@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/WireRamp.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/BoxV3.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=4]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Scenes/SimpleCube.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Testing/DebugOutputLabel.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=9]
 
 [node name="PhysicsTest" type="Spatial"]
 
@@ -24,7 +23,6 @@ script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-format_string = "Speed: %s Gravity Scale: %s"
 
 [node name="BoxV3" parent="." groups=[
 "box",
@@ -71,112 +69,5 @@ transform = Transform( 0.939693, 0, 0.34202, 0, 1, -6.70552e-08, -0.34202, 1.192
 [node name="BallFeed" parent="BoxV3/BoardAligned" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -2.23517e-08, 0, 2.23517e-08, 1, -3.41956, 0.253471, 1.6229 )
 
-[node name="Boss" parent="BoxV3/BoardAligned" instance=ExtResource( 1 )]
-transform = Transform( -0.799927, -3.34649e-10, 0.0108066, -9.31323e-11, 0.8, 1.78798e-08, -0.0108066, 1.78769e-08, -0.799927, 0.069882, 0, -5.17279 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
-
-[node name="BossShield" parent="BoxV3/BoardAligned/Boss" index="1"]
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": true
-}
-
-[node name="BossBombGun" parent="BoxV3/BoardAligned/Boss" index="3"]
-IS_SHOOTING_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
-
-[node name="BossBombGun2" parent="BoxV3/BoardAligned/Boss" index="4"]
-IS_SHOOTING_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
-
-[node name="BossMissileGun" parent="BoxV3/BoardAligned/Boss" index="5"]
-SECONDS_BETWEEN_SHOTS = 5.0
-IS_SHOOTING_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": false,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
-
-[node name="BossMissileGun2" parent="BoxV3/BoardAligned/Boss" index="6"]
-IS_SHOOTING_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": false,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
-
-[node name="PlayerShip" parent="BoxV3/BoardAligned" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 2.97327, 0.000302792, 2.65093 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": true,
-"3-EnemyFleet": true,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
-
-[editable path="BoxV3/BoardAligned/Boss"]
+[node name="WireRamp" parent="BoxV3/BoardAligned" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00342, 0.418098, 0 )

@@ -65,7 +65,6 @@ func shoot():
 
 
 func enter_idle_state():
-	print("idle")
 	state = State.IDLE
 	shot_time_bar.set_visible(false)
 	stunned_indicator.set_visible(false)

@@ -1,15 +1,13 @@
 extends Path
 
-signal debug_info_update(angle, speed, acceleration)
-
 enum states {NONE, AT_ENTRANCE, AT_EXIT}
 
 const SPEED_ROTATION_RATE = 4
 
 export var start_velocity_multiplier = 1 # not zero
-export var gravity = 15
-export var resistance = 2
-export var friction = .6
+export var gravity = 14.0
+export var resistance = .3
+export var friction = .2
 export var allow_exit_as_entrance = false
 
 var looping_body = null
@@ -23,7 +21,7 @@ onready var entrance_area = get_node("EntranceArea")
 onready var exit_area = get_node("ExitArea")
 onready var ball_replica = get_node("PathFollow/BallReplica")
 onready var bomb_replica = get_node("PathFollow/BombReplica")
-
+onready var debug_label = get_node("DebugLabel")
 
 func _ready():
 	entrance_area.connect("body_entered", self, "on_EntranceArea_body_entered")
@@ -39,7 +37,7 @@ func on_EntranceArea_body_entered(body):
 	speed = angle_factor * body.get_linear_velocity().length() * start_velocity_multiplier
 	if speed > 0:
 		looping_body = weakref(body)
-		looping_body.get_ref().delayed_teleport(entrance_area.get_global_transform().origin)
+		looping_body.get_ref().teleport(entrance_area.get_global_transform().origin)
 		path_follow.set_unit_offset(0.0)
 		looping_body_waiting_status = states.AT_ENTRANCE
 		looping_body_entered_status = states.AT_ENTRANCE
@@ -52,7 +50,7 @@ func on_ExitArea_body_entered(body):
 		speed = angle_factor * body.get_linear_velocity().length() * -start_velocity_multiplier
 		if speed < 0:
 			looping_body = weakref(body)
-			looping_body.get_ref().delayed_teleport(exit_area.get_global_transform().origin)
+			looping_body.get_ref().teleport(exit_area.get_global_transform().origin)
 			path_follow.set_unit_offset(1.0)
 			looping_body_waiting_status = states.AT_EXIT
 			looping_body_entered_status = states.AT_EXIT
@@ -60,12 +58,12 @@ func on_ExitArea_body_entered(body):
 
 
 func _physics_process(delta):
-	var incline = Vector3(0, 0, 1).angle_to(-get_global_transform().basis.z)
+	var incline = Vector3(0, 0, 1).angle_to(-path_follow.get_global_transform().basis.z)
 	if incline > PI / 2:
 		incline -= (incline - PI / 2) * 2
 	incline /= PI / 2
-	var point_ahead = get_global_transform().origin + get_global_transform().basis.z.normalized()
-	if point_ahead.y < get_global_transform().origin.y:
+	var point_ahead = path_follow.get_global_transform().origin + path_follow.get_global_transform().basis.z.normalized()
+	if point_ahead.y < path_follow.get_global_transform().origin.y:
 		incline = -incline
 	
 	var acceleration = -incline * gravity
@@ -99,15 +97,15 @@ func _physics_process(delta):
 			else:
 				ball_replica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
 			if looping_body_waiting_status == states.AT_ENTRANCE and path_follow.get_unit_offset() > .6:
-				looping_body.get_ref().delayed_teleport(exit_area.get_global_transform().origin)
+				looping_body.get_ref().teleport(exit_area.get_global_transform().origin)
 				looping_body_waiting_status = states.AT_EXIT
 			elif looping_body_waiting_status == states.AT_EXIT and path_follow.get_unit_offset() < .4:
-				looping_body.get_ref().delayed_teleport(entrance_area.get_global_transform().origin)
+				looping_body.get_ref().teleport(entrance_area.get_global_transform().origin)
 				looping_body_waiting_status = states.AT_ENTRANCE
 	else:
 		#that means the bomb exploded while it was on the rail
 		reset(true)
-	emit_signal("debug_info_update", incline, speed, acceleration)
+	debug_label.display_debug_info(rad2deg(incline), speed, acceleration)
 
 
 func start_follow():

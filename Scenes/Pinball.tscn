@@ -26,6 +26,6 @@ texture = ExtResource( 3 )
 
 [node name="RemoteControlTimeBar3D" parent="RotationStabiliser" index="1" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.400635, 0 )
-visible = false
+pixel_size = 0.004
 
 [node name="RemoteControlTimer" type="Timer" parent="." index="4"]

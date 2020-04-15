@@ -26,7 +26,8 @@ func set_is_active(value):
 	get_tree().paused = value
 	set_visible(value)
 	set_process(value)
-	restart_timer.start(RESTART_DELAY)
+	if value:
+		restart_timer.start(RESTART_DELAY)
 
 
 func on_RestartTimer_timeout():
@@ -38,8 +39,8 @@ func on_GameState_changed(new_state, is_debug_skip):
 	if new_state == GameState.VICTORY:
 		result_label.text = "Victory!"
 		set_is_active(true)
-	elif new_state == GameState.DEFEAT:
-		result_label.text = "You Lose!"
-		set_is_active(true)
+#	elif new_state == GameState.DEFEAT:
+#		result_label.text = "You Lose!"
+#		set_is_active(true)
 	elif new_state == GameState.PREGAME or is_debug_skip:
 		set_is_active(false)

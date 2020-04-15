@@ -6,7 +6,7 @@
 [ext_resource path="res://Animations/looping_louies_looping_curve.tres" type="Curve3D" id=4]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.458054, 0.263543, 0.2 )
+extents = Vector3( 0.295303, 0.263543, 0.2 )
 
 [node name="LoopingLouiesLooping" instance=ExtResource( 2 )]
 curve = ExtResource( 4 )
@@ -16,14 +16,14 @@ script = ExtResource( 1 )
 transform = Transform( -0.974963, 0.0957846, -0.20012, 0, 0.902031, 0.431599, 0.221868, 0.420911, -0.879397, 6.50809, -0.283037, -0.0562016 )
 
 [node name="EntranceArea" parent="." index="1"]
-transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 6.52322, -0.259082, -0.0171835 )
+transform = Transform( -0.999666, 0, 0.0258278, 0, 1, 0, -0.0258278, 0, -0.999666, 6.52322, -0.259082, -0.0171835 )
 
 [node name="CollisionShape" parent="EntranceArea" index="0"]
 transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0.25 )
 shape = SubResource( 1 )
 
 [node name="ExitArea" parent="." index="2"]
-transform = Transform( -0.639439, 0, -0.768842, 0, 1, 0, 0.768842, 0, -0.639439, 0.367968, -0.0334542, 4.22468 )
+transform = Transform( -0.639439, 0, -0.768842, 0, 1, 0, 0.768842, 0, -0.639439, 0.367968, 0.140252, 4.22468 )
 
 [node name="LoopingLouie" parent="." index="4" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.235347, 1.96172, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.804054, 1.96172, -0.138916 )

@@ -28,7 +28,6 @@ linear_damp = 0.4
 angular_damp = 0.0
 script = ExtResource( 3 )
 SPEED = 2.0
-TURN_FORCE = 0.3
 
 [node name="CollisionShape" parent="." index="0"]
 shape = SubResource( 1 )
