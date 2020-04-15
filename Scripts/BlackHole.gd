@@ -17,6 +17,8 @@ var scale_interp_value = 1
 func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
 	nom_area.connect("body_entered", self, "on_NomArea_body_entered")
+	pull_area.connect("body_entered", self, "on_PullArea_body_entered")
+	pull_area.connect("body_exited", self, "on_PullArea_body_exited")
 	base_scale_vector = mesh.get_transform().basis.get_scale()
 	current_scale_vector = base_scale_vector
 	rng.randomize()
@@ -71,3 +73,13 @@ func fade():
 	yield(animation_player, "animation_finished")
 	
 	set_is_active(false)
+
+
+func on_PullArea_body_entered(body):
+	if body.is_in_group("missiles"):
+		body.gravity_scale = 1.0
+
+
+func on_PullArea_body_exited(body):
+	if body.is_in_group("missiles"):
+		body.gravity_scale = 0.0

@@ -162,7 +162,6 @@ margin_right = 50.0
 
 [node name="PlayerShip" parent="BoxV3/Playfield" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.154202, -0.000694513, 7.56369 )
-MAX_HEALTH = 10.0
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
