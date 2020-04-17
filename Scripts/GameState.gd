@@ -25,6 +25,7 @@ enum Event {
 	TRANSMISSION_FINISHED,
 	FLEET_DEFEATED,
 	SHOP_USED,
+	BOSS_SHIELD_DESTROYED,
 	BOSS_MISSILES_THRESHOLD,
 	BOSS_TREX_THRESHOLD,
 	BOSS_BLACK_HOLE_THRESHOLD,
@@ -136,7 +137,7 @@ func handle_event(var event):
 				if is_fleet_defeated:
 					set_state(BOSS_APPEARS)
 		BOSS_APPEARS:
-			if event == Event.BOSS_MISSILES_THRESHOLD:
+			if event == Event.BOSS_MISSILES_THRESHOLD or event == Event.BOSS_SHIELD_DESTROYED:
 				set_state(MISSILES)
 		MISSILES:
 			if event == Event.BOSS_TREX_THRESHOLD:

@@ -14,7 +14,7 @@ rings = 8
 gravity_scale = 13.0
 angular_damp = 0.3
 script = ExtResource( 1 )
-AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 0.6
+AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 0.2
 SPEED_BASED_GRAVITY_SCALE = true
 
 [node name="CollisionShape" parent="." index="0"]

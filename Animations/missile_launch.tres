@@ -60,7 +60,7 @@ tracks/5/path = NodePath("MainExhaustFlame:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
-tracks/5/enabled = true
+tracks/5/enabled = false
 tracks/5/keys = {
 "times": PoolRealArray( 0, 0.42, 0.58 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
@@ -68,11 +68,11 @@ tracks/5/keys = {
 "values": [ true, false, true ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("TopExhaustFlame:visible")
+tracks/6/path = NodePath("SteeringFlames/TopExhaustFlame:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
-tracks/6/enabled = true
+tracks/6/enabled = false
 tracks/6/keys = {
 "times": PoolRealArray( 0, 0.46, 0.52 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
@@ -80,11 +80,11 @@ tracks/6/keys = {
 "values": [ false, true, false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("BottomExhaustFlame:visible")
+tracks/7/path = NodePath("SteeringFlames/BottomExhaustFlame:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
-tracks/7/enabled = true
+tracks/7/enabled = false
 tracks/7/keys = {
 "times": PoolRealArray( 0, 0.74, 0.95 ),
 "transitions": PoolRealArray( 1, 1, 1 ),

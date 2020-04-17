@@ -20,9 +20,9 @@ func shoot():
 	var bomb_instance = BOMB_SCENE.instance()
 	var t = Transform(Basis.IDENTITY, muzzle.get_global_transform().origin)
 	bomb_instance.set_global_transform(t)
-	if boss != null:
-		boss.add_collision_exception_with(bomb_instance)
-		bomb_instance.add_collision_exception_with(boss)
+	if Globals.boss != null:
+		Globals.boss.add_collision_exception_with(bomb_instance)
+		bomb_instance.add_collision_exception_with(Globals.boss)
 	ignored_projectiles.append(bomb_instance)
 	#bomb_instance.get_node("Rigidbody").add_collision_exception_with(self)
 	#self.add_collision_exception_with(bomb_instance.get_node("Rigidbody"))
@@ -42,5 +42,6 @@ func shoot():
 
 func on_body_exited(body):
 	ignored_projectiles.erase(body)
-	boss.remove_collision_exception_with(body)
-	body.remove_collision_exception_with(boss)
+	if Globals.boss != null:
+		Globals.boss.remove_collision_exception_with(body)
+		body.remove_collision_exception_with(Globals.boss)

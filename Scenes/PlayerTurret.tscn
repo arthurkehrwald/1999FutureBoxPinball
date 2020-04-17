@@ -7,20 +7,20 @@
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=5]
 
 [node name="PlayerTurret" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, 0.960347, -0.278807, 0, 0.278807, 0.960347, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 1 )
 MAX_SHOT_SPEED = 30
 SHOT_CHARGE_SPEED = 0.7
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -0.459907, 0.123232 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = ExtResource( 4 )
 material/0 = ExtResource( 5 )
 
 [node name="Muzzle" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.902826, -0.430007, 0, 0.430007, 0.902826, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 1.10413, 0 )
 
 [node name="DottedLine" type="MeshInstance" parent="Muzzle"]
-transform = Transform( 1, 0, 0, 0, 0.985949, 0.041761, 0, -0.167044, 0.246487, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 0.984807, -0.043412, 0, 0.173648, 0.246202, 0, 0, 0 )
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 3 )

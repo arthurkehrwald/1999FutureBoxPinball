@@ -6,9 +6,9 @@ enum State {
 	STUNNED
 }
 
-const RAND_REL_SHOT_DELAY = .5
-
+export var SECONDS_UNTIL_FIRST_SHOT = 1.5
 export var SECONDS_BETWEEN_SHOTS = 3.0
+export var SECONDS_BETWEEN_SHOTS_RANDOMNESS = 0.0
 export var IS_STUNNABLE = true
 export var PINBALL_DIRECT_HIT_BASE_STUN_DUR = 10.0
 export var BOMB_DIRECT_HIT_BASE_STUN_DUR = 10.0
@@ -40,11 +40,10 @@ onready var shot_time_bar = get_node("ShotTimeBar3D/Viewport/Bar")
 onready var stunned_indicator = get_node("StunnedIndicator")
 onready var muzzle = get_node("Muzzle")
 onready var rng = RandomNumberGenerator.new()
-onready var boss = Globals.boss
 
 
 func _ready():
-	if boss == null:
+	if Globals.boss == null:
 		push_warning("Boss Gun: Reference to boss not set in Globals!")
 	rng.randomize()
 	for string_key in IS_SHOOTING_PER_STAGE.keys():
@@ -77,14 +76,14 @@ func enter_shooting_state():
 	shot_time_bar.set_visible(true)
 	stunned_indicator.set_visible(false)
 	set_process(true)
-	var r_spread = rng.randf_range(-RAND_REL_SHOT_DELAY, RAND_REL_SHOT_DELAY)
-	var r_shot_delay = SECONDS_BETWEEN_SHOTS + SECONDS_BETWEEN_SHOTS * r_spread
+	var randomness = SECONDS_BETWEEN_SHOTS_RANDOMNESS
+	var r_spread = rng.randf_range(-randomness, randomness)
+	var r_shot_delay = SECONDS_UNTIL_FIRST_SHOT + SECONDS_BETWEEN_SHOTS * r_spread
 	shot_time_bar.max_value = r_shot_delay
 	timer.start(r_shot_delay)
 
 
 func enter_stunned_state(var stun_duration):
-	print("stunned")
 	if stun_duration <= 0:
 		return
 	state = State.STUNNED
@@ -109,7 +108,8 @@ func calc_explosion_stun_dur(var base_stun_dur, var explosion_pos, var blast_rad
 func on_Timer_timeout():
 	if state == State.SHOOTING:
 		shoot()
-		var r_spread = rng.randf_range(-RAND_REL_SHOT_DELAY, RAND_REL_SHOT_DELAY)
+		var randomness = SECONDS_BETWEEN_SHOTS_RANDOMNESS
+		var r_spread = rng.randf_range(-randomness, randomness)
 		var r_shot_delay = SECONDS_BETWEEN_SHOTS + SECONDS_BETWEEN_SHOTS * r_spread
 		shot_time_bar.max_value = r_shot_delay
 		timer.start(r_shot_delay)

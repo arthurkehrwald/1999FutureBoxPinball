@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/TeleporterEntrance.gd" type="Script" id=1]
 [ext_resource path="res://Audio/fx/teleporter.wav" type="AudioStream" id=2]
@@ -6,7 +6,10 @@
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=4]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.5, 0.7, 0.1 )
+extents = Vector3( 0.612181, 0.7, 0.378689 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.405982, 0.391346, 0.598912 )
 
 [node name="TeleporterEntrance" type="Area"]
 monitorable = false
@@ -14,7 +17,7 @@ collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.273454 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -24,3 +27,9 @@ material/0 = ExtResource( 4 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 bus = "Effects"
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 0.938234, -0.346002, 0, 0.346002, 0.938234, 0, -0.168631, 0.449709 )
+shape = SubResource( 2 )

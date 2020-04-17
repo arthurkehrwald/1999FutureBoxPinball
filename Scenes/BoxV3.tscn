@@ -12,9 +12,7 @@ extents = Vector3( 6.5, 3.08219, 1 )
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1, 2.9607, 10 )
 
-[node name="BoxV3" type="StaticBody" groups=[
-"box",
-]]
+[node name="BoxV3" type="StaticBody"]
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

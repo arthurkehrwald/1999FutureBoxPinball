@@ -1,4 +1,3 @@
-class_name Roller
 extends "res://Scripts/Projectile.gd"
 # Can teleport and adjust gravity scale based on speed and grounded
 # status. Abstract base class for 'Pinball.gd' and 'Bomb.gd'.
@@ -38,17 +37,14 @@ func _physics_process(_delta):
 		set_gravity_scale_based_on_speed()
 
 
-func bid_farewell():
-	pass
-
-
 func teleport(destination):
-	set_global_transform(Transform(get_global_transform().basis, destination))
+	#set_global_transform(Transform(get_global_transform().basis, destination))
+	var t = Transform(get_global_transform().basis, destination)
+	PhysicsServer.body_set_state(self.get_rid(), PhysicsServer.BODY_STATE_TRANSFORM, t)
 	
 	if not is_airborne:
 		is_airborne = true
-		if not SPEED_BASED_GRAVITY_SCALE:
-			gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
+		gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
 
 
 func set_locked(is_locked):

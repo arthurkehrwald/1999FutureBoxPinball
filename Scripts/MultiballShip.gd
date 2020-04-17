@@ -24,7 +24,7 @@ func _ready():
 
 
 func on_EntranceArea_body_entered(body):
-	if not body.is_in_group("pinballs"):
+	if not body.is_in_group("pinballs") or pinballs_locked >= 3:
 		return
 	loaded_pinballs.push_back(weakref(body))
 	body.set_visible(false)

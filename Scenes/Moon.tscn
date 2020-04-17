@@ -59,7 +59,8 @@ IS_VULNERABLE_PER_STAGE = {
 "8-Eclipse": true,
 "9-Victory": false
 }
-FLIGHT_DURATION = 20.0
+FLIGHT_DURATION = 40.0
+IMPULSE_STRENGTH = 20.0
 
 [node name="MeshInstance" type="MeshInstance" parent="MoonGatePivot/MoonGate"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Materials/white_unlit.tres" type="Material" id=1]
+[ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=1]
 [ext_resource path="res://Meshes/Wireframe/cube_wireframe.obj" type="ArrayMesh" id=3]
 
 [sub_resource type="BoxShape" id=1]

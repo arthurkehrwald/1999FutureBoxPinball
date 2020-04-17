@@ -24,7 +24,7 @@ enum ScaleState {
 export var FLIGHT_DURATION = 5.0
 export var SPIN_SPEED_MULTIPLIER = 1.0
 export var SPIN_SPEED_FALLOFF = 1.4
-export var impulse_strength = 3.0
+export var IMPULSE_STRENGTH = 3.0
 
 var is_flying = false
 var scale_state = ScaleState.SMALL
@@ -59,12 +59,13 @@ func _process(delta):
 
 func on_body_entered(var body):
 	if not body.is_in_group("projectiles"):
-		push_warning(Globals.USELESS_COLLISION_WARNING_FORMAT_STRING % [name, body.name])
 		return
 	.on_hit_by_projectile(body)
-	var projectile_pos = body.get_global_transform().origin
-	var projectile_vel = body.get_linear_velocity()
-	start_spinning(projectile_pos, projectile_vel)
+	var body_pos = body.get_global_transform().origin
+	var body_vel = body.get_linear_velocity()
+	start_spinning(body_pos, body_vel)
+	if is_flying and body_pos.z > get_global_transform().origin.z:
+		body.apply_central_impulse(Vector3.FORWARD * IMPULSE_STRENGTH)
 
 
 func start_spinning(var projectile_pos, var projectile_vel):

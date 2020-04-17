@@ -46,7 +46,6 @@ func on_GameState_changed(new_state, is_debug_skip):
 func on_NomArea_body_entered(body):
 	if not body.is_in_group("projectiles"):
 		return
-	body.bid_farewell()
 	body.queue_free()
 
 
@@ -63,6 +62,8 @@ func expand():
 	
 	yield(animation_player, "animation_finished")
 	
+	if GameState.current_state != GameState.ECLIPSE:
+		return
 	GameState.handle_event(GameState.Event.BLACK_HOLE_EXPANDED)
 	fade()
 
@@ -72,6 +73,8 @@ func fade():
 	
 	yield(animation_player, "animation_finished")
 	
+	if GameState.current_state != GameState.ECLIPSE:
+		return
 	set_is_active(false)
 
 
