@@ -59,23 +59,24 @@ func set_is_active(value):
 func expand():
 	set_process(false)
 	animation_player.play("black_hole_expand_anim", -1, 1 / EXPAND_DURATION)
+	Announcer.say("solar_eclipse", true)
 	
 	yield(animation_player, "animation_finished")
 	
-	if GameState.current_state != GameState.ECLIPSE:
-		return
-	GameState.handle_event(GameState.Event.BLACK_HOLE_EXPANDED)
-	fade()
+	if GameState.current_state == GameState.ECLIPSE:
+		GameState.handle_event(GameState.Event.BLACK_HOLE_EXPANDED)
+		fade()
 
 
 func fade():
+	pull_area.set_deferred("monitoring", false)
+	nom_area.set_deferred("monitoring", false)
 	animation_player.play("black_hole_fade", -1, 1 / FADE_DURATION)
 	
 	yield(animation_player, "animation_finished")
 	
-	if GameState.current_state != GameState.ECLIPSE:
-		return
-	set_is_active(false)
+	if GameState.current_state == GameState.ECLIPSE:
+		set_is_active(false)
 
 
 func on_PullArea_body_entered(body):

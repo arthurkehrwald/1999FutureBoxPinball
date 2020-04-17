@@ -4,14 +4,15 @@ enum Thruster {NONE, LEFT, RIGHT}
 
 const EXPLOSION_SCENE = preload("res://Scenes/Explosion.tscn")
 const GUIDANCE_UPDATE_RATE = 0.2
+const INACCURACY_TOLERANCE = 0.1
 
 export var SPEED = 1.0
 export var TURN_FORCE = .3
 export var MAX_TURN_SPEED = 5.0
 export var VERTICAL_GUIDANCE = false
-export var rotation_angle = 0
 
 var start_basis = Basis.IDENTITY
+var target_pos = Vector3.ZERO
 
 onready var animation_player = get_node("AnimationPlayer")
 onready var target_pointer = get_node("TargetPointer")
@@ -31,12 +32,11 @@ func _ready():
 	set_visible(false)
 
 
-func _process(delta):
+func _process(_delta):
 	var steering_flames_pos = steering_flames.get_global_transform().origin
 	var forward_transform_with_no_roll = Transform(Basis.IDENTITY, steering_flames_pos)
 	steering_flames.set_global_transform(forward_transform_with_no_roll)
 	steering_flames.look_at(steering_flames_pos - get_global_transform().basis.z, Vector3.UP)
-	#steering_flames.rotate_z(-get_angular_velocity().z)
 
 func explode():
 	var explosion_instance = EXPLOSION_SCENE.instance()
@@ -55,6 +55,8 @@ func on_AnimationPlayer_animation_finished(_animation_name):
 #		start_target_dir = -target_pointer.get_transform().basis.z.normalized()
 #		prev_backwards = get_global_transform().basis.z.normalized()
 		#set_physics_process(true)
+		target_pos = Globals.player_ship.get_global_transform().origin
+		target_pos += Globals.player_ship.get_global_transform().basis.y.normalized() * .288
 		guidance_update_timer.start(GUIDANCE_UPDATE_RATE)
 		pass
 
@@ -67,7 +69,7 @@ func on_body_entered(body):
 func on_GuidanceUpdateTimer_timeout():
 	apply_central_impulse(-get_global_transform().basis.z.normalized() * SPEED * 2 * GUIDANCE_UPDATE_RATE)
 	
-	target_pointer.look_at(Globals.player_ship.get_global_transform().origin, Vector3.UP)
+	target_pointer.look_at(target_pos, Vector3.UP)
 	var target_dir = -target_pointer.get_global_transform().basis.orthonormalized().z
 	var current_dir = -get_global_transform().basis.orthonormalized().z
 	
@@ -76,14 +78,17 @@ func on_GuidanceUpdateTimer_timeout():
 	var hor_angle_to_target = hor_current_dir.angle_to(hor_target_dir)
 	var target_clockwise_speed = lerp(-MAX_TURN_SPEED, MAX_TURN_SPEED, hor_angle_to_target / PI * .5 + .5)
 	var current_clockwise_speed = -get_angular_velocity().y
-	if current_clockwise_speed < target_clockwise_speed:
+	if abs(current_clockwise_speed - target_clockwise_speed) < INACCURACY_TOLERANCE:
+		left_exhaust_flame.set_visible(false)
+		right_exhaust_flame.set_visible(false)
+	elif current_clockwise_speed < target_clockwise_speed:
 		apply_torque_impulse(start_basis.y * -TURN_FORCE * GUIDANCE_UPDATE_RATE)
 		left_exhaust_flame.set_visible(true)
-		#right_exhaust_flame.set_visible(false)
+		right_exhaust_flame.set_visible(false)
 	else:
 		apply_torque_impulse(start_basis.y * TURN_FORCE * GUIDANCE_UPDATE_RATE)
 		right_exhaust_flame.set_visible(true)
-		#left_exhaust_flame.set_visible(false)
+		left_exhaust_flame.set_visible(false)
 	
 	if not VERTICAL_GUIDANCE:
 		return
@@ -93,11 +98,14 @@ func on_GuidanceUpdateTimer_timeout():
 	var ver_angle_to_target = ver_current_dir.angle_to(ver_target_dir)
 	var target_backflip_speed = lerp(-MAX_TURN_SPEED, MAX_TURN_SPEED, ver_angle_to_target / PI * .5 + .5)
 	var current_backflip_speed = get_angular_velocity().x
-	if current_backflip_speed < target_backflip_speed:
+	if abs(current_backflip_speed - target_backflip_speed) < INACCURACY_TOLERANCE:
+		top_exhaust_flame.set_visible(false)
+		bottom_exhaust_flame.set_visible(false)
+	elif current_backflip_speed < target_backflip_speed:
 		apply_torque_impulse(Vector3.RIGHT * TURN_FORCE * GUIDANCE_UPDATE_RATE)
 		bottom_exhaust_flame.set_visible(true)
-		#top_exhaust_flame.set_visible(false)
+		top_exhaust_flame.set_visible(false)
 	else:
 		apply_torque_impulse(Vector3.RIGHT * -TURN_FORCE * GUIDANCE_UPDATE_RATE)
 		top_exhaust_flame.set_visible(true)
-		#bottom_exhaust_flame.set_visible(false)
+		bottom_exhaust_flame.set_visible(false)

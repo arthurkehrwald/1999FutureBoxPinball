@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scenes/PlayerTurret.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/BoxV3.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=4]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Scenes/SimpleCube.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Testing/DebugOutputLabel.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=9]
 
 [node name="PhysicsTest" type="Spatial"]
 
@@ -65,25 +64,8 @@ transform = Transform( 0.939693, 0, -0.34202, 7.45058e-09, 1, -5.96046e-08, 0.34
 [node name="Flipper_R" parent="BoxV3/BoardAligned" instance=ExtResource( 8 )]
 transform = Transform( 0.939693, 0, 0.34202, 0, 1, -6.70552e-08, -0.34202, 1.19209e-07, 0.939694, 1.5142, -0.727137, 6.19278 )
 
-[node name="PlayerTurret" parent="BoxV3/BoardAligned" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56157, 4.99241 )
-MAX_SHOT_SPEED = 40
-
 [node name="BallFeed" parent="BoxV3/BoardAligned" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -2.23517e-08, 0, 2.23517e-08, 1, -3.41956, 0.253471, 1.6229 )
 
-[node name="Boss" parent="BoxV3/BoardAligned" instance=ExtResource( 9 )]
-transform = Transform( -0.8, 0, -1.20797e-07, 8.88178e-16, 0.8, 7.45058e-09, 1.20797e-07, 7.45058e-09, -0.8, 0, 0, 0 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
+[node name="MultiballShip" parent="BoxV3/BoardAligned" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27734, 0, -0.805763 )

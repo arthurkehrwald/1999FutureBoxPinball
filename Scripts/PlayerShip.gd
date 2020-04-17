@@ -58,6 +58,8 @@ func on_body_entered(body):
 	on_hit_by_projectile(body)
 	if body.is_in_group("pinballs"):
 		body.queue_free()
+	if body.is_in_group("bombs") or body.is_in_group("missiles"):
+		body.explode()
 
 
 func on_GameState_changed(new_state, is_debug_skip):

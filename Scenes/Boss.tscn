@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Boss.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Bar3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Meshes/boss.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=5]
@@ -26,7 +25,7 @@ height = 0.461056
 extents = Vector3( 0.342589, 0.1, 0.457196 )
 
 [node name="Boss" type="StaticBody"]
-transform = Transform( -0.8, 0, -1.20797e-07, 0, 0.8, 0, 1.20797e-07, 0, -0.8, 0, 0, 0 )
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
 collision_mask = 0
 script = ExtResource( 1 )
 IS_VULNERABLE_PER_STAGE = {
@@ -75,7 +74,7 @@ IS_SHOOTING_PER_STAGE = {
 "10-Defeat": false,
 "2-Exposition": false,
 "3-EnemyFleet": false,
-"4-BossAppears": false,
+"4-BossAppears": true,
 "5-Missiles": true,
 "6-Trex": true,
 "7-BlackHole": true,
@@ -92,7 +91,7 @@ IS_SHOOTING_PER_STAGE = {
 "10-Defeat": false,
 "2-Exposition": false,
 "3-EnemyFleet": false,
-"4-BossAppears": false,
+"4-BossAppears": true,
 "5-Missiles": true,
 "6-Trex": true,
 "7-BlackHole": true,
@@ -162,19 +161,3 @@ shape = SubResource( 5 )
 [node name="CollisionShape7" type="CollisionShape" parent="."]
 transform = Transform( 0.964376, 0.0365053, -0.262003, 0.146168, 0.75197, 0.642788, 0.220483, -0.658186, 0.719846, -0.55, 1.7, 1 )
 shape = SubResource( 5 )
-
-[node name="PlayerShip" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.20346, 4.59517, -12.594 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": true,
-"3-EnemyFleet": true,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}

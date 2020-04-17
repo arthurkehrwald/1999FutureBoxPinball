@@ -161,7 +161,7 @@ margin_right = 50.0
 [node name="GlitchOverlay" parent="BoxV3/Playfield/PlayerStatsHUD3D/Viewport" instance=ExtResource( 19 )]
 
 [node name="PlayerShip" parent="BoxV3/Playfield" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.154, 0, 7.564 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.481217, 1.66893e-06, 7.78645 )
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,

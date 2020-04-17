@@ -11,8 +11,7 @@ radial_segments = 16
 rings = 8
 
 [node name="Roller" instance=ExtResource( 2 )]
-gravity_scale = 13.0
-angular_damp = 0.3
+gravity_scale = 15.0
 script = ExtResource( 1 )
 AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 0.2
 SPEED_BASED_GRAVITY_SCALE = true
