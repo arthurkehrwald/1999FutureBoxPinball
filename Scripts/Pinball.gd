@@ -5,7 +5,7 @@ extends "res://Scripts/Roller.gd"
 # becomes inaccessible so that the number of pinballs on the field can be
 # monitored.
 
-signal became_inaccessible
+signal accessibility_changed(value)
 
 export var IS_ALWAYS_REMOTE_CONTROLLED = false
 export var REMOTE_CONTROL_STRENGTH = 4.0
@@ -25,6 +25,7 @@ func _ready():
 	remote_control_timer.connect("timeout", self, "on_RemoteControlTimer_timeout")
 	arrow_sprite.set_visible(false)
 	set_is_remote_controlled(IS_ALWAYS_REMOTE_CONTROLLED)
+	connect("tree_exiting", self, "set_is_accessible_to_player", [false])
 
 
 func _process(_delta):
@@ -44,29 +45,24 @@ func _physics_process(delta):
 			apply_central_impulse(dir * REMOTE_CONTROL_STRENGTH * delta)
 
 
-func bid_farewell():
-	set_is_accessible_to_player(false)
-
-
 func on_visibility_changed(value):
 	arrow_sprite.set_visible(!value)
 
 
 func set_is_accessible_to_player(value):
+	if value == is_accessible_to_player:
+		return
 	is_accessible_to_player = value
-	if !value:
-		emit_signal("became_inaccessible")
+	emit_signal("accessibility_changed", value)
 
 
 func set_is_remote_controlled(value, duration = 0):
-	print("pinball remote: ", value)
 	is_remote_controlled = value
 	if not IS_ALWAYS_REMOTE_CONTROLLED and value and duration != 0:
 		remote_control_timer.start(duration)
 		remote_control_time_bar.max_value = duration
 	remote_control_time_bar.set_visible(value)
 	set_process(value)
-	set_physics_process(value)
 
 
 func on_RemoteControlTimer_timeout():

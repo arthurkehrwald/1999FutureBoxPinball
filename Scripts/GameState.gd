@@ -25,6 +25,7 @@ enum Event {
 	TRANSMISSION_FINISHED,
 	FLEET_DEFEATED,
 	SHOP_USED,
+	BOSS_SHIELD_DESTROYED,
 	BOSS_MISSILES_THRESHOLD,
 	BOSS_TREX_THRESHOLD,
 	BOSS_BLACK_HOLE_THRESHOLD,
@@ -136,7 +137,7 @@ func handle_event(var event):
 				if is_fleet_defeated:
 					set_state(BOSS_APPEARS)
 		BOSS_APPEARS:
-			if event == Event.BOSS_MISSILES_THRESHOLD:
+			if event == Event.BOSS_MISSILES_THRESHOLD or event == Event.BOSS_SHIELD_DESTROYED:
 				set_state(MISSILES)
 		MISSILES:
 			if event == Event.BOSS_TREX_THRESHOLD:
@@ -149,6 +150,8 @@ func handle_event(var event):
 				set_state(ECLIPSE)
 		ECLIPSE:
 			if event == Event.BLACK_HOLE_EXPANDED:
+				if Globals.player_ship != null:
+					Globals.player_ship.set_is_vulnerable(true)
 				set_global_eclipse_materials(true)
 		VICTORY:
 			if event == Event.POSTGAME_FINISHED:
@@ -160,7 +163,9 @@ func handle_event(var event):
 
 func set_state(new_state, is_debug_skip = false):
 	print("GameState: set to ", new_state)
-	if new_state < ECLIPSE or new_state == DEFEAT:
+	if Globals.player_ship != null:
+		Globals.player_ship.set_is_vulnerable(new_state != ECLIPSE)
+	if new_state < ECLIPSE:
 		set_global_eclipse_materials(false)
 	if new_state == ENEMY_FLEET:
 		has_player_used_shop = false

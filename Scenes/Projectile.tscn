@@ -8,6 +8,7 @@ contacts_reported = 2
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 1 )
+EXPLOSION_BASE_KNOCKBACK_STRENGTH = 15.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 

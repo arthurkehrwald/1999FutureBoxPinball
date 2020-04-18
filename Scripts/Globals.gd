@@ -1,8 +1,6 @@
 extends Node
 
-const PRICE_FOR_ALL_ITEMS_IN_SHOP = 200
 const ROLLER_TOPSPEED = 20.0
-const USELESS_COLLISION_WARNING_FORMAT_STRING = "%s registered a useless collision with %s. Check groups and collision masks."
 
 var shop_menu = null
 # shop - activate the menu, know price for items
@@ -17,9 +15,12 @@ var player_ship = null
 # shop menu - reduce money
 # damageables & bumpers - add money
 # shop entrance - open when player has enough money
-
-var player_turret = null
-# shop entrance - insert ball from inside shop entrance into turret
+# transmission hud - display injured rex portrait when health is low
+# player stats hud - display health, coolness and money
+# looping louie - maximise coolness
+# flippers - forward explosion and missile impacts to player 
 
 var trex = null
 # transmission hud - play
+
+var teleporter_exits = []

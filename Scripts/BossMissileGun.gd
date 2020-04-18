@@ -5,8 +5,8 @@ var missile_scene = preload("res://Scenes/Missile.tscn")
 onready var missile_basis_node = muzzle
 
 func _ready():
-	if boss != null:
-		missile_basis_node = boss
+	if Globals.boss != null:
+		missile_basis_node = Globals.boss
 
 
 func shoot():

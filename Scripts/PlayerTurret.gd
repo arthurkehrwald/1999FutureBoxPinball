@@ -55,7 +55,7 @@ func _process(delta):
 				rotation_progress += TURN_SPEED * delta
 		if Input.is_action_pressed("ui_down"):
 			shot_charge = clamp(shot_charge + SHOT_CHARGE_SPEED * delta, 0, 1)
-			var dotted_line_scale = Vector3(1, 1, lerp(1, 4, shot_charge))
+			var dotted_line_scale = Vector3(1, 1, lerp(1, 3, shot_charge))
 			dotted_line.set_transform(dotted_line_start_transform.scaled(dotted_line_scale))
 	
 	if rotation_progress != old_rotation_progress:
@@ -80,7 +80,6 @@ func insert_ball(ball):
 		shoot(.5)
 	Announcer.say("turret_active")
 	dotted_line.set_visible(true)
-	ball.set_visible(false)
 	ball.set_locked(true)
 	ball.teleport(muzzle.get_global_transform().origin)
 	ball_to_shoot = ball

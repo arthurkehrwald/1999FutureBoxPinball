@@ -19,6 +19,7 @@ extents = Vector3( 0.380734, 0.462911, 1.13464 )
 
 [node name="MultiballShip" type="Spatial"]
 script = ExtResource( 2 )
+SHOT_SPEED = 25.0
 
 [node name="StaticBody" type="StaticBody" parent="."]
 collision_mask = 0
@@ -34,7 +35,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.500741, 1.11645, -0.388658 
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="EntranceArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 3 )
 
 [node name="LowGravArea" type="Area" parent="."]
@@ -46,7 +46,7 @@ collision_mask = 0
 shape = SubResource( 4 )
 
 [node name="ShipMesh" type="MeshInstance" parent="."]
-transform = Transform( 0.412217, 0, -0.118451, 0, 0.428898, 0, 0.118451, 0, 0.412217, -0.575038, 0.814908, -0.87118 )
+transform = Transform( 0.428357, 0, -0.0215427, 0, 0.428898, 0, 0.0215427, 0, 0.428357, -0.575038, 0.814908, -0.87118 )
 mesh = ExtResource( 3 )
 material/0 = ExtResource( 4 )
 

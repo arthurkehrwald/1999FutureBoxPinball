@@ -72,7 +72,7 @@ transform = Transform( 1, 0, 0, 0, -3.27826e-07, 1, 0, -1, -3.27826e-07, 0.01232
 environment = null
 
 [node name="Playfield" type="Spatial" parent="BoxV3"]
-transform = Transform( 1, 0, 0, 0, 0.998629, 0.0523353, 0, -0.0523353, 0.998629, 2.01166e-06, -1.92887, 0.305485 )
+transform = Transform( 1, 0, 0, 0, 0.998629, 0.0523353, 0, -0.0523353, 0.998629, 2.02656e-06, -1.92887, 0.305485 )
 
 [node name="CentralHUD3D" type="Sprite3D" parent="BoxV3/Playfield"]
 pause_mode = 2
@@ -161,7 +161,7 @@ margin_right = 50.0
 [node name="GlitchOverlay" parent="BoxV3/Playfield/PlayerStatsHUD3D/Viewport" instance=ExtResource( 19 )]
 
 [node name="PlayerShip" parent="BoxV3/Playfield" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.154202, -0.000694513, 7.56369 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.481217, 1.66893e-06, 7.78645 )
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
@@ -233,7 +233,7 @@ IS_VULNERABLE_PER_STAGE = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.62664, 0.651941, 1.97457 )
 
 [node name="PlayerTurret" parent="BoxV3/Playfield" instance=ExtResource( 21 )]
-transform = Transform( 0.256758, -0.214922, -0.942277, -0.129893, 0.958443, -0.254004, 0.957707, 0.187613, 0.218171, -4.21973, 1.11634, 1.06246 )
+transform = Transform( 0.34705, 0, -0.937848, -4.47035e-08, 1, 1.49012e-08, 0.937846, 0, 0.347051, -4.21973, 0.649673, 1.06246 )
 
 [node name="Moon" parent="BoxV3/Playfield" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59964, 0.245859, 0.0462199 )
@@ -242,7 +242,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59964, 0.245859, 0.0462199 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25363, 0.0278032, -5.79861 )
 
 [node name="Storm" parent="BoxV3/Playfield" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38419e-07, -2.34299 )
+transform = Transform( 1, 0, 0, 0, 1, -2.23517e-08, 0, 2.23517e-08, 1, 0, 7.15256e-07, -5.41155 )
 
 [node name="ShopEntrance" parent="BoxV3/Playfield" instance=ExtResource( 3 )]
 transform = Transform( -0.592056, 0, -0.805897, -4.47035e-08, 1, -2.23517e-08, 0.805898, 0, -0.592057, -2.63442, -0.00016737, 5.31615 )
@@ -264,16 +264,6 @@ transform = Transform( 0.362242, 2.18455e-09, 0.932084, -5.96046e-08, 1, 7.45058
 [node name="BumperCage3" parent="BoxV3/Playfield" instance=ExtResource( 32 )]
 transform = Transform( -0.231732, -1.02707e-08, 0.97278, -5.96046e-08, 1, -5.58794e-09, -0.97278, -5.96046e-08, -0.231732, -2.09849, 0.0021069, -1.30236 )
 
-[node name="MysteryTeleporterEntrance" parent="BoxV3/Playfield" instance=ExtResource( 38 )]
-transform = Transform( 0.983766, 1.29738e-07, -0.179457, -1.17347e-07, 1, 7.45058e-08, 0.179456, -5.21541e-08, 0.983769, 3.07829, 0.0509901, -6.13414 )
-collision_mask = 257
-
-[node name="MysteryTeleporterExit" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
-transform = Transform( 0.957024, 0.0454007, 0.286431, -0.0464535, 0.998917, -0.00312243, -0.286262, -0.0103176, 0.958097, -3.83971, 0.422765, 2.53143 )
-
-[node name="MysteryTeleporterExit2" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
-transform = Transform( 0.997945, 0.0337795, -0.0544518, -0.035458, 0.998916, -0.0301592, 0.053374, 0.032028, 0.998062, 3.09049, 0.34231, 2.08743 )
-
 [node name="NoRemoteControlArea" parent="BoxV3/Playfield" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.235402, 8.44002e-05, 5.85387 )
 
@@ -286,6 +276,16 @@ script = ExtResource( 18 )
 
 [node name="LoopingLouiesLooping" parent="BoxV3/Playfield" instance=ExtResource( 43 )]
 transform = Transform( 0.860875, -6.81168e-10, -0.508815, -0.026629, 0.998628, -0.045054, 0.508118, 0.0523351, 0.859695, -2.45168, 0.949692, -2.18199 )
+
+[node name="TeleporterEntrance" parent="BoxV3/Playfield" instance=ExtResource( 38 )]
+transform = Transform( 0.983766, 1.29738e-07, -0.179457, -1.17347e-07, 1, 7.45058e-08, 0.179456, -5.21541e-08, 0.983769, 3.25411, 0.0509901, -6.28843 )
+collision_mask = 1
+
+[node name="TeleporterExit" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
+transform = Transform( -0.193625, 0, -0.250464, 4.65661e-10, 0.2, 1.49012e-08, 0.0500929, 1.86265e-09, -0.968126, -3.86976, 0.460877, 2.59783 )
+
+[node name="TeleporterExit2" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
+transform = Transform( -0.193625, 0, 0.250464, -4.65661e-10, 0.2, 1.49012e-08, -0.0500929, 1.86265e-09, -0.968126, 3.05194, 0.433526, 2.76174 )
 
 [node name="StaticGeometry" type="Spatial" parent="BoxV3/Playfield"]
 

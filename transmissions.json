@@ -59,7 +59,7 @@
   ],
   "trex_appears": [
     {
-      "name": "LaZer Trex",
+      "name": "Laser Trex",
       "text": "*trex noises*",
       "duration": 3
     },
@@ -71,7 +71,7 @@
   ],
   "trex_defeated": [
     {
-      "name": "LaZer Trex",
+      "name": "Laser Trex",
       "text": "*dramatic screeching*",
       "duration": 3
     },

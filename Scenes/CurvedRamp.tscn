@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Meshes/curved_ramp.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Meshes/Wireframe/curved_ramp_wireframe.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Meshes/Collision/cuved_ramp_collision_v3.tres" type="Shape" id=5]
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=6]
-
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.400371, 0.4, 1.85 )
 
 [node name="CurvedRamp" type="StaticBody"]
 transform = Transform( 0.594161, 0, 0.0835039, 0, 0.6, 0, -0.0835039, 0, 0.594161, 0, 0, 0 )
@@ -23,16 +20,3 @@ material/0 = ExtResource( 6 )
 visible = false
 mesh = ExtResource( 4 )
 material/0 = null
-
-[node name="Area" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0665345, 0, 0 )
-space_override = 3
-gravity_vec = Vector3( 0, -0.8, 0 )
-gravity = 1.0
-linear_damp = 0.0
-angular_damp = 0.0
-collision_layer = 0
-
-[node name="CollisionShape2" type="CollisionShape" parent="Area"]
-transform = Transform( 0.977219, -0.0406902, -0.208297, -0.0223185, 0.956304, -0.291519, 0.211057, 0.289526, 0.933612, -0.0435278, 0.709334, 0.0393072 )
-shape = SubResource( 1 )

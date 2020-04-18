@@ -1,5 +1,7 @@
 extends "res://Scripts/Damageable.gd"
 
+export var REGENERATES = false
+export var TRIGGERS_MISSILES_WHEN_DESTROYED = true
 export var REGENERATION_TIME = 10.0
 
 onready var health_bar = get_node("HealthBar3D/Viewport/Bar")
@@ -26,7 +28,10 @@ func on_is_vulnerable_changed(value):
 
 
 func on_death():
-	regeneration_timer.start(REGENERATION_TIME)
+	if REGENERATES:
+		regeneration_timer.start(REGENERATION_TIME)
+	if TRIGGERS_MISSILES_WHEN_DESTROYED:
+		GameState.handle_event(GameState.Event.BOSS_SHIELD_DESTROYED)
 
 
 func on_RegenerationTimer_timeout():

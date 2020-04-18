@@ -22,7 +22,7 @@ onready var active_player_in_state = {
 	GameState.BOSS_APPEARS: track_2_player,
 	GameState.MISSILES: track_2_player,
 	GameState.TREX: track_2_player,
-	GameState.BLACK_HOLE: track_2_player,
+	GameState.BLACK_HOLE: track_3_player,
 	GameState.ECLIPSE: track_3_player,
 	GameState.VICTORY: track_3_player,
 	GameState.DEFEAT: null

@@ -25,7 +25,8 @@ func _ready():
 		input_code = "ui_left"
 		max_transform = start_transform.rotated(get_transform().basis.y.normalized(), deg2rad(MAX_TURN_ANGLE))
 	if Globals.player_ship == null:
-		push_warning("[Flipper] can't find player! Missiles hitting this flipper will not damage the player.")
+		push_warning("[Flipper] can't find player! Missiles and explosions "
+				+ "hitting this flipper will not damage the player.")
 
 #func _input(event):
 #	if event.is_action_pressed(input_code):

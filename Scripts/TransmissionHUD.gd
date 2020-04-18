@@ -94,12 +94,13 @@ func display_line(key, index):
 			portrait_rect.texture = CAPTAIN_PORTRAIT
 		"Enemies":
 			portrait_rect.texture = ENEMY_PORTRAIT
-		"LaZer Trex":
+		"Laser Trex":
 			portrait_rect.texture = TREX_PORTRAIT
 		"Emperor":
 			portrait_rect.texture = EMPEROR_PORTRAIT
 		_:
-			push_warning("[TransmissionHUD] Unknown character " + line["name"])
+			portrait_rect.texture = null
+			push_warning("[TransmissionHUD] Unknown character: '" + line["name"] + "'")
 	is_rex_on_display = line["name"] == "Rex"
 	text_label.text = line["text"]
 	glitch_overlay.super_glitch()
