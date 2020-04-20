@@ -1,5 +1,7 @@
 extends "res://Scripts/Damageable.gd"
 
+const EXPLOSION_SCENE = preload("res://Scenes/Particles_Explosion_02.tscn")
+
 export var IS_BUMPER = true
 export var BUMP_FORCE = 10.0
 
@@ -12,6 +14,7 @@ func _ready():
 	connect("is_vulnerable_changed", health_bar, "set_visible")
 	connect("health_changed", health_bar, "update_value")
 	connect("health_changed", self, "on_health_changed")
+	connect("death", self, "on_death")
 
 
 func on_is_vulnerable_changed(value):
@@ -31,6 +34,13 @@ func on_hit_by_projectile(projectile):
 	#body.apply_impulse(impulse_origin + Vector3.UP * .2, )
 	projectile.apply_central_impulse((projectile_pos - impulse_origin).normalized() * BUMP_FORCE)
 
+
 func on_health_changed(current_health, old_health, _max_health):
 	if current_health < old_health:
 		audio_player.play()
+
+
+func on_death():
+	var explosion_instance = EXPLOSION_SCENE.instance()
+	explosion_instance.set_global_transform(get_global_transform())
+	get_node("/root").add_child(explosion_instance)
