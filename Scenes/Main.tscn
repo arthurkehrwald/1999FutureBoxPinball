@@ -214,7 +214,7 @@ IS_VULNERABLE_PER_STAGE = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115225, -7.34329e-05, 1.80435 )
 
 [node name="LaserTrex" parent="BoxV3/Playfield" instance=ExtResource( 45 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 4.88498e-15, -1, 0, -4.37114e-08, 3.51716, 2.57492e-05, 0.798243 )
+transform = Transform( -0.434799, 0.0456997, 0.899367, 0.0104615, 0.9989, -0.0456997, -0.900467, -0.0104615, -0.434799, 2.62896, -0.333577, -2.37576 )
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
