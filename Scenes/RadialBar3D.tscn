@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/RadialBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=2]
+
+[node name="RadialBar3D" type="Sprite3D"]
+script = ExtResource( 2 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 48, 48 )
+size_override_stretch = true
+transparent_bg = true
+hdr = false
+disable_3d = true
+usage = 0
+render_target_v_flip = true
+
+[node name="Bar" parent="Viewport" instance=ExtResource( 1 )]
+fill_mode = 4

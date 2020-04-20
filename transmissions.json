@@ -1,0 +1,118 @@
+{
+  "exposition": [
+    {
+      "name": "Capt'n Multiball",
+      "text": "Rex, are you alive?",
+      "duration": 3
+    },
+    {
+      "name": "Rex",
+      "text": "...",
+      "duration": 2
+    },
+    {
+      "name": "Capt'n Multiball",
+      "text": "The Emperor's soldiers are locking down the system.",
+      "duration": 5
+    },
+	{
+      "name": "Capt'n Multiball",
+      "text": "You must...",
+      "duration": 1
+    }
+  ],
+  "enemy_fleet_appears": [
+    {
+      "name": "Enemies",
+      "text": "Surrender and you WILL be harmed!",
+      "duration": 3
+    },
+    {
+      "name": "Capt'n Multiball",
+      "text": "Oh golly, here they come. Good luck, Rex!",
+      "duration": 3
+    },
+    {
+      "name": "Rex",
+      "text": "They're already dead.",
+      "duration": 2
+    }
+  ],
+  "boss_appears": [
+    {
+      "name": "Emperor",
+      "text": "Infidels! Must I do everything myself?",
+      "duration": 4
+    }
+  ],
+  "missiles": [
+    {
+      "name": "Emperor",
+      "text": "You should feel honored!",
+      "duration": 2
+    },
+	{
+      "name": "Emperor",
+      "text": "These puppies cost me a fortune.",
+      "duration": 4
+    }
+  ],
+  "trex_appears": [
+    {
+      "name": "Laser Trex",
+      "text": "*trex noises*",
+      "duration": 3
+    },
+    {
+      "name": "Rex",
+      "text": "What in the...",
+      "duration": 3
+    }
+  ],
+  "trex_defeated": [
+    {
+      "name": "Laser Trex",
+      "text": "*dramatic screeching*",
+      "duration": 3
+    },
+    {
+      "name": "Emperor",
+      "text": "Daisy noooooooooooo!",
+      "duration": 4
+    },
+	{
+      "name": "Emperor",
+      "text": "What have you done to my dearest pet?!",
+      "duration": 4
+    }
+  ],
+  "black_hole_appears": [
+	{
+	  "name": "Emperor",
+	  "text": "Prepare for your doom!",
+	  "duration": 5
+	}
+  ],
+  "eclipse": [
+	{
+	  "name": "Emperor",
+	  "text": "WHY...",
+	  "duration": 1
+	},
+	{
+	  "name": "Emperor",
+	  "text": "...WON'T...",
+	  "duration": 1
+	},
+	{
+	  "name": "Emperor",
+	  "text": "...YOU...",
+	  "duration": 1
+	},
+	{
+	  "name": "Emperor",
+	  "text": "...DIE!",
+	  "duration": 1
+	}
+  ]
+}

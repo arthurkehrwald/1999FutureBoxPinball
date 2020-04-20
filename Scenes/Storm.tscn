@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Storm.gd" type="Script" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 4.5, 2, 3 )
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+albedo_color = Color( 0.282353, 0.282353, 0.282353, 0.560784 )
+
+[sub_resource type="CubeMesh" id=3]
+
+[node name="Storm" type="Area"]
+space_override = 1
+gravity_vec = Vector3( 0, 0, 1 )
+collision_layer = 0
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 4.5, 0, 0, 0, 2, 0, 0, 0, 3, 0, 2, 0 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
+material/0 = null

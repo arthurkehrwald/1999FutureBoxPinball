@@ -1,0 +1,140 @@
+extends Control
+
+enum RexMood {NEUTRAL, INJURED, HAPPY, ANGRY}
+
+export var INJURED_PORTRAIT_HEALTH_PERCENTAGE = 0.3
+export (String, FILE, "*.json") var TRANSMISSIONS_FILE_PATH : String
+
+const REX_PORTRAITS = {
+	RexMood.NEUTRAL: preload("res://HUD/portrait_rex_neutral.png"),
+	RexMood.INJURED: preload("res://HUD/portrait_rex_injured.png"),
+	RexMood.HAPPY: preload("res://HUD/portrait_rex_happy.png"),
+	RexMood.ANGRY: preload("res://HUD/portrait_rex_angry.png")	
+}
+const CAPTAIN_PORTRAIT = preload("res://HUD/portrait_captain.png")
+const PORTRAIT_LOUIE = preload("res://HUD/portrait_louie.png")
+const ENEMY_PORTRAIT = preload("res://HUD/portrait_enemy.png")
+const EMPEROR_PORTRAIT = preload("res://HUD/portrait_emperor.png")
+const TREX_PORTRAIT = preload("res://HUD/portrait_trex.png")
+
+var sequences = null
+var queued_line = ""
+var rex_mood = RexMood.NEUTRAL
+var is_rex_on_display = true
+var current_sequence_key = ""
+var current_line_index = 0
+
+onready var audio_player = get_node("AudioStreamPlayer")
+onready var character_name_label = get_node("Background/CharacterNameLabel")
+onready var portrait_rect = get_node("Background/PortraitRect")
+onready var text_label = get_node("Background/TextLabel")
+onready var glitch_overlay = get_node("../GlitchOverlay")
+onready var timer = get_node("Timer")
+
+
+func _ready():
+	var file = File.new()
+	assert(file.file_exists(TRANSMISSIONS_FILE_PATH))
+
+	file.open(TRANSMISSIONS_FILE_PATH, file.READ)
+	sequences = parse_json(file.get_as_text())
+	assert (typeof(sequences) == TYPE_DICTIONARY and sequences.size() > 0)
+	GameState.connect("state_changed", self, "on_GameState_changed")
+	if Globals.player_ship != null:
+		Globals.player_ship.connect("health_changed", self, "on_PlayerShip_health_changed")
+	else:
+		push_warning("[lineHUD]: can't find player! Will not adjust rex"
+				+ " portrait based on health.")
+	timer.connect("timeout", self, "on_Timer_timeout")
+	if Globals.trex != null:
+		Globals.trex.connect("death", self, "play_sequence", ["trex_defeated"])
+
+
+func on_GameState_changed(new_state, is_debug_skip):
+	if is_debug_skip or new_state == GameState.PREGAME:
+		set_rex_mood(RexMood.NEUTRAL)
+		timer.stop()
+		reset()
+	match new_state:
+		GameState.EXPOSITION:
+			play_sequence("exposition")
+		GameState.ENEMY_FLEET:
+			play_sequence("enemy_fleet_appears")
+		GameState.BOSS_APPEARS:
+			play_sequence("boss_appears")
+		GameState.MISSILES:
+			play_sequence("missiles")
+		GameState.TREX:
+			play_sequence("trex_appears")
+		GameState.BLACK_HOLE:
+			play_sequence("black_hole_appears")
+		GameState.ECLIPSE:
+			play_sequence("eclipse")
+		GameState.VICTORY:
+			set_rex_mood(RexMood.HAPPY)
+		GameState.DEFEAT:
+			set_rex_mood(RexMood.ANGRY)
+
+
+func play_sequence(key):
+	display_line(key, 0)
+	current_sequence_key = key
+	current_line_index = 0
+	timer.start(sequences[key][0]["duration"])
+
+
+func display_line(key, index):
+	var line = sequences[key][index]
+	audio_player.play()
+	character_name_label.text = line["name"]
+	match line["name"]:
+		"Rex":
+			portrait_rect.texture = REX_PORTRAITS[rex_mood]
+		"Capt'n Multiball":
+			portrait_rect.texture = CAPTAIN_PORTRAIT
+		"Enemies":
+			portrait_rect.texture = ENEMY_PORTRAIT
+		"Laser Trex":
+			portrait_rect.texture = TREX_PORTRAIT
+		"Emperor":
+			portrait_rect.texture = EMPEROR_PORTRAIT
+		_:
+			portrait_rect.texture = null
+			push_warning("[TransmissionHUD] Unknown character: '" + line["name"] + "'")
+	is_rex_on_display = line["name"] == "Rex"
+	text_label.text = line["text"]
+	glitch_overlay.super_glitch()
+
+
+func reset():
+	character_name_label.text = ""
+	text_label.text = ""
+	portrait_rect.texture = REX_PORTRAITS[rex_mood]
+	is_rex_on_display = true
+	glitch_overlay.super_glitch()
+
+
+func set_rex_mood(value):
+	rex_mood = value
+	if is_rex_on_display:
+		portrait_rect.texture = REX_PORTRAITS[value]
+		glitch_overlay.super_glitch()
+
+
+func on_PlayerShip_health_changed(new_health, old_health, max_health):
+	if old_health / max_health > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
+		if new_health / max_health < INJURED_PORTRAIT_HEALTH_PERCENTAGE:
+			set_rex_mood(RexMood.INJURED)
+	else:
+		if new_health / max_health > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
+			set_rex_mood(RexMood.NEUTRAL)
+
+
+func on_Timer_timeout():
+	if current_line_index < sequences[current_sequence_key].size() - 1:
+		current_line_index += 1
+		display_line(current_sequence_key, current_line_index)
+		timer.start(sequences[current_sequence_key][current_line_index]["duration"])
+	else:
+		reset()
+		GameState.handle_event(GameState.Event.TRANSMISSION_FINISHED)

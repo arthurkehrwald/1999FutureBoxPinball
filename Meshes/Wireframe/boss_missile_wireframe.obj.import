@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/boss_missile_wireframe.obj-16c737f708337536f27720884bd72b76.mesh"
+
+[deps]
+
+files=[ "res://.import/boss_missile_wireframe.obj-16c737f708337536f27720884bd72b76.mesh" ]
+
+source_file="res://Meshes/Wireframe/boss_missile_wireframe.obj"
+dest_files=[ "res://.import/boss_missile_wireframe.obj-16c737f708337536f27720884bd72b76.mesh", "res://.import/boss_missile_wireframe.obj-16c737f708337536f27720884bd72b76.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

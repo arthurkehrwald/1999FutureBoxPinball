@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Louie_01.obj-4d82da93062f89407269f5326b4469f2.mesh"
+
+[deps]
+
+files=[ "res://.import/Louie_01.obj-4d82da93062f89407269f5326b4469f2.mesh" ]
+
+source_file="res://Meshes/Louie_01.obj"
+dest_files=[ "res://.import/Louie_01.obj-4d82da93062f89407269f5326b4469f2.mesh", "res://.import/Louie_01.obj-4d82da93062f89407269f5326b4469f2.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

@@ -1,30 +1,187 @@
 extends Node
 
-signal score_changed(new_score)
-signal reserve_balls_changed(new_reserve_balls)
-signal reset_ball
-signal game_over
+signal state_changed(new_stage, is_debug_skip)
 
-var current_score = 0 setget set_score
-var reserve_balls = 3 setget set_reserve_balls
+signal objective_one_completed
+signal objective_two_completed
+signal objectives_changed(objectives)
 
-func set_score(new_score):
-	new_score = max(0, new_score)
-	current_score = new_score
-	emit_signal("score_changed", current_score)
+enum {
+	TESTING,
+	PREGAME,
+	EXPOSITION,
+	ENEMY_FLEET,
+	BOSS_APPEARS,
+	MISSILES,
+	TREX,
+	BLACK_HOLE,
+	ECLIPSE,
+	VICTORY,
+	DEFEAT
+}
 
-func set_reserve_balls(new_reserve_balls):
-	new_reserve_balls = max(0, new_reserve_balls)
-	reserve_balls = new_reserve_balls
-	emit_signal("reserve_balls_changed", reserve_balls)
+enum Event {
+	START_INPUT,
+	TRANSMISSION_FINISHED,
+	FLEET_DEFEATED,
+	SHOP_USED,
+	BOSS_SHIELD_DESTROYED,
+	BOSS_MISSILES_THRESHOLD,
+	BOSS_TREX_THRESHOLD,
+	BOSS_BLACK_HOLE_THRESHOLD,
+	BOSS_ECLIPSE_THRESHOLD,
+	BLACK_HOLE_EXPANDED,
+	BOSS_DIED,
+	PLAYER_DIED,
+	POSTGAME_FINISHED
+}
 
-func _on_Drain_ball_drained():
-	if reserve_balls > 0:
-		set_reserve_balls(reserve_balls - 1)
-		emit_signal("reset_ball")
+const NAME_STATE_DICT = {
+	"0-Testing": TESTING,
+	"1-Pregame": PREGAME,
+	"2-Exposition": EXPOSITION,
+	"3-EnemyFleet": ENEMY_FLEET,
+	"4-BossAppears": BOSS_APPEARS,
+	"5-Missiles": MISSILES,
+	"6-Trex": TREX,
+	"7-BlackHole": BLACK_HOLE,
+	"8-Eclipse": ECLIPSE,
+	"9-Victory": VICTORY,
+	"10-Defeat": DEFEAT
+}
+
+const OBJECTIVES = {
+	TESTING: ["Test123", "Yes"],
+	PREGAME: ["", ""],
+	EXPOSITION: ["", ""],
+	ENEMY_FLEET: ["Destroy the enemy fleet!", "Use the shop!"],
+	BOSS_APPEARS: ["Defeat the emperor!", ""],
+	MISSILES: ["Defeat the emperor!", ""],
+	TREX: ["Defeat the emperor!", ""],
+	BLACK_HOLE: ["Defeat the emperor!", ""],
+	ECLIPSE: ["Defeat the emperor!", ""],
+	VICTORY: ["", ""],
+	DEFEAT: ["", ""]
+}
+
+var current_state = TESTING
+
+var is_fleet_defeated = false
+var has_player_used_shop = false
+var is_black_hole_expanding = false
+
+var global_non_wireframe_mat = preload("res://Materials/mat_for_3d_prints.tres")
+var global_wireframe_mat = preload("res://Materials/wireframe_material.tres")
+
+
+func _ready():
+	#yield(get_tree().create_timer(.1), "timeout")
+	set_pause_mode(Node.PAUSE_MODE_PROCESS)
+	if get_node_or_null("/root/Main") == null:
+		call_deferred("set_state", TESTING)
 	else:
-		emit_signal("game_over")
+		call_deferred("set_state", PREGAME)
+	#emit_signal("objectives_changed", OBJECTIVES[current_state])
 
-func _process(delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		get_tree().reload_current_scene()
+
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		match event.scancode:
+			KEY_0:
+				set_state(TESTING, true)
+			KEY_1:
+				set_state(PREGAME, true)
+			KEY_2:
+				set_state(EXPOSITION, true)
+			KEY_3:
+				set_state(ENEMY_FLEET, true)
+			KEY_4:
+				set_state(BOSS_APPEARS, true)
+			KEY_5:
+				set_state(MISSILES, true)
+			KEY_6:
+				set_state(TREX, true)
+			KEY_7:
+				set_state(BLACK_HOLE, true)
+			KEY_8:
+				set_state(ECLIPSE, true)
+			KEY_9:
+				set_state(VICTORY, true)
+			_:
+				handle_event(Event.START_INPUT)
+
+
+func handle_event(var event):
+	if event == Event.PLAYER_DIED:
+		set_state(DEFEAT)
+	elif event == Event.BOSS_DIED:
+		set_state(VICTORY)
+	match current_state:
+		TESTING:
+			pass
+		PREGAME:
+			if event == Event.START_INPUT:
+				set_state(EXPOSITION)
+		EXPOSITION:
+			if event == Event.TRANSMISSION_FINISHED:
+				set_state(ENEMY_FLEET)
+		ENEMY_FLEET:
+			if event == Event.FLEET_DEFEATED:
+				is_fleet_defeated = true
+				emit_signal("objective_one_completed")
+				if has_player_used_shop:
+					set_state(BOSS_APPEARS)
+			if event == Event.SHOP_USED:
+				has_player_used_shop = true
+				emit_signal("objective_two_completed")
+				if is_fleet_defeated:
+					set_state(BOSS_APPEARS)
+		BOSS_APPEARS:
+			if event == Event.BOSS_MISSILES_THRESHOLD or event == Event.BOSS_SHIELD_DESTROYED:
+				set_state(MISSILES)
+		MISSILES:
+			if event == Event.BOSS_TREX_THRESHOLD:
+				set_state(TREX)
+		TREX:
+			if event == Event.BOSS_BLACK_HOLE_THRESHOLD:
+				set_state(BLACK_HOLE)
+		BLACK_HOLE:
+			if event == Event.BOSS_ECLIPSE_THRESHOLD:
+				set_state(ECLIPSE)
+		ECLIPSE:
+			if event == Event.BLACK_HOLE_EXPANDED:
+				if Globals.player_ship != null:
+					Globals.player_ship.set_is_vulnerable(true)
+				set_global_eclipse_materials(true)
+		VICTORY:
+			if event == Event.POSTGAME_FINISHED:
+				set_state(PREGAME)
+		DEFEAT:
+			if event == Event.POSTGAME_FINISHED:
+				set_state(PREGAME)
+
+
+func set_state(new_state, is_debug_skip = false):
+	print("GameState: set to ", new_state)
+	if Globals.player_ship != null:
+		Globals.player_ship.set_is_vulnerable(new_state != ECLIPSE)
+	if new_state < ECLIPSE:
+		set_global_eclipse_materials(false)
+	if new_state == ENEMY_FLEET:
+		has_player_used_shop = false
+		is_fleet_defeated = false
+	if OBJECTIVES[current_state] != OBJECTIVES[new_state]:
+		emit_signal("objectives_changed", OBJECTIVES[new_state])
+	emit_signal("state_changed", new_state, is_debug_skip)
+	current_state = new_state
+
+
+func set_global_eclipse_materials(is_eclipse):
+	if is_eclipse:
+		global_non_wireframe_mat.albedo_color = Color.black
+		global_wireframe_mat.albedo_color = Color(133, 0, 255, 255)
+		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_ADD)
+	else:
+		global_non_wireframe_mat.albedo_color = Color.white
+		global_wireframe_mat.albedo_color = Color(0, 255, 58, 255)
+		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_SUB)

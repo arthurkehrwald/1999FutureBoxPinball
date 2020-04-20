@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/PlayerShip.gd" type="Script" id=2]
+[ext_resource path="res://Audio/fx/damage_taken.wav" type="AudioStream" id=4]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.74066, 0.2, 0.427852 )
+
+[node name="PlayerShip" type="Area"]
+collision_mask = 0
+script = ExtResource( 2 )
+DIRECT_HIT_SPEED_RELEVANCE = 0.0
+MONEY_YIELD_PER_DAMAGE = 0.0
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": true,
+"3-EnemyFleet": true,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -20.0
+bus = "Effects"
+
+[node name="CoolnessTween" type="Tween" parent="."]

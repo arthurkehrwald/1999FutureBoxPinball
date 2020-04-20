@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Audio/fx/bomb_shot.wav" type="AudioStream" id=1]
+[ext_resource path="res://Scenes/BossGun.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/BossBombGun.gd" type="Script" id=3]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 0.4
+height = 0.1
+
+[node name="BossBombGun" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+SECONDS_BETWEEN_SHOTS = 15.0
+IS_SHOOTING_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+
+[node name="CollisionShape" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Muzzle" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.225217 )
+
+[node name="ShotTimeBar3D" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.053 )
+
+[node name="StunnedIndicator" parent="." index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.053 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource( 1 )
+bus = "Effects"

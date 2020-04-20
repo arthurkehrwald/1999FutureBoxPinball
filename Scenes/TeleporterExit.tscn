@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/TeleporterExit.gd" type="Script" id=1]
+[ext_resource path="res://Textures/tele_exit_placeholder.png" type="Texture" id=2]
+
+[node name="TeleporterExit" type="Sprite3D"]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0, 0 )
+modulate = Color( 0, 0, 0, 1 )
+billboard = 1
+double_sided = false
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

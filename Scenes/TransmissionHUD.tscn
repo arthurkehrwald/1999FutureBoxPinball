@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Audio/fx/transmission.wav" type="AudioStream" id=1]
+[ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://HUD/panel_left.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/TransmissionHUD.gd" type="Script" id=4]
+[ext_resource path="res://HUD/portrait_rex_neutral.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 2 )
+
+[node name="TransmissionHUD" type="Control"]
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+TRANSMISSIONS_FILE_PATH = "res://transmissions.json"
+
+[node name="Background" type="TextureRect" parent="."]
+margin_right = 430.0
+margin_bottom = 380.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PortraitRect" type="TextureRect" parent="Background"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -300.0
+margin_right = 300.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharacterNameLabel" type="Label" parent="Background"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 18.1382
+margin_top = -121.767
+margin_right = 334.138
+margin_bottom = -72.7671
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 0.423529 )
+text = "Capt'n Multiball"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextLabel" type="Label" parent="Background"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 43.4076
+margin_top = -95.2039
+margin_right = 389.408
+margin_bottom = -12.2039
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "The Emperor's soldiers are locking down the system."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+bus = "Effects"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

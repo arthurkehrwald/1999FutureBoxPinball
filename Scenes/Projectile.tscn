@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Projectile.gd" type="Script" id=1]
+
+[node name="Projectile" type="RigidBody"]
+continuous_cd = true
+contacts_reported = 2
+contact_monitor = true
+can_sleep = false
+script = ExtResource( 1 )
+EXPLOSION_BASE_KNOCKBACK_STRENGTH = 15.0
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+
+[node name="OmniLight" type="OmniLight" parent="."]
+visible = false
+omni_range = 1.0

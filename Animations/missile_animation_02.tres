@@ -1,0 +1,29 @@
+[gd_resource type="Animation" format=2]
+
+[resource]
+resource_name = "boss_missile_animation_01"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4, 6.3, 9, 12.2, 16, 20 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.760906, 0, 0 ), Vector3( -0.773249, 1.16841, -0.104564 ), Vector3( -0.855864, 2.27718, -1 ), Vector3( -0.944989, 1.8, -2 ), Vector3( -0.943, -0.6, -4.491 ), Vector3( -0.986487, -1, -8.113 ), Vector3( 1.18157, -1, -13.606 ), Vector3( 1.5, -1, -19 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 4, 7, 9, 12.2, 16 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 81.865, 30.5448, 30.799 ), Vector3( 72.9944, 46.6696, 46.9849 ), Vector3( 9, 5.557, 0 ), Vector3( -26, 0, 0 ), Vector3( 0, -2.004, 0 ), Vector3( 0, -8.552, 0 ), Vector3( 0, 0.243, 0 ) ]
+}

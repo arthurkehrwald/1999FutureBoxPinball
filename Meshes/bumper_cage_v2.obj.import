@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/bumper_cage_v2.obj-a437acc97eaa5191289aef0bdb908d02.mesh"
+
+[deps]
+
+files=[ "res://.import/bumper_cage_v2.obj-a437acc97eaa5191289aef0bdb908d02.mesh" ]
+
+source_file="res://Meshes/bumper_cage_v2.obj"
+dest_files=[ "res://.import/bumper_cage_v2.obj-a437acc97eaa5191289aef0bdb908d02.mesh", "res://.import/bumper_cage_v2.obj-a437acc97eaa5191289aef0bdb908d02.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

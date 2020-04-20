@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/WeirdCamera.gd" type="Script" id=1]
+
+[sub_resource type="ProceduralSky" id=2]
+
+[sub_resource type="Environment" id=3]
+background_mode = 1
+background_sky = SubResource( 2 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[node name="WeirdCamera" type="Camera"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -0.005, 6.702, 1.613 )
+environment = SubResource( 3 )
+projection = 2
+current = true
+fov = 55.0691
+size = 4.87
+near = 1.0
+script = ExtResource( 1 )

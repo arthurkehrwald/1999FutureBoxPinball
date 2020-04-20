@@ -1,43 +1,56 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Flipper.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/flipper.obj" type="ArrayMesh" id=2]
-[ext_resource path="res://Materials/light_blue_material.tres" type="Material" id=3]
+[ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=3]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.559, 0.3, 0.127 )
+extents = Vector3( 0.491779, 0.3, 0.0590627 )
 
 [sub_resource type="CylinderShape" id=2]
-radius = 0.258864
+radius = 0.180597
 height = 0.6
 
 [sub_resource type="CylinderShape" id=3]
-radius = 0.154589
+radius = 0.100407
 height = 0.6
 
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.48293, 0.15329, 0.0718273 )
+
 [node name="Flipper" type="KinematicBody"]
-transform = Transform( 0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 0, 0, 0 )
-collision_layer = 4
+transform = Transform( 0.819152, 0, -0.573577, 0, 1, 0, 0.573577, 0, 0.819152, 0, 0, 0 )
+collision_mask = 0
 script = ExtResource( 1 )
-MAX_TURN_ANGLE = 30
+MAX_TURN_ANGLE = 50
 TURN_SPEED = 800
+forward_impulse_strength = 800
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.9, 0, 0, 0, 1, 0, 0, 0, 0.7, 0, 0, 0 )
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.995818, 0, 0.0913626, 0, 1, 0, -0.0913626, 0, 0.995818, 0.54, 0.15, 0.0802937 )
+transform = Transform( 0.998384, 0, 0.056832, 0, 1, 0, -0.056832, 0, 0.998384, 0.437093, 0.15, 0.0915877 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="."]
-transform = Transform( 0.995818, 0, -0.0913626, 0, 1, 0, 0.0913626, 0, 0.995818, 0.54, 0.15, -0.0782097 )
+transform = Transform( 0.998072, 0, -0.0620764, 0, 1, 0, 0.0620764, 0, 0.998072, 0.430052, 0.15, -0.0737521 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0534035, 0.15, 0.0138631 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10455, 0.15, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97248, 0.15, 8.9407e-08 )
 shape = SubResource( 3 )
+
+[node name="ImpulseArea" type="Area" parent="."]
+transform = Transform( 0.99639, 0, -0.0848954, 0, 1, 0, 0.0848954, 0, 0.99639, 0.607606, 0.2, -0.173006 )
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="ImpulseArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013, 0, 0 )
+shape = SubResource( 4 )

@@ -1,0 +1,127 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/EnemyShip.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Animations/enemy_fleet_appear_anim.tres" type="Animation" id=3]
+[ext_resource path="res://Scripts/EnemyFleet.gd" type="Script" id=4]
+[ext_resource path="res://Animations/enemy_fleet_idle_anim.tres" type="Animation" id=5]
+
+[node name="EnemyFleet" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="ParentForAnimation" type="Spatial" parent="."]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0 )
+
+[node name="EnemyShip" parent="ParentForAnimation" instance=ExtResource( 1 )]
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": true,
+"4-BossAppears": false,
+"5-Missiles": false,
+"6-Trex": false,
+"7-BlackHole": false,
+"8-Eclipse": false,
+"9-Victory": false
+}
+
+[node name="EnemyShip2" parent="ParentForAnimation" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0, 0 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": true,
+"4-BossAppears": false,
+"5-Missiles": false,
+"6-Trex": false,
+"7-BlackHole": false,
+"8-Eclipse": false,
+"9-Victory": false
+}
+
+[node name="EnemyShip3" parent="ParentForAnimation" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0, 0 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": true,
+"4-BossAppears": false,
+"5-Missiles": false,
+"6-Trex": false,
+"7-BlackHole": false,
+"8-Eclipse": false,
+"9-Victory": false
+}
+
+[node name="EnemyShip4" parent="ParentForAnimation" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1.6 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": true,
+"4-BossAppears": false,
+"5-Missiles": false,
+"6-Trex": false,
+"7-BlackHole": false,
+"8-Eclipse": false,
+"9-Victory": false
+}
+
+[node name="EnemyShip5" parent="ParentForAnimation" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1.6 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": true,
+"4-BossAppears": false,
+"5-Missiles": false,
+"6-Trex": false,
+"7-BlackHole": false,
+"8-Eclipse": false,
+"9-Victory": false
+}
+
+[node name="EnemyShip7" parent="ParentForAnimation" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.6 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": true,
+"4-BossAppears": false,
+"5-Missiles": false,
+"6-Trex": false,
+"7-BlackHole": false,
+"8-Eclipse": false,
+"9-Victory": false
+}
+
+[node name="EnemyShip6" parent="ParentForAnimation" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1.6 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": true,
+"4-BossAppears": false,
+"5-Missiles": false,
+"6-Trex": false,
+"7-BlackHole": false,
+"8-Eclipse": false,
+"9-Victory": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/enemy_fleet_appear_anim = ExtResource( 3 )
+anims/enemy_fleet_idle_anim = ExtResource( 5 )

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Meshes/curved_ramp.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Meshes/Wireframe/curved_ramp_wireframe.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://Meshes/Collision/cuved_ramp_collision_v3.tres" type="Shape" id=5]
+[ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=6]
+
+[node name="CurvedRamp" type="StaticBody"]
+transform = Transform( 0.594161, 0, 0.0835039, 0, 0.6, 0, -0.0835039, 0, 0.594161, 0, 0, 0 )
+collision_layer = 32
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = ExtResource( 5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="Wireframe" type="MeshInstance" parent="MeshInstance"]
+visible = false
+mesh = ExtResource( 4 )
+material/0 = null

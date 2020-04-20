@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Ramp_Wireframe_01.obj-0ce91ccdccd9069053607b00d1f7ffbc.mesh"
+
+[deps]
+
+files=[ "res://.import/Ramp_Wireframe_01.obj-0ce91ccdccd9069053607b00d1f7ffbc.mesh" ]
+
+source_file="res://Meshes/Wireframe/Ramp_Wireframe_01.obj"
+dest_files=[ "res://.import/Ramp_Wireframe_01.obj-0ce91ccdccd9069053607b00d1f7ffbc.mesh", "res://.import/Ramp_Wireframe_01.obj-0ce91ccdccd9069053607b00d1f7ffbc.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

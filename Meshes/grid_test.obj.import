@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/grid_test.obj-1b71958241fe8014b8f6b20512a99f51.mesh"
+
+[deps]
+
+files=[ "res://.import/grid_test.obj-1b71958241fe8014b8f6b20512a99f51.mesh" ]
+
+source_file="res://Meshes/grid_test.obj"
+dest_files=[ "res://.import/grid_test.obj-1b71958241fe8014b8f6b20512a99f51.mesh", "res://.import/grid_test.obj-1b71958241fe8014b8f6b20512a99f51.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

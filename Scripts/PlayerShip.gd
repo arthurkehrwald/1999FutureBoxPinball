@@ -1,0 +1,69 @@
+class_name PlayerShip
+extends "res://Scripts/Damageable.gd"
+
+signal money_changed(new_value, old_value)
+signal coolness_changed(new_value, old_value)
+
+export var COOLNESS_DECAY_TIME = 10.0
+
+var money = 0 setget set_money
+var coolness = 0 setget set_coolness
+
+onready var audio_player = get_node("AudioStreamPlayer")
+onready var coolness_tween = get_node("CoolnessTween")
+
+
+func _enter_tree():
+	Globals.player_ship = self
+
+
+func _ready():
+	if Globals.shop_menu != null:
+		Globals.shop_menu.connect("bought_repair", self, "on_ShopMenu_bought_repair")
+	else:
+		push_warning("[PlayerShip]: Can't find shop menu!")
+	connect("body_entered", self, "on_body_entered")
+	connect("health_changed", self, "on_health_changed")
+	connect("death", GameState, "handle_event", [GameState.Event.PLAYER_DIED])
+
+
+func set_money(value):
+	emit_signal("money_changed", value, money)
+	money = value
+
+
+func set_coolness(value):
+	emit_signal("coolness_changed", value, coolness)
+	if value > coolness:
+		coolness_tween.remove_all()
+		coolness_tween.interpolate_property(self, "coolness", value, 0, COOLNESS_DECAY_TIME * value,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		coolness_tween.start()
+	coolness = value
+
+
+func on_ShopMenu_bought_repair(heal_percent):
+	heal(MAX_HEALTH * .01 * heal_percent)
+
+
+func on_health_changed(current_health, old_health, _max_health):
+	if current_health < old_health:
+		#Announcer.say("ouch")
+		audio_player.play()
+
+
+func on_body_entered(body):
+	if not body.is_in_group("projectiles"):
+		return
+	on_hit_by_projectile(body)
+	if body.is_in_group("pinballs"):
+		body.queue_free()
+	if body.is_in_group("bombs") or body.is_in_group("missiles"):
+		body.explode()
+
+
+func on_GameState_changed(new_state, is_debug_skip):
+	.on_GameState_changed(new_state, is_debug_skip)
+	if new_state == GameState.PREGAME or is_debug_skip:
+		set_money(0)
+		set_coolness(0)

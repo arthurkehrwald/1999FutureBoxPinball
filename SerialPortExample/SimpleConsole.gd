@@ -8,7 +8,10 @@ onready var com=$Com
 #use it as node since script alone won't have the editor help
 
 var port
-var data
+var number
+var output
+var intData = 0;
+var data = ""
 
 func _ready():
 	#adding the baudrates options
@@ -20,11 +23,18 @@ func _ready():
 #for best speed, you can use a thread
 #do not use _process due to fps being too high
 func _physics_process(delta): 
+	#print(PORT.get_available())
 	if PORT.get_available()>0:
 		for i in range(PORT.get_available()):
-			#data = com.redline(port)
-			$RichTextLabel.add_text(PORT.read())
-
+			var raw = PORT.read(true)
+			if(raw != 10):
+				output = PoolByteArray([raw]).get_string_from_ascii()
+				data += output
+		intData = int(data)
+		data = ""
+		if(intData > 20 && intData < 300):
+			$Sprite.set_position(Vector2(intData, intData))
+		
 func _on_SendButton_pressed():
 	send_text()
 

@@ -6,35 +6,27 @@ export var max_distance = 5.0
 
 var start_pos = Vector3()
 var	max_pos = Vector3()
+var start_transform 
+var max_transform
 var move_progress = 0.0
 var is_at_start = true
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	start_pos = get_translation()
 	max_pos = start_pos + get_transform().basis.z.normalized() * max_distance
+	start_transform = Transform(Basis.IDENTITY, start_pos)
+	max_transform = Transform(Basis.IDENTITY, max_pos)
+
 
 func _physics_process(delta):
-	var vector_to_start_pos = start_pos - get_global_transform().origin
-	var to_start_dot_forward = vector_to_start_pos.normalized().dot(get_global_transform().basis.x.normalized())
-
 	if Input.is_action_pressed("ui_down"):
 		if move_progress < 1:
 			move_progress += windup_speed / max_distance * delta
-			#global_translate(-get_global_transform().basis.x.normalized() * windup_speed * delta)
-			#is_at_start = false
-	#if plunger is released, move forward until start_pos is behind plunger
 	elif move_progress > 0:
 		move_progress -= release_speed / max_distance * delta
 		if move_progress < 0:
 			move_progress = 0
-		#if to_start_dot_forward > 0:
-			#global_translate(get_global_transform().basis.x.normalized() * release_speed * delta)
-		# because of the fast release speed, plunger will significantly overshoot past start position
-		# to correct this, reset position if there is no plunger input and plunger is not behind start pos
-		#else:
-			#global_transform.origin = start_pos
-			#is_at_start = true
 	
-	set_translation(start_pos.linear_interpolate(max_pos, move_progress))
+	#set_translation(start_pos.linear_interpolate(max_pos, move_progress))
+	set_transform(start_transform.interpolate_with(max_transform, move_progress))
 		

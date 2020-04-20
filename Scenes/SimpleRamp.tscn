@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Meshes/slope_mesh.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Meshes/Wireframe/slope_mesh_wireframe.obj" type="ArrayMesh" id=4]
+
+[sub_resource type="ConcavePolygonShape" id=1]
+data = PoolVector3Array( 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, -1, 1, -1, 1, 1, -1, 1, -1, -1, -1, -1, -1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, -1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.248211, 0.354, 1 )
+
+[node name="SimpleRamp" type="StaticBody"]
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( -1.62921e-07, 0, 0.5, 0, 0.2, 0, -1, 0, -8.14603e-08, 0, 0.2, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -1.62921e-07, 0, 0.5, 0, 0.2, 0, -1, 0, -8.14603e-08, 0, 0.2, 0 )
+mesh = ExtResource( 3 )
+material/0 = SubResource( 2 )
+
+[node name="WireframeMesh" type="MeshInstance" parent="MeshInstance"]
+mesh = ExtResource( 4 )
+material/0 = null
+
+[node name="Area" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.70703, 0, 0, 0, 1, 0, 0.341406, 0 )
+space_override = 3
+gravity = 4.0
+linear_damp = 0.0
+angular_damp = 0.0
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.153606, 0 )
+shape = SubResource( 3 )

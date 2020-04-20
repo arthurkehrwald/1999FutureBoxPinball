@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/bumper_wireframe.obj-54e630f9333cca210a1a0713d2691490.mesh"
+
+[deps]
+
+files=[ "res://.import/bumper_wireframe.obj-54e630f9333cca210a1a0713d2691490.mesh" ]
+
+source_file="res://Meshes/Wireframe/bumper_wireframe.obj"
+dest_files=[ "res://.import/bumper_wireframe.obj-54e630f9333cca210a1a0713d2691490.mesh", "res://.import/bumper_wireframe.obj-54e630f9333cca210a1a0713d2691490.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/announcer_prodigy.wav-c941819e920569298fb0345d45312be9.sample"
+
+[deps]
+
+source_file="res://Audio/Announcer/announcer_prodigy.wav"
+dest_files=[ "res://.import/announcer_prodigy.wav-c941819e920569298fb0345d45312be9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
