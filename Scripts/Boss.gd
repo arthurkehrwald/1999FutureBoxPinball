@@ -36,7 +36,7 @@ func on_health_changed(current_health, old_health, max_health):
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	set_is_vulnerable(IS_VULNERABLE_PER_GAME_STATE[new_state])
+	.on_GameState_changed(new_state, is_debug_skip)
 	if is_debug_skip:
 		match new_state:
 			GameState.MISSILES:
