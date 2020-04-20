@@ -121,7 +121,9 @@ hue_variation_random = 1.0
 [node name="Ring" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 material_override = SubResource( 1 )
+emitting = false
 amount = 10
+one_shot = true
 explosiveness = 0.86
 local_coords = false
 process_material = SubResource( 6 )
@@ -129,8 +131,10 @@ draw_pass_1 = SubResource( 7 )
 
 [node name="Debris" type="Particles" parent="."]
 material_override = SubResource( 8 )
+emitting = false
 amount = 150
 lifetime = 2.0
+one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
 process_material = SubResource( 13 )

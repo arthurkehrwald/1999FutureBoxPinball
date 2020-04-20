@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Enemy_Spaceship_01.obj-1d551fe8f0766770512dd0c407c318bd.mesh"
+
+[deps]
+
+files=[ "res://.import/Enemy_Spaceship_01.obj-1d551fe8f0766770512dd0c407c318bd.mesh" ]
+
+source_file="res://Meshes/Enemy_Spaceship_01.obj"
+dest_files=[ "res://.import/Enemy_Spaceship_01.obj-1d551fe8f0766770512dd0c407c318bd.mesh", "res://.import/Enemy_Spaceship_01.obj-1d551fe8f0766770512dd0c407c318bd.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

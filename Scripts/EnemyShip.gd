@@ -44,3 +44,5 @@ func on_death():
 	var explosion_instance = EXPLOSION_SCENE.instance()
 	explosion_instance.set_global_transform(get_global_transform())
 	get_node("/root").add_child(explosion_instance)
+	explosion_instance.get_node("Debris").emitting = true
+	explosion_instance.get_node("Ring").emitting = true
