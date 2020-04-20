@@ -211,7 +211,7 @@ IS_VULNERABLE_PER_STAGE = {
 }
 
 [node name="EnemyFleet" parent="BoxV3/Playfield" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115225, -7.36713e-05, 1.80435 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115225, -7.34329e-05, 1.80435 )
 
 [node name="LaserTrex" parent="BoxV3/Playfield" instance=ExtResource( 45 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 4.88498e-15, -1, 0, -4.37114e-08, 3.51716, 2.57492e-05, 0.798243 )

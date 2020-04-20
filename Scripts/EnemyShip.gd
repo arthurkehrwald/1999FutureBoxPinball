@@ -46,3 +46,4 @@ func on_death():
 	get_node("/root").add_child(explosion_instance)
 	explosion_instance.get_node("Debris").emitting = true
 	explosion_instance.get_node("Ring").emitting = true
+	explosion_instance.get_node("Mesh").emitting = true
