@@ -22,6 +22,8 @@ onready var arrow_sprite = get_node("RotationStabiliser/ArrowSprite")
 const EXPLOSION_SCENE = preload("res://Scenes/Particles_Pinball_Death_01.tscn")
 
 
+
+
 func _ready():
 	add_to_group("pinballs")
 	remote_control_timer.connect("timeout", self, "on_RemoteControlTimer_timeout")
@@ -49,6 +51,7 @@ func _physics_process(delta):
 
 func on_visibility_changed(value):
 	arrow_sprite.set_visible(!value)
+	
 
 
 func on_delete():
@@ -58,6 +61,10 @@ func on_delete():
 	get_node("/root").add_child(explosion_instance)
 	explosion_instance.get_node("Ring").emitting = true
 	explosion_instance.get_node("Ball Explosion").emitting = true
+	
+	
+	
+	
 	
 	
 	
@@ -86,3 +93,4 @@ func on_RemoteControlTimer_timeout():
 func on_entered_laser_area():
 	set_is_accessible_to_player(false)
 	queue_free()
+	

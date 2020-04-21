@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Particles/White_Circle_01.png" type="Texture" id=1]
 [ext_resource path="res://Meshes/ball.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Particles/White_Long_Particle_01.png" type="Texture" id=3]
+[ext_resource path="res://Audio/fx/Enemy_Ship_Explosion_03.wav" type="AudioStream" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -14,28 +15,28 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 albedo_texture = ExtResource( 1 )
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.462428, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=4]
 max_value = 1.5
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.5 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=7]
-curve = SubResource( 6 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=6]
 direction = Vector3( 0, 0, 1 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-scale_curve = SubResource( 7 )
-color_ramp = SubResource( 5 )
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
-[sub_resource type="QuadMesh" id=3]
+[sub_resource type="QuadMesh" id=7]
 
 [sub_resource type="SpatialMaterial" id=8]
 flags_transparent = true
@@ -95,8 +96,8 @@ amount = 3
 one_shot = true
 preprocess = 0.2
 explosiveness = 0.75
-process_material = SubResource( 2 )
-draw_pass_1 = SubResource( 3 )
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 7 )
 
 [node name="ball" type="MeshInstance" parent="."]
 visible = false
@@ -114,3 +115,8 @@ speed_scale = 2.0
 explosiveness = 1.0
 process_material = SubResource( 13 )
 draw_pass_1 = SubResource( 14 )
+
+[node name="Ball Explode Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+bus = "Effects"
