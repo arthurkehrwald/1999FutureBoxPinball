@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Audio/fx/transmission.wav" type="AudioStream" id=1]
+[ext_resource path="res://Audio/fx/Transmittion_03.wav" type="AudioStream" id=1]
 [ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://HUD/panel_left.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/TransmissionHUD.gd" type="Script" id=4]
@@ -71,6 +71,7 @@ __meta__ = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
+volume_db = -3.0
 bus = "Effects"
 
 [node name="Timer" type="Timer" parent="."]
