@@ -195,7 +195,7 @@ transform = Transform( -0.467807, 0, -0.883831, -7.45058e-09, 1, -7.45058e-09, 0
 forward_impulse_strength = 50
 
 [node name="Boss" parent="BoxV3/Playfield" instance=ExtResource( 23 )]
-transform = Transform( -0.8, -6.20542e-15, -3.11531e-07, -7.10543e-15, 0.8, 7.45058e-08, 3.11532e-07, 7.45058e-08, -0.8, -0.237199, 0.0792544, 4.74458 )
+transform = Transform( -0.8, -6.20542e-15, -3.11531e-07, -7.10543e-15, 0.8, 7.45058e-08, 3.11532e-07, 7.45058e-08, -0.8, 0.69185, 0.170444, -6.13765 )
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
@@ -214,7 +214,7 @@ IS_VULNERABLE_PER_STAGE = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115225, -7.34329e-05, 1.80435 )
 
 [node name="LaserTrex" parent="BoxV3/Playfield" instance=ExtResource( 45 )]
-transform = Transform( -0.4348, 0.0456997, 0.899367, 0.0104615, 0.9989, -0.0456997, -0.900466, -0.0104615, -0.4348, 2.62896, -0.333577, -2.37576 )
+transform = Transform( 1.21516e-06, 0.00657984, 0.999979, 0.000209436, 0.999978, -0.00657985, -1, 0.000209391, -1.62923e-07, 3.49576, -0.00770879, 0.724624 )
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
@@ -265,7 +265,7 @@ transform = Transform( 0.362242, 2.18455e-09, 0.932084, -5.96046e-08, 1, 7.45058
 transform = Transform( -0.231732, -1.02707e-08, 0.97278, -5.96046e-08, 1, -5.58794e-09, -0.97278, -5.96046e-08, -0.231732, -2.09849, 0.0021069, -1.30236 )
 
 [node name="NoRemoteControlArea" parent="BoxV3/Playfield" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.235402, 8.44002e-05, 5.85387 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.235402, 8.4877e-05, 5.85387 )
 
 [node name="StageOneEntryRamp" parent="BoxV3/Playfield" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.83074, 0.000140905, 0.016608 )
