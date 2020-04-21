@@ -25,7 +25,7 @@ func _ready():
 	remote_control_timer.connect("timeout", self, "on_RemoteControlTimer_timeout")
 	arrow_sprite.set_visible(false)
 	set_is_remote_controlled(IS_ALWAYS_REMOTE_CONTROLLED)
-	connect("tree_exiting", self, "set_is_accessible_to_player", [false])
+	connect("tree_exiting", self, "on_delete")
 
 
 func _process(_delta):
@@ -47,6 +47,11 @@ func _physics_process(delta):
 
 func on_visibility_changed(value):
 	arrow_sprite.set_visible(!value)
+
+
+func on_delete():
+	set_is_accessible_to_player(false)
+	#do your thing, KEVIN
 
 
 func set_is_accessible_to_player(value):
