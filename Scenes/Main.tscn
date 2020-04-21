@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Scenes/TriangularWall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=2]
@@ -41,6 +41,7 @@
 [ext_resource path="res://Scenes/WeirdCamera.tscn" type="PackedScene" id=39]
 [ext_resource path="res://Scripts/VideoPlayer.gd" type="Script" id=40]
 [ext_resource path="res://Scenes/TeleporterExit.tscn" type="PackedScene" id=41]
+[ext_resource path="res://Reference/Floor_07.png" type="Texture" id=42]
 [ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=43]
 [ext_resource path="res://Scenes/Slingshot_R.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=45]
@@ -332,6 +333,10 @@ transform = Transform( 0.594161, 0, -0.0835039, 0, 0.6, -2.6077e-08, 0.0835039, 
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, -0.676062, -2.62545, 0.214347 )
 visible = false
 texture = ExtResource( 17 )
+
+[node name="Reference2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, -0.676062, -2.62545, 0.214347 )
+texture = ExtResource( 42 )
 
 [node name="NormalCamera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, -0.265423, 10.0877, 4.75283 )
