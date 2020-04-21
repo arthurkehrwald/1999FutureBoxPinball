@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Slingshot_01.wav-54d4d563beba812a1d90357928363dfc.sample"
+
+[deps]
+
+source_file="res://Audio/fx/Slingshot_01.wav"
+dest_files=[ "res://.import/Slingshot_01.wav-54d4d563beba812a1d90357928363dfc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
