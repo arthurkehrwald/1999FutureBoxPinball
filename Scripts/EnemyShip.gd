@@ -7,7 +7,8 @@ export var BUMP_FORCE = 10.0
 
 onready var collision_shape = get_node("CollisionShape")
 onready var health_bar = get_node("HealthBar3D/Viewport/Bar")
-onready var audio_player = get_node("AudioStreamPlayer")
+onready var hit_sound = get_node("Enemy Hit Sound")
+onready var explode_sound = get_node("Enemy Explode Sound")
 
 func _ready():
 	connect("is_vulnerable_changed", self, "on_is_vulnerable_changed")
@@ -36,8 +37,8 @@ func on_hit_by_projectile(projectile):
 
 
 func on_health_changed(current_health, old_health, _max_health):
-	if current_health < old_health:
-		audio_player.play()
+	if current_health < old_health and current_health > 0:
+		hit_sound.play()
 
 
 func on_death():
@@ -47,3 +48,4 @@ func on_death():
 	explosion_instance.get_node("Debris").emitting = true
 	explosion_instance.get_node("Ring").emitting = true
 	explosion_instance.get_node("Mesh").emitting = true
+	explode_sound.play()
