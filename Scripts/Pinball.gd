@@ -15,9 +15,11 @@ var is_accessible_to_player = true setget set_is_accessible_to_player
 var is_remote_controlled = false setget set_is_remote_controlled
 var is_remote_control_blocked = false
 
+
 onready var remote_control_timer = get_node("RemoteControlTimer")
 onready var remote_control_time_bar = get_node("RotationStabiliser/RemoteControlTimeBar3D/Viewport/Bar")
 onready var arrow_sprite = get_node("RotationStabiliser/ArrowSprite")
+const EXPLOSION_SCENE = preload("res://Scenes/Particles_Pinball_Death_01.tscn")
 
 
 func _ready():
@@ -51,7 +53,14 @@ func on_visibility_changed(value):
 
 func on_delete():
 	set_is_accessible_to_player(false)
-	#do your thing, KEVIN
+	var explosion_instance = EXPLOSION_SCENE.instance()
+	explosion_instance.set_global_transform(get_global_transform())
+	get_node("/root").add_child(explosion_instance)
+	explosion_instance.get_node("Ring").emitting = true
+	explosion_instance.get_node("Ball Explosion").emitting = true
+	
+	
+	
 
 
 func set_is_accessible_to_player(value):

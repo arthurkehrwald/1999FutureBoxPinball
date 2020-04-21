@@ -123,20 +123,20 @@ vertex_color_use_as_albedo = true
 albedo_color = Color( 0.74902, 0.0862745, 1, 1 )
 albedo_texture = ExtResource( 1 )
 
-[sub_resource type="Gradient" id=21]
+[sub_resource type="Gradient" id=16]
 offsets = PoolRealArray( 0, 0.508671, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=22]
-gradient = SubResource( 21 )
+[sub_resource type="GradientTexture" id=17]
+gradient = SubResource( 16 )
 
-[sub_resource type="Curve" id=16]
+[sub_resource type="Curve" id=18]
 _data = [ Vector2( 0, 0.0647727 ), 0.0, 0.0, 0, 0, Vector2( 0.613924, 0.464773 ), 0.700665, 0.700665, 0, 0, Vector2( 1, 0.773864 ), 0.800596, 0.0, 1, 0 ]
 
-[sub_resource type="CurveTexture" id=17]
-curve = SubResource( 16 )
+[sub_resource type="CurveTexture" id=19]
+curve = SubResource( 18 )
 
-[sub_resource type="ParticlesMaterial" id=18]
+[sub_resource type="ParticlesMaterial" id=20]
 flag_rotate_y = true
 direction = Vector3( 0, 0, 2 )
 spread = 0.0
@@ -144,15 +144,14 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 2.0
 damping = 1.0
 scale = 3.0
-scale_curve = SubResource( 17 )
-color_ramp = SubResource( 22 )
+scale_curve = SubResource( 19 )
+color_ramp = SubResource( 17 )
 hue_variation = 0.08
 hue_variation_random = 0.65
 
-[sub_resource type="QuadMesh" id=19]
+[sub_resource type="QuadMesh" id=21]
 
-[sub_resource type="Animation" id=20]
-resource_name = "Rotation"
+[sub_resource type="Animation" id=22]
 length = 5.0
 loop = true
 tracks/0/type = "value"
@@ -246,9 +245,9 @@ amount = 3
 one_shot = true
 speed_scale = 1.6
 draw_order = 2
-process_material = SubResource( 18 )
-draw_pass_1 = SubResource( 19 )
+process_material = SubResource( 20 )
+draw_pass_1 = SubResource( 21 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Rotation"
-anims/Rotation = SubResource( 20 )
+anims/Rotation = SubResource( 22 )
