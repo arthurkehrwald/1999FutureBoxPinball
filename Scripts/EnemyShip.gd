@@ -37,7 +37,7 @@ func on_hit_by_projectile(projectile):
 
 
 func on_health_changed(current_health, old_health, _max_health):
-	if current_health < old_health and current_health > 0:
+	if current_health < old_health:
 		hit_sound.play()
 
 

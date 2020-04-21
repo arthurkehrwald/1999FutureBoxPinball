@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Enemy_Ship_Explosion_03.wav-e6a9485287ef3003bc8621eea407d786.sample"
+
+[deps]
+
+source_file="res://Audio/fx/Enemy_Ship_Explosion_03.wav"
+dest_files=[ "res://.import/Enemy_Ship_Explosion_03.wav-e6a9485287ef3003bc8621eea407d786.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
