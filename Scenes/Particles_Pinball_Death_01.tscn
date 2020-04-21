@@ -3,7 +3,7 @@
 [ext_resource path="res://Particles/White_Circle_01.png" type="Texture" id=1]
 [ext_resource path="res://Meshes/ball.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Particles/White_Long_Particle_01.png" type="Texture" id=3]
-[ext_resource path="res://Audio/fx/Enemy_Ship_Explosion_03.wav" type="AudioStream" id=4]
+[ext_resource path="res://Audio/fx/Ball_Digitized_01.wav" type="AudioStream" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -118,5 +118,6 @@ draw_pass_1 = SubResource( 14 )
 
 [node name="Ball Explode Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -8.0
 autoplay = true
 bus = "Effects"
