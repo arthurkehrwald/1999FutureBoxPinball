@@ -15,5 +15,4 @@ dest_files=[ "res://.import/bumper_cage_v4_two_openings.obj-4f60c8395a97b7db9527
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
-offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true

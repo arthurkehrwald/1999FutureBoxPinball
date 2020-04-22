@@ -93,6 +93,11 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://Old/StateMachine.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": "VisualShaderNodePerlinNoise3D",
+"language": "GDScript",
+"path": "res://Scripts/PerlinNoise3D.gd"
 } ]
 _global_script_class_icons={
 "Boss": "",
@@ -111,7 +116,8 @@ _global_script_class_icons={
 "RotationStabiliser": "",
 "ShopEntrance": "",
 "State": "",
-"StateMachine": ""
+"StateMachine": "",
+"VisualShaderNodePerlinNoise3D": ""
 }
 
 [application]

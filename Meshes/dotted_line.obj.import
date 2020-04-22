@@ -15,5 +15,4 @@ dest_files=[ "res://.import/dotted_line.obj-448ea8b8980477308c4c5ec707e58f46.mes
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
-offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true
