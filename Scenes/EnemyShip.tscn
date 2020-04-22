@@ -17,6 +17,8 @@ transform = Transform( 1.00307, 0, 0, 0, 1.00307, 0, 0, 0, 1.00307, 0, 0, 0 )
 collision_mask = 0
 script = ExtResource( 2 )
 MAX_HEALTH = 20.0
+PINBALL_DIRECT_HIT_BASE_DAMAGE = 20.0
+DIRECT_HIT_SPEED_RELEVANCE = 1.0
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
