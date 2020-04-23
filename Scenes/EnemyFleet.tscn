@@ -6,6 +6,12 @@
 [ext_resource path="res://Scripts/EnemyFleet.gd" type="Script" id=4]
 [ext_resource path="res://Animations/enemy_fleet_idle_anim.tres" type="Animation" id=5]
 
+
+
+
+
+
+
 [node name="EnemyFleet" type="Spatial"]
 script = ExtResource( 4 )
 
