@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/TrailFX.tscn" type="PackedScene" id=1]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.845481, 1 )
+colors = PoolColorArray( 0, 0.756863, 1, 1, 0, 0.756863, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 6 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.875 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 300.0
+scale = 0.1
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[node name="PinballMoonTrailFX" instance=ExtResource( 1 )]
+process_material = SubResource( 7 )

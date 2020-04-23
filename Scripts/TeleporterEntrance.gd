@@ -3,6 +3,7 @@ extends Area
 var rng = RandomNumberGenerator.new()
 
 onready var audio_player = get_node("AudioStreamPlayer")
+onready var fx = get_node("StarGateFX")
 
 func _ready():
 	if Globals.teleporter_exits.empty():
@@ -15,6 +16,7 @@ func _ready():
 
 func set_is_active(value):
 	set_deferred("monitoring", value)
+	fx.set_is_emitting(value)
 
 
 func on_body_entered(body):
@@ -26,6 +28,8 @@ func on_body_entered(body):
 	var exit_dir = -exit.get_global_transform().basis.z
 	body.teleport(exit.get_global_transform().origin)
 	body.set_linear_velocity(exit_dir * body.get_linear_velocity().length())
+	PoolManager.request(PoolManager.STAR_GATE_ENTER, body.get_global_transform().origin)
+	PoolManager.request(PoolManager.STAR_GATE_EXIT, exit.get_global_transform().origin)
 
 
 func on_GameState_changed(new_state, _is_debug_skip):

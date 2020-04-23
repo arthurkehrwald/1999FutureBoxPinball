@@ -215,7 +215,7 @@ IS_VULNERABLE_PER_STAGE = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115225, 0.129818, 1.7907 )
 
 [node name="LaserTrex" parent="BoxV3/Playfield" instance=ExtResource( 45 )]
-transform = Transform( 1.21516e-06, 0.00657984, 0.999979, 0.000209436, 0.999978, -0.00657985, -1, 0.000209391, -1.62923e-07, 3.49576, -0.00770879, 0.724624 )
+transform = Transform( 1.21516e-06, 0.00657984, 0.999979, 0.000209436, 0.999978, -0.00657985, -1, 0.000209376, -1.62923e-07, 3.49576, -0.00770879, 0.724624 )
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
@@ -336,6 +336,7 @@ texture = ExtResource( 17 )
 
 [node name="Reference2" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, -0.676062, -2.62545, 0.214347 )
+visible = false
 texture = ExtResource( 42 )
 
 [node name="NormalCamera" type="Camera" parent="."]

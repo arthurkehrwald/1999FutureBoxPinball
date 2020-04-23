@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Meshes/Louie_01.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scripts/LoopingLouie.gd" type="Script" id=2]
 [ext_resource path="res://Animations/looping_louie_flight_curve.tres" type="Curve3D" id=3]
 [ext_resource path="res://Audio/fx/looping_louie.wav" type="AudioStream" id=4]
+[ext_resource path="res://Scenes/LoopingLouieTrailFX.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/TrailFX.gd" type="Script" id=6]
 
 [node name="LoopingLouie" type="Path"]
 curve = ExtResource( 3 )
@@ -19,6 +21,11 @@ rotation_mode = 4
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 mesh = ExtResource( 1 )
 material/0 = null
+
+[node name="LoopingLouieTrailFX" parent="PathFollow/Spatial" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 3.72529e-09, 0, 1, 0, -3.72529e-09, 0, 1, 0, 0, 0 )
+amount = 10
+script = ExtResource( 6 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

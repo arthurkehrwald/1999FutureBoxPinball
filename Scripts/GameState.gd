@@ -179,9 +179,9 @@ func set_state(new_state, is_debug_skip = false):
 func set_global_eclipse_materials(is_eclipse):
 	if is_eclipse:
 		global_non_wireframe_mat.albedo_color = Color.black
-		global_wireframe_mat.albedo_color = Color(133, 0, 255, 255)
-		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_ADD)
+		#global_wireframe_mat.albedo_color = Color(133, 0, 255, 255)
+		#global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_ADD)
 	else:
-		global_non_wireframe_mat.albedo_color = Color.white
-		global_wireframe_mat.albedo_color = Color(0, 255, 58, 255)
-		global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_SUB)
+		global_non_wireframe_mat.albedo_color = Color.gray
+		#global_wireframe_mat.albedo_color = Color(0, 255, 58, 255)
+		#global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_SUB)

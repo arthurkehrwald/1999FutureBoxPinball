@@ -19,7 +19,7 @@ extents = Vector3( 0.380734, 0.462911, 1.13464 )
 
 [node name="MultiballShip" type="Spatial"]
 script = ExtResource( 2 )
-SHOT_SPEED = 25.0
+SHOT_SPEED = 15.0
 
 [node name="StaticBody" type="StaticBody" parent="."]
 collision_mask = 0

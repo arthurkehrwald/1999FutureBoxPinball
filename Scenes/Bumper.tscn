@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Bumper.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/bumper.obj" type="ArrayMesh" id=2]
-[ext_resource path="res://Audio/fx/Bumpers_04.wav" type="AudioStream" id=3]
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=5]
 
 [sub_resource type="CylinderShape" id=1]
@@ -17,7 +16,7 @@ monitorable = false
 collision_mask = 0
 script = ExtResource( 1 )
 BUMP_FORCE = 7.0
-MONEY_PER_BUMP = 5
+MONEY_PER_BUMP = 5.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
@@ -39,8 +38,3 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape" parent="Top"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.0109101 )
 shape = SubResource( 2 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = -6.0
-bus = "Effects"

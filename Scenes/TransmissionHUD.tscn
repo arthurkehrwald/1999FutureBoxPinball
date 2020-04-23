@@ -74,5 +74,8 @@ stream = ExtResource( 1 )
 volume_db = -3.0
 bus = "Effects"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="TransmissionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HurtReactionTimer" type="Timer" parent="."]
 one_shot = true

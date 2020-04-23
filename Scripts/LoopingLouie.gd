@@ -10,6 +10,7 @@ var is_flying = false
 
 onready var audio_player = get_node("AudioStreamPlayer")
 onready var path_follow = get_node("PathFollow")
+onready var trail = get_node("PathFollow/Spatial/LoopingLouieTrailFX")
 
 
 func _ready():
@@ -19,6 +20,7 @@ func _ready():
 				+ "coolness.")
 	curve_length = get_curve().get_baked_length()
 	set_process(false)
+	trail.emitting = false
 
 
 func _process(delta):
@@ -41,6 +43,7 @@ func start_flying():
 	audio_player.play()
 	Announcer.say("looping_louie")
 	set_process(true)
+	trail.emitting = true
 
 
 func land():
@@ -48,3 +51,4 @@ func land():
 	path_follow.set_offset(0.0)
 	dist_travelled = 0
 	set_process(false)
+	trail.emitting = false

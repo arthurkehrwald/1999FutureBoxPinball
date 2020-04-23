@@ -67,7 +67,3 @@ func set_gravity_scale_based_on_speed():
 		emit_signal("physics_debug_info_update",
 				get_linear_velocity().length(), 
 				gravity_scale)
-
-
-func on_entered_laser_area():
-	.on_entered_laser_area()

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/plunger_pull_placeholder.wav-755ce56cebc7873863c08aa53aab9f6f.sample"
+
+[deps]
+
+source_file="res://Audio/fx/plunger_pull_placeholder.wav"
+dest_files=[ "res://.import/plunger_pull_placeholder.wav-755ce56cebc7873863c08aa53aab9f6f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
