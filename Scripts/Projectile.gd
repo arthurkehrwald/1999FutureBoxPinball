@@ -18,6 +18,7 @@ func _ready():
 func on_body_entered(body):
 	if body.has_method("on_hit_by_projectile"):
 		body.on_hit_by_projectile(self)
+		PoolManager.request(PoolManager.WIREFRAME_FLASH, get_global_transform().origin)
 
 
 func on_hit_by_explosion(explosion):
@@ -32,11 +33,13 @@ func on_hit_by_explosion(explosion):
 
 
 func on_entered_laser_area():
+	PoolManager.request(PoolManager.PROJECTILE_LASERED, get_global_transform().origin)
 	queue_free()
 
 
 func on_GameState_changed(new_state, is_debug_skip):
 	if is_debug_skip or new_state == GameState.PREGAME:
+		PoolManager.request(PoolManager.PROJECTILE_DISAPPEAR, get_global_transform().origin)
 		queue_free()
 	else:
 		omni_light.set_visible(new_state == GameState.ECLIPSE)

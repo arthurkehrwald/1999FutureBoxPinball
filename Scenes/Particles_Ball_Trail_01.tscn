@@ -58,9 +58,8 @@ tracks/0/keys = {
 [node name="Spatial" type="Spatial"]
 
 [node name="Particles" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.317025 )
 material_override = SubResource( 1 )
-amount = 10000
 local_coords = false
 process_material = SubResource( 6 )
 draw_pass_1 = SubResource( 7 )

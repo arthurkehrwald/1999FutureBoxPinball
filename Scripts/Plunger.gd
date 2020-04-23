@@ -11,6 +11,10 @@ var max_transform
 var move_progress = 0.0
 var is_at_start = true
 
+onready var pull_audio_player = get_node("PullAudioPlayer")
+onready var release_audio_player = get_node("ReleaseAudioPlayer")
+
+
 func _ready():
 	start_pos = get_translation()
 	max_pos = start_pos + get_transform().basis.z.normalized() * max_distance
@@ -18,10 +22,19 @@ func _ready():
 	max_transform = Transform(Basis.IDENTITY, max_pos)
 
 
+func _input(event):
+	if event.is_action_pressed("ui_down"):
+		pull_audio_player.play()
+	elif event.is_action_released("ui_down"):
+		release_audio_player.play()
+		pull_audio_player.stop()
+
+
 func _physics_process(delta):
 	if Input.is_action_pressed("ui_down"):
 		if move_progress < 1:
 			move_progress += windup_speed / max_distance * delta
+			pull_audio_player.pitch_scale = move_progress + .5
 	elif move_progress > 0:
 		move_progress -= release_speed / max_distance * delta
 		if move_progress < 0:

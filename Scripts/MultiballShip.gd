@@ -26,6 +26,7 @@ func _ready():
 func on_EntranceArea_body_entered(body):
 	if not body.is_in_group("pinballs") or pinballs_locked >= 3:
 		return
+	PoolManager.request(PoolManager.MULTIBALL_LOCK, body.get_global_transform().origin)
 	loaded_pinballs.push_back(weakref(body))
 	body.set_visible(false)
 	body.set_locked(true)
@@ -44,6 +45,7 @@ func on_EntranceArea_body_entered(body):
 				loaded_pinballs[i].get_ref().apply_central_impulse(impulse)
 				loaded_pinballs[i].get_ref().set_is_accessible_to_player(true)
 		Announcer.say("multiball")
+		PoolManager.request(PoolManager.MULTIBALL_SHOT, muzzle_transforms[0].origin)
 	else:
 		body.set_is_accessible_to_player(false)
 		Announcer.say("ball_locked")

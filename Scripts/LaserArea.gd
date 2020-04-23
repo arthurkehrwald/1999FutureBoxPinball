@@ -5,7 +5,5 @@ func _ready():
 
 
 func on_body_entered(body):
-	if not body.is_in_group("projectiles"):
-		push_warning(Globals.USELESS_COLLISION_WARNING_FORMAT_STRING % [name, body.name])
-		return
-	body.on_entered_laser_area()
+	if body.is_in_group("projectiles"):
+		body.on_entered_laser_area()

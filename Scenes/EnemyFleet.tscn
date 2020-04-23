@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/EnemyShip.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Audio/fx/powerup1.wav" type="AudioStream" id=2]
 [ext_resource path="res://Animations/enemy_fleet_appear_anim.tres" type="Animation" id=3]
 [ext_resource path="res://Scripts/EnemyFleet.gd" type="Script" id=4]
 [ext_resource path="res://Animations/enemy_fleet_idle_anim.tres" type="Animation" id=5]
@@ -126,3 +127,6 @@ IS_VULNERABLE_PER_STAGE = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/enemy_fleet_appear_anim = ExtResource( 3 )
 anims/enemy_fleet_idle_anim = ExtResource( 5 )
+
+[node name="FlyInAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )

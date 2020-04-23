@@ -5,8 +5,6 @@ signal is_vulnerable_changed(value)
 signal health_changed(health, old_health, max_health)
 signal death
 
-const MONEY_TEXT_3D_SCENE = preload("res://Scenes/MoneyText3D.tscn")
-
 export var MAX_HEALTH = 100.0
 export var PINBALL_DIRECT_HIT_BASE_DAMAGE = 10.0
 export var BOMB_DIRECT_HIT_BASE_DAMAGE = 10.0
@@ -36,7 +34,7 @@ var IS_VULNERABLE_PER_GAME_STATE = {}
 var is_vulnerable = true setget set_is_vulnerable
 
 onready var health = MAX_HEALTH setget set_health
-onready var money_text_parent = Spatial.new()
+
 
 func _ready():
 	for string_key in IS_VULNERABLE_PER_STAGE.keys():
@@ -47,8 +45,6 @@ func _ready():
 	if MONEY_YIELD_PER_DAMAGE != 0 and Globals.player_ship == null:
 		push_warning("[" + name + "] can't find player ship!"
 				+ " Damaging it will not yield money.")
-	add_child(money_text_parent)
-	money_text_parent.translate(Vector3.UP * MONEY_TEXT_HEIGHT)
 
 
 func set_is_vulnerable(value):
@@ -77,9 +73,8 @@ func take_damage(damage):
 		var money_yield = damage * MONEY_YIELD_PER_DAMAGE
 		if Globals.player_ship != null and money_yield != 0:
 			Globals.player_ship.set_money(Globals.player_ship.money + money_yield)
-			var money_text_3d_instance = MONEY_TEXT_3D_SCENE.instance()
-			money_text_3d_instance.set_money_amount(money_yield)
-			money_text_parent.add_child(money_text_3d_instance)
+			var money_pos = get_global_transform().origin + Vector3.UP * MONEY_TEXT_HEIGHT
+			PoolManager.request(PoolManager.MONEY_TEXT, money_pos)
 
 
 func on_GameState_changed(new_state, is_debug_skip):
@@ -113,6 +108,8 @@ func on_hit_by_projectile(projectile):
 	take_damage(calc_direct_hit_damage(
 			base_damage,
 			projectile.get_linear_velocity().length()))
+	if is_vulnerable:
+		PoolManager.request(PoolManager.DAMAGEABLE_HIT, projectile.get_global_transform().origin)
 
 
 func on_hit_by_explosion(explosion):

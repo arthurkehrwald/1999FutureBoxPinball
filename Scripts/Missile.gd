@@ -47,14 +47,9 @@ func explode():
 
 
 func on_AnimationPlayer_animation_finished(_animation_name):
-	#mode = RigidBody.MODE_RIGID
 	start_basis = get_global_transform().basis.orthonormalized()
 	apply_central_impulse(-get_global_transform().basis.z * SPEED * 5)
 	if Globals.player_ship != null:
-#		target_pointer.look_at(Globals.player_ship.get_global_transform().origin, Vector3.UP)
-#		start_target_dir = -target_pointer.get_transform().basis.z.normalized()
-#		prev_backwards = get_global_transform().basis.z.normalized()
-		#set_physics_process(true)
 		target_pos = Globals.player_ship.get_global_transform().origin
 		target_pos += Globals.player_ship.get_global_transform().basis.y.normalized() * .288
 		guidance_update_timer.start(GUIDANCE_UPDATE_RATE)

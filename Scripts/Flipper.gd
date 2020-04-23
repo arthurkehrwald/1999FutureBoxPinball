@@ -13,6 +13,7 @@ var rotation_progress = 0.0
 var input_code = ""
 
 onready var impulse_area = get_node("ImpulseArea")
+onready var audio_player = get_node("AudioStreamPlayer")
 
 
 func _ready():
@@ -37,6 +38,11 @@ func _ready():
 #			var boost_factor = 1 - pointy_end_dir.angle_to(body.get_global_transform().origin - get_global_transform().origin) / PI
 #			print(boost_factor)
 #			body.apply_central_impulse(-get_global_transform().basis.orthonormalized().z * boost_factor * forward_impulse_strength)
+
+
+func _input(event):
+	if event.is_action_pressed(input_code):
+		audio_player.play()
 
 
 func _physics_process(delta):	

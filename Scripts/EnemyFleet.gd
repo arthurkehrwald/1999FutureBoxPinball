@@ -6,7 +6,7 @@ var is_active = false
 
 onready var ship_parent = get_node("ParentForAnimation")
 onready var animation_player = get_node("AnimationPlayer")
-
+onready var fly_in_audio_player = get_node("FlyInAudioPlayer")
 
 func _ready():
 	GameState.connect("state_changed", self, "_on_GameState_changed")
@@ -32,6 +32,7 @@ func set_is_active(value):
 		remaining_ship_count = total_ship_count
 		animation_player.play("enemy_fleet_appear_anim")
 		animation_player.queue("enemy_fleet_idle_anim")
+		fly_in_audio_player.play()
 
 
 func _on_EnemyShip_death():

@@ -3,6 +3,7 @@ extends Control
 enum RexMood {NEUTRAL, INJURED, HAPPY, ANGRY}
 
 export var INJURED_PORTRAIT_HEALTH_PERCENTAGE = 0.3
+export var INJURED_REACTION_DURATION = 1.0
 export (String, FILE, "*.json") var TRANSMISSIONS_FILE_PATH : String
 
 const REX_PORTRAITS = {
@@ -29,7 +30,8 @@ onready var character_name_label = get_node("Background/CharacterNameLabel")
 onready var portrait_rect = get_node("Background/PortraitRect")
 onready var text_label = get_node("Background/TextLabel")
 onready var glitch_overlay = get_node("../GlitchOverlay")
-onready var timer = get_node("Timer")
+onready var transmission_timer = get_node("TransmissionTimer")
+onready var hurt_reaction_timer = get_node("HurtReactionTimer")
 
 
 func _ready():
@@ -45,7 +47,8 @@ func _ready():
 	else:
 		push_warning("[lineHUD]: can't find player! Will not adjust rex"
 				+ " portrait based on health.")
-	timer.connect("timeout", self, "on_Timer_timeout")
+	transmission_timer.connect("timeout", self, "on_TransmissionTimer_timeout")
+	hurt_reaction_timer.connect("timeout", self, "on_HurtReactionTimer_timeout")
 	if Globals.trex != null:
 		Globals.trex.connect("death", self, "play_sequence", ["trex_defeated"])
 
@@ -53,7 +56,7 @@ func _ready():
 func on_GameState_changed(new_state, is_debug_skip):
 	if is_debug_skip or new_state == GameState.PREGAME:
 		set_rex_mood(RexMood.NEUTRAL)
-		timer.stop()
+		transmission_timer.stop()
 		reset()
 	match new_state:
 		GameState.EXPOSITION:
@@ -80,7 +83,7 @@ func play_sequence(key):
 	display_line(key, 0)
 	current_sequence_key = key
 	current_line_index = 0
-	timer.start(sequences[key][0]["duration"])
+	transmission_timer.start(sequences[key][0]["duration"])
 
 
 func display_line(key, index):
@@ -122,19 +125,27 @@ func set_rex_mood(value):
 
 
 func on_PlayerShip_health_changed(new_health, old_health, max_health):
+	hurt_reaction_timer.stop()
 	if old_health / max_health > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
 		if new_health / max_health < INJURED_PORTRAIT_HEALTH_PERCENTAGE:
 			set_rex_mood(RexMood.INJURED)
+		else:
+			set_rex_mood(RexMood.INJURED)
+			hurt_reaction_timer.start(INJURED_REACTION_DURATION)
 	else:
 		if new_health / max_health > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
 			set_rex_mood(RexMood.NEUTRAL)
 
 
-func on_Timer_timeout():
+func on_TransmissionTimer_timeout():
 	if current_line_index < sequences[current_sequence_key].size() - 1:
 		current_line_index += 1
 		display_line(current_sequence_key, current_line_index)
-		timer.start(sequences[current_sequence_key][current_line_index]["duration"])
+		transmission_timer.start(sequences[current_sequence_key][current_line_index]["duration"])
 	else:
 		reset()
 		GameState.handle_event(GameState.Event.TRANSMISSION_FINISHED)
+
+
+func on_HurtReactionTimer_timeout():
+	set_rex_mood(RexMood.NEUTRAL)

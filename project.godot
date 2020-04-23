@@ -125,6 +125,7 @@ config/icon="res://icon.png"
 GameState="*res://Scripts/GameState.gd"
 Announcer="*res://Scripts/Announcer.gd"
 Globals="*res://Scripts/Globals.gd"
+PoolManager="*res://Scripts/PoolManager.gd"
 
 [debug]
 

@@ -1,7 +1,9 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://Particles/grunge-circle-frame-6_white.png" type="Texture" id=1]
-[ext_resource path="res://Particles/Purple_Particle_01.png" type="Texture" id=2]
+[ext_resource path="res://Particles/Purple_Particle_01.png" type="Texture" id=1]
+[ext_resource path="res://Particles/grunge-circle-frame-6_white.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/OneShotFX.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Audio/fx/powerup3.wav" type="AudioStream" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -9,7 +11,7 @@ flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_blend_mode = 1
 params_billboard_mode = 2
-albedo_texture = ExtResource( 2 )
+albedo_texture = ExtResource( 1 )
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.126582, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.639241, 0 ), 0.0, 0.0, 0, 0 ]
@@ -38,7 +40,7 @@ flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_blend_mode = 1
 params_billboard_mode = 2
-albedo_texture = ExtResource( 2 )
+albedo_texture = ExtResource( 1 )
 
 [sub_resource type="ParticlesMaterial" id=7]
 trail_divisor = 11
@@ -121,7 +123,7 @@ flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
 albedo_color = Color( 0.74902, 0.0862745, 1, 1 )
-albedo_texture = ExtResource( 1 )
+albedo_texture = ExtResource( 2 )
 
 [sub_resource type="Gradient" id=16]
 offsets = PoolRealArray( 0, 0.508671, 1 )
@@ -155,7 +157,7 @@ hue_variation_random = 0.65
 length = 5.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Strudel:rotation_degrees")
+tracks/0/path = NodePath("BillboardParticles:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -164,10 +166,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( -90, 0, 0 ), Vector3( -90, 720, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Billboard Particles:rotation_degrees")
+tracks/1/path = NodePath("Strudel:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -176,14 +178,12 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+"values": [ Vector3( -90, 0, 0 ), Vector3( -90, 720, 0 ) ]
 }
 
-[node name="Particles Explosion" type="Spatial"]
+[node name="PinballAppearFX" instance=ExtResource( 3 )]
 
-[node name="Billboard Particles" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334359, 0, -0.558467 )
-visible = false
+[node name="BillboardParticles" type="Particles" parent="." index="1"]
 material_override = SubResource( 1 )
 emitting = false
 amount = 200
@@ -192,8 +192,8 @@ draw_order = 2
 process_material = SubResource( 4 )
 draw_pass_1 = SubResource( 5 )
 
-[node name="Billboard Particles2" type="Particles" parent="."]
-transform = Transform( -1.09133, 0, 0.286268, 0, 1, 0, -0.326059, 0, -0.95815, 0.334359, 0, -0.558467 )
+[node name="BillboardParticles2" type="Particles" parent="." index="2"]
+transform = Transform( -1.09133, 0, 0.286268, 0, 1, 0, -0.326059, 0, -0.95815, 0, 0, 0 )
 material_override = SubResource( 6 )
 emitting = false
 amount = 200
@@ -202,8 +202,8 @@ draw_order = 2
 process_material = SubResource( 7 )
 draw_pass_1 = SubResource( 5 )
 
-[node name="Data Shit" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.334359, 2.69201, -0.558467 )
+[node name="DataShit" type="Particles" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 visible = false
 material_override = SubResource( 8 )
 emitting = false
@@ -214,8 +214,8 @@ speed_scale = 1.5
 process_material = SubResource( 11 )
 draw_pass_1 = SubResource( 12 )
 
-[node name="Data Shit2" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.334359, 1.62441, -0.558467 )
+[node name="DataShit2" type="Particles" parent="." index="4"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 visible = false
 material_override = SubResource( 8 )
 emitting = false
@@ -226,8 +226,8 @@ speed_scale = 1.5
 process_material = SubResource( 13 )
 draw_pass_1 = SubResource( 12 )
 
-[node name="Data Shit3" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.334359, 0.0705066, -0.558467 )
+[node name="DataShit3" type="Particles" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 material_override = SubResource( 8 )
 emitting = false
 amount = 500
@@ -237,8 +237,8 @@ speed_scale = 1.5
 process_material = SubResource( 14 )
 draw_pass_1 = SubResource( 12 )
 
-[node name="Strudel" type="Particles" parent="."]
-transform = Transform( 0.272632, 0, 0, 0, -1.19171e-08, 0.272632, 0, -0.272632, -1.19171e-08, 0.334359, 0, -0.558467 )
+[node name="Strudel" type="Particles" parent="." index="6"]
+transform = Transform( 0.272632, 0, 0, 0, -1.19171e-08, 0.272632, 0, -0.272632, -1.19171e-08, 0, 0, 0 )
 material_override = SubResource( 15 )
 emitting = false
 amount = 3
@@ -248,6 +248,10 @@ draw_order = 2
 process_material = SubResource( 20 )
 draw_pass_1 = SubResource( 21 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 autoplay = "Rotation"
 anims/Rotation = SubResource( 22 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource( 4 )
+autoplay = true

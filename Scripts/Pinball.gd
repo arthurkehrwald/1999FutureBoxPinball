@@ -7,6 +7,8 @@ extends "res://Scripts/Roller.gd"
 
 signal accessibility_changed(value)
 
+const TRAIL_SCENE = preload("res://Scenes/PinballTrailFX.tscn")
+
 export var IS_ALWAYS_REMOTE_CONTROLLED = false
 export var REMOTE_CONTROL_STRENGTH = 4.0
 export var IS_REMOTE_CONTROL_FROM_PLAYER_POV = true
@@ -14,14 +16,12 @@ export var IS_REMOTE_CONTROL_FROM_PLAYER_POV = true
 var is_accessible_to_player = true setget set_is_accessible_to_player
 var is_remote_controlled = false setget set_is_remote_controlled
 var is_remote_control_blocked = false
-
+var is_laser_death_fx_playing = false
 
 onready var remote_control_timer = get_node("RemoteControlTimer")
 onready var remote_control_time_bar = get_node("RotationStabiliser/RemoteControlTimeBar3D/Viewport/Bar")
 onready var arrow_sprite = get_node("RotationStabiliser/ArrowSprite")
-const EXPLOSION_SCENE = preload("res://Scenes/Particles_Pinball_Death_01.tscn")
-
-
+onready var appear_particles_timer = get_node("AppearParticlesTimer")
 
 
 func _ready():
@@ -29,11 +29,13 @@ func _ready():
 	remote_control_timer.connect("timeout", self, "on_RemoteControlTimer_timeout")
 	arrow_sprite.set_visible(false)
 	set_is_remote_controlled(IS_ALWAYS_REMOTE_CONTROLLED)
-	connect("tree_exiting", self, "on_delete")
+	connect("tree_exiting", self, "set_is_accessible_to_player", [false])
+	appear_particles_timer.connect("timeout", self, "on_AppearParticlesTimer_timeout")
 
 
 func _process(_delta):
-	remote_control_time_bar.value = remote_control_timer.time_left
+	if is_remote_controlled:
+		remote_control_time_bar.value = remote_control_timer.time_left
 
 
 func _physics_process(delta):
@@ -51,23 +53,6 @@ func _physics_process(delta):
 
 func on_visibility_changed(value):
 	arrow_sprite.set_visible(!value)
-	
-
-
-func on_delete():
-	set_is_accessible_to_player(false)
-	var explosion_instance = EXPLOSION_SCENE.instance()
-	explosion_instance.set_global_transform(get_global_transform())
-	get_node("/root").add_child(explosion_instance)
-	explosion_instance.get_node("Ring").emitting = true
-	explosion_instance.get_node("Ball Explosion").emitting = true
-	
-	
-	
-	
-	
-	
-	
 
 
 func set_is_accessible_to_player(value):
@@ -83,14 +68,20 @@ func set_is_remote_controlled(value, duration = 0):
 		remote_control_timer.start(duration)
 		remote_control_time_bar.max_value = duration
 	remote_control_time_bar.set_visible(value)
-	set_process(value)
 
 
 func on_RemoteControlTimer_timeout():
 	set_is_remote_controlled(false)
 
 
-func on_entered_laser_area():
-	set_is_accessible_to_player(false)
+func on_hit_player():
+	PoolManager.request(PoolManager.PROJECTILE_DISAPPEAR, get_global_transform().origin)
 	queue_free()
-	
+
+
+func on_hit_moon():
+	pass
+
+
+func on_AppearParticlesTimer_timeout():
+	PoolManager.request(PoolManager.PINBALL_APPEAR, get_global_transform().origin)

@@ -66,6 +66,8 @@ func on_body_entered(var body):
 	start_spinning(body_pos, body_vel)
 	if is_flying and body_pos.z > get_global_transform().origin.z:
 		body.apply_central_impulse(Vector3.FORWARD * IMPULSE_STRENGTH)
+		if body.is_in_group("pinballs"):
+			body.on_hit_moon()
 
 
 func start_spinning(var projectile_pos, var projectile_vel):
@@ -85,6 +87,7 @@ func spin(var delta):
 func start_flying():
 	is_flying = true
 	fly_anim_player.play("moon_fly", -1, 1 / FLIGHT_DURATION)
+	PoolManager.request(PoolManager.MOON_TRIGGERED, get_global_transform().origin)
 
 
 func _scale_up():

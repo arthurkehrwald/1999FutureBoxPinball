@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/TeleporterEntrance.gd" type="Script" id=1]
 [ext_resource path="res://Audio/fx/teleporter.wav" type="AudioStream" id=2]
 [ext_resource path="res://Meshes/Wireframe/teleporter.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=4]
+[ext_resource path="res://Scenes/StarGateFX.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.612181, 0.7, 0.378689 )
@@ -33,3 +34,6 @@ bus = "Effects"
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 0.938234, -0.346002, 0, 0.346002, 0.938234, 0, -0.168631, 0.449709 )
 shape = SubResource( 2 )
+
+[node name="StarGateFX" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93348, 0 )
