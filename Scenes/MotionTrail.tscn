@@ -6,3 +6,5 @@
 [node name="MotionTrail" type="ImmediateGeometry"]
 material_override = ExtResource( 1 )
 script = ExtResource( 2 )
+startColor = Color( 0, 0.952941, 1, 1 )
+endColor = Color( 0, 0, 0, 0 )

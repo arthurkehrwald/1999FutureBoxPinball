@@ -23,3 +23,6 @@ transform = Transform( 0.998853, 0, 0.0478736, 0, 1, 0, -0.0478736, 0, 0.998853,
 
 [node name="CollisionShape" parent="ImpulseArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="AudioStreamPlayer" parent="." index="6"]
+volume_db = -12.0
