@@ -15,4 +15,5 @@ dest_files=[ "res://.import/Sebasbossshield.obj-e44c13ddc04472a0d6bcadd2314c424c
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true
