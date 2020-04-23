@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Moving_Ground_01.obj-7e978a9c025193fc08f4d67ef7ca66e6.mesh"
+
+[deps]
+
+files=[ "res://.import/Moving_Ground_01.obj-7e978a9c025193fc08f4d67ef7ca66e6.mesh" ]
+
+source_file="res://Particles/Moving_Ground_01.obj"
+dest_files=[ "res://.import/Moving_Ground_01.obj-7e978a9c025193fc08f4d67ef7ca66e6.mesh", "res://.import/Moving_Ground_01.obj-7e978a9c025193fc08f4d67ef7ca66e6.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
