@@ -198,6 +198,8 @@ forward_impulse_strength = 50
 
 [node name="Boss" parent="BoxV3/Playfield" instance=ExtResource( 31 )]
 transform = Transform( -0.693655, -2.61461e-08, 0.0940331, -2.79397e-08, 0.700001, 1.49012e-08, -0.0940331, -1.49012e-08, -0.693656, 0.121877, 0.134301, -5.53232 )
+DIRECT_HIT_SPEED_RELEVANCE = 1.0
+MISSILE_EXPLOSION_BASE_DAMAGE = 5.0
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
@@ -218,6 +220,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0196679, -0.116388, 2.18705 
 
 [node name="LaserTrex" parent="BoxV3/Playfield" instance=ExtResource( 21 )]
 transform = Transform( -0.694205, -1.87987e-07, 0.397592, -1.22935e-07, 0.8, 1.41561e-07, -0.397591, 7.45058e-08, -0.694206, 2.09945, -0.0441036, 0.528914 )
+MAX_HEALTH = 30.0
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
