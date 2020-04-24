@@ -47,7 +47,7 @@ mesh = ExtResource( 4 )
 material/0 = ExtResource( 5 )
 
 [node name="BossShield" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.37602 )
+transform = Transform( 1, -1.98605e-08, 1.31182e-09, 1.98605e-08, 0.991312, -0.13153, 1.31182e-09, 0.13153, 0.991312, 7.49787e-09, 0.566653, -2.42568 )
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
