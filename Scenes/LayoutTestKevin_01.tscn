@@ -1,0 +1,377 @@
+[gd_scene load_steps=50 format=2]
+
+[ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=1]
+[ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/NoRemoteControlArea.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Reference/angles_combined.jpg" type="Texture" id=6]
+[ext_resource path="res://HUD/Game_Over_Plain_01.ogv" type="VideoStream" id=7]
+[ext_resource path="res://Scripts/StageTwoEntryRamp.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/VideoPlayer.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/RibbonHUD.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/BoxV3.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/BumperCage.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/WeirdCamera.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Storm.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Slingshot_R.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/TransmissionHUD.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/TemporaryFlipper.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/ObjectiveHUD.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/BlackHole.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/PlayerTurret.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Slingshot.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/PostGameHUD.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Scenes/StageOneEntryRamp.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Scenes/StageTwoEntryRamp.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Scenes/TeleporterEntrance.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Scenes/ShopMenu.tscn" type="PackedScene" id=36]
+[ext_resource path="res://Scenes/PlayerStatsHUD.tscn" type="PackedScene" id=37]
+[ext_resource path="res://Scenes/ShopEntrance.tscn" type="PackedScene" id=38]
+[ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=39]
+[ext_resource path="res://Testing/LongBox.tscn" type="PackedScene" id=40]
+[ext_resource path="res://Scenes/TeleporterExit.tscn" type="PackedScene" id=41]
+[ext_resource path="res://Scenes/TriangularWall.tscn" type="PackedScene" id=42]
+[ext_resource path="res://Scenes/CurvedRamp_R.tscn" type="PackedScene" id=43]
+[ext_resource path="res://Scenes/CurvedRamp.tscn" type="PackedScene" id=44]
+[ext_resource path="res://Scenes/GlitchShaderFullscreen.tscn" type="PackedScene" id=45]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("BoxV3/Playfield/TransmissionHUD3D/Viewport")
+
+[sub_resource type="ViewportTexture" id=3]
+viewport_path = NodePath("BoxV3/Playfield/PlayerStatsHUD3D/Viewport")
+
+[sub_resource type="PrismMesh" id=4]
+
+[node name="Main2" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014652, 0.00814342, -0.0152197 )
+
+[node name="RibbonHUD" parent="." instance=ExtResource( 10 )]
+pause_mode = 2
+
+[node name="MusicPlayer" parent="." instance=ExtResource( 32 )]
+
+[node name="BoxV3" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 0.987689, -0.156435, 0, 0.156435, 0.987689, -0.460406, -0.812996, 0.00820866 )
+
+[node name="WeirdCamera" parent="BoxV3" instance=ExtResource( 15 )]
+pause_mode = 2
+transform = Transform( 1, 0, 0, 0, -3.27826e-07, 1, 0, -1, -3.27826e-07, 0.0123291, 10.8958, 2.55503 )
+environment = null
+
+[node name="Playfield" type="Spatial" parent="BoxV3"]
+transform = Transform( 1, 0, 0, 0, 0.998629, 0.0523353, 0, -0.0523353, 0.998629, 2.02656e-06, -1.92887, 0.305485 )
+
+[node name="CentralHUD3D" type="Sprite3D" parent="BoxV3/Playfield"]
+pause_mode = 2
+transform = Transform( 0.606, 0, 0, 0, 0.00381853, 0.654987, 0, -0.606988, 0.00412049, -0.457334, -0.0169265, 4.39275 )
+material_override = ExtResource( 1 )
+texture = SubResource( 1 )
+region_enabled = true
+region_rect = Rect2( 34.6944, 0, 613.113, 418.448 )
+script = ExtResource( 2 )
+
+[node name="Viewport" type="Viewport" parent="BoxV3/Playfield/CentralHUD3D"]
+size = Vector2( 700, 450 )
+transparent_bg = true
+disable_3d = true
+render_target_v_flip = true
+
+[node name="ShopMenu" parent="BoxV3/Playfield/CentralHUD3D/Viewport" instance=ExtResource( 36 )]
+visible = false
+margin_left = 54.0
+margin_top = 11.0
+margin_right = -448.0
+margin_bottom = -439.0
+focus_mode = 2
+
+[node name="ObjectiveHUD" parent="BoxV3/Playfield/CentralHUD3D/Viewport" instance=ExtResource( 20 )]
+margin_left = 54.0
+margin_top = 11.0
+margin_right = -448.0
+margin_bottom = -439.0
+
+[node name="PostGameHud" parent="BoxV3/Playfield/CentralHUD3D/Viewport" instance=ExtResource( 27 )]
+visible = false
+margin_left = 43.4249
+margin_top = 10.0211
+margin_right = -458.575
+margin_bottom = -439.979
+
+[node name="GlitchOverlay" parent="BoxV3/Playfield/CentralHUD3D/Viewport" instance=ExtResource( 5 )]
+
+[node name="TransmissionHUD3D" type="Sprite3D" parent="BoxV3/Playfield"]
+pause_mode = 2
+transform = Transform( 0.806335, 0, 0, 0, 0.00507621, 0.85463, 0, -0.806869, -0.00507606, -4.5, 0.800001, 7.5 )
+material_override = ExtResource( 1 )
+centered = false
+offset = Vector2( 0, -40 )
+texture = SubResource( 2 )
+region_enabled = true
+region_rect = Rect2( 34.6944, 0, 432.06, 380.926 )
+script = ExtResource( 2 )
+
+[node name="Viewport" type="Viewport" parent="BoxV3/Playfield/TransmissionHUD3D"]
+size = Vector2( 700, 450 )
+transparent_bg = true
+handle_input_locally = false
+disable_3d = true
+render_target_v_flip = true
+
+[node name="TransmissionHUD" parent="BoxV3/Playfield/TransmissionHUD3D/Viewport" instance=ExtResource( 18 )]
+margin_left = 40.0
+margin_right = 40.0
+
+[node name="GlitchOverlay" parent="BoxV3/Playfield/TransmissionHUD3D/Viewport" instance=ExtResource( 5 )]
+
+[node name="PlayerStatsHUD3D" type="Sprite3D" parent="BoxV3/Playfield"]
+pause_mode = 2
+transform = Transform( 0.806335, 0, 0, 0, 0.00507621, 0.85463, 0, -0.80687, -0.00507606, 3.84095, 0.8, 7.5 )
+material_override = ExtResource( 1 )
+centered = false
+offset = Vector2( -436.79, -40 )
+texture = SubResource( 3 )
+region_enabled = true
+region_rect = Rect2( 45.9354, 0, 425.065, 380.745 )
+script = ExtResource( 2 )
+
+[node name="Viewport" type="Viewport" parent="BoxV3/Playfield/PlayerStatsHUD3D"]
+size = Vector2( 700, 450 )
+transparent_bg = true
+handle_input_locally = false
+disable_3d = true
+render_target_v_flip = true
+
+[node name="PlayerStatsHUD" parent="BoxV3/Playfield/PlayerStatsHUD3D/Viewport" instance=ExtResource( 37 )]
+margin_left = 50.0
+margin_right = 50.0
+
+[node name="GlitchOverlay" parent="BoxV3/Playfield/PlayerStatsHUD3D/Viewport" instance=ExtResource( 5 )]
+
+[node name="PlayerShip" parent="BoxV3/Playfield" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.481217, 1.66893e-06, 7.78645 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": true,
+"3-EnemyFleet": true,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+
+[node name="Flipper" parent="BoxV3/Playfield" instance=ExtResource( 3 )]
+transform = Transform( 0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, -1.74427, 6.86646e-05, 6.52426 )
+forward_impulse_strength = 500
+sideways_impulse_strength = 0
+
+[node name="Flipper_R" parent="BoxV3/Playfield" instance=ExtResource( 39 )]
+transform = Transform( 0.906308, 0, 0.422618, 0, 1, 7.45058e-09, -0.422618, 0, 0.906308, 0.920547, -0.000405312, 6.49064 )
+forward_impulse_strength = 500
+sideways_impulse_strength = 0
+
+[node name="Plunger" parent="BoxV3/Playfield" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.092, 2.38419e-07, 6.218 )
+release_speed = 40.0
+
+[node name="TemporaryFlipper" parent="BoxV3/Playfield" instance=ExtResource( 19 )]
+transform = Transform( -0.909882, 5.15797e-08, -0.414869, 9.31323e-08, 1, -5.21541e-08, 0.414868, -7.45058e-08, -0.909885, 1.6654, -0.000344992, 0.087208 )
+forward_impulse_strength = 50
+
+[node name="Boss" parent="BoxV3/Playfield" instance=ExtResource( 31 )]
+transform = Transform( -0.699817, 0.00846837, 0.0135609, 0.00845728, 0.69995, -0.000653006, -0.013568, -0.000489034, -0.699869, -0.167618, 0.214215, -4.772 )
+DIRECT_HIT_SPEED_RELEVANCE = 1.0
+MISSILE_EXPLOSION_BASE_DAMAGE = 5.0
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+MISSILES_HEALTH_PERCENT = 10.0
+
+[node name="EnemyFleet" parent="BoxV3/Playfield" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0196679, -0.116388, 2.18705 )
+
+[node name="LaserTrex" parent="BoxV3/Playfield" instance=ExtResource( 21 )]
+transform = Transform( -0.694205, -1.87987e-07, 0.397592, -1.22935e-07, 0.8, 1.41561e-07, -0.397591, 7.45058e-08, -0.694206, 2.09945, -0.0441036, 0.528914 )
+MAX_HEALTH = 30.0
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": false,
+"5-Missiles": false,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+
+[node name="PlatformRex" type="MeshInstance" parent="BoxV3/Playfield/LaserTrex"]
+transform = Transform( -0.93625, 0.14826, 6.98492e-09, -3.72529e-08, 5.96046e-08, -0.125, -0.181869, -0.763233, -8.3819e-09, -0.0297542, 0.667569, -0.683381 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="LongBox8" parent="BoxV3/Playfield/LaserTrex/PlatformRex" instance=ExtResource( 40 )]
+transform = Transform( 1.11608, -2.08616e-07, 0.087946, -0.84283, 2.38419e-07, 0.175243, -2.20537e-06, -10.52, 2.23517e-08, -0.484102, -0.176583, 5.16012 )
+
+[node name="LongBox7" parent="BoxV3/Playfield/LaserTrex/PlatformRex" instance=ExtResource( 40 )]
+transform = Transform( -0.0931101, -1.56462e-07, -0.166028, 1.60366, 2.38419e-07, -0.0145056, 1.72853e-06, -10.52, 8.9407e-08, 0.0951872, -1.07238, 5.16012 )
+
+[node name="PlatformRex2" type="MeshInstance" parent="BoxV3/Playfield/LaserTrex/PlatformRex"]
+transform = Transform( 0.515957, -0.636313, 1.86265e-08, 0.907135, 0.544605, -2.23517e-08, 0, 7.37607e-07, 1, -0.305449, -1.54815, 8.7738e-05 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="LongBox11" parent="BoxV3/Playfield/LaserTrex/PlatformRex/PlatformRex2" instance=ExtResource( 40 )]
+transform = Transform( -1.23823, -2.83122e-07, -0.0898211, 0.884634, -2.6729e-07, -0.169804, -4.17233e-07, -8.53, 1.9744e-07, -0.643404, -0.00603867, 3.92395 )
+
+[node name="LongBox12" parent="BoxV3/Playfield/LaserTrex/PlatformRex/PlatformRex2" instance=ExtResource( 40 )]
+transform = Transform( 0.124532, -1.19209e-07, -0.204188, 1.68298, -3.44589e-07, 0.0204065, -1.89787e-06, -8.53, -1.19209e-07, 0.183808, -1.07297, 3.94551 )
+
+[node name="BlackHole" parent="BoxV3/Playfield" instance=ExtResource( 22 )]
+transform = Transform( 0.976796, 0, -0.214173, 4.84288e-08, 1, 3.72529e-08, 0.214173, 0, 0.976796, 2.66577, 0.651943, 2.23083 )
+
+[node name="BlackHole2" parent="BoxV3/Playfield" instance=ExtResource( 22 )]
+transform = Transform( 0.976796, 0, -0.214173, 5.58794e-08, 1, 3.72529e-08, 0.214173, 0, 0.976796, -8.63578, 0.651943, -6.40349 )
+visible = false
+
+[node name="PlayerTurret" parent="BoxV3/Playfield" instance=ExtResource( 24 )]
+transform = Transform( 0.840075, 4.42692e-08, 0.542473, -7.45058e-09, 1, -6.70552e-08, -0.542471, 5.21541e-08, 0.840077, 1.34466, 0.649681, 6.13639 )
+
+[node name="Moon" parent="BoxV3/Playfield" instance=ExtResource( 25 )]
+transform = Transform( 0.910986, -0.412437, 1.038e-08, 0.412437, 0.910986, 7.45058e-09, -1.49012e-08, -7.45058e-09, 1, -3.0991, 0.303952, 1.01084 )
+
+[node name="MultiballShip" parent="BoxV3/Playfield" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25363, 0.0278032, -5.79861 )
+
+[node name="Storm" parent="BoxV3/Playfield" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, -2.23517e-08, 0, 2.23517e-08, 1, 0.0100067, -0.00994301, -4.53467 )
+
+[node name="ShopEntrance" parent="BoxV3/Playfield" instance=ExtResource( 38 )]
+transform = Transform( -0.592056, 0, -0.805897, -4.47035e-08, 1, -2.6077e-08, 0.805898, 0, -0.592057, -2.63442, -0.000167131, 5.31615 )
+collision_layer = 1
+collision_mask = 0
+
+[node name="Slingshot" parent="BoxV3/Playfield" instance=ExtResource( 26 )]
+transform = Transform( 0.598534, 0, 0.0419166, 1.39698e-09, 0.6, -2.23517e-08, -0.0419166, 3.72529e-09, 0.598534, -2.81191, -7.62939e-05, 4.89009 )
+
+[node name="Slingshot_R" parent="BoxV3/Playfield" instance=ExtResource( 17 )]
+transform = Transform( 0.598543, -1.66533e-17, -0.0417912, -4.65661e-10, 0.6, -1.86265e-08, 0.0417912, 0, 0.598543, 1.8762, 3.76701e-05, 4.99228 )
+
+[node name="Ball Feed" parent="BoxV3/Playfield" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.35173, -2.71797e-05, 5.5123 )
+
+[node name="BumperCage" parent="BoxV3/Playfield" instance=ExtResource( 14 )]
+transform = Transform( -0.244966, -0.0343005, 0.968925, -0.0139914, 0.999395, 0.0318418, -0.969432, -0.00575648, -0.245297, -2.23781, -0.0216446, -0.527245 )
+
+[node name="BumperCage3" parent="BoxV3/Playfield" instance=ExtResource( 14 )]
+transform = Transform( -0.583826, -1.07393e-07, 0.811879, -1.63913e-07, 1, -3.35276e-08, -0.811881, -2.01166e-07, -0.583825, 2.63988, -0.010509, -6.68365 )
+
+[node name="NoRemoteControlArea" parent="BoxV3/Playfield" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.235402, 8.44002e-05, 5.85387 )
+
+[node name="StageOneEntryRamp" parent="BoxV3/Playfield" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.86386, -0.000625849, 0.381658 )
+
+[node name="StageTwoEntryRamp" parent="BoxV3/Playfield" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00629, 0.00259686, -5.73398 )
+script = ExtResource( 8 )
+
+[node name="LoopingLouiesLooping" parent="BoxV3/Playfield" instance=ExtResource( 34 )]
+transform = Transform( 0.860875, -6.81168e-10, -0.508815, -0.026629, 0.998628, -0.045054, 0.508118, 0.0523351, 0.859695, -2.45295, 0.964935, -2.21368 )
+
+[node name="TeleporterEntrance" parent="BoxV3/Playfield" instance=ExtResource( 35 )]
+transform = Transform( 0.808905, -0.00531529, -0.39452, 0.00484292, 0.899984, -0.00219557, 0.394526, -0.000149503, 0.808919, 2.00157, -0.046324, -2.1876 )
+collision_mask = 1
+
+[node name="TeleporterExit" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
+transform = Transform( -0.193625, 0, -0.250464, 8.84756e-09, 0.2, 1.49012e-08, 0.0500929, 1.86265e-08, -0.968126, -2.34817, 0.595577, -0.413715 )
+
+[node name="TeleporterExit2" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
+transform = Transform( -0.193625, 0, 0.250464, -1.25729e-08, 0.2, 1.49012e-08, -0.0500929, 1.86265e-08, -0.968126, 2.64236, 0.420336, -6.5765 )
+
+[node name="StaticGeometry" type="Spatial" parent="BoxV3/Playfield"]
+
+[node name="LongBox2" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 40 )]
+transform = Transform( 0.520905, 0, -0.176824, -7.45058e-08, 1, -8.3819e-09, 0.853616, 0, 0.107904, 2.11681, 0.000596523, 5.65028 )
+
+[node name="LongBox9" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 40 )]
+transform = Transform( 1, 0, 0, 0, 1, -3.72529e-09, 0, 0, 0.207148, 1.38223, -0.019423, 7.3896 )
+
+[node name="LongBox10" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 40 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.207148, -2.18785, -0.179812, 7.3896 )
+
+[node name="LongBox4" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 40 )]
+transform = Transform( 0.884939, -0.0198197, -0.0963822, 0.0184204, 0.999802, -0.00156481, 0.465342, -0.00188576, 0.183352, 3.19489, 0.014817, 4.28561 )
+
+[node name="LongBox5" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 40 )]
+transform = Transform( 0.957001, 0, 0.06009, -1.86265e-09, 1, 0, -0.290084, 0, 0.19824, -4.127, 7.15256e-07, 3.838 )
+
+[node name="LongBox3" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 40 )]
+transform = Transform( 0.543511, 0, 0.173879, 2.23517e-08, 0.66107, -3.72529e-09, -0.839403, 4.47035e-08, 0.112587, -2.90495, -0.000393867, 5.62396 )
+
+[node name="LongBox" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 40 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.882665, 3.72846, 0.00148296, -0.301636 )
+
+[node name="triangular_wall" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14589, 1.19209e-06, 1.11051 )
+
+[node name="LongBox6" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 40 )]
+transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 0.176186, 3.73275, -9.53674e-07, 7.03805 )
+
+[node name="CurvedRamp" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 44 )]
+transform = Transform( 0.587247, 0.0366322, 0.11747, -0.0382217, 0.598767, 0.00435476, -0.116962, -0.0117453, 0.588374, -1.34403, 0.114044, -2.44466 )
+
+[node name="CurvedRamp_R" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 43 )]
+transform = Transform( 0.558283, -0.03805, -0.2165, 0.0387555, 0.598724, -0.00528792, 0.216374, -0.009064, 0.559555, 0.920229, -0.0311885, -2.54706 )
+
+[node name="Reference" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, -0.676062, -2.62545, 0.214347 )
+visible = false
+texture = ExtResource( 6 )
+
+[node name="NormalCamera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, -0.265423, 10.0877, 4.75283 )
+
+[node name="GlitchShaderFullscreen" parent="." instance=ExtResource( 45 )]
+visible = false
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+stream = ExtResource( 7 )
+bus = "Effects"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
