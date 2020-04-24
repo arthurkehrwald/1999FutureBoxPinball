@@ -184,6 +184,8 @@ tracks/1/keys = {
 [node name="MultiballLockFX" instance=ExtResource( 3 )]
 
 [node name="BillboardParticles" type="Particles" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.170387, 0, 0 )
+visible = false
 material_override = SubResource( 1 )
 emitting = false
 amount = 200
@@ -193,7 +195,7 @@ process_material = SubResource( 4 )
 draw_pass_1 = SubResource( 5 )
 
 [node name="BillboardParticles2" type="Particles" parent="." index="2"]
-transform = Transform( -1.09133, 0, 0.286268, 0, 1, 0, -0.326059, 0, -0.95815, 0, 0, 0 )
+transform = Transform( -1.09133, 0, 0.286268, 0, 1, 0, -0.326059, 0, -0.95815, -0.170387, 0, 0 )
 material_override = SubResource( 6 )
 emitting = false
 amount = 200
@@ -203,7 +205,7 @@ process_material = SubResource( 7 )
 draw_pass_1 = SubResource( 5 )
 
 [node name="DataShit" type="Particles" parent="." index="3"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.170387, 0, 0 )
 visible = false
 material_override = SubResource( 8 )
 emitting = false
@@ -215,7 +217,7 @@ process_material = SubResource( 11 )
 draw_pass_1 = SubResource( 12 )
 
 [node name="DataShit2" type="Particles" parent="." index="4"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.170387, 0, 0 )
 visible = false
 material_override = SubResource( 8 )
 emitting = false
@@ -227,7 +229,7 @@ process_material = SubResource( 13 )
 draw_pass_1 = SubResource( 12 )
 
 [node name="DataShit3" type="Particles" parent="." index="5"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.170387, 0, 0 )
 material_override = SubResource( 8 )
 emitting = false
 amount = 500
@@ -238,7 +240,7 @@ process_material = SubResource( 14 )
 draw_pass_1 = SubResource( 12 )
 
 [node name="Strudel" type="Particles" parent="." index="6"]
-transform = Transform( 0.272632, 0, 0, 0, -1.19171e-08, 0.272632, 0, -0.272632, -1.19171e-08, 0, 0, 0 )
+transform = Transform( 0.272632, 0, 0, 0, -1.19171e-08, 0.272632, 0, -0.272632, -1.19171e-08, -0.170387, 0, 0 )
 material_override = SubResource( 15 )
 emitting = false
 amount = 3

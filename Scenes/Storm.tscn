@@ -13,20 +13,20 @@ albedo_color = Color( 0.282353, 0.282353, 0.282353, 0.560784 )
 
 [sub_resource type="CubeMesh" id=3]
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.184971, 0.49711, 0.815029, 0.971098 )
 colors = PoolColorArray( 0, 0, 0, 0, 0.976471, 0, 0.835294, 1, 0.976471, 0, 0.835294, 1, 0.976471, 0, 0.835294, 0.709804, 0, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
-[sub_resource type="Curve" id=7]
+[sub_resource type="Curve" id=6]
 _data = [ Vector2( 0.0510204, 0.278409 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=8]
-curve = SubResource( 7 )
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 2
 emission_box_extents = Vector3( 4, 0, 0 )
 flag_rotate_y = true
@@ -36,10 +36,10 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1.0
 scale = 0.5
 scale_random = 1.0
-scale_curve = SubResource( 8 )
-color_ramp = SubResource( 6 )
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=9]
 emission_shape = 2
 emission_box_extents = Vector3( 4, 0, 0 )
 flag_rotate_y = true
@@ -49,10 +49,10 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1.0
 scale = 0.5
 scale_random = 1.0
-scale_curve = SubResource( 8 )
-color_ramp = SubResource( 6 )
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=10]
 emission_shape = 2
 emission_box_extents = Vector3( 0, 0, 4 )
 flag_rotate_y = true
@@ -61,27 +61,27 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1.0
 scale = 0.5
 scale_random = 1.0
-scale_curve = SubResource( 8 )
-color_ramp = SubResource( 6 )
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
 
-[sub_resource type="SpatialMaterial" id=12]
+[sub_resource type="SpatialMaterial" id=11]
 flags_transparent = true
 vertex_color_use_as_albedo = true
 
-[sub_resource type="Gradient" id=13]
+[sub_resource type="Gradient" id=12]
 offsets = PoolRealArray( 0, 0.16185, 0.531792, 0.901734, 1 )
 colors = PoolColorArray( 0, 0, 0, 0, 0.0235294, 0.67451, 0.803922, 1, 0.0235294, 0.67451, 0.803922, 1, 0.0235294, 0.67451, 0.803922, 1, 0, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=14]
-gradient = SubResource( 13 )
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
 
-[sub_resource type="ParticlesMaterial" id=15]
+[sub_resource type="ParticlesMaterial" id=14]
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1.0
-color_ramp = SubResource( 14 )
+color_ramp = SubResource( 13 )
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=15]
 resource_name = "Street"
 length = 3.0
 loop = true
@@ -118,6 +118,17 @@ material/0 = null
 
 [node name="Particles" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.84934, -3.3965 )
+visible = false
+amount = 5
+lifetime = 3.0
+speed_scale = 1.3
+randomness = 0.02
+process_material = SubResource( 8 )
+draw_pass_1 = ExtResource( 3 )
+
+[node name="Particles2" type="Particles" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.84934, -3.3965 )
+visible = false
 amount = 5
 lifetime = 3.0
 speed_scale = 1.3
@@ -125,8 +136,9 @@ randomness = 0.02
 process_material = SubResource( 9 )
 draw_pass_1 = ExtResource( 3 )
 
-[node name="Particles2" type="Particles" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.84934, -3.3965 )
+[node name="Particles3" type="Particles" parent="."]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 3.84934, -3.3965 )
+visible = false
 amount = 5
 lifetime = 3.0
 speed_scale = 1.3
@@ -134,27 +146,20 @@ randomness = 0.02
 process_material = SubResource( 10 )
 draw_pass_1 = ExtResource( 3 )
 
-[node name="Particles3" type="Particles" parent="."]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 3.84934, -3.3965 )
-amount = 5
-lifetime = 3.0
-speed_scale = 1.3
-randomness = 0.02
-process_material = SubResource( 11 )
-draw_pass_1 = ExtResource( 3 )
-
 [node name="Particles4" type="Particles" parent="."]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.117, 3.7597, 0 )
-material_override = SubResource( 12 )
+visible = false
+material_override = SubResource( 11 )
 amount = 2
-process_material = SubResource( 15 )
+process_material = SubResource( 14 )
 draw_pass_1 = ExtResource( 2 )
 
 [node name="Moving_Ground_01" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0245052, 3.692, 2.6008 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0829117, 3.69202, 0 )
+visible = false
 mesh = ExtResource( 2 )
 material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Street"
-anims/Street = SubResource( 16 )
+anims/Street = SubResource( 15 )
