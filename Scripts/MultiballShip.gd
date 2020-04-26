@@ -14,6 +14,7 @@ onready var muzzle_a = get_node("ShipMesh/MuzzleA")
 onready var muzzle_b = get_node("ShipMesh/MuzzleB")
 onready var muzzle_c = get_node("ShipMesh/MuzzleC")
 
+
 func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
 	entrance_area.connect("body_entered", self, "on_EntranceArea_body_entered")

@@ -21,7 +21,7 @@ onready var entrance_area = get_node("EntranceArea")
 onready var exit_area = get_node("ExitArea")
 onready var ball_replica = get_node("PathFollow/BallReplica")
 onready var bomb_replica = get_node("PathFollow/BombReplica")
-onready var debug_label = get_node("DebugLabel")
+#onready var debug_label = get_node("DebugLabel")
 
 func _ready():
 	entrance_area.connect("body_entered", self, "on_EntranceArea_body_entered")
@@ -105,7 +105,7 @@ func _physics_process(delta):
 	else:
 		#that means the bomb exploded while it was on the rail
 		reset(true)
-	debug_label.display_debug_info(rad2deg(incline), speed, acceleration)
+	#debug_label.display_debug_info(rad2deg(incline), speed, acceleration)
 
 
 func start_follow():

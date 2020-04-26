@@ -24,3 +24,7 @@ var trex = null
 # transmission hud - play
 
 var teleporter_exits = []
+# stargate - teleport ball there
+
+var head_track_cam_dummy = null
+# weird camera - interpret head tracking input

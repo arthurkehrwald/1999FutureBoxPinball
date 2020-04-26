@@ -30,6 +30,7 @@ func set_is_active(value, duration = 0):
 	if value and duration == 0:
 		return
 	set_process(value)
+	set_physics_process(value)
 	set_visible(value)
 	if value:
 		active_time_bar.max_value = duration
@@ -41,6 +42,7 @@ func set_is_active(value, duration = 0):
 	collision_shape_3.set_deferred("disabled", !value)
 	collision_shape_4.set_deferred("disabled", !value)
 	no_remote_control_area.set_deferred("monitoring", value)
+	impulse_area.set_deferred("monitoring", value)
 
 
 func on_ShopMenu_bought_flipper(duration):

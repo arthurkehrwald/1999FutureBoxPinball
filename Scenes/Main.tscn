@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Scenes/TriangularWall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=2]
@@ -47,14 +47,10 @@
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=45]
 [ext_resource path="res://Testing/LongBox.tscn" type="PackedScene" id=46]
 
-[sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")
+[sub_resource type="CubeMesh" id=1]
 
-[sub_resource type="ViewportTexture" id=2]
-viewport_path = NodePath("BoxV3/Playfield/TransmissionHUD3D/Viewport")
-
-[sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("BoxV3/Playfield/PlayerStatsHUD3D/Viewport")
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 1, 0, 0, 1 )
 
 [node name="Main" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014652, 0.00814342, -0.0152197 )
@@ -67,11 +63,6 @@ pause_mode = 2
 [node name="BoxV3" parent="." instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 0.987689, -0.156435, 0, 0.156435, 0.987689, -0.539152, -0.70964, 0.112696 )
 
-[node name="WeirdCamera" parent="BoxV3" instance=ExtResource( 39 )]
-pause_mode = 2
-transform = Transform( 1, 0, 0, 0, -3.27826e-07, 1, 0, -1, -3.27826e-07, 0.0123291, 10.8958, 2.55503 )
-environment = null
-
 [node name="Playfield" type="Spatial" parent="BoxV3"]
 transform = Transform( 1, 0, 0, 0, 0.998629, 0.0523353, 0, -0.0523353, 0.998629, 2.02656e-06, -1.92887, 0.305485 )
 
@@ -79,7 +70,6 @@ transform = Transform( 1, 0, 0, 0, 0.998629, 0.0523353, 0, -0.0523353, 0.998629,
 pause_mode = 2
 transform = Transform( 0.806335, 0, 0, 0, 0.00507604, 0.854629, 0, -0.806869, -0.00507595, -0.457334, 0.0788434, 4.49143 )
 material_override = ExtResource( 2 )
-texture = SubResource( 1 )
 region_enabled = true
 region_rect = Rect2( 34.6944, 0, 613.113, 418.448 )
 script = ExtResource( 5 )
@@ -119,7 +109,6 @@ transform = Transform( 0.806335, 0, 0, 0, 0.00507621, 0.85463, 0, -0.806869, -0.
 material_override = ExtResource( 2 )
 centered = false
 offset = Vector2( 0, -40 )
-texture = SubResource( 2 )
 region_enabled = true
 region_rect = Rect2( 34.6944, 0, 432.06, 380.926 )
 script = ExtResource( 5 )
@@ -143,7 +132,6 @@ transform = Transform( 0.806335, 0, 0, 0, 0.00507621, 0.85463, 0, -0.80687, -0.0
 material_override = ExtResource( 2 )
 centered = false
 offset = Vector2( -436.79, -40 )
-texture = SubResource( 3 )
 region_enabled = true
 region_rect = Rect2( 45.9354, 0, 425.065, 380.745 )
 script = ExtResource( 5 )
@@ -329,6 +317,15 @@ transform = Transform( 0.594161, 0, 0.083504, 0, 0.600001, -2.23517e-08, -0.0835
 [node name="CurvedRamp_R" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 27 )]
 transform = Transform( 0.594161, 0, -0.0835039, 0, 0.6, -2.6077e-08, 0.0835039, 0, 0.594161, 1.9, 0.000999928, -3 )
 
+[node name="WeirdCamera" parent="BoxV3" instance=ExtResource( 39 )]
+pause_mode = 2
+transform = Transform( 1, 0, 0, 0, -3.72529e-07, 0.999999, 0, -0.999999, -3.72529e-07, 0, 13.6712, -0.524929 )
+environment = null
+
+[node name="MeshInstance" type="MeshInstance" parent="BoxV3/WeirdCamera"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
 [node name="Reference" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, -0.676062, -2.62545, 0.214347 )
 visible = false
@@ -356,3 +353,5 @@ script = ExtResource( 40 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[editable path="BoxV3/WeirdCamera"]

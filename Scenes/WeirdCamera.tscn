@@ -1,20 +1,87 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/WeirdCamera.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="ProceduralSky" id=2]
+[sub_resource type="ProceduralSky" id=1]
 
-[sub_resource type="Environment" id=3]
+[sub_resource type="Environment" id=2]
 background_mode = 1
-background_sky = SubResource( 2 )
+background_sky = SubResource( 1 )
 ambient_light_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+outline_size = 1
+font_data = ExtResource( 2 )
 
 [node name="WeirdCamera" type="Camera"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -0.005, 6.702, 1.613 )
-environment = SubResource( 3 )
+environment = SubResource( 2 )
 projection = 2
 current = true
 fov = 55.0691
 size = 4.87
 near = 1.0
 script = ExtResource( 1 )
+
+[node name="TrackStateDebugLabel" type="Label" parent="."]
+margin_right = 202.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "head tracking: off"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RawOffsetDebugLabel" type="Label" parent="."]
+margin_left = 13.0
+margin_top = 48.0
+margin_right = 131.0
+margin_bottom = 169.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "raw offset
+X:
+Y:
+Z:"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SensitivityDebugLabel" type="Label" parent="."]
+margin_left = 166.0
+margin_top = 47.0
+margin_right = 277.0
+margin_bottom = 168.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "sensitivity
+X:
+Y:
+Z:"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CamOffsetDebugLabel" type="Label" parent="."]
+margin_left = 328.0
+margin_top = 47.0
+margin_right = 446.0
+margin_bottom = 168.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "cam offset
+X:
+Y:
+Z:"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
