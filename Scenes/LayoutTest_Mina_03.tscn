@@ -78,7 +78,7 @@ transform = Transform( 1, 0, 0, 0, 0.998629, 0.0523353, 0, -0.0523353, 0.998629,
 
 [node name="CentralHUD3D" type="Sprite3D" parent="BoxV3/Playfield"]
 pause_mode = 2
-transform = Transform( 0.606, 0, 0, 0, 0.00381853, 0.654987, 0, -0.606988, 0.00412049, -0.457334, -0.0169265, 4.39275 )
+transform = Transform( 0.606, 0, 0, 0, 0.00381853, 0.654987, 0, -0.606988, 0.00412048, -0.457334, -0.0169263, 4.39275 )
 material_override = ExtResource( 7 )
 texture = SubResource( 1 )
 region_enabled = true
@@ -193,11 +193,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.092, 2.38419e-07, 6.218 )
 release_speed = 40.0
 
 [node name="TemporaryFlipper" parent="BoxV3/Playfield" instance=ExtResource( 35 )]
-transform = Transform( -0.909882, 5.15797e-08, -0.414869, 9.31323e-08, 1, -5.21541e-08, 0.414868, -7.45058e-08, -0.909885, 1.6654, -0.000344992, 0.087208 )
+transform = Transform( -0.909882, 5.15797e-08, -0.414869, 9.31323e-08, 1, -5.21541e-08, 0.414868, -7.45058e-08, -0.909885, 1.64317, -0.000879526, 0.0821234 )
 forward_impulse_strength = 50
 
 [node name="Boss" parent="BoxV3/Playfield" instance=ExtResource( 36 )]
-transform = Transform( -0.699758, -2.77449e-08, 0.0183978, -2.91038e-08, 0.700001, -4.47035e-08, -0.0183978, -5.21541e-08, -0.699759, -0.204948, 0.182227, -5.07634 )
+transform = Transform( -0.569494, -2.21108e-08, 0.188883, -3.53903e-08, 0.6, -4.84288e-08, -0.188883, -4.47035e-08, -0.569494, 1.22682, 0.228384, -4.10845 )
 DIRECT_HIT_SPEED_RELEVANCE = 1.0
 MISSILE_EXPLOSION_BASE_DAMAGE = 5.0
 IS_VULNERABLE_PER_STAGE = {
@@ -264,7 +264,7 @@ transform = Transform( 0.976796, 0, -0.214173, 4.84288e-08, 1, 3.72529e-08, 0.21
 transform = Transform( 0.840075, 4.42692e-08, 0.542473, -7.45058e-09, 1, -6.70552e-08, -0.542471, 5.21541e-08, 0.840077, 1.34466, 0.649681, 6.13639 )
 
 [node name="Moon" parent="BoxV3/Playfield" instance=ExtResource( 24 )]
-transform = Transform( 0.910986, -0.412437, 1.038e-08, 0.412437, 0.910986, 7.45058e-09, -1.49012e-08, -7.45058e-09, 1, -3.0991, 0.303952, 1.01084 )
+transform = Transform( 0.842769, -0.412437, -0.345885, 0.381553, 0.910986, -0.156595, 0.379682, -2.16067e-07, 0.925117, -3.35434, 0.188398, 1.69288 )
 
 [node name="MultiballShip" parent="BoxV3/Playfield" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25363, 0.0278032, -5.79861 )
@@ -290,7 +290,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.35173, -2.71797e-05, 5.5123 
 transform = Transform( -0.336701, -1.41801e-07, 0.941612, -2.5332e-07, 1, 5.96046e-08, -0.941613, -2.16067e-07, -0.336701, -2.23781, -0.0216446, -0.527245 )
 
 [node name="BumperCage3" parent="BoxV3/Playfield" instance=ExtResource( 11 )]
-transform = Transform( -0.583826, -1.07393e-07, 0.811879, -2.23517e-07, 1, -3.35276e-08, -0.811881, -2.01166e-07, -0.583825, 2.50002, 0.00268388, -1.81557 )
+transform = Transform( -0.0824087, -5.8083e-08, 0.996598, -1.3411e-07, 1, 4.93601e-08, -0.9966, -1.3411e-07, -0.0824086, -0.842837, 0.00268364, -6.12815 )
 
 [node name="NoRemoteControlArea" parent="BoxV3/Playfield" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.235402, 8.44002e-05, 5.85387 )
@@ -309,14 +309,14 @@ transform = Transform( 0.860875, -6.81168e-10, -0.508815, -0.026629, 0.998628, -
 transform = Transform( 0.82981, 1.34401e-07, -0.348448, -1.04308e-07, 0.9, 1.2666e-07, 0.348448, -4.47035e-08, 0.82981, 3.40829, 0.0591052, -6.51708 )
 
 [node name="TeleporterEntrance" parent="BoxV3/Playfield/TPs" instance=ExtResource( 20 )]
-transform = Transform( 1, 3.72529e-09, 2.98023e-08, 0, 1, -1.49012e-08, 0, 0, 1, -2.38419e-07, -2.38419e-07, -4.76837e-07 )
+transform = Transform( 0.82272, 3.72529e-09, 0.568448, 9.31323e-09, 1, -2.98023e-08, -0.568448, 1.49012e-08, 0.82272, -6.26908, 4.52995e-06, 3.76805 )
 collision_mask = 1
 
 [node name="TeleporterExit" parent="BoxV3/Playfield/TPs" instance=ExtResource( 15 )]
-transform = Transform( -0.176811, -1.76951e-08, -0.67306, -3.07336e-08, 0.222222, 8.19564e-08, 0.134612, 4.28408e-08, -0.884057, -5.34271, 0.453219, 8.12444 )
+transform = Transform( -0.176811, -1.58325e-08, -0.67306, -3.07336e-08, 0.222222, 1.04308e-07, 0.134612, 4.09782e-08, -0.884057, -3.37903, 0.45322, 7.77893 )
 
 [node name="TeleporterExit2" parent="BoxV3/Playfield/TPs" instance=ExtResource( 15 )]
-transform = Transform( -0.219909, -1.76951e-08, -0.159881, -3.91155e-08, 0.222222, 1.71363e-07, 0.0319761, 4.28408e-08, -1.09955, 1.14066, 0.416025, 5.31591 )
+transform = Transform( -0.219909, 3.72529e-09, -0.159882, -2.04891e-08, 0.222222, 6.33299e-07, 0.0319763, 3.91155e-08, -1.09955, -3.89762, 0.223854, 1.07467 )
 
 [node name="StaticGeometry" type="Spatial" parent="BoxV3/Playfield"]
 
@@ -342,16 +342,16 @@ transform = Transform( 0.543511, 0, 0.173879, 2.23517e-08, 0.66107, -3.72529e-09
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.882665, 3.72846, 0.00148296, -0.301636 )
 
 [node name="triangular_wall" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14589, 1.19209e-06, 1.11051 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14589, 1.66893e-06, 0.12506 )
 
 [node name="LongBox6" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 38 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 0.176186, 3.73275, -9.53674e-07, 7.03805 )
 
 [node name="CurvedRamp" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 18 )]
-transform = Transform( 0.559125, 4.41887e-10, -0.217669, 2.04891e-08, 0.600001, 4.09782e-08, 0.217669, -5.58794e-08, 0.559126, -1.70322, 0.0929525, -2.64533 )
+transform = Transform( 0.544763, -1.58607e-09, -0.251464, 4.47035e-08, 0.600001, 4.47035e-08, 0.251463, -7.82311e-08, 0.544764, -0.57952, 0.139108, -2.3952 )
 
 [node name="CurvedRamp_R" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 19 )]
-transform = Transform( 0.586534, -0.0147773, 0.125534, 0.0147291, 0.599817, 0.00178825, -0.125539, 0.00133353, 0.58672, 0.802558, 0.0965357, -2.46782 )
+transform = Transform( 0.589771, -0.0147773, -0.109324, 0.0142866, 0.599817, -0.00400482, 0.109389, 0.00133339, 0.589944, 1.57053, 0.122288, -1.66883 )
 
 [node name="Reference" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, -0.676062, -2.62545, 0.214347 )

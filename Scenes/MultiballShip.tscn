@@ -60,5 +60,6 @@ transform = Transform( -0.367294, -0.544235, -2.2372, 0.0458327, 2.26331, -0.558
 transform = Transform( -0.367294, -0.544235, -2.2372, 0.0458327, 2.26331, -0.558111, 2.30199, -0.131898, -0.345844, 1.1473, 0.448233, 0.414142 )
 
 [node name="RampMesh" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0787315, -0.0140171, 0.0152831 )
 mesh = ExtResource( 5 )
-material/0 = ExtResource( 4 )
+material/0 = null
