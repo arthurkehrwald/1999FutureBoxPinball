@@ -131,7 +131,7 @@ mesh = SubResource( 5 )
 material/0 = ExtResource( 5 )
 
 [node name="LaserArea" type="Area" parent="."]
-transform = Transform( 0.534529, 0, -0.84515, 0, 0.755, 0, 0.84515, 0, 0.534529, 2.70279, 0.564854, -2.14014 )
+transform = Transform( 0.534529, 0, -0.693023, 0, 0.755, 0, 0.84515, 0, 0.438314, 2.22716, 0.564854, -1.83932 )
 collision_mask = 0
 script = ExtResource( 1 )
 

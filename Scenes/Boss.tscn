@@ -28,6 +28,7 @@ extents = Vector3( 0.342589, 0.1, 0.457196 )
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
 collision_mask = 0
 script = ExtResource( 1 )
+MAX_HEALTH = 150.0
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
@@ -85,7 +86,7 @@ IS_SHOOTING_PER_STAGE = {
 
 [node name="BossBombGun2" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.898794, -0.438371, 0, 0.438371, 0.898794, 1.43817, 1.13367, -1.58522 )
-SECONDS_UNTIL_FIRST_SHOT = 7.5
+SECONDS_UNTIL_FIRST_SHOT = 10.0
 IS_SHOOTING_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
@@ -120,7 +121,7 @@ IS_SHOOTING_PER_STAGE = {
 
 [node name="BossMissileGun2" parent="." instance=ExtResource( 7 )]
 transform = Transform( 0.958071, -0.183726, -0.219875, 0.184271, 0.982707, -0.0182111, 0.219419, -0.023069, 0.975358, -0.616472, 1.98681, 1.03998 )
-SECONDS_UNTIL_FIRST_SHOT = 10.0
+SECONDS_UNTIL_FIRST_SHOT = 15.0
 IS_SHOOTING_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
