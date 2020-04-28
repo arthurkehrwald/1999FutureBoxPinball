@@ -10,10 +10,8 @@
 [ext_resource path="res://Materials/Crazy_Rocket_01/initialShadingGroup_occlusionRoughnessMetallic.png" type="Texture" id=8]
 [ext_resource path="res://Materials/Crazy_Rocket_01/initialShadingGroup_emissive.png" type="Texture" id=9]
 
-[sub_resource type="CapsuleShape" id=1]
-margin = 0.1
-radius = 0.2
-height = 0.8
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 0.205, 0.16, 0.41 )
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 7 )
@@ -63,7 +61,7 @@ script = ExtResource( 3 )
 VERTICAL_GUIDANCE = true
 
 [node name="CollisionShape" parent="." index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 10 )
 disabled = true
 
 [node name="New_Rocket_UV_02" type="MeshInstance" parent="." index="1"]

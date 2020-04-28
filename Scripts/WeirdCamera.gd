@@ -57,6 +57,7 @@ func _input(event):
 		return
 	
 	if event is InputEventMouseMotion:
+		print("mouse motion")
 		track_raw_offset.x += event.relative.x
 		track_raw_offset.y += event.relative.y
 	elif event is InputEventMouseButton:

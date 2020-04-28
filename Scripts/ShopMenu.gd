@@ -34,6 +34,7 @@ func _enter_tree():
 
 
 func _ready():
+	GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.player_ship == null:
 		push_warning("[ShopMenu] Can't find player! Can't take money away.")
 	decision_timer.connect("timeout", self, "on_DecisionTimer_timeout")
@@ -90,6 +91,8 @@ func set_is_active(value, _ball_in_shop = null):
 		glitch_overlay.super_glitch()
 		set_focus_mode(Control.FOCUS_ALL)
 		grab_focus()
+	else:
+		decision_timer.stop()
 	set_process(value)
 	if PAUSES_GAME:
 		get_tree().paused = value
@@ -116,3 +119,8 @@ func buy_item(item_index):
 		4:
 			if ball_in_shop != null:
 				ball_in_shop.set_is_remote_controlled(true, REMOTE_CONTROL_DURATION)
+
+
+func on_GameState_changed(new_state, is_debug_skip):
+	if new_state == GameState.PREGAME or is_debug_skip:
+		set_is_active(false)
