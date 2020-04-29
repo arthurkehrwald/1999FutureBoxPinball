@@ -78,7 +78,7 @@ transform = Transform( 1, 0, 0, 0, 0.998629, 0.0523353, 0, -0.0523353, 0.998629,
 
 [node name="CentralHUD3D" type="Sprite3D" parent="BoxV3/Playfield"]
 pause_mode = 2
-transform = Transform( 0.606, 0, 0, 0, 0.00381853, 0.654987, 0, -0.606988, 0.00412048, -0.457334, -0.0169263, 4.39275 )
+transform = Transform( 0.706, 0, 0, 0, 0.00444762, 0.754985, 0, -0.706986, 0.00474958, -0.457334, -0.0169263, 4.39275 )
 material_override = ExtResource( 7 )
 texture = SubResource( 1 )
 region_enabled = true
