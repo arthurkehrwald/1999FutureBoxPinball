@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/CurvedRamp.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=2]
@@ -8,11 +8,12 @@
 [ext_resource path="res://Scenes/SimpleCube.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Testing/DebugOutputLabel.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=9]
 
 [node name="PhysicsTest" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.852065, 0.523436, 0, -0.523436, 0.852065, 0, 5, 13.4523 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 10.3766, 2.83861, 0.985075 )
 
 [node name="DebugOutputLabel" type="Label" parent="."]
 anchor_left = 1.0
@@ -68,4 +69,24 @@ transform = Transform( 0.939693, 0, 0.34202, 0, 1, -3.72529e-08, -0.34202, 1.266
 transform = Transform( 1, 0, 0, 0, 1, -2.23517e-08, 0, 2.23517e-08, 1, -3.41956, 0.253471, 1.6229 )
 
 [node name="CurvedRamp" parent="BoxV3/BoardAligned" instance=ExtResource( 1 )]
-transform = Transform( 0.990268, -0.00892542, 0.138887, -3.72529e-09, 0.997942, 0.0641317, -0.139173, -0.0635076, 0.98823, 0.193974, 0.0914242, -0.0364878 )
+transform = Transform( 0.990268, -0.00892542, 0.138887, -9.31323e-10, 0.997943, 0.0641319, -0.139173, -0.0635076, 0.988233, 0.45884, -0.015438, -1.75291 )
+
+[node name="BossBombGun" parent="BoxV3/BoardAligned" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.396973, 1.02683, 5.44993 )
+SECONDS_BETWEEN_SHOTS = 3.0
+IS_STUNNABLE = false
+IS_SHOOTING_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+MUZZLE_SPEED = 20.0
+SPREAD_DEG = 2.0

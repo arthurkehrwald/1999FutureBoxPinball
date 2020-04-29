@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Roller.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Projectile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Meshes/Collision/roller.tres" type="Shape" id=4]
+
+[sub_resource type="PhysicsMaterial" id=2]
+rough = true
 
 [sub_resource type="SphereMesh" id=1]
 radius = 0.2
@@ -11,8 +14,10 @@ radial_segments = 16
 rings = 8
 
 [node name="Roller" instance=ExtResource( 2 )]
+physics_material_override = SubResource( 2 )
 gravity_scale = 15.0
 script = ExtResource( 1 )
+AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 1.0
 SPEED_BASED_GRAVITY_SCALE = true
 
 [node name="CollisionShape" parent="." index="0"]

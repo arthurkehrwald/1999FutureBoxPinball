@@ -59,8 +59,10 @@ func set_locked(is_locked):
 func set_gravity_scale_based_on_speed():
 		#gravity_scale = clamp(-.2 * pow(.2 * get_linear_velocity().length(),
 		#		2.7) + 15, 1, 15)
-		gravity_scale = clamp(-.1 * pow(.2 * get_linear_velocity().length(),
-				2.5) + 15, 5, 15)
+		#gravity_scale = clamp(-.1 * pow(.2 * get_linear_velocity().length(),
+				#2.5) + 15, 5, 15)
+		#gravity_scale = 3 if get_linear_velocity().z < 0 else 15
+		gravity_scale = max(-get_linear_velocity().length() + 15, 1)
 		if is_airborne:
 			gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
 		#gravity_scale = -get_linear_velocity().length() + 20

@@ -44,7 +44,7 @@ onready var rng = RandomNumberGenerator.new()
 
 func _ready():
 	if Globals.boss == null:
-		push_warning("Boss Gun: Reference to boss not set in Globals!")
+		push_warning("[Boss Gun] can't find Boss! Will not add collision exceptions with outgoing projectiles.")
 	rng.randomize()
 	for string_key in IS_SHOOTING_PER_STAGE.keys():
 		var game_state = GameState.NAME_STATE_DICT[string_key]
@@ -142,6 +142,8 @@ func on_hit_by_projectile(projectile):
 
 
 func on_hit_by_explosion(explosion):
+	if !IS_STUNNABLE:
+		return
 	var base_stun_dur = 0
 	if explosion.is_in_group("bomb_explosions"):
 		base_stun_dur = BOMB_EXPLOSION_BASE_STUN_DUR
