@@ -8,14 +8,18 @@ export var EXPLOSION_BASE_KNOCKBACK_STRENGTH = 10.0
 export var EXPLOSION_DISTANCE_RELEVANCE = .5
 
 onready var omni_light = get_node("OmniLight")
+onready var area = get_node("Area")
+
 
 func _ready():
 	add_to_group("projectiles")
-	connect("body_entered", self, "on_body_entered")
+	area.connect("body_entered", self, "on_body_entered")
 	GameState.connect("state_changed", self, "on_GameState_changed")
 
 
 func on_body_entered(body):
+	if get_collision_exceptions().has(body):
+		return
 	if body.has_method("on_hit_by_projectile"):
 		body.on_hit_by_projectile(self)
 		PoolManager.request(PoolManager.WIREFRAME_FLASH, get_global_transform().origin)

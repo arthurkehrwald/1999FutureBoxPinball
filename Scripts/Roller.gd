@@ -2,16 +2,15 @@ extends "res://Scripts/Projectile.gd"
 # Can teleport and adjust gravity scale based on speed and grounded
 # status. Abstract base class for 'Pinball.gd' and 'Bomb.gd'.
 
-signal physics_debug_info_update(speed, gravity)
+const E = 2.71828
 
-const TELEPORT_PHYSICS_COOLDOWN_BUFFER = .02
-
-export var AIRBORNE_GRAVITY_SCALE_MULTIPLIER = .4
-export var SPEED_BASED_GRAVITY_SCALE = false
-
-var is_airborne = false
-var teleporting = false
-var teleport_physics_cooldown_time_remaining = 0
+export(float, 0, 20.0) var MAX_GRAV = 20.0
+export(float, 0, 20.0) var MIN_GRAV = 5.0
+export(float, 0, 1.0) var GRAV_CURVE_STEEPNESS = .5
+export(float, 0, 1.0) var GRAV_CURVE_OFFSET = .5
+export(float, 0, 50.0) var SPEED_LIM = 30.0
+export var ENFORCE_SPEED_LIM = true
+export var AIRBORNE_GRAV_FACTOR = 1.0
 
 
 func _ready():
@@ -19,32 +18,22 @@ func _ready():
 
 
 func _physics_process(_delta):
-	var was_airborne = is_airborne
-	if was_airborne and not get_colliding_bodies().empty():
-		for body in get_colliding_bodies():
-			if not body.is_in_group("projectiles"):
-				is_airborne = false
-	elif not was_airborne and get_colliding_bodies().empty():
-		is_airborne = true
-	if is_airborne != was_airborne:
-		if is_airborne:
-			if not SPEED_BASED_GRAVITY_SCALE:
-				gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
-		else:
-			if not SPEED_BASED_GRAVITY_SCALE:
-				gravity_scale /= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
-	if SPEED_BASED_GRAVITY_SCALE:
-		set_gravity_scale_based_on_speed()
+	var speed = get_linear_velocity().length()
+	if ENFORCE_SPEED_LIM and speed > SPEED_LIM:
+		var capped_vel = get_linear_velocity().normalized() * Globals.ROLLER_TOPSPEED
+		set_linear_velocity(capped_vel)
+		speed = capped_vel.length()
+	var a = 5 / ((1 - GRAV_CURVE_STEEPNESS - .5 * (1 - GRAV_CURVE_STEEPNESS)) * SPEED_LIM)
+	var b = speed + (GRAV_CURVE_STEEPNESS * (1 - 2 * GRAV_CURVE_OFFSET) - 1) * SPEED_LIM * .5
+	gravity_scale = (MIN_GRAV - MAX_GRAV) / (1 + pow(E, -a * b)) + MAX_GRAV
+	if area.get_overlapping_bodies().empty():
+		gravity_scale *= AIRBORNE_GRAV_FACTOR
+	$Label.text = "speed: %s\ngrav: %s\nairborne: %s" % [speed, gravity_scale, area.get_overlapping_bodies().empty()]
 
 
 func teleport(destination):
-	#set_global_transform(Transform(get_global_transform().basis, destination))
 	var t = Transform(get_global_transform().basis, destination)
 	PhysicsServer.body_set_state(self.get_rid(), PhysicsServer.BODY_STATE_TRANSFORM, t)
-	
-	if not is_airborne:
-		is_airborne = true
-		gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
 
 
 func set_locked(is_locked):
@@ -54,18 +43,3 @@ func set_locked(is_locked):
 	axis_lock_angular_x = is_locked
 	axis_lock_angular_y = is_locked
 	axis_lock_angular_z = is_locked
-
-
-func set_gravity_scale_based_on_speed():
-		#gravity_scale = clamp(-.2 * pow(.2 * get_linear_velocity().length(),
-		#		2.7) + 15, 1, 15)
-		#gravity_scale = clamp(-.1 * pow(.2 * get_linear_velocity().length(),
-				#2.5) + 15, 5, 15)
-		#gravity_scale = 3 if get_linear_velocity().z < 0 else 15
-		gravity_scale = max(-get_linear_velocity().length() + 15, 1)
-		if is_airborne:
-			gravity_scale *= AIRBORNE_GRAVITY_SCALE_MULTIPLIER
-		#gravity_scale = -get_linear_velocity().length() + 20
-		emit_signal("physics_debug_info_update",
-				get_linear_velocity().length(), 
-				gravity_scale)

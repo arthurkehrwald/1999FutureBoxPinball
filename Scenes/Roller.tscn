@@ -4,25 +4,37 @@
 [ext_resource path="res://Scenes/Projectile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Meshes/Collision/roller.tres" type="Shape" id=4]
 
-[sub_resource type="PhysicsMaterial" id=2]
+[sub_resource type="PhysicsMaterial" id=1]
 rough = true
 
-[sub_resource type="SphereMesh" id=1]
+[sub_resource type="SphereMesh" id=2]
 radius = 0.2
 height = 0.4
 radial_segments = 16
 rings = 8
 
 [node name="Roller" instance=ExtResource( 2 )]
-physics_material_override = SubResource( 2 )
+physics_material_override = SubResource( 1 )
 gravity_scale = 15.0
 script = ExtResource( 1 )
-AIRBORNE_GRAVITY_SCALE_MULTIPLIER = 1.0
-SPEED_BASED_GRAVITY_SCALE = true
+MIN_GRAV = 1.667
+GRAV_CURVE_STEEPNESS = 0.0
+ENFORCE_SPEED_LIM = false
 
 [node name="CollisionShape" parent="." index="0"]
 shape = ExtResource( 4 )
 
 [node name="MeshInstance" parent="." index="1"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
+
+[node name="Label" type="Label" parent="." index="3"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape" parent="Area" index="0"]
+shape = ExtResource( 4 )

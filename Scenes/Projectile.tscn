@@ -3,6 +3,7 @@
 [ext_resource path="res://Scripts/Projectile.gd" type="Script" id=1]
 
 [node name="Projectile" type="RigidBody"]
+collision_layer = 0
 continuous_cd = true
 contacts_reported = 2
 contact_monitor = true
@@ -17,3 +18,9 @@ EXPLOSION_BASE_KNOCKBACK_STRENGTH = 15.0
 [node name="OmniLight" type="OmniLight" parent="."]
 visible = false
 omni_range = 1.0
+
+[node name="Area" type="Area" parent="."]
+monitorable = false
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]

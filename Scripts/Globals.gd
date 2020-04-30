@@ -1,6 +1,6 @@
 extends Node
 
-const ROLLER_TOPSPEED = 20.0
+const ROLLER_TOPSPEED = 40.0
 
 var shop_menu = null
 # shop - activate the menu, know price for items

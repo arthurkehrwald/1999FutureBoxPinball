@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scenes/TriangularWall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=2]
@@ -47,15 +47,6 @@
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=45]
 [ext_resource path="res://Testing/LongBox.tscn" type="PackedScene" id=46]
 
-[sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")
-
-[sub_resource type="ViewportTexture" id=2]
-viewport_path = NodePath("BoxV3/Playfield/TransmissionHUD3D/Viewport")
-
-[sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("BoxV3/Playfield/PlayerStatsHUD3D/Viewport")
-
 [node name="Main" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014652, 0.00814342, -0.0152197 )
 
@@ -79,7 +70,6 @@ transform = Transform( 1, 0, 0, 0, 0.998629, 0.0523353, 0, -0.0523353, 0.998629,
 pause_mode = 2
 transform = Transform( 0.806335, 0, 0, 0, 0.00507604, 0.854629, 0, -0.806869, -0.00507595, -0.457334, 0.0788434, 4.49143 )
 material_override = ExtResource( 2 )
-texture = SubResource( 1 )
 region_enabled = true
 region_rect = Rect2( 34.6944, 0, 613.113, 418.448 )
 script = ExtResource( 5 )
@@ -119,7 +109,6 @@ transform = Transform( 0.806335, 0, 0, 0, 0.00507621, 0.85463, 0, -0.806869, -0.
 material_override = ExtResource( 2 )
 centered = false
 offset = Vector2( 0, -40 )
-texture = SubResource( 2 )
 region_enabled = true
 region_rect = Rect2( 34.6944, 0, 432.06, 380.926 )
 script = ExtResource( 5 )
@@ -143,7 +132,6 @@ transform = Transform( 0.806335, 0, 0, 0, 0.00507621, 0.85463, 0, -0.80687, -0.0
 material_override = ExtResource( 2 )
 centered = false
 offset = Vector2( -436.79, -40 )
-texture = SubResource( 3 )
 region_enabled = true
 region_rect = Rect2( 45.9354, 0, 425.065, 380.745 )
 script = ExtResource( 5 )

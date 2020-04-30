@@ -38,6 +38,7 @@ func _process(_delta):
 	steering_flames.set_global_transform(forward_transform_with_no_roll)
 	steering_flames.look_at(steering_flames_pos - get_global_transform().basis.z, Vector3.UP)
 
+
 func explode():
 	var explosion_instance = EXPLOSION_SCENE.instance()
 	explosion_instance.add_to_group("missile_explosions")
@@ -53,11 +54,12 @@ func on_AnimationPlayer_animation_finished(_animation_name):
 		target_pos = Globals.player_ship.get_global_transform().origin
 		target_pos += Globals.player_ship.get_global_transform().basis.y.normalized() * .288
 		guidance_update_timer.start(GUIDANCE_UPDATE_RATE)
-		pass
 
 
 func on_body_entered(body):
 	.on_body_entered(body)
+	if get_collision_exceptions().has(body):
+		return
 	explode()
 
 

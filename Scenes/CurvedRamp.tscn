@@ -7,7 +7,7 @@
 
 [node name="CurvedRamp" type="StaticBody"]
 transform = Transform( 0.594161, 0, 0.0835039, 0, 0.6, 0, -0.0835039, 0, 0.594161, 0, 0, 0 )
-collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = ExtResource( 5 )
