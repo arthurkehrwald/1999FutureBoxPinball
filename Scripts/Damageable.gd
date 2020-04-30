@@ -8,7 +8,7 @@ signal death
 export var MAX_HEALTH = 100.0
 export var PINBALL_DIRECT_HIT_BASE_DAMAGE = 10.0
 export var BOMB_DIRECT_HIT_BASE_DAMAGE = 10.0
-export var MISSILE_DIRECT_HIT_BASE_DAMAGE = 10.0
+export var MISSILE_DIRECT_HIT_DAMAGE = 10.0
 export var DIRECT_HIT_SPEED_RELEVANCE = 0.5
 export var BOMB_EXPLOSION_BASE_DAMAGE = 10.0
 export var MISSILE_EXPLOSION_BASE_DAMAGE = 10.0
@@ -83,8 +83,7 @@ func on_GameState_changed(new_state, is_debug_skip):
 		set_health(MAX_HEALTH)
 
 
-func calc_direct_hit_damage(var base_damage, var projectile_speed):
-	var normalized_projectile_speed = projectile_speed / Globals.ROLLER_TOPSPEED
+func calc_roller_damage(var base_damage, var normalized_projectile_speed):
 	normalized_projectile_speed = clamp(normalized_projectile_speed, 0, 1)
 	return base_damage * DIRECT_HIT_SPEED_RELEVANCE * sin(PI * normalized_projectile_speed - PI / 2) + base_damage
 
@@ -96,18 +95,18 @@ func calc_explosion_damage(var base_damage, var explosion_pos, var blast_radius)
 
 
 func on_hit_by_projectile(projectile):
-	var base_damage = 0
+	var damage = 0
 	if projectile.is_in_group("pinballs"):
-		base_damage = PINBALL_DIRECT_HIT_BASE_DAMAGE
+		damage = calc_roller_damage(PINBALL_DIRECT_HIT_BASE_DAMAGE,
+				projectile.get_linear_velocity().length() / projectile.SPEED_LIM)
 	elif projectile.is_in_group("bombs"):
-		base_damage = BOMB_DIRECT_HIT_BASE_DAMAGE
+		damage = calc_roller_damage(BOMB_DIRECT_HIT_BASE_DAMAGE,
+				projectile.get_linear_velocity().length() / projectile.SPEED_LIM)
 	elif projectile.is_in_group("missiles"):
-		base_damage = MISSILE_DIRECT_HIT_BASE_DAMAGE
+		damage = MISSILE_DIRECT_HIT_DAMAGE
 	else:
 		return
-	take_damage(calc_direct_hit_damage(
-			base_damage,
-			projectile.get_linear_velocity().length()))
+	take_damage(damage)
 	if is_vulnerable:
 		PoolManager.request(PoolManager.DAMAGEABLE_HIT, projectile.get_global_transform().origin)
 

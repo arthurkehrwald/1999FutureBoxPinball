@@ -48,7 +48,7 @@ mesh = ExtResource( 4 )
 material/0 = ExtResource( 5 )
 
 [node name="BossShield" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, -1.98605e-08, 1.31182e-09, 1.98605e-08, 0.991312, -0.13153, 1.31182e-09, 0.13153, 0.991312, 7.49787e-09, 0.566653, -2.42568 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.49648 )
 MAX_HEALTH = 50.0
 BOMB_DIRECT_HIT_BASE_DAMAGE = 20.0
 DIRECT_HIT_SPEED_RELEVANCE = 0.5
@@ -71,6 +71,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57968, 0 )
 
 [node name="BossBombGun" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.898794, -0.438371, 0, 0.438371, 0.898794, -1.40748, 1.16619, -1.59755 )
+monitorable = true
 collision_mask = 1
 SECONDS_UNTIL_FIRST_SHOT = 0.0
 IS_SHOOTING_PER_STAGE = {
@@ -89,6 +90,7 @@ IS_SHOOTING_PER_STAGE = {
 
 [node name="BossBombGun2" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.898794, -0.438371, 0, 0.438371, 0.898794, 1.43817, 1.13367, -1.58522 )
+monitorable = true
 collision_mask = 1
 SECONDS_UNTIL_FIRST_SHOT = 10.0
 IS_SHOOTING_PER_STAGE = {
@@ -107,6 +109,7 @@ IS_SHOOTING_PER_STAGE = {
 
 [node name="BossMissileGun" parent="." instance=ExtResource( 7 )]
 transform = Transform( 0.972824, 0.140383, 0.184138, -0.136843, 0.99008, -0.0318596, -0.186784, 0.00579588, 0.982384, 0.626045, 1.97672, 1.0126 )
+monitorable = true
 collision_mask = 2
 SECONDS_UNTIL_FIRST_SHOT = 0.0
 IS_SHOOTING_PER_STAGE = {
@@ -125,6 +128,7 @@ IS_SHOOTING_PER_STAGE = {
 
 [node name="BossMissileGun2" parent="." instance=ExtResource( 7 )]
 transform = Transform( 0.958071, -0.183726, -0.219875, 0.184271, 0.982707, -0.0182111, 0.219419, -0.023069, 0.975358, -0.616472, 1.98681, 1.03998 )
+monitorable = true
 collision_mask = 1
 SECONDS_UNTIL_FIRST_SHOT = 15.0
 IS_SHOOTING_PER_STAGE = {

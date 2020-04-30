@@ -5,6 +5,7 @@
 [ext_resource path="res://HUD/diagonal_cross.png" type="Texture" id=3]
 
 [node name="BossGun" type="Area"]
+monitorable = false
 collision_mask = 0
 script = ExtResource( 2 )
 

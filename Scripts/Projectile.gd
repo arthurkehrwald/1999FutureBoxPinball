@@ -18,7 +18,7 @@ func _ready():
 
 
 func on_body_entered(body):
-	if get_collision_exceptions().has(body):
+	if get_collision_exceptions().has(body) or body == self:
 		return
 	if body.has_method("on_hit_by_projectile"):
 		body.on_hit_by_projectile(self)

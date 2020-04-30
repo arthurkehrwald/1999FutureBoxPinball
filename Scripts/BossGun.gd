@@ -12,7 +12,7 @@ export var SECONDS_BETWEEN_SHOTS_RANDOMNESS = 0.0
 export var IS_STUNNABLE = true
 export var PINBALL_DIRECT_HIT_BASE_STUN_DUR = 10.0
 export var BOMB_DIRECT_HIT_BASE_STUN_DUR = 10.0
-export var MISSILE_DIRECT_HIT_BASE_STUN_DUR = 10.0
+export var MISSILE_DIRECT_HIT_STUN_DUR = 10.0
 export var DIRECT_HIT_SPEED_RELEVANCE = 0.5
 export var BOMB_EXPLOSION_BASE_STUN_DUR = 10.0
 export var MISSILE_EXPLOSION_BASE_STUN_DUR = 10.0
@@ -93,8 +93,7 @@ func enter_stunned_state(var stun_duration):
 	timer.start(stun_duration)
 
 
-func calc_direct_hit_stun_dur(var base_stun_dur, var projectile_speed):
-	var normalized_projectile_speed = projectile_speed / Globals.ROLLER_TOPSPEED
+func calc_roller_stun_dur(var base_stun_dur, var normalized_projectile_speed):
 	normalized_projectile_speed = clamp(normalized_projectile_speed, 0, 1)
 	return base_stun_dur * DIRECT_HIT_SPEED_RELEVANCE * sin(PI * normalized_projectile_speed - PI / 2) + base_stun_dur
 
@@ -125,20 +124,20 @@ func on_GameState_changed(new_state, _is_debug_skip):
 
 
 func on_hit_by_projectile(projectile):
-	if !IS_STUNNABLE or ignored_projectiles.has(projectile):
+	if state == State.IDLE or !IS_STUNNABLE or ignored_projectiles.has(projectile):
 		return
-	var base_stun_dur = 0
+	var stun_dur = 0
 	if projectile.is_in_group("pinballs"):
-		base_stun_dur = PINBALL_DIRECT_HIT_BASE_STUN_DUR
+		stun_dur = calc_roller_stun_dur(PINBALL_DIRECT_HIT_BASE_STUN_DUR,
+				projectile.get_linear_velocity().length() / projectile.SPEED_LIM)
 	elif projectile.is_in_group("bombs"):
-		base_stun_dur = BOMB_DIRECT_HIT_BASE_STUN_DUR
+		stun_dur = calc_roller_stun_dur(BOMB_DIRECT_HIT_BASE_STUN_DUR,
+				projectile.get_linear_velocity().length() / projectile.SPEED_LIM)
 	elif projectile.is_in_group("missiles"):
-		base_stun_dur = MISSILE_DIRECT_HIT_BASE_STUN_DUR
+		stun_dur = MISSILE_DIRECT_HIT_STUN_DUR
 	else:
 		return
-	enter_stunned_state(calc_direct_hit_stun_dur(
-			base_stun_dur,
-			projectile.get_linear_velocity().length()))
+	enter_stunned_state(stun_dur)
 
 
 func on_hit_by_explosion(explosion):

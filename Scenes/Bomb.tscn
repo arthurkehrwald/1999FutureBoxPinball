@@ -5,10 +5,10 @@
 [ext_resource path="res://Scripts/Bomb.gd" type="Script" id=3]
 
 [node name="Bomb" instance=ExtResource( 1 )]
-collision_layer = 1
 contacts_reported = 1
+contact_monitor = true
 script = ExtResource( 3 )
-FUSE_TIME = 5.0
+FUSE_TIME = 2.0
 
 [node name="MeshInstance" parent="." index="1"]
 material/0 = ExtResource( 2 )

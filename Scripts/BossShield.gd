@@ -16,6 +16,7 @@ func _ready():
 	connect("death", self, "on_death")
 	connect("health_changed", health_bar, "update_value")
 	regeneration_timer.connect("timeout", self, "on_RegenerationTimer_timeout")
+	#front_area.connect("body_entered", self, "on_FrontArea_body_entered")
 	front_area.connect("body_exited", self, "on_FrontArea_body_exited")
 	behind_area.connect("body_entered", self, "on_BehindArea_body_entered")
 

@@ -58,9 +58,12 @@ func on_AnimationPlayer_animation_finished(_animation_name):
 
 func on_body_entered(body):
 	.on_body_entered(body)
-	if get_collision_exceptions().has(body):
+	if get_collision_exceptions().has(body) or body == self:
 		return
-	explode()
+	if body.is_in_group("projectiles"):
+		gravity_scale = .2
+	else:
+		explode()
 
 
 func on_GuidanceUpdateTimer_timeout():
