@@ -69,11 +69,6 @@ pause_mode = 2
 [node name="BoxV3" parent="." instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 0.987689, -0.156435, 0, 0.156435, 0.987689, -0.539152, -0.70964, 0.112696 )
 
-[node name="WeirdCamera" parent="BoxV3" instance=ExtResource( 39 )]
-pause_mode = 2
-transform = Transform( 1, 0, 0, 0, -3.27826e-07, 1, 0, -1, -3.27826e-07, 0.0123291, 10.8958, 2.55503 )
-environment = null
-
 [node name="Playfield" type="Spatial" parent="BoxV3"]
 transform = Transform( 1, 0, 0, 0, 0.998628, 0.0523352, 0, -0.0523352, 0.998628, 2.02656e-06, -1.94052, 0.30733 )
 
@@ -337,6 +332,11 @@ transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -
 
 [node name="CurvedRamp_R" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 27 )]
 transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 2.03313, 7.15256e-07, -3 )
+
+[node name="WeirdCamera" parent="BoxV3" instance=ExtResource( 39 )]
+pause_mode = 2
+transform = Transform( 1, 0, 0, 0, -3.42727e-07, 0.999999, 0, -0.999999, -3.57628e-07, 0.0123291, 10.8958, 2.55503 )
+environment = null
 
 [node name="Reference" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, -0.676062, -2.62545, 0.214347 )

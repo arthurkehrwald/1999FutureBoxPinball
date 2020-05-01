@@ -17,9 +17,14 @@ albedo_color = Color( 0.670588, 1, 1, 1 )
 
 [node name="Pinball" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
+EXTRA_BALL_TRAIL_COLOR = Color( 0.945098, 0.854902, 0.113725, 1 )
 
 [node name="MeshInstance" parent="." index="1"]
 material/0 = ExtResource( 5 )
+
+[node name="MotionTrail" parent="MeshInstance" index="0" instance=ExtResource( 7 )]
+width = 0.13
+lifespan = 0.3
 
 [node name="RotationStabiliser" type="Spatial" parent="." index="3"]
 script = ExtResource( 6 )
@@ -49,6 +54,3 @@ autostart = true
 wait_time = 0.5
 one_shot = true
 autostart = true
-
-[node name="MotionTrail" parent="." index="7" instance=ExtResource( 7 )]
-width = 0.1

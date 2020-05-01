@@ -47,9 +47,9 @@ func set_locked(is_locked):
 
 
 func is_airborne():
-	if area.get_overlapping_bodies().empty():
+	if hitreg_area.get_overlapping_bodies().empty():
 		return true
-	for body in area.get_overlapping_bodies():
+	for body in hitreg_area.get_overlapping_bodies():
 		if !body.is_in_group("projectiles"):
 			return false
 	return true

@@ -63,7 +63,7 @@ func _process(delta):
 	end()
 
 func appendPoint():
-	var widthVec = get_global_transform().basis.x * width
+	var widthVec = -(oldPos - get_global_transform().origin).cross(Vector3.UP).normalized() * width
 	
 	points.append(get_global_transform().origin + widthVec)
 	points2.append(get_global_transform().origin - widthVec)

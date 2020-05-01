@@ -15,6 +15,7 @@ export var MISSILE_EXPLOSION_BASE_DAMAGE = 10.0
 export var EXPLOSION_DISTANCE_RELEVANCE = 0.5
 export var MONEY_YIELD_PER_DAMAGE = 1.0
 export var MONEY_TEXT_HEIGHT = 0.5
+export var BOMBS_EXPLODE_ON_IMPACT = false
 export var IS_VULNERABLE_PER_STAGE = {
 	"0-Testing": true,
 	"1-Pregame": false,
@@ -100,6 +101,8 @@ func on_hit_by_projectile(projectile):
 		damage = calc_roller_damage(PINBALL_DIRECT_HIT_BASE_DAMAGE,
 				projectile.get_linear_velocity().length() / projectile.SPEED_LIM)
 	elif projectile.is_in_group("bombs"):
+		if BOMBS_EXPLODE_ON_IMPACT:
+			projectile.explode()
 		damage = calc_roller_damage(BOMB_DIRECT_HIT_BASE_DAMAGE,
 				projectile.get_linear_velocity().length() / projectile.SPEED_LIM)
 	elif projectile.is_in_group("missiles"):
