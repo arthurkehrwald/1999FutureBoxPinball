@@ -23,7 +23,7 @@ onready var remote_control_timer = get_node("RemoteControlTimer")
 onready var remote_control_time_bar = get_node("RotationStabiliser/RemoteControlTimeBar3D/Viewport/Bar")
 onready var arrow_sprite = get_node("RotationStabiliser/ArrowSprite")
 onready var appear_particles_timer = get_node("AppearParticlesTimer")
-onready var motion_trail = get_node("MotionTrail")
+onready var motion_trail = get_node("MeshInstance/MotionTrail")
 
 
 func _ready():

@@ -80,8 +80,6 @@ func _physics_process(delta):
 		var reached_entrance = speed < 0 and path_follow.get_unit_offset() == 0
 		var reached_exit = speed > 0 and path_follow.get_unit_offset() == 1
 		if reached_exit or reached_entrance:
-			path_follow.remove_child(looping_body_mesh)
-			looping_body.get_ref().add_child(looping_body_mesh)
 			looping_body.get_ref().set_locked(false)
 			var impulse_dir = Vector3.ZERO
 			var impulse = Vector3.ZERO
@@ -146,12 +144,15 @@ func reset(is_active):
 	entrance_area.set_deferred("monitorable", is_active)
 	exit_area.set_deferred("monitoring", is_active)
 	exit_area.set_deferred("monitorable", is_active)
-	looping_body_mesh = null
 	if looping_body != null:
 		if looping_body.get_ref():
 			looping_body_waiting_status = states.NONE
 			looping_body_entered_status = states.NONE
 			looping_body.get_ref().set_visible(true)
 			looping_body.get_ref().set_locked(false)
+			if looping_body_mesh != null:
+				path_follow.remove_child(looping_body_mesh)
+				looping_body.get_ref().add_child(looping_body_mesh)
+				looping_body_mesh = null
 		looping_body = null
 	speed = 0
