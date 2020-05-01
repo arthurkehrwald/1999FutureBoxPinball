@@ -9,11 +9,11 @@
 [ext_resource path="res://Scenes/ShopEntrance.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Old/RemoteBallControlTimer.gd" type="Script" id=8]
 [ext_resource path="res://Old/MultiTrigger.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/CurvedRamp.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/CurvedRampL.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/WeirdCamera.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/CurvedRamp_R.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/CurvedRampR.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/SimpleCube.tscn" type="PackedScene" id=17]
@@ -27,6 +27,8 @@
 [ext_resource path="res://Scenes/Slingshot.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/TemporaryFlipper.tscn" type="PackedScene" id=29]
+
+
 
 
 

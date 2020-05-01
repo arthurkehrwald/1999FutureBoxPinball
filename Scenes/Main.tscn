@@ -26,7 +26,7 @@
 [ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/Storm.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Scenes/CurvedRamp_R.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scenes/CurvedRampR.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/RibbonHUD.tscn" type="PackedScene" id=28]
 [ext_resource path="res://HUD/Game_Over_Plain_01.ogv" type="VideoStream" id=29]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=30]
@@ -34,7 +34,7 @@
 [ext_resource path="res://Scenes/BumperCage.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=34]
-[ext_resource path="res://Scenes/CurvedRamp.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Scenes/CurvedRampL.tscn" type="PackedScene" id=35]
 [ext_resource path="res://Scenes/BoxV3.tscn" type="PackedScene" id=36]
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=37]
 [ext_resource path="res://Scenes/TeleporterEntrance.tscn" type="PackedScene" id=38]
@@ -313,10 +313,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14589, 7.15256e-07, 1.11051
 transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 0.176186, 3.73275, -9.53674e-07, 7.03805 )
 
 [node name="CurvedRamp" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 35 )]
-transform = Transform( 0.594161, 0, 0.083504, 0, 0.600001, -2.23517e-08, -0.0835039, -3.72529e-09, 0.594162, -0.548, 2.38419e-07, -2.989 )
+transform = Transform( 0.990268, -8.5569e-10, 0.139173, -9.31323e-10, 1, 0, -0.139173, -7.45058e-09, 0.990268, -0.548, 2.38419e-07, -2.989 )
 
 [node name="CurvedRamp_R" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 27 )]
-transform = Transform( 0.594161, 0, -0.0835039, 0, 0.6, 7.45058e-09, 0.0835039, 0, 0.594161, 1.9, 7.15256e-07, -3 )
+transform = Transform( 0.990268, 0, -0.139173, 0, 1, -2.23517e-08, 0.139173, 0, 0.990268, 2.02839, 1.43051e-06, -3 )
 
 [node name="Reference" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, -0.676062, -2.62545, 0.214347 )
