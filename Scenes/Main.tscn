@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Scenes/TriangularWall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=2]
@@ -47,6 +47,15 @@
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=45]
 [ext_resource path="res://Testing/LongBox.tscn" type="PackedScene" id=46]
 
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("BoxV3/Playfield/TransmissionHUD3D/Viewport")
+
+[sub_resource type="ViewportTexture" id=3]
+viewport_path = NodePath("BoxV3/Playfield/PlayerStatsHUD3D/Viewport")
+
 [node name="Main" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014652, 0.00814342, -0.0152197 )
 
@@ -70,6 +79,7 @@ transform = Transform( 1, 0, 0, 0, 0.998629, 0.0523353, 0, -0.0523353, 0.998629,
 pause_mode = 2
 transform = Transform( 0.806335, 0, 0, 0, 0.00507604, 0.854629, 0, -0.806869, -0.00507595, -0.457334, 0.0788434, 4.49143 )
 material_override = ExtResource( 2 )
+texture = SubResource( 1 )
 region_enabled = true
 region_rect = Rect2( 34.6944, 0, 613.113, 418.448 )
 script = ExtResource( 5 )
@@ -109,6 +119,7 @@ transform = Transform( 0.806335, 0, 0, 0, 0.00507621, 0.85463, 0, -0.806869, -0.
 material_override = ExtResource( 2 )
 centered = false
 offset = Vector2( 0, -40 )
+texture = SubResource( 2 )
 region_enabled = true
 region_rect = Rect2( 34.6944, 0, 432.06, 380.926 )
 script = ExtResource( 5 )
@@ -132,6 +143,7 @@ transform = Transform( 0.806335, 0, 0, 0, 0.00507621, 0.85463, 0, -0.80687, -0.0
 material_override = ExtResource( 2 )
 centered = false
 offset = Vector2( -436.79, -40 )
+texture = SubResource( 3 )
 region_enabled = true
 region_rect = Rect2( 45.9354, 0, 425.065, 380.745 )
 script = ExtResource( 5 )
@@ -229,7 +241,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59964, 0.245859, 0.0462199 
 
 [node name="MultiballShip" parent="BoxV3/Playfield" instance=ExtResource( 37 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25363, 0.0278032, -5.79861 )
-visible = false
 
 [node name="Storm" parent="BoxV3/Playfield" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, -2.23517e-08, 0, 2.23517e-08, 1, 0, 9.53674e-07, -5.41155 )
@@ -313,10 +324,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14589, 7.15256e-07, 1.11051
 transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 0.176186, 3.73275, -9.53674e-07, 7.03805 )
 
 [node name="CurvedRamp" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 35 )]
-transform = Transform( 0.990268, -8.5569e-10, 0.139173, -9.31323e-10, 1, 0, -0.139173, -7.45058e-09, 0.990268, -0.548, 2.38419e-07, -2.989 )
+transform = Transform( 0.594161, 0, 0.083504, 0, 0.600001, -2.23517e-08, -0.0835039, -3.72529e-09, 0.594162, -0.547634, -0.00720668, -2.98918 )
 
 [node name="CurvedRamp_R" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 27 )]
-transform = Transform( 0.990268, 0, -0.139173, 0, 1, -2.23517e-08, 0.139173, 0, 0.990268, 2.02839, 1.43051e-06, -3 )
+transform = Transform( 0.594161, 0, -0.0835039, 0, 0.6, -2.6077e-08, 0.0835039, 0, 0.594161, 1.9, 0.000999928, -3 )
 
 [node name="Reference" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, -0.676062, -2.62545, 0.214347 )
