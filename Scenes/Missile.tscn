@@ -10,13 +10,13 @@
 [ext_resource path="res://Materials/Crazy_Rocket_01/initialShadingGroup_occlusionRoughnessMetallic.png" type="Texture" id=8]
 [ext_resource path="res://Materials/Crazy_Rocket_01/initialShadingGroup_emissive.png" type="Texture" id=9]
 
-[sub_resource type="PhysicsMaterial" id=10]
+[sub_resource type="PhysicsMaterial" id=1]
 friction = 0.1
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.205, 0.16, 0.41 )
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 7 )
 roughness = 0.85
 roughness_texture = ExtResource( 8 )
@@ -27,19 +27,15 @@ emission_operator = 0
 emission_on_uv2 = false
 emission_texture = ExtResource( 9 )
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.819608, 0.231373, 0.231373, 1 )
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=5]
 flags_unshaded = true
 albedo_color = Color( 0.878431, 0.564706, 0.286275, 1 )
 
-[sub_resource type="PrismMesh" id=5]
+[sub_resource type="PrismMesh" id=6]
 size = Vector3( 0.2, 0.2, 0.2 )
-
-[sub_resource type="SpatialMaterial" id=6]
-flags_unshaded = true
-albedo_color = Color( 0.878431, 0.564706, 0.286275, 1 )
 
 [sub_resource type="SpatialMaterial" id=7]
 flags_unshaded = true
@@ -53,30 +49,34 @@ albedo_color = Color( 0.878431, 0.564706, 0.286275, 1 )
 flags_unshaded = true
 albedo_color = Color( 0.878431, 0.564706, 0.286275, 1 )
 
+[sub_resource type="SpatialMaterial" id=10]
+flags_unshaded = true
+albedo_color = Color( 0.878431, 0.564706, 0.286275, 1 )
+
 [sub_resource type="BoxShape" id=11]
 extents = Vector3( 0.245, 0.175, 0.435 )
 
 [node name="Missile" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, -5 )
 mass = 5.0
-physics_material_override = SubResource( 10 )
+physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 linear_damp = 0.4
 angular_damp = 0.2
 script = ExtResource( 3 )
 
 [node name="CollisionShape" parent="." index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="New_Rocket_UV_02" type="MeshInstance" parent="." index="1"]
 transform = Transform( -0.41756, 0, -1.36058e-07, 0, 0.41756, 8.9407e-08, 1.36058e-07, 8.9407e-08, -0.41756, 0, -0.215705, -0.0293398 )
 mesh = ExtResource( 6 )
-material/0 = SubResource( 2 )
+material/0 = SubResource( 3 )
 
 [node name="MeshInstance" parent="." index="2"]
 visible = false
 mesh = ExtResource( 1 )
-material/0 = SubResource( 3 )
+material/0 = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 playback_process_mode = 0
@@ -86,14 +86,14 @@ anims/missile_launch = ExtResource( 4 )
 [node name="MainExhaustFlame" type="MeshInstance" parent="." index="5"]
 transform = Transform( 0.15, 0, 0, 0, -6.55671e-09, 0.15, 0, -0.15, -6.55671e-09, 0, 0, 0.350464 )
 mesh = ExtResource( 5 )
-material/0 = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="TargetPointer" type="Spatial" parent="." index="6"]
 
 [node name="MeshInstance" type="MeshInstance" parent="TargetPointer" index="0"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.65 )
 visible = false
-mesh = SubResource( 5 )
+mesh = SubResource( 6 )
 material/0 = null
 
 [node name="GuidanceUpdateTimer" type="Timer" parent="." index="7"]
@@ -107,25 +107,25 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3 )
 transform = Transform( 0.07, 0, 0, 0, 0.0699999, 0, 0, 0, 0.0699999, 0, -0.15, 0 )
 visible = false
 mesh = ExtResource( 5 )
-material/0 = SubResource( 6 )
+material/0 = SubResource( 7 )
 
 [node name="TopExhaustFlame" type="MeshInstance" parent="SteeringFlames" index="1"]
 transform = Transform( -0.07, 2.28089e-08, 0, -2.28089e-08, -0.0699999, 0, 0, 0, 0.0699999, 0, 0.15, 2.98023e-08 )
 visible = false
 mesh = ExtResource( 5 )
-material/0 = SubResource( 7 )
+material/0 = SubResource( 8 )
 
 [node name="LeftExhaustFlame" type="MeshInstance" parent="SteeringFlames" index="2"]
 transform = Transform( 2.58687e-08, 0.0699999, 0, -0.07, 2.58686e-08, -3.72529e-09, 0, 0, 0.0699998, -0.15, 2.98023e-08, 0 )
 visible = false
 mesh = ExtResource( 5 )
-material/0 = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="RightExhaustFlame" type="MeshInstance" parent="SteeringFlames" index="3"]
 transform = Transform( -3.19883e-08, -0.0699999, 0, 0.0699999, -3.19882e-08, -3.72529e-09, 0, 0, 0.0699998, 0.15, 2.98023e-08, 0 )
 visible = false
 mesh = ExtResource( 5 )
-material/0 = SubResource( 9 )
+material/0 = SubResource( 10 )
 
 [node name="Area" parent="." index="9"]
 transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0.03, -3.72529e-09 )

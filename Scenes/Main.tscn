@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Scenes/TriangularWall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=2]
@@ -46,6 +46,8 @@
 [ext_resource path="res://Scenes/Slingshot_R.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=45]
 [ext_resource path="res://Testing/LongBox.tscn" type="PackedScene" id=46]
+[ext_resource path="res://Scenes/FlipperV2.tscn" type="PackedScene" id=47]
+[ext_resource path="res://Scenes/FlipperV2_R.tscn" type="PackedScene" id=48]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")
@@ -73,7 +75,7 @@ transform = Transform( 1, 0, 0, 0, -3.27826e-07, 1, 0, -1, -3.27826e-07, 0.01232
 environment = null
 
 [node name="Playfield" type="Spatial" parent="BoxV3"]
-transform = Transform( 1, 0, 0, 0, 0.998629, 0.0523353, 0, -0.0523353, 0.998629, 2.02656e-06, -1.92887, 0.305485 )
+transform = Transform( 1, 0, 0, 0, 0.998628, 0.0523352, 0, -0.0523352, 0.998628, 2.02656e-06, -1.94052, 0.30733 )
 
 [node name="CentralHUD3D" type="Sprite3D" parent="BoxV3/Playfield"]
 pause_mode = 2
@@ -178,12 +180,18 @@ IS_VULNERABLE_PER_STAGE = {
 }
 
 [node name="Flipper" parent="BoxV3/Playfield" instance=ExtResource( 20 )]
-transform = Transform( 0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, -1.74427, 6.86646e-05, 6.52426 )
+transform = Transform( 0.906308, 0, -0.422618, -7.45058e-09, 1, 0, 0.422618, 0, 0.906308, -1.78653, -0.699932, 6.61489 )
 forward_impulse_strength = 500
 sideways_impulse_strength = 0
 
+[node name="FlipperV2" parent="BoxV3/Playfield" instance=ExtResource( 47 )]
+transform = Transform( 0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, -1.705, -2.38419e-07, 6.5 )
+
+[node name="FlipperV2_R" parent="BoxV3/Playfield" instance=ExtResource( 48 )]
+transform = Transform( 0.866026, 0, 0.5, 7.45058e-09, 1, 1.49012e-08, -0.5, 0, 0.866026, 0.897, -2.38419e-07, 6.5 )
+
 [node name="Flipper_R" parent="BoxV3/Playfield" instance=ExtResource( 26 )]
-transform = Transform( 0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, 0.942751, -0.000405788, 6.53826 )
+transform = Transform( 0.906308, 0, 0.422618, 1.49012e-08, 1, 0, -0.422618, 0, 0.906308, 0.894, -0.7, 6.5 )
 forward_impulse_strength = 500
 sideways_impulse_strength = 0
 
@@ -274,6 +282,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.83074, 0.000140905, 0.016608
 [node name="StageTwoEntryRamp" parent="BoxV3/Playfield" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00938, 9.53674e-07, -5.7332 )
 script = ExtResource( 18 )
+allow_exit_as_entrance = false
 
 [node name="LoopingLouiesLooping" parent="BoxV3/Playfield" instance=ExtResource( 43 )]
 transform = Transform( 0.860875, -6.81168e-10, -0.508815, -0.026629, 0.998628, -0.045054, 0.508118, 0.0523351, 0.859695, -2.45168, 0.949692, -2.18199 )
@@ -323,11 +332,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14589, 7.15256e-07, 1.11051
 [node name="LongBox6" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 46 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 0.176186, 3.73275, -9.53674e-07, 7.03805 )
 
-[node name="CurvedRamp" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 35 )]
-transform = Transform( 0.594161, 0, 0.083504, 0, 0.600001, -2.23517e-08, -0.0835039, -3.72529e-09, 0.594162, -0.547634, -0.00720668, -2.98918 )
+[node name="CurvedRamp_L" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 35 )]
+transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -0.868603, 0, -2.989 )
 
 [node name="CurvedRamp_R" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 27 )]
-transform = Transform( 0.594161, 0, -0.0835039, 0, 0.6, -2.6077e-08, 0.0835039, 0, 0.594161, 1.9, 0.000999928, -3 )
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 2.03313, 7.15256e-07, -3 )
 
 [node name="Reference" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, -0.676062, -2.62545, 0.214347 )

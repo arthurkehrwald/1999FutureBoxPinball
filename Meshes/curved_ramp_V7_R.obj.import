@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/curved_ramp_V7_R.obj-eb994f02e4915d2cc0591151592cb147.mesh"
+
+[deps]
+
+files=[ "res://.import/curved_ramp_V7_R.obj-eb994f02e4915d2cc0591151592cb147.mesh" ]
+
+source_file="res://Meshes/curved_ramp_V7_R.obj"
+dest_files=[ "res://.import/curved_ramp_V7_R.obj-eb994f02e4915d2cc0591151592cb147.mesh", "res://.import/curved_ramp_V7_R.obj-eb994f02e4915d2cc0591151592cb147.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

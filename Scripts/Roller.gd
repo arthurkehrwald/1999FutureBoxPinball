@@ -10,7 +10,7 @@ export(float, 0, 1.0) var GRAV_CURVE_STEEPNESS = .5
 export(float, 0, 1.0) var GRAV_CURVE_OFFSET = .5
 export(float, 0, 50.0) var SPEED_LIM = 30.0
 export var ENFORCE_SPEED_LIM = true
-export var AIRBORNE_GRAV_FACTOR = 1.0
+export var AIRBORNE_GRAV = 8.0
 
 
 func _ready():
@@ -28,7 +28,7 @@ func _physics_process(_delta):
 	gravity_scale = (MIN_GRAV - MAX_GRAV) / (1 + pow(E, -a * b)) + MAX_GRAV
 	var is_airborne = is_airborne()
 	if is_airborne:
-		gravity_scale *= AIRBORNE_GRAV_FACTOR
+		gravity_scale = AIRBORNE_GRAV
 	$Label.text = "speed: %s\ngrav: %s\nairborne: %s" % [speed, gravity_scale, is_airborne]
 
 
@@ -51,5 +51,5 @@ func is_airborne():
 		return true
 	for body in area.get_overlapping_bodies():
 		if !body.is_in_group("projectiles"):
-			return true
-	return false
+			return false
+	return true

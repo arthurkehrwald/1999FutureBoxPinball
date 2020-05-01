@@ -81,6 +81,7 @@ func _ready():
 		call_deferred("set_state", TESTING)
 	else:
 		call_deferred("set_state", PREGAME)
+	#Engine.time_scale = .2
 	#emit_signal("objectives_changed", OBJECTIVES[current_state])
 
 
