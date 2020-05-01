@@ -11,6 +11,7 @@ collision_mask = 0
 script = ExtResource( 2 )
 DIRECT_HIT_SPEED_RELEVANCE = 0.0
 MONEY_YIELD_PER_DAMAGE = 0.0
+BOMBS_EXPLODE_ON_IMPACT = true
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,

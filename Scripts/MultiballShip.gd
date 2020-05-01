@@ -27,6 +27,7 @@ func _ready():
 func on_EntranceArea_body_entered(body):
 	if not body.is_in_group("pinballs") or pinballs_locked >= 3:
 		return
+	body.turn_into_extra_pinball()
 	PoolManager.request(PoolManager.MULTIBALL_LOCK, body.get_global_transform().origin)
 	loaded_pinballs.push_back(weakref(body))
 	body.set_visible(false)

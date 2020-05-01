@@ -22,7 +22,6 @@ func _ready():
 		Globals.shop_menu.connect("bought_repair", self, "on_ShopMenu_bought_repair")
 	else:
 		push_warning("[PlayerShip]: Can't find shop menu!")
-	connect("body_entered", self, "on_body_entered")
 	connect("health_changed", self, "on_health_changed")
 	connect("death", GameState, "handle_event", [GameState.Event.PLAYER_DIED])
 
@@ -52,14 +51,13 @@ func on_health_changed(current_health, old_health, _max_health):
 		audio_player.play()
 
 
-func on_body_entered(body):
-	if not body.is_in_group("projectiles"):
-		return
-	on_hit_by_projectile(body)
-	if body.is_in_group("pinballs"):
-		body.on_hit_player()
-	if body.is_in_group("bombs") or body.is_in_group("missiles"):
-		body.explode()
+func on_hit_by_projectile(projectile):
+	if not projectile.is_in_group("extra_pinballs"):
+		.on_hit_by_projectile(projectile)
+	if projectile.is_in_group("pinballs"):
+		projectile.on_hit_player()
+	if projectile.is_in_group("missiles"):
+		projectile.explode()
 
 
 func on_GameState_changed(new_state, is_debug_skip):

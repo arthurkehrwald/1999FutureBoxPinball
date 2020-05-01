@@ -78,7 +78,6 @@ func on_ImpulseArea_body_entered(body):
 		angle = -angle
 	var dir = -basis.z.rotated(basis.y, angle)
 	body.apply_central_impulse(dir * dist * IMPULSE_STRENGTH)
-	print("flipper hit - dist: ", dist, " angle : ", rad2deg(angle))
 
 
 func on_hit_by_projectile(projectile):

@@ -33,7 +33,6 @@ monitorable = false
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="ImpulseArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

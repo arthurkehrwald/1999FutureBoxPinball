@@ -17,9 +17,9 @@ EXPLOSION_BASE_KNOCKBACK_STRENGTH = 15.0
 visible = false
 omni_range = 1.0
 
-[node name="Area" type="Area" parent="."]
+[node name="HitregArea" type="Area" parent="."]
 monitorable = false
 collision_layer = 0
 
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
+[node name="CollisionShape" type="CollisionShape" parent="HitregArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.086792, 0.060791, -0.0258789 )

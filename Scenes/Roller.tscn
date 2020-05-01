@@ -5,6 +5,7 @@
 
 [sub_resource type="PhysicsMaterial" id=1]
 rough = true
+bounce = 0.1
 
 [sub_resource type="SphereShape" id=2]
 radius = 0.2
@@ -41,6 +42,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CollisionShape" parent="Area" index="0"]
+[node name="CollisionShape" parent="HitregArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 4 )

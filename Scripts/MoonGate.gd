@@ -38,7 +38,6 @@ onready var mesh = get_node("MeshInstance")
 
 
 func _ready():
-	connect("body_entered", self, "on_body_entered")
 	connect("health_changed", self, "on_health_changed")
 	connect("death", self, "on_death")
 	scale_anim_player.connect("animation_finished", self, "on_ScaleAnimPlayer_animation_finished")
@@ -57,17 +56,15 @@ func _process(delta):
 				scale_down()
 
 
-func on_body_entered(var body):
-	if not body.is_in_group("projectiles"):
-		return
-	.on_hit_by_projectile(body)
-	var body_pos = body.get_global_transform().origin
-	var body_vel = body.get_linear_velocity()
-	start_spinning(body_pos, body_vel)
-	if is_flying and body_pos.z > get_global_transform().origin.z:
-		body.apply_central_impulse(Vector3.FORWARD * IMPULSE_STRENGTH)
-		if body.is_in_group("pinballs"):
-			body.on_hit_moon()
+func on_hit_by_projectile(var projectile):
+	.on_hit_by_projectile(projectile)
+	var projectile_pos = projectile.get_global_transform().origin
+	var projectile_vel = projectile.get_linear_velocity()
+	start_spinning(projectile_pos, projectile_vel)
+	if is_flying and projectile_pos.z > get_global_transform().origin.z:
+		projectile.apply_central_impulse(Vector3.FORWARD * IMPULSE_STRENGTH)
+		if projectile.is_in_group("pinballs"):
+			projectile.on_hit_moon()
 
 
 func start_spinning(var projectile_pos, var projectile_vel):

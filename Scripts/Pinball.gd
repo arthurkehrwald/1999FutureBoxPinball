@@ -12,6 +12,7 @@ const TRAIL_SCENE = preload("res://Scenes/PinballTrailFX.tscn")
 export var IS_ALWAYS_REMOTE_CONTROLLED = false
 export var REMOTE_CONTROL_STRENGTH = 4.0
 export var IS_REMOTE_CONTROL_FROM_PLAYER_POV = true
+export var EXTRA_BALL_TRAIL_COLOR = Color(1.0, 1.0, 1.0, 1.0)
 
 var is_accessible_to_player = true setget set_is_accessible_to_player
 var is_remote_controlled = false setget set_is_remote_controlled
@@ -22,6 +23,7 @@ onready var remote_control_timer = get_node("RemoteControlTimer")
 onready var remote_control_time_bar = get_node("RotationStabiliser/RemoteControlTimeBar3D/Viewport/Bar")
 onready var arrow_sprite = get_node("RotationStabiliser/ArrowSprite")
 onready var appear_particles_timer = get_node("AppearParticlesTimer")
+onready var motion_trail = get_node("MotionTrail")
 
 
 func _ready():
@@ -85,3 +87,8 @@ func on_hit_moon():
 
 func on_AppearParticlesTimer_timeout():
 	PoolManager.request(PoolManager.PINBALL_APPEAR, get_global_transform().origin)
+
+
+func turn_into_extra_pinball():
+	add_to_group("extra_pinballs")
+	motion_trail.startColor = EXTRA_BALL_TRAIL_COLOR

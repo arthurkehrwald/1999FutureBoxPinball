@@ -15,6 +15,7 @@ var looping_body_is_bomb = false
 var speed = 0
 var looping_body_waiting_status = states.NONE
 var looping_body_entered_status = states.NONE
+var looping_body_mesh = null
 
 onready var path_follow = get_node("PathFollow")
 onready var entrance_area = get_node("EntranceArea")
@@ -79,6 +80,8 @@ func _physics_process(delta):
 		var reached_entrance = speed < 0 and path_follow.get_unit_offset() == 0
 		var reached_exit = speed > 0 and path_follow.get_unit_offset() == 1
 		if reached_exit or reached_entrance:
+			path_follow.remove_child(looping_body_mesh)
+			looping_body.get_ref().add_child(looping_body_mesh)
 			looping_body.get_ref().set_locked(false)
 			var impulse_dir = Vector3.ZERO
 			var impulse = Vector3.ZERO
@@ -92,10 +95,11 @@ func _physics_process(delta):
 			reset(true)
 		else:
 			path_follow.set_offset(path_follow.get_offset() + speed * delta)
-			if looping_body_is_bomb:
-				bomb_replica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
-			else:
-				ball_replica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
+			looping_body_mesh.rotate_x(speed * SPEED_ROTATION_RATE * delta)
+#			if looping_body_is_bomb:
+#				bomb_replica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
+#			else:
+#				ball_replica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
 			if looping_body_waiting_status == states.AT_ENTRANCE and path_follow.get_unit_offset() > .6:
 				looping_body.get_ref().teleport(exit_area.get_global_transform().origin)
 				looping_body_waiting_status = states.AT_EXIT
@@ -110,10 +114,10 @@ func _physics_process(delta):
 
 func start_follow():
 	if looping_body.get_ref().is_in_group("pinballs"):
-		ball_replica.set_visible(true)
+		#ball_replica.set_visible(true)
 		looping_body_is_bomb = false
 	elif looping_body.get_ref().is_in_group("bombs"):
-		bomb_replica.set_visible(true)
+		#bomb_replica.set_visible(true)
 		looping_body_is_bomb = true
 	else:
 		push_error("WireRamp: Body with name: " + looping_body.get_ref().name
@@ -121,6 +125,9 @@ func start_follow():
 		+ " nor in group 'bombs.' Check groups")
 		looping_body = null
 		return
+	looping_body_mesh = looping_body.get_ref().get_node("MeshInstance")
+	looping_body_mesh.get_parent().remove_child(looping_body_mesh)
+	path_follow.add_child(looping_body_mesh)
 	looping_body.get_ref().set_visible(false)
 	looping_body.get_ref().set_locked(true)
 	entrance_area.set_deferred("monitoring", false)
@@ -133,12 +140,13 @@ func start_follow():
 func reset(is_active):
 	set_physics_process(false)
 	path_follow.set_unit_offset(0.0)
-	ball_replica.set_visible(false)
-	bomb_replica.set_visible(false)
+	#ball_replica.set_visible(false)
+	#bomb_replica.set_visible(false)
 	entrance_area.set_deferred("monitoring", is_active)
 	entrance_area.set_deferred("monitorable", is_active)
 	exit_area.set_deferred("monitoring", is_active)
 	exit_area.set_deferred("monitorable", is_active)
+	looping_body_mesh = null
 	if looping_body != null:
 		if looping_body.get_ref():
 			looping_body_waiting_status = states.NONE
