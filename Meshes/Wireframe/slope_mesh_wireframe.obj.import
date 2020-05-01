@@ -15,5 +15,4 @@ dest_files=[ "res://.import/slope_mesh_wireframe.obj-5f4ba71783045a5791bcdad501c
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
-offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true

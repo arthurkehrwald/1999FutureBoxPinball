@@ -15,5 +15,4 @@ dest_files=[ "res://.import/Enemy_Spaceship_Uvs_done_05.obj-1799a421d1618bab14b0
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
-offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true

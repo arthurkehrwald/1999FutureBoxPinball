@@ -15,5 +15,4 @@ dest_files=[ "res://.import/wall2_wireframe.obj-1822267f0d7f015c17d713f354226240
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
-offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true

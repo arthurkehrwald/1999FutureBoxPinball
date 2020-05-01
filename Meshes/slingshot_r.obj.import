@@ -15,5 +15,4 @@ dest_files=[ "res://.import/slingshot_r.obj-8bddfec5d9cf0d33d8228f3e1f4874f4.mes
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
-offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true
