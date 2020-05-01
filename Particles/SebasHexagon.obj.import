@@ -15,4 +15,5 @@ dest_files=[ "res://.import/SebasHexagon.obj-60f1cc106fc24a9204b0601b2556e8e3.me
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true

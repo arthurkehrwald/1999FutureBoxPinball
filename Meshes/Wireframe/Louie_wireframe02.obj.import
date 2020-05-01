@@ -15,4 +15,5 @@ dest_files=[ "res://.import/Louie_wireframe02.obj-8e6d17511a8b6c82bd02609d4c07e6
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true

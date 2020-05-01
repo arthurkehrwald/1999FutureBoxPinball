@@ -15,4 +15,5 @@ dest_files=[ "res://.import/boss_back_barrier.obj-b2f9420dd55e3bbd104b267e8f0a8d
 
 generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
 optimize_mesh=true
