@@ -1,4 +1,4 @@
-class_name ShopEntrance
+class_name ShopEntranceV2
 extends Area
 # Emits singal to activate shop menu if player has
 # enough money to buy something, 'shop_enter' input
