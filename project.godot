@@ -84,11 +84,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/ShopEntrance.gd"
 }, {
-"base": "Area",
-"class": "ShopEntranceV2",
-"language": "GDScript",
-"path": "res://Scripts/ShopEntranceV2.gd"
-}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -120,7 +115,6 @@ _global_script_class_icons={
 "Projectile": "",
 "RotationStabiliser": "",
 "ShopEntrance": "",
-"ShopEntranceV2": "",
 "State": "",
 "StateMachine": "",
 "VisualShaderNodePerlinNoise3D": ""
