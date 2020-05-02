@@ -46,8 +46,6 @@
 [ext_resource path="res://Scenes/CurvedRampL.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scenes/GlitchShaderFullscreen.tscn" type="PackedScene" id=45]
 
-
-
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")
 
@@ -312,7 +310,7 @@ script = ExtResource( 8 )
 transform = Transform( 0.860875, -6.81168e-10, -0.508815, -0.026629, 0.998628, -0.045054, 0.508118, 0.0523351, 0.859695, -2.45295, 0.964935, -2.21368 )
 
 [node name="TeleporterEntrance" parent="BoxV3/Playfield" instance=ExtResource( 35 )]
-transform = Transform( 0.808905, -0.00531529, -0.39452, 0.00484292, 0.899984, -0.00219557, 0.394526, -0.000149503, 0.808919, 2.00157, -0.046324, -2.1876 )
+transform = Transform( 0.898815, 0.0334933, -0.0318062, -0.0332547, 0.899355, 0.00731538, 0.0320558, -0.00613047, 0.899409, -0.24436, -0.0462608, -1.71748 )
 collision_mask = 1
 
 [node name="TeleporterExit" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
