@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/plungerlane_guide_placeholder.obj-6cff43f09313989e9bc959b3d0a1805a.mesh"
+
+[deps]
+
+files=[ "res://.import/plungerlane_guide_placeholder.obj-6cff43f09313989e9bc959b3d0a1805a.mesh" ]
+
+source_file="res://Meshes/plungerlane_guide_placeholder.obj"
+dest_files=[ "res://.import/plungerlane_guide_placeholder.obj-6cff43f09313989e9bc959b3d0a1805a.mesh", "res://.import/plungerlane_guide_placeholder.obj-6cff43f09313989e9bc959b3d0a1805a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
