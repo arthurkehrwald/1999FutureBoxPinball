@@ -57,7 +57,7 @@ albedo_color = Color( 0.878431, 0.564706, 0.286275, 1 )
 extents = Vector3( 0.3, 0.23, 0.51 )
 
 [node name="Missile" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 0.701198, -0.712967, 0, 0.712967, 0.701198, 0, 1.01435, -0.788735 )
+transform = Transform( 1, 0, 0, 0, 0.790024, -0.613076, 0, 0.613076, 0.790024, 0, 1.25369, -0.977181 )
 mass = 5.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
@@ -113,7 +113,6 @@ material/0 = SubResource( 7 )
 
 [node name="TopExhaustFlame" type="MeshInstance" parent="SteeringFlames" index="1"]
 transform = Transform( -0.07, 2.28089e-08, 0, -2.28089e-08, -0.0699999, 0, 0, 0, 0.0699999, 0, 0.15, 2.98023e-08 )
-visible = false
 mesh = ExtResource( 5 )
 material/0 = SubResource( 8 )
 
@@ -131,6 +130,7 @@ material/0 = SubResource( 10 )
 
 [node name="HitregArea" parent="." index="9"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, -0.0250001 )
+monitoring = false
 
 [node name="CollisionShape" parent="HitregArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )

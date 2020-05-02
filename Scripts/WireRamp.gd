@@ -46,16 +46,17 @@ func on_EntranceArea_body_entered(body):
 
 
 func on_ExitArea_body_entered(body):
-	if looping_body == null:
-		var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(exit_area.get_global_transform().basis.z), 3) + 1)
-		speed = angle_factor * body.get_linear_velocity().length() * -start_velocity_multiplier
-		if speed < 0:
-			looping_body = weakref(body)
-			looping_body.get_ref().teleport(exit_area.get_global_transform().origin)
-			path_follow.set_unit_offset(1.0)
-			looping_body_waiting_status = states.AT_EXIT
-			looping_body_entered_status = states.AT_EXIT
-			start_follow()
+	if looping_body != null or not body.is_in_group("rollers"):
+		return
+	var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(exit_area.get_global_transform().basis.z), 3) + 1)
+	speed = angle_factor * body.get_linear_velocity().length() * -start_velocity_multiplier
+	if speed < 0:
+		looping_body = weakref(body)
+		looping_body.get_ref().teleport(exit_area.get_global_transform().origin)
+		path_follow.set_unit_offset(1.0)
+		looping_body_waiting_status = states.AT_EXIT
+		looping_body_entered_status = states.AT_EXIT
+		start_follow()
 
 
 func _physics_process(delta):
