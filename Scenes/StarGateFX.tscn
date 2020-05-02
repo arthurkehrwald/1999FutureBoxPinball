@@ -8,10 +8,6 @@
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
 albedo_texture = ExtResource( 1 )
 
 [sub_resource type="Gradient" id=2]
@@ -34,6 +30,8 @@ spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 scale_curve = SubResource( 5 )
 color_ramp = SubResource( 3 )
+hue_variation = 0.02
+hue_variation_random = 0.07
 
 [sub_resource type="QuadMesh" id=7]
 
@@ -89,18 +87,17 @@ hue_variation_random = 1.0
 script = ExtResource( 2 )
 
 [node name="Ring" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 material_override = SubResource( 1 )
-emitting = false
-amount = 3
+amount = 5
+lifetime = 2.0
 preprocess = 0.2
-explosiveness = 0.75
 process_material = SubResource( 6 )
 draw_pass_1 = SubResource( 7 )
 
 [node name="BallExplosion" type="Particles" parent="."]
+visible = false
 material_override = SubResource( 8 )
-emitting = false
 amount = 250
 lifetime = 1.5
 preprocess = 0.2
