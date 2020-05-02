@@ -24,7 +24,6 @@ __meta__ = {
 }
 DECISION_TIME = 10.0
 EXTRA_FLIPPER_DURATION = 30.0
-REMOTE_CONTROL_DURATION = 30.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 578.0

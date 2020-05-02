@@ -6,6 +6,8 @@ var shop_menu = null
 # shop - activate the menu, know price for items
 # player turret - enter firing mode when the player buys a turret shot
 
+var powerup_roulette = null
+
 var boss = null
 # missile guns - shoot where boss is facing
 # bomb guns - add and remove collision exceptions with bombs
@@ -28,3 +30,5 @@ var teleporter_exits = []
 
 var head_track_cam_dummy = null
 # weird camera - interpret head tracking input
+
+var player_turret = null

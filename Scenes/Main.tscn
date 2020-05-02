@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Scenes/TriangularWall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=2]
@@ -48,6 +48,7 @@
 [ext_resource path="res://Testing/LongBox.tscn" type="PackedScene" id=46]
 [ext_resource path="res://Scenes/FlipperV2.tscn" type="PackedScene" id=47]
 [ext_resource path="res://Scenes/FlipperV2_R.tscn" type="PackedScene" id=48]
+[ext_resource path="res://Scenes/PowerupRoulette.tscn" type="PackedScene" id=49]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")
@@ -74,7 +75,7 @@ transform = Transform( 1, 0, 0, 0, 0.998628, 0.0523352, 0, -0.0523352, 0.998628,
 
 [node name="CentralHUD3D" type="Sprite3D" parent="BoxV3/Playfield"]
 pause_mode = 2
-transform = Transform( 0.806335, 0, 0, 0, 0.00507604, 0.854629, 0, -0.806869, -0.00507595, -0.457334, 0.0788434, 4.49143 )
+transform = Transform( 0.7, 0, 0, 0, 0.00440366, 0.699986, 0, -0.699986, 0.00440366, -0.457334, 0.0788434, 4.49143 )
 material_override = ExtResource( 2 )
 texture = SubResource( 1 )
 region_enabled = true
@@ -96,6 +97,7 @@ margin_bottom = -439.0
 focus_mode = 2
 
 [node name="ObjectiveHUD" parent="BoxV3/Playfield/CentralHUD3D/Viewport" instance=ExtResource( 14 )]
+visible = false
 margin_left = 54.0
 margin_top = 11.0
 margin_right = -448.0
@@ -107,6 +109,12 @@ margin_left = 43.4249
 margin_top = 10.0211
 margin_right = -458.575
 margin_bottom = -439.979
+
+[node name="PowerupRoulette" parent="BoxV3/Playfield/CentralHUD3D/Viewport" instance=ExtResource( 49 )]
+margin_left = -208.0
+margin_top = -63.0
+margin_right = 192.0
+margin_bottom = 37.0
 
 [node name="GlitchOverlay" parent="BoxV3/Playfield/CentralHUD3D/Viewport" instance=ExtResource( 19 )]
 
@@ -249,9 +257,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25363, 0.0278032, -5.79861 
 transform = Transform( 1, 0, 0, 0, 1, -2.23517e-08, 0, 2.23517e-08, 1, 0, 9.53674e-07, -5.41155 )
 
 [node name="ShopEntrance" parent="BoxV3/Playfield" instance=ExtResource( 3 )]
-transform = Transform( -0.592056, 0, -0.805897, -4.47035e-08, 1, -2.23517e-08, 0.805898, 0, -0.592057, -2.63442, -0.00016737, 5.31615 )
+transform = Transform( -0.592056, 0, -0.805897, -7.45058e-08, 1, -7.45058e-09, 0.805898, 0, -0.592057, -2.79489, -0.000167847, 5.19826 )
 collision_layer = 1
 collision_mask = 0
+PRICE_FOR_EVERYTHING = 1.0
 
 [node name="Slingshot" parent="BoxV3/Playfield" instance=ExtResource( 22 )]
 transform = Transform( 0.598534, 0, 0.0419166, 1.39698e-09, 0.6, -2.23517e-08, -0.0419166, 3.72529e-09, 0.598534, -2.81191, -7.62939e-05, 4.89009 )

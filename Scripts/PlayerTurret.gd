@@ -22,12 +22,20 @@ onready var max_transform = get_transform().rotated(get_transform().basis.y.norm
 		deg2rad(MAX_TURN_ANGLE))
 
 
+func _enter_tree():
+	Globals.player_turret = self
+
+
 func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.shop_menu != null:
 		Globals.shop_menu.connect("bought_turret_shot", self, "insert_ball")
 	else:
 		push_warning("[Turret] can't find shop menu! Will not respond when player buys turret shot.")
+	if Globals.powerup_roulette != null:
+		Globals.powerup_roulette.connect("selected_turret", self, "insert_ball")
+	else:
+		push_warning("[Turret] can't find powerup roulette! Will not respond when player buys turret shot.")
 	set_process(false)
 
 
@@ -75,7 +83,8 @@ func on_GameState_changed(new_state, is_debug_skip):
 
 
 func insert_ball(ball):
-	assert(ball.is_in_group("pinballs"))
+	if ball == null or not ball.is_in_group("pinballs"):
+		return
 	if ball_to_shoot != null:
 		shoot(.5)
 	Announcer.say("turret_active")

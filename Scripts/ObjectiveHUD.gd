@@ -18,6 +18,11 @@ func _ready():
 	else:
 		push_warning("[ObjectiveHUD] Can't find shop menu! Will ignore whether"
 				+ " it is active or not.")
+	if Globals.powerup_roulette != null:
+		Globals.powerup_roulette.connect("is_active_changed", self, "on_PowerupRoulette_is_active_changed")
+	else:
+		push_warning("[ObjectiveHUD] Can't find powerup roulette! Will ignore whether"
+				+ " it is active or not.")
 
 
 func set_objectives(objectives):
@@ -60,4 +65,8 @@ func set_objective_complete(completed_obj_index):
 
 
 func on_ShopMenu_is_active_changed(value):
+	set_visible(!value)
+
+
+func on_PowerupRoulette_is_active_changed(value):
 	set_visible(!value)

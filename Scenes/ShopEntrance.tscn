@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/ShopEntrance.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/ShopEntranceV2.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/shop.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=3]
 

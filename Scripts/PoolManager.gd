@@ -28,7 +28,7 @@ var effect_info = {
 	ENEMY_EXPLOSION: Pool.new(preload("res://Scenes/EnemyExplosionFX.tscn"), 7),
 	BUMPER_HIT: Pool.new(preload("res://Scenes/BumperHitFX.tscn"), 50),
 	SLINGSHOT_HIT: Pool.new(preload("res://Scenes/SlingshotHitFX.tscn"), 5),
-	DAMAGEABLE_HIT: Pool.new(preload("res://Scenes/DamageableHitFX.tscn"), 5),
+	DAMAGEABLE_HIT: Pool.new(preload("res://Scenes/DamageableHitFX.tscn"), 10),
 	MULTIBALL_LOCK: Pool.new(preload("res://Scenes/MultiballLockFX.tscn"), 3),
 	MULTIBALL_SHOT: Pool.new(preload("res://Scenes/MultiballShotFX.tscn"), 1),
 	MOON_TRIGGERED: Pool.new(preload("res://Scenes/MoonTriggeredFX.tscn"), 1),

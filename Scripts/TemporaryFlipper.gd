@@ -13,6 +13,8 @@ func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.shop_menu != null:
 		Globals.shop_menu.connect("bought_flipper", self, "on_ShopMenu_bought_flipper")
+	if Globals.powerup_roulette != null:
+		Globals.powerup_roulette.connect("selected_flipper", self, "on_PowerupRoulette_selected_flipper")
 	active_timer.connect("timeout", self, "on_ActiveTimer_timeout")
 	set_process(false)
 
@@ -46,6 +48,10 @@ func set_is_active(value, duration = 0):
 
 
 func on_ShopMenu_bought_flipper(duration):
+	set_is_active(true, duration)
+
+
+func on_PowerupRoulette_selected_flipper(duration):
 	set_is_active(true, duration)
 
 

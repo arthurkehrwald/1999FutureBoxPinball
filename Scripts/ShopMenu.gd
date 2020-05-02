@@ -15,7 +15,6 @@ export var PRICE_FOR_EVERYTHING = 200.0
 export var DECISION_TIME = 5.0
 export var PLAYER_REPAIR_HEAL_PERCENT = 50.0
 export var EXTRA_FLIPPER_DURATION = 20.0
-export var REMOTE_CONTROL_DURATION = 10.0
 
 var is_active = false
 var selected_item = 1
@@ -118,7 +117,7 @@ func buy_item(item_index):
 				emit_signal("bought_turret_shot", ball_in_shop)
 		4:
 			if ball_in_shop != null:
-				ball_in_shop.set_is_remote_controlled(true, REMOTE_CONTROL_DURATION)
+				ball_in_shop.set_is_remote_controlled(true)
 
 
 func on_GameState_changed(new_state, is_debug_skip):

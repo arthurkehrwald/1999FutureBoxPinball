@@ -82,7 +82,7 @@ _global_script_classes=[ {
 "base": "Area",
 "class": "ShopEntrance",
 "language": "GDScript",
-"path": "res://Scripts/ShopEntrance.gd"
+"path": "res://Scripts/ShopEntranceV2.gd"
 }, {
 "base": "Node",
 "class": "State",

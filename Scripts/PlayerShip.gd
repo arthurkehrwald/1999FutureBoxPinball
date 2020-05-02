@@ -22,6 +22,10 @@ func _ready():
 		Globals.shop_menu.connect("bought_repair", self, "on_ShopMenu_bought_repair")
 	else:
 		push_warning("[PlayerShip]: Can't find shop menu!")
+	if Globals.powerup_roulette != null:
+		Globals.powerup_roulette.connect("selected_repair", self, "on_PowerupRoulette_selected_repair")
+	else:
+		push_warning("[PlayerShip]: Can't find powerup roulette!")
 	connect("health_changed", self, "on_health_changed")
 	connect("death", GameState, "handle_event", [GameState.Event.PLAYER_DIED])
 
@@ -42,6 +46,10 @@ func set_coolness(value):
 
 
 func on_ShopMenu_bought_repair(heal_percent):
+	heal(MAX_HEALTH * .01 * heal_percent)
+
+
+func on_PowerupRoulette_selected_repair(heal_percent):
 	heal(MAX_HEALTH * .01 * heal_percent)
 
 
