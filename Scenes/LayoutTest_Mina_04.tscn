@@ -290,7 +290,7 @@ transform = Transform( 1, -7.45058e-09, 0, 0, 1, 0, 2.98023e-08, 0, 1, -0.804054
 transform = Transform( 0.82981, 1.34401e-07, -0.348448, -1.04308e-07, 0.9, 1.3411e-07, 0.348448, -4.47035e-08, 0.82981, 6.48689, 0.0313022, -0.71847 )
 
 [node name="TeleporterEntrance" parent="BoxV3/Playfield/FunSupport/TPs" instance=ExtResource( 32 )]
-transform = Transform( 0.992248, 1.3411e-07, -0.124257, -1.37836e-07, 1, -3.72529e-08, 0.124257, 5.21541e-08, 0.992253, 2.80043, 0.000453711, 8.07331 )
+transform = Transform( 0.992248, 1.37836e-07, -0.124257, -1.3411e-07, 1, -4.47035e-08, 0.124257, 5.21541e-08, 0.992253, 2.76442, 0.000453949, 8.36086 )
 collision_mask = 1
 
 [node name="TeleporterExit" parent="BoxV3/Playfield/FunSupport/TPs" instance=ExtResource( 33 )]
@@ -302,7 +302,7 @@ transform = Transform( -0.219909, 2.98023e-08, -0.159882, 3.25963e-09, 0.222222,
 [node name="Enemies" type="Spatial" parent="BoxV3/Playfield"]
 
 [node name="EnemyFleet" parent="BoxV3/Playfield/Enemies" instance=ExtResource( 48 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21191, -0.1163, 1.9605 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68211, -0.1163, 1.9605 )
 
 [node name="Boss" parent="BoxV3/Playfield/Enemies" instance=ExtResource( 47 )]
 transform = Transform( -0.8, 2.84217e-14, -3.11531e-07, 0, 0.8, 6.70552e-08, 3.11532e-07, 6.70552e-08, -0.8, -0.0143661, 7.79629e-05, -2.43169 )

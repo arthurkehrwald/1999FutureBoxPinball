@@ -46,8 +46,6 @@
 [ext_resource path="res://Scenes/CurvedRampL.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scenes/GlitchShaderFullscreen.tscn" type="PackedScene" id=45]
 
-
-
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")
 

@@ -332,7 +332,7 @@ script = ExtResource( 2 )
 transform = Transform( 0.860875, -6.81168e-10, -0.508815, -0.026629, 0.998628, -0.045054, 0.508118, 0.0523351, 0.859695, -2.45295, 0.964935, -2.21368 )
 
 [node name="TeleporterEntrance" parent="BoxV3/Playfield" instance=ExtResource( 35 )]
-transform = Transform( 0.701137, 9.04185e-08, -0.564277, -2.98023e-08, 0.9, 1.11759e-07, 0.564277, -6.70552e-08, 0.701137, 2.19705, 0.112294, -1.35069 )
+transform = Transform( 0.701137, 9.04185e-08, -0.564277, -2.98023e-08, 0.9, 1.2666e-07, 0.564277, -6.70552e-08, 0.701137, 2.19705, 0.112294, -1.35069 )
 collision_mask = 1
 
 [node name="TeleporterExit" parent="BoxV3/Playfield" instance=ExtResource( 31 )]
