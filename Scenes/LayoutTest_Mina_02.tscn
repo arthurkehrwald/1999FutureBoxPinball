@@ -275,7 +275,6 @@ transform = Transform( 0.909747, -0.153054, 0.385921, 0.0908261, 0.98042, 0.1747
 transform = Transform( -1.58325e-08, -0.25, 3.72529e-09, 0.1, -4.65661e-08, 9.31323e-10, -9.31323e-10, -7.45058e-09, 0.1, -0.651095, 0.56, 0 )
 
 [node name="MoonGate" parent="BoxV3/Playfield/Moon/MoonGatePivot" index="0"]
-visible = true
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,

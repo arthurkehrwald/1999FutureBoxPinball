@@ -79,10 +79,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/RotationStabiliser.gd"
 }, {
-"base": "Area",
+"base": "Reference",
 "class": "ShopEntrance",
 "language": "GDScript",
-"path": "res://Scripts/ShopEntrance.gd"
+"path": "res://Scripts/ShopEntranceV2.gd"
 }, {
 "base": "Node",
 "class": "State",
