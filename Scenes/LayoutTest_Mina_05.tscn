@@ -84,7 +84,7 @@ pause_mode = 2
 [node name="MusicPlayer" parent="." instance=ExtResource( 16 )]
 
 [node name="BoxV3" parent="." instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 0.987689, -0.156435, 0, 0.156435, 0.987689, 0.233526, -0.929077, 0.148846 )
+transform = Transform( 1, 0, 0, 0, 0.987689, -0.156435, 0, 0.156435, 0.987689, 0.232239, -0.929077, 0.148775 )
 
 [node name="WeirdCamera" parent="BoxV3" instance=ExtResource( 21 )]
 pause_mode = 2
@@ -232,13 +232,13 @@ transform = Transform( 1, 0, 1.49012e-08, 2.98023e-08, 0.999999, 6.89179e-08, 3.
 transform = Transform( 1, -1.49012e-08, 2.6077e-08, 5.96046e-08, 0.999999, 7.12462e-08, 1.11759e-08, -8.84756e-08, 0.999999, -1.74475, -1.19209e-06, 10.08 )
 
 [node name="Bumper3" parent="BoxV3/Playfield/Bounceback Elements/BumperCage5" index="4"]
-transform = Transform( 1, -3.72529e-08, 2.23517e-08, 5.96046e-08, 0.999999, 7.12462e-08, 3.72529e-09, -7.31088e-08, 0.999999, -0.902927, -0.011662, -0.544 )
+transform = Transform( 1, -6.70552e-08, 2.98023e-08, 8.9407e-08, 0.999999, 7.31088e-08, 3.72529e-09, -7.35745e-08, 0.999999, -0.888291, -0.0116618, -0.462588 )
 
 [node name="BumperCage6" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 30 )]
 transform = Transform( 0.964065, -2.6077e-08, -0.265673, 4.65661e-08, 1, -2.98023e-08, 0.265673, 7.45058e-09, 0.964063, 4.48173, 0.00309181, -12.6658 )
 
 [node name="Bumper" parent="BoxV3/Playfield/Bounceback Elements/BumperCage6" index="2"]
-transform = Transform( 1, 2.42144e-08, 2.83122e-07, -7.45058e-09, 0.999999, 1.49012e-08, -1.04308e-07, -5.96046e-08, 0.999998, -1.98728, -0.0005126, 0.258316 )
+transform = Transform( 1, 2.98023e-08, 3.12924e-07, -7.45058e-09, 0.999999, 1.49012e-08, -1.3411e-07, -5.96046e-08, 0.999998, -1.85976, -0.000512838, 0.307369 )
 
 [node name="Bumper2" parent="BoxV3/Playfield/Bounceback Elements/BumperCage6" index="3"]
 transform = Transform( 1, 0, 1.63913e-07, 2.6077e-08, 0.999999, 5.21541e-08, -5.96046e-08, -8.9407e-08, 0.999998, -7.4553, -3.57628e-06, -1.65306 )
