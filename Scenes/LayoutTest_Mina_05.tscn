@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://HUD/Game_Over_Plain_01.ogv" type="VideoStream" id=1]
 [ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=3]
@@ -42,7 +42,6 @@
 [ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=43]
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Testing/LongBox.tscn" type="PackedScene" id=45]
-[ext_resource path="res://Scenes/BlackHole.tscn" type="PackedScene" id=46]
 [ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=47]
 [ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=48]
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=49]
@@ -85,7 +84,7 @@ pause_mode = 2
 [node name="MusicPlayer" parent="." instance=ExtResource( 16 )]
 
 [node name="BoxV3" parent="." instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 0.987689, -0.156435, 0, 0.156435, 0.987689, 0.212632, -0.928693, 0.162876 )
+transform = Transform( 1, 0, 0, 0, 0.987689, -0.156435, 0, 0.156435, 0.987689, 0.233526, -0.929077, 0.148846 )
 
 [node name="WeirdCamera" parent="BoxV3" instance=ExtResource( 21 )]
 pause_mode = 2
@@ -206,6 +205,10 @@ transform = Transform( 1, 0, 0, 0, 1, -2.23517e-08, 0, 2.23517e-08, 1, 0.0100067
 [node name="Ball Feed" parent="BoxV3/Playfield" instance=ExtResource( 41 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.35173, -2.71797e-05, 5.5123 )
 
+[node name="Plunger" parent="BoxV3/Playfield" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17365, 2.38419e-07, 6.218 )
+release_speed = 30.0
+
 [node name="Bounceback Elements" type="Spatial" parent="BoxV3/Playfield"]
 transform = Transform( 0.906308, 0, 0.422618, 0, 1, 7.45058e-09, -0.422618, 0, 0.906308, 0.920547, -0.000405312, 6.49064 )
 
@@ -219,11 +222,32 @@ transform = Transform( 1, 0, 2.98023e-08, 7.45058e-09, 1, -1.49012e-08, 0, 0, 1,
 forward_impulse_strength = 500
 sideways_impulse_strength = 0
 
-[node name="BumperCage3" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 30 )]
-transform = Transform( 0.911613, 0, -0.411052, 5.68107e-08, 1, 2.45869e-07, 0.411053, -1.49012e-07, 0.911611, 4.40081, 0.00308943, -11.8559 )
+[node name="BumperCage5" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 30 )]
+transform = Transform( -0.36814, -1.49012e-08, -0.92977, -7.45058e-09, 1, -3.58559e-08, 0.929772, -2.23517e-08, -0.36814, 5.62861, 0.00309062, -10.2725 )
+
+[node name="Bumper" parent="BoxV3/Playfield/Bounceback Elements/BumperCage5" index="2"]
+transform = Transform( 1, 0, 1.49012e-08, 2.98023e-08, 0.999999, 6.89179e-08, 3.72529e-09, -8.84756e-08, 0.999999, -2.06003, -1.43051e-06, 0.605394 )
+
+[node name="Bumper2" parent="BoxV3/Playfield/Bounceback Elements/BumperCage5" index="3"]
+transform = Transform( 1, -1.49012e-08, 2.6077e-08, 5.96046e-08, 0.999999, 7.12462e-08, 1.11759e-08, -8.84756e-08, 0.999999, -1.74475, -1.19209e-06, 10.08 )
+
+[node name="Bumper3" parent="BoxV3/Playfield/Bounceback Elements/BumperCage5" index="4"]
+transform = Transform( 1, -3.72529e-08, 2.23517e-08, 5.96046e-08, 0.999999, 7.12462e-08, 3.72529e-09, -7.31088e-08, 0.999999, -0.902927, -0.011662, -0.544 )
+
+[node name="BumperCage6" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 30 )]
+transform = Transform( 0.964065, -2.6077e-08, -0.265673, 4.65661e-08, 1, -2.98023e-08, 0.265673, 7.45058e-09, 0.964063, 4.48173, 0.00309181, -12.6658 )
+
+[node name="Bumper" parent="BoxV3/Playfield/Bounceback Elements/BumperCage6" index="2"]
+transform = Transform( 1, 2.42144e-08, 2.83122e-07, -7.45058e-09, 0.999999, 1.49012e-08, -1.04308e-07, -5.96046e-08, 0.999998, -1.98728, -0.0005126, 0.258316 )
+
+[node name="Bumper2" parent="BoxV3/Playfield/Bounceback Elements/BumperCage6" index="3"]
+transform = Transform( 1, 0, 1.63913e-07, 2.6077e-08, 0.999999, 5.21541e-08, -5.96046e-08, -8.9407e-08, 0.999998, -7.4553, -3.57628e-06, -1.65306 )
+
+[node name="Bumper3" parent="BoxV3/Playfield/Bounceback Elements/BumperCage6" index="4"]
+transform = Transform( 1, -7.45058e-09, 1.19209e-07, 3.1665e-08, 0.999999, 4.47035e-08, -2.98023e-08, -7.45058e-08, 0.999999, -0.564146, -0.0116622, -0.449522 )
 
 [node name="BumperCage4" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 30 )]
-transform = Transform( 0.254637, 1.86265e-08, -0.967035, 8.9407e-08, 1, 5.96046e-08, 0.967038, -1.11759e-07, 0.254636, -1.71008, 0.00309038, -6.45532 )
+transform = Transform( 0.254637, 2.23517e-08, -0.967035, 5.96046e-08, 1, 3.72529e-08, 0.967038, -1.11759e-07, 0.254636, -1.97114, 0.0030899, -6.37529 )
 
 [node name="Bumper" parent="BoxV3/Playfield/Bounceback Elements/BumperCage4" index="2"]
 transform = Transform( 1, -1.49012e-08, 0, -1.49012e-08, 1, 0, 0, 0, 1, 0.497906, 2.38419e-07, -0.583453 )
@@ -246,13 +270,6 @@ transform = Transform( 0.560171, 1.86265e-09, -0.214962, -4.65661e-10, 0.6, -2.6
 [node name="Slingshot_R" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 37 )]
 transform = Transform( 0.524803, 1.86265e-09, -0.290831, -3.25963e-09, 0.6, -1.86265e-08, 0.290831, 0, 0.524803, 1.49935, 0.000442982, -0.954099 )
 
-[node name="Plunger" parent="BoxV3/Playfield" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17365, 2.38419e-07, 6.218 )
-release_speed = 30.0
-
-[node name="CarMesh" parent="BoxV3/Playfield/Plunger" index="2"]
-transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.2, 0.546683 )
-
 [node name="FunSupport" type="Spatial" parent="BoxV3/Playfield"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0786, 0.0278032, -5.79861 )
 
@@ -263,12 +280,13 @@ transform = Transform( 0.959433, 4.30538e-08, 0.28194, -2.98023e-08, 1, -4.47035
 transform = Transform( 0.906595, -0.279399, 0.316263, 0.245525, 0.958758, 0.143184, -0.343225, -0.0521597, 0.937804, 0.446073, -0.141856, 5.1289 )
 
 [node name="MultiballShip" parent="BoxV3/Playfield/FunSupport" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.76837e-07, -0.150037 )
 
 [node name="CollisionShape" parent="BoxV3/Playfield/FunSupport/MultiballShip/EntranceArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.150276, -0.319576, 0.0170145 )
 
 [node name="TemporaryFlipper" parent="BoxV3/Playfield/FunSupport" instance=ExtResource( 13 )]
-transform = Transform( -0.40562, 1.20922e-07, -0.914045, 1.86265e-07, 1, 2.23517e-08, 0.914042, -1.78814e-07, -0.405622, 6.61993, -0.106187, 9.00914 )
+transform = Transform( -0.40562, 1.20922e-07, -0.914045, 1.86265e-07, 1, 1.86265e-08, 0.914042, -1.78814e-07, -0.405622, 6.61993, -0.106187, 9.00914 )
 forward_impulse_strength = 50
 
 [node name="ShopEntrance" parent="BoxV3/Playfield/FunSupport" instance=ExtResource( 29 )]
@@ -290,7 +308,7 @@ transform = Transform( -0.707884, -1.49012e-08, -0.706329, -3.72529e-09, 0.99999
 transform = Transform( -0.63944, -2.98023e-08, -0.768842, -1.11759e-08, 1, -2.98023e-08, 0.768843, -4.47035e-08, -0.639439, 2.0548, -0.350219, 6.58403 )
 
 [node name="LoopingLouie" parent="BoxV3/Playfield/FunSupport/LoopingLouiesLooping" index="4"]
-transform = Transform( 1, -7.45058e-09, 0, 0, 1, 0, 2.98023e-08, 0, 1, -0.804054, 1.96172, -0.138916 )
+transform = Transform( 1, -5.21541e-08, 0, -2.98023e-08, 1, 0, 2.68221e-07, -1.49012e-08, 1, -0.801378, 1.96225, -0.136598 )
 
 [node name="TPs" type="Spatial" parent="BoxV3/Playfield/FunSupport"]
 transform = Transform( 0.82981, 1.34401e-07, -0.348448, -1.04308e-07, 0.9, 1.3411e-07, 0.348448, -4.47035e-08, 0.82981, 6.48689, 0.0313022, -0.71847 )
@@ -300,18 +318,18 @@ transform = Transform( 0.992248, 1.37836e-07, -0.124257, -1.3411e-07, 1, -4.4703
 collision_mask = 1
 
 [node name="TeleporterExit" parent="BoxV3/Playfield/FunSupport/TPs" instance=ExtResource( 33 )]
-transform = Transform( -0.176811, 4.65661e-09, -0.67306, -3.77186e-08, 0.222222, 1.63913e-07, 0.134612, 3.91155e-08, -0.884057, -3.42944, 0.45322, 10.918 )
+transform = Transform( -0.176811, 1.49012e-08, -0.67306, -3.77186e-08, 0.222222, 1.63913e-07, 0.134612, 3.72529e-08, -0.884057, -3.50686, 0.453221, 11.1981 )
 
 [node name="TeleporterExit2" parent="BoxV3/Playfield/FunSupport/TPs" instance=ExtResource( 33 )]
-transform = Transform( -0.219909, 2.98023e-08, -0.159882, 3.25963e-09, 0.222222, 6.85453e-07, 0.0319765, 3.35276e-08, -1.09955, -3.3639, 0.224305, 2.00115 )
+transform = Transform( -0.219909, 4.56348e-08, -0.159883, 1.95578e-08, 0.222222, 6.10948e-07, 0.0319767, 2.6077e-08, -1.09955, -3.90734, 0.196043, 0.770612 )
 
 [node name="Enemies" type="Spatial" parent="BoxV3/Playfield"]
 
 [node name="EnemyFleet" parent="BoxV3/Playfield/Enemies" instance=ExtResource( 48 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68211, 0.225199, 1.9605 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68211, -0.1163, 1.9605 )
 
 [node name="Boss" parent="BoxV3/Playfield/Enemies" instance=ExtResource( 47 )]
-transform = Transform( -0.8, 2.84217e-14, -3.11531e-07, -7.10543e-15, 0.8, 7.45058e-08, 3.11532e-07, 7.45058e-08, -0.8, -0.0143663, 7.77245e-05, -2.80788 )
+transform = Transform( -0.8, 2.84217e-14, -3.11531e-07, -7.10543e-15, 0.8, 7.45058e-08, 3.11532e-07, 7.45058e-08, -0.8, -0.0600154, 7.67708e-05, -4.65295 )
 MAX_HEALTH = 200.0
 DIRECT_HIT_SPEED_RELEVANCE = 1.0
 MISSILE_EXPLOSION_BASE_DAMAGE = 5.0
@@ -331,7 +349,7 @@ IS_VULNERABLE_PER_STAGE = {
 MISSILES_HEALTH_PERCENT = 10.0
 
 [node name="BossShield" parent="BoxV3/Playfield/Enemies/Boss" index="1"]
-transform = Transform( 1, 3.55271e-15, -5.68434e-14, 1.42109e-14, 1, 0, 2.84217e-14, 0, 1, 8.9407e-08, 0, -2.936 )
+transform = Transform( 0.999999, 3.55271e-15, -3.41061e-13, 1.06581e-14, 1, 0, 1.98952e-13, 0, 1, -0.0395591, 6.05583e-05, -2.93658 )
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
@@ -406,6 +424,9 @@ IS_SHOOTING_PER_STAGE = {
 "9-Victory": false
 }
 
+[node name="CollisionShape6" parent="BoxV3/Playfield/Enemies/Boss" index="12"]
+transform = Transform( 0.971484, -0.0135127, 0.236721, -0.146168, 0.75197, 0.642788, -0.186693, -0.659059, 0.728551, 0.589457, 1.69406, 0.992418 )
+
 [node name="BossBackBarrier" type="MeshInstance" parent="BoxV3/Playfield/Enemies/Boss"]
 transform = Transform( 0.218, 5.32907e-15, 1.78004e-08, -8.88178e-16, 0.667, 3.53903e-08, -1.38589e-08, -6.70552e-08, 0.28, 0.0246038, -0.000125408, 2.43935 )
 mesh = ExtResource( 26 )
@@ -414,14 +435,11 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="BoxV3/Playfield/Enemies/Boss/BossBackBarrier"]
 
 [node name="CollisionShape" type="CollisionShape" parent="BoxV3/Playfield/Enemies/Boss/BossBackBarrier/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -5.68434e-14, -2.98023e-08, 1, 0, 0, 0 )
 shape = SubResource( 4 )
 
-[node name="BlackHole" parent="BoxV3/Playfield/Enemies/Boss" instance=ExtResource( 46 )]
-transform = Transform( -1.22099, 3.55271e-15, 0.267717, 8.00937e-08, 1.25, 2.08616e-07, -0.267717, 8.9407e-08, -1.22099, 4.23166, 0.57448, -7.42036 )
-visible = false
-
 [node name="LaserTrex" parent="BoxV3/Playfield/Enemies" instance=ExtResource( 49 )]
-transform = Transform( -0.626711, -1.83859e-07, -0.497226, -1.93715e-07, 0.8, -1.56462e-07, 0.497224, 7.45058e-08, -0.626713, 3.20862, 0.0090766, -6.92444 )
+transform = Transform( -0.626711, -1.83859e-07, -0.497226, -1.93715e-07, 0.8, -1.71363e-07, 0.497224, 7.45058e-08, -0.626713, 3.189, 0.00907612, -7.2993 )
 MAX_HEALTH = 30.0
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
@@ -503,12 +521,15 @@ transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 0.176186, 3.76588, -2.
 [node name="triangular_wall" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 35 )]
 transform = Transform( -0.421385, 0.0229987, 0.202803, 0.0180079, 0.878394, 0.00318574, -0.26479, 0.0231381, -0.322524, -2.63312, 0.184603, 2.37327 )
 
+[node name="triangular_wall2" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 35 )]
+transform = Transform( -8.11344e-08, 0, -0.381, 7.82311e-08, 0.879001, -1.02141e-14, 0.497999, -4.47035e-08, -6.20729e-08, -0.135854, -0.00870419, -7.62711 )
+
 [node name="CurvedRamp" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 28 )]
-transform = Transform( 0.519239, -2.16468e-08, 0.300653, -4.09782e-08, 0.600001, 1.08033e-07, -0.300652, -1.00583e-07, 0.51924, -1.25713, -0.0175097, -0.974583 )
+transform = Transform( 1, 0, 0, 0, 1, 7.45058e-09, 0, 0, 1, 4.1394, 0.35884, -0.800003 )
 visible = false
 
 [node name="CurvedRamp_R" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 40 )]
-transform = Transform( 0.533025, -0.0147773, -0.275075, 0.0125201, 0.599818, -0.0079619, 0.275186, 0.0013332, 0.533172, 1.24679, -0.0330734, -0.912091 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.58966, 0.352957, -0.739075 )
 visible = false
 
 [node name="plungerlane_guide_placeholder4" type="MeshInstance" parent="BoxV3/Playfield/StaticGeometry"]
@@ -545,7 +566,7 @@ transform = Transform( 1, 7.10543e-15, -5.96046e-08, 2.84217e-14, 1, -5.68434e-1
 shape = SubResource( 7 )
 
 [node name="guid_L_bot" type="MeshInstance" parent="BoxV3/Playfield/StaticGeometry"]
-transform = Transform( -1, -4.73695e-15, -3.89414e-07, -3.55271e-15, 1, 0, 3.89414e-07, 0, -1, 3.15962, 7.15256e-07, -5.799 )
+transform = Transform( -1, -4.73695e-15, -3.89414e-07, -3.55271e-15, 1, 0, 3.89414e-07, 0, -1, 3.15962, 4.76837e-07, -5.93494 )
 mesh = ExtResource( 25 )
 material/0 = null
 
@@ -597,7 +618,8 @@ material/0 = null
 shape = SubResource( 7 )
 
 [node name="midguide" type="MeshInstance" parent="BoxV3/Playfield/StaticGeometry/Plungerlane"]
-transform = Transform( -8.43019e-09, -2.73173e-09, -0.556, -0.0529616, 0.227575, 8.65117e-16, 0.19286, 0.0624947, -2.43035e-08, -0.52982, -1.75, -7.187 )
+transform = Transform( -2.11598e-08, -3.28734e-09, -0.626, -0.132934, 0.273862, 9.38545e-15, 0.484079, 0.0752056, -2.73633e-08, -0.52982, -1.56244, -7.87 )
+visible = false
 mesh = ExtResource( 23 )
 material/0 = null
 
@@ -608,6 +630,12 @@ shape = SubResource( 10 )
 
 [node name="left side" parent="BoxV3/Playfield/StaticGeometry/Plungerlane" instance=ExtResource( 45 )]
 transform = Transform( 1, 0, 0, 0, 0.995473, -0.0299093, 0, 0.10505, 0.283426, 3.33396, -3.09493, 3.43465 )
+
+[node name="CurvedRampL" parent="BoxV3" instance=ExtResource( 28 )]
+transform = Transform( 0.962678, 0, 0.27065, -3.35276e-08, 0.999997, 1.49012e-07, -0.270651, -2.5332e-07, 0.962675, -1.35496, -2.12043, -1.4814 )
+
+[node name="CurvedRamp_R" parent="BoxV3" instance=ExtResource( 40 )]
+transform = Transform( 0.934869, 0, -0.354992, 5.58794e-08, 0.999998, 1.3411e-07, 0.354993, -1.49012e-07, 0.934867, 1.19389, -2.12043, -1.43112 )
 
 [node name="Reference" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, 0.0242683, -2.62545, 0.214347 )
@@ -631,9 +659,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[editable path="BoxV3/Playfield/Bounceback Elements/BumperCage4"]
-
 [editable path="BoxV3/Playfield/Plunger"]
+
+[editable path="BoxV3/Playfield/Bounceback Elements/BumperCage5"]
+
+[editable path="BoxV3/Playfield/Bounceback Elements/BumperCage6"]
+
+[editable path="BoxV3/Playfield/Bounceback Elements/BumperCage4"]
 
 [editable path="BoxV3/Playfield/FunSupport/MultiballShip"]
 
