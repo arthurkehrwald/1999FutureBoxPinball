@@ -3,12 +3,17 @@ extends "res://Scripts/Damageable.gd"
 export var REGENERATES = false
 export var TRIGGERS_MISSILES_WHEN_DESTROYED = true
 export var REGENERATION_TIME = 10.0
+export var FADE_TIME = 1.0
+
+var fade_progress = 0
 
 onready var health_bar = get_node("HealthBar3D/Viewport/Bar")
 onready var regeneration_timer = get_node("RegenerationTimer")
 onready var collision_shape = get_node("CollisionShape")
 onready var front_area = get_node("FrontArea")
 onready var behind_area = get_node("BehindArea")
+onready var tween = get_node("Tween")
+onready var mesh = get_node("MeshInstance")
 
 
 func _ready():
@@ -19,10 +24,25 @@ func _ready():
 	#front_area.connect("body_entered", self, "on_FrontArea_body_entered")
 	front_area.connect("body_exited", self, "on_FrontArea_body_exited")
 	behind_area.connect("body_entered", self, "on_BehindArea_body_entered")
+	mesh.get_surface_material(0).set_shader_param("FadeProgress", 2.5)
+	set_visible(false)
+
+
+func _process(delta):
+	if is_vulnerable and fade_progress < 1:
+		fade_progress += FADE_TIME * delta
+	elif not is_vulnerable and fade_progress > 0:
+		fade_progress -= FADE_TIME * delta
+		if fade_progress <= 0:
+			set_visible(false)
+	else:
+		return
+	mesh.get_surface_material(0).set_shader_param("FadeProgress", fade_progress * 1.5 + 2.5)
 
 
 func on_is_vulnerable_changed(value):
-	set_visible(value)
+	if value:
+		set_visible(value)
 	collision_shape.set_deferred("disabled", !value)
 	front_area.set_deferred("monitoring", value)
 	behind_area.set_deferred("monitoring", value)

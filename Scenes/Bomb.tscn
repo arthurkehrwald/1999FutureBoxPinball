@@ -8,7 +8,7 @@
 contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 3 )
-FUSE_TIME = 10.0
+FUSE_TIME = 4.0
 
 [node name="MeshInstance" parent="." index="1"]
 material/0 = ExtResource( 2 )
