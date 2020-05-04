@@ -596,6 +596,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ShopEntrance" parent="." instance=ExtResource( 29 )]
+transform = Transform( -0.903088, 0, -0.429455, 0, 1, 0, 0.429455, 0, -0.903088, -3.09681, -2.70351, -0.691727 )
+visible = false
+
 [editable path="BoxV3/Playfield/Plunger"]
 
 [editable path="BoxV3/Playfield/Bounceback Elements/BumperCage4"]

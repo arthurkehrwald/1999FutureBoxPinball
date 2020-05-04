@@ -60,10 +60,10 @@ IS_VULNERABLE_PER_STAGE = {
 "2-Exposition": false,
 "3-EnemyFleet": false,
 "4-BossAppears": true,
-"5-Missiles": false,
+"5-Missiles": true,
 "6-Trex": true,
-"7-BlackHole": false,
-"8-Eclipse": false,
+"7-BlackHole": true,
+"8-Eclipse": true,
 "9-Victory": true
 }
 REGENERATES = true
