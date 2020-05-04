@@ -215,13 +215,14 @@ release_speed = 30.0
 transform = Transform( 0.906308, 0, 0.422618, 0, 1, 7.45058e-09, -0.422618, 0, 0.906308, 0.920547, -0.000405312, 6.49064 )
 
 [node name="FlipperV2" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 2 )]
-transform = Transform( 0.642787, 0, -0.766044, 0, 1, 0, 0.766044, 0, 0.642787, -2.408, 0.840386, -1.28216 )
+transform = Transform( 0.642787, 0, -0.766044, -1.49012e-08, 1, -5.96046e-08, 0.766044, 0, 0.642787, -2.46048, 0, -1.34454 )
 
 [node name="FlipperV2_R" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 5.96046e-08, 1.49012e-08, 1, -1.49012e-08, -5.96046e-08, 0, 1, 0.106068, 0.451485, -0.143848 )
+transform = Transform( 1, 0, 1.19209e-07, 2.98023e-08, 1, -2.98023e-08, -5.96046e-08, 0, 1, 0.106, 0, -0.144 )
 
 [node name="Flipper" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 18 )]
 transform = Transform( 0.642788, 0, -0.766044, -3.72529e-09, 1, -6.70552e-08, 0.766044, 0, 0.642788, 5.72044, 0.000473976, 2.70457 )
+visible = false
 forward_impulse_strength = 500
 sideways_impulse_strength = 0
 
@@ -667,6 +668,10 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ShopEntrance" parent="." instance=ExtResource( 29 )]
+transform = Transform( 0.583995, 0, 0.811757, 0, 1, 0, -0.811757, 0, 0.583995, -2.90693, -2.89298, -0.408685 )
+visible = false
 
 [editable path="BoxV3/Playfield/Plunger"]
 

@@ -441,10 +441,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, -5.68434e-14, -2.98023e-08, 1, 0, 0, 0 
 shape = SubResource( 4 )
 
 [node name="CurvedRampL" parent="BoxV3/Playfield/Enemies/Boss" instance=ExtResource( 28 )]
-transform = Transform( -1.20335, 2.54749e-08, -0.338312, 0.0177057, 1.24828, -0.0629771, 0.337849, -0.0654185, -1.20169, 1.31066, -0.176243, -3.23018 )
+transform = Transform( -1.20335, 2.54749e-08, -0.338312, 0.0177057, 1.24828, -0.0629771, 0.337849, -0.0654185, -1.20169, 1.61331, -0.176243, -3.23018 )
 
 [node name="CurvedRamp_R" parent="BoxV3/Playfield/Enemies/Boss" instance=ExtResource( 40 )]
-transform = Transform( -1.16859, 2.54749e-08, 0.44374, -0.0232231, 1.24828, -0.0611576, -0.443134, -0.0654183, -1.16698, -1.8754, -0.179533, -3.29295 )
+transform = Transform( -1.16859, 2.54748e-08, 0.44374, -0.0232231, 1.24828, -0.0611576, -0.443134, -0.0654183, -1.16698, -1.57275, -0.179533, -3.29295 )
 
 [node name="LaserTrex" parent="BoxV3/Playfield/Enemies" instance=ExtResource( 49 )]
 transform = Transform( -0.626711, -1.83859e-07, -0.497226, -1.93715e-07, 0.8, -1.71363e-07, 0.497224, 7.45058e-08, -0.626713, 3.189, 0.00907612, -7.2993 )
