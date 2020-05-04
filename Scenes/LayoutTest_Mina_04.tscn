@@ -1,6 +1,7 @@
 [gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://HUD/Game_Over_Plain_01.ogv" type="VideoStream" id=1]
+[ext_resource path="res://Scenes/FlipperV2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=3]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=4]
 [ext_resource path="res://Scripts/VideoPlayer.gd" type="Script" id=5]
@@ -9,14 +10,13 @@
 [ext_resource path="res://Scenes/TransmissionHUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/PlayerStatsHUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/FlipperV2_R.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/TemporaryFlipper.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/ShopMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/NoRemoteControlArea.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/BoxV3.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/RibbonHUD.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/WeirdCamera.tscn" type="PackedScene" id=21]
@@ -208,16 +208,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.35173, -2.71797e-05, 5.5123 
 
 [node name="Bounceback Elements" type="Spatial" parent="BoxV3/Playfield"]
 transform = Transform( 0.906308, 0, 0.422618, 0, 1, 7.45058e-09, -0.422618, 0, 0.906308, 0.920547, -0.000405312, 6.49064 )
-
-[node name="Flipper" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 18 )]
-transform = Transform( 0.642788, 0, -0.766044, -3.72529e-09, 1, -3.72529e-08, 0.766044, 0, 0.642788, -2.42935, 0.000473976, -1.09573 )
-forward_impulse_strength = 500
-sideways_impulse_strength = 0
-
-[node name="Flipper_R" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 2.98023e-08, 7.45058e-09, 1, -1.49012e-08, 0, 0, 1, 0, 0, 0 )
-forward_impulse_strength = 500
-sideways_impulse_strength = 0
 
 [node name="BumperCage3" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 30 )]
 transform = Transform( 0.911613, 0, -0.411052, 5.68107e-08, 1, 2.45869e-07, 0.411053, -1.49012e-07, 0.911611, 4.40081, 0.00308943, -11.8559 )
@@ -630,6 +620,12 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="FlipperV2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, -1.65729, -3.28198, 6.55141 )
+
+[node name="FlipperV2_R" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, 1.12273, -3.2714, 6.54901 )
 
 [editable path="BoxV3/Playfield/Bounceback Elements/BumperCage4"]
 

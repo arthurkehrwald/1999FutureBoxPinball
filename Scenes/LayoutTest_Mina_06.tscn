@@ -1,7 +1,6 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://HUD/Game_Over_Plain_01.ogv" type="VideoStream" id=1]
-[ext_resource path="res://Scenes/FlipperV2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=3]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=4]
 [ext_resource path="res://Scripts/VideoPlayer.gd" type="Script" id=5]
@@ -30,7 +29,6 @@
 [ext_resource path="res://Scenes/CurvedRampL.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/ShopEntrance.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/BumperCage.tscn" type="PackedScene" id=30]
-[ext_resource path="res://Scenes/FlipperV2_R.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Scenes/TeleporterEntrance.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Scenes/TeleporterExit.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=34]
@@ -214,20 +212,13 @@ release_speed = 30.0
 [node name="Bounceback Elements" type="Spatial" parent="BoxV3/Playfield"]
 transform = Transform( 0.906308, 0, 0.422618, 0, 1, 7.45058e-09, -0.422618, 0, 0.906308, 0.920547, -0.000405312, 6.49064 )
 
-[node name="FlipperV2" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 2 )]
-transform = Transform( 0.642787, 0, -0.766044, 0, 1, 0, 0.766044, 0, 0.642787, -2.408, 0.840386, -1.28216 )
-
-[node name="FlipperV2_R" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 5.96046e-08, 1.49012e-08, 1, -1.49012e-08, -5.96046e-08, 0, 1, 0.106068, 0.451485, -0.143848 )
-
 [node name="Flipper" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 18 )]
-transform = Transform( 0.642788, 0, -0.766044, -3.72529e-09, 1, -6.70552e-08, 0.766044, 0, 0.642788, 5.72044, 0.000473976, 2.70457 )
+transform = Transform( 0.642788, 0, -0.766044, -3.72529e-09, 1, -3.72529e-08, 0.766044, 0, 0.642788, -2.42935, 0.000473976, -1.09573 )
 forward_impulse_strength = 500
 sideways_impulse_strength = 0
 
 [node name="Flipper_R" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 2.98023e-08, 1.49012e-08, 1, -2.98023e-08, 0, 0, 1, 8.14979, -2.38419e-07, 3.8003 )
-visible = false
+transform = Transform( 1, 0, 2.98023e-08, 7.45058e-09, 1, -1.49012e-08, 0, 0, 1, 0, 0, 0 )
 forward_impulse_strength = 500
 sideways_impulse_strength = 0
 
