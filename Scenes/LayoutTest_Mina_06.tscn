@@ -243,10 +243,10 @@ transform = Transform( 1, 3.1665e-08, 3.42727e-07, -1.49012e-08, 0.999999, 2.980
 visible = false
 
 [node name="Bumper2" parent="BoxV3/Playfield/Bounceback Elements/BumperCage6" index="3"]
-transform = Transform( 1, 5.58794e-09, 1.78814e-07, 1.11759e-08, 0.999999, 8.19564e-08, -5.96046e-08, -8.9407e-08, 0.999998, 1.80307, -2.38419e-06, 0.060545 )
+transform = Transform( 1, 7.45058e-09, 1.93715e-07, 3.72529e-09, 0.999999, 8.9407e-08, -5.96046e-08, -8.9407e-08, 0.999998, 2.02038, -1.90735e-06, 0.0788827 )
 
 [node name="Bumper3" parent="BoxV3/Playfield/Bounceback Elements/BumperCage6" index="4"]
-transform = Transform( 1, 9.31323e-09, 3.12924e-07, 9.31323e-09, 0.999998, 5.96046e-08, -2.98023e-08, -8.19564e-08, 0.999998, 1.30217, -0.0116606, 0.851452 )
+transform = Transform( 1, 1.30385e-08, 4.17233e-07, -3.72529e-09, 0.999998, 1.04308e-07, -2.98023e-08, -8.19564e-08, 0.999998, 1.42025, -0.0110035, 0.905804 )
 
 [node name="BumperCage4" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 30 )]
 transform = Transform( 0.254637, 2.23517e-08, -0.967035, 5.96046e-08, 1, 3.72529e-08, 0.967038, -1.11759e-07, 0.254636, -1.97114, 0.0030899, -6.37529 )
@@ -323,7 +323,7 @@ collision_mask = 1
 transform = Transform( -0.176811, 1.49012e-08, -0.67306, -3.77186e-08, 0.222222, 1.63913e-07, 0.134612, 3.72529e-08, -0.884057, -3.50686, 0.453221, 11.1981 )
 
 [node name="TeleporterExit2" parent="BoxV3/Playfield/FunSupport/TPs" instance=ExtResource( 33 )]
-transform = Transform( -0.219909, 4.74975e-08, -0.159883, 2.00234e-08, 0.222222, 6.10948e-07, 0.0319767, 2.42144e-08, -1.09955, -3.07597, 0.196042, 0.444022 )
+transform = Transform( -0.219909, 5.02914e-08, -0.159883, 2.18861e-08, 0.222222, 6.03497e-07, 0.0319767, 2.42144e-08, -1.09955, -2.12607, 0.196041, 0.73026 )
 
 [node name="Enemies" type="Spatial" parent="BoxV3/Playfield"]
 
@@ -331,7 +331,7 @@ transform = Transform( -0.219909, 4.74975e-08, -0.159883, 2.00234e-08, 0.222222,
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68211, -0.1163, 1.9605 )
 
 [node name="Boss" parent="BoxV3/Playfield/Enemies" instance=ExtResource( 47 )]
-transform = Transform( -0.8, 2.84217e-14, -3.11531e-07, -7.10543e-15, 0.8, 7.45058e-08, 3.11532e-07, 7.45058e-08, -0.8, -0.891939, 0.00319242, -4.79767 )
+transform = Transform( -0.8, 2.84217e-14, -3.11531e-07, -7.10543e-15, 0.8, 7.45058e-08, 3.11532e-07, 7.45058e-08, -0.8, -0.891939, 0.167547, -4.79768 )
 MAX_HEALTH = 200.0
 DIRECT_HIT_SPEED_RELEVANCE = 1.0
 MISSILE_EXPLOSION_BASE_DAMAGE = 5.0
@@ -351,7 +351,7 @@ IS_VULNERABLE_PER_STAGE = {
 MISSILES_HEALTH_PERCENT = 10.0
 
 [node name="BossShield" parent="BoxV3/Playfield/Enemies/Boss" index="1"]
-transform = Transform( 0.999999, 3.55271e-15, -3.41061e-13, 1.06581e-14, 1, 0, 1.98952e-13, 0, 1, -0.0395591, 6.05583e-05, -2.93658 )
+transform = Transform( 0.999999, 7.10543e-15, -3.41061e-13, 1.06581e-14, 1, 0, 2.27374e-13, 0, 1, -0.0395589, 0.191012, -2.93658 )
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
@@ -439,12 +439,6 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="BoxV3/Playfield/Enemies/Boss/BossBackBarrier/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, -5.68434e-14, -2.98023e-08, 1, 0, 0, 0 )
 shape = SubResource( 4 )
-
-[node name="CurvedRampL" parent="BoxV3/Playfield/Enemies/Boss" instance=ExtResource( 28 )]
-transform = Transform( -1.20335, 2.54749e-08, -0.338312, 0.0177057, 1.24828, -0.0629771, 0.337849, -0.0654185, -1.20169, 1.61331, -0.176243, -3.23018 )
-
-[node name="CurvedRamp_R" parent="BoxV3/Playfield/Enemies/Boss" instance=ExtResource( 40 )]
-transform = Transform( -1.16859, 2.54748e-08, 0.44374, -0.0232231, 1.24828, -0.0611576, -0.443134, -0.0654183, -1.16698, -1.57275, -0.179533, -3.29295 )
 
 [node name="LaserTrex" parent="BoxV3/Playfield/Enemies" instance=ExtResource( 49 )]
 transform = Transform( -0.626711, -1.83859e-07, -0.497226, -1.93715e-07, 0.8, -1.71363e-07, 0.497224, 7.45058e-08, -0.626713, 3.189, 0.00907612, -7.2993 )
@@ -638,6 +632,12 @@ shape = SubResource( 10 )
 
 [node name="left side" parent="BoxV3/Playfield/StaticGeometry/Plungerlane" instance=ExtResource( 45 )]
 transform = Transform( 1, 0, 0, 0, 0.995473, -0.0299093, 0, 0.10505, 0.283426, 3.33396, -3.09493, 3.43465 )
+
+[node name="CurvedRampL" parent="BoxV3/Playfield" instance=ExtResource( 28 )]
+transform = Transform( 0.962678, -1.95399e-14, 0.27065, 0.0141646, 0.998627, -0.0503817, -0.27028, 0.0523349, 0.961355, -2.18259, 0.021625, -2.21353 )
+
+[node name="CurvedRamp_R" parent="BoxV3/Playfield" instance=ExtResource( 40 )]
+transform = Transform( 0.934869, -1.77636e-15, -0.354992, -0.0185785, 0.998628, -0.0489262, 0.354507, 0.0523348, 0.933586, 0.366264, 0.0189927, -2.16332 )
 
 [node name="Reference" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.102805, 0.994522, 0, -0.978123, 0.104528, 0.0242683, -2.62545, 0.214347 )

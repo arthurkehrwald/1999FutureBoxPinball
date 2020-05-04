@@ -339,7 +339,7 @@ transform = Transform( -0.219909, 4.56348e-08, -0.159883, 1.95578e-08, 0.222222,
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68211, -0.1163, 1.9605 )
 
 [node name="Boss" parent="BoxV3/Playfield/Enemies" instance=ExtResource( 47 )]
-transform = Transform( -0.8, 2.84217e-14, -3.11531e-07, -7.10543e-15, 0.8, 7.45058e-08, 3.11532e-07, 7.45058e-08, -0.8, -0.0600154, 7.67708e-05, -4.65295 )
+transform = Transform( -0.8, 2.84217e-14, -3.11531e-07, -7.10543e-15, 0.8, 7.45058e-08, 3.11532e-07, 7.45058e-08, -0.8, -0.0600154, 0.0577598, -4.65295 )
 MAX_HEALTH = 200.0
 DIRECT_HIT_SPEED_RELEVANCE = 1.0
 MISSILE_EXPLOSION_BASE_DAMAGE = 5.0
