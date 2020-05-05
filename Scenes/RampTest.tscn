@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Animations/StageTwoEntryCurve.tres" type="Curve3D" id=1]
+[ext_resource path="res://Scenes/WireRamp.tscn" type="PackedScene" id=2]
+
+[node name="StageTwoEntryRamp" instance=ExtResource( 2 )]
+curve = ExtResource( 1 )
+allow_exit_as_entrance = true
+
+[node name="EntranceArea" parent="." index="1"]
+transform = Transform( -0.999804, 0, -0.0198081, 0, 1, 0, 0.0198081, 0, -0.999804, 0.276423, -1.28248, 3.07846 )
+
+[node name="ExitArea" parent="." index="2"]
+transform = Transform( -0.0513209, -0.280877, -0.958371, 0.99167, 0.099189, -0.0821741, 0.118141, -0.954604, 0.273446, -4.01772, -0.0897509, -5.6608 )
+
+[node name="CollisionShape" parent="ExitArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
