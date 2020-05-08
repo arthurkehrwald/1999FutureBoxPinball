@@ -54,8 +54,8 @@ material/0 = ExtResource( 5 )
 
 [node name="BossShield" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.936 )
-MAX_HEALTH = 50.0
-BOMB_DIRECT_HIT_BASE_DAMAGE = 20.0
+MAX_HEALTH = 40.0
+BOMB_DIRECT_HIT_BASE_DAMAGE = 10.0
 DIRECT_HIT_SPEED_RELEVANCE = 0.5
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,

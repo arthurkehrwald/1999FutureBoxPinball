@@ -254,10 +254,16 @@ transform = Transform( 0.642788, 0, -0.766044, -2.6077e-08, 1, -1.19209e-07, 0.7
 transform = Transform( 1, 0, 1.78814e-07, 5.21541e-08, 1, -5.21541e-08, -5.96046e-08, 0, 1, 0.171374, -4.76837e-07, -0.0500464 )
 
 [node name="BumperCage_Flipper" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 30 )]
-transform = Transform( 0.426302, 2.98023e-08, -0.90458, 5.21541e-08, 1, 2.98023e-08, 0.904583, -5.21541e-08, 0.426301, -3.00985, 0.00309157, -3.92164 )
+transform = Transform( -0.589536, 2.23517e-08, -0.807743, 6.70552e-08, 1, -2.04891e-08, 0.807746, -4.47035e-08, -0.589534, 2.33085, 0.00309324, -1.18099 )
+
+[node name="Bumper" parent="BoxV3/Playfield/Bounceback Elements/BumperCage_Flipper" index="2"]
+transform = Transform( 1, -7.45058e-09, 5.96046e-08, -2.98023e-08, 1, -1.11759e-08, -2.98023e-08, -1.86265e-09, 1, 0.299327, 0, -0.360109 )
+
+[node name="Bumper2" parent="BoxV3/Playfield/Bounceback Elements/BumperCage_Flipper" index="3"]
+transform = Transform( 1, 0, 0, -1.49012e-08, 1, 3.72529e-09, -5.96046e-08, 0, 1, 0.197763, 0, 0.549243 )
 
 [node name="Bumper3" parent="BoxV3/Playfield/Bounceback Elements/BumperCage_Flipper" index="4"]
-transform = Transform( 1, 0, -2.98023e-08, 2.23517e-08, 1, 2.23517e-08, -2.98023e-08, 0, 1, -0.890815, 1.66893e-06, -0.0651889 )
+transform = Transform( 1, 0, -2.98023e-08, 7.45058e-09, 1, 2.6077e-08, -8.9407e-08, 0, 1, -1.03644, 9.53674e-07, -0.144768 )
 
 [node name="BumperCage_Top" parent="BoxV3/Playfield/Bounceback Elements" instance=ExtResource( 30 )]
 transform = Transform( 0.834062, 3.35276e-08, -0.551674, 3.1665e-08, 1, 1.2666e-07, 0.551675, -7.45058e-08, 0.83406, 5.31112, 0.00706935, -14.4446 )
@@ -325,11 +331,11 @@ transform = Transform( 1, -6.70552e-08, 0, -2.23517e-08, 1, 0, 3.8743e-07, -5.96
 transform = Transform( 0.82981, 1.34401e-07, -0.348448, -1.04308e-07, 0.9, 1.3411e-07, 0.348448, -4.47035e-08, 0.82981, 6.48689, 0.0313022, -0.71847 )
 
 [node name="TeleporterEntrance" parent="BoxV3/Playfield/FunSupport/TPs" instance=ExtResource( 32 )]
-transform = Transform( 0.999996, 2.16067e-07, -0.0015682, -2.30968e-07, 1, -1.3411e-07, 0.00156823, 1.19209e-07, 1, 2.1763, 0.000449896, 7.95838 )
+transform = Transform( 0.769206, 2.38419e-07, 0.638999, -1.04308e-07, 1, -2.5332e-07, -0.638996, 1.04308e-07, 0.769209, -3.82856, 0.000452042, 10.3864 )
 collision_mask = 1
 
 [node name="TeleporterExit" parent="BoxV3/Playfield/FunSupport/TPs" instance=ExtResource( 33 )]
-transform = Transform( -0.176811, 2.23517e-08, -0.67306, -4.28408e-08, 0.222222, 1.78814e-07, 0.134612, 3.72529e-08, -0.884057, -2.58703, 0.500792, 13.6007 )
+transform = Transform( -0.176811, 2.23517e-08, -0.67306, -4.33065e-08, 0.222222, 2.01166e-07, 0.134612, 3.72529e-08, -0.884057, 3.5315, 0.500792, 11.3544 )
 
 [node name="TeleporterExit2" parent="BoxV3/Playfield/FunSupport/TPs" instance=ExtResource( 33 )]
 transform = Transform( -0.219909, 4.37722e-08, -0.159884, 2.65427e-08, 0.222222, 7.30157e-07, 0.0319768, 1.49012e-08, -1.09955, -3.7025, 0.323308, 1.61774 )
@@ -555,6 +561,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00808811, 0.000349045, 0.00
 
 [node name="LongBox2" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 45 )]
 transform = Transform( 0.520905, 0, -0.176824, -7.45058e-08, 1, -8.3819e-09, 0.853616, 0, 0.107904, 2.11681, 0.000596523, 5.65028 )
+visible = false
 
 [node name="LongBox9" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 45 )]
 transform = Transform( 1, 0, 0, 0, 1, -3.72529e-09, 0, 0, 0.207148, 1.38223, -0.019423, 7.3896 )
@@ -577,7 +584,7 @@ transform = Transform( 0.543511, 0, 0.173879, 2.23517e-08, 0.66107, -3.72529e-09
 transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 0.176186, 3.81602, -2.38419e-06, 7.03805 )
 
 [node name="triangular_wall" parent="BoxV3/Playfield/StaticGeometry" instance=ExtResource( 35 )]
-transform = Transform( -0.448612, 0.0229987, 0.130117, 0.0164406, 0.878395, 0.00520744, -0.178231, 0.0231379, -0.327027, -3.33414, -0.0713975, 0.959689 )
+transform = Transform( -0.348799, 0.0229986, -0.243317, 0.00033167, 0.878395, 0.0130621, 0.334108, 0.0231379, -0.254029, 1.97408, -0.213899, 1.09328 )
 
 [node name="guid_L_bot" type="MeshInstance" parent="BoxV3/Playfield/StaticGeometry"]
 transform = Transform( -1, -4.73695e-15, -3.89414e-07, 2.13163e-14, 1, 0, 3.89414e-07, 0, -1, 2.82354, 4.76837e-07, -5.93494 )
