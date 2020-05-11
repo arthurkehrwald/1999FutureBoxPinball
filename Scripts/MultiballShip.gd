@@ -10,6 +10,8 @@ var loaded_pinballs = []
 var muzzle_transforms = []
 
 onready var entrance_area = get_node("EntranceArea")
+onready var exit_area = get_node("ExitArea")
+onready var static_body = get_node("StaticBody")
 onready var muzzle_a = get_node("ShipMesh/MuzzleA")
 onready var muzzle_b = get_node("ShipMesh/MuzzleB")
 onready var muzzle_c = get_node("ShipMesh/MuzzleC")
@@ -18,6 +20,7 @@ onready var muzzle_c = get_node("ShipMesh/MuzzleC")
 func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
 	entrance_area.connect("body_entered", self, "on_EntranceArea_body_entered")
+	exit_area.connect("body_exited", self, "on_ExitArea_body_exited")
 	muzzle_transforms.resize(3)
 	muzzle_transforms[0] = muzzle_a.get_global_transform()
 	muzzle_transforms[1] = muzzle_b.get_global_transform()
@@ -32,6 +35,8 @@ func on_EntranceArea_body_entered(body):
 	loaded_pinballs.push_back(weakref(body))
 	body.set_visible(false)
 	body.set_locked(true)
+	body.add_collision_exception_with(static_body)
+	static_body.add_collision_exception_with(body)
 	body.teleport(muzzle_transforms[pinballs_locked].origin)
 	pinballs_locked += 1	
 	if pinballs_locked >= 3:
@@ -51,6 +56,11 @@ func on_EntranceArea_body_entered(body):
 	else:
 		body.set_is_accessible_to_player(false)
 		Announcer.say("ball_locked")
+
+
+func on_ExitArea_body_exited(body):
+	body.remove_collision_exception_with(static_body)
+	static_body.remove_collision_exception_with(body)
 
 
 func on_GameState_changed(new_stage, is_debug_skip):

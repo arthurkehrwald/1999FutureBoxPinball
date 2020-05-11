@@ -1,11 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Roller.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Projectile.tscn" type="PackedScene" id=2]
-
-[sub_resource type="PhysicsMaterial" id=1]
-rough = true
-bounce = 0.1
 
 [sub_resource type="SphereShape" id=2]
 radius = 0.2
@@ -20,7 +16,6 @@ rings = 8
 radius = 0.22
 
 [node name="Roller" instance=ExtResource( 2 )]
-physics_material_override = SubResource( 1 )
 script = ExtResource( 1 )
 MAX_GRAV = 15.0
 MIN_GRAV = 7.0

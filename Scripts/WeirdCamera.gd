@@ -3,7 +3,7 @@ extends Camera
 enum { TRACK_OFF, TRACK_CALIBRATING, TRACK_ON}
 
 const TRACK_POS_FORMAT_STRING = "head tracking data:\nraw:\nx: %s\ny: %s\nz: %s"
-const CALIBRATION_OFFSET = Vector3(5, -5, -5)
+const CALIBRATION_OFFSET = Vector3(5, -1, -5)
 
 var track_raw_offset = Vector3(0, 0, 0)
 var track_sensitivity = Vector3(0, 0, 0)
@@ -16,7 +16,7 @@ onready var raw_offset_debug_label = get_node("RawOffsetDebugLabel")
 onready var sensitivity_debug_label = get_node("SensitivityDebugLabel")
 onready var cam_offset_debug_label = get_node("CamOffsetDebugLabel")
 onready var tween = get_node("Tween")
-onready var start_pos = get_transform().origin
+onready var start_pos = get_global_transform().origin
 
 
 func _ready():
@@ -33,7 +33,7 @@ func _process(_delta):
 		track_cam_offset = track_raw_offset * track_sensitivity
 		apply_offset(track_cam_offset)
 	if track_state != TRACK_OFF:
-		track_cam_offset = get_transform().origin - start_pos
+		track_cam_offset = get_global_transform().origin - start_pos
 		debug_output()
 	
 	set_frustum_offset(
@@ -44,7 +44,7 @@ func _process(_delta):
 
 
 func _input(event):
-	if event.is_action_pressed("toggle_head_tracking"):
+	if current and event.is_action_pressed("toggle_head_tracking"):
 		match track_state:
 			TRACK_OFF:
 				set_track_state(TRACK_CALIBRATING)
@@ -72,7 +72,7 @@ func set_track_state(value):
 		TRACK_OFF:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			tween.stop_all()
-			set_transform(Transform(get_transform().basis, start_pos))
+			set_global_transform(Transform(get_global_transform().basis, start_pos))
 			track_state_debug_label.text = "head tracking: off"
 			raw_offset_debug_label.text = ""
 			sensitivity_debug_label.text = ""
@@ -82,7 +82,7 @@ func set_track_state(value):
 			track_raw_offset = Vector3.ZERO
 			track_sensitivity = Vector3.ZERO
 			track_cam_offset = Vector3.ZERO
-			set_transform(Transform(get_transform().basis, start_pos))
+			set_global_transform(Transform(get_global_transform().basis, start_pos))
 			track_state_debug_label.text = "head tracking: calibrating"
 			tween.interpolate_method(self, "apply_offset", Vector3(0, 0, 0),
 					CALIBRATION_OFFSET, 1, Tween.TRANS_LINEAR,

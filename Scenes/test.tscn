@@ -21,20 +21,20 @@
 [ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/PlayerTurret.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Scenes/Slingshot.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Slingshot_L.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/Storm.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Scenes/CurvedRampR.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scenes/BossRampR.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/RibbonHUD.tscn" type="PackedScene" id=28]
 [ext_resource path="res://HUD/Game_Over_Plain_01.ogv" type="VideoStream" id=29]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Scenes/BumperCage.tscn" type="PackedScene" id=32]
-[ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Scenes/FlyingMoon.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=34]
-[ext_resource path="res://Scenes/CurvedRampL.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Scenes/BossRampL.tscn" type="PackedScene" id=35]
 [ext_resource path="res://Scenes/BoxV3.tscn" type="PackedScene" id=36]
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=37]
 [ext_resource path="res://Scenes/TeleporterEntrance.tscn" type="PackedScene" id=38]
@@ -43,9 +43,17 @@
 [ext_resource path="res://Scenes/TeleporterExit.tscn" type="PackedScene" id=41]
 [ext_resource path="res://Reference/Floor_07.png" type="Texture" id=42]
 [ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=43]
-[ext_resource path="res://Scenes/Slingshot_R.tscn" type="PackedScene" id=44]
-[ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=45]
+[ext_resource path="res://Old/Slingshot_R_Standalone.tscn" type="PackedScene" id=44]
+[ext_resource path="res://Old/LaserTrexOld.tscn" type="PackedScene" id=45]
 [ext_resource path="res://Testing/LongBox.tscn" type="PackedScene" id=46]
+
+
+
+
+
+
+
+
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")

@@ -10,7 +10,8 @@ func _ready():
 		push_warning("[TeleporterEntrance] can't find any exits. Will not work.")
 		return
 	rng.randomize()
-	GameState.connect("state_changed", self, "on_GameState_changed")
+	#GameState.connect("state_changed", self, "on_GameState_changed")
+	#set_is_active(true)
 	connect("body_entered", self, "on_body_entered")
 
 

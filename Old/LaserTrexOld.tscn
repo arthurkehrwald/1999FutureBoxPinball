@@ -1,0 +1,161 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://Scripts/LaserArea.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/LaserTrexOld.gd" type="Script" id=2]
+[ext_resource path="res://Meshes/laser_trex.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Scenes/Bar3D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=5]
+[ext_resource path="res://Meshes/T-Rex-UVs_done_04.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://Materials/T-Rex Textures/T-Rex-UVs_done_04_Gameboy_BaseColor.png" type="Texture" id=7]
+[ext_resource path="res://Materials/T-Rex Textures/T-Rex-UVs_done_04_Gameboy_Metallic.png" type="Texture" id=8]
+[ext_resource path="res://Materials/T-Rex Textures/T-Rex-UVs_done_04_Gameboy_Roughness.png" type="Texture" id=9]
+[ext_resource path="res://Materials/T-Rex Textures/T-Rex-UVs_done_04_Glasses_BaseColor.png" type="Texture" id=10]
+[ext_resource path="res://Materials/T-Rex Textures/T-Rex-UVs_done_04_Gameboy_Emissive.png" type="Texture" id=11]
+[ext_resource path="res://Materials/T-Rex Textures/T-Rex-UVs_done_04_T-Rex_BaseColor.png" type="Texture" id=12]
+[ext_resource path="res://Materials/T-Rex Textures/T-Rex-UVs_done_04_Glasses_Emissive.png" type="Texture" id=13]
+[ext_resource path="res://Materials/T-Rex Textures/T-Rex-UVs_done_04_Guns_Emissive.png" type="Texture" id=14]
+[ext_resource path="res://Materials/T-Rex Textures/T-Rex-UVs_done_04_Glasses_Metallic.png" type="Texture" id=15]
+[ext_resource path="res://Materials/T-Rex Textures/T-Rex-UVs_done_04_Guns_BaseColor.png" type="Texture" id=16]
+[ext_resource path="res://Materials/T-Rex Textures/T-Rex-UVs_done_04_T-Rex_Roughness.png" type="Texture" id=17]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 7 )
+metallic = 0.12
+metallic_specular = 0.3
+metallic_texture = ExtResource( 8 )
+roughness_texture = ExtResource( 9 )
+emission_enabled = true
+emission = Color( 0, 0, 0, 1 )
+emission_energy = 1.29
+emission_operator = 0
+emission_on_uv2 = false
+emission_texture = ExtResource( 11 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 12 )
+roughness_texture = ExtResource( 17 )
+normal_enabled = true
+normal_scale = 1.0
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 16 )
+emission_enabled = true
+emission = Color( 0, 0, 0, 1 )
+emission_energy = 3.29
+emission_operator = 0
+emission_on_uv2 = false
+emission_texture = ExtResource( 14 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_texture = ExtResource( 10 )
+metallic = 0.41
+metallic_texture = ExtResource( 15 )
+emission_enabled = true
+emission = Color( 0, 0, 0, 1 )
+emission_energy = 4.71
+emission_operator = 0
+emission_on_uv2 = false
+emission_texture = ExtResource( 13 )
+
+[sub_resource type="CubeMesh" id=5]
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.1, 1, 2.5 )
+
+[sub_resource type="CubeMesh" id=7]
+
+[sub_resource type="SpatialMaterial" id=8]
+flags_transparent = true
+albedo_color = Color( 1, 0, 0.819608, 0.521569 )
+
+[sub_resource type="Animation" id=9]
+tracks/0/type = "value"
+tracks/0/path = NodePath("DropTargetParent/MeshInstance:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.5, 0 ), Vector3( 0, -0.6, 0 ) ]
+}
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 0.7, 0.5, 0.1 )
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 0.966673, 0.898562, 0.331795 )
+
+[node name="LaserTrex" type="StaticBody"]
+collision_mask = 0
+script = ExtResource( 2 )
+MAX_HEALTH = 40.0
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": false,
+"5-Missiles": false,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+LASER_DOWNTIME = 10.0
+
+[node name="T-Rex-UVs_done_04" type="MeshInstance" parent="."]
+transform = Transform( -0.303006, 0, 0.499064, 0, 0.583847, 0, -0.499064, 0, -0.303006, -0.12604, 0.778277, -0.373331 )
+mesh = ExtResource( 6 )
+material/0 = SubResource( 1 )
+material/1 = SubResource( 2 )
+material/2 = SubResource( 3 )
+material/3 = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 0, 0, 0 )
+visible = false
+mesh = ExtResource( 3 )
+material/0 = ExtResource( 5 )
+material/1 = ExtResource( 5 )
+
+[node name="DropTargetParent" type="Spatial" parent="."]
+transform = Transform( 0.880121, 0, -0.474749, 0, 1, 0, 0.474749, 0, 0.880121, -0.595158, 0, -0.791894 )
+
+[node name="MeshInstance" type="MeshInstance" parent="DropTargetParent"]
+transform = Transform( 0.707107, 0, 0.0707107, 0, 0.5, 0, -0.707107, 0, 0.0707107, 0, 0.5, 0 )
+mesh = SubResource( 5 )
+material/0 = ExtResource( 5 )
+
+[node name="LaserArea" type="Area" parent="."]
+transform = Transform( 0.534529, 0, -0.693023, 0, 0.755, 0, 0.84515, 0, 0.438314, 2.22716, 0.564854, -1.83932 )
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="LaserArea"]
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="LaserArea"]
+transform = Transform( 0.1, 0, -1.19209e-07, 0, 1, 0, -1.11759e-08, 0, 2.5, -0.00645888, 4.76837e-07, -0.010808 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="HealthBar3D" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.04035, -0.568054 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/gate_open_anim = SubResource( 9 )
+
+[node name="LaserToggleTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GateCollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.958038, 0, 0.286642, 0, 1, 0, -0.286642, 0, 0.958038, -0.54, 0.5, -0.8 )
+shape = SubResource( 10 )
+
+[node name="TrexCollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.00441569, 0, 0.99999, 0, 1, 0, -0.99999, 0, 0.00441569, -0.0613624, 1.68962, -0.820731 )
+shape = SubResource( 11 )

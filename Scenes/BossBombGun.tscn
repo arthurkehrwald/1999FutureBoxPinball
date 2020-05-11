@@ -6,7 +6,7 @@
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.4
-height = 0.1
+height = 0.4
 
 [node name="BossBombGun" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
@@ -26,7 +26,7 @@ IS_SHOOTING_PER_STAGE = {
 }
 
 [node name="CollisionShape" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 3.25842e-08, -0.2 )
 shape = SubResource( 1 )
 
 [node name="Muzzle" parent="." index="1"]

@@ -16,16 +16,16 @@
 [ext_resource path="res://Scenes/BumperCage.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/WeirdCamera.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Storm.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Slingshot_R.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Old/Slingshot_R_Standalone.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/TransmissionHUD.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/TemporaryFlipper.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/ObjectiveHUD.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Old/LaserTrexOld.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/BlackHole.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/PlayerTurret.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Scenes/Slingshot.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/FlyingMoon.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Slingshot_L.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/PostGameHUD.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=29]
@@ -42,9 +42,17 @@
 [ext_resource path="res://Testing/LongBox.tscn" type="PackedScene" id=40]
 [ext_resource path="res://Scenes/TeleporterExit.tscn" type="PackedScene" id=41]
 [ext_resource path="res://Scenes/TriangularWall.tscn" type="PackedScene" id=42]
-[ext_resource path="res://Scenes/CurvedRampR.tscn" type="PackedScene" id=43]
-[ext_resource path="res://Scenes/CurvedRampL.tscn" type="PackedScene" id=44]
+[ext_resource path="res://Scenes/BossRampR.tscn" type="PackedScene" id=43]
+[ext_resource path="res://Scenes/BossRampL.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scenes/GlitchShaderFullscreen.tscn" type="PackedScene" id=45]
+
+
+
+
+
+
+
+
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")

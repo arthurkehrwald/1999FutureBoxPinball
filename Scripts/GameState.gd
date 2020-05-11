@@ -53,8 +53,8 @@ const NAME_STATE_DICT = {
 const OBJECTIVES = {
 	TESTING: ["Test123", "Yes"],
 	PREGAME: ["", ""],
-	EXPOSITION: ["", ""],
-	ENEMY_FLEET: ["Destroy the enemy fleet!", "Use the shop!"],
+	EXPOSITION: ["To the moon!", ""],
+	ENEMY_FLEET: ["Destroy the enemy fleet!", ""],
 	BOSS_APPEARS: ["Defeat the emperor!", ""],
 	MISSILES: ["Defeat the emperor!", ""],
 	TREX: ["Defeat the emperor!", ""],
@@ -66,7 +66,6 @@ const OBJECTIVES = {
 
 var current_state = TESTING
 
-var is_fleet_defeated = false
 var has_player_used_shop = false
 var is_black_hole_expanding = false
 
@@ -124,19 +123,14 @@ func handle_event(var event):
 			if event == Event.START_INPUT:
 				set_state(EXPOSITION)
 		EXPOSITION:
-			if event == Event.TRANSMISSION_FINISHED:
+			if event == Event.SHOP_USED:
+				emit_signal("objective_one_completed")
+			if event == Event.TRANSMISSION_FINISHED and has_player_used_shop:
 				set_state(ENEMY_FLEET)
 		ENEMY_FLEET:
 			if event == Event.FLEET_DEFEATED:
-				is_fleet_defeated = true
 				emit_signal("objective_one_completed")
-				if has_player_used_shop:
-					set_state(BOSS_APPEARS)
-			if event == Event.SHOP_USED:
-				has_player_used_shop = true
-				emit_signal("objective_two_completed")
-				if is_fleet_defeated:
-					set_state(BOSS_APPEARS)
+				set_state(BOSS_APPEARS)
 		BOSS_APPEARS:
 			if event == Event.BOSS_MISSILES_THRESHOLD or event == Event.BOSS_SHIELD_DESTROYED:
 				set_state(MISSILES)
@@ -168,9 +162,8 @@ func set_state(new_state, is_debug_skip = false):
 		Globals.player_ship.set_is_vulnerable(new_state != ECLIPSE)
 	if new_state < ECLIPSE:
 		set_global_eclipse_materials(false)
-	if new_state == ENEMY_FLEET:
+	if new_state == EXPOSITION:
 		has_player_used_shop = false
-		is_fleet_defeated = false
 	if OBJECTIVES[current_state] != OBJECTIVES[new_state]:
 		emit_signal("objectives_changed", OBJECTIVES[new_state])
 	emit_signal("state_changed", new_state, is_debug_skip)

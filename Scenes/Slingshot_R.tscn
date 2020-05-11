@@ -1,52 +1,28 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Meshes/slingshot_r.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=2]
-[ext_resource path="res://Scenes/SlingshotTrigger.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Materials/wireframe_material.tres" type="Material" id=4]
-[ext_resource path="res://Meshes/Wireframe/slingshot_wireframe_r.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://Scenes/Slingshot_L.tscn" type="PackedScene" id=2]
 
-[sub_resource type="CylinderShape" id=1]
-radius = 0.119733
-height = 0.5
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( -0.750415, 0, 0.48635, 0, 0, 0, 0.003527, 0, -1.16475, 0.003527, 0.3, -1.16475, 0, 0.3, 0, -0.750415, 0.3, 0.48635, 0.003527, 0.3, -1.16475, 0.003527, 0, -1.16475, 0, 0.3, 0, 0, 0, 0, 0, 0.3, 0, 0, 0, 0, -0.750415, 0.3, 0.48635, -0.750415, 0, 0.48635, -0.750415, 0.3, 0.48635, -0.750415, 0, 0.48635, 0.003527, 0.3, -1.16475, 0.003527, 0, -1.16475 )
 
-[sub_resource type="CylinderShape" id=2]
-radius = 0.110775
-height = 0.5
+[node name="Slingshot_R" instance=ExtResource( 2 )]
 
-[sub_resource type="ConvexPolygonShape" id=3]
-points = PoolVector3Array( 0.06, 0, 0.11, -0.62, 0, 0.95, 1.55, 0, 0.12, 0.06, 0.5, 0.11, -0.62, 0.5, 0.95, 1.55, 0.5, 0.12 )
-
-[node name="Slingshot_R" type="StaticBody"]
-transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0 )
-collision_mask = 0
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="MeshInstance" parent="." index="0"]
 mesh = ExtResource( 1 )
-material/0 = ExtResource( 2 )
+material/0 = null
 
-[node name="Wireframe" type="MeshInstance" parent="MeshInstance"]
-mesh = ExtResource( 5 )
-material/0 = ExtResource( 4 )
+[node name="Wireframe" parent="MeshInstance" index="0"]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="CollisionShapeCylinder1" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.934, 0.25, 0.58 )
+[node name="CollisionShapeCylinder1" parent="." index="1"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.833544, 0.25, 0.439011 )
+
+[node name="CollisionShapeCylinder2" parent="." index="2"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0438183, 0.25, -1.21301 )
+
+[node name="SlingshotTrigger" parent="." index="3"]
+transform = Transform( 0.426742, 0, 0.904373, 0, 1, 0, -0.904373, 0, 0.426742, -0.484392, 0, -0.434349 )
+
+[node name="CollisionShape" parent="." index="4"]
 shape = SubResource( 1 )
-
-[node name="CollisionShapeCylinder2" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.119, 0.25, -1.547 )
-shape = SubResource( 1 )
-
-[node name="CollisionShapeCylinder3" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.102, 0.25, -0.083 )
-shape = SubResource( 2 )
-
-[node name="CollisionShapeTriangle" type="CollisionShape" parent="."]
-transform = Transform( 4.37114e-08, 3.82137e-15, -1, 8.74228e-08, -1, 0, -1, -8.74228e-08, -4.37114e-08, 1.91069e-15, 0.5, 4.37114e-08 )
-shape = SubResource( 3 )
-
-[node name="SlingshotTrigger" parent="." instance=ExtResource( 3 )]
-transform = Transform( -0.379128, 0, -0.0652406, 0, 0.25, 0, 0.974927, 0, -0.0253707, -0.58, 0.25, -0.501 )
-monitorable = false
-collision_layer = 1
-collision_mask = 0

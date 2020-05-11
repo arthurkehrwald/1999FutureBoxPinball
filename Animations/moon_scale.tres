@@ -3,7 +3,7 @@
 [resource]
 resource_name = "moon_scale"
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance:scale")
+tracks/0/path = NodePath("SpinPivot/SpinningMesh:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = false
 tracks/0/imported = false

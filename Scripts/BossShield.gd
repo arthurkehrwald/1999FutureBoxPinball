@@ -9,11 +9,11 @@ var fade_progress = 0
 
 onready var health_bar = get_node("HealthBar3D/Viewport/Bar")
 onready var regeneration_timer = get_node("RegenerationTimer")
-onready var collision_shape = get_node("CollisionShape")
 onready var front_area = get_node("FrontArea")
 onready var behind_area = get_node("BehindArea")
 onready var tween = get_node("Tween")
 onready var mesh = get_node("MeshInstance")
+onready var col_layers_when_enabled = call("get_collision_layer")
 
 
 func _ready():
@@ -43,7 +43,7 @@ func _process(delta):
 func on_is_vulnerable_changed(value):
 	if value:
 		set_visible(value)
-	collision_shape.set_deferred("disabled", !value)
+	call("set_collision_layer", col_layers_when_enabled if value else 0)
 	front_area.set_deferred("monitoring", value)
 	behind_area.set_deferred("monitoring", value)
 

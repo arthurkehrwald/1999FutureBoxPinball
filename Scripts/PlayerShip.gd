@@ -18,10 +18,6 @@ func _enter_tree():
 
 
 func _ready():
-	if Globals.shop_menu != null:
-		Globals.shop_menu.connect("bought_repair", self, "on_ShopMenu_bought_repair")
-	else:
-		push_warning("[PlayerShip]: Can't find shop menu!")
 	if Globals.powerup_roulette != null:
 		Globals.powerup_roulette.connect("selected_repair", self, "on_PowerupRoulette_selected_repair")
 	else:
