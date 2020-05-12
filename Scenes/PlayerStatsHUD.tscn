@@ -12,7 +12,7 @@ size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 22
+size = 30
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -34,7 +34,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CoolnessMeter" type="TextureProgress" parent="Background"]
+[node name="ShopMeter" type="TextureProgress" parent="Background"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -87,12 +87,12 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -137.302
-margin_top = -272.509
+margin_top = -273.022
 margin_right = -17.3019
-margin_bottom = -243.509
+margin_bottom = -244.022
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
-text = "You're broke"
+text = "Score"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -103,13 +103,13 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -183.605
-margin_top = -230.669
-margin_right = -12.605
-margin_bottom = -203.669
+margin_left = -182.63
+margin_top = -241.886
+margin_right = -11.6296
+margin_bottom = -205.886
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
-text = "0"
+text = "420.000.000"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false

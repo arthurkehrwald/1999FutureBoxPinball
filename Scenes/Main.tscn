@@ -210,7 +210,7 @@ IS_VULNERABLE_PER_STAGE = {
 }
 
 [node name="Boss_Back_Barrier_V2" type="MeshInstance" parent="BoxV4/Playfield"]
-transform = Transform( -1.626, 1.28371e-13, -9.20186e-07, 2.13163e-14, 2, 3.12924e-07, 6.33188e-07, 2.38419e-07, -2.363, 0.00432238, 0.174241, -6.43247 )
+transform = Transform( -1.626, 1.28371e-13, -9.20186e-07, 7.10543e-15, 2, 3.42727e-07, 6.33188e-07, 2.38419e-07, -2.363, 0.00432238, -0.625759, -6.43247 )
 mesh = ExtResource( 32 )
 material/0 = null
 
@@ -359,7 +359,7 @@ transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, -2.980
 transform = Transform( 0.806335, 0, 0, 0, -4.47035e-08, 0.854646, 0, -0.806885, -9.68575e-08, -4.2506, 0.700001, 7.5 )
 
 [node name="MoonShop" parent="BoxV4/Playfield" instance=ExtResource( 26 )]
-transform = Transform( 0.910872, 0.25526, 0.324275, -0.240476, 0.966873, -0.0856107, -0.335386, 7.45058e-08, 0.942082, 2.33612, -0.164237, -4.93192 )
+transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, 4.47035e-08, 1, 2.49087, -0.0037528, -4.54947 )
 
 [node name="CentralHUD3D" parent="BoxV4/Playfield" instance=ExtResource( 27 )]
 transform = Transform( 0.8, 0, 0, 0, -2.23517e-08, 8, 0, -0.8, -2.38419e-07, 0, 0.0999999, 4.2 )

@@ -32,3 +32,7 @@ var head_track_cam_dummy = null
 # weird camera - interpret head tracking input
 
 var player_turret = null
+# roulette + ball spawn - insert pinballs
+
+var moon_shop = null
+# player stats hud - display progress to opening

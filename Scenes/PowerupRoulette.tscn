@@ -31,10 +31,10 @@ __meta__ = {
 }
 POWERUP_ODDS_PER_STAGE = {
 "0-Testing": {
-"Boost": 1.0,
+"Boost": 0.0,
 "Remote": 1.0,
-"Stopper": 1.0,
-"Turret": 1.0
+"Stopper": 0.0,
+"Turret": 0.0
 },
 "1-Pregame": {
 "Boost": 1.0,
@@ -96,6 +96,13 @@ POWERUP_ODDS_PER_STAGE = {
 "Stopper": 1.0,
 "Turret": 1.0
 }
+}
+POWERUP_DURATIONS = {
+"Boost": 30.0,
+"Remote": 30.0,
+"Repair": 10.0,
+"Stopper": 30.0,
+"Turret": 10.0
 }
 
 [node name="Background" type="TextureRect" parent="."]
@@ -236,3 +243,6 @@ margin_right = 1000.0
 texture = ExtResource( 8 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="SpinTimer" type="Timer" parent="."]
+one_shot = true

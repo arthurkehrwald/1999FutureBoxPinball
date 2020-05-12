@@ -164,9 +164,9 @@ func set_state(new_state, is_debug_skip = false):
 		set_global_eclipse_materials(false)
 	if new_state == EXPOSITION:
 		has_player_used_shop = false
+	emit_signal("state_changed", new_state, is_debug_skip)
 	if OBJECTIVES[current_state] != OBJECTIVES[new_state]:
 		emit_signal("objectives_changed", OBJECTIVES[new_state])
-	emit_signal("state_changed", new_state, is_debug_skip)
 	current_state = new_state
 
 

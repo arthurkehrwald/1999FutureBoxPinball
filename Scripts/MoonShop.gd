@@ -2,6 +2,7 @@ extends Spatial
 # The mobile, partially transparent part of the moon:
 #-  If player has enough money, scales up, spins and activates shop roulette when hit
 
+signal unlock_progress_changed(progress)
 
 enum In {
 	SCALE_ANIM_DONE,
@@ -17,11 +18,12 @@ enum ScaleState {
 
 export var MONEY_INCREASE_TO_OPEN = 200.0
 export var SPIN_SPEED_MULTIPLIER = .3
-export var SPIN_SPEED_FALLOFF = .5
+export var MAX_SPIN_SPEED = 5.0
+export var SPIN_SPEED_DECAY = .5
 export var IMPULSE_STRENGTH = 3.0
 
 var is_open = true setget set_is_open
-var unlock_progress = 0
+var unlock_progress = 1
 var scale_state = ScaleState.SMALL
 var is_spinning = false
 var spin_speed = 0.0
@@ -29,6 +31,10 @@ var spin_axis = Vector3(1, 0, 0)
 
 onready var scale_anim_player = get_node("ScaleAnimPlayer")
 onready var spinning_mesh = get_node("SpinPivot/SpinningMesh")
+
+
+func _enter_tree():
+	Globals.moon_shop = self
 
 
 func _ready():
@@ -46,7 +52,9 @@ func _ready():
 
 func _process(delta):
 	if spin_speed > 0:
-		spin(delta)
+		spinning_mesh.set_transform(
+			spinning_mesh.get_transform().rotated(spin_axis, spin_speed * TAU * delta))
+		spin_speed -= SPIN_SPEED_DECAY * delta
 	else:
 		is_spinning = false
 		set_process(false)
@@ -55,16 +63,23 @@ func _process(delta):
 
 
 func on_hit_by_projectile(var projectile):
-	if not is_open or not projectile.is_in_group("pinballs"):
+	if not is_open or not projectile.is_in_group("rollers"):
 		return
 	var projectile_pos = projectile.get_global_transform().origin
 	var projectile_vel = projectile.get_linear_velocity()
-	start_spinning(projectile_pos, projectile_vel)
+	var new_spin_speed = min(projectile_vel.length() * SPIN_SPEED_MULTIPLIER, MAX_SPIN_SPEED)
+	if new_spin_speed < spin_speed:
+		return
+	var colliding_body_to_moon = spinning_mesh.get_global_transform().origin - projectile_pos
+	spin_axis = projectile_vel.cross(colliding_body_to_moon).normalized()
+	spin_speed = projectile_vel.length() * SPIN_SPEED_MULTIPLIER
+	is_spinning = true
+	set_process(true)
 	if scale_state == ScaleState.SCALING_DOWN or scale_state == ScaleState.SMALL:
 		scale_up()
 	PoolManager.request(PoolManager.MOON_TRIGGERED, get_global_transform().origin)
 	if Globals.powerup_roulette != null:
-		Globals.powerup_roulette.set_is_active(true, projectile)
+		Globals.powerup_roulette.start_spinning(spin_speed, SPIN_SPEED_DECAY)
 	set_is_open(false)
 
 
@@ -74,12 +89,6 @@ func start_spinning(var projectile_pos, var projectile_vel):
 	spin_speed = projectile_vel.length() * SPIN_SPEED_MULTIPLIER
 	is_spinning = true
 	set_process(true)
-
-
-func spin(var delta):
-	spinning_mesh.set_transform(
-			spinning_mesh.get_transform().rotated(spin_axis, spin_speed * TAU * delta))
-	spin_speed -= SPIN_SPEED_FALLOFF * delta
 
 
 func scale_up():
@@ -117,14 +126,15 @@ func on_GameState_changed(new_state, is_debug_skip):
 
 
 func set_is_open(value):
-	unlock_progress = 0
 	is_open = value
 
 
 func on_Player_money_changed(new, old):
-	if new <= old:
+	if new <= old or is_open:
 		return
 	unlock_progress += (new - old) / MONEY_INCREASE_TO_OPEN
-	if unlock_progress <= 1:
+	emit_signal("unlock_progress_changed", unlock_progress)
+	if unlock_progress >= 1:
+		unlock_progress = 0
 		Announcer.say("shop_open", true)
 		set_is_open(true)

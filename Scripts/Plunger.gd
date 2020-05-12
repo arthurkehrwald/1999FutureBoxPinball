@@ -33,10 +33,10 @@ func _input(event):
 func _physics_process(delta):
 	if Input.is_action_pressed("ui_down"):
 		if move_progress < 1:
-			move_progress += windup_speed / max_distance * delta
+			move_progress += windup_speed / Engine.time_scale / max_distance * delta
 			pull_audio_player.pitch_scale = move_progress + .5
 	elif move_progress > 0:
-		move_progress -= release_speed / max_distance * delta
+		move_progress -= release_speed / Engine.time_scale / max_distance * delta
 		if move_progress < 0:
 			move_progress = 0
 	

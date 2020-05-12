@@ -26,9 +26,8 @@ func on_body_entered(body):
 	audio_player.play()
 	var exit_index = rng.randi_range(0, Globals.teleporter_exits.size() - 1)
 	var exit = Globals.teleporter_exits[exit_index]
-	var exit_dir = -exit.get_global_transform().basis.z
 	body.teleport(exit.get_global_transform().origin)
-	body.set_linear_velocity(exit_dir * body.get_linear_velocity().length())
+	body.set_linear_velocity(Vector3(0, 0, 0))
 	PoolManager.request(PoolManager.STAR_GATE_ENTER, body.get_global_transform().origin)
 	PoolManager.request(PoolManager.STAR_GATE_EXIT, exit.get_global_transform().origin)
 
@@ -36,4 +35,3 @@ func on_body_entered(body):
 func on_GameState_changed(new_state, _is_debug_skip):
 	var is_bossfight = new_state > GameState.ENEMY_FLEET and new_state < GameState.VICTORY
 	set_is_active(new_state == GameState.TESTING or is_bossfight)
-		

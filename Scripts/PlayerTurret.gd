@@ -7,6 +7,7 @@ export var MAX_TURN_ANGLE = 45
 export var TURN_SPEED = .5
 export var MAX_SHOT_SPEED = 50
 export var SHOT_CHARGE_SPEED = 1.0
+export var TIME_SCALE_WHEN_AIMING = .1
 
 var ball_to_shoot = null
 var rotation_progress = 0.5
@@ -28,12 +29,9 @@ func _enter_tree():
 
 func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
-	if Globals.shop_menu != null:
-		Globals.shop_menu.connect("bought_turret_shot", self, "insert_ball")
-	else:
-		push_warning("[Turret] can't find shop menu! Will not respond when player buys turret shot.")
 	if Globals.powerup_roulette != null:
 		Globals.powerup_roulette.connect("selected_turret", self, "insert_ball")
+		Globals.powerup_roulette.connect("turret_expired", self, "shoot", [shot_charge])
 	else:
 		push_warning("[Turret] can't find powerup roulette! Will not respond when player buys turret shot.")
 	set_process(false)
@@ -57,12 +55,12 @@ func _process(delta):
 	else:
 		if Input.is_action_pressed("ui_right"):
 			if rotation_progress > 0:
-				rotation_progress -= TURN_SPEED * delta
+				rotation_progress -= TURN_SPEED / TIME_SCALE_WHEN_AIMING * delta
 		if Input.is_action_pressed("ui_left"):
 			if rotation_progress < 1:
-				rotation_progress += TURN_SPEED * delta
+				rotation_progress += TURN_SPEED / TIME_SCALE_WHEN_AIMING * delta
 		if Input.is_action_pressed("ui_down"):
-			shot_charge = clamp(shot_charge + SHOT_CHARGE_SPEED * delta, 0, 1)
+			shot_charge = clamp(shot_charge + SHOT_CHARGE_SPEED / TIME_SCALE_WHEN_AIMING * delta, 0, 1)
 			var dotted_line_scale = Vector3(1, 1, lerp(1, 3, shot_charge))
 			dotted_line.set_transform(dotted_line_start_transform.scaled(dotted_line_scale))
 	
@@ -79,7 +77,8 @@ func on_GameState_changed(new_state, is_debug_skip):
 		ball_to_shoot = null
 		set_process(false)
 		var start_rotation = Quat(start_transform.basis.orthonormalized())
-		set_transform(Transform(start_rotation, get_transform().origin))		
+		set_transform(Transform(start_rotation, get_transform().origin))
+		Engine.time_scale = 1
 
 
 func insert_ball(ball):
@@ -95,23 +94,25 @@ func insert_ball(ball):
 	emit_signal("was_loaded")
 	set_process(true)
 	delayed_announcer_instructions()
+	Engine.time_scale = TIME_SCALE_WHEN_AIMING
 
 
-func shoot(plunger_progress):
+func shoot(charge):
 	if ball_to_shoot == null:
 		return
 	dotted_line.set_visible(false)
 	ball_to_shoot.set_locked(false)
 	ball_to_shoot.set_visible(true)
-	var plunger_force = .15 * pow(plunger_progress - 1.7, 3) + 1
+	var force = .15 * pow(charge - 1.7, 3) + 1
 	#print(plunger_force)
-	ball_to_shoot.apply_central_impulse(-muzzle.get_global_transform().basis.z.normalized() * MAX_SHOT_SPEED * plunger_force)
+	ball_to_shoot.apply_central_impulse(-muzzle.get_global_transform().basis.z.normalized() * MAX_SHOT_SPEED * force)
 	ball_to_shoot = null
 	shot_charge = 0
+	Engine.time_scale = 1
 	emit_signal("has_shot")
 
 
 func delayed_announcer_instructions():
-	yield(get_tree().create_timer(2.0), "timeout")
+	yield(get_tree().create_timer(1.0), "timeout")
 	if ball_to_shoot != null:
 		Announcer.say("plunger_fire")

@@ -4,7 +4,7 @@ const MONEY_LABEL_FORMAT_STRING = "%s,000,000,000"
 const PLAYER_HEALTH_LABEL_FORMAT_STRING = "%s%"
 
 onready var glitch_overlay = get_node("../GlitchOverlay")
-onready var coolness_meter = get_node("Background/CoolnessMeter")
+onready var shop_meter = get_node("Background/ShopMeter")
 onready var health_bar = get_node("Background/HealthBar")
 onready var money_desc_label = get_node("Background/MoneyDescLabel")
 onready var money_label = get_node("Background/MoneyLabel")
@@ -15,11 +15,12 @@ func _ready():
 	if Globals.player_ship != null:
 		Globals.player_ship.connect("health_changed", self, "on_PlayerShip_health_changed")
 		Globals.player_ship.connect("money_changed", self, "on_PlayerShip_money_changed")
-		Globals.player_ship.connect("coolness_changed", self, "on_PlayerShip_coolness_changed")
 	else:
 		push_warning("[PlayerStatsHUD] can't find player. Will not display stats.")
-	if Globals.shop_menu == null:
-		push_warning("[PlayerStatsHUD] can't find shop menu. Will not display when the shop is open.")
+	if Globals.moon_shop != null:
+		shop_meter.value = Globals.moon_shop.unlock_progress
+		Globals.moon_shop.connect("unlock_progress_changed", shop_meter, "set_value")
+		push_warning("[PlayerStatsHUD] can't find moon shop. Will not display progress to opening.")
 
 
 func on_PlayerShip_money_changed(new_value, _old_value):
@@ -34,12 +35,6 @@ func on_PlayerShip_money_changed(new_value, _old_value):
 	else:
 			money_desc_label.text = ""
 	glitch_overlay.super_glitch()
-
-
-func on_PlayerShip_coolness_changed(new_value, old_value):
-	coolness_meter.value = new_value
-	if new_value > old_value:
-		glitch_overlay.super_glitch()
 
 
 func on_PlayerShip_health_changed(new_health, _old_health, max_health):

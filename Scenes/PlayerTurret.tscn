@@ -8,8 +8,10 @@
 
 [node name="PlayerTurret" type="Spatial"]
 script = ExtResource( 1 )
+MAX_TURN_ANGLE = 90
 MAX_SHOT_SPEED = 40
 SHOT_CHARGE_SPEED = 0.7
+TIME_SCALE_WHEN_AIMING = 0.1
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 4 )

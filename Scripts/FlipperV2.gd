@@ -52,7 +52,7 @@ func _input(event):
 func _physics_process(delta):	
 	if Input.is_action_pressed(input_code):
 		if rotation_progress < 1:
-			rotation_progress += TURN_SPEED / MAX_TURN_ANGLE * delta
+			rotation_progress += TURN_SPEED * delta
 #			for body in impulse_area.get_overlapping_bodies():
 #				if body.is_in_group("rollers"):
 #					body.apply_central_impulse(-get_global_transform().basis.z.normalized() - body.get_linear_velocity().normalized() * sideways_impulse_strength * delta)
@@ -60,7 +60,7 @@ func _physics_process(delta):
 		else:
 			impulse_area.set_deferred("monitoring", false)
 	elif rotation_progress > 0:
-		rotation_progress -= TURN_SPEED / MAX_TURN_ANGLE * delta
+		rotation_progress -= TURN_SPEED * delta
 	else:
 		set_physics_process(false)
 	
