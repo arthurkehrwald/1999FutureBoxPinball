@@ -12,6 +12,8 @@ export(float, 0, 50.0) var SPEED_LIM = 30.0
 export var ENFORCE_SPEED_LIM = true
 export var AIRBORNE_GRAV = 8.0
 
+var current_wire_ramp = null
+
 
 func _ready():
 	add_to_group("rollers")

@@ -6,6 +6,7 @@ signal health_changed(health, old_health, max_health)
 signal death
 
 export var MAX_HEALTH = 100.0
+export var BASE_REGEN_PER_SEC = .0
 export var PINBALL_DIRECT_HIT_BASE_DAMAGE = 10.0
 export var BOMB_DIRECT_HIT_BASE_DAMAGE = 10.0
 export var MISSILE_DIRECT_HIT_DAMAGE = 10.0
@@ -33,6 +34,7 @@ export var IS_VULNERABLE_PER_STAGE = {
 
 var IS_VULNERABLE_PER_GAME_STATE = {}
 var is_vulnerable = true setget set_is_vulnerable
+var dynamic_regen_per_sec = 0.0
 
 onready var health = MAX_HEALTH setget set_health
 
@@ -46,6 +48,12 @@ func _ready():
 	if MONEY_YIELD_PER_DAMAGE != 0 and Globals.player_ship == null:
 		push_warning("[" + name + "] can't find player ship!"
 				+ " Damaging it will not yield money.")
+
+
+func _process(delta):
+	var regenerated_hp = BASE_REGEN_PER_SEC + dynamic_regen_per_sec
+	if regenerated_hp != 0:
+		heal(regenerated_hp * delta)
 
 
 func set_is_vulnerable(value):

@@ -2,7 +2,7 @@ extends Control
 
 enum RexMood {NEUTRAL, INJURED, HAPPY, ANGRY}
 
-export var INJURED_PORTRAIT_HEALTH_PERCENTAGE = 0.3
+export var INJURED_PORTRAIT_HEALTH_PERCENTAGE = 30.0
 export var INJURED_REACTION_DURATION = 1.0
 export (String, FILE, "*.json") var TRANSMISSIONS_FILE_PATH : String
 
@@ -125,15 +125,17 @@ func set_rex_mood(value):
 
 
 func on_PlayerShip_health_changed(new_health, old_health, max_health):
+	if new_health >= old_health:
+		return
 	hurt_reaction_timer.stop()
-	if old_health / max_health > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
-		if new_health / max_health < INJURED_PORTRAIT_HEALTH_PERCENTAGE:
+	if old_health / max_health * 100 > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
+		if new_health / max_health * 100 < INJURED_PORTRAIT_HEALTH_PERCENTAGE:
 			set_rex_mood(RexMood.INJURED)
 		else:
 			set_rex_mood(RexMood.INJURED)
 			hurt_reaction_timer.start(INJURED_REACTION_DURATION)
 	else:
-		if new_health / max_health > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
+		if new_health / max_health * 100 > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
 			set_rex_mood(RexMood.NEUTRAL)
 
 

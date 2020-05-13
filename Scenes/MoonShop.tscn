@@ -15,7 +15,6 @@ radius = 0.66
 [node name="MoonShop" type="Area"]
 collision_mask = 0
 script = ExtResource( 3 )
-SPIN_SPEED_MULTIPLIER = 0.3
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56, 0 )

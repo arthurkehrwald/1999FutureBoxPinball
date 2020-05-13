@@ -30,10 +30,12 @@ func _enter_tree():
 func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.powerup_roulette != null:
-		Globals.powerup_roulette.connect("selected_turret", self, "insert_ball")
+		Globals.powerup_roulette.connect("selected_turret", self, "on_PowerupRoulette_selected_turret")
 		Globals.powerup_roulette.connect("turret_expired", self, "shoot", [shot_charge])
 	else:
 		push_warning("[Turret] can't find powerup roulette! Will not respond when player buys turret shot.")
+	if Globals.ball_spawn == null:
+		push_warning("[Turret] can't find ball spawn! Will not work if ball is drained when it gets triggered.")
 	set_process(false)
 
 
@@ -116,3 +118,14 @@ func delayed_announcer_instructions():
 	yield(get_tree().create_timer(1.0), "timeout")
 	if ball_to_shoot != null:
 		Announcer.say("plunger_fire")
+
+
+func on_PowerupRoulette_selected_turret():
+	for pinball in get_tree().get_nodes_in_group("pinballs"):
+		if pinball.is_accessible_to_player:
+			if pinball.current_wire_ramp != null:
+				pinball.current_wire_ramp.reset(true)
+			insert_ball(pinball)
+			return
+	if Globals.ball_spawn != null:
+		Globals.ball_spawn.insert_next_ball_into_turret = true

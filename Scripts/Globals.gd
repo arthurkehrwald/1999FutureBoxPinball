@@ -36,3 +36,7 @@ var player_turret = null
 
 var moon_shop = null
 # player stats hud - display progress to opening
+
+var ball_spawn = null
+# player turret - tell ball spawn to give it the next ball if there are none
+# left on the field when it is triggered

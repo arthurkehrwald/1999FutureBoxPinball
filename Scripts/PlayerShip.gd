@@ -20,6 +20,7 @@ func _enter_tree():
 func _ready():
 	if Globals.powerup_roulette != null:
 		Globals.powerup_roulette.connect("selected_repair", self, "on_PowerupRoulette_selected_repair")
+		Globals.powerup_roulette.connect("repair_expired", self, "on_PowerupRoulette_repair_expired")
 	else:
 		push_warning("[PlayerShip]: Can't find powerup roulette!")
 	connect("health_changed", self, "on_health_changed")
@@ -41,12 +42,12 @@ func set_coolness(value):
 	coolness = value
 
 
-func on_ShopMenu_bought_repair(heal_percent):
-	heal(MAX_HEALTH * .01 * heal_percent)
+func on_PowerupRoulette_selected_repair(health_per_sec):
+	dynamic_regen_per_sec += health_per_sec
 
 
-func on_PowerupRoulette_selected_repair(heal_percent):
-	heal(MAX_HEALTH * .01 * heal_percent)
+func on_PowerupRoulette_repair_expired(health_per_sec):
+	dynamic_regen_per_sec -= health_per_sec
 
 
 func on_health_changed(current_health, old_health, _max_health):

@@ -28,10 +28,10 @@ render_target_v_flip = true
 [node name="PowerupRoulette" parent="Viewport" instance=ExtResource( 2 )]
 POWERUP_ODDS_PER_STAGE = {
 "0-Testing": {
-"Boost": 0.0,
+"Boost": 1.0,
 "Remote": 0.0,
 "Stopper": 0.0,
-"Turret": 1.0
+"Turret": 0.0
 },
 "1-Pregame": {
 "Boost": 1.0,
@@ -98,7 +98,7 @@ POWERUP_DURATIONS = {
 "Boost": 30.0,
 "Remote": 10.0,
 "Repair": 10.0,
-"Stopper": 30.0,
+"Stopper": 70.0,
 "Turret": 10.0
 }
 

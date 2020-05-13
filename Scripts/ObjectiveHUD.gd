@@ -65,6 +65,7 @@ func on_PowerupRoulette_visibility_changed():
 			set_objective_complete(queued_complete_objectives.pop_back())
 		elif not queued_new_objectives.empty():
 			set_objectives(queued_new_objectives)
+			queued_new_objectives.clear()
 
 
 func on_anim_finished(_anim_name):
@@ -73,6 +74,7 @@ func on_anim_finished(_anim_name):
 			set_objective_complete(queued_complete_objectives.pop_back())
 		elif not queued_new_objectives.empty():
 			set_objectives(queued_new_objectives)
+			queued_new_objectives.clear()
 
 
 func on_GameState_changed(new_state, is_debug_skip):

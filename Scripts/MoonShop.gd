@@ -22,7 +22,7 @@ export var MAX_SPIN_SPEED = 5.0
 export var SPIN_SPEED_DECAY = .5
 export var IMPULSE_STRENGTH = 3.0
 
-var is_open = true setget set_is_open
+var is_open = false setget set_is_open
 var unlock_progress = 1
 var scale_state = ScaleState.SMALL
 var is_spinning = false
@@ -47,6 +47,7 @@ func _ready():
 	if Globals.powerup_roulette == null:
 		push_warning("[MoonShop] Can't find powerup roulette! Will not activate it.")
 	scale_anim_player.connect("animation_finished", self, "on_ScaleAnimPlayer_animation_finished")
+	is_open = MONEY_INCREASE_TO_OPEN <= 0
 	set_process(false)
 
 
@@ -68,27 +69,21 @@ func on_hit_by_projectile(var projectile):
 	var projectile_pos = projectile.get_global_transform().origin
 	var projectile_vel = projectile.get_linear_velocity()
 	var new_spin_speed = min(projectile_vel.length() * SPIN_SPEED_MULTIPLIER, MAX_SPIN_SPEED)
+	print(new_spin_speed)
 	if new_spin_speed < spin_speed:
 		return
 	var colliding_body_to_moon = spinning_mesh.get_global_transform().origin - projectile_pos
 	spin_axis = projectile_vel.cross(colliding_body_to_moon).normalized()
-	spin_speed = projectile_vel.length() * SPIN_SPEED_MULTIPLIER
+	spin_speed = new_spin_speed
 	is_spinning = true
 	set_process(true)
 	if scale_state == ScaleState.SCALING_DOWN or scale_state == ScaleState.SMALL:
 		scale_up()
 	PoolManager.request(PoolManager.MOON_TRIGGERED, get_global_transform().origin)
 	if Globals.powerup_roulette != null:
-		Globals.powerup_roulette.start_spinning(spin_speed, SPIN_SPEED_DECAY)
-	set_is_open(false)
-
-
-func start_spinning(var projectile_pos, var projectile_vel):
-	var colliding_body_to_moon = spinning_mesh.get_global_transform().origin - projectile_pos
-	spin_axis = projectile_vel.cross(colliding_body_to_moon).normalized()
-	spin_speed = projectile_vel.length() * SPIN_SPEED_MULTIPLIER
-	is_spinning = true
-	set_process(true)
+		Globals.powerup_roulette.start_spinning(new_spin_speed, SPIN_SPEED_DECAY)
+	if MONEY_INCREASE_TO_OPEN > 0:
+		set_is_open(false)
 
 
 func scale_up():
@@ -114,9 +109,9 @@ func on_ScaleAnimPlayer_animation_finished(_anim_name):
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if new_state <= GameState.PREGAME:
+	if new_state == GameState.TESTING or new_state == GameState.EXPOSITION:
 		set_is_open(true)
-	elif is_debug_skip:
+	elif is_debug_skip and MONEY_INCREASE_TO_OPEN > 0:
 		set_is_open(false)
 	if new_state == GameState.PREGAME or is_debug_skip:
 		is_spinning = false
@@ -126,15 +121,20 @@ func on_GameState_changed(new_state, is_debug_skip):
 
 
 func set_is_open(value):
+	if value:
+		Announcer.say("shop_open", true)
 	is_open = value
+	unlock_progress = 1 if value else 0
+	emit_signal("unlock_progress_changed", unlock_progress)
 
 
 func on_Player_money_changed(new, old):
 	if new <= old or is_open:
 		return
-	unlock_progress += (new - old) / MONEY_INCREASE_TO_OPEN
+	if MONEY_INCREASE_TO_OPEN > 0:
+		unlock_progress += (new - old) / MONEY_INCREASE_TO_OPEN
+	else:
+		unlock_progress = 1
 	emit_signal("unlock_progress_changed", unlock_progress)
 	if unlock_progress >= 1:
-		unlock_progress = 0
-		Announcer.say("shop_open", true)
 		set_is_open(true)

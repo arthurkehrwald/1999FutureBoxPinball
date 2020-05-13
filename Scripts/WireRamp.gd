@@ -127,6 +127,7 @@ func start_follow():
 	looping_body_mesh = looping_body.get_ref().get_node("MeshInstance")
 	looping_body_mesh.get_parent().remove_child(looping_body_mesh)
 	path_follow.add_child(looping_body_mesh)
+	looping_body.get_ref().current_wire_ramp = self
 	looping_body.get_ref().set_visible(false)
 	looping_body.get_ref().set_locked(true)
 	entrance_area.set_deferred("monitoring", false)
@@ -149,6 +150,7 @@ func reset(is_active):
 		if looping_body.get_ref():
 			looping_body_waiting_status = states.NONE
 			looping_body_entered_status = states.NONE
+			looping_body.get_ref().current_wire_ramp = null
 			looping_body.get_ref().set_visible(true)
 			looping_body.get_ref().set_locked(false)
 			if looping_body_mesh != null:

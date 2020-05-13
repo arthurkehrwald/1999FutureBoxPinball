@@ -5,7 +5,7 @@ extends "res://Scripts/Roller.gd"
 # becomes inaccessible so that the number of pinballs on the field can be
 # monitored.
 
-signal accessibility_changed(pinball, value)
+signal became_inaccessible
 
 const TRAIL_SCENE = preload("res://Scenes/PinballTrailFX.tscn")
 
@@ -63,7 +63,8 @@ func set_is_accessible_to_player(value):
 	if value == is_accessible_to_player:
 		return
 	is_accessible_to_player = value
-	emit_signal("accessibility_changed", self, value)
+	if not value:
+		emit_signal("became_inaccessible")
 
 
 func set_is_remote_controlled(value, duration = 0):

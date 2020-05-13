@@ -5,6 +5,7 @@ var points2 = []
 var lifePoints = []
 export var width = 0.5
 export var motionDelta = 0.1
+export var clear_trail_motion_delta = .5
 export var lifespan = 1.0
 export var scaleTexture = true
 export var startColor = Color(1.0, 1.0, 1.0, 1.0)
@@ -17,8 +18,13 @@ func _ready():
 	oldPos = get_global_transform().origin
 
 func _process(delta):
+	var dist_traveled = (oldPos - get_global_transform().origin).length()
 	
-	if (oldPos - get_global_transform().origin).length() > motionDelta:
+	if dist_traveled > clear_trail_motion_delta:
+		lifePoints.clear()
+		points.clear()
+		points2.clear()
+	if  dist_traveled > motionDelta:
 		appendPoint()
 		oldPos = get_global_transform().origin
 	
