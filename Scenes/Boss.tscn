@@ -4,7 +4,7 @@
 [ext_resource path="res://Meshes/Collision/col_boss_platform.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Scenes/Bar3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Meshes/boss.obj" type="ArrayMesh" id=4]
-[ext_resource path="res://Scenes/Storm_Fox_FX_01.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Storm_Fog_FX_01.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/BossMissileGun.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/BossShield.tscn" type="PackedScene" id=8]
@@ -44,9 +44,9 @@ shape = SubResource( 1 )
 
 [node name="BossShield" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.523656 )
+visible = false
 MAX_HEALTH = 75.0
 PINBALL_DIRECT_HIT_BASE_DAMAGE = 15.0
-BOMB_DIRECT_HIT_BASE_DAMAGE = 10.0
 DIRECT_HIT_SPEED_RELEVANCE = 0.5
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
@@ -154,5 +154,4 @@ mesh = ExtResource( 2 )
 material/0 = null
 
 [node name="Fog" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.17053 )
-visible = false
+transform = Transform( 1.02701, 0, 0, 0, 1.02701, 0, 0, 0, 1.02701, 0, 0, 0.0398126 )
