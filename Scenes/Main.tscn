@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://Scenes/BoxV4.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Reference/playfield_flipper_r_trajectories.jpg" type="Texture" id=2]
@@ -37,7 +37,11 @@
 [ext_resource path="res://Meshes/Collision/col_middle_left_guide.obj" type="ArrayMesh" id=35]
 [ext_resource path="res://Scenes/Stopper.tscn" type="PackedScene" id=36]
 [ext_resource path="res://Scenes/Boost.tscn" type="PackedScene" id=37]
+[ext_resource path="res://Scenes/Multiball_and_T-Rex_Cage_01.tscn" type="PackedScene" id=38]
 [ext_resource path="res://Scenes/WeirdCamera.tscn" type="PackedScene" id=39]
+[ext_resource path="res://Textures/initialShadingGroup_baseColor.png" type="Texture" id=40]
+[ext_resource path="res://Meshes/Cage_Spaceship_02.obj" type="ArrayMesh" id=41]
+[ext_resource path="res://Textures/initialShadingGroup_baseColor_rex.png" type="Texture" id=42]
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=45]
 
 [sub_resource type="ConcavePolygonShape" id=1]
@@ -116,6 +120,41 @@ albedo_color = Color( 0.941176, 0.905882, 0.0588235, 1 )
 
 [sub_resource type="SpatialMaterial" id=20]
 albedo_color = Color( 0.0588235, 0.65098, 0.941176, 1 )
+
+[sub_resource type="Animation" id=21]
+resource_name = "Cage_Rotation"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Trex_Cage:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Multiball_Cage:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+
+[sub_resource type="SpatialMaterial" id=22]
+albedo_texture = ExtResource( 42 )
+
+[sub_resource type="SpatialMaterial" id=23]
+albedo_texture = ExtResource( 40 )
 
 [node name="Main" type="Spatial"]
 
@@ -429,5 +468,25 @@ texture = ExtResource( 2 )
 [node name="HeadTrackCamDummy" parent="BoxV4" instance=ExtResource( 30 )]
 transform = Transform( -1, -2.21093e-07, -3.20564e-07, 0, 0.823196, -0.567758, 3.89414e-07, -0.567758, -0.823196, 0, 3.92669, -8.91109 )
 cam_path = NodePath("../TheWeirdo/WeirdCameraPolar")
+
+[node name="Trex_Cage" parent="." instance=ExtResource( 38 )]
+transform = Transform( -0.562673, 0, -0.82668, 0, 1, 0, 0.82668, 0, -0.562673, 3.21436, 3.08031, -5.23861 )
+
+[node name="Multiball_Cage" parent="." instance=ExtResource( 38 )]
+transform = Transform( -0.562673, 0, -0.82668, 0, 1, 0, 0.82668, 0, -0.562673, -3.52095, 3.08031, -6.34467 )
+
+[node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
+autoplay = "Cage_Rotation"
+anims/Cage_Rotation = SubResource( 21 )
+
+[node name="Cage_Spaceship_Rex" type="MeshInstance" parent="."]
+transform = Transform( 0.994801, 0, 0.101838, 0, 1, 0, -0.101838, 0, 0.994801, 3.13478, 2.9302, -5.06739 )
+mesh = ExtResource( 41 )
+material/0 = SubResource( 22 )
+
+[node name="Cage_Spaceship_Multiball" type="MeshInstance" parent="."]
+transform = Transform( 0.961021, 0, 0.276476, 0, 1, 0, -0.276476, 0, 0.961021, -3.37899, 2.9302, -6.2637 )
+mesh = ExtResource( 41 )
+material/0 = SubResource( 23 )
 
 [editable path="BoxV4/Playfield/UpperGuide/WireRamp"]
