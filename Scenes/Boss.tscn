@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Boss.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/Collision/col_boss_platform.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Scenes/Bar3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Meshes/boss.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://Scenes/Storm_Fox_FX_01.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/BossMissileGun.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/BossShield.tscn" type="PackedScene" id=8]
@@ -149,3 +150,7 @@ shape = SubResource( 2 )
 visible = false
 mesh = ExtResource( 2 )
 material/0 = null
+
+[node name="Fog" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.17053 )
+visible = false

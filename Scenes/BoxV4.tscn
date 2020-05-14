@@ -1,36 +1,38 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Meshes/box_v5.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/PerlinNoise3D.gd" type="Script" id=3]
 [ext_resource path="res://Meshes/Box_06.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Textures/Space_BG_02.jpg" type="Texture" id=5]
+[ext_resource path="res://Meshes/Box_07.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://Textures/BG_Box_03.png" type="Texture" id=7]
 
-[sub_resource type="VisualShaderNodeTransformVecMult" id=22]
+[sub_resource type="VisualShaderNodeTransformVecMult" id=25]
 default_input_values = [ 0, Transform( 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ), 1, Vector3( 0, 0, 0 ) ]
 
-[sub_resource type="VisualShaderNodeVectorDerivativeFunc" id=23]
+[sub_resource type="VisualShaderNodeVectorDerivativeFunc" id=26]
 default_input_values = [ 0, Vector3( 1, 1, 0 ) ]
 
-[sub_resource type="VisualShaderNodeInput" id=1]
+[sub_resource type="VisualShaderNodeInput" id=27]
 input_name = "screen_uv"
 
-[sub_resource type="VisualShaderNodeTexture" id=2]
+[sub_resource type="VisualShaderNodeTexture" id=28]
 output_port_for_preview = 0
 texture = ExtResource( 5 )
 
-[sub_resource type="VisualShaderNodeInput" id=3]
+[sub_resource type="VisualShaderNodeInput" id=29]
 input_name = "time"
 
-[sub_resource type="VisualShaderNodeScalarOp" id=4]
+[sub_resource type="VisualShaderNodeScalarOp" id=30]
 operator = 2
 
-[sub_resource type="VisualShaderNodeVectorOp" id=5]
+[sub_resource type="VisualShaderNodeVectorOp" id=31]
 
-[sub_resource type="VisualShaderNodeVec3Constant" id=6]
+[sub_resource type="VisualShaderNodeVec3Constant" id=32]
 constant = Vector3( 0.5, 0, 0 )
 
-[sub_resource type="VisualShader" id=7]
+[sub_resource type="VisualShader" id=33]
 code = "shader_type spatial;
 uniform sampler2D tex_frg_4;
 
@@ -77,53 +79,53 @@ void light() {
 "
 graph_offset = Vector2( -22.5999, -32.8708 )
 nodes/fragment/0/position = Vector2( 1100, 120 )
-nodes/fragment/3/node = SubResource( 1 )
+nodes/fragment/3/node = SubResource( 27 )
 nodes/fragment/3/position = Vector2( 280, 440 )
-nodes/fragment/4/node = SubResource( 2 )
+nodes/fragment/4/node = SubResource( 28 )
 nodes/fragment/4/position = Vector2( 860, 300 )
-nodes/fragment/6/node = SubResource( 3 )
+nodes/fragment/6/node = SubResource( 29 )
 nodes/fragment/6/position = Vector2( 240, 280 )
-nodes/fragment/7/node = SubResource( 4 )
+nodes/fragment/7/node = SubResource( 30 )
 nodes/fragment/7/position = Vector2( 460, 80 )
-nodes/fragment/8/node = SubResource( 5 )
+nodes/fragment/8/node = SubResource( 31 )
 nodes/fragment/8/position = Vector2( 680, 180 )
-nodes/fragment/9/node = SubResource( 6 )
+nodes/fragment/9/node = SubResource( 32 )
 nodes/fragment/9/position = Vector2( 80, 60 )
-nodes/fragment/10/node = SubResource( 22 )
+nodes/fragment/10/node = SubResource( 25 )
 nodes/fragment/10/position = Vector2( -100, 160 )
-nodes/fragment/11/node = SubResource( 23 )
+nodes/fragment/11/node = SubResource( 26 )
 nodes/fragment/11/position = Vector2( -40, 300 )
 nodes/fragment/connections = PoolIntArray( 4, 0, 0, 0, 7, 0, 8, 0, 8, 0, 4, 0, 3, 0, 8, 1, 6, 0, 7, 1 )
 
-[sub_resource type="ShaderMaterial" id=8]
-shader = SubResource( 7 )
+[sub_resource type="ShaderMaterial" id=34]
+shader = SubResource( 33 )
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=9]
+[sub_resource type="VisualShaderNodeScalarConstant" id=35]
 
-[sub_resource type="VisualShaderNodeInput" id=10]
+[sub_resource type="VisualShaderNodeInput" id=36]
 output_port_for_preview = 0
 input_name = "time"
 
-[sub_resource type="VisualShaderNodeScalarOp" id=11]
+[sub_resource type="VisualShaderNodeScalarOp" id=37]
 output_port_for_preview = 0
 
-[sub_resource type="VisualShaderNodeTextureUniform" id=12]
+[sub_resource type="VisualShaderNodeTextureUniform" id=38]
 uniform_name = "TextureUniform"
 
-[sub_resource type="VisualShaderNodeTexture" id=13]
+[sub_resource type="VisualShaderNodeTexture" id=39]
 output_port_for_preview = 0
 texture = ExtResource( 5 )
 
-[sub_resource type="VisualShaderNodeInput" id=14]
+[sub_resource type="VisualShaderNodeInput" id=40]
 input_name = "screen_uv"
 
-[sub_resource type="VisualShaderNodeCustom" id=15]
+[sub_resource type="VisualShaderNodeCustom" id=41]
 output_port_for_preview = 0
 script = ExtResource( 3 )
 
-[sub_resource type="VisualShaderNodeVectorFunc" id=16]
+[sub_resource type="VisualShaderNodeVectorFunc" id=42]
 
-[sub_resource type="VisualShader" id=17]
+[sub_resource type="VisualShader" id=43]
 code = "shader_type spatial;
 uniform sampler2D tex_frg_4;
 
@@ -271,77 +273,85 @@ void light() {
 graph_offset = Vector2( -229, -78.1708 )
 nodes/vertex/0/position = Vector2( 560, 140 )
 nodes/fragment/0/position = Vector2( 540, 140 )
-nodes/fragment/4/node = SubResource( 13 )
+nodes/fragment/4/node = SubResource( 39 )
 nodes/fragment/4/position = Vector2( 40, -60 )
-nodes/fragment/5/node = SubResource( 14 )
+nodes/fragment/5/node = SubResource( 40 )
 nodes/fragment/5/position = Vector2( -200, 220 )
-nodes/fragment/8/node = SubResource( 15 )
+nodes/fragment/8/node = SubResource( 41 )
 nodes/fragment/8/position = Vector2( 40, 340 )
-nodes/fragment/9/node = SubResource( 16 )
+nodes/fragment/9/node = SubResource( 42 )
 nodes/fragment/9/position = Vector2( -320, 400 )
-nodes/fragment/10/node = SubResource( 9 )
+nodes/fragment/10/node = SubResource( 35 )
 nodes/fragment/10/position = Vector2( -174, 462.191 )
-nodes/fragment/11/node = SubResource( 10 )
+nodes/fragment/11/node = SubResource( 36 )
 nodes/fragment/11/position = Vector2( -320, 580 )
-nodes/fragment/12/node = SubResource( 11 )
+nodes/fragment/12/node = SubResource( 37 )
 nodes/fragment/12/position = Vector2( 294, 237 )
-nodes/fragment/13/node = SubResource( 12 )
+nodes/fragment/13/node = SubResource( 38 )
 nodes/fragment/13/position = Vector2( 780, -20 )
 nodes/fragment/connections = PoolIntArray( 9, 0, 8, 1, 10, 0, 8, 2, 11, 0, 8, 3, 5, 0, 8, 0, 5, 0, 4, 0, 4, 0, 12, 0, 8, 0, 12, 1, 12, 0, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=18]
-shader = SubResource( 17 )
+[sub_resource type="ShaderMaterial" id=44]
+shader = SubResource( 43 )
 
-[sub_resource type="BoxShape" id=19]
+[sub_resource type="SpatialMaterial" id=45]
+albedo_texture = ExtResource( 7 )
+
+[sub_resource type="BoxShape" id=22]
 extents = Vector3( 6.5, 1, 10 )
 
-[sub_resource type="BoxShape" id=20]
+[sub_resource type="BoxShape" id=23]
 extents = Vector3( 6.5, 3.08219, 1 )
 
-[sub_resource type="BoxShape" id=21]
+[sub_resource type="BoxShape" id=24]
 extents = Vector3( 1, 2.9607, 10 )
 
 [node name="BoxV4" type="StaticBody"]
 collision_mask = 0
 
 [node name="Box_06" type="MeshInstance" parent="."]
-mesh = ExtResource( 4 )
-material/0 = SubResource( 8 )
-
-[node name="Box_07" type="MeshInstance" parent="."]
 visible = false
 mesh = ExtResource( 4 )
-material/0 = SubResource( 18 )
+material/0 = SubResource( 34 )
+
+[node name="Box_06_05" type="MeshInstance" parent="."]
+visible = false
+mesh = ExtResource( 4 )
+material/0 = SubResource( 44 )
+
+[node name="Box_07" type="MeshInstance" parent="."]
+mesh = ExtResource( 6 )
+material/0 = SubResource( 45 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.81833, -0.0512481 )
 visible = false
-shape = SubResource( 19 )
+shape = SubResource( 22 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, -1.00664, -0.0371313 )
 visible = false
-shape = SubResource( 19 )
+shape = SubResource( 22 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.978147, 0.207912, 0, -0.207912, 0.978147, 0, 1.60709, 8.67985 )
 visible = false
-shape = SubResource( 20 )
+shape = SubResource( 23 )
 
 [node name="CollisionShape5" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1.07762, -0.0512481 )
 visible = false
-shape = SubResource( 21 )
+shape = SubResource( 24 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.978147, 0.207912, 0, -0.207912, 0.978147, 0, 0.745893, -9.17884 )
 visible = false
-shape = SubResource( 20 )
+shape = SubResource( 23 )
 
 [node name="CollisionShape6" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.07762, -0.0512481 )
 visible = false
-shape = SubResource( 21 )
+shape = SubResource( 24 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 visible = false
