@@ -1,12 +1,15 @@
 extends Control
 
-signal selected_repair(heal_percent)
-signal selected_stopper(duration)
+signal selected_repair(hp_per_sec)
+signal selected_stopper
 signal selected_turret
 signal selected_remote
 signal selected_boost
-signal remote_expired
+signal repair_expired(hp_per_sec)
+signal stopper_expired
 signal turret_expired
+signal remote_expired
+signal boost_expired
 
 enum {
 	INACTIVE,
@@ -58,7 +61,7 @@ const POWERUP_ODDS_STR = {
 }
 const ICONS_VISIBLE_AT_A_TIME = 4
 
-export var PLAYER_REPAIR_HEAL_PERCENT = 50.0
+export var REPAIR_PERCENT = 50.0
 export var POWERUP_ODDS_PER_STAGE = {
 	"0-Testing": POWERUP_ODDS_STR,
 	"1-Pregame": POWERUP_ODDS_STR,
@@ -79,6 +82,7 @@ export var POWERUP_DURATIONS = {
 	"Remote": 30.0,
 	"Boost": 30.0
 }
+export var DISPLAY_POWERUP_NAME_WHILE_SPINNING = false
 
 var spin_speed = 0
 var spin_speed_decay = 0
@@ -124,6 +128,7 @@ func _ready():
 		timer.wait_time = POWERUP_DURATIONS[powerup_str]
 		if powerup_type == Powerup.TURRET and Globals.player_turret != null:
 			timer.wait_time *= Globals.player_turret.TIME_SCALE_WHEN_AIMING
+			Globals.player_turret.connect("was_loaded", timer, "start")
 		powerup_timers[powerup_type] = timer
 		timer.connect("timeout", self, "on_PowerupTimer_timeout", [powerup_type])
 		add_child(timer)
@@ -164,6 +169,8 @@ func spin(delta):
 			icon.modulate = Color(1, 1, 1, progress * 5)
 		elif progress > .8:
 			icon.modulate = Color(1, 1 , 1, (1 - progress) * 5)
+		if DISPLAY_POWERUP_NAME_WHILE_SPINNING:
+			name_label.text = POWERUP_ENUM_TO_STR[powerup_of_icon[get_center_icon()]]
 
 
 func get_center_icon():
@@ -196,18 +203,23 @@ func trigger_selection_animation(selected_icon):
 
 
 func activate_powerup(powerup):
-	match powerup:
-		Powerup.REPAIR:
-			emit_signal("selected_repair", PLAYER_REPAIR_HEAL_PERCENT)
-		Powerup.STOPPER: 
-			emit_signal("selected_stopper")
-		Powerup.TURRET:
-			emit_signal("selected_turret")
-		Powerup.REMOTE:
-			emit_signal("selected_remote")
-		Powerup.BOOST: 
-			emit_signal("selected_boost")
-	GameState.handle_event(GameState.Event.SHOP_USED)
+	var was_active = not powerup_timers[powerup].is_stopped()
+	if Globals.player_turret != null and not powerup == Powerup.TURRET:
+		powerup_timers[powerup].start()
+	if not was_active:
+		match powerup:
+			Powerup.REPAIR:
+				var repair_dur = POWERUP_DURATIONS[POWERUP_ENUM_TO_STR[powerup]]
+				emit_signal("selected_repair", REPAIR_PERCENT / repair_dur)
+			Powerup.STOPPER: 
+				emit_signal("selected_stopper")
+			Powerup.TURRET:
+				emit_signal("selected_turret")
+			Powerup.REMOTE:
+				emit_signal("selected_remote")
+			Powerup.BOOST: 
+				emit_signal("selected_boost")
+		GameState.handle_event(GameState.Event.SHOP_USED)
 
 
 func calc_odds():
@@ -238,10 +250,11 @@ func start_spinning(speed, decay):
 	var powerup_odds = calc_odds()
 	var i = 0
 	for icon in icons.get_children():
+		icon.get_node("AnimationPlayer").stop() 
+		tween.remove_all()
 		icon.rect_scale = Vector2.ONE
 		icon.modulate = Color(1, 1, 1, 1)
-		icon.rect_position.x = icon.rect_size.x * i
-		icon.get_node("AnimationPlayer").stop() 
+		icon.rect_position.x = icon.rect_size.x * i - half_icon_width
 		var r = randf()
 		var s = 0
 		for key in powerup_odds:
@@ -253,9 +266,9 @@ func start_spinning(speed, decay):
 				s += powerup_odds[key]
 		i += 1
 	visible = true
+	name_label.visible = DISPLAY_POWERUP_NAME_WHILE_SPINNING
 	icons.visible = true
 	instruction_rect.visible = false
-	name_label.visible = false
 	time_bar.visible = false
 	selected_icon_rect.visible = false
 
@@ -273,17 +286,19 @@ func display_instructions(powerup):
 	state = INSTRUCTING
 	
 	selected_icon_rect.texture = ICON_IMGS[powerup]
-	name_label.text = POWERUP_ENUM_TO_STR[powerup]
+	if powerup == Powerup.STOPPER:
+		name_label.text = "Eye Patch"
+	else:
+		name_label.text = POWERUP_ENUM_TO_STR[powerup]
 	instruction_rect.texture = INSTRUCTION_IMGS[powerup]
-	if powerup_timers[powerup].time_left == 0 or timer_on_time_bar == powerup_timers[powerup]:
-		powerup_timers[powerup].start()
 	timer_on_time_bar = powerup_timers[powerup]
 	tween.start()
 	time_bar.max_value = timer_on_time_bar.wait_time * 100
 	
-	icons.visible = false
 	name_label.visible = true
-	selected_icon_rect.visible = true
+	icons.visible = false
+	if powerup != Powerup.BOOST:
+		selected_icon_rect.visible = true
 	instruction_rect.visible = true
 	time_bar.visible = true
 	
@@ -292,10 +307,18 @@ func display_instructions(powerup):
 
 
 func on_PowerupTimer_timeout(expired_powerup):
-	if expired_powerup == Powerup.REMOTE:
-		emit_signal("remote_expired")
-	elif expired_powerup == Powerup.TURRET:
-		emit_signal("turret_expired")
+	match expired_powerup:
+		Powerup.REPAIR:
+			var repair_dur = POWERUP_DURATIONS[POWERUP_ENUM_TO_STR[expired_powerup]]
+			emit_signal("repair_expired", REPAIR_PERCENT / repair_dur)
+		Powerup.STOPPER: 
+			emit_signal("stopper_expired")
+		Powerup.TURRET:
+			emit_signal("turret_expired")
+		Powerup.REMOTE:
+			emit_signal("remote_expired")
+		Powerup.BOOST: 
+			emit_signal("boost_expired")
 	var active_powerup_with_least_time_left = 0
 	var least_time_left = 0
 	for key in powerup_timers:

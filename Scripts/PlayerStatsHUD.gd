@@ -1,13 +1,11 @@
 extends Control
 
-const MONEY_LABEL_FORMAT_STRING = "%s,000,000,000"
-const PLAYER_HEALTH_LABEL_FORMAT_STRING = "%s%"
+const MONEY_LABEL_FORMAT_STRING = "%s,000"
 
 onready var glitch_overlay = get_node("../GlitchOverlay")
 onready var shop_meter = get_node("Background/ShopMeter")
 onready var health_bar = get_node("Background/HealthBar")
-onready var money_desc_label = get_node("Background/MoneyDescLabel")
-onready var money_label = get_node("Background/MoneyLabel")
+onready var money_label = get_node("Background/ScoreLabel")
 onready var health_label = get_node("Background/HealthLabel")
 
 
@@ -18,27 +16,21 @@ func _ready():
 	else:
 		push_warning("[PlayerStatsHUD] can't find player. Will not display stats.")
 	if Globals.moon_shop != null:
-		shop_meter.value = Globals.moon_shop.unlock_progress
 		Globals.moon_shop.connect("unlock_progress_changed", shop_meter, "set_value")
+	else:
 		push_warning("[PlayerStatsHUD] can't find moon shop. Will not display progress to opening.")
 
 
 func on_PlayerShip_money_changed(new_value, _old_value):
-	new_value = clamp(new_value, 0, 999)
-	money_label.text = MONEY_LABEL_FORMAT_STRING % int(new_value)
-	if new_value == 0:
-		money_desc_label.text = "YOU'RE BROKE"
-	elif new_value == 999:
-		money_desc_label.text = "CAP"
-	elif Globals.shop_menu != null and new_value >= Globals.shop_menu.PRICE_FOR_EVERYTHING:
-		money_desc_label.text = "SHOP OPEN"
-	else:
-			money_desc_label.text = ""
-	glitch_overlay.super_glitch()
+	money_label.text = "%07d" % new_value
+	money_label.text = money_label.text.insert(1, ",")
+	money_label.text = money_label.text.insert(5, ",")
+	#glitch_overlay.super_glitch()
 
 
-func on_PlayerShip_health_changed(new_health, _old_health, max_health):
+func on_PlayerShip_health_changed(new_health, old_health, max_health):
 	health_bar.max_value = max_health
 	health_bar.value = new_health
 	health_label.text = str(round(new_health / max_health * 100)) + "%"
-	glitch_overlay.super_glitch()
+	if new_health < old_health:
+		glitch_overlay.super_glitch()

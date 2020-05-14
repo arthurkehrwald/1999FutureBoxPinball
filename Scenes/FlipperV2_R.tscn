@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/FlipperV2.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Audio/fx/Flipper_02.wav" type="AudioStream" id=2]
 
 [node name="FlipperV2_R" instance=ExtResource( 1 )]
 transform = Transform( 0.866026, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866026, 0, 0, 0 )
@@ -14,3 +15,6 @@ transform = Transform( -0.9, 0, -2.28089e-07, 0, 1, 0, 2.93257e-07, 0, -0.7, 0, 
 
 [node name="ImpulseArea" parent="." index="2"]
 transform = Transform( 0.997707, 2.93631e-09, 0.0676844, -2.95502e-09, 1, 1.76306e-10, -0.0676844, -3.75911e-10, 0.997707, -0.480126, -3.36228e-11, -0.190307 )
+
+[node name="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource( 2 )
