@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Scenes/BoxV4.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Reference/playfield_flipper_r_trajectories.jpg" type="Texture" id=2]
@@ -42,6 +42,7 @@
 [ext_resource path="res://Textures/initialShadingGroup_baseColor.png" type="Texture" id=40]
 [ext_resource path="res://Meshes/Cage_Spaceship_02.obj" type="ArrayMesh" id=41]
 [ext_resource path="res://Textures/initialShadingGroup_baseColor_rex.png" type="Texture" id=42]
+[ext_resource path="res://Textures/Gate_Closed_02.png" type="Texture" id=43]
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=45]
 
 [sub_resource type="ConcavePolygonShape" id=1]
@@ -155,6 +156,33 @@ albedo_texture = ExtResource( 42 )
 
 [sub_resource type="SpatialMaterial" id=23]
 albedo_texture = ExtResource( 40 )
+
+[sub_resource type="QuadMesh" id=24]
+size = Vector2( 1.067, 2.404 )
+
+[sub_resource type="SpatialMaterial" id=25]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 2
+albedo_color = Color( 0.780392, 0, 0.0901961, 1 )
+albedo_texture = ExtResource( 43 )
+emission_enabled = true
+emission = Color( 0.976471, 0.00392157, 0.564706, 1 )
+emission_energy = 1.91
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SpatialMaterial" id=26]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 2
+albedo_color = Color( 0, 0.529412, 1, 1 )
+albedo_texture = ExtResource( 43 )
+emission_enabled = true
+emission = Color( 0, 0.603922, 0.721569, 1 )
+emission_energy = 2.51
+emission_operator = 0
+emission_on_uv2 = false
 
 [node name="Main" type="Spatial"]
 
@@ -488,5 +516,15 @@ material/0 = SubResource( 22 )
 transform = Transform( 0.961021, 0, 0.276476, 0, 1, 0, -0.276476, 0, 0.961021, -3.37899, 2.9302, -6.2637 )
 mesh = ExtResource( 41 )
 material/0 = SubResource( 23 )
+
+[node name="Trex_Gate_Closed_01" type="MeshInstance" parent="."]
+transform = Transform( 0.964253, 0, 0.264984, 0, 1, 0, -0.264984, 0, 0.964253, 3.33025, 1.83674, -3.04332 )
+mesh = SubResource( 24 )
+material/0 = SubResource( 25 )
+
+[node name="Multiball_Gate_Closed_02" type="MeshInstance" parent="."]
+transform = Transform( 0.964253, 0, 0.264984, 0, 1, 0, -0.264984, 0, 0.964253, -3.86341, 1.83674, -3.04332 )
+mesh = SubResource( 24 )
+material/0 = SubResource( 26 )
 
 [editable path="BoxV4/Playfield/UpperGuide/WireRamp"]
