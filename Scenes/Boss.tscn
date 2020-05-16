@@ -35,6 +35,9 @@ IS_VULNERABLE_PER_STAGE = {
 "9-Victory": false
 }
 
+[node name="Boss Explosion" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00385666, 0.95382, -0.0137682 )
+
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 4 )
 material/0 = null
