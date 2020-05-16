@@ -28,6 +28,9 @@ onready var tween = get_node("Tween")
 onready var cam = get_node_or_null(cam_path)
 
 
+func _enter_tree():
+	Globals.head_track_cam_dummy = self
+
 func _ready():
 	set_process_input(true)
 	set_track_state(TRACK_OFF)
