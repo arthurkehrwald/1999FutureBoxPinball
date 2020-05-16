@@ -3,8 +3,13 @@
 [ext_resource path="res://Scripts/Plunger.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/car.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=3]
+<<<<<<< HEAD
 [ext_resource path="res://Audio/fx/Car_Eninge_07.wav" type="AudioStream" id=4]
 [ext_resource path="res://Audio/fx/Plunger_Shot_01.wav" type="AudioStream" id=5]
+=======
+[ext_resource path="res://Audio/fx/Plunger_Shot_03.wav" type="AudioStream" id=4]
+[ext_resource path="res://Audio/fx/Car_Eninge_07.wav" type="AudioStream" id=5]
+>>>>>>> parent of 0c5286d... Revert "Merge branch 'master' of https://github.com/arthurkehrwald/1999FutureBoxPinball"
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.4, 0.5, 2 )
