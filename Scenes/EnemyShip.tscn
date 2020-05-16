@@ -12,8 +12,8 @@ height = 0.5
 
 [node name="EnemyShip" type="KinematicBody"]
 script = ExtResource( 2 )
-MAX_HEALTH = 15.0
-MONEY_YIELD_PER_DAMAGE = 1.5
+MAX_HEALTH = 20.0
+MONEY_YIELD_PER_DAMAGE = 2.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

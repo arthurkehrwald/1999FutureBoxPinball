@@ -17,6 +17,9 @@ rings = 2
 collision_mask = 0
 collision/safe_margin = 0.01
 script = ExtResource( 1 )
+windup_speed = 2.0
+release_speed = 8.0
+max_distance = 5.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2 )
