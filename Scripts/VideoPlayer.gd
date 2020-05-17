@@ -21,8 +21,8 @@ func _ready():
 	connect("finished", self, "on_finished")
 
 
-func on_GameState_changed(new_state, _is_debug_skip):
-	if video[new_state] != null:
+func on_GameState_changed(new_state, is_debug_skip):
+	if not is_debug_skip and video[new_state] != null:
 		stream = video[new_state]
 		visible = true
 		get_tree().paused = true
