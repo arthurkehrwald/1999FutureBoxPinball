@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://PlungerStuff/PlungerPoti.gd" type="Script" id=1]
+[ext_resource path="res://Meshes/car.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=3]
+[ext_resource path="res://Audio/fx/Car_Eninge_07.wav" type="AudioStream" id=4]
+[ext_resource path="res://Audio/fx/Plunger_Shot_01.wav" type="AudioStream" id=5]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.4, 0.5, 2 )
+
+[sub_resource type="CylinderMesh" id=2]
+radial_segments = 12
+rings = 2
+
+[node name="PlungerPoti" type="KinematicBody"]
+collision_mask = 0
+collision/safe_margin = 0.01
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2 )
+shape = SubResource( 1 )
+
+[node name="StickMesh" type="MeshInstance" parent="."]
+transform = Transform( 0.12, 0, 0, 0, -5.24537e-09, 0.12, 0, -1.836, -8.02541e-08, 0, 0.2, 1.98445 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 3 )
+
+[node name="CarMesh" type="MeshInstance" parent="."]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.2, 0.546683 )
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 3 )
+
+[node name="ReleaseAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="PullAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -12.0
+bus = "Effects"

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://PlungerStuff/PlungerPoti.tscn" type="PackedScene" id=1]
+[ext_resource path="res://PlungerStuff/SerialReader.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/BoxV4.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Testing/LongBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Pinball.tscn" type="PackedScene" id=5]
+
+[node name="PlungerTestScene" type="Spatial"]
+
+[node name="PlungerPoti" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 0.990875, -0.134782, 0, 0.134782, 0.990875, 4.12699, -0.372011, 5.8 )
+windup_speed = 2.0
+release_speed = 20.0
+max_distance = 1.0
+
+[node name="SerialReader" parent="." instance=ExtResource( 2 )]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.314688, 0.949195, 0, -0.949195, 0.314688, 2.36024, 6.51412, 5.79034 )
+
+[node name="BoxV4" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 0, 0 )
+
+[node name="LongBox" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 0.993242, -0.116064, 0, 0.116064, 0.993242, 3.62992, -0.643193, 5.49567 )
+
+[node name="Pinball" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.07107, 0, 0 )
+[connection signal="PlungerSignal" from="SerialReader" to="SerialReader" method="_on_SerialReader_PlungerSignal"]
