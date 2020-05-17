@@ -16,7 +16,7 @@ func _enter_tree():
 func _ready():
 	connect("health_changed", self, "on_health_changed")
 	connect("health_changed", health_bar, "update_value")
-	connect("is_vulnerable_changed", health_bar, "set_visible")
+	connect("is_vulnerable_changed", health_bar.get_parent(), "set_visible")
 	connect("death", GameState, "handle_event", [GameState.Event.BOSS_DIED])
 
 

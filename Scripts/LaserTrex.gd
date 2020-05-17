@@ -17,7 +17,7 @@ func _enter_tree():
 
 func _ready():
 	connect("health_changed", health_bar, "update_value")
-	connect("is_vulnerable_changed", health_bar, "set_visible")
+	connect("is_vulnerable_changed", health_bar.get_parent(), "set_visible")
 	connect("is_vulnerable_changed", self, "on_is_vulnerable_changed")
 	connect("death", self, "on_death")
 	laser_toggle_timer.connect("timeout", self, "on_LaserToggleTimer_timeout")
