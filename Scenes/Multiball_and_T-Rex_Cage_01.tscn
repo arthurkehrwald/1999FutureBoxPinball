@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Particles/White_Quad_Glow_Structure_01.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/ToggleParticles.gd" type="Script" id=2]
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=1]
 resource_name = "Rotation"
 length = 5.0
 loop = true
@@ -31,7 +32,7 @@ tracks/1/keys = {
 "values": [ Vector3( -90, 45, 0 ), Vector3( -90, 405, 0 ) ]
 }
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true
 vertex_color_use_as_albedo = true
 albedo_color = Color( 0, 0.494118, 0.890196, 1 )
@@ -42,24 +43,24 @@ emission_energy = 1.6
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0, 0.403743, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=5]
 direction = Vector3( 0, 0, -1 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1.0
 scale = 2.0
-color_ramp = SubResource( 8 )
+color_ramp = SubResource( 4 )
 
-[sub_resource type="QuadMesh" id=3]
+[sub_resource type="QuadMesh" id=6]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=7]
 flags_transparent = true
 vertex_color_use_as_albedo = true
 params_blend_mode = 1
@@ -72,27 +73,28 @@ emission_operator = 0
 emission_on_uv2 = false
 
 [node name="Cage" type="Spatial"]
+script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Rotation"
-anims/Rotation = SubResource( 6 )
+anims/Rotation = SubResource( 1 )
 
 [node name="Blue" type="Particles" parent="."]
-transform = Transform( -0.0508284, 0.998707, 1.6271e-07, 0, -1.62921e-07, 1, 0.998707, 0.0508284, 8.28101e-09, 0, 0.747393, 0 )
-material_override = SubResource( 5 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.747393, 0 )
+material_override = SubResource( 2 )
 amount = 6
 lifetime = 2.0
 local_coords = false
 draw_order = 2
-process_material = SubResource( 2 )
-draw_pass_1 = SubResource( 3 )
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 6 )
 
 [node name="Red" type="Particles" parent="."]
-transform = Transform( 0.670252, 0.742134, 1.20909e-07, 0, -1.62921e-07, 1, 0.742134, -0.670252, -1.09198e-07, 0, 0, 0 )
-material_override = SubResource( 1 )
+transform = Transform( 0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, -0.707107, -3.09086e-08, 0, 0, 0 )
+material_override = SubResource( 7 )
 amount = 6
 lifetime = 2.0
 local_coords = false
 draw_order = 2
-process_material = SubResource( 2 )
-draw_pass_1 = SubResource( 3 )
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 6 )
