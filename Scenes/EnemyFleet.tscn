@@ -13,6 +13,7 @@ script = ExtResource( 4 )
 transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 1.41072, -7.09119 )
 
 [node name="EnemyShip" parent="ParentForAnimation" instance=ExtResource( 1 )]
+MAX_HEALTH = 15.0
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
