@@ -41,6 +41,8 @@ func _physics_process(delta):
 	
 	#set_translation(start_pos.linear_interpolate(max_pos, move_progress))
 	set_transform(start_transform.interpolate_with(max_transform, move_progress))
-	
-func _on_PlungerReader_PlungerSignal(data):
+
+
+
+func _on_SerialReader_PlungerSignal(data):
 	move_progress = data
