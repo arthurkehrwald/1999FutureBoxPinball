@@ -125,7 +125,6 @@ func handle_event(var event):
 		EXPOSITION:
 			if event == Event.SHOP_USED:
 				emit_signal("objective_one_completed")
-			if event == Event.TRANSMISSION_FINISHED and has_player_used_shop:
 				set_state(ENEMY_FLEET)
 		ENEMY_FLEET:
 			if event == Event.FLEET_DEFEATED:

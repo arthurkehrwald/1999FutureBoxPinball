@@ -2,23 +2,23 @@
   "exposition": [
     {
       "name": "Capt'n Multiball",
-      "text": "Rex, are you alive?",
-      "duration": 3
-    },
-    {
-      "name": "Rex",
-      "text": "...",
-      "duration": 2
+      "text": "Aye lad!",
+      "duration": 1
     },
     {
       "name": "Capt'n Multiball",
-      "text": "The Emperor's soldiers are locking down the system.",
-      "duration": 5
+      "text": "Yer ship's a wee bit rough round the edges, eh?",
+      "duration": 2
     },
 	{
       "name": "Capt'n Multiball",
-      "text": "You must...",
-      "duration": 1
+      "text": "Why don't you head over to the moon?",
+      "duration": 2
+    },
+	{
+      "name": "Capt'n Multiball",
+      "text": "They'll fix you right up!",
+      "duration": 2
     }
   ],
   "enemy_fleet_appears": [

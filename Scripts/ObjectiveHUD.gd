@@ -25,7 +25,9 @@ func _ready():
 
 func set_objectives(objectives):
 	if Globals.powerup_roulette != null and Globals.powerup_roulette.visible or animation_player.is_playing():
-		queued_new_objectives = objectives
+		queued_new_objectives.clear()
+		queued_new_objectives.push_back(objectives[0])
+		queued_new_objectives.push_back(objectives[1])
 		return
 	glitch_overlay.super_glitch()
 	objective_one_check_box.text = objectives[0]
@@ -68,13 +70,16 @@ func on_PowerupRoulette_visibility_changed():
 			queued_new_objectives.clear()
 
 
-func on_anim_finished(_anim_name):
-	if Globals.powerup_roulette != null and not Globals.powerup_roulette.visible:
-		if not queued_complete_objectives.empty():
-			set_objective_complete(queued_complete_objectives.pop_back())
-		elif not queued_new_objectives.empty():
-			set_objectives(queued_new_objectives)
-			queued_new_objectives.clear()
+func on_anim_finished(anim_name):
+	if anim_name != "objectives_complete_anim":
+		return
+	if Globals.powerup_roulette != null and Globals.powerup_roulette.visible:
+		return
+	if not queued_complete_objectives.empty():
+		set_objective_complete(queued_complete_objectives.pop_back())
+	elif not queued_new_objectives.empty():
+		set_objectives(queued_new_objectives)
+		queued_new_objectives.clear()
 
 
 func on_GameState_changed(new_state, is_debug_skip):
