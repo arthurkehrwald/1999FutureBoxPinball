@@ -6,7 +6,7 @@ export var LASER_TREX_HEALTH_PERCENT = 60.0
 export var BLACK_HOLE_HEALTH_PERCENT = 40.0
 export var ECLIPSE_HEALTH_PERCENT = 20.0
 
-onready var health_bar = get_node("BossShield/HealthBar3D/Viewport/Bar")
+onready var health_bar = get_node("BossBar3D/Viewport/BossBar/HealthBar")
 
 
 func _enter_tree():

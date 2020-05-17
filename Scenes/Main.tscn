@@ -512,6 +512,7 @@ anims/Cage_Rotation = SubResource( 21 )
 
 [node name="Cage_Spaceship_Rex" type="MeshInstance" parent="."]
 transform = Transform( 0.994801, 0, 0.101838, 0, 1, 0, -0.101838, 0, 0.994801, 3.13478, 2.9302, -5.06739 )
+layers = 3
 mesh = ExtResource( 41 )
 material/0 = SubResource( 22 )
 
