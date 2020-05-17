@@ -145,8 +145,6 @@ func handle_event(var event):
 				set_state(ECLIPSE)
 		ECLIPSE:
 			if event == Event.BLACK_HOLE_EXPANDED:
-				if Globals.player_ship != null:
-					Globals.player_ship.set_is_vulnerable(true)
 				set_global_eclipse_materials(true)
 		VICTORY:
 			if event == Event.POSTGAME_FINISHED:
@@ -158,8 +156,6 @@ func handle_event(var event):
 
 func set_state(new_state, is_debug_skip = false):
 	print("GameState: set to ", new_state)
-	if Globals.player_ship != null:
-		Globals.player_ship.set_is_vulnerable(new_state != ECLIPSE)
 	if new_state < ECLIPSE:
 		set_global_eclipse_materials(false)
 	if new_state == EXPOSITION:

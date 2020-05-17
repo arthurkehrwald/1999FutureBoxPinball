@@ -9,7 +9,7 @@
 [ext_resource path="res://Testing/DebugOutputLabel.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/WireRamp.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=11]
 
 [node name="PhysicsTest" type="Spatial"]
 
@@ -93,5 +93,18 @@ SPREAD_DEG = 3.0
 [node name="BallFeed" parent="BoxV3/BoardAligned" instance=ExtResource( 2 )]
 transform = Transform( 0.0416488, 0, -0.999133, -3.72529e-08, 1, -1.62981e-09, 0.999132, 3.72529e-08, 0.0416489, 0.223991, 0.262558, -6.38981 )
 
-[node name="WireRamp" parent="BoxV3/BoardAligned" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, -7.45058e-09, 0, 7.45058e-09, 1, 0, 5.96046e-08, 2.42115 )
+[node name="Boss" parent="BoxV3/BoardAligned" instance=ExtResource( 11 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 7.45058e-09, 3.25841e-07, 7.45058e-09, -1, -1.2368e-06, 1.19209e-07, -3.79536 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}

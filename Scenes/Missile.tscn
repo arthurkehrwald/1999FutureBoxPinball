@@ -57,7 +57,7 @@ albedo_color = Color( 0.878431, 0.564706, 0.286275, 1 )
 extents = Vector3( 0.3, 0.23, 0.51 )
 
 [node name="Missile" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 0.790024, -0.613076, 0, 0.613076, 0.790024, 0, 1.25369, -0.977181 )
+transform = Transform( 1, 0, 0, 0, 0.636078, -0.771625, 0, 0.771625, 0.636078, 0, 0, 0 )
 mass = 5.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
@@ -68,6 +68,7 @@ script = ExtResource( 3 )
 [node name="CollisionShape" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, -0.0250001 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="New_Rocket_UV_02" type="MeshInstance" parent="." index="1"]
 transform = Transform( -0.41756, 0, -1.36058e-07, 0, 0.41756, 8.9407e-08, 1.36058e-07, 8.9407e-08, -0.41756, 0, -0.215705, -0.0293398 )
@@ -86,7 +87,6 @@ anims/missile_launch = ExtResource( 4 )
 
 [node name="MainExhaustFlame" type="MeshInstance" parent="." index="5"]
 transform = Transform( 0.15, 0, 0, 0, -6.55671e-09, 0.15, 0, -0.15, -6.55671e-09, 0, 0, 0.350464 )
-visible = false
 mesh = ExtResource( 5 )
 material/0 = SubResource( 5 )
 
@@ -113,6 +113,7 @@ material/0 = SubResource( 7 )
 
 [node name="TopExhaustFlame" type="MeshInstance" parent="SteeringFlames" index="1"]
 transform = Transform( -0.07, 2.28089e-08, 0, -2.28089e-08, -0.0699999, 0, 0, 0, 0.0699999, 0, 0.15, 2.98023e-08 )
+visible = false
 mesh = ExtResource( 5 )
 material/0 = SubResource( 8 )
 

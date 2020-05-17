@@ -3,7 +3,7 @@ extends Camera
 enum { TRACK_OFF, TRACK_CALIBRATING, TRACK_ON}
 
 const TRACK_POS_FORMAT_STRING = "head tracking data:\nraw:\nx: %s\ny: %s\nz: %s"
-const CALIBRATION_OFFSET = Vector3(5, -1, -5)
+const CALIBRATION_OFFSET = Vector3(5, -8, -8)
 
 var track_raw_offset = Vector3(0, 0, 0)
 var track_sensitivity = Vector3(0, 0, 0)
