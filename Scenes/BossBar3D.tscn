@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/BossBar.tscn" type="PackedScene" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_unshaded = true
+params_billboard_mode = 1
+
+[node name="BossBar3D" type="Sprite3D"]
+material_override = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 350, 110 )
+transparent_bg = true
+usage = 0
+render_target_v_flip = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BossBar" parent="Viewport" instance=ExtResource( 2 )]

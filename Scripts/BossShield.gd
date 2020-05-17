@@ -7,7 +7,8 @@ export var FADE_TIME = 1.0
 
 var fade_progress = 0
 
-onready var health_bar = get_node("HealthBar3D/Viewport/Bar")
+onready var health_bar = get_parent().get_node("BossBar3D/Viewport/BossBar/ShieldBar")
+
 onready var regeneration_timer = get_node("RegenerationTimer")
 onready var front_area = get_node("FrontArea")
 onready var behind_area = get_node("BehindArea")

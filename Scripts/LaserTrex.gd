@@ -6,7 +6,7 @@ export var LASER_DOWNTIME = 5.0
 var laser_is_active = false
 var time_until_laser_toggle = 0.0
 
-onready var health_bar = get_node("HealthBar3D/Viewport/Bar")
+onready var health_bar = get_node("TrexBar3D/Viewport/TrexBar/HealthBar")
 onready var laser_area = get_node("LaserArea")
 onready var laser_toggle_timer = get_node("LaserToggleTimer")
 
