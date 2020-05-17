@@ -43,7 +43,7 @@
 [ext_resource path="res://Meshes/Cage_Spaceship_02.obj" type="ArrayMesh" id=41]
 [ext_resource path="res://Textures/initialShadingGroup_baseColor_rex.png" type="Texture" id=42]
 [ext_resource path="res://Textures/Gate_Closed_02.png" type="Texture" id=43]
-[ext_resource path="res://HUD/Game_Over_Plain_01.ogv" type="VideoStream" id=44]
+[ext_resource path="res://HUD/Videos/game_over_overlay.ogv" type="VideoStream" id=44]
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=45]
 [ext_resource path="res://Scripts/VideoPlayer.gd" type="Script" id=46]
 [ext_resource path="res://Scripts/UpperRampGate.gd" type="Script" id=47]
@@ -519,6 +519,7 @@ autoplay = "Cage_Rotation"
 anims/Cage_Rotation = SubResource( 22 )
 
 [node name="VideoPlayer" type="VideoPlayer" parent="."]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 stream = ExtResource( 44 )

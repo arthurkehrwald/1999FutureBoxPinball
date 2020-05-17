@@ -95,7 +95,8 @@ input_name = "vertex"
 code = "shader_type spatial;
 render_mode depth_draw_alpha_prepass, cull_disabled;
 
-uniform sampler2D tex_frg_15;uniform float FadeProgress;
+uniform sampler2D tex_frg_15;
+uniform float FadeProgress;
 
 
 // PerlinNoise3D
@@ -192,42 +193,35 @@ uniform sampler2D tex_frg_15;uniform float FadeProgress;
 
 void vertex() {
 // Input:8
-	vec3 n_out8p0;
-	n_out8p0 = VERTEX;
+	vec3 n_out8p0 = VERTEX;
 
 // Input:4
-	vec3 n_out4p0;
-	n_out4p0 = NORMAL;
+	vec3 n_out4p0 = NORMAL;
 
 // Vector:5
-	vec3 n_out5p0;
-	n_out5p0 = vec3(0.000000,0.000000,0.000000);
+	vec3 n_out5p0 = vec3(0.000000, 0.000000, 0.000000);
 
 // Scalar:10
-	float n_out10p0;
-	n_out10p0 = 5.000000;
+	float n_out10p0 = 5.000000;
 
 // ScalarFunc:11
-	float n_out11p0;
-	n_out11p0 = roundEven(n_out10p0);
+	float n_out11p0 = roundEven(n_out10p0);
 
 // ScalarOp:12
 	float n_in12p1 = 2.00000;
-	float n_out12p0;
-	n_out12p0 = n_out11p0 + n_in12p1;
+	float n_out12p0 = n_out11p0 + n_in12p1;
 
 // Input:7
-	float n_out7p0;
-	n_out7p0 = TIME;
+	float n_out7p0 = TIME;
 
 // PerlinNoise3D:2
 	float n_out2p0;
 	{
 		n_out2p0 = cnoise(vec3((n_out4p0.xy + n_out5p0.xy) * n_out12p0, n_out7p0)) * 0.5 + 0.5
 	}
+
 // VectorOp:3
-	vec3 n_out3p0;
-	n_out3p0 = n_out8p0 - vec3(n_out2p0);
+	vec3 n_out3p0 = n_out8p0 - vec3(n_out2p0);
 
 // Output:0
 	VERTEX = n_out3p0;
@@ -236,66 +230,50 @@ void vertex() {
 
 void fragment() {
 // Color:25
-	vec3 n_out25p0;
-	float n_out25p1;
-	n_out25p0 = vec3(0.416150,0.000000,0.166460);
-	n_out25p1 = 1.000000;
+	vec3 n_out25p0 = vec3(0.416150, 0.000000, 0.166460);
+	float n_out25p1 = 1.000000;
 
 // Input:10
-	vec3 n_out10p0;
-	n_out10p0 = vec3(UV,0.0);
+	vec3 n_out10p0 = vec3(UV, 0.0);
 
 // Texture:15
-	vec3 n_out15p0;
-	float n_out15p1;
-	vec4 tex_frg_15_read = texture( tex_frg_15 , n_out10p0.xy );
-	n_out15p0 = tex_frg_15_read.rgb;
-	n_out15p1 = tex_frg_15_read.a;
+	vec4 tex_frg_15_read = texture(tex_frg_15, n_out10p0.xy);
+	vec3 n_out15p0 = tex_frg_15_read.rgb;
+	float n_out15p1 = tex_frg_15_read.a;
 
 // ScalarUniform:32
-	float n_out32p0;
-	n_out32p0 = FadeProgress;
+	float n_out32p0 = FadeProgress;
 
 // ScalarFunc:12
-	float n_out12p0;
-	n_out12p0 = sin(n_out32p0);
+	float n_out12p0 = sin(n_out32p0);
 
 // ScalarOp:13
 	float n_in13p1 = 2.00000;
-	float n_out13p0;
-	n_out13p0 = n_out12p0 / n_in13p1;
+	float n_out13p0 = n_out12p0 / n_in13p1;
 
 // ScalarOp:16
-	float n_out16p0;
-	n_out16p0 = dot(n_out15p0,vec3(0.333333,0.333333,0.333333)) - n_out13p0;
+	float n_out16p0 = dot(n_out15p0, vec3(0.333333, 0.333333, 0.333333)) - n_out13p0;
 
 // ScalarFunc:24
-	float n_out24p0;
-	n_out24p0 = roundEven(n_out16p0);
+	float n_out24p0 = roundEven(n_out16p0);
 
 // ScalarOp:20
 	float n_in20p1 = 0.05000;
-	float n_out20p0;
-	n_out20p0 = n_out16p0 - n_in20p1;
+	float n_out20p0 = n_out16p0 - n_in20p1;
 
 // ScalarOp:21
 	float n_in21p0 = 1.00000;
-	float n_out21p0;
-	n_out21p0 = n_in21p0 - n_out20p0;
+	float n_out21p0 = n_in21p0 - n_out20p0;
 
 // ScalarFunc:22
-	float n_out22p0;
-	n_out22p0 = roundEven(n_out21p0);
+	float n_out22p0 = roundEven(n_out21p0);
 
 // Color:19
-	vec3 n_out19p0;
-	float n_out19p1;
-	n_out19p0 = vec3(1.000000,0.302838,0.581703);
-	n_out19p1 = 1.000000;
+	vec3 n_out19p0 = vec3(1.000000, 0.302838, 0.581703);
+	float n_out19p1 = 1.000000;
 
 // VectorOp:23
-	vec3 n_out23p0;
-	n_out23p0 = vec3(n_out22p0) + n_out19p0;
+	vec3 n_out23p0 = vec3(n_out22p0) + n_out19p0;
 
 // Output:0
 	ALBEDO = n_out25p0;
@@ -331,7 +309,7 @@ nodes/vertex/11/node = SubResource( 19 )
 nodes/vertex/11/position = Vector2( -546, 357 )
 nodes/vertex/12/node = SubResource( 20 )
 nodes/vertex/12/position = Vector2( -359, 375.538 )
-nodes/vertex/connections = PoolIntArray( 2, 0, 3, 1, 5, 0, 2, 1, 4, 0, 2, 0, 8, 0, 3, 0, 7, 0, 2, 3, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 2, 2, 3, 0, 0, 0 )
+nodes/vertex/connections = PoolIntArray( 2, 0, 3, 1, 5, 0, 2, 1, 4, 0, 2, 0, 8, 0, 3, 0, 7, 0, 2, 3, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 2, 2, 3, 0, 0, 0, 2, 0, 3, 1, 5, 0, 2, 1, 4, 0, 2, 0, 8, 0, 3, 0, 7, 0, 2, 3, 10, 0, 11, 0, 11, 0, 12, 0, 12, 0, 2, 2, 3, 0, 0, 0 )
 nodes/fragment/0/position = Vector2( 2373, 0 )
 nodes/fragment/10/node = SubResource( 1 )
 nodes/fragment/10/position = Vector2( 640, 160 )
@@ -367,4 +345,4 @@ nodes/fragment/29/node = SubResource( 16 )
 nodes/fragment/29/position = Vector2( 300, 180 )
 nodes/fragment/32/node = SubResource( 17 )
 nodes/fragment/32/position = Vector2( 280, 300 )
-nodes/fragment/connections = PoolIntArray( 12, 0, 13, 0, 13, 0, 16, 1, 16, 0, 20, 0, 20, 0, 21, 1, 21, 0, 22, 0, 16, 0, 24, 0, 22, 0, 23, 0, 19, 0, 23, 1, 25, 0, 0, 0, 24, 0, 0, 1, 23, 0, 0, 5, 10, 0, 27, 0, 28, 0, 27, 1, 29, 0, 27, 2, 10, 0, 15, 0, 15, 0, 16, 0, 32, 0, 12, 0, 32, 0, 27, 3 )
+nodes/fragment/connections = PoolIntArray( 12, 0, 13, 0, 13, 0, 16, 1, 16, 0, 20, 0, 20, 0, 21, 1, 21, 0, 22, 0, 16, 0, 24, 0, 22, 0, 23, 0, 19, 0, 23, 1, 25, 0, 0, 0, 24, 0, 0, 1, 23, 0, 0, 5, 10, 0, 27, 0, 28, 0, 27, 1, 29, 0, 27, 2, 10, 0, 15, 0, 15, 0, 16, 0, 32, 0, 12, 0, 32, 0, 27, 3, 12, 0, 13, 0, 13, 0, 16, 1, 16, 0, 20, 0, 20, 0, 21, 1, 21, 0, 22, 0, 16, 0, 24, 0, 22, 0, 23, 0, 19, 0, 23, 1, 25, 0, 0, 0, 24, 0, 0, 1, 23, 0, 0, 5, 10, 0, 27, 0, 28, 0, 27, 1, 29, 0, 27, 2, 10, 0, 15, 0, 15, 0, 16, 0, 32, 0, 12, 0, 32, 0, 27, 3 )
