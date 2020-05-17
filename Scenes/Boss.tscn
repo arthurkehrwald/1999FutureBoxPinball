@@ -18,8 +18,8 @@ points = PoolVector3Array( 0, 0.4, 1.86881, 0, 0, 1.86881, -0.715165, 0.4, 1.726
 [node name="Boss" type="StaticBody"]
 collision_mask = 0
 script = ExtResource( 1 )
-MAX_HEALTH = 250.0
-PINBALL_DIRECT_HIT_BASE_DAMAGE = 12.0
+MAX_HEALTH = 200.0
+PINBALL_DIRECT_HIT_BASE_DAMAGE = 15.0
 MONEY_YIELD_PER_DAMAGE = 2.0
 BOMBS_EXPLODE_ON_IMPACT = true
 IS_VULNERABLE_PER_STAGE = {
@@ -46,8 +46,8 @@ shape = SubResource( 1 )
 [node name="BossShield" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.523656 )
 visible = false
-MAX_HEALTH = 100.0
-PINBALL_DIRECT_HIT_BASE_DAMAGE = 12.0
+MAX_HEALTH = 75.0
+PINBALL_DIRECT_HIT_BASE_DAMAGE = 20.0
 DIRECT_HIT_SPEED_RELEVANCE = 0.5
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
@@ -63,6 +63,7 @@ IS_VULNERABLE_PER_STAGE = {
 "9-Victory": true
 }
 REGENERATES = true
+REGENERATION_TIME = 20.0
 
 [node name="BossBar3D" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0 )
