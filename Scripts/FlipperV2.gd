@@ -14,6 +14,7 @@ var input_code = ""
 
 onready var impulse_area = get_node("ImpulseArea")
 onready var audio_player = get_node("AudioStreamPlayer")
+onready var start_basis = get_global_transform().basis
 
 
 func _ready():
@@ -72,11 +73,11 @@ func on_ImpulseArea_body_entered(body):
 	if !body.is_in_group("rollers"):
 		return
 	var dist = (body.get_global_transform().origin - get_global_transform().origin).length()
-	var basis = get_global_transform().basis.orthonormalized()
 	var angle = (1.2 - dist) * deg2rad(MAX_IMPULSE_ANGLE)
 	if IS_RIGHT_FLIPPER:
 		angle = -angle
-	var dir = -basis.z.rotated(basis.y, angle)
+	print(1.2 - dist)
+	var dir = -start_basis.z.rotated(start_basis.y, angle)
 	body.apply_central_impulse(dir * dist * IMPULSE_STRENGTH)
 
 

@@ -389,10 +389,10 @@ transform = Transform( 0.758987, 9.91677e-09, 0.651105, -8.19564e-08, 1, -7.4505
 shape = SubResource( 15 )
 
 [node name="Bumper" parent="BoxV4/Playfield/LowerRightGuide" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, -6.70552e-08, 0, 6.70552e-08, 1, -0.685469, 0.000195384, -3.95484 )
+transform = Transform( 1, 0, 0, 0, 1, -6.70552e-08, 0, 6.70552e-08, 1, -0.640797, 0.00357962, -3.92264 )
 
 [node name="Bumper2" parent="BoxV4/Playfield/LowerRightGuide" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, -6.70552e-08, 0, 6.70552e-08, 1, -1.66783, -0.000446141, -3.38648 )
+transform = Transform( 1, 0, 0, 0, 1, -6.70552e-08, 0, 6.70552e-08, 1, -1.63898, -0.000446171, -3.38648 )
 
 [node name="Bumper3" parent="BoxV4/Playfield/LowerRightGuide" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, -6.70552e-08, 0, 6.70552e-08, 1, -0.790518, -0.000113904, -2.87157 )
@@ -432,9 +432,11 @@ IS_VULNERABLE_PER_STAGE = {
 
 [node name="FlipperV2" parent="BoxV4/Playfield" instance=ExtResource( 13 )]
 transform = Transform( 0.866026, 0, -0.5, -2.6077e-08, 1, 0, 0.5, 5.21541e-08, 0.866026, -1.35, 0, 6.5 )
+IMPULSE_STRENGTH = 60
 
 [node name="FlipperV2_R" parent="BoxV4/Playfield" instance=ExtResource( 16 )]
 transform = Transform( 0.866026, 0, 0.5, 1.49012e-08, 1, 0, -0.5, 2.98023e-08, 0.866026, 1.35, 0, 6.5 )
+IMPULSE_STRENGTH = 60
 
 [node name="Plunger" parent="BoxV4/Playfield" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 4.6, -5.96046e-08, 5.8 )
