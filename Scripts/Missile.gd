@@ -44,6 +44,7 @@ func explode():
 	explosion_instance.add_to_group("missile_explosions")
 	explosion_instance.set_transform(Transform(Basis.IDENTITY, get_transform().origin))
 	get_parent().add_child(explosion_instance)
+	PoolManager.request(PoolManager.BOMB_EXPLOSION, get_global_transform().origin)
 	queue_free()
 
 

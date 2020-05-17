@@ -14,7 +14,8 @@ enum {
 	MULTIBALL_SHOT,
 	MOON_TRIGGERED,
 	STAR_GATE_ENTER,
-	STAR_GATE_EXIT
+	STAR_GATE_EXIT,
+	BOMB_EXPLOSION
 }
 
 const Pool = preload("res://Scripts/Pool.gd")
@@ -33,7 +34,8 @@ var effect_info = {
 	MULTIBALL_SHOT: Pool.new(preload("res://Scenes/MultiballShotFX.tscn"), 1),
 	MOON_TRIGGERED: Pool.new(preload("res://Scenes/MoonTriggeredFX.tscn"), 1),
 	STAR_GATE_ENTER: Pool.new(preload("res://Scenes/StarGateEnterFX.tscn"), 3),
-	STAR_GATE_EXIT: Pool.new(preload("res://Scenes/StarGateExitFX.tscn"), 3)
+	STAR_GATE_EXIT: Pool.new(preload("res://Scenes/StarGateExitFX.tscn"), 3),
+	BOMB_EXPLOSION: Pool.new(preload("res://Scenes/BombExplosionFX.tscn"), 5)
 }
 
 
