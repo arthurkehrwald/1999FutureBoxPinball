@@ -4,15 +4,16 @@ var is_open = false
 var pinballs_in_plunger_lane = 0
 
 onready var animation_player = get_node("AnimationPlayer")
-onready var area = get_node("Area")
+onready var lane_area = get_node("LaneArea")
+onready var gate_area = get_node("GateArea")
 
 
 func _ready():
-	area.connect("body_entered", self, "on_Area_body_entered")
-	area.connect("body_exited", self, "on_Area_body_exited")
+	lane_area.connect("body_entered", self, "on_LaneArea_body_entered")
+	gate_area.connect("body_exited", self, "on_GateArea_body_exited")
 
 
-func on_Area_body_entered(body):
+func on_LaneArea_body_entered(body):
 	if not body.is_in_group("pinballs"):
 		return
 	pinballs_in_plunger_lane += 1
@@ -21,7 +22,7 @@ func on_Area_body_entered(body):
 		is_open = true
 
 
-func on_Area_body_exited(body):
+func on_GateArea_body_exited(body):
 	if not body.is_in_group("pinballs"):
 		return
 	pinballs_in_plunger_lane -= 1
