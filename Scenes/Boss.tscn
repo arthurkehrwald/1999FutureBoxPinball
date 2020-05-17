@@ -153,7 +153,6 @@ material/0 = null
 
 [node name="Fog" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1.02701, 0, 0, 0, 1.02701, 0, 0, 0, 1.02701, 0, 0, 0.0398126 )
-visible = false
 
 [node name="BossBar3D" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0 )

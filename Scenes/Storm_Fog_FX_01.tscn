@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Meshes/boss.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Particles/white-smoke-transparent-background-png-6.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Particles/White_Circle_Washed_01.png" type="Texture" id=6]
 [ext_resource path="res://Textures/Noise_02.jpg" type="Texture" id=7]
 [ext_resource path="res://Textures/Noise_05.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/BossFog.gd" type="Script" id=9]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -301,9 +302,11 @@ tracks/0/keys = {
 }
 
 [node name="Fog" type="Spatial"]
+script = ExtResource( 9 )
 
 [node name="boss" type="MeshInstance" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.00592e-09, 0.23725, 0.0230129 )
+visible = false
 mesh = ExtResource( 1 )
 material/0 = null
 
