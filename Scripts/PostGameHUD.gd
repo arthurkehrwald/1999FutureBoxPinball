@@ -23,7 +23,7 @@ func _process(_delta):
 
 func set_is_active(value):
 	is_active = value
-	get_tree().paused = value
+	#get_tree().paused = value
 	set_visible(value)
 	set_process(value)
 	if value:
