@@ -9,6 +9,7 @@
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
+albedo_color = Color( 1, 0, 0, 1 )
 albedo_texture = ExtResource( 4 )
 
 [sub_resource type="Gradient" id=2]
@@ -85,9 +86,9 @@ angular_velocity = 720.0
 angular_velocity_random = 1.0
 scale = 0.3
 scale_curve = SubResource( 13 )
-color = Color( 1, 0.254902, 0, 1 )
+color = Color( 1, 0, 0, 1 )
 hue_variation = 0.04
-hue_variation_random = 1.0
+hue_variation_random = 0.4
 
 [sub_resource type="QuadMesh" id=15]
 
@@ -106,10 +107,9 @@ draw_pass_1 = SubResource( 7 )
 
 [node name="Ring3" type="Particles" parent="." index="2"]
 transform = Transform( 0.517259, 0, 0, 0, -2.26101e-08, 0.517259, 0, -0.517259, -2.26101e-08, 0, -0.286648, 0 )
+visible = false
 material_override = SubResource( 1 )
-emitting = false
 amount = 3
-one_shot = true
 preprocess = 0.2
 explosiveness = 0.75
 process_material = SubResource( 6 )
