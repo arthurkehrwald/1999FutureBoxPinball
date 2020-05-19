@@ -430,6 +430,7 @@ transform = Transform( 1, 0, 0, 0, 1, -5.21541e-08, 0, 5.21541e-08, 1, 2.6, -8.9
 
 [node name="PlayerShip" parent="BoxV4/Playfield" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, 4.47035e-08, 1, 0, 5.96046e-08, 7.9 )
+MAX_HEALTH = 14.0
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,

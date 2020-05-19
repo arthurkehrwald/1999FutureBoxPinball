@@ -1,17 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PowerupRoulette.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/CentralHudBackground.gd" type="Script" id=3]
+[ext_resource path="res://HUD/central_hud_background.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/ObjectiveHUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/PostGameHUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/WarningHUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=9]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
 
 [node name="CentralHUD3D" type="Sprite3D"]
-pause_mode = 2
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
 material_override = ExtResource( 9 )
 texture = SubResource( 1 )
@@ -25,7 +27,18 @@ transparent_bg = true
 disable_3d = true
 render_target_v_flip = true
 
+[node name="Background" type="TextureRect" parent="Viewport"]
+anchor_left = 0.088
+anchor_top = 0.06
+anchor_right = 0.139
+anchor_bottom = 0.065
+margin_right = 578.0
+margin_bottom = 393.0
+texture = ExtResource( 4 )
+script = ExtResource( 3 )
+
 [node name="PowerupRoulette" parent="Viewport" instance=ExtResource( 2 )]
+visible = false
 POWERUP_ODDS_PER_STAGE = {
 "0-Testing": {
 "Boost": 1.0,
@@ -110,5 +123,8 @@ margin_left = 43.4249
 margin_top = 10.0211
 margin_right = -458.575
 margin_bottom = -439.979
+
+[node name="WarningHUD" parent="Viewport" instance=ExtResource( 8 )]
+visible = false
 
 [node name="GlitchOverlay" parent="Viewport" instance=ExtResource( 7 )]

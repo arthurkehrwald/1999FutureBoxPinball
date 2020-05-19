@@ -2,7 +2,6 @@ extends "res://Scripts/ToggleParticles.gd"
 
 onready var boss = get_node("..")
 onready var mesh = get_node("MeshInstance3")
-onready var collision_shape = get_node("CollisionShape")
 onready var col_layer_when_enabled = call("get_collision_layer")
 
 

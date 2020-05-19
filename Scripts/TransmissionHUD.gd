@@ -17,6 +17,8 @@ const PORTRAIT_LOUIE = preload("res://HUD/portrait_louie.png")
 const ENEMY_PORTRAIT = preload("res://HUD/portrait_enemy.png")
 const EMPEROR_PORTRAIT = preload("res://HUD/portrait_emperor.png")
 const TREX_PORTRAIT = preload("res://HUD/portrait_trex.png")
+const GREEN_PANEL = preload("res://HUD/panel_left.png")
+const RED_PANEL = preload("res://HUD/panel_left_red.png")
 
 var sequences = null
 var queued_line = ""
@@ -32,6 +34,7 @@ onready var text_label = get_node("Background/TextLabel")
 onready var glitch_overlay = get_node("../GlitchOverlay")
 onready var transmission_timer = get_node("TransmissionTimer")
 onready var hurt_reaction_timer = get_node("HurtReactionTimer")
+onready var background_rect = get_node("Background")
 
 
 func _ready():
@@ -118,6 +121,8 @@ func reset():
 
 
 func set_rex_mood(value):
+	if rex_mood == value:
+		return
 	rex_mood = value
 	if is_rex_on_display:
 		portrait_rect.texture = REX_PORTRAITS[value]
@@ -125,18 +130,16 @@ func set_rex_mood(value):
 
 
 func on_PlayerShip_health_changed(new_health, old_health, max_health):
-	if new_health >= old_health:
-		return
-	hurt_reaction_timer.stop()
-	if old_health / max_health * 100 > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
-		if new_health / max_health * 100 < INJURED_PORTRAIT_HEALTH_PERCENTAGE:
-			set_rex_mood(RexMood.INJURED)
+	var is_hp_critical = new_health / max_health * 100 <= Globals.PLAYER_CRITICAL_HEALTH_PERCENT
+	background_rect.texture = RED_PANEL if is_hp_critical else GREEN_PANEL
+	if new_health < old_health:
+		set_rex_mood(RexMood.INJURED)
+		if is_hp_critical:
+			hurt_reaction_timer.stop()
 		else:
-			set_rex_mood(RexMood.INJURED)
 			hurt_reaction_timer.start(INJURED_REACTION_DURATION)
-	else:
-		if new_health / max_health * 100 > INJURED_PORTRAIT_HEALTH_PERCENTAGE:
-			set_rex_mood(RexMood.NEUTRAL)
+	elif not is_hp_critical:
+		set_rex_mood(RexMood.NEUTRAL)
 
 
 func on_TransmissionTimer_timeout():
