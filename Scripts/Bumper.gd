@@ -1,4 +1,7 @@
+class_name Bumper
 extends Spatial
+
+signal bumped
 
 export var BUMP_FORCE = 10.0
 export var MONEY_PER_BUMP = 100.0
@@ -24,3 +27,4 @@ func on_body_entered(body):
 		PoolManager.request(PoolManager.MONEY_TEXT, money_pos)
 	var fx_pos = get_global_transform().origin + Vector3.UP * .2
 	PoolManager.request(PoolManager.BUMPER_HIT, fx_pos)
+	emit_signal("bumped")
