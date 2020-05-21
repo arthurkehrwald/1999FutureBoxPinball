@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/NoRemoteControlArea.gd" type="Script" id=1]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 2.25132, 0.3, 1.35844 )
+extents = Vector3( 2.07907, 0.3, 0.950005 )
 
 [node name="NoRemoteControlArea" type="Area"]
 monitorable = false

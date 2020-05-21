@@ -76,7 +76,6 @@ func on_ImpulseArea_body_entered(body):
 	var angle = (1.2 - dist) * deg2rad(MAX_IMPULSE_ANGLE)
 	if IS_RIGHT_FLIPPER:
 		angle = -angle
-	print(1.2 - dist)
 	var dir = -start_basis.z.rotated(start_basis.y, angle)
 	body.apply_central_impulse(dir * dist * IMPULSE_STRENGTH)
 

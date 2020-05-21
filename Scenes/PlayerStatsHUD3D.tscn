@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PlayerStatsHUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=6]
-
-[sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("Viewport")
 
 [node name="PlayerStatsHUD3D" type="Sprite3D"]
 pause_mode = 2
@@ -15,7 +12,6 @@ material_override = ExtResource( 6 )
 centered = false
 offset = Vector2( -425, 0 )
 double_sided = false
-texture = SubResource( 1 )
 region_enabled = true
 region_rect = Rect2( 45.9354, 0, 425.065, 375.659 )
 script = ExtResource( 1 )

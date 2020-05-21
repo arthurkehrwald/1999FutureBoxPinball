@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PowerupRoulette.tscn" type="PackedScene" id=2]
@@ -10,13 +10,9 @@
 [ext_resource path="res://Scenes/WarningHUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=9]
 
-[sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("Viewport")
-
 [node name="CentralHUD3D" type="Sprite3D"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
 material_override = ExtResource( 9 )
-texture = SubResource( 1 )
 region_enabled = true
 region_rect = Rect2( 50.3149, 5.0539, 597.492, 413.394 )
 script = ExtResource( 1 )
@@ -41,8 +37,8 @@ script = ExtResource( 3 )
 visible = false
 POWERUP_ODDS_PER_STAGE = {
 "0-Testing": {
-"Boost": 1.0,
-"Remote": 0.0,
+"Boost": 0.0,
+"Remote": 1.0,
 "Stopper": 0.0,
 "Turret": 0.0
 },

@@ -2,19 +2,19 @@
 
 [ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=1]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
 flags_unshaded = true
 flags_albedo_tex_force_srgb = true
 
-[sub_resource type="ViewportTexture" id=3]
+[sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("Viewport")
 
 [node name="HUD3D" type="Sprite3D"]
 pause_mode = 2
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 2 )
-texture = SubResource( 3 )
+material_override = SubResource( 1 )
+texture = SubResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 435, 386 )
 script = ExtResource( 1 )
