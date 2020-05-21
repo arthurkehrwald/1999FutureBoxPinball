@@ -25,7 +25,6 @@ func toggle_bumpers(value):
 		bumper.set_deferred("monitoring", value)
 	disable_timer.stop()
 	bump_count = 0
-	print("BumperCage: ", "enabled" if value else "disabled")
 	if not value:
 		enable_timer.start(DISABLED_DURATION)
 

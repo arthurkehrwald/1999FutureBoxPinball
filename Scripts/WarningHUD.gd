@@ -23,7 +23,7 @@ func _ready():
 		Globals.powerup_roulette.connect("visibility_changed", self, "update_visibility")
 
 
-func on_PlayerShip_health_changed(new_health, old_health, max_health):
+func on_PlayerShip_health_changed(new_health, _old_health, max_health):
 	is_player_hp_critical = new_health / max_health * 100 <= Globals.PLAYER_CRITICAL_HEALTH_PERCENT
 	update_visibility()
 
