@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/shop_bar_progress.png" type="Texture" id=2]
 [ext_resource path="res://HUD/player_lifebar_fill.png" type="Texture" id=3]
-[ext_resource path="res://HUD/player_lifebar_outline.png" type="Texture" id=4]
+[ext_resource path="res://HUD/car_outline.png" type="Texture" id=4]
 [ext_resource path="res://HUD/panel_right.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/PlayerStatsHUD.gd" type="Script" id=6]
 [ext_resource path="res://HUD/shop_bar_over.png" type="Texture" id=7]
@@ -13,13 +13,8 @@ size = 30
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
-size = 25
-use_filter = true
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=2]
-size = 35
+size = 25
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -27,6 +22,25 @@ font_data = ExtResource( 1 )
 size = 35
 use_filter = true
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 35
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "car_flash"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Background/CarFill:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.103368, -0.490172, 0.0880306, -0.498598, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
 
 [node name="PlayerStatsHUD" type="Control"]
 script = ExtResource( 6 )
@@ -67,32 +81,19 @@ __meta__ = {
 }
 
 [node name="HealthBar" type="TextureProgress" parent="Background"]
+visible = false
+modulate = Color( 1, 0, 0.435294, 1 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -314.819
-margin_top = -154.394
-margin_right = -115.819
-margin_bottom = -66.3941
+margin_left = -321.117
+margin_top = -155.97
+margin_right = -114.117
+margin_bottom = -67.9704
 step = 0.1
 value = 100.0
 texture_progress = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HealthBarOutline" type="TextureRect" parent="Background"]
-visible = false
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -316.186
-margin_top = -155.59
-margin_right = -117.186
-margin_bottom = -67.5898
-texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -114,7 +115,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShopLabel" type="Label" parent="Background"]
+[node name="ShopNameLabel" type="Label" parent="Background"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -123,7 +124,7 @@ margin_left = -63.528
 margin_top = -186.248
 margin_right = -20.528
 margin_bottom = -156.248
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "Shop"
 align = 2
@@ -156,7 +157,7 @@ margin_left = -173.0
 margin_top = -246.0
 margin_right = -21.9998
 margin_bottom = -204.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "9.999.999"
 align = 2
@@ -173,10 +174,34 @@ margin_left = -194.056
 margin_top = -58.0837
 margin_right = -113.056
 margin_bottom = -16.0837
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "100%"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CarFill" type="TextureRect" parent="Background"]
+modulate = Color( 1, 0, 0.435294, 0 )
+margin_left = 99.6442
+margin_top = 220.267
+margin_right = 306.644
+margin_bottom = 310.267
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CarOutline" type="TextureRect" parent="Background"]
+margin_left = 99.6442
+margin_top = 220.267
+margin_right = 306.644
+margin_bottom = 310.267
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/car_flash = SubResource( 5 )

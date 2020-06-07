@@ -18,3 +18,6 @@ transform = Transform( 0.997707, 2.93631e-09, 0.0676844, -2.95502e-09, 1, 1.7630
 
 [node name="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 2 )
+
+[node name="Sprite3D" parent="." index="4"]
+transform = Transform( -0.720018, 2.08616e-07, -1.42109e-14, 3.82231e-14, 9.95948e-08, 0.611309, 2.38419e-07, 0.611309, -9.95948e-08, -0.442704, 0.313232, 0.00845331 )

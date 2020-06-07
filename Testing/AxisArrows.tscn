@@ -1,16 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Materials/blue_test.tres" type="Material" id=1]
 [ext_resource path="res://Materials/green_test.tres" type="Material" id=2]
 [ext_resource path="res://Materials/red_test.tres" type="Material" id=3]
 [ext_resource path="res://Meshes/slope_mesh.obj" type="ArrayMesh" id=4]
-[ext_resource path="res://Testing/XZRotationCancel.gd" type="Script" id=5]
 
 [sub_resource type="CubeMesh" id=1]
 
 [node name="AxisArrows" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-script = ExtResource( 5 )
 
 [node name="XArrow" type="Spatial" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.448851, 1.19209e-07, 0.0162401 )

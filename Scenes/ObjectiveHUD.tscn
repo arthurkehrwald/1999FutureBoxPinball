@@ -1,14 +1,13 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://HUD/central_hud_background.png" type="Texture" id=2]
 [ext_resource path="res://HUD/objective_checkbox.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://HUD/objective_checkmark.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/ObjectiveHUD.gd" type="Script" id=6]
 [ext_resource path="res://Animations/objectives_complete_anim.tres" type="Animation" id=7]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=7]
 size = 40
 use_filter = true
 font_data = ExtResource( 4 )
@@ -76,21 +75,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 578.0
-margin_bottom = 398.0
-texture = ExtResource( 2 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="HeadingLabel" type="Label" parent="."]
-margin_left = 193.662
-margin_top = 48.7257
-margin_right = 381.662
-margin_bottom = 103.725
-custom_fonts/font = SubResource( 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -74.0
+margin_top = 35.2944
+margin_right = 74.0
+margin_bottom = 84.2944
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "Objective"
 align = 1
@@ -100,7 +92,7 @@ __meta__ = {
 }
 
 [node name="ObjectiveOneCheckBox" type="CheckBox" parent="."]
-margin_left = 85.0
+margin_left = 71.0
 margin_top = 150.0
 margin_right = 538.0
 margin_bottom = 211.0

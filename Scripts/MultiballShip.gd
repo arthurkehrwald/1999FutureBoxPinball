@@ -3,8 +3,6 @@ extends Spatial
 const SHOT_DELAY = 1.0
 
 export var SHOT_SPEED = 5.0
-export(NodePath) var PATH_TO_GATE = ""
-export(NodePath) var PATH_TO_CAGE = ""
 
 var pinballs_locked = 0
 var next_muzzle_position = Vector3(0, 0, 0)
@@ -17,8 +15,6 @@ onready var static_body = get_node("StaticBody")
 onready var muzzle_a = get_node("ShipMesh/MuzzleA")
 onready var muzzle_b = get_node("ShipMesh/MuzzleB")
 onready var muzzle_c = get_node("ShipMesh/MuzzleC")
-onready var gate = get_node_or_null(PATH_TO_GATE)
-onready var cage = get_node_or_null(PATH_TO_CAGE)
 
 
 func _ready():
@@ -71,7 +67,3 @@ func on_GameState_changed(new_state, is_debug_skip):
 	if is_debug_skip or new_state == GameState.PREGAME:
 		pinballs_locked = 0
 		loaded_pinballs.clear()
-	if gate != null:
-		gate.toggle(new_state < GameState.MISSILES)
-	if cage != null:
-		cage.toggle(new_state < GameState.MISSILES)

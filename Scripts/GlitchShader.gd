@@ -15,10 +15,10 @@ func _ready():
 	#make displacement color rect material unique so that instances can be animated separately
 	var unique_material = displacement_rect.get_material().duplicate()
 	displacement_rect.set_material(unique_material)
+	idle_animation_player.play("glitch_idle")
 	if auto_glitch:
 		rng.randomize()
 		super_glitch_timer.start(rng.randf_range(auto_glitch_rate * .8, auto_glitch_rate * 1.2))
-	idle_animation_player.play("glitch_idle")
 
 
 func super_glitch():

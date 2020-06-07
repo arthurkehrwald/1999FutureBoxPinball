@@ -6,6 +6,7 @@ export var BUMP_FORCE = 10.0
 onready var collision_shape = get_node("CollisionShape")
 onready var health_bar = get_node("HealthBar3D/Viewport/Bar")
 onready var hit_audio_player = get_node("HitAudioPlayer")
+onready var mesh = get_node("MeshInstance")
 
 
 func _ready():
@@ -14,6 +15,7 @@ func _ready():
 	connect("health_changed", health_bar, "update_value")
 	connect("health_changed", self, "on_health_changed")
 	connect("death", self, "on_death")
+	mesh.set_surface_material(0, mesh.get_surface_material(0).duplicate())
 
 
 func on_is_vulnerable_changed(value):
@@ -32,9 +34,10 @@ func on_hit_by_projectile(projectile):
 		projectile.apply_central_impulse((proj_pos - pos).normalized() * BUMP_FORCE)
 
 
-func on_health_changed(current_health, old_health, _max_health):
+func on_health_changed(current_health, old_health, max_health):
 	if current_health < old_health:
 		hit_audio_player.play()
+	mesh.get_surface_material(0).albedo_color.a = current_health / max_health
 
 
 func on_death():

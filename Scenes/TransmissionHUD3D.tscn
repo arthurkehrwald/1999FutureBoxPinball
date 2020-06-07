@@ -6,7 +6,6 @@
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=5]
 
 [node name="TransmissionHUD3D" type="Sprite3D"]
-pause_mode = 2
 transform = Transform( 0.806335, 0, 0, 0, -1.31458e-07, 0.854645, 0, -0.806885, -1.39239e-07, 0, 0, 0 )
 material_override = ExtResource( 5 )
 centered = false

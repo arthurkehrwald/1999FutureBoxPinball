@@ -6,6 +6,7 @@
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
 flags_unshaded = true
+flags_albedo_tex_force_srgb = true
 params_billboard_mode = 1
 
 [node name="Bar3D" type="Sprite3D"]

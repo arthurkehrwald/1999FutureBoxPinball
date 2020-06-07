@@ -107,4 +107,4 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="WebcamDummy" parent="." instance=ExtResource( 3 )]
+[node name="AxisArrows" parent="." instance=ExtResource( 3 )]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Bumper.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/BumperCluster.gd" type="Script" id=4]
+
+[node name="BumperCluster" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="Bumper" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.531239, 0, -0.289469 )
+
+[node name="Bumper2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0115545, 0, 0.569575 )
+
+[node name="Bumper3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.53493, 0, -0.281001 )
+
+[node name="DisableTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="EnableTimer" type="Timer" parent="."]
+one_shot = true
