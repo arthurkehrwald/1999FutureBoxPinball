@@ -57,7 +57,3 @@ material/1 = ExtResource( 6 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="D20_08" index="0"]
 autoplay = "blikingBomb"
 anims/blikingBomb = SubResource( 1 )
-
-[node name="Camera" type="Camera" parent="." index="7"]
-transform = Transform( 1, 0, 0, 0, 0.732626, 0.680631, 0, -0.680631, 0.732626, 0, 1.08644, 1.47256 )
-visible = false

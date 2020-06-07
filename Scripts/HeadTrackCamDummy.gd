@@ -15,7 +15,7 @@ export (NodePath) var cam_path = ""
 
 var track = Vector3(0, 0, 1)
 
-onready var wc = get_node("WebcamDummy")
+onready var wc = get_node("AxisArrows")
 onready var x_dummy = get_node("XDummy")
 onready var y_dummy = get_node("YDummy")
 onready var combo_dummy = get_node("ComboDummy")
