@@ -9,7 +9,7 @@ public class SerialReader : Node
     public SerialPort _serialPort;
     
     [Export]
-    public string portName = "COM3";
+    public string portName = "COM5";
     [Export]
     public int baudRate = 9600;
 
@@ -84,10 +84,10 @@ public class SerialReader : Node
                     zFloat = float.Parse(zString);
                 }
 
-                zNormalized = zFloat/1023;
+                zNormalized = (zFloat-120)/(950-120);
             //}
             EmitSignal("PlungerSignal", zNormalized);
-            GD.Print(zNormalized);
+            //GD.Print(zNormalized);
             }
         });
     }    

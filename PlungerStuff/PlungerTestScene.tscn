@@ -15,7 +15,6 @@ release_speed = 20.0
 max_distance = 1.0
 
 [node name="SerialReader" parent="." instance=ExtResource( 2 )]
-portName = "COM14"
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.314688, 0.949195, 0, -0.949195, 0.314688, 2.36024, 6.51412, 5.79034 )
@@ -29,3 +28,4 @@ transform = Transform( 1, 0, 0, 0, 0.993242, -0.116064, 0, 0.116064, 0.993242, 3
 [node name="Pinball" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.07107, 0, 0 )
 [connection signal="PlungerSignal" from="SerialReader" to="PlungerPoti" method="_on_SerialReader_PlungerSignal"]
+[connection signal="PlungerSignal" from="SerialReader" to="SerialReader" method="_on_SerialReader_PlungerSignal"]
