@@ -5,13 +5,21 @@ const COLLISION_MASK_SWITCH_DELAY = .7
 
 export var FUSE_TIME = 5.0
 
-onready var timer = get_node("Timer")
-
+onready var explode_timer = get_node("ExplodeTimer")
+onready var buildup_audio_timer = get_node("BuildupAudioTimer")
+onready var buildup_audio_player = get_node("BuildupAudioPlayer")
 
 func _ready():
 	add_to_group("bombs")
-	timer.connect("timeout", self, "on_Timer_timeout")
-	timer.start(FUSE_TIME)
+	explode_timer.connect("timeout", self, "explode")
+	explode_timer.start(FUSE_TIME)
+	var buildup_audio_length = buildup_audio_player.stream.get_length()
+	print(buildup_audio_length)
+	if FUSE_TIME > buildup_audio_length:
+		buildup_audio_timer.start(FUSE_TIME - buildup_audio_length)
+		buildup_audio_timer.connect("timeout", buildup_audio_player, "play")
+	else:
+		buildup_audio_player.play()
 
 
 func explode():

@@ -644,17 +644,17 @@ current = false
 
 [node name="MeshInstance" type="MeshInstance" parent="BoxV4/TheWeirdo/WeirdCameraPolar"]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 4.47035e-08, 0, -4.47035e-08, 0.3, 0, 0, 0 )
+visible = false
 mesh = SubResource( 25 )
 material/0 = SubResource( 28 )
 
 [node name="Reference" type="Sprite3D" parent="BoxV4"]
 transform = Transform( 0.803417, 0, 0, 0, 0.799015, 0.0839797, 0, -0.0839797, 0.799015, 0, 0.0291273, -0.00512256 )
-visible = false
 axis = 1
 texture = ExtResource( 2 )
 
 [node name="HeadTrackCamDummy" parent="BoxV4" instance=ExtResource( 30 )]
-transform = Transform( -1.91454e-07, 0.167113, -0.985938, 0.207912, 0.964393, 0.163461, 0.978148, -0.204988, -0.0347449, 40.8208, 3.94684, 0.963622 )
+transform = Transform( 1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.821449, -25.3096, -38.6107 )
 cam_path = NodePath("../TheWeirdo/WeirdCameraPolar")
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]

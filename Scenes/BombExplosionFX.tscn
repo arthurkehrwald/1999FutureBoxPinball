@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/OneShotFX.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Particles/White_Long_Particle_01.png" type="Texture" id=2]
-[ext_resource path="res://Audio/fx/Bomb_02.wav" type="AudioStream" id=3]
+[ext_resource path="res://Audio/fx/Bomb_02_explosion.wav" type="AudioStream" id=3]
 [ext_resource path="res://Textures/fire.png" type="Texture" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
