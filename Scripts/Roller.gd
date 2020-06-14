@@ -39,7 +39,7 @@ func _physics_process(_delta):
 
 
 func _process(_delta):
-	var norm_z_pos = clamp((get_global_transform().origin.z + 8) / 8, 0, 1)
+	var norm_z_pos = clamp((get_global_transform().origin.z + 8) / 16, 0, 1)
 	print(norm_z_pos)
 	audio_player.pitch_scale = lerp(MIN_AUDIO_PITCH, MAX_AUDIO_PITCH, norm_z_pos)
 

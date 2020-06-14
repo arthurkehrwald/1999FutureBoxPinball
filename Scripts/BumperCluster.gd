@@ -15,7 +15,7 @@ func _ready():
 	disable_timer.connect("timeout", self, "toggle_bumpers", [false])
 	enable_timer.connect("timeout", self, "toggle_bumpers", [true])
 	for child in get_children():
-		if child is Bumper:
+		if child.name.matchn("Bumper*"):
 			bumpers.push_back(child)
 			child.connect("bumped", self, "on_Bumper_bumped")
 
