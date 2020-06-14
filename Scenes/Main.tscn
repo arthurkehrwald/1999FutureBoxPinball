@@ -568,7 +568,7 @@ transform = Transform( 0.2, 0, 0, 0, 0.2, -8.19564e-08, 0, 7.45058e-09, 1, 0, 0.
 visible = false
 
 [node name="EnemyFleet" parent="BoxV4/Playfield" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, -2.98023e-08, 2.5 )
+transform = Transform( 1, 0, 0, 0, 1, -8.9407e-08, 0, 8.9407e-08, 1, 0, 0.275452, 0.765365 )
 
 [node name="TransmissionHUD3D" parent="BoxV4/Playfield" instance=ExtResource( 25 )]
 transform = Transform( 0.806335, 0, 0, 0, -4.47035e-08, 0.854646, 0, -0.806885, -9.68575e-08, -4.2506, 0.700001, 7.5 )
