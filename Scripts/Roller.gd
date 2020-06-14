@@ -11,12 +11,8 @@ export(float, 0, 1.0) var GRAV_CURVE_OFFSET = .5
 export(float, 0, 50.0) var SPEED_LIM = 30.0
 export var ENFORCE_SPEED_LIM = true
 export var AIRBORNE_GRAV = 8.0
-export var MAX_AUDIO_PITCH = 3
-export var MIN_AUDIO_PITCH = .5
 
 var current_wire_ramp = null
-
-onready var audio_player = get_node("AudioStreamPlayer3D")
 
 
 func _ready():
@@ -36,12 +32,6 @@ func _physics_process(_delta):
 	if is_airborne:
 		gravity_scale = AIRBORNE_GRAV
 	$Label.text = "speed: %s\ngrav: %s\nairborne: %s" % [speed, gravity_scale, is_airborne]
-
-
-func _process(_delta):
-	var norm_z_pos = clamp((get_global_transform().origin.z + 8) / 8, 0, 1)
-	print(norm_z_pos)
-	audio_player.pitch_scale = lerp(MIN_AUDIO_PITCH, MAX_AUDIO_PITCH, norm_z_pos)
 
 
 func teleport(destination):
