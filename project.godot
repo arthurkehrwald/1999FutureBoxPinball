@@ -147,14 +147,13 @@ PoolManager="*res://Scripts/PoolManager.gd"
 
 [debug]
 
+settings/stdout/print_fps=true
 gdscript/warnings/return_value_discarded=false
 
 [display]
 
 window/size/width=1080
 window/size/height=1920
-window/size/test_width=564
-window/size/test_height=1000
 window/handheld/orientation="portrait"
 
 [input]
