@@ -46,26 +46,26 @@ func _process(delta):
 		return
 	
 	begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
-	for i in range(points.size()):
-		var t = float(i + 1) / points.size()
+	for j in range(points.size()):
+		var t = float(j + 1) / points.size()
 		var currColor = startColor.linear_interpolate(endColor, 1 - t)
 		set_color(currColor)
 		
 		if scaleTexture:
-			var t0 = motionDelta * i
-			var t1 = motionDelta * (i + 1)
+			var t0 = motionDelta * j
+			var t1 = motionDelta * (j + 1)
 			set_uv(Vector2(t0, 0))
-			add_vertex(to_local(points[i]))
+			add_vertex(to_local(points[j]))
 			set_uv(Vector2(t1, 1))
-			add_vertex(to_local(points2[i]))
+			add_vertex(to_local(points2[j]))
 		else:
-			var t0 = i / points.size()
+			var t0 = j / points.size()
 			var t1 = t
 			
 			set_uv(Vector2(t0, 0))
-			add_vertex(to_local(points[i]))
+			add_vertex(to_local(points[j]))
 			set_uv(Vector2(t1, 1))
-			add_vertex(to_local(points2[i]))
+			add_vertex(to_local(points2[j]))
 	end()
 
 func appendPoint():
