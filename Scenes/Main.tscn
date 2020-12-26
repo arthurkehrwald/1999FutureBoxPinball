@@ -635,7 +635,6 @@ script = ExtResource( 56 )
 adjustment = 0.32
 
 [node name="AnaglyphTriangle" type="MeshInstance" parent="BoxV4/TheWeirdo/WeirdCamera"]
-visible = false
 extra_cull_margin = 16384.0
 mesh = ExtResource( 54 )
 material/0 = ExtResource( 29 )
@@ -646,9 +645,11 @@ material/0 = ExtResource( 29 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0 )
 remote_path = NodePath("../../../../../AnaglyphViewports/LeftAnaglyphViewport/CamOrigin/LeftAnaglyphCam")
 
-[node name="RightAnaglyphCamPos" type="RemoteTransform" parent="BoxV4/TheWeirdo/WeirdCamera/AnaglyphCamPos"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0 )
-remote_path = NodePath("../../../../../AnaglyphViewports/RightAnaglyphViewport/CamOrigin/RightAnaglyphCam")
+[node name="CamOriginRemote" type="RemoteTransform" parent="BoxV4/TheWeirdo"]
+remote_path = NodePath("../../../AnaglyphViewports/LeftAnaglyphViewport/CamOrigin")
+
+[node name="CamOriginRemote2" type="RemoteTransform" parent="BoxV4/TheWeirdo"]
+remote_path = NodePath("../../../AnaglyphViewports/RightAnaglyphViewport/CamOrigin")
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"

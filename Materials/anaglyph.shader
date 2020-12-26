@@ -82,9 +82,7 @@ void fragment()
 				+ right_col.b * right_col_balance[2][1]
 				+ right_col.g * right_col_balance[2][2];
 		
-		//ALBEDO = left_col + right_col;
 		ALBEDO = vec3(left_r + right_r, left_g + right_g, left_b + right_b);
-		//ALBEDO = left_col;
-		//ALBEDO = vec3(left_col.r, 0, right_col.b);
+
 	}
 }

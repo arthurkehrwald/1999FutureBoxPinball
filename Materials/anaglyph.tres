@@ -3,11 +3,12 @@
 [ext_resource path="res://Materials/anaglyph.shader" type="Shader" id=1]
 
 [resource]
+render_priority = -1
 shader = ExtResource( 1 )
-shader_param/screen_width = 2.7
-shader_param/stereo_offset = 0.224
-shader_param/max_uv_offset = 0.141
-shader_param/error_tolerance = 9.568
+shader_param/screen_width = 3.75
+shader_param/stereo_offset = 0.64
+shader_param/max_uv_offset = 0.039
+shader_param/error_tolerance = 3.162
 shader_param/left_col_balance = Basis( 0.299, 0, 0, 0.587, 0, 0, 0.114, 0, 0 )
 shader_param/right_col_balance = Basis( 0, 0, 0, 0, 1, 0, 0, 0, 1 )
 shader_param/screen_pos = Vector3( 0, 2.91, 0 )
