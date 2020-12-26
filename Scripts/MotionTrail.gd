@@ -3,6 +3,8 @@ extends ImmediateGeometry
 var points = []
 var points2 = []
 var lifePoints = []
+
+export var is_enabled = true
 export var width = 0.5
 export var motionDelta = 0.1
 export var clear_trail_motion_delta = .5
@@ -15,6 +17,7 @@ var oldPos
 var fadeCounter
 
 func _ready():
+	set_process(is_enabled)
 	oldPos = get_global_transform().origin
 
 func _process(delta):

@@ -23,6 +23,8 @@ EXTRA_BALL_TRAIL_COLOR = Color( 0.945098, 0.854902, 0.113725, 1 )
 material/0 = ExtResource( 5 )
 
 [node name="MotionTrail" parent="MeshInstance" index="0" instance=ExtResource( 7 )]
+visible = false
+is_enabled = false
 width = 0.13
 lifespan = 0.3
 

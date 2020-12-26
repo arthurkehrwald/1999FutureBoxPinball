@@ -93,7 +93,7 @@ input_name = "vertex"
 
 [resource]
 code = "shader_type spatial;
-render_mode depth_draw_alpha_prepass, cull_disabled, specular_schlick_ggx;
+render_mode depth_draw_alpha_prepass, cull_disabled;
 
 uniform sampler2D tex_frg_15;
 uniform float FadeProgress;

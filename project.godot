@@ -154,6 +154,7 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1080
 window/size/height=1920
+window/vsync/use_vsync=false
 window/handheld/orientation="portrait"
 
 [input]
