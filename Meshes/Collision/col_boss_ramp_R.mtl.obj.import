@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/col_boss_ramp_R.mtl.obj-13c1f0d03d571d00793cfff499fcf659.mesh"
+
+[deps]
+
+files=[ "res://.import/col_boss_ramp_R.mtl.obj-13c1f0d03d571d00793cfff499fcf659.mesh" ]
+
+source_file="res://Meshes/Collision/col_boss_ramp_R.mtl.obj"
+dest_files=[ "res://.import/col_boss_ramp_R.mtl.obj-13c1f0d03d571d00793cfff499fcf659.mesh", "res://.import/col_boss_ramp_R.mtl.obj-13c1f0d03d571d00793cfff499fcf659.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

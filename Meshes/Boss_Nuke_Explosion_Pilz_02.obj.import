@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Boss_Nuke_Explosion_Pilz_02.obj-35556d3aff02b12a3a0be704ad81ab68.mesh"
+
+[deps]
+
+files=[ "res://.import/Boss_Nuke_Explosion_Pilz_02.obj-35556d3aff02b12a3a0be704ad81ab68.mesh" ]
+
+source_file="res://Meshes/Boss_Nuke_Explosion_Pilz_02.obj"
+dest_files=[ "res://.import/Boss_Nuke_Explosion_Pilz_02.obj-35556d3aff02b12a3a0be704ad81ab68.mesh", "res://.import/Boss_Nuke_Explosion_Pilz_02.obj-35556d3aff02b12a3a0be704ad81ab68.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

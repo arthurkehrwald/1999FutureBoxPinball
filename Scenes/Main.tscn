@@ -29,7 +29,7 @@
 [ext_resource path="res://Scenes/CentralHUD3D.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/PlayerStatsHUD3D.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/WeirdCameraPolar.tscn" type="PackedScene" id=29]
-[ext_resource path="res://Scenes/HeadTrackCamDummy.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Scenes/HeadtrackKinectDummy.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scripts/LaserTRexUFO.gd" type="Script" id=31]
 [ext_resource path="res://Meshes/Boss_Back_Barrier_V2.obj" type="ArrayMesh" id=32]
 [ext_resource path="res://Scenes/PlayerTurret.tscn" type="PackedScene" id=33]
@@ -618,7 +618,7 @@ fov = 55.0691
 size = 4.87
 near = 1.0
 script = ExtResource( 54 )
-kinect_dummy_path = NodePath("../../HeadTrackCamDummy")
+kinect_dummy_path = NodePath("../../HeadtrackKinectDummy")
 track_scale = 22.5
 
 [node name="MeshInstance" type="MeshInstance" parent="BoxV4/TheWeirdo/WeirdCameraKinect"]
@@ -650,12 +650,13 @@ material/0 = SubResource( 28 )
 
 [node name="Reference" type="Sprite3D" parent="BoxV4"]
 transform = Transform( 0.803417, 0, 0, 0, 0.799015, 0.0839797, 0, -0.0839797, 0.799015, 0, 0.0291273, -0.00512256 )
+visible = false
 axis = 1
 texture = ExtResource( 2 )
 
-[node name="HeadTrackCamDummy" parent="BoxV4" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.821449, -25.3096, -38.6107 )
-cam_path = NodePath("../TheWeirdo/WeirdCameraPolar")
+[node name="HeadtrackKinectDummy" parent="BoxV4" instance=ExtResource( 30 )]
+transform = Transform( 22.5, 0, 0, 0, 17.99, 4.33, 0, -4, 19.94, -0.1, 4.3, -10.08 )
+enable_manual_calibration = true
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/col_lower_right_guide.obj-32130a3040c74ce0d12ac2be5fef710b.mesh"
+
+[deps]
+
+files=[ "res://.import/col_lower_right_guide.obj-32130a3040c74ce0d12ac2be5fef710b.mesh" ]
+
+source_file="res://Meshes/Collision/col_lower_right_guide.obj"
+dest_files=[ "res://.import/col_lower_right_guide.obj-32130a3040c74ce0d12ac2be5fef710b.mesh", "res://.import/col_lower_right_guide.obj-32130a3040c74ce0d12ac2be5fef710b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/HeadtrackKinectDummy.gd" type="Script" id=1]
+[ext_resource path="res://Testing/AxisArrows.tscn" type="PackedScene" id=2]
+
+[node name="HeadtrackKinectDummy" type="Spatial"]
+transform = Transform( 22.5, 0, 0, 0, 22.5, 0, 0, 0, 22.5, 0, 0, 0 )
+script = ExtResource( 1 )
+rotateSpeed = 0.1
+
+[node name="AxisArrows" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/col_laser.obj-58e9910d3307f329b691a5ff7519a554.mesh"
+
+[deps]
+
+files=[ "res://.import/col_laser.obj-58e9910d3307f329b691a5ff7519a554.mesh" ]
+
+source_file="res://Meshes/Collision/col_laser.obj"
+dest_files=[ "res://.import/col_laser.obj-58e9910d3307f329b691a5ff7519a554.mesh", "res://.import/col_laser.obj-58e9910d3307f329b691a5ff7519a554.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

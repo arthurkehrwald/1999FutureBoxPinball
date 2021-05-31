@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/FullPower_RampV2.obj-ee3f451bcf6cb259ecf520215acb7b95.mesh"
+
+[deps]
+
+files=[ "res://.import/FullPower_RampV2.obj-ee3f451bcf6cb259ecf520215acb7b95.mesh" ]
+
+source_file="res://Meshes/FullPower_RampV2.obj"
+dest_files=[ "res://.import/FullPower_RampV2.obj-ee3f451bcf6cb259ecf520215acb7b95.mesh", "res://.import/FullPower_RampV2.obj-ee3f451bcf6cb259ecf520215acb7b95.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

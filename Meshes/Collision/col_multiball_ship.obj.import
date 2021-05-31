@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/col_multiball_ship.obj-380f9d3bc19bfcdb33902740f33784c5.mesh"
+
+[deps]
+
+files=[ "res://.import/col_multiball_ship.obj-380f9d3bc19bfcdb33902740f33784c5.mesh" ]
+
+source_file="res://Meshes/Collision/col_multiball_ship.obj"
+dest_files=[ "res://.import/col_multiball_ship.obj-380f9d3bc19bfcdb33902740f33784c5.mesh", "res://.import/col_multiball_ship.obj-380f9d3bc19bfcdb33902740f33784c5.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

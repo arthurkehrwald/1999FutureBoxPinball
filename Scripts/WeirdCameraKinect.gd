@@ -59,7 +59,7 @@ func _process(_delta):
 		elif len(decoded) == 5: #location
 			kinect_out_label.text = "kinect:\n%.4f\n%.4f\n%.4f" % [decoded[2],
 					decoded[3], decoded[4]]
-			head_dummy.set_translation(track_scale * Vector3(decoded[2], decoded[3], decoded[4]))
+			head_dummy.set_translation(Vector3(decoded[2], decoded[3], decoded[4]))
 			set_global_transform(Transform(get_global_transform().basis, head_dummy.get_global_transform().origin))
 
 		elif len(decoded) == 6: #quaternion
@@ -68,7 +68,7 @@ func _process(_delta):
 
 		elif len(decoded) == 9: #location & quaternion
 			head_dummy.set_transform(Transform(Quat(decoded[6], decoded[7], decoded[8], -decoded[5]),
-												track_scale * Vector3(decoded[2], decoded[3], decoded[4])))
+												Vector3(decoded[2], decoded[3], decoded[4])))
 			set_global_transform(Transform(get_global_transform().basis, head_dummy.get_global_transform().origin))
 		
 		else:

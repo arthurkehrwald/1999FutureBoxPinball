@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/boss_shield_back_collision.obj-c9ed22ba86f6c04259926967d535392a.mesh"
+
+[deps]
+
+files=[ "res://.import/boss_shield_back_collision.obj-c9ed22ba86f6c04259926967d535392a.mesh" ]
+
+source_file="res://Meshes/Collision/boss_shield_back_collision.obj"
+dest_files=[ "res://.import/boss_shield_back_collision.obj-c9ed22ba86f6c04259926967d535392a.mesh", "res://.import/boss_shield_back_collision.obj-c9ed22ba86f6c04259926967d535392a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
