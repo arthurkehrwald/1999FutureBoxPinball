@@ -38,6 +38,7 @@ IS_VULNERABLE_PER_STAGE = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+visible = false
 mesh = ExtResource( 4 )
 material/0 = null
 

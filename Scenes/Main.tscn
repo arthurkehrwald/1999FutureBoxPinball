@@ -253,6 +253,7 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="BoxV4/Playfield/UpperGuide"]
 transform = Transform( 1, 0, 0, 0, 1, -2.23517e-08, 0, 2.23517e-08, 1, 0, 0, 0 )
+visible = false
 mesh = ExtResource( 3 )
 material/0 = null
 
@@ -266,6 +267,7 @@ script = ExtResource( 19 )
 
 [node name="MeshInstance" type="MeshInstance" parent="BoxV4/Playfield/UpperGuide/PlungerRampEntrance"]
 transform = Transform( 1, 0, 0, 0, 1, -7.45058e-09, 0, 7.45058e-09, 1, 0, 0, 0 )
+visible = false
 mesh = ExtResource( 17 )
 material/0 = null
 
@@ -418,6 +420,7 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="BoxV4/Playfield/LowerLeftGuide"]
 transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 0 )
+visible = false
 mesh = ExtResource( 6 )
 material/0 = null
 
@@ -430,6 +433,7 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="BoxV4/Playfield/MiddleLeftGuide"]
 transform = Transform( 1, 0, 0, 0, 1, -2.23517e-08, 0, 2.23517e-08, 1, 0, 0, 0 )
+visible = false
 mesh = ExtResource( 35 )
 material/0 = null
 
@@ -442,6 +446,7 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="BoxV4/Playfield/LowerRightGuide"]
 transform = Transform( 1, 0, 0, 0, 1, -7.45058e-09, 0, 7.45058e-09, 1, 0, 0, 0 )
+visible = false
 mesh = ExtResource( 7 )
 material/0 = null
 
@@ -519,6 +524,7 @@ shape = SubResource( 24 )
 
 [node name="MeshInstance" type="MeshInstance" parent="BoxV4/Playfield/DropTargetsGuide"]
 transform = Transform( 1, 6.98492e-10, 1.11759e-08, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+visible = false
 mesh = ExtResource( 10 )
 material/0 = null
 
@@ -584,7 +590,7 @@ transform = Transform( 0.8, 0, 0, 0, -2.23517e-08, 8, 0, -0.8, -2.38419e-07, 0, 
 transform = Transform( 0.8, 0, 0, 0, -1.04308e-07, 0.800001, 0, -0.800001, -1.04308e-07, 4.2, 0.700001, 7.8 )
 
 [node name="PlayerTurret" parent="BoxV4/Playfield" instance=ExtResource( 33 )]
-transform = Transform( 0.766044, 0, -0.642788, 0, 1, 0, 0.642787, 0, 0.766045, -3.80431, 0.418573, 4.17028 )
+transform = Transform( 0.766044, 0, -0.642788, 0, 1, 0, 0.642787, 7.45058e-09, 0.766045, -3.80431, 0.418573, 4.17028 )
 MAX_TURN_ANGLE = 40
 
 [node name="Stopper" parent="BoxV4/Playfield" instance=ExtResource( 36 )]
@@ -600,7 +606,7 @@ transform = Transform( 1, 0, 0, 0, 1, -4.47035e-08, 0, 4.47035e-08, 1, 0, 0, 6.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95875, -0.567383 )
 
 [node name="WeirdCamera" parent="BoxV4/TheWeirdo" instance=ExtResource( 39 )]
-transform = Transform( 1, 0, 0, 0, -3.42727e-07, 1, 0, -1, -3.42727e-07, 0, 12.0687, 1.4275 )
+transform = Transform( 1, 0, 0, 0, -3.42727e-07, 1, 0, -1, -3.42727e-07, 0, 12.0687, 5.31128 )
 visible = false
 environment = null
 current = false
@@ -611,7 +617,7 @@ mesh = SubResource( 25 )
 material/0 = SubResource( 26 )
 
 [node name="WeirdCameraKinect" type="Camera" parent="BoxV4/TheWeirdo"]
-transform = Transform( 1, 0, 0, 0, -3.42727e-07, 1, 0, -1, -3.42727e-07, 0, 12.0687, 1.4275 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 13.2374, 4.98278 )
 projection = 2
 current = true
 fov = 55.0691
@@ -638,6 +644,7 @@ __meta__ = {
 }
 
 [node name="WeirdCameraPolar" parent="BoxV4/TheWeirdo" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 0.0921619, 0.995744, 0, -0.995744, 0.0921619, -0.005, 6.702, 1.613 )
 visible = false
 environment = null
 current = false
