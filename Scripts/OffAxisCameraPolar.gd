@@ -1,6 +1,5 @@
 extends Camera
 
-
 func set_pos(pos):
 	set_global_transform(Transform(get_global_transform().basis, pos))
 	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/WeirdCameraPolar.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/OffAxisCameraPolar.gd" type="Script" id=1]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -9,7 +9,7 @@ background_mode = 1
 background_sky = SubResource( 1 )
 ambient_light_color = Color( 1, 1, 1, 1 )
 
-[node name="WeirdCameraPolar" type="Camera"]
+[node name="OffAxisCameraPolar" type="Camera"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -0.005, 6.702, 1.613 )
 environment = SubResource( 2 )
 projection = 2

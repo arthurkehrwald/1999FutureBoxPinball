@@ -14,7 +14,7 @@
 [ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/BumperCage.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/WeirdCamera.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/OffAxisCameraNoIR.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Storm.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Old/Slingshot_R_Standalone.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/TransmissionHUD.tscn" type="PackedScene" id=18]
@@ -45,6 +45,7 @@
 [ext_resource path="res://Scenes/BossRampR.tscn" type="PackedScene" id=43]
 [ext_resource path="res://Scenes/BossRampL.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scenes/GlitchShaderFullscreen.tscn" type="PackedScene" id=45]
+
 
 
 

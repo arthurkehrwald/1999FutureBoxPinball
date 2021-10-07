@@ -12,7 +12,7 @@
 [ext_resource path="res://Scenes/ObjectiveHUD.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/WeirdCamera.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/OffAxisCameraNoIR.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/ShopMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/TransmissionHUD.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/PostGameHUD.tscn" type="PackedScene" id=16]
@@ -45,6 +45,7 @@
 [ext_resource path="res://Scenes/TriangularWall.tscn" type="PackedScene" id=43]
 [ext_resource path="res://Scenes/CurvedRampL.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=45]
+
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("BoxV3/Playfield/CentralHUD3D/Viewport")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scripts/WeirdCamera.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/OffAxisCameraNoIR.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="ProceduralSky" id=1]
@@ -15,7 +15,7 @@ size = 20
 outline_size = 1
 font_data = ExtResource( 2 )
 
-[node name="WeirdCamera" type="Camera"]
+[node name="OffAxisCameraNoIR" type="Camera"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -0.005, 6.702, 1.613 )
 environment = SubResource( 2 )
 projection = 2
