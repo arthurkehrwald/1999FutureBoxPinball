@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "tool
+extends Camera
+
+export var adj_factor = .333;
+
+func _process(delta):
+	set_frustum_offset(
+			Vector2(transform.origin.x * -adj_factor,
+			transform.origin.z * adj_factor)
+			)
+	set_znear((transform.origin.y) * adj_factor)
+"
+
+[node name="OffAxisCamera" type="Camera"]
+projection = 2
+near = 0.0
+script = SubResource( 1 )
+adj_factor = 0.063

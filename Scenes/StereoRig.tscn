@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/CameraRemoteTransform.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=2]
+
+[node name="StereoRig" type="Spatial"]
+
+[node name="LeftCameraRemoteTransform" parent="." instance=ExtResource( 1 )]
+remote_path = NodePath("../ViewportContainer/Left/ScreenCenter/OffAxisCamera")
+
+[node name="RightCameraRemoteTransform" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.065, 0, 0 )
+remote_path = NodePath("../ViewportContainer/Right/ScreenCenter/OffAxisCamera")
+isRightCamera = true
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1080, 1920 )
+handle_input_locally = false
+render_target_update_mode = 3
+gui_disable_input = true
+
+[node name="ScreenCenter" type="Spatial" parent="ViewportContainer/Left"]
+
+[node name="OffAxisCamera" parent="ViewportContainer/Left/ScreenCenter" instance=ExtResource( 2 )]
+
+[node name="Right" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1080, 1920 )
+handle_input_locally = false
+render_target_update_mode = 3
+gui_disable_input = true
+
+[node name="ScreenCenter" type="Spatial" parent="ViewportContainer/Right"]
+
+[node name="OffAxisCamera" parent="ViewportContainer/Right/ScreenCenter" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.065, 0, 0 )
+frustum_offset = Vector2( -0.004095, 0 )

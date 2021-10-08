@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D left_camera;
+uniform sampler2D right_camera;
+uniform bool isEnabled = true;
+
+void fragment()
+{
+	vec4 leftCol = texture(left_camera, SCREEN_UV);
+	vec4 rightCol = texture(right_camera, SCREEN_UV);
+	vec4 col = texture(SCREEN_TEXTURE, SCREEN_UV);
+	float pixelX = floor(FRAGCOORD.x);
+	if (isEnabled)
+	{
+		COLOR = mix(leftCol, rightCol, mod(pixelX, 2.0));		
+	}
+	else
+	{
+		COLOR = leftCol;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/isEnabled = true
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends CanvasItem
+
+func _process(_delta):
+	if (Input.is_action_just_pressed(\"toggle_stereo\")):
+		material.set(\"shader_param/isEnabled\", !material.get(\"shader_param/isEnabled\"));
+"
+
+[node name="InterlacedStereoCanvas" type="ColorRect"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
