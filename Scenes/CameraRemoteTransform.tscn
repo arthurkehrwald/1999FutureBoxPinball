@@ -4,33 +4,11 @@
 script/source = "extends Spatial
 
 export var isRightCamera = false
-export var manualMoveSpeed = 1.0
 export var manualStereoOffsetChangeSpeed = 0.1
 
 
 func _process(delta):
 	var translation = Vector3.ZERO
-	
-	# Forward/backward and up/down are switched because the camera is
-	# rotated 90 degress to face straight down
-	
-	if Input.is_action_pressed(\"debug_move_camera_up\"):
-		translation += Vector3.FORWARD * delta * manualMoveSpeed;
-	
-	if Input.is_action_pressed(\"debug_move_camera_down\"):
-		translation += Vector3.BACK * delta * manualMoveSpeed;
-	
-	if Input.is_action_pressed(\"debug_move_camera_left\"):
-		translation += Vector3.LEFT * delta * manualMoveSpeed;
-	
-	if Input.is_action_pressed(\"debug_move_camera_right\"):
-		translation += Vector3.RIGHT * delta * manualMoveSpeed;
-	
-	if Input.is_action_pressed(\"debug_move_camera_forward\"):
-		translation += Vector3.UP * delta * manualMoveSpeed;
-	
-	if Input.is_action_pressed(\"debug_move_camera_backward\"):
-		translation += Vector3.DOWN * delta * manualMoveSpeed;
 	
 	if Input.is_action_pressed(\"debug_increase_stereo_offset\"):
 		if isRightCamera:
