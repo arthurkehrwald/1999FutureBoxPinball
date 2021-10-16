@@ -37,6 +37,7 @@ func _ready():
 		Globals.powerup_roulette.connect("selected_remote", self, "set_is_remote_controlled", [true])
 		Globals.powerup_roulette.connect("remote_expired", self, "set_is_remote_controlled", [false])
 
+
 func _process(_delta):
 	if is_remote_controlled:
 		remote_control_time_bar.value = remote_control_timer.time_left

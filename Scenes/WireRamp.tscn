@@ -2,12 +2,13 @@
 
 [ext_resource path="res://Scripts/WireRamp.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Ball_03/initialShadingGroup_Emissive - Red.png" type="Texture" id=2]
-[ext_resource path="res://Testing/DebugOutputLabel.gd" type="Script" id=3]
+[ext_resource path="res://TestUtilities/DebugOutputLabel.gd" type="Script" id=3]
 [ext_resource path="res://Animations/test_curve.tres" type="Curve3D" id=4]
 [ext_resource path="res://Textures/Ball_03/initialShadingGroup_Metallic.png" type="Texture" id=5]
 [ext_resource path="res://Textures/Ball_03/initialShadingGroup_Base_Color.png" type="Texture" id=6]
 [ext_resource path="res://Textures/Ball_03/initialShadingGroup_Normal.png" type="Texture" id=7]
 [ext_resource path="res://Materials/pinball.tres" type="Material" id=8]
+
 
 [sub_resource type="SphereMesh" id=1]
 radial_segments = 16

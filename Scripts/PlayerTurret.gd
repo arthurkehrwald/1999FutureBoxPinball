@@ -106,7 +106,6 @@ func shoot(charge):
 	ball_to_shoot.set_locked(false)
 	ball_to_shoot.set_visible(true)
 	var force = .15 * pow(charge - 1.7, 3) + 1
-	#print(plunger_force)
 	ball_to_shoot.apply_central_impulse(-muzzle.get_global_transform().basis.z.normalized() * MAX_SHOT_SPEED * force)
 	ball_to_shoot = null
 	shot_charge = 0

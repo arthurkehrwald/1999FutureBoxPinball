@@ -98,7 +98,6 @@ func set_is_active(value, _ball_in_shop = null):
 
 
 func on_DecisionTimer_timeout():
-	print("decision timer timeout")
 	buy_item(selected_item)
 	set_is_active(false)
 

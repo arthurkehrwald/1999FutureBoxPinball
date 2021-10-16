@@ -89,7 +89,6 @@ func on_anim_finished(anim_name):
 		pop_queue()
 	else:
 		queued_complete_objectives.pop_back()
-		print(anim_name)
 
 
 func pop_queue():

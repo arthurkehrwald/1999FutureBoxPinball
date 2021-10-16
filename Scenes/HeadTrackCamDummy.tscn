@@ -2,7 +2,8 @@
 
 [ext_resource path="res://Scripts/HeadTrackCamDummy.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Testing/AxisArrows.tscn" type="PackedScene" id=3]
+[ext_resource path="res://TestUtilities/AxisArrows.tscn" type="PackedScene" id=3]
+
 
 [sub_resource type="SphereMesh" id=1]
 radius = 0.1

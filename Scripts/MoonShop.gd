@@ -69,7 +69,6 @@ func on_hit_by_projectile(var projectile):
 	var projectile_pos = projectile.get_global_transform().origin
 	var projectile_vel = projectile.get_linear_velocity()
 	var new_spin_speed = min(projectile_vel.length() * SPIN_SPEED_MULTIPLIER, MAX_SPIN_SPEED)
-	print(new_spin_speed)
 	if new_spin_speed < spin_speed:
 		return
 	var colliding_body_to_moon = spinning_mesh.get_global_transform().origin - projectile_pos

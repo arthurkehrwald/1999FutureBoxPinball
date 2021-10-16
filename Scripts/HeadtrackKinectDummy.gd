@@ -45,5 +45,3 @@ func _process(delta):
 			scale -= Vector3.FORWARD * scale_speed * delta
 		else:
 			scale += Vector3.FORWARD * scale_speed * delta
-	if Input.is_action_just_pressed("ui_up"):
-		print(transform)

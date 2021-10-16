@@ -6,7 +6,7 @@ extends Camera
 
 export var adj_factor = .333;
 
-func _process(delta):
+func _process(_delta):
 	set_frustum_offset(
 			Vector2(transform.origin.x * -adj_factor,
 			transform.origin.z * adj_factor)

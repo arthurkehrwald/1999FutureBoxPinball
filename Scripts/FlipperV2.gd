@@ -32,16 +32,6 @@ func _ready():
 				+ "hitting this flipper will not damage the player.")
 	set_physics_process(false)
 
-#func _input(event):
-#	if event.is_action_pressed(input_code):
-#		for body in impulse_area.get_overlapping_bodies():
-#			var pointy_end_dir = get_global_transform().basis.orthonormalized().x
-#			if IS_RIGHT_FLIPPER:
-#				pointy_end_dir = -pointy_end_dir
-#			var boost_factor = 1 - pointy_end_dir.angle_to(body.get_global_transform().origin - get_global_transform().origin) / PI
-#			print(boost_factor)
-#			body.apply_central_impulse(-get_global_transform().basis.orthonormalized().z * boost_factor * forward_impulse_strength)
-
 
 func _input(event):
 	if event.is_action_pressed(input_code):
@@ -54,10 +44,6 @@ func _physics_process(delta):
 	if Input.is_action_pressed(input_code):
 		if rotation_progress < 1:
 			rotation_progress += TURN_SPEED * delta
-#			for body in impulse_area.get_overlapping_bodies():
-#				if body.is_in_group("rollers"):
-#					body.apply_central_impulse(-get_global_transform().basis.z.normalized() - body.get_linear_velocity().normalized() * sideways_impulse_strength * delta)
-#					body.apply_central_impulse(-get_global_transform().basis.z.normalized() * forward_impulse_strength * delta)
 		else:
 			impulse_area.set_deferred("monitoring", false)
 	elif rotation_progress > 0:

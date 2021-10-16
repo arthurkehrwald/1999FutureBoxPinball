@@ -32,7 +32,6 @@ func on_area_entered(area):
 		PoolManager.request(PoolManager.WIREFRAME_FLASH, get_global_transform().origin)
 
 
-
 func on_hit_by_explosion(explosion):
 	var explosion_pos = explosion.get_global_transform().origin
 	var to_explosion = explosion_pos - get_global_transform().origin

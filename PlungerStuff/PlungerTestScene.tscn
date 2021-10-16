@@ -3,8 +3,9 @@
 [ext_resource path="res://PlungerStuff/PlungerPoti.tscn" type="PackedScene" id=1]
 [ext_resource path="res://PlungerStuff/SerialReader.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/BoxV4.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Testing/LongBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://TestUtilities/LongBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Pinball.tscn" type="PackedScene" id=5]
+
 
 [node name="PlungerTestScene" type="Spatial"]
 

@@ -14,7 +14,6 @@ func _ready():
 	explode_timer.connect("timeout", self, "explode")
 	explode_timer.start(FUSE_TIME)
 	var buildup_audio_length = buildup_audio_player.stream.get_length()
-	print(buildup_audio_length)
 	if FUSE_TIME > buildup_audio_length:
 		buildup_audio_timer.start(FUSE_TIME - buildup_audio_length)
 		buildup_audio_timer.connect("timeout", buildup_audio_player, "play")
