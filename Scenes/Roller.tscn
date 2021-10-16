@@ -47,3 +47,7 @@ stream = ExtResource( 3 )
 unit_db = 5.572
 autoplay = true
 bus = "Effects"
+
+[node name="DetectStuckTimer" type="Timer" parent="." index="6"]
+wait_time = 0.5
+autostart = true

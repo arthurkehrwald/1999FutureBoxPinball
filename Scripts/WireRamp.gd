@@ -95,10 +95,6 @@ func _physics_process(delta):
 		else:
 			path_follow.set_offset(path_follow.get_offset() + speed * delta)
 			looping_body_mesh.rotate_x(speed * SPEED_ROTATION_RATE * delta)
-#			if looping_body_is_bomb:
-#				bomb_replica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
-#			else:
-#				ball_replica.rotate_x(speed * SPEED_ROTATION_RATE * delta)
 			if looping_body_waiting_status == states.AT_ENTRANCE and path_follow.get_unit_offset() > .6:
 				looping_body.get_ref().teleport(exit_area.get_global_transform().origin)
 				looping_body_waiting_status = states.AT_EXIT
@@ -106,28 +102,15 @@ func _physics_process(delta):
 				looping_body.get_ref().teleport(entrance_area.get_global_transform().origin)
 				looping_body_waiting_status = states.AT_ENTRANCE
 	else:
-		#that means the bomb exploded while it was on the rail
+		# body was deleted while on ramp (e.g. bomb exploded)
 		reset(true)
 	#debug_label.display_debug_info(rad2deg(incline), speed, acceleration)
 
 
 func start_follow():
-	if looping_body.get_ref().is_in_group("pinballs"):
-		#ball_replica.set_visible(true)
-		looping_body_is_bomb = false
-	elif looping_body.get_ref().is_in_group("bombs"):
-		#bomb_replica.set_visible(true)
-		looping_body_is_bomb = true
-	else:
-		push_error("WireRamp: Body with name: " + looping_body.get_ref().name
-		+ "entered that is in group 'rollers', but neither in group 'pinballs'"
-		+ " nor in group 'bombs.' Check groups")
-		looping_body = null
-		return
 	looping_body_mesh = looping_body.get_ref().get_node("MeshInstance")
 	looping_body_mesh.get_parent().remove_child(looping_body_mesh)
 	path_follow.add_child(looping_body_mesh)
-	looping_body.get_ref().current_wire_ramp = self
 	looping_body.get_ref().set_visible(false)
 	looping_body.get_ref().set_locked(true)
 	entrance_area.set_deferred("monitoring", false)
@@ -140,8 +123,6 @@ func start_follow():
 func reset(is_active):
 	set_physics_process(false)
 	path_follow.set_unit_offset(0.0)
-	#ball_replica.set_visible(false)
-	#bomb_replica.set_visible(false)
 	entrance_area.set_deferred("monitoring", is_active)
 	entrance_area.set_deferred("monitorable", is_active)
 	exit_area.set_deferred("monitoring", is_active)
@@ -150,12 +131,14 @@ func reset(is_active):
 		if looping_body.get_ref():
 			looping_body_waiting_status = states.NONE
 			looping_body_entered_status = states.NONE
-			looping_body.get_ref().current_wire_ramp = null
+
 			looping_body.get_ref().set_visible(true)
 			looping_body.get_ref().set_locked(false)
 			if looping_body_mesh != null:
 				path_follow.remove_child(looping_body_mesh)
 				looping_body.get_ref().add_child(looping_body_mesh)
-				looping_body_mesh = null
+		else:
+			looping_body_mesh.queue_free()
+		looping_body_mesh = null
 		looping_body = null
 	speed = 0

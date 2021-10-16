@@ -16,6 +16,7 @@ onready var release_audio_player = get_node("ReleaseAudioPlayer")
 
 
 func _ready():
+	add_to_group("plunger")
 	start_pos = get_translation()
 	max_pos = start_pos + get_transform().basis.z.normalized() * max_distance
 	start_transform = Transform(Basis.IDENTITY, start_pos)
