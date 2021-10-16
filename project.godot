@@ -220,6 +220,7 @@ debug_decrease_stereo_offset={
 
 common/physics_fps=200
 3d/physics_engine="Bullet"
+3d/active_soft_world=false
 
 [rendering]
 
