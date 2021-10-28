@@ -1,0 +1,133 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/InterlacedStereoCanvas.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Spatial
+
+export var stereo_offset = 1.4
+export var manualMoveSpeed = 1.0
+export var left_cam_path := NodePath()
+export var right_cam_path := NodePath()
+
+onready var left_cam = get_node(left_cam_path) as OffAxisCamera
+onready var right_cam = get_node(right_cam_path) as OffAxisCamera
+
+func _process(delta):
+	handle_debug_input(delta)
+	update_cam_positions()
+
+
+func handle_debug_input(delta):
+	if Input.is_action_pressed(\"debug_increase_stereo_offset\"):
+		stereo_offset += manualMoveSpeed * delta * 0.1
+	
+	if Input.is_action_pressed(\"debug_decrease_stereo_offset\"):
+		stereo_offset -= manualMoveSpeed * delta * 0.1
+	
+	var translation = Vector3.ZERO
+	
+	# Forward/backward and up/down are switched because the camera is
+	# rotated 90 degress to face straight down
+	
+	if Input.is_action_pressed(\"debug_move_camera_up\"):
+		translation += Vector3.FORWARD * delta * manualMoveSpeed;
+	
+	if Input.is_action_pressed(\"debug_move_camera_down\"):
+		translation += Vector3.BACK * delta * manualMoveSpeed;
+	
+	if Input.is_action_pressed(\"debug_move_camera_left\"):
+		translation += Vector3.LEFT * delta * manualMoveSpeed;
+	
+	if Input.is_action_pressed(\"debug_move_camera_right\"):
+		translation += Vector3.RIGHT * delta * manualMoveSpeed;
+	
+	if Input.is_action_pressed(\"debug_move_camera_forward\"):
+		translation += Vector3.UP * delta * manualMoveSpeed;
+	
+	if Input.is_action_pressed(\"debug_move_camera_backward\"):
+		translation += Vector3.DOWN * delta * manualMoveSpeed;
+	
+	transform = transform.translated(translation)
+
+
+func update_cam_positions():
+	left_cam.global_transform.origin = global_transform.origin - (global_transform.basis.x * stereo_offset / 2)
+	right_cam.global_transform.origin = global_transform.origin + (global_transform.basis.x * stereo_offset / 2)
+"
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform sampler2D left_camera;
+uniform sampler2D right_camera;
+uniform bool isEnabled = true;
+
+void fragment()
+{
+	vec4 leftCol = texture(left_camera, SCREEN_UV);
+	vec4 rightCol = texture(right_camera, SCREEN_UV);
+	vec4 col = texture(SCREEN_TEXTURE, SCREEN_UV);
+	float pixelX = floor(FRAGCOORD.x);
+	if (isEnabled)
+	{
+		COLOR = mix(leftCol, rightCol, mod(pixelX, 2.0));		
+	}
+	else
+	{
+		COLOR = leftCol;
+	}
+}"
+custom_defines = ""
+
+[sub_resource type="ViewportTexture" id=3]
+viewport_path = NodePath("ViewportContainer/Left")
+
+[sub_resource type="ViewportTexture" id=4]
+viewport_path = NodePath("ViewportContainer/Right")
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = SubResource( 2 )
+shader_param/isEnabled = true
+shader_param/left_camera = SubResource( 3 )
+shader_param/right_camera = SubResource( 4 )
+
+[node name="StereoCamera" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.09155, 0 )
+script = SubResource( 1 )
+left_cam_path = NodePath("ViewportContainer/Left/OffAxisCamera")
+right_cam_path = NodePath("ViewportContainer/Right/OffAxisCamera")
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1080, 1920 )
+handle_input_locally = false
+render_target_update_mode = 3
+gui_disable_input = true
+
+[node name="OffAxisCamera" parent="ViewportContainer/Left" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72, 0, 0 )
+frustum_offset = Vector2( 0.04536, 0 )
+
+[node name="Right" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1080, 1920 )
+handle_input_locally = false
+render_target_update_mode = 3
+gui_disable_input = true
+
+[node name="OffAxisCamera" parent="ViewportContainer/Right" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72, 0, 0 )
+current = true
+frustum_offset = Vector2( -0.04536, 0 )
+
+[node name="InterlacedStereoCanvas" parent="." instance=ExtResource( 1 )]
+material = SubResource( 5 )

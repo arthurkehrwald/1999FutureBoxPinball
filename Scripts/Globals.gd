@@ -16,3 +16,4 @@ var player_turret = null
 var moon_shop = null
 var ball_spawn = null
 var warning_hud = null
+var screen_center_child = null

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Spatial
+
+func _process(_delta):
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		translate(Vector3.RIGHT)
+		print(\"remote transform x pos: \", $RemoteTransform.global_transform.origin.x)
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Spatial
+
+var debug_last_frame = false
+
+func _process(_delta):
+	if debug_last_frame:
+		print(\"child x pos: \", global_transform.origin.x)
+		debug_last_frame = false
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		print(\"child x pos: \", global_transform.origin.x)
+		debug_last_frame = true
+"
+
+[node name="Node" type="Node"]
+
+[node name="Spatial" type="Spatial" parent="."]
+script = SubResource( 1 )
+
+[node name="RemoteTransform" type="RemoteTransform" parent="Spatial"]
+remote_path = NodePath("../../Spatial2")
+
+[node name="Spatial2" type="Spatial" parent="."]
+script = SubResource( 2 )

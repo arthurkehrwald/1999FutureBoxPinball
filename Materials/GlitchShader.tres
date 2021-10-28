@@ -27,6 +27,7 @@ void fragment()
 	COLOR.b = texture(SCREEN_TEXTURE, newUV + vec2(abberationAmtX, abberationAmtY)).b;
 	COLOR.a = texture(SCREEN_TEXTURE, newUV).a * maxAlpha;
 }"
+custom_defines = ""
 
 [resource]
 shader = SubResource( 1 )

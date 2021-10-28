@@ -3,8 +3,7 @@
 [ext_resource path="res://Scripts/HeadtrackKinectDummy.gd" type="Script" id=1]
 [ext_resource path="res://TestUtilities/AxisArrows.tscn" type="PackedScene" id=2]
 
-
-[node name="HeadtrackKinectDummy" type="Spatial"]
+[node name="HeadTrackerSpace" type="Spatial"]
 transform = Transform( 22.5, 0, 0, 0, 22.5, 0, 0, 0, 22.5, 0, 0, 0 )
 script = ExtResource( 1 )
 rotateSpeed = 0.1
