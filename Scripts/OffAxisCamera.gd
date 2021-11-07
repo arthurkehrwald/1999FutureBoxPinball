@@ -19,8 +19,8 @@ func _process(_delta):
 func cache_screen_center_child():
 	if Globals.screen_center_child == null:
 		push_warning("[OffAxisCamera] Screen center child not set in globals."
-				+ "Screen center position will be assumed to be at scene origin."
-				+ "Screen rotation will be assumed to be identity.")
+				+ " Will use global origin as screen center position and"
+				+ " identity as screen rotation.")
 	else:
 		screen_center_child = Globals.screen_center_child
 
@@ -37,7 +37,6 @@ func calc_offset_from_screen_center() -> Vector3:
 	if screen_center_child == null:
 		return global_transform.origin
 	else:
-		screen_center_child.transform.basis = Basis(Vector3(-90, 0, 0))
 		screen_center_child.global_transform.origin = global_transform.origin
 		return screen_center_child.transform.origin
 

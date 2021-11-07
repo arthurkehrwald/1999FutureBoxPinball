@@ -11,17 +11,18 @@ void fragment()
 {
 	vec4 leftCol = texture(left_camera, SCREEN_UV);
 	vec4 rightCol = texture(right_camera, SCREEN_UV);
-	vec4 col = texture(SCREEN_TEXTURE, SCREEN_UV);
+
 	float pixelX = floor(FRAGCOORD.x);
 	if (isEnabled)
 	{
-		COLOR = mix(leftCol, rightCol, mod(pixelX, 2.0));		
+		COLOR = mix(leftCol, rightCol, mod(pixelX, 2.0));
 	}
 	else
 	{
 		COLOR = leftCol;
 	}
 }"
+custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true

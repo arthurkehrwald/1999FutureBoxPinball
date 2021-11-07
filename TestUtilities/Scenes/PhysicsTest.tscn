@@ -6,10 +6,11 @@
 [ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/SimpleCube.tscn" type="PackedScene" id=6]
-[ext_resource path="res://TestUtilities/DebugOutputLabel.gd" type="Script" id=7]
+[ext_resource path="res://TestUtilities/Scripts/DebugOutputLabel.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=11]
+
 
 
 [node name="PhysicsTest" type="Spatial"]

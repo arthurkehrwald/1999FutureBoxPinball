@@ -1,7 +1,9 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://TestUtilities/AxisArrows.tscn" type="PackedScene" id=1]
-[ext_resource path="res://TestUtilities/TrackOutputInterpretationTest.gd" type="Script" id=2]
+[ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TestUtilities/Scripts/TrackOutputInterpretationTest.gd" type="Script" id=2]
+
+
 
 
 [sub_resource type="SphereMesh" id=1]

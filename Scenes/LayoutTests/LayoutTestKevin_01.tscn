@@ -26,7 +26,7 @@
 [ext_resource path="res://Scenes/OffAxisCameraNoIR.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/TemporaryFlipper.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Old/LaserTrexOld.tscn" type="PackedScene" id=26]
-[ext_resource path="res://TestUtilities/LongBox.tscn" type="PackedScene" id=27]
+[ext_resource path="res://TestUtilities/Scenes/LongBox.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/RibbonHUD.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Flipper_R.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/FlyingMoon.tscn" type="PackedScene" id=30]
@@ -44,6 +44,7 @@
 [ext_resource path="res://Scenes/GlitchShaderFullscreen.tscn" type="PackedScene" id=42]
 [ext_resource path="res://Reference/angles_combined.jpg" type="Texture" id=43]
 [ext_resource path="res://Scripts/StageTwoEntryRamp.gd" type="Script" id=44]
+
 
 
 [sub_resource type="ViewportTexture" id=1]

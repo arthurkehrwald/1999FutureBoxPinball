@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://TestUtilities/Textures/uv_grid.png" type="Texture" id=3]
+[ext_resource path="res://TestUtilities/Scripts/SetShaderScale.gd" type="Script" id=4]
+
+[sub_resource type="QuadMesh" id=1]
+
+[sub_resource type="Shader" id=2]
+resource_local_to_scene = true
+code = "shader_type spatial;
+
+uniform sampler2D mainTex;
+uniform vec2 scale;
+
+void fragment()
+{
+	ALBEDO = texture(mainTex, UV * scale).rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 2 )
+shader_param/scale = Vector2( 3.8, 3 )
+shader_param/mainTex = ExtResource( 3 )
+
+[sub_resource type="Shader" id=9]
+resource_local_to_scene = true
+code = "shader_type spatial;
+
+uniform sampler2D mainTex;
+uniform vec2 scale;
+
+void fragment()
+{
+	ALBEDO = texture(mainTex, UV * scale).rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 9 )
+shader_param/scale = Vector2( 3.8, 1.05 )
+shader_param/mainTex = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 9 )
+shader_param/scale = Vector2( 3.8, 1.05 )
+shader_param/mainTex = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 9 )
+shader_param/scale = Vector2( 3, 1.05 )
+shader_param/mainTex = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 9 )
+shader_param/scale = Vector2( 2.99545, 1.04841 )
+shader_param/mainTex = ExtResource( 3 )
+
+[node name="Box" type="Spatial"]
+
+[node name="face" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -1, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
+script = ExtResource( 4 )
+
+[node name="face2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 5 )
+script = ExtResource( 4 )
+
+[node name="face3" type="MeshInstance" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.5, 0.5 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 6 )
+script = ExtResource( 4 )
+
+[node name="face5" type="MeshInstance" parent="."]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -0.5, -0.5, 2.18557e-08 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 7 )
+script = ExtResource( 4 )
+
+[node name="face4" type="MeshInstance" parent="."]
+transform = Transform( 1.30935e-07, 0, -0.998482, 0, 0.998482, 0, 0.998482, 0, 1.30935e-07, 0.5, -0.5, -2.18557e-08 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 8 )
+script = ExtResource( 4 )

@@ -44,11 +44,12 @@
 [ext_resource path="res://Meshes/Boss_Back_Barrier_V2.obj" type="ArrayMesh" id=42]
 [ext_resource path="res://Scenes/Old/MoonConventional.tscn" type="PackedScene" id=43]
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=44]
-[ext_resource path="res://TestUtilities/LongBox.tscn" type="PackedScene" id=45]
+[ext_resource path="res://TestUtilities/Scenes/LongBox.tscn" type="PackedScene" id=45]
 [ext_resource path="res://Scenes/RampTest.tscn" type="PackedScene" id=46]
 [ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=47]
 [ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=48]
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=49]
+
 
 
 [sub_resource type="ViewportTexture" id=1]

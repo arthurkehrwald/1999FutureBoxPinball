@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TestUtilities/Scenes/Box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/ScreenCenter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/OpenTrackUdpTransform.tscn" type="PackedScene" id=5]
+
+[node name="ProjectionTesting" type="Spatial"]
+
+[node name="Box" parent="." instance=ExtResource( 2 )]
+transform = Transform( 3.8, 0, 0, 0, 1.05, 0, 0, 0, 3, 0, 0, 0 )
+
+[node name="ScreenCenter" parent="Box" instance=ExtResource( 4 )]
+transform = Transform( 0.263158, 0, 0, 0, 0.952381, 0, 0, 0, 0.333333, 0, 0, 0 )
+
+[node name="HeadTrackerSpace" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1.043, 0, 0, 0, 1, 0, 0, 0, 1.005, -0.293, 4.335, -5 )
+
+[node name="OpenTrackUdpTransform" parent="HeadTrackerSpace" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
+debug_label_path = NodePath("../../HeadTrackerSpace/OpenTrackUdpTransform/CanvasLayer/DebugLabel")
+
+[node name="OffAxisCamera" parent="HeadTrackerSpace/OpenTrackUdpTransform" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
+current = true
+zoom = 0.333

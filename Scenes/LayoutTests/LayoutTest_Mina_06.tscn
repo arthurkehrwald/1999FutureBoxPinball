@@ -41,10 +41,11 @@
 [ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=41]
 [ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=43]
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=44]
-[ext_resource path="res://TestUtilities/LongBox.tscn" type="PackedScene" id=45]
+[ext_resource path="res://TestUtilities/Scenes/LongBox.tscn" type="PackedScene" id=45]
 [ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=47]
 [ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=48]
 [ext_resource path="res://Scenes/LaserTrex.tscn" type="PackedScene" id=49]
+
 
 
 

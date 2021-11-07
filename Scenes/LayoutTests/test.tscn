@@ -45,7 +45,8 @@
 [ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=43]
 [ext_resource path="res://Scenes/Old/Slingshot_R_Standalone.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scenes/Old/LaserTrexOld.tscn" type="PackedScene" id=45]
-[ext_resource path="res://TestUtilities/LongBox.tscn" type="PackedScene" id=46]
+[ext_resource path="res://TestUtilities/Scenes/LongBox.tscn" type="PackedScene" id=46]
+
 
 
 
