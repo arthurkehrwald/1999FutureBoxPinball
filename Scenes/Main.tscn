@@ -227,7 +227,7 @@ tracks/1/keys = {
 [node name="MusicPlayer" parent="." instance=ExtResource( 34 )]
 
 [node name="ScreenCenter" parent="." instance=ExtResource( 54 )]
-transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 2.91, 0 )
+transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 2.23, 0 )
 
 [node name="HeadTrackerSpace" parent="ScreenCenter" instance=ExtResource( 30 )]
 transform = Transform( 2.285, 0, 0, 0, 1.97887, 1.1425, 0, -1.1425, 1.97887, 0, 0.729622, -7.81184 )
