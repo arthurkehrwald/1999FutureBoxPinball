@@ -57,7 +57,7 @@ func parse_open_track_packet(packet) -> bool:
 		debug_label.text = DEBUG_MSG % [x, y, z, pitch, yaw, roll]
 	
 	if apply_rotation:
-		transform.basis = Basis(Vector3(deg2rad(-pitch), deg2rad(yaw), deg2rad(-roll)))
+		transform.basis = Basis(Vector3(deg2rad(pitch), deg2rad(-yaw), deg2rad(roll)))
 	
 	if apply_position:
 		transform.origin = Vector3(x, y, z)
