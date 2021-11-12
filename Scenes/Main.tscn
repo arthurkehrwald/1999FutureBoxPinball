@@ -230,10 +230,10 @@ tracks/1/keys = {
 transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 2.514, 0 )
 
 [node name="HeadTrackerSpace" parent="ScreenCenter" instance=ExtResource( 30 )]
-transform = Transform( 2.285, 0, 0, 0, 1.97887, 1.1425, 0, -1.1425, 1.97887, 0, 1.15604, -8.30014 )
+transform = Transform( 1.85, 0, 0, 0, 1.60215, 0.924999, 0, -0.924999, 1.60215, 0, 1.39711, -8.61757 )
 
 [node name="OpenTrackUdpTransform" parent="ScreenCenter/HeadTrackerSpace" instance=ExtResource( 55 )]
-transform = Transform( 1, 0, 0, 0, 0.999999, 1.19209e-07, 0, -1.19209e-07, 0.999999, 0, 2.807, 8.124 )
+transform = Transform( 1, 0, 0, 0, 0.999999, 1.78814e-07, 0, -1.78814e-07, 0.999999, 0, 3.27724, 10.0783 )
 
 [node name="AxisArrows" parent="ScreenCenter/HeadTrackerSpace/OpenTrackUdpTransform" instance=ExtResource( 39 )]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
@@ -243,9 +243,6 @@ transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
 zoom = 0.063
 stereo_offset = -0.62
 manualMoveSpeed = 0.988
-
-[node name="Spatial2" type="Spatial" parent="ScreenCenter/HeadTrackerSpace"]
-transform = Transform( 0.437637, 0, 0, 0, 0.416217, -0.135237, 0, 0.135237, 0.416217, 0, 2.80695, 8.12408 )
 
 [node name="BoxV4" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 0, 0 )
@@ -610,6 +607,7 @@ transform = Transform( 1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 0, 6.0
 
 [node name="Reference" type="Sprite3D" parent="BoxV4"]
 transform = Transform( 0.803417, 0, 0, 0, 0.799015, 0.0839797, 0, -0.0839797, 0.799015, 0, 0.0291273, -0.00512256 )
+visible = false
 axis = 1
 texture = ExtResource( 2 )
 
