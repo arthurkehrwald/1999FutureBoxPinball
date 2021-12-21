@@ -28,7 +28,7 @@
 [ext_resource path="res://Scenes/MoonShop.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/CentralHUD3D.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/PlayerStatsHUD3D.tscn" type="PackedScene" id=28]
-[ext_resource path="res://Scenes/StereoCamera.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scripts/LaserTRexUFO.gd" type="Script" id=31]
 [ext_resource path="res://Meshes/Boss_Back_Barrier_V2.obj" type="ArrayMesh" id=32]
@@ -238,14 +238,7 @@ transform = Transform( 1, 0, 0, 0, 0.999999, 1.19209e-07, 0, -1.19209e-07, 0.999
 [node name="AxisArrows" parent="ScreenCenter/HeadTrackerSpace/OpenTrackUdpTransform" instance=ExtResource( 39 )]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 
-[node name="StereoCamera" parent="ScreenCenter/HeadTrackerSpace/OpenTrackUdpTransform" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
-zoom = 0.063
-stereo_offset = -0.62
-manualMoveSpeed = 0.988
-
-[node name="Spatial2" type="Spatial" parent="ScreenCenter/HeadTrackerSpace"]
-transform = Transform( 0.437637, 0, 0, 0, 0.416217, -0.135237, 0, 0.135237, 0.416217, 0, 2.80695, 8.12408 )
+[node name="OffAxisCamera" parent="ScreenCenter/HeadTrackerSpace/OpenTrackUdpTransform" instance=ExtResource( 29 )]
 
 [node name="BoxV4" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 0, 0 )
@@ -386,7 +379,7 @@ IS_VULNERABLE_PER_STAGE = {
 }
 
 [node name="MultiballShip" parent="BoxV4/Playfield/UpperGuide" instance=ExtResource( 23 )]
-transform = Transform( -1, 0, -3.25841e-07, 1.77636e-14, 1, -2.98023e-08, 3.25841e-07, -2.98023e-08, -1, -4.21984, 0.400156, -0.0305195 )
+transform = Transform( -1, 0, -3.25841e-07, 1.77636e-14, 1, -1.49012e-08, 3.25841e-07, -1.49012e-08, -1, -4.21984, 0.400156, -0.0305204 )
 
 [node name="Boss" parent="BoxV4/Playfield" instance=ExtResource( 4 )]
 transform = Transform( -1, -1.04502e-14, -3.89414e-07, -2.13163e-14, 1, 1.19209e-07, 3.89415e-07, 1.19209e-07, -1, 1.10269e-06, 3.27826e-07, -4.59035 )
@@ -609,7 +602,7 @@ transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 4.3
 transform = Transform( 1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 0, 6.07056 )
 
 [node name="Reference" type="Sprite3D" parent="BoxV4"]
-transform = Transform( 0.803417, 0, 0, 0, 0.799015, 0.0839797, 0, -0.0839797, 0.799015, 0, 0.0291273, -0.00512256 )
+transform = Transform( 0.803417, 0, 0, 0, 0.799015, 0.0839797, 0, -0.0839797, 0.799015, 0.0421066, 0.0720464, -0.0240731 )
 axis = 1
 texture = ExtResource( 2 )
 

@@ -18,6 +18,7 @@ export var MIN_NOT_STUCK_DISTANCE_FROM_RECENT_LOCATION = .2
 export var DETECT_STUCK_RECENT_LOCATION_SAMPLE_SIZE = 5
 
 var is_locked_in_place = false
+var current_wire_ramp = null
 var recent_locations = []
 
 onready var audio_player = get_node("AudioStreamPlayer3D")

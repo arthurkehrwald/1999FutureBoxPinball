@@ -9,7 +9,6 @@ data = PoolVector3Array( -0.3461, 0.0198, -0.7686, -0.3604, 0.0178, -0.5836, -0.
 collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-visible = false
 mesh = ExtResource( 1 )
 material/0 = null
 
