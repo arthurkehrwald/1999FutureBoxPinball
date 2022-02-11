@@ -22,7 +22,7 @@
 [ext_resource path="res://Scenes/Flipper.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=21]
 [ext_resource path="res://Scripts/VideoPlayer.gd" type="Script" id=22]
-[ext_resource path="res://Scenes/BoxV3.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Old/BoxV3.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/OffAxisCameraNoIR.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/TemporaryFlipper.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Old/LaserTrexOld.tscn" type="PackedScene" id=26]
@@ -44,6 +44,7 @@
 [ext_resource path="res://Scenes/GlitchShaderFullscreen.tscn" type="PackedScene" id=42]
 [ext_resource path="res://Reference/angles_combined.jpg" type="Texture" id=43]
 [ext_resource path="res://Scripts/StageTwoEntryRamp.gd" type="Script" id=44]
+
 
 
 
