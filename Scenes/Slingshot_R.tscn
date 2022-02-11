@@ -10,7 +10,6 @@ points = PoolVector3Array( 0.004, 0, -1.165, 0, 0, 0, -0.75, 0, 0.486, -0.75, 0.
 
 [node name="MeshInstance" parent="." index="0"]
 mesh = ExtResource( 1 )
-material/0 = null
 
 [node name="Wireframe" parent="MeshInstance" index="0"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )

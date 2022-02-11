@@ -16,36 +16,37 @@ export var MAX_AUDIO_PITCH = 3
 export var MIN_AUDIO_PITCH = .5
 export var MIN_NOT_STUCK_DISTANCE_FROM_RECENT_LOCATION = .2
 export var DETECT_STUCK_RECENT_LOCATION_SAMPLE_SIZE = 5
+export var MIN_NOT_STUCK_SPEED_UPSEC = 0.1
+export var STUCK_DELETE_TIME_SEC = 1.0
 
 var is_locked_in_place = false
+var current_wire_ramp = null
 var recent_locations = []
+var stuck_time = 0.0
 
 onready var audio_player = get_node("AudioStreamPlayer3D")
-onready var stuck_timer = get_node("DetectStuckTimer")
 
 
 func _ready():
 	add_to_group("rollers")
-	stuck_timer.connect("timeout", self, "on_StuckTimer_timeout")
 
 
 func _physics_process(_delta):
 	update_gravity_scale()
 
 
-func _process(_delta):
+func _process(delta):
 	var norm_z_pos = clamp((get_global_transform().origin.z + 8) / 16, 0, 1)
 	audio_player.pitch_scale = lerp(MIN_AUDIO_PITCH, MAX_AUDIO_PITCH, norm_z_pos)
-
-
-func on_StuckTimer_timeout():
-	if is_stuck():
+	
+	if (check_stuck()):
+		stuck_time += delta
+	else:
+		stuck_time = 0
+	
+	if stuck_time > STUCK_DELETE_TIME_SEC:
 		queue_free()
-		return
-	if recent_locations.size() >= DETECT_STUCK_RECENT_LOCATION_SAMPLE_SIZE:
-		recent_locations.pop_front()
-	var location = global_transform.origin;
-	recent_locations.push_back(location)
+
 
 func teleport(destination):
 	var t = Transform(get_global_transform().basis, destination)
@@ -68,7 +69,7 @@ func update_gravity_scale():
 		var capped_vel = get_linear_velocity().normalized() * SPEED_LIM
 		PhysicsServer.body_set_state(self.get_rid(), PhysicsServer.BODY_STATE_LINEAR_VELOCITY, capped_vel)
 		speed = capped_vel.length()
-	var is_airborne = is_airborne()
+	var is_airborne = check_airborne()
 	if is_airborne:
 		gravity_scale = AIRBORNE_GRAV
 	else:
@@ -78,7 +79,7 @@ func update_gravity_scale():
 	$Label.text = "speed: %s\ngrav: %s\nairborne: %s" % [speed, gravity_scale, is_airborne]
 
 
-func is_airborne():
+func check_airborne() -> bool:
 	if hitreg_area.get_overlapping_bodies().empty():
 		return true
 	for body in hitreg_area.get_overlapping_bodies():
@@ -87,17 +88,10 @@ func is_airborne():
 	return true
 
 
-func is_stuck():
+func check_stuck() -> bool:
 	if is_locked_in_place:
 		return false
 	for body in hitreg_area.get_overlapping_bodies():
 		if body.is_in_group("flippers") or body.is_in_group("plunger"):
 			return false
-	if recent_locations.size() < DETECT_STUCK_RECENT_LOCATION_SAMPLE_SIZE:
-		return false
-	var location = global_transform.origin
-	for recent_location in recent_locations:
-		if location.distance_to(recent_location) > MIN_NOT_STUCK_DISTANCE_FROM_RECENT_LOCATION:
-			return false
-	return true
-	
+	return linear_velocity.length() < MIN_NOT_STUCK_SPEED_UPSEC

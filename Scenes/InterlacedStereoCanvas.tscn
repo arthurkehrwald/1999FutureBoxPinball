@@ -15,7 +15,7 @@ void fragment()
 	float pixelX = floor(FRAGCOORD.x);
 	if (isEnabled)
 	{
-		COLOR = mix(leftCol, rightCol, mod(pixelX, 2.0));
+		COLOR = mix(rightCol, leftCol, mod(pixelX, 2.0));
 	}
 	else
 	{

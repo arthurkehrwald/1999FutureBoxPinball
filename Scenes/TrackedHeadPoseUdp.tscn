@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/TrackedHeadPoseUdp.gd" type="Script" id=1]
+
+[node name="TrackedHeadPoseUdp" type="Spatial"]
+script = ExtResource( 1 )
+debug_label_path = NodePath("CanvasLayer/DebugLabel")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DebugLabel" type="Label" parent="CanvasLayer"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+anchor_left = 0.817
+anchor_right = 1.0
+margin_left = -0.359985
+margin_bottom = 31.0
+text = "eontlshioeshntcoiescnmoiseahtcoi"
+align = 2
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

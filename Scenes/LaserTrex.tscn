@@ -86,7 +86,6 @@ LASER_DOWNTIME = 4.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( -0.583847, 0, -1.90242e-07, 0, 0.583847, 0, 1.90242e-07, 0, -0.583847, 0, 0, 0 )
-visible = false
 mesh = ExtResource( 6 )
 material/0 = SubResource( 1 )
 material/1 = SubResource( 2 )

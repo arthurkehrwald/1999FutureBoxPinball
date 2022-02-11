@@ -1,7 +1,7 @@
 extends Spatial
 
 const DEBUG_MSG = "opentrack:\nX %.4f\nY %.4f\nZ %.4f\nPITCH %.4f\nYAW %.4f\nROLL %.4f"
-const PACKET_SIZE_ERROR_MSG = "[OpenTrackUdpTransform] Expected UDP packet size: 48 bytes." \
+const PACKET_SIZE_ERROR_MSG = "[äs] Expected UDP packet size: 48 bytes." \
 		+ " Received packet size: %s bytes. Connection will be closed."
 
 export var apply_position := true

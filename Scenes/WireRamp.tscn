@@ -9,8 +9,6 @@
 [ext_resource path="res://Textures/Ball_03/initialShadingGroup_Normal.png" type="Texture" id=7]
 [ext_resource path="res://Materials/pinball.tres" type="Material" id=8]
 
-
-
 [sub_resource type="SphereMesh" id=1]
 radial_segments = 16
 rings = 16
@@ -57,7 +55,7 @@ mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
 [node name="EntranceArea" type="Area" parent="."]
-transform = Transform( -0.998775, 0, -0.0494773, 0, 1, 0, 0.0494773, 0, -0.998775, -0.652794, 0.0216143, 1.62833 )
+transform = Transform( -0.99982, 0, -0.0189356, 0, 1, 0, 0.0189356, 0, -0.99982, 0.0918428, 0.0216143, 0.284624 )
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="EntranceArea"]
@@ -65,7 +63,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2 )
 shape = SubResource( 4 )
 
 [node name="ExitArea" type="Area" parent="."]
-transform = Transform( -0.0780595, 0, 0.996949, 0, 1, 0, -0.996949, 0, -0.0780595, 0.91125, 0, -5.90962 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -3.9515, 0, -6.80152 )
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="ExitArea"]
