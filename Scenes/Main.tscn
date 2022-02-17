@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Playfield.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/StereoCamera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=34]
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=39]
@@ -42,24 +42,19 @@ tracks/1/keys = {
 
 [node name="MusicPlayer" parent="." instance=ExtResource( 34 )]
 
-[node name="HeadTrackerSpace" parent="." instance=ExtResource( 30 )]
-transform = Transform( 22.53, 0, 0, 0, 22.5301, 9.05991e-06, 0, -9.05991e-06, 22.5301, 0, 12.568, -8.40088 )
-
-[node name="TrackedHeadPoseUdp" parent="HeadTrackerSpace" instance=ExtResource( 55 )]
-transform = Transform( 1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0.104977, 0.803958 )
-
-[node name="Offset" type="Spatial" parent="HeadTrackerSpace/TrackedHeadPoseUdp"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.196421, -0.00446397 )
-
-[node name="AxisArrows2" parent="HeadTrackerSpace/TrackedHeadPoseUdp/Offset" instance=ExtResource( 39 )]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 1.80625e-08, 0, -1.80625e-08, 0.2, 0, 0, 0 )
-
-[node name="StereoCamera" parent="HeadTrackerSpace/TrackedHeadPoseUdp/Offset" instance=ExtResource( 2 )]
-zoom = 0.063
-stereo_offset = 0.062
-
 [node name="ScreenCenter" parent="." instance=ExtResource( 54 )]
-transform = Transform( 1, 0, 0, 0, 0.987159, -0.159743, 0, 0.159743, 0.987159, 0, 2.699, 0 )
+transform = Transform( 1, 0, 0, 0, 0.987159, -0.159743, 0, 0.159743, 0.987159, 0, 2.479, 0 )
+
+[node name="HeadTrackerSpace" parent="ScreenCenter" instance=ExtResource( 30 )]
+transform = Transform( 22.53, 0, 0, 0, 19.5116, 11.265, 0, -11.265, 19.5116, 0, 1.15604, -8.30014 )
+
+[node name="TrackedHeadPoseUdp" parent="ScreenCenter/HeadTrackerSpace" instance=ExtResource( 55 )]
+
+[node name="AxisArrows2" parent="ScreenCenter/HeadTrackerSpace/TrackedHeadPoseUdp" instance=ExtResource( 39 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 2.23517e-08, 0, -2.23517e-08, 0.2, 0, 2.807, 8.124 )
+
+[node name="OffAxisCamera" parent="ScreenCenter/HeadTrackerSpace/TrackedHeadPoseUdp" instance=ExtResource( 29 )]
+transform = Transform( 0.0443853, 0, 0, 0, 0.0443852, 6.51926e-09, 0, -4.65661e-09, 0.0443852, 0, 0.281, 0.812 )
 
 [node name="Playfield" parent="." instance=ExtResource( 1 )]
 
@@ -77,5 +72,3 @@ script = ExtResource( 46 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[editable path="HeadTrackerSpace/TrackedHeadPoseUdp"]

@@ -18,7 +18,7 @@ transform = Transform( 0.263158, 0, 0, 0, 0.952381, 0, 0, 0, 0.333333, 0, 0, 0 )
 transform = Transform( 1.043, 0, 0, 0, 1, 0, 0, 0, 1.005, -0.293, 4.335, -5 )
 
 [node name="OpenTrackUdpTransform" parent="HeadTrackerSpace" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.163, 0, 5 )
 debug_label_path = NodePath("../../HeadTrackerSpace/OpenTrackUdpTransform/CanvasLayer/DebugLabel")
 
 [node name="OffAxisCamera" parent="HeadTrackerSpace/OpenTrackUdpTransform" instance=ExtResource( 1 )]

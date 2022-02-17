@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
+[ext_resource path="res://TestUtilities/Scripts/TestBox.gd" type="Script" id=1]
 [ext_resource path="res://TestUtilities/Textures/uv_grid.png" type="Texture" id=3]
 [ext_resource path="res://TestUtilities/Scripts/SetShaderScale.gd" type="Script" id=4]
 
@@ -17,12 +18,12 @@ void fragment()
 	ALBEDO = texture(mainTex, UV * scale).rgb;
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
 shader_param/scale = Vector2( 3.8, 3 )
 shader_param/mainTex = ExtResource( 3 )
 
-[sub_resource type="Shader" id=9]
+[sub_resource type="Shader" id=4]
 resource_local_to_scene = true
 code = "shader_type spatial;
 
@@ -35,31 +36,32 @@ void fragment()
 }"
 
 [sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 9 )
+shader = SubResource( 4 )
 shader_param/scale = Vector2( 3.8, 1.05 )
 shader_param/mainTex = ExtResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 9 )
+shader = SubResource( 4 )
 shader_param/scale = Vector2( 3.8, 1.05 )
 shader_param/mainTex = ExtResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=7]
-shader = SubResource( 9 )
+shader = SubResource( 4 )
 shader_param/scale = Vector2( 3, 1.05 )
 shader_param/mainTex = ExtResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=8]
-shader = SubResource( 9 )
+shader = SubResource( 4 )
 shader_param/scale = Vector2( 2.99545, 1.04841 )
 shader_param/mainTex = ExtResource( 3 )
 
 [node name="Box" type="Spatial"]
+script = ExtResource( 1 )
 
 [node name="face" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -1, 0 )
 mesh = SubResource( 1 )
-material/0 = SubResource( 4 )
+material/0 = SubResource( 3 )
 script = ExtResource( 4 )
 
 [node name="face2" type="MeshInstance" parent="."]
