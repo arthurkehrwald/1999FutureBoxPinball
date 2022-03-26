@@ -10,3 +10,4 @@ rotateSpeed = 0.1
 
 [node name="AxisArrows" parent="." instance=ExtResource( 2 )]
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+visible = false

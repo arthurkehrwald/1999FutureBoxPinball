@@ -78,7 +78,7 @@ func parse_kinect_packet(packet) -> HeadTrackingData:
 
 func apply_head_tracking_data(data):
 	if data.isPosDefined() && apply_position:
-		transform.origin = Vector3(data.x, data.y, data.z)	
+		transform.origin = Vector3(data.x, data.y, data.z)
 		
 	if data.isRotDefined() && apply_rotation:
 		transform.basis = Basis(Vector3(deg2rad(data.pitch),

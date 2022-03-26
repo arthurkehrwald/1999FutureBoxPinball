@@ -1,15 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/TrackedHeadPoseUdp.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/TrackedHeadPoseBam.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 2 )
 
-[node name="TrackedHeadPoseUdp" type="Spatial"]
+[node name="TrackedHeadPoseBam" type="Spatial"]
 script = ExtResource( 1 )
-debug_label_path = NodePath("CanvasLayer/DebugLabel")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

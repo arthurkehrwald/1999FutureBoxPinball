@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Playfield.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=34]
-[ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=39]
 [ext_resource path="res://HUD/Videos/game_over_overlay.ogv" type="VideoStream" id=44]
 [ext_resource path="res://Scripts/VideoPlayer.gd" type="Script" id=46]
 [ext_resource path="res://Scenes/ScreenCenter.tscn" type="PackedScene" id=54]
@@ -50,11 +50,14 @@ transform = Transform( 22.53, 0, 0, 0, 19.5116, 11.265, 0, -11.265, 19.5116, 0, 
 
 [node name="TrackedHeadPoseUdp" parent="ScreenCenter/HeadTrackerSpace" instance=ExtResource( 55 )]
 
-[node name="AxisArrows2" parent="ScreenCenter/HeadTrackerSpace/TrackedHeadPoseUdp" instance=ExtResource( 39 )]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 2.23517e-08, 0, -2.23517e-08, 0.2, 0, 2.807, 8.124 )
+[node name="HeadTrackerSpace2" parent="ScreenCenter" instance=ExtResource( 30 )]
+transform = Transform( 43.2285, 0, 0, 0, 47.0319, 1.43051e-06, 0, 0, 45.3169, 0, 2.559, 5.96046e-08 )
 
-[node name="OffAxisCamera" parent="ScreenCenter/HeadTrackerSpace/TrackedHeadPoseUdp" instance=ExtResource( 29 )]
-transform = Transform( 0.0443853, 0, 0, 0, 0.0443852, 6.51926e-09, 0, -4.65661e-09, 0.0443852, 0, 0.281, 0.812 )
+[node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpace2" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, -5.96046e-08, 0, 2.98023e-08, 1, 0, 0.35192, 0.391459 )
+
+[node name="OffAxisCamera" parent="ScreenCenter/HeadTrackerSpace2/TrackedHeadPoseBam" instance=ExtResource( 29 )]
+transform = Transform( 0.0568376, 0, 0, 0, 0.0452422, 0.0261205, 0, -0.027109, 0.0469543, 0, 0.339073, -0.154102 )
 
 [node name="Playfield" parent="." instance=ExtResource( 1 )]
 

@@ -20,7 +20,7 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
-shader_param/scale = Vector2( 3.8, 3 )
+shader_param/scale = Vector2( 3.941, 7 )
 shader_param/mainTex = ExtResource( 3 )
 
 [sub_resource type="Shader" id=4]
@@ -37,22 +37,22 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = SubResource( 4 )
-shader_param/scale = Vector2( 3.8, 1.05 )
+shader_param/scale = Vector2( 3.941, 1 )
 shader_param/mainTex = ExtResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = SubResource( 4 )
-shader_param/scale = Vector2( 3.8, 1.05 )
+shader_param/scale = Vector2( 3.941, 1 )
 shader_param/mainTex = ExtResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = SubResource( 4 )
-shader_param/scale = Vector2( 3, 1.05 )
+shader_param/scale = Vector2( 7, 1 )
 shader_param/mainTex = ExtResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=8]
 shader = SubResource( 4 )
-shader_param/scale = Vector2( 2.99545, 1.04841 )
+shader_param/scale = Vector2( 6.98937, 0.998482 )
 shader_param/mainTex = ExtResource( 3 )
 
 [node name="Box" type="Spatial"]
