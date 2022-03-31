@@ -86,6 +86,7 @@ void fragment()
 		COLOR = leftCol;
 	}
 }"
+custom_defines = ""
 
 [sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("ViewportContainer/Left")

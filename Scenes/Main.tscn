@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Playfield.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/StereoCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=34]
 [ext_resource path="res://HUD/Videos/game_over_overlay.ogv" type="VideoStream" id=44]
@@ -45,22 +46,26 @@ tracks/1/keys = {
 [node name="ScreenCenter" parent="." instance=ExtResource( 54 )]
 transform = Transform( 1, 0, 0, 0, 0.987159, -0.159743, 0, 0.159743, 0.987159, 0, 2.479, 0 )
 
-[node name="HeadTrackerSpace" parent="ScreenCenter" instance=ExtResource( 30 )]
+[node name="OffAxisCamera" parent="ScreenCenter" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, -7.45058e-08, 0, 7.45058e-08, 1, 0, 7.64991, 6.62076 )
+
+[node name="AxisArrows" parent="ScreenCenter/OffAxisCamera" instance=ExtResource( 4 )]
+
+[node name="HeadTrackerSpaceUdp" parent="ScreenCenter" instance=ExtResource( 30 )]
 transform = Transform( 22.53, 0, 0, 0, 19.5116, 11.265, 0, -11.265, 19.5116, 0, 1.15604, -8.30014 )
 
-[node name="TrackedHeadPoseUdp" parent="ScreenCenter/HeadTrackerSpace" instance=ExtResource( 55 )]
+[node name="TrackedHeadPoseUdp" parent="ScreenCenter/HeadTrackerSpaceUdp" instance=ExtResource( 55 )]
+transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
+debug_label_path = NodePath("../../HeadTrackerSpaceUdp/TrackedHeadPoseUdp/CanvasLayer/DebugLabel")
 
-[node name="HeadTrackerSpace2" parent="ScreenCenter" instance=ExtResource( 30 )]
+[node name="HeadTrackerSpaceBam" parent="ScreenCenter" instance=ExtResource( 30 )]
 transform = Transform( 29, 0, 0, 0, 29, 0, 0, 0, 29, 0, 0, 0 )
 
-[node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpace2" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 5.96046e-08, 1, 160, 0, 0 )
-
-[node name="StereoCamera" parent="ScreenCenter/HeadTrackerSpace2/TrackedHeadPoseBam" instance=ExtResource( 3 )]
-zoom = 0.063
-stereo_offset = 0.043
+[node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpaceBam" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 5.96046e-08, 1, 0, 0.26379, 0.228302 )
 
 [node name="Playfield" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.200368 )
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"
