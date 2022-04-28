@@ -5,18 +5,28 @@ using System.Runtime.ConstrainedExecution;
 
 public class TrackedHeadPoseBam : Spatial
 {
+    [Export]
+    private bool ignoreX = false;
+    [Export]
+    private bool ignoreY = false;
+    [Export]
+    private bool ignoreZ = false;
+    [Export]
+    private bool isTracking = true;
+
     private bool isReady = false;
-    const string DEBUG_MSG = "Tracker:\nX %.4f\nY %.4f\nZ %.4f";
 
     public override void _Ready()
     {
         BAM_Tracker.init();
         GD.Print("Starting BAM client...");
-        Translation = new Vector3 (0f, 5f, 0f);    
+        Translation = new Vector3 (0f, 5f, 0f);
+
     }
 
     public override void _Process(float delta)
     {
+        
         if (!isReady)
         {
             isReady = BAM_Tracker.isReady();    
@@ -26,13 +36,17 @@ public class TrackedHeadPoseBam : Spatial
             }
         }
 
-        if (isReady)
+        if (isReady && isTracking)
         {
             BAM_Tracker.data_struct data = BAM_Tracker.getData();
-            Vector3 prevTranslation = Translation;
-            Translation = new Vector3((float)data.EyeVecX, (float)data.EyeVecZ, -(float)data.EyeVecY) * .001f;
-            //LookAt(Vector3.Zero, Vector3.Up);
-            //GD.Print(data.EyeVecY);
+            Vector3 pose = new Vector3((float)data.EyeVecX, (float)data.EyeVecZ, -(float)data.EyeVecY) * .001f;
+            if (ignoreX)
+                pose.x = 0f;
+            if (ignoreY)
+                pose.y = 0f;
+            if (ignoreZ)
+                pose.z = 0f;
+            Translation = pose;
         }
     }
 

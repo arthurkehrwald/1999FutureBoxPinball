@@ -1,5 +1,6 @@
 extends Node
 
+const ONE_GAME_UNIT_IN_METERS = .044375
 const ROLLER_TOPSPEED = 40.0
 const PLAYER_CRITICAL_HEALTH_PERCENT = 30.0
 const CYAN_COLOR = Color(0, 1, .8, 1)

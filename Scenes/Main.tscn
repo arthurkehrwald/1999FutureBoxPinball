@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Playfield.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/StereoCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
+[ext_resource path="res://TestUtilities/Scenes/LocalPosLabel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=34]
 [ext_resource path="res://HUD/Videos/game_over_overlay.ogv" type="VideoStream" id=44]
@@ -11,7 +12,13 @@
 [ext_resource path="res://Scenes/ScreenCenter.tscn" type="PackedScene" id=54]
 [ext_resource path="res://Scenes/TrackedHeadPoseUdp.tscn" type="PackedScene" id=55]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="QuadMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+albedo_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+
+[sub_resource type="Animation" id=3]
 length = 5.0
 loop = true
 tracks/0/type = "value"
@@ -44,12 +51,7 @@ tracks/1/keys = {
 [node name="MusicPlayer" parent="." instance=ExtResource( 34 )]
 
 [node name="ScreenCenter" parent="." instance=ExtResource( 54 )]
-transform = Transform( 1, 0, 0, 0, 0.987159, -0.159743, 0, 0.159743, 0.987159, 0, 2.479, 0 )
-
-[node name="OffAxisCamera" parent="ScreenCenter" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, -7.45058e-08, 0, 7.45058e-08, 1, 0, 7.64991, 6.62076 )
-
-[node name="AxisArrows" parent="ScreenCenter/OffAxisCamera" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 0.986624, -0.163016, 0, 0.163016, 0.986624, 0, 2.54142, 0.202314 )
 
 [node name="HeadTrackerSpaceUdp" parent="ScreenCenter" instance=ExtResource( 30 )]
 transform = Transform( 22.53, 0, 0, 0, 19.5116, 11.265, 0, -11.265, 19.5116, 0, 1.15604, -8.30014 )
@@ -58,18 +60,46 @@ transform = Transform( 22.53, 0, 0, 0, 19.5116, 11.265, 0, -11.265, 19.5116, 0, 
 transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
 debug_label_path = NodePath("../../HeadTrackerSpaceUdp/TrackedHeadPoseUdp/CanvasLayer/DebugLabel")
 
+[node name="DebugLabel" parent="ScreenCenter/HeadTrackerSpaceUdp/TrackedHeadPoseUdp" index="0"]
+visible = false
+
+[node name="Millimeters" type="Spatial" parent="ScreenCenter"]
+transform = Transform( 0.023, 0, 0, 0, 0.023, 0, 0, 0, 0.023, 0, 0, 0 )
+
+[node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
+transform = Transform( 50, 0, 0, 0, 50.0002, 9.53674e-07, 0, -9.53674e-07, 50.0002, 9.30435, 323.261, 26.4348 )
+
+[node name="LocalPosLabel" parent="ScreenCenter/Millimeters/AxisArrows" instance=ExtResource( 5 )]
+
+[node name="AxisArrows2" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
+transform = Transform( -400, 0, 0, 0, 400, 0, 0, 0, 400, 196.254, 1.52588e-05, 350.813 )
+visible = false
+
+[node name="MeshInstance4" type="MeshInstance" parent="ScreenCenter/Millimeters/AxisArrows2"]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0.5, 0.5 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
 [node name="HeadTrackerSpaceBam" parent="ScreenCenter" instance=ExtResource( 30 )]
-transform = Transform( 29, 0, 0, 0, 29, 0, 0, 0, 29, 0, 0, 0 )
+transform = Transform( 20.161, 0, 0, 0, 15.866, 0, 0, 0, 16.47, 0.214, 7.435, 0.608 )
 
 [node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpaceBam" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 5.96046e-08, 1, 0, 0.26379, 0.228302 )
+transform = Transform( 1, 0, 0, 0, 1, 2.02272e-08, 0, -2.02272e-08, 1, 0, 0, 0 )
+
+[node name="RemoteTransform" type="RemoteTransform" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam"]
+remote_path = NodePath("../../../Millimeters/AxisArrows")
+update_rotation = false
+update_scale = false
+
+[node name="StereoCamera" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 0.993853, -0.110706, 0, 0.110706, 0.993853, 0.104, 0, 0 )
 
 [node name="Playfield" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.200368 )
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"
-anims/Cage_Rotation = SubResource( 1 )
+anims/Cage_Rotation = SubResource( 3 )
 
 [node name="VideoPlayer" type="VideoPlayer" parent="."]
 pause_mode = 2
@@ -81,3 +111,5 @@ script = ExtResource( 46 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[editable path="ScreenCenter/HeadTrackerSpaceUdp/TrackedHeadPoseUdp"]
