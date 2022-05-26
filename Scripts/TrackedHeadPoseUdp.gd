@@ -8,7 +8,7 @@ const PACKET_SIZE_ERROR_MSG = "[UdpHeadTrackingReceiver] Expected UDP packet" \
 export var apply_position := true
 export var apply_rotation := true
 export var debug_label_path := NodePath()
-export var write_debug_output := true
+export var is_debug_output_enabled := true
 export var port := 4242
 
 var udp = PacketPeerUDP.new()
@@ -87,7 +87,7 @@ func apply_head_tracking_data(data):
 
 
 func write_debug_output(data):
-	if write_debug_output:
+	if is_debug_output_enabled:
 		debug_label.text = DEBUG_MSG % [data.x, data.y, data.z,
 		data.pitch, data.yaw, data.roll]
 

@@ -1,0 +1,65 @@
+# Blender MTL File: 'Playfield_Blockout_Godot_03_Kevin.blend'
+# Material Count: 6
+
+newmtl Degradable_Metal.001
+Ns 937.375976
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.218182 0.218182 0.218182
+Ke 0.000000 0.000000 0.000000
+Ni 21.399994
+d 1.000000
+illum 3
+
+newmtl Material.004
+Ns 714.793386
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+
+newmtl Metal.002
+Ns 714.793386
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+
+newmtl Old_Metal_Pan.001
+Ns 611.239692
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+
+newmtl Old_White_Metal.001
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump D:\\CGL\\Future Box Pinball Kickstart\\Blender\\assets\\materials\\old_white_metal_97da47e0-10b9-4b10-85fe-e2390a3e9e9d\\textures_1k\\WhiteMetal_normal.jpg
+map_Kd D:\\CGL\\Future Box Pinball Kickstart\\Blender\\assets\\materials\\old_white_metal_97da47e0-10b9-4b10-85fe-e2390a3e9e9d\\textures_1k\\WhiteMetal_diffuse.jpg
+map_Ns D:\\CGL\\Future Box Pinball Kickstart\\Blender\\assets\\materials\\old_white_metal_97da47e0-10b9-4b10-85fe-e2390a3e9e9d\\textures_1k\\WhiteMetal_roughness.jpg
+
+newmtl plastic_touched.001
+Ns 1000.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.644053 0.761277
+Ks 0.500000 0.500000 0.500000
+Ke 0.021220 0.409264 0.615177
+Ni 1.450000
+d 1.000000
+illum 2

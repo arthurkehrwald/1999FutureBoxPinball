@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Scenes/Playfield.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/PlayfieldKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/StereoCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
@@ -21,30 +21,6 @@ albedo_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 [sub_resource type="Animation" id=3]
 length = 5.0
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Playfield/SymmetryAxis/UpperGuide/LaserTRexUFO/Cage:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Playfield/SymmetryAxis/UpperGuide/MultiballUFO/Cage:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
-}
 
 [node name="Main" type="Spatial"]
 
@@ -58,7 +34,6 @@ transform = Transform( 22.53, 0, 0, 0, 19.5116, 11.265, 0, -11.265, 19.5116, 0, 
 
 [node name="TrackedHeadPoseUdp" parent="ScreenCenter/HeadTrackerSpaceUdp" instance=ExtResource( 55 )]
 transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
-debug_label_path = NodePath("../../HeadTrackerSpaceUdp/TrackedHeadPoseUdp/CanvasLayer/DebugLabel")
 
 [node name="DebugLabel" parent="ScreenCenter/HeadTrackerSpaceUdp/TrackedHeadPoseUdp" index="0"]
 visible = false
@@ -94,9 +69,6 @@ update_scale = false
 [node name="StereoCamera" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 0.993853, -0.110706, 0, 0.110706, 0.993853, 0.104, 0, 0 )
 
-[node name="Playfield" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.200368 )
-
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"
 anims/Cage_Rotation = SubResource( 3 )
@@ -111,5 +83,7 @@ script = ExtResource( 46 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PlayfieldKickstart" parent="." instance=ExtResource( 1 )]
 
 [editable path="ScreenCenter/HeadTrackerSpaceUdp/TrackedHeadPoseUdp"]

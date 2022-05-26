@@ -32,7 +32,7 @@ func _ready():
 
 
 func on_EntranceArea_body_entered(body):
-	if looping_body != null or not body.is_in_group("rollers"):
+	if looping_body != null or not body.is_in_group("rollers") or body.current_wire_ramp != null:
 		return
 	var angle_factor = max(0, -.3 * pow(body.get_linear_velocity().angle_to(entrance_area.get_global_transform().basis.z), 3) + 1)
 	speed = angle_factor * body.get_linear_velocity().length() * start_velocity_multiplier

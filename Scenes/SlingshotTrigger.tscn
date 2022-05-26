@@ -8,6 +8,7 @@ extents = Vector3( 0.9, 0.2, 0.05 )
 [node name="SlingshotTrigger" type="Area"]
 collision_layer = 0
 script = ExtResource( 1 )
+BOUNCE_FORCE = 15
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )

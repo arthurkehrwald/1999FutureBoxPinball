@@ -1,0 +1,234 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Scenes/PlayfieldBoxKickstart.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Import/Playfield_Blockout_Godot_03.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/SlingshotTrigger.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/FlipperV2_R.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/PinballSpawn.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/WireRamp.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/FlipperV2.tscn" type="PackedScene" id=38]
+
+[sub_resource type="CubeMesh" id=25]
+
+[sub_resource type="Curve3D" id=26]
+_data = {
+"points": PoolVector3Array( -0.953664, -0.622124, 1.41092, 0.953664, 0.622124, -1.41092, 0.368028, 0.0600598, 0.0951223, -0.0370417, 0.468751, 1.79944, 0.0370417, -0.468751, -1.79944, 2.18936, 0.773847, -4.24226 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=27]
+_data = {
+"points": PoolVector3Array( -0.953664, -0.622124, 1.41092, 0.953664, 0.622124, -1.41092, 0.368028, 0.0600598, 0.0951223, -0.0370417, 0.468751, 1.79944, 0.0370417, -0.468751, -1.79944, 1.85948, 0.769767, -4.33639 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=28]
+_data = {
+"points": PoolVector3Array( -0.723491, -1.93015, 3.71225, 0.723491, 1.93015, -3.71225, 0.22216, 0.0433023, -0.0963573, 4.00246, 1.65227, -4.88691, -4.00246, -1.65227, 4.88691, 0.599546, 0.974028, 4.42139 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=29]
+_data = {
+"points": PoolVector3Array( -0.498276, -2.12347, 3.49393, 0.498276, 2.12347, -3.49393, 0.22216, 0.0433023, -0.0963573, 3.60635, 1.75377, -4.76416, -3.60635, -1.75377, 4.76416, 0.125515, 0.967189, 4.28884 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=30]
+_data = {
+"points": PoolVector3Array( -0.73895, 0.000147194, 1.87507, 0.73895, -0.000147194, -1.87507, 0.124723, 0.159917, 0.23673, -0.237144, -0.846835, 0.623955, 0.237144, 0.846835, -0.623955, 0.67077, 0.935262, -3.07764, 0, 0, 0, 0, 0, 0, 0.926276, 1.25725, -4.03296 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=31]
+_data = {
+"points": PoolVector3Array( -0.262009, 0.00178811, 2.02344, 0.262009, -0.00178811, -2.02344, 0.124723, 0.159917, 0.23673, -0.237144, -0.846835, 0.623955, 0.237144, 0.846835, -0.623955, 0.220958, 0.907784, -3.02386, 0, 0, 0, 0, 0, 0, 0.549991, 1.32324, -4.01041 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=32]
+_data = {
+"points": PoolVector3Array( 0.000282764, -0.766192, 1.93975, -0.000282764, 0.766192, -1.93975, 0.109939, 0.168152, 0.33085, -0.992431, 0.0704893, -0.00843143, 0.992431, -0.0704893, 0.00843143, 0.588669, 1.75213, -4.07643, 0.101807, 0.113249, -2.11856, -0.101807, -0.113249, 2.11856, 0.734406, 1.06129, -0.592735, -0.0209513, 0.0995578, -1.6001, 0.0209513, -0.0995578, 1.6001, -0.680466, 0.986806, 2.55778, -0.0317707, 0.0453095, -0.924984, 0.0317707, -0.0453095, 0.924984, -0.604675, 0.837641, 5.83097, -0.10728, 0.032328, -1.75842, 0.10728, -0.032328, 1.75842, -0.140228, 0.766793, 7.91154 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=33]
+_data = {
+"points": PoolVector3Array( 0.786604, -0.719589, 2.11634, -0.786604, 0.719589, -2.11634, 0.586551, 0.164822, 0.292785, -0.992431, 0.0704893, -0.00843143, 0.992431, -0.0704893, 0.00843143, 0.588669, 1.75213, -4.07643, 0.101807, 0.113249, -2.11856, -0.101807, -0.113249, 2.11856, 0.734406, 1.06129, -0.592735, -0.0209513, 0.0995578, -1.6001, 0.0209513, -0.0995578, 1.6001, -0.680466, 0.986806, 2.55778, -0.0317707, 0.0453095, -0.924984, 0.0317707, -0.0453095, 0.924984, -0.604675, 0.837641, 5.83097, -0.10728, 0.032328, -1.75842, 0.10728, -0.032328, 1.75842, -0.140228, 0.766793, 7.91154 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="PlayfieldKickstart" type="Spatial"]
+
+[node name="PlayfieldBoxKickstart" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.122361, 0.028657, 0.0797532 )
+visible = false
+
+[node name="Center" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871558, 0, 0.0871558, 0.996195, -0.335, 0, 0 )
+
+[node name="FlipperV2" parent="Center" instance=ExtResource( 38 )]
+transform = Transform( 0.866026, 0, -0.5, 0, 1, -7.45058e-09, 0.5, 0, 0.866027, -1.268, -0.069, 6.613 )
+
+[node name="FlipperV2_R" parent="Center" instance=ExtResource( 22 )]
+transform = Transform( 0.866026, 0, 0.5, 0, 1, -7.45058e-09, -0.5, 0, 0.866026, 1.268, 0.111, 6.613 )
+IMPULSE_STRENGTH = 50
+
+[node name="Plunger" parent="Center" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, -7.45058e-09, 0, 7.45058e-09, 1, 4.329, 0.0056631, 6.27874 )
+
+[node name="PinballSpawn" parent="Center" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.28925, 0.919748, 5.71257 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Center/PinballSpawn"]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.100001, -0.128808, 0.0112691 )
+visible = false
+mesh = SubResource( 25 )
+material/0 = null
+
+[node name="PlayerShip" parent="Center" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0381613, 7.60382 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": true,
+"3-EnemyFleet": true,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+
+[node name="WireRamp1-1" parent="Center" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12896, 0.137825, 1.30159 )
+curve = SubResource( 26 )
+
+[node name="PathFollow" parent="Center/WireRamp1-1" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="EntranceArea" parent="Center/WireRamp1-1" index="1"]
+transform = Transform( -0.690425, -0.0677577, 0.720223, -0.0701736, 0.997183, 0.0265432, -0.719992, -0.0322146, -0.693233, 0.257904, 0.0366439, 0.246438 )
+
+[node name="ExitArea" parent="Center/WireRamp1-1" index="2"]
+transform = Transform( 1, 0, 0, 0, 0.977268, 0.212007, 0, -0.212007, 0.977268, 2.22537, 0.781219, -4.23993 )
+
+[node name="WireRamp1-2" parent="Center" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.49353, 0.137825, 1.60743 )
+curve = SubResource( 27 )
+
+[node name="PathFollow" parent="Center/WireRamp1-2" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="EntranceArea" parent="Center/WireRamp1-2" index="1"]
+transform = Transform( -0.690425, -0.0677577, 0.720223, -0.0701736, 0.997183, 0.0265432, -0.719992, -0.0322146, -0.693233, 0.257904, 0.0366439, 0.246438 )
+
+[node name="ExitArea" parent="Center/WireRamp1-2" index="2"]
+transform = Transform( 1, 0, 0, 0, 0.977268, 0.212007, 0, -0.212007, 0.977268, 1.85052, 0.76885, -4.32327 )
+
+[node name="WireRamp2-1" parent="Center" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92892, 6.25849e-06, -2.5696 )
+curve = SubResource( 28 )
+
+[node name="PathFollow" parent="Center/WireRamp2-1" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="EntranceArea" parent="Center/WireRamp2-1" index="1"]
+transform = Transform( -0.973531, 0, 0.228555, 0, 1, 0, -0.228555, 0, -0.973533, 0.132068, 0.171098, 0.246153 )
+
+[node name="ExitArea" parent="Center/WireRamp2-1" index="2"]
+transform = Transform( -0.77867, 0, 0.627433, 0, 1, -7.45058e-09, -0.627433, 0, -0.778671, 0.628954, 0.938002, 4.43943 )
+
+[node name="WireRamp2-2" parent="Center" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.44646, 6.15418e-06, -2.46342 )
+curve = SubResource( 29 )
+
+[node name="PathFollow" parent="Center/WireRamp2-2" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="EntranceArea" parent="Center/WireRamp2-2" index="1"]
+transform = Transform( -0.973531, 0, 0.228555, 0, 1, 0, -0.228555, 0, -0.973533, 0.132068, 0.171098, 0.246153 )
+
+[node name="ExitArea" parent="Center/WireRamp2-2" index="2"]
+transform = Transform( -0.755876, 0, 0.654715, 1.11759e-08, 1, 0, -0.654715, 0, -0.755876, 0.0783982, 0.975992, 4.34338 )
+
+[node name="WireRamp3-1" parent="Center" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01078, 6.09457e-06, -2.46342 )
+curve = SubResource( 30 )
+
+[node name="PathFollow" parent="Center/WireRamp3-1" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="EntranceArea" parent="Center/WireRamp3-1" index="1"]
+transform = Transform( -0.973531, 0, 0.228555, 0, 1, 0, -0.228555, 0, -0.973533, 0.132068, 0.171098, 0.246153 )
+
+[node name="ExitArea" parent="Center/WireRamp3-1" index="2"]
+transform = Transform( 0.928044, 0.166649, -0.33311, -3.72529e-08, 0.894326, 0.447416, 0.37247, -0.415222, 0.829975, 0.938623, 1.26306, -4.03943 )
+
+[node name="WireRamp3-2" parent="Center" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.47805, 6.07967e-06, -2.46342 )
+curve = SubResource( 31 )
+
+[node name="PathFollow" parent="Center/WireRamp3-2" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="EntranceArea" parent="Center/WireRamp3-2" index="1"]
+transform = Transform( -0.973531, 0, 0.228555, 0, 1, 0, -0.228555, 0, -0.973533, 0.132068, 0.171098, 0.246153 )
+
+[node name="ExitArea" parent="Center/WireRamp3-2" index="2"]
+transform = Transform( 0.928044, 0.166649, -0.33311, -3.72529e-08, 0.894326, 0.447416, 0.37247, -0.415222, 0.829975, 0.472752, 1.25004, -4.04651 )
+
+[node name="WireRamp4-1" parent="Center" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79659, 6.22869e-06, -3.33961 )
+curve = SubResource( 32 )
+
+[node name="PathFollow" parent="Center/WireRamp4-1" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="EntranceArea" parent="Center/WireRamp4-1" index="1"]
+transform = Transform( -0.991888, -4.54319e-10, -0.127117, -9.31323e-10, 1, 1.49012e-08, 0.127117, 1.49012e-08, -0.99189, 0.125012, 0.171091, 0.336428 )
+
+[node name="ExitArea" parent="Center/WireRamp4-1" index="2"]
+transform = Transform( -1, 1.50996e-07, 6.60024e-15, 8.88178e-16, -4.47035e-08, 1, 1.50996e-07, 1, 4.47035e-08, -0.092104, 0.729319, 7.88685 )
+
+[node name="WireRamp4-2" parent="Center" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79659, 6.22869e-06, -3.33961 )
+curve = SubResource( 33 )
+
+[node name="PathFollow" parent="Center/WireRamp4-2" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="EntranceArea" parent="Center/WireRamp4-2" index="1"]
+transform = Transform( -0.991888, -4.54319e-10, -0.127117, 9.31323e-10, 1, 1.49012e-08, 0.127117, 2.23517e-08, -0.99189, 0.557487, 0.171091, 0.281004 )
+
+[node name="ExitArea" parent="Center/WireRamp4-2" index="2"]
+transform = Transform( -1, 1.50996e-07, 6.60024e-15, 8.88178e-16, -4.47035e-08, 1, 1.50996e-07, 1, 4.47035e-08, -0.092104, 0.729319, 7.88685 )
+
+[node name="SlingshotTrigger" parent="Center" instance=ExtResource( 3 )]
+transform = Transform( 0.409382, 0, -0.912363, 0, 1, 0, 0.912363, 0, 0.409382, -2.00824, -2.5332e-06, 4.39107 )
+
+[node name="SlingshotTrigger2" parent="Center" instance=ExtResource( 3 )]
+transform = Transform( 0.409382, 0, 0.912363, 0, 1, 0, -0.912363, 0, 0.409382, 2.008, 0, 4.391 )
+
+[node name="Playfield_Blockout_Godot_03" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0, 0 )
+
+[editable path="Center/WireRamp1-1"]
+
+[editable path="Center/WireRamp1-2"]
+
+[editable path="Center/WireRamp2-1"]
+
+[editable path="Center/WireRamp2-2"]
+
+[editable path="Center/WireRamp3-1"]
+
+[editable path="Center/WireRamp3-2"]
+
+[editable path="Center/WireRamp4-1"]
+
+[editable path="Center/WireRamp4-2"]

@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/InterlacedStereoCanvas.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=2]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=5]
 script/source = "extends Spatial
 
 export var zoom = 0.333
@@ -64,7 +64,7 @@ func update_cam_zoom():
 	right_cam.zoom = zoom
 "
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
 
 uniform sampler2D left_camera;
@@ -88,22 +88,22 @@ void fragment()
 }"
 custom_defines = ""
 
-[sub_resource type="ViewportTexture" id=3]
+[sub_resource type="ViewportTexture" id=6]
 viewport_path = NodePath("ViewportContainer/Left")
 
-[sub_resource type="ViewportTexture" id=4]
+[sub_resource type="ViewportTexture" id=7]
 viewport_path = NodePath("ViewportContainer/Right")
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=8]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 4 )
 shader_param/isEnabled = true
-shader_param/left_camera = SubResource( 3 )
-shader_param/right_camera = SubResource( 4 )
+shader_param/left_camera = SubResource( 6 )
+shader_param/right_camera = SubResource( 7 )
 
 [node name="StereoCamera" type="Spatial"]
 transform = Transform( 0.517241, 0, 0, 0, 0.5427, 0.0603309, 0, -0.0570401, 0.574011, -4.9328e-07, 8.34455, 3.70458 )
-script = SubResource( 1 )
+script = SubResource( 5 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -144,4 +144,4 @@ frustum_offset = Vector2( -0.04536, 0 )
 zoom = 0.172
 
 [node name="InterlacedStereoCanvas" parent="." instance=ExtResource( 1 )]
-material = SubResource( 5 )
+material = SubResource( 8 )
