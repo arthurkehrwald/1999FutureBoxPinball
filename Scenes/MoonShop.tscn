@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=1]
+[ext_resource path="res://Materials/3d_prints.tres" type="Material" id=1]
 [ext_resource path="res://Materials/wireframe_material.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/MoonShop.gd" type="Script" id=3]
 [ext_resource path="res://Materials/moon_gate_mat.tres" type="Material" id=4]

@@ -31,6 +31,7 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="Label" type="Label" parent="." index="3"]
+visible = false
 margin_right = 40.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )

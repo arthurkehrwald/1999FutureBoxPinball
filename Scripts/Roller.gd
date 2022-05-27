@@ -14,14 +14,11 @@ export var ENFORCE_SPEED_LIM = true
 export var AIRBORNE_GRAV = 8.0
 export var MAX_AUDIO_PITCH = 3
 export var MIN_AUDIO_PITCH = .5
-export var MIN_NOT_STUCK_DISTANCE_FROM_RECENT_LOCATION = .2
-export var DETECT_STUCK_RECENT_LOCATION_SAMPLE_SIZE = 5
 export var MIN_NOT_STUCK_SPEED_UPSEC = 0.1
 export var STUCK_DELETE_TIME_SEC = 1.0
 
 var is_locked_in_place = false
 var current_wire_ramp = null
-var recent_locations = []
 var stuck_time = 0.0
 
 onready var audio_player = get_node("AudioStreamPlayer3D")

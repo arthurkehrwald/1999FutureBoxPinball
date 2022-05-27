@@ -147,6 +147,7 @@ func _process(delta):
 			var ap = selected_icon.get_node("AnimationPlayer")
 			ap.connect("animation_finished", self, "on_SelectionAnim_finished", [selected_powerup], CONNECT_ONESHOT)
 	elif state == INSTRUCTING:
+		var a = timer_on_time_bar
 		time_bar.value = timer_on_time_bar.time_left * 100
 
 
@@ -204,7 +205,7 @@ func trigger_selection_animation(selected_icon):
 
 func activate_powerup(powerup):
 	var was_active = not powerup_timers[powerup].is_stopped()
-	if Globals.player_turret != null and not powerup == Powerup.TURRET:
+	if Globals.player_turret == null or not powerup == Powerup.TURRET:
 		powerup_timers[powerup].start()
 	if not was_active:
 		match powerup:
@@ -294,7 +295,6 @@ func display_instructions(powerup):
 	timer_on_time_bar = powerup_timers[powerup]
 	tween.start()
 	time_bar.max_value = timer_on_time_bar.wait_time * 100
-	
 	name_label.visible = true
 	icons.visible = false
 	if powerup != Powerup.BOOST:

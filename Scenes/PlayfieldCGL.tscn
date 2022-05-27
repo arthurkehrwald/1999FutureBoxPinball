@@ -219,7 +219,7 @@ material/0 = null
 shape = SubResource( 2 )
 
 [node name="WireRamp" parent="SymmetryAxis/UpperGuide" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.42799, -5.89415e-05, 7.02202 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.42799, -5.89043e-05, 7.02202 )
 gravity = 8.0
 
 [node name="CollisionShape2" type="CollisionShape" parent="SymmetryAxis/UpperGuide"]

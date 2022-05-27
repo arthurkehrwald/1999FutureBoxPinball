@@ -19,6 +19,7 @@ void fragment()
 	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
 	COLOR.rgb += texture(screen, SCREEN_UV * size + offset).rgb * brightness;
 }"
+custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
