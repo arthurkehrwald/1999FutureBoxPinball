@@ -27,7 +27,7 @@ loop = true
 [node name="MusicPlayer" parent="." instance=ExtResource( 34 )]
 
 [node name="ScreenCenter" parent="." instance=ExtResource( 54 )]
-transform = Transform( 1, 0, 0, 0, 0.986624, -0.163016, 0, 0.163016, 0.986624, 0, 2.54142, 0.202314 )
+transform = Transform( 1, 0, 0, 0, 0.990838, -0.135059, 0, 0.135059, 0.990838, 0, 2.29891, 0.077672 )
 
 [node name="HeadTrackerSpaceUdp" parent="ScreenCenter" instance=ExtResource( 30 )]
 transform = Transform( 22.53, 0, 0, 0, 19.5116, 11.265, 0, -11.265, 19.5116, 0, 1.15604, -8.30014 )
@@ -42,7 +42,7 @@ visible = false
 transform = Transform( 0.023, 0, 0, 0, 0.023, 0, 0, 0, 0.023, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 50.0002, 9.53674e-07, 0, -9.53674e-07, 50.0002, 9.30435, 323.261, 66.2004 )
+transform = Transform( 50, 0, 0, 0, 50.0009, -3.76701e-05, 0, 3.76701e-05, 50.0009, 0, 298.913, 64.4765 )
 
 [node name="LocalPosLabel" parent="ScreenCenter/Millimeters/AxisArrows" instance=ExtResource( 5 )]
 
@@ -56,7 +56,7 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="HeadTrackerSpaceBam" parent="ScreenCenter" instance=ExtResource( 30 )]
-transform = Transform( 20.161, 0, 0, 0, 15.866, 0, 0, 0, 16.47, 0.214, 7.435, 0.608 )
+transform = Transform( 14.5, 0, 0, 0, 18.577, 0, 0, 0, 15.756, 0, 6.875, 0.608 )
 
 [node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpaceBam" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.3411e-07, 0, 0, 1, 0, 5.96046e-08, 0.0555319 )
@@ -67,7 +67,8 @@ update_rotation = false
 update_scale = false
 
 [node name="StereoCamera" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 0.993853, -0.110706, 0, 0.110706, 0.993853, 0.102642, -0.00157326, -0.00237896 )
+transform = Transform( 1, 0, 0, 0, 0.993853, -0.110706, 0, 0.110706, 0.993853, 0.103, 0.02, -0.002 )
+stereo_offset = 0.037
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"

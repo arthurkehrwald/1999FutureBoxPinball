@@ -72,6 +72,7 @@ _data = {
 
 [node name="Playfield_Blockout_Godot_03" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, -0.003, 0, 0.029 )
+visible = false
 
 [node name="Center" type="Spatial" parent="Playfield_Blockout_Godot_03"]
 transform = Transform( 1, 0, 0, 0, 1, -9.68575e-08, 0, 9.68575e-08, 1, -0.335, 0, 0 )
