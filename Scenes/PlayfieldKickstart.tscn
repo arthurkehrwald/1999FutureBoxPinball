@@ -78,10 +78,10 @@ transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195,
 transform = Transform( 1, 0, 0, 0, 1, -9.68575e-08, 0, 9.68575e-08, 1, -0.335, 0, 0 )
 
 [node name="FlipperV2" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 38 )]
-transform = Transform( 0.866026, 0, -0.5, 0, 1, -7.45058e-09, 0.5, 0, 0.866027, -1.268, -0.069, 6.613 )
+transform = Transform( 0.866026, 0, -0.5, 0, 1, -7.45058e-09, 0.5, 0, 0.866027, -1.268, 0, 6.613 )
 
 [node name="FlipperV2_R" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 22 )]
-transform = Transform( 0.866026, 0, 0.5, 0, 1, -7.45058e-09, -0.5, 0, 0.866026, 1.268, 0.111, 6.613 )
+transform = Transform( 0.866026, 0, 0.5, 0, 1, -7.45058e-09, -0.5, 0, 0.866026, 1.268, 0, 6.613 )
 IMPULSE_STRENGTH = 50
 
 [node name="Plunger" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 17 )]
@@ -151,6 +151,9 @@ curve = SubResource( 5 )
 
 [node name="EntranceArea" parent="Playfield_Blockout_Godot_03/Center/WireRamp2-2" index="1"]
 transform = Transform( -0.973162, 0, 0.230118, -1.30385e-08, 1, 2.23517e-08, -0.230118, 0, -0.973163, 0.0772491, 0.213405, 0.346341 )
+
+[node name="ExitArea" parent="Playfield_Blockout_Godot_03/Center/WireRamp2-2" index="2"]
+transform = Transform( -0.770736, -0.153872, 0.618296, 0, 0.970401, 0.241499, -0.637155, 0.186132, -0.747924, 0.11647, 0.978414, 4.27207 )
 
 [node name="WireRamp3-1" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01078, 6.06827e-06, -2.46342 )

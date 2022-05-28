@@ -22,7 +22,7 @@ TURN_SPEED = 16
 IMPULSE_STRENGTH = 75
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.996068, 0, -0.0974586, 0, 1.1, 0, 0.0885988, 0, 1.09567, 0.110483, 0.2, 0.00982727 )
+transform = Transform( 0.996068, 0, -0.0974586, 0, 1.1, 0, 0.0885988, 0, 1.09567, 0.110483, 0.177739, 0.00982727 )
 mesh = ExtResource( 2 )
 material/0 = null
 material/1 = null
