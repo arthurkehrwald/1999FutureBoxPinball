@@ -7,6 +7,7 @@ signal bumped(bumper, body)
 export var BUMP_FORCE = 10.0
 export var MONEY_PER_BUMP = 100.0
 export var MONEY_TEXT_HEIGHT = 1.0
+export var SOLID_WHEN_DISABLED = true 
 
 # Set to true by parent bumper cluster if it exists
 var is_controlled_by_bumper_cluster = false
@@ -14,6 +15,7 @@ var bodies_moving_through_bumper = []
 
 
 func _ready():
+	$StaticBody.set_enabled(SOLID_WHEN_DISABLED)
 	if Globals.player_ship == null:
 		push_warning("[Bumper] can't find player! Will not yield money.")
 	connect("body_entered", self, "on_body_entered")

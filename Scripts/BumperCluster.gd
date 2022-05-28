@@ -1,4 +1,7 @@
+class_name BumperCluster
 extends Spatial
+
+signal bumped(bumper_cluster, bumper, bumped_body)
 
 export var TIME_LIMIT = 0.0
 export var BUMP_LIMIT = 0
@@ -62,3 +65,4 @@ func on_Bumper_bumped(bumper, bumped_body):
 	print("bump count: " + str(bump_count))
 	if BUMP_LIMIT > 0 and bump_count >= BUMP_LIMIT:
 		toggle_bumpers(false)
+	emit_signal("bumped", self, bumper, bumped_body)

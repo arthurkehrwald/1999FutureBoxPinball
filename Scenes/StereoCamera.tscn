@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/InterlacedStereoCanvas.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=2]
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Spatial
 
 export var zoom = 0.333
@@ -64,12 +64,12 @@ func update_cam_zoom():
 	right_cam.zoom = zoom
 "
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 
 uniform sampler2D left_camera;
 uniform sampler2D right_camera;
-uniform bool isEnabled = true;
+uniform bool is_enabled = true;
 
 void fragment()
 {
@@ -77,7 +77,7 @@ void fragment()
 	vec4 rightCol = texture(right_camera, SCREEN_UV);
 
 	float pixelX = floor(FRAGCOORD.x);
-	if (isEnabled)
+	if (is_enabled)
 	{
 		COLOR = mix(rightCol, leftCol, mod(pixelX, 2.0));
 	}
@@ -88,22 +88,14 @@ void fragment()
 }"
 custom_defines = ""
 
-[sub_resource type="ViewportTexture" id=6]
-viewport_path = NodePath("ViewportContainer/Left")
-
-[sub_resource type="ViewportTexture" id=7]
-viewport_path = NodePath("ViewportContainer/Right")
-
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
-shader = SubResource( 4 )
-shader_param/isEnabled = true
-shader_param/left_camera = SubResource( 6 )
-shader_param/right_camera = SubResource( 7 )
+shader = SubResource( 2 )
+shader_param/is_enabled = true
 
 [node name="StereoCamera" type="Spatial"]
-transform = Transform( 0.517241, 0, 0, 0, 0.5427, 0.0603309, 0, -0.0570401, 0.574011, -4.9328e-07, 8.34455, 3.70458 )
-script = SubResource( 5 )
+transform = Transform( 0.517241, 0, 0, 0, 0.5427, 0.0603309, 0, -0.0570401, 0.574011, 0, 0, 0 )
+script = SubResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -144,4 +136,6 @@ frustum_offset = Vector2( -0.04536, 0 )
 zoom = 0.172
 
 [node name="InterlacedStereoCanvas" parent="." instance=ExtResource( 1 )]
-material = SubResource( 8 )
+material = SubResource( 5 )
+left_viewport_path = NodePath("../ViewportContainer/Left")
+right_viewport_path = NodePath("../ViewportContainer/Right")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -24,25 +24,27 @@ void fragment()
 }"
 custom_defines = ""
 
-[sub_resource type="ViewportTexture" id=2]
-viewport_path = NodePath("ViewportContainer/Left")
-
-[sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("ViewportContainer/Right")
-
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/isEnabled = true
-shader_param/left_camera = SubResource( 2 )
-shader_param/right_camera = SubResource( 3 )
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends CanvasItem
 
+export var left_viewport_path := NodePath()
+export var right_viewport_path := NodePath()
+
+onready var left_viewport = get_node(left_viewport_path) as Viewport
+onready var right_viewport = get_node(right_viewport_path) as Viewport
+
+func _ready():
+	material.set(\"shader_param/left_camera\", left_viewport.get_texture())
+	material.set(\"shader_param/right_camera\", right_viewport.get_texture())
+
 func _process(_delta):
 	if (Input.is_action_just_pressed(\"toggle_stereo\")):
-		material.set(\"shader_param/isEnabled\", !material.get(\"shader_param/isEnabled\"));
+		material.set(\"shader_param/isEnabled\", !material.get(\"shader_param/is_enabled\"));
 "
 
 [node name="InterlacedStereoCanvas" type="ColorRect"]

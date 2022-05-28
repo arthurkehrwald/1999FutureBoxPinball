@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Bumper.gd"
 }, {
+"base": "Spatial",
+"class": "BumperCluster",
+"language": "GDScript",
+"path": "res://Scripts/BumperCluster.gd"
+}, {
 "base": "CollisionObject",
 "class": "Damageable",
 "language": "GDScript",
@@ -130,6 +135,7 @@ _global_script_class_icons={
 "BossGunShooting": "",
 "BossGunStunned": "",
 "Bumper": "",
+"BumperCluster": "",
 "Damageable": "",
 "Explosion": "",
 "Gate": "",

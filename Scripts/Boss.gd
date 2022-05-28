@@ -9,7 +9,6 @@ export var ECLIPSE_HEALTH_PERCENT = 20.0
 onready var health_bar = get_node("BossBar3D/Viewport/BossBar/HealthBar")
 onready var explosion = get_node("BossExplosionFX")
 
-
 func _enter_tree():
 	Globals.boss = self
 

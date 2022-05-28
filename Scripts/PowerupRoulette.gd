@@ -147,7 +147,6 @@ func _process(delta):
 			var ap = selected_icon.get_node("AnimationPlayer")
 			ap.connect("animation_finished", self, "on_SelectionAnim_finished", [selected_powerup], CONNECT_ONESHOT)
 	elif state == INSTRUCTING:
-		var a = timer_on_time_bar
 		time_bar.value = timer_on_time_bar.time_left * 100
 
 
