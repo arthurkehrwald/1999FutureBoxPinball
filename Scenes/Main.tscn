@@ -42,7 +42,7 @@ visible = false
 transform = Transform( 0.023, 0, 0, 0, 0.023, 0, 0, 0, 0.023, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 50.0009, -3.76701e-05, 0, 3.76701e-05, 50.0009, 0, 298.913, 64.4765 )
+transform = Transform( 50, 0, 0, 0, 50.0009, -3.67165e-05, 0, 3.67165e-05, 50.0009, 0, 298.913, 64.4765 )
 
 [node name="LocalPosLabel" parent="ScreenCenter/Millimeters/AxisArrows" instance=ExtResource( 5 )]
 
@@ -68,7 +68,7 @@ update_scale = false
 
 [node name="StereoCamera" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 0.993853, -0.110706, 0, 0.110706, 0.993853, 0.103, 0.02, -0.002 )
-stereo_offset = 0.037
+stereo_offset = 0.093
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"

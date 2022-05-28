@@ -24,15 +24,15 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("ui_down"):
+	if event.is_action_pressed("plunger"):
 		pull_audio_player.play()
-	elif event.is_action_released("ui_down"):
+	elif event.is_action_released("plunger"):
 		release_audio_player.play()
 		pull_audio_player.stop()
 
 
 func _physics_process(delta):
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("plunger"):
 		if move_progress < 1:
 			move_progress += windup_speed / Engine.time_scale / max_distance * delta
 			pull_audio_player.pitch_scale = move_progress + .5

@@ -87,26 +87,6 @@ func _ready():
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		match event.scancode:
-			KEY_0:
-				set_state(TESTING, true)
-			KEY_1:
-				set_state(PREGAME, true)
-			KEY_2:
-				set_state(EXPOSITION, true)
-			KEY_3:
-				set_state(ENEMY_FLEET, true)
-			KEY_4:
-				set_state(BOSS_APPEARS, true)
-			KEY_5:
-				set_state(MISSILES, true)
-			KEY_6:
-				set_state(TREX, true)
-			KEY_7:
-				set_state(BLACK_HOLE, true)
-			KEY_8:
-				set_state(ECLIPSE, true)
-			KEY_9:
-				set_state(VICTORY, true)
 			_:
 				handle_event(Event.START_INPUT)
 
