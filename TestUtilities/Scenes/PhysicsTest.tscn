@@ -11,9 +11,6 @@
 [ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=11]
 
-
-
-
 [node name="PhysicsTest" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]

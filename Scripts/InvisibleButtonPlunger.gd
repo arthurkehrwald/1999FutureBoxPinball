@@ -1,3 +1,4 @@
+class_name InvisibleButtonPlunger
 extends Area
 
 export var IMPULSE_STRENGTH = 20.0

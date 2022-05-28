@@ -1,3 +1,4 @@
+class_name Roller
 extends "res://Scripts/Projectile.gd"
 # Can teleport and adjust gravity scale based on speed and grounded
 # status. Deletes itself when it gets stuck. Abstract base class for

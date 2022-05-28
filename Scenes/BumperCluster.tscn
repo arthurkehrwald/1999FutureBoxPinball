@@ -5,6 +5,7 @@
 
 [node name="BumperCluster" type="Spatial"]
 script = ExtResource( 4 )
+MAX_AUTO_AIM_ANGLE = 180.0
 
 [node name="Bumper" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.531239, 0, -0.289469 )
