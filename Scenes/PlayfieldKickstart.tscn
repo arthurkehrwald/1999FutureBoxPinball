@@ -83,7 +83,7 @@ transform = Transform( 0.866026, 0, 0.5, 0, 1, -7.45058e-09, -0.5, 0, 0.866026, 
 IMPULSE_STRENGTH = 50
 
 [node name="PinballSpawn" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.289, 0.35, 5.36675 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.289, 0.35, 5.505 )
 
 [node name="PlayerShip" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0381613, 7.60382 )
