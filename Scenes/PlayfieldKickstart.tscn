@@ -197,7 +197,7 @@ transform = Transform( 0.409382, 0, -0.912363, 0, 1, 0, 0.912363, 0, 0.409382, -
 transform = Transform( 0.409382, 0, 0.912363, 0, 1, 0, -0.912363, 0, 0.409382, 2.008, 0, 4.391 )
 
 [node name="MoonShop" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 4 )]
-transform = Transform( -0.7, 0, -2.28089e-07, -8.88178e-15, 0.7, 0, 2.28089e-07, 0, -0.7, -3.47713, 0.0652821, -3.53333 )
+transform = Transform( -1, -1.26883e-14, -3.89414e-07, -1.26883e-14, 1, 0, 3.89414e-07, 4.94099e-21, -1, -3.47713, 0.0652821, -3.53333 )
 
 [node name="CentralHUD3D" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 5 )]
 transform = Transform( 0.73, 0, 0, 0, -1.49012e-08, 0.73, 0, -0.73, -1.49012e-08, 0, 0.0619999, 4.084 )
