@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/PlayfieldBoxKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Import/Playfield_Blockout_Godot_03.tscn" type="PackedScene" id=2]
@@ -9,14 +9,12 @@
 [ext_resource path="res://Scenes/PlayerStatsHUD3D.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Stopper.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/InvisibleButtonPlunger.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Plunger.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/FlipperV2_R.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/PinballSpawn.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/WireRamp.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/FlipperV2.tscn" type="PackedScene" id=38]
-
-[sub_resource type="CubeMesh" id=1]
 
 [sub_resource type="Curve3D" id=2]
 _data = {
@@ -84,17 +82,8 @@ transform = Transform( 0.866026, 0, -0.5, 0, 1, -7.45058e-09, 0.5, 0, 0.866027, 
 transform = Transform( 0.866026, 0, 0.5, 0, 1, -7.45058e-09, -0.5, 0, 0.866026, 1.268, 0, 6.613 )
 IMPULSE_STRENGTH = 50
 
-[node name="Plunger" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, -7.45058e-09, 0, 7.45058e-09, 1, 4.329, 0.0056631, 6.27874 )
-
 [node name="PinballSpawn" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.28925, 0.919748, 5.71257 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Playfield_Blockout_Godot_03/Center/PinballSpawn"]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.100001, -0.128808, 0.0112691 )
-visible = false
-mesh = SubResource( 1 )
-material/0 = null
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.289, 0.35, 5.36675 )
 
 [node name="PlayerShip" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0381613, 7.60382 )
@@ -219,7 +208,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 7.25 )
 [node name="PlayerStatsHUD3D" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 7 )]
 transform = Transform( 0.8, 0, 0, 0, -1.2666e-07, 0.8, 0, -0.8, -1.2666e-07, 3.88829, 0.5, 8 )
 
-[node name="Spatial" type="Spatial" parent="Playfield_Blockout_Godot_03/Center"]
+[node name="InvisibleButtonPlunger" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.34949, 5.08479e-06, 6.05119 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.450597, 0.892727, 0, -0.892727, 0.450597, 0, 0, 0 )

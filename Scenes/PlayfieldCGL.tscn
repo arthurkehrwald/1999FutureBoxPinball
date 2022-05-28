@@ -19,7 +19,7 @@
 [ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/WireRamp.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/PinballSpawn.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/PinballSpawnWithPushArea.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/TransmissionHUD3D.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/BossRampL.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/MoonShop.tscn" type="PackedScene" id=23]
@@ -374,9 +374,6 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="SymmetryAxis/LowerRightGuide"]
 shape = SubResource( 16 )
 
-[node name="PinballSpawn" parent="SymmetryAxis/LowerRightGuide" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, -6.70552e-08, 0, 6.70552e-08, 1, -0.233283, 0.385462, -2.4 )
-
 [node name="PlungerLaneGate" type="Spatial" parent="SymmetryAxis/LowerRightGuide"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0999999, -2.98023e-08, -4.79999 )
 script = ExtResource( 43 )
@@ -427,6 +424,9 @@ transform = Transform( 1, 0, 0, 0, 6.77422, 0, 0, 5.96046e-08, 6.77421, 0.246778
 
 [node name="Spatial2" type="Spatial" parent="SymmetryAxis/LowerRightGuide/BumperCluster"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.603222, 0, -0.0194807 )
+
+[node name="PinballSpawnWithPushArea" parent="SymmetryAxis/LowerRightGuide" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, -6.70552e-08, 0, 6.70552e-08, 1, -0.233283, 0.385462, -2.4 )
 
 [node name="DropTargetsGuide" type="StaticBody" parent="SymmetryAxis"]
 transform = Transform( 0.999855, 8.64064e-10, 0.0170162, 8.14907e-10, 1, -8.19564e-08, -0.0170162, 9.68575e-08, 0.999856, 3.17045, -0.000128567, 1.73757 )

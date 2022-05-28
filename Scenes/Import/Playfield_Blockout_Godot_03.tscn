@@ -76,3 +76,6 @@ material/0 = ExtResource( 2 )
 [node name="Louioe_Top_Curve" parent="." index="17"]
 cast_shadow = 0
 material/0 = ExtResource( 2 )
+
+[node name="PlungerLanePlug" parent="." index="40"]
+material/0 = ExtResource( 2 )
