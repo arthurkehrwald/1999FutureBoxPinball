@@ -6,19 +6,13 @@ export var LASER_TREX_HEALTH_PERCENT = 60.0
 export var BLACK_HOLE_HEALTH_PERCENT = 40.0
 export var ECLIPSE_HEALTH_PERCENT = 20.0
 
-onready var health_bar = get_node("BossBar3D/Viewport/BossBar/HealthBar")
-onready var explosion = get_node("BossExplosionFX")
-
 func _enter_tree():
 	Globals.boss = self
 
 
 func _ready():
 	connect("health_changed", self, "on_health_changed")
-	connect("health_changed", health_bar, "update_value")
-	connect("is_vulnerable_changed", health_bar.get_parent(), "set_visible")
 	connect("death", GameState, "handle_event", [GameState.Event.BOSS_DIED])
-	connect("death", explosion, "activate")
 
 
 func on_health_changed(current_health, old_health, max_health):

@@ -42,7 +42,7 @@ texture_under = null
 texture_progress = ExtResource( 4 )
 nine_patch_stretch = true
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="Portrait" type="TextureRect" parent="."]
 margin_left = -72.7344
 margin_top = -48.5225
 margin_right = 333.266

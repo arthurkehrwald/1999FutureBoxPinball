@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/BossExplosionFX.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/BumperCluster.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/BossBar3D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/StraightShield.tscn" type="PackedScene" id=5]
+
+[node name="BossSetup" type="Spatial"]
+
+[node name="Boss" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+
+[node name="BossExplosionFX" parent="." instance=ExtResource( 1 )]
+
+[node name="BumperCluster" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1.2216, 0, -0.444626, 0, 1.3, 0, 0.444626, 0, 1.2216, 0, 0, 0 )
+BUMP_LIMIT = 15
+
+[node name="Bumper" parent="BumperCluster" index="0"]
+transform = Transform( 1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0.531239, 0, -0.289469 )
+SOLID_WHEN_DISABLED = false
+
+[node name="Bumper2" parent="BumperCluster" index="1"]
+transform = Transform( 1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.0115545, 0, 0.569575 )
+SOLID_WHEN_DISABLED = false
+
+[node name="Bumper3" parent="BumperCluster" index="2"]
+transform = Transform( 1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.53493, 0, -0.281001 )
+SOLID_WHEN_DISABLED = false
+
+[node name="BossBar3D" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.1, -2.6 )
+
+[node name="StraightShield" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.4 )
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+[connection signal="death" from="Boss" to="BossExplosionFX" method="_on_Boss_death"]
+[connection signal="health_changed" from="Boss" to="BossBar3D" method="_on_Boss_health_changed"]
+[connection signal="is_vulnerable_changed" from="Boss" to="BossBar3D" method="_on_Boss_is_vulnerable_changed"]
+[connection signal="health_changed" from="StraightShield" to="BossBar3D" method="_on_Shield_health_changed"]
+[connection signal="is_vulnerable_changed" from="StraightShield" to="BossBar3D" method="_on_Shield_is_vulnerable_changed"]
+
+[editable path="BumperCluster"]

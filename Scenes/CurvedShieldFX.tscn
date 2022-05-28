@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Materials/boss_shield_shader.tres" type="Shader" id=1]
+[ext_resource path="res://Meshes/Sebasbossshield.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Scripts/CurvedShieldFX.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/FadeProgress = null
+
+[node name="CurvedShieldFX" type="MeshInstance"]
+transform = Transform( -1.1, 0, 4.28356e-07, 0, 1.1, 0, -4.28356e-07, 0, -1.1, -0.539992, 1.44041, -0.340597 )
+mesh = ExtResource( 2 )
+material/0 = SubResource( 1 )
+script = ExtResource( 3 )

@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Shield.gd" type="Script" id=3]
+
+[node name="Shield" type="StaticBody"]
+collision_layer = 3
+collision_mask = 0
+script = ExtResource( 3 )
+MAX_HEALTH = 30.0
+DIRECT_HIT_SPEED_RELEVANCE = 1.0
+BOMBS_EXPLODE_ON_IMPACT = true
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+
+[node name="RegenerationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BehindArea" type="Area" parent="."]
+monitorable = false
+collision_mask = 0
+
+[node name="FrontArea" type="Area" parent="."]
+monitorable = false
+collision_mask = 0

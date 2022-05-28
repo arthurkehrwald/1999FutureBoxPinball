@@ -62,7 +62,6 @@ func on_Bumper_bumped(bumper, bumped_body):
 	if TIME_LIMIT > 0 and disable_timer.is_stopped():
 		disable_timer.start(TIME_LIMIT)
 	bump_count += 1
-	print("bump count: " + str(bump_count))
 	if BUMP_LIMIT > 0 and bump_count >= BUMP_LIMIT:
 		toggle_bumpers(false)
 	emit_signal("bumped", self, bumper, bumped_body)
