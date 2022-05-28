@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/PlayfieldKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/StereoCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TestUtilities/Scenes/LocalPosLabel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
@@ -42,7 +42,7 @@ visible = false
 transform = Transform( 0.023, 0, 0, 0, 0.023, 0, 0, 0, 0.023, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 50.0009, -3.67165e-05, 0, 3.67165e-05, 50.0009, 0, 298.913, 64.4765 )
+transform = Transform( 50, 0, 0, 0, 50.0009, -3.38554e-05, 0, 3.38554e-05, 50.0009, 0, 298.913, 64.4765 )
 
 [node name="LocalPosLabel" parent="ScreenCenter/Millimeters/AxisArrows" instance=ExtResource( 5 )]
 
@@ -60,15 +60,14 @@ transform = Transform( 14.5, 0, 0, 0, 18.577, 0, 0, 0, 15.756, 0, 6.875, 0.608 )
 
 [node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpaceBam" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.3411e-07, 0, 0, 1, 0, 5.96046e-08, 0.0555319 )
+enabled = false
 
 [node name="RemoteTransform" type="RemoteTransform" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam"]
 remote_path = NodePath("../../../Millimeters/AxisArrows")
 update_rotation = false
 update_scale = false
 
-[node name="StereoCamera" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 0.993853, -0.110706, 0, 0.110706, 0.993853, 0.103, 0.02, -0.002 )
-stereo_offset = 0.093
+[node name="OffAxisCamera" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 3 )]
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"
