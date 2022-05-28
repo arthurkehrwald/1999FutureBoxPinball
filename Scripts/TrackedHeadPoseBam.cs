@@ -12,48 +12,76 @@ public class TrackedHeadPoseBam : Spatial
     [Export]
     private bool ignoreZ = false;
     [Export]
-    private bool isTracking = true;
+    private bool enabled = true;
 
-    private bool isReady = false;
+    private enum Status { Idle, Initializing, Tracking }
+    private Status status = Status.Idle;
 
-    public override void _Ready()
+    private void StartTracker()
     {
+        if (status != Status.Idle)
+            return;
         BAM_Tracker.init();
         GD.Print("Starting BAM client...");
         Translation = new Vector3 (0f, 5f, 0f);
+        status = Status.Initializing;
+    }
 
+    private void StopTracker()
+    {
+        BAM_Tracker.release();
+        GD.Print("BAM Client closed.");
+        status = Status.Idle;
     }
 
     public override void _Process(float delta)
     {
-        
-        if (!isReady)
+        if (enabled)
         {
-            isReady = BAM_Tracker.isReady();    
-            if (isReady)
+            switch (status)
             {
-                GD.Print("BAM client started.");
+                case Status.Idle:
+                    StartTracker();
+                    break;
+                case Status.Initializing:
+                    if (BAM_Tracker.isReady())
+                    {
+                        GD.Print("BAM client started.");
+                        status = Status.Tracking;
+                    }
+                    break;
+                case Status.Tracking:
+                    ApplyTrackingData();
+                    break;
             }
         }
-
-        if (isReady && isTracking)
+        else
         {
-            BAM_Tracker.data_struct data = BAM_Tracker.getData();
-            Vector3 pose = new Vector3((float)data.EyeVecX, (float)data.EyeVecZ, -(float)data.EyeVecY) * .001f;
-            if (ignoreX)
-                pose.x = 0f;
-            if (ignoreY)
-                pose.y = 0f;
-            if (ignoreZ)
-                pose.z = 0f;
-            Translation = pose;
+            if (status != Status.Idle)
+            {
+                StopTracker();
+            }
         }
+    }
+
+    private void ApplyTrackingData()
+    {
+        if (status != Status.Tracking)
+            return;
+        BAM_Tracker.data_struct data = BAM_Tracker.getData();
+        Vector3 pose = new Vector3((float)data.EyeVecX, (float)data.EyeVecZ, -(float)data.EyeVecY) * .001f;
+        if (ignoreX)
+            pose.x = 0f;
+        if (ignoreY)
+            pose.y = 0f;
+        if (ignoreZ)
+            pose.z = 0f;
+        Translation = pose;
     }
 
     public override void _ExitTree()
     {
-        BAM_Tracker.release();
-        GD.Print("BAM Client closed.");
+        StopTracker();
     }
 }
 
