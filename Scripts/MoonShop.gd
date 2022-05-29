@@ -20,7 +20,6 @@ export var MONEY_INCREASE_TO_OPEN = 200.0
 export var SPIN_SPEED_MULTIPLIER = .3
 export var MAX_SPIN_SPEED = 5.0
 export var SPIN_SPEED_DECAY = .5
-export var IMPULSE_STRENGTH = 3.0
 
 var is_open = false setget set_is_open
 var unlock_progress = 1
