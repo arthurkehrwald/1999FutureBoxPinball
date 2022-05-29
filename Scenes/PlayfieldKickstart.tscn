@@ -244,7 +244,7 @@ transform = Transform( 0.8, 0, 0, 0, -3.72529e-08, 1, 0, -0.8, -4.47035e-08, -4.
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326087, 0, 0 )
 
 [node name="Stopper" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 7.25 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 6.95921 )
 
 [node name="PlayerStatsHUD3D" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 7 )]
 transform = Transform( 0.8, 0, 0, 0, -1.2666e-07, 0.8, 0, -0.8, -1.2666e-07, 3.88829, 0.5, 8 )
@@ -288,7 +288,7 @@ IS_VULNERABLE_PER_STAGE = {
 }
 
 [node name="BossMissileGun" parent="Playfield_Blockout_Godot_03/Center/BossSetup" index="5"]
-transform = Transform( 1, 7.10543e-15, -5.68434e-14, -3.55271e-15, 1, 0, 0, 0, 1, -5.96046e-08, 0.204196, -0.396812 )
+transform = Transform( 1, 8.88178e-15, -7.10543e-14, -4.44089e-15, 1, 0, 0, 0, 1, -7.45058e-08, 0.204196, -0.396811 )
 IS_SHOOTING_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
