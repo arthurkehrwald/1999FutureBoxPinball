@@ -61,6 +61,7 @@ transform = Transform( 14.5, 0, 0, 0, 18.577, 0, 0, 0, 15.756, 0, 6.875, 0.608 )
 
 [node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpaceBam" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.3411e-07, 0, 0, 1, 0, 5.96046e-08, 0.0555319 )
+enabled = false
 
 [node name="RemoteTransform" type="RemoteTransform" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam"]
 remote_path = NodePath("../../../Millimeters/AxisArrows")

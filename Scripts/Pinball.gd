@@ -56,6 +56,15 @@ func _physics_process(delta):
 			apply_central_impulse(dir * REMOTE_CONTROL_STRENGTH * delta)
 
 
+func _input(event):
+	if event.is_action_pressed("debug_delete_all_balls") and event.is_pressed():
+		self.queue_free()
+
+
+func _exit_tree():
+	set_is_accessible_to_player(false)
+
+
 func on_visibility_changed(value):
 	arrow_sprite.set_visible(!value)
 
