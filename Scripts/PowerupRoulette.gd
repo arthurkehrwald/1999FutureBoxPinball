@@ -4,12 +4,10 @@ signal selected_repair(hp_per_sec)
 signal selected_stopper
 signal selected_turret
 signal selected_remote
-signal selected_boost
 signal repair_expired(hp_per_sec)
 signal stopper_expired
 signal turret_expired
 signal remote_expired
-signal boost_expired
 
 enum {
 	INACTIVE,
@@ -21,43 +19,37 @@ enum Powerup {
 	REPAIR,
 	STOPPER,
 	TURRET,
-	REMOTE,
-	BOOST
+	REMOTE
 }
 
 const ICON_IMGS = {
 	Powerup.REPAIR: preload("res://HUD/repair_icon.png"),
 	Powerup.STOPPER: preload("res://HUD/stopper_icon.png"),
 	Powerup.TURRET: preload("res://HUD/turret_icon.png"),
-	Powerup.REMOTE: preload("res://HUD/remote_icon.png"),
-	Powerup.BOOST: preload("res://HUD/boost_icon.png")
+	Powerup.REMOTE: preload("res://HUD/remote_icon.png")
 }
 const INSTRUCTION_IMGS = {
 	Powerup.REPAIR: null,
 	Powerup.STOPPER: null,
 	Powerup.TURRET: preload("res://HUD/turret_instructions.png"),
-	Powerup.REMOTE: preload("res://HUD/remote_instructions.png"),
-	Powerup.BOOST: preload("res://HUD/boost_instructions.png")
+	Powerup.REMOTE: preload("res://HUD/remote_instructions.png")
 }
 const POWERUP_STR_TO_ENUM = {
 	"Repair": Powerup.REPAIR,
 	"Stopper": Powerup.STOPPER,
 	"Turret": Powerup.TURRET,
-	"Remote": Powerup.REMOTE,
-	"Boost": Powerup.BOOST
+	"Remote": Powerup.REMOTE
 }
 const POWERUP_ENUM_TO_STR = {
 	Powerup.REPAIR: "Repair",
 	Powerup.STOPPER: "Stopper",
 	Powerup.TURRET: "Turret",
-	Powerup.REMOTE: "Remote",
-	Powerup.BOOST: "Boost"
+	Powerup.REMOTE: "Remote"
 }
 const POWERUP_ODDS_STR = {
 	"Stopper": 1.0,
 	"Turret": 1.0,
-	"Remote": 1.0,
-	"Boost": 1.0
+	"Remote": 1.0
 }
 const ICONS_VISIBLE_AT_A_TIME = 4
 
@@ -79,8 +71,7 @@ export var POWERUP_DURATIONS = {
 	"Repair": 5.0,
 	"Stopper": 30.0,
 	"Turret": 10.0,
-	"Remote": 30.0,
-	"Boost": 30.0
+	"Remote": 30.0
 }
 export var DISPLAY_POWERUP_NAME_WHILE_SPINNING = false
 
@@ -113,7 +104,7 @@ func _ready():
 	randomize()
 	if Globals.player_ship == null:
 		print("[Powerup Roulette] can't find player ship. Repair powerup unavailable.")
-	for powerup_str in POWERUP_DURATIONS:
+	for powerup_str in POWERUP_DURATIONS.keys():
 		var powerup_type = POWERUP_STR_TO_ENUM[powerup_str]
 		var timer = Timer.new()
 		timer.one_shot = true
@@ -209,8 +200,6 @@ func activate_powerup(powerup):
 				emit_signal("selected_turret")
 			Powerup.REMOTE:
 				emit_signal("selected_remote")
-			Powerup.BOOST: 
-				emit_signal("selected_boost")
 		GameState.handle_event(GameState.Event.SHOP_USED)
 
 
@@ -289,8 +278,7 @@ func display_instructions(powerup):
 	time_bar.max_value = timer_on_time_bar.wait_time * 100
 	name_label.visible = true
 	icons.visible = false
-	if powerup != Powerup.BOOST:
-		selected_icon_rect.visible = true
+	selected_icon_rect.visible = true
 	instruction_rect.visible = true
 	time_bar.visible = true
 	
@@ -309,8 +297,6 @@ func on_PowerupTimer_timeout(expired_powerup):
 			emit_signal("turret_expired")
 		Powerup.REMOTE:
 			emit_signal("remote_expired")
-		Powerup.BOOST: 
-			emit_signal("boost_expired")
 	var active_powerup_with_least_time_left = 0
 	var least_time_left = 0
 	for key in powerup_timers:
