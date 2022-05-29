@@ -29,6 +29,8 @@ public class TrackedHeadPoseBam : Spatial
 
     private void StopTracker()
     {
+        if (status == Status.Idle)
+            return;
         BAM_Tracker.release();
         GD.Print("BAM Client closed.");
         status = Status.Idle;
