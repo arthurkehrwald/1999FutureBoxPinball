@@ -229,6 +229,7 @@ func calc_odds():
 	if sum_of_non_repair_odds > 0:
 		for key in POWERUP_ODDS_PER_STAGE[GameState.current_state.NAME]:
 			var chance = POWERUP_ODDS_PER_STAGE[GameState.current_state.NAME][key]
+			key = POWERUP_STR_TO_ENUM[key]
 			current_powerup_odds[key] = chance / sum_of_non_repair_odds * (1 - repair_chance)
 	return current_powerup_odds
 
