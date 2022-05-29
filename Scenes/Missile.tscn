@@ -57,13 +57,15 @@ albedo_color = Color( 0.878431, 0.564706, 0.286275, 1 )
 extents = Vector3( 0.3, 0.23, 0.51 )
 
 [node name="Missile" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -5 )
 mass = 5.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 linear_damp = 0.4
 angular_damp = 0.2
 script = ExtResource( 3 )
+SPEED = 0.7
+DO_INTRO_ANIM = false
+EXPLODE_DELAY = 1.5
 
 [node name="CollisionShape" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, -0.0250001 )
@@ -131,7 +133,11 @@ material/0 = SubResource( 10 )
 
 [node name="HitregArea" parent="." index="9"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, -0.0250001 )
+monitoring = false
 
 [node name="CollisionShape" parent="HitregArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 11 )
+
+[node name="ExplodeTimer" type="Timer" parent="." index="10"]
+one_shot = true

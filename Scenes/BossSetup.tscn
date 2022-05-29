@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/BossExplosionFX.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/BumperCluster.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/BossBar3D.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/StraightShield.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/BossMissileGun.tscn" type="PackedScene" id=6]
 
 [node name="BossSetup" type="Spatial"]
 
@@ -54,6 +55,22 @@ IS_VULNERABLE_PER_STAGE = {
 "2-Exposition": false,
 "3-EnemyFleet": false,
 "4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+
+[node name="BossMissileGun" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.204196, -1.18805 )
+IS_SHOOTING_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": false,
 "5-Missiles": true,
 "6-Trex": true,
 "7-BlackHole": true,

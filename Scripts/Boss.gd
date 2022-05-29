@@ -1,7 +1,7 @@
 class_name Boss
 extends "res://Scripts/Damageable.gd"
 
-export var MISSILES_HEALTH_PERCENT = 80.0
+export var MISSILES_HEALTH_PERCENT = 50.0
 export var LASER_TREX_HEALTH_PERCENT = 60.0
 export var BLACK_HOLE_HEALTH_PERCENT = 40.0
 export var ECLIPSE_HEALTH_PERCENT = 20.0

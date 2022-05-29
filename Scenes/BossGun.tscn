@@ -8,6 +8,8 @@
 monitorable = false
 collision_mask = 0
 script = ExtResource( 2 )
+SECONDS_BETWEEN_SHOTS = 20.0
+IS_STUNNABLE = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 

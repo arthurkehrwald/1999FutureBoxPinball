@@ -287,6 +287,21 @@ IS_VULNERABLE_PER_STAGE = {
 "9-Victory": false
 }
 
+[node name="BossMissileGun" parent="Playfield_Blockout_Godot_03/Center/BossSetup" index="5"]
+IS_SHOOTING_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": false,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+
 [node name="MultiballShip" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 12 )]
 transform = Transform( -0.627507, 0.526541, -0.573577, 0.642788, 0.766045, -1.49012e-08, 0.439386, -0.368688, -0.819153, 2.56042, 0.448842, -6.0174 )
 

@@ -1,12 +1,16 @@
 extends "res://Scripts/BossGun.gd"
 
+export(bool) var missiles_ignore_gun_rotation = false
+
 var missile_scene = preload("res://Scenes/Missile.tscn")
 
-onready var missile_basis_node = muzzle
+var missile_basis_node
 
 func _ready():
-	if Globals.boss != null:
+	if missiles_ignore_gun_rotation and Globals.boss:
 		missile_basis_node = Globals.boss
+	else:
+		missile_basis_node = muzzle
 
 
 func shoot():

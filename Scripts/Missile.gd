@@ -10,6 +10,8 @@ export var SPEED = 1.0
 export var TURN_FORCE = .3
 export var MAX_TURN_SPEED = 5.0
 export var VERTICAL_GUIDANCE = false
+export var DO_INTRO_ANIM = true
+export var EXPLODE_DELAY = 2.5
 
 var start_basis = Basis.IDENTITY
 var target_pos = Vector3.ZERO
@@ -22,14 +24,23 @@ onready var right_exhaust_flame = get_node("SteeringFlames/RightExhaustFlame")
 onready var bottom_exhaust_flame = get_node("SteeringFlames/BottomExhaustFlame")
 onready var top_exhaust_flame = get_node("SteeringFlames/TopExhaustFlame")
 onready var guidance_update_timer = get_node("GuidanceUpdateTimer")
+onready var explode_timer = get_node("ExplodeTimer")
+
+
+func on_ExplodeTimer_timeout():
+	explode()
 
 
 func _ready():
 	add_to_group("missiles")
 	guidance_update_timer.connect("timeout", self, "on_GuidanceUpdateTimer_timeout")
-	animation_player.connect("animation_finished", self, "on_AnimationPlayer_animation_finished")
-	animation_player.play("missile_launch", -1, SPEED)
-	set_visible(false)
+	explode_timer.connect("timeout", self, "on_ExplodeTimer_timeout")
+	if DO_INTRO_ANIM:
+		animation_player.connect("animation_finished", self, "on_AnimationPlayer_animation_finished")
+		animation_player.play("missile_launch", -1, SPEED)
+		set_visible(false)
+	else:
+		start_moving_towards_player_ship()
 
 
 func _process(_delta):
@@ -49,6 +60,10 @@ func explode():
 
 
 func on_AnimationPlayer_animation_finished(_animation_name):
+	start_moving_towards_player_ship()
+
+func start_moving_towards_player_ship():
+	hitreg_area.monitoring = true
 	start_basis = get_global_transform().basis.orthonormalized()
 	apply_central_impulse(-get_global_transform().basis.z * SPEED * 5)
 	if Globals.player_ship != null:
@@ -65,8 +80,7 @@ func on_body_entered(body):
 		return
 	if body.is_in_group("projectiles"):
 		gravity_scale = .3
-	else:
-		explode()
+		explode_timer.start(EXPLODE_DELAY)
 
 
 func on_GuidanceUpdateTimer_timeout():
