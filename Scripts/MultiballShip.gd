@@ -1,30 +1,23 @@
 extends Spatial
 
-const SHOT_DELAY = 1.0
+const SHOT_DELAY = 2.0
 
 export var SHOT_SPEED = 5.0
 
 var pinballs_locked = 0
 var next_muzzle_position = Vector3(0, 0, 0)
 var loaded_pinballs = []
-var muzzle_transforms = []
 
-onready var entrance_area = get_node("EntranceArea")
-onready var exit_area = get_node("ExitArea")
-onready var static_body = get_node("StaticBody")
-onready var muzzle_a = get_node("ShipMesh/MuzzleA")
-onready var muzzle_b = get_node("ShipMesh/MuzzleB")
-onready var muzzle_c = get_node("ShipMesh/MuzzleC")
+onready var entrance_area = get_node("EntranceArea") as Area
+onready var exit_area = get_node("ExitArea") as Area
+onready var static_body = get_node("StaticBody") as StaticBody
+onready var muzzle = get_node("Muzzle") as Spatial
 
 
 func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
 	entrance_area.connect("body_entered", self, "on_EntranceArea_body_entered")
 	exit_area.connect("body_exited", self, "on_ExitArea_body_exited")
-	muzzle_transforms.resize(3)
-	muzzle_transforms[0] = muzzle_a.get_global_transform()
-	muzzle_transforms[1] = muzzle_b.get_global_transform()
-	muzzle_transforms[2] = muzzle_c.get_global_transform()
 
 
 func on_EntranceArea_body_entered(body):
@@ -37,22 +30,31 @@ func on_EntranceArea_body_entered(body):
 	body.set_locked(true)
 	body.add_collision_exception_with(static_body)
 	static_body.add_collision_exception_with(body)
-	body.teleport(muzzle_transforms[pinballs_locked].origin)
-	pinballs_locked += 1	
+	body.teleport(muzzle.global_transform.origin)
+	pinballs_locked += 1
 	if pinballs_locked >= 3:
+		entrance_area.set_deferred("monitorable", false)
+		entrance_area.set_deferred("monitoring", false)
 		
 		yield(get_tree().create_timer(SHOT_DELAY), "timeout")
 		
-		pinballs_locked = 0
-		for i in range(3):
+		Announcer.say("multiball")
+		PoolManager.request(PoolManager.MULTIBALL_SHOT, muzzle.global_transform.origin)
+		for i in range(pinballs_locked):
 			if loaded_pinballs[i].get_ref():
 				loaded_pinballs[i].get_ref().set_visible(true)
 				loaded_pinballs[i].get_ref().set_locked(false)
-				var impulse = -muzzle_transforms[i].basis.z.normalized() * SHOT_SPEED
+				var impulse = -muzzle.global_transform.basis.z.normalized() * SHOT_SPEED
 				loaded_pinballs[i].get_ref().apply_central_impulse(impulse)
 				loaded_pinballs[i].get_ref().set_is_accessible_to_player(true)
-		Announcer.say("multiball")
-		PoolManager.request(PoolManager.MULTIBALL_SHOT, muzzle_transforms[0].origin)
+				pinballs_locked -= 1
+				
+				yield(get_tree().create_timer(SHOT_DELAY), "timeout")
+				
+		entrance_area.set_deferred("monitorable", true)
+		entrance_area.set_deferred("monitoring", true)
+		pinballs_locked = 0
+		loaded_pinballs.clear()
 	else:
 		body.set_is_accessible_to_player(false)
 		Announcer.say("ball_locked")

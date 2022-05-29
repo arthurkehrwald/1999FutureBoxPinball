@@ -49,10 +49,11 @@ func _physics_process(delta):
 
 
 func set_rot_progress(value):
+	value = clamp(value, 0, 1)
 	if value == rotation_progress:
 		return
 	var prev = rotation_progress
-	rotation_progress = clamp(value, 0.0, 1.0)
+	rotation_progress = value
 	var new_rotation = Quat(start_transform.basis.orthonormalized()).slerp(max_transform.basis.orthonormalized(), rotation_progress)
 	set_transform(Transform(new_rotation, get_transform().origin))
 	if rotation_progress == 1 or rotation_progress == 0:
@@ -65,8 +66,6 @@ func set_rot_progress(value):
 		friction_area.set_deferred("monitoring", false)
 	if rotation_progress == 0:
 		set_physics_process(false)
-	
-	
 
 
 func on_ImpulseArea_body_entered(body):

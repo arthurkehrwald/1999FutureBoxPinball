@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Boss.gd" type="Script" id=1]
+[ext_resource path="res://Materials/3d_prints.tres" type="Material" id=2]
 [ext_resource path="res://Meshes/boss.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Scenes/BossBombGun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/BossMissileGun.tscn" type="PackedScene" id=7]
@@ -31,7 +32,7 @@ IS_VULNERABLE_PER_STAGE = {
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 4 )
-material/0 = null
+material/0 = ExtResource( 2 )
 
 [node name="BossBombGun" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.898794, -0.438371, 0, 0.438371, 0.898794, -1.15, 0.9, -1.25 )

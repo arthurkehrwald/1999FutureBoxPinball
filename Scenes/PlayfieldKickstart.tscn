@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/PlayfieldBoxKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Import/Playfield_Blockout_Godot_03.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/Stopper.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/InvisibleButtonPlunger.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/BossSetup.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/FlipperV2_R.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/PinballSpawn.tscn" type="PackedScene" id=23]
@@ -43,14 +44,14 @@ _data = {
 
 [sub_resource type="Curve3D" id=5]
 _data = {
-"points": PoolVector3Array( -0.73895, 0.000147194, 1.87507, 0.73895, -0.000147194, -1.87507, 0.214862, 0.235038, 0.246611, 0.0203929, -0.628844, 0.570536, -0.0203929, 0.628844, -0.570536, 0.540718, 0.771479, -2.86652 ),
+"points": PoolVector3Array( -0.73895, 0.000147194, 1.87507, 0.73895, -0.000147194, -1.87507, 0.214862, 0.235038, 0.246611, 0.0203929, -0.628844, 0.570536, -0.0203929, 0.628844, -0.570536, 0.506757, 0.752901, -2.55948 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
 [sub_resource type="Curve3D" id=6]
 _data = {
-"points": PoolVector3Array( -0.262009, 0.00178811, 2.02344, 0.262009, -0.00178811, -2.02344, 0.131429, 0.170385, 0.35644, 0.0323749, -0.135524, 0.246084, -0.0323749, 0.135524, -0.246084, 0.119821, 0.374049, -2.4507, 0, 0, 0, 0, 0, 0, 0.0867257, 0.78614, -2.87272 ),
-"tilts": PoolRealArray( 0, 0, 0 )
+"points": PoolVector3Array( -0.262009, 0.00178811, 2.02344, 0.262009, -0.00178811, -2.02344, 0.131429, 0.170385, 0.35644, 0, 0, 0, 0, 0, 0, 0.109554, 0.780605, -2.43549 ),
+"tilts": PoolRealArray( 0, 0 )
 }
 
 [sub_resource type="Curve3D" id=7]
@@ -68,6 +69,12 @@ _data = {
 [sub_resource type="Curve3D" id=9]
 _data = {
 "points": PoolVector3Array( -0.384317, -0.160463, 1.39638, 0.384317, 0.160463, -1.39638, -0.957448, 0.194658, 1.13687, -0.281806, 0.102131, -1.53649, 0.281806, -0.102131, 1.53649, 2.58536, 0.147334, 1.12853 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=10]
+_data = {
+"points": PoolVector3Array( 0.483779, -0.299698, -0.195076, -0.483779, 0.299698, 0.195076, -0.00754893, 1.18903, -0.0544853, 0, 0, 0, 0.281806, -0.102131, 1.53649, -0.81629, 1.2737, 0.775506 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
@@ -165,7 +172,7 @@ curve = SubResource( 5 )
 transform = Transform( -0.988953, 0, 0.148224, 1.86265e-09, 1, 1.49012e-08, -0.148224, 0, -0.988953, 0.124213, 0.198423, 0.360442 )
 
 [node name="ExitArea" parent="Playfield_Blockout_Godot_03/Center/WireRamp3-1" index="2"]
-transform = Transform( 0.998134, 1.74642e-09, 0.0610659, -2.79397e-09, 1, 0, -0.0610659, 0, 0.998134, 0.531565, 0.853501, -2.90004 )
+transform = Transform( 0.998134, 1.74642e-09, 0.0610659, -2.79397e-09, 1, 0, -0.0610659, 0, 0.998134, 0.549643, 0.853501, -2.60454 )
 
 [node name="WireRamp3-2" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.47805, 6.03846e-06, -2.46342 )
@@ -175,7 +182,7 @@ curve = SubResource( 6 )
 transform = Transform( -0.993695, 0, 0.112111, -1.86265e-09, 1, 0, -0.112111, 0, -0.993695, 0.122448, 0.201784, 0.365087 )
 
 [node name="ExitArea" parent="Playfield_Blockout_Godot_03/Center/WireRamp3-2" index="2"]
-transform = Transform( 0.99236, -4.64855e-10, 0.123376, 0, 1, 1.49012e-08, -0.123376, 0, 0.992361, 0.019573, 0.920225, -2.9414 )
+transform = Transform( 0.99236, -4.64855e-10, 0.123376, 0, 1, 1.49012e-08, -0.123376, 0, 0.992361, 0.0661218, 0.920225, -2.56699 )
 
 [node name="WireRamp4-1" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79659, 6.22869e-06, -3.33961 )
@@ -197,16 +204,26 @@ transform = Transform( -0.984564, 2.32789e-10, -0.175023, 0, 1, 7.45058e-09, 0.1
 [node name="ExitArea" parent="Playfield_Blockout_Godot_03/Center/WireRamp4-2" index="2"]
 transform = Transform( 1, 0, 0, 0, -4.47035e-08, 1, 0, -1, -4.47035e-08, -0.12271, 0.781431, 7.86756 )
 
-[node name="WireRamp" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 24 )]
+[node name="WireRamp5" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.781006, 1.15088e-06, -7.07809 )
 curve = SubResource( 9 )
 allow_exit_as_entrance = true
 
-[node name="EntranceArea" parent="Playfield_Blockout_Godot_03/Center/WireRamp" index="1"]
+[node name="EntranceArea" parent="Playfield_Blockout_Godot_03/Center/WireRamp5" index="1"]
 transform = Transform( -0.999792, -9.21067e-09, -0.020349, -9.31323e-09, 1, -7.45058e-09, 0.020349, -7.45058e-09, -0.999792, -0.947593, 0.200013, 1.19654 )
 
-[node name="ExitArea" parent="Playfield_Blockout_Godot_03/Center/WireRamp" index="2"]
+[node name="ExitArea" parent="Playfield_Blockout_Godot_03/Center/WireRamp5" index="2"]
 transform = Transform( -0.949765, -5.82257e-09, -0.312965, -3.72529e-09, 1, -7.45058e-09, 0.312965, 0, -0.949765, 2.58458, 0.199968, 1.13671 )
+
+[node name="WireRamp6" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88171, -0.00711099, -5.86553 )
+curve = SubResource( 10 )
+
+[node name="EntranceArea" parent="Playfield_Blockout_Godot_03/Center/WireRamp6" index="1"]
+transform = Transform( 1.2506, 0.6367, -0.851396, 0.275068, 1.83432, 0.387833, 2.71299, -0.479477, 0.353143, 0.17114, 1.30709, -0.194115 )
+
+[node name="ExitArea" parent="Playfield_Blockout_Godot_03/Center/WireRamp6" index="2"]
+transform = Transform( -0.813944, -0.211057, 0.54125, -0.0506327, 0.9539, 0.295825, -0.578734, 0.21338, -0.787107, -0.776176, 1.30286, 0.777132 )
 
 [node name="SlingshotTrigger" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 3 )]
 transform = Transform( 0.409382, 0, -0.912363, 0, 1, 0, 0.912363, 0, 0.409382, -1.9, 0, 4.391 )
@@ -239,7 +256,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.34949, 5.08479e-06, 6.05119 
 transform = Transform( -1, 0, -1.50996e-07, 2.66454e-15, 1, 0, 1.50996e-07, 0, -1, 0.093, -1.14087e-08, -4.73919 )
 
 [node name="Boss" parent="Playfield_Blockout_Godot_03/Center/BossSetup" index="0"]
-transform = Transform( 1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0.6, 0 )
+transform = Transform( 1, -2.13163e-14, -4.26326e-14, -1.77636e-15, 0.866025, -0.5, 0, 0.5, 0.866025, 0.00686078, 0.608112, 0.00515318 )
 IS_VULNERABLE_PER_STAGE = {
 "0-Testing": true,
 "1-Pregame": false,
@@ -270,6 +287,9 @@ IS_VULNERABLE_PER_STAGE = {
 "9-Victory": false
 }
 
+[node name="MultiballShip" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 12 )]
+transform = Transform( -0.627507, 0.526541, -0.573577, 0.642788, 0.766045, -1.49012e-08, 0.439386, -0.368688, -0.819153, 2.56042, 0.448842, -6.0174 )
+
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.450597, 0.892727, 0, -0.892727, 0.450597, 0, 0, 0 )
 __meta__ = {
@@ -292,6 +312,8 @@ __meta__ = {
 
 [editable path="Playfield_Blockout_Godot_03/Center/WireRamp4-2"]
 
-[editable path="Playfield_Blockout_Godot_03/Center/WireRamp"]
+[editable path="Playfield_Blockout_Godot_03/Center/WireRamp5"]
+
+[editable path="Playfield_Blockout_Godot_03/Center/WireRamp6"]
 
 [editable path="Playfield_Blockout_Godot_03/Center/BossSetup"]
