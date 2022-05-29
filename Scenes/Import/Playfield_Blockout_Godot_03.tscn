@@ -53,29 +53,21 @@ material/0 = ExtResource( 2 )
 cast_shadow = 0
 material/0 = ExtResource( 2 )
 
-[node name="Slingshot_L" parent="." index="12"]
+[node name="Princess_Curve" parent="." index="12"]
 cast_shadow = 0
 material/0 = ExtResource( 2 )
 
-[node name="Slingshot_R" parent="." index="13"]
+[node name="Plunger_Lane" parent="." index="13"]
 cast_shadow = 0
 material/0 = ExtResource( 2 )
 
-[node name="Princess_Curve" parent="." index="14"]
+[node name="Louie_Ramp" parent="." index="14"]
 cast_shadow = 0
 material/0 = ExtResource( 2 )
 
-[node name="Plunger_Lane" parent="." index="15"]
+[node name="Louioe_Top_Curve" parent="." index="15"]
 cast_shadow = 0
 material/0 = ExtResource( 2 )
 
-[node name="Louie_Ramp" parent="." index="16"]
-cast_shadow = 0
-material/0 = ExtResource( 2 )
-
-[node name="Louioe_Top_Curve" parent="." index="17"]
-cast_shadow = 0
-material/0 = ExtResource( 2 )
-
-[node name="PlungerLanePlug" parent="." index="40"]
+[node name="PlungerLanePlug" parent="." index="36"]
 material/0 = ExtResource( 2 )

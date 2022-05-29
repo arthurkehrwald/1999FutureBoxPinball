@@ -13,6 +13,7 @@ var rotation_progress = 0.0
 var input_code = ""
 
 onready var impulse_area = get_node("ImpulseArea")
+onready var friction_area = get_node("FrictionArea")
 onready var audio_player = get_node("AudioStreamPlayer")
 onready var start_basis = get_global_transform().basis
 
@@ -35,24 +36,37 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed(input_code):
-		impulse_area.set_deferred("monitoring", true)
 		set_physics_process(true)
 		audio_player.play()
 
 
-func _physics_process(delta):	
+func _physics_process(delta):
 	if Input.is_action_pressed(input_code):
-		if rotation_progress < 1:
-			rotation_progress += TURN_SPEED * delta
-		else:
-			impulse_area.set_deferred("monitoring", false)
+		if rotation_progress <= 1:
+			set_rot_progress(rotation_progress + TURN_SPEED * delta)
 	elif rotation_progress > 0:
-		rotation_progress -= TURN_SPEED * delta
-	else:
-		set_physics_process(false)
-	
+		set_rot_progress(rotation_progress - TURN_SPEED * delta)
+
+
+func set_rot_progress(value):
+	if value == rotation_progress:
+		return
+	var prev = rotation_progress
+	rotation_progress = clamp(value, 0.0, 1.0)
 	var new_rotation = Quat(start_transform.basis.orthonormalized()).slerp(max_transform.basis.orthonormalized(), rotation_progress)
 	set_transform(Transform(new_rotation, get_transform().origin))
+	if rotation_progress == 1 or rotation_progress == 0:
+			impulse_area.set_deferred("monitoring", false)
+	elif prev == 0 or prev == 1 and prev < rotation_progress:
+		impulse_area.set_deferred("monitoring", true)
+	if rotation_progress == 1:
+		friction_area.set_deferred("monitoring", true)
+	elif prev == 1:
+		friction_area.set_deferred("monitoring", false)
+	if rotation_progress == 0:
+		set_physics_process(false)
+	
+	
 
 
 func on_ImpulseArea_body_entered(body):

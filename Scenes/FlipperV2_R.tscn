@@ -13,13 +13,13 @@ transform = Transform( 0.997051, 0, 0.0844103, 0, 1.1, 0, -0.0767364, 0, 1.09676
 mesh = ExtResource( 3 )
 
 [node name="CollisionShape5" parent="." index="1"]
-transform = Transform( -0.8, 0, -2.7259e-07, 0, 1, 0, 3.11531e-07, 0, -0.7, 0, 0, 0 )
+transform = Transform( -0.9, 0, -2.7259e-07, 0, 1, 0, 3.50473e-07, 0, -0.7, 0, 0, 0 )
 
 [node name="ImpulseArea" parent="." index="2"]
-transform = Transform( 0.997707, 2.93631e-09, 0.0676844, -2.95502e-09, 1, 1.76306e-10, -0.0676844, -3.75911e-10, 0.997707, -0.48, 0.15, -0.19 )
+transform = Transform( 0.996918, 0, 0.0784591, 0, 1, 0, -0.0784591, 0, 0.996918, -0.45, 0.15, -0.2 )
 
-[node name="AudioStreamPlayer" parent="." index="3"]
+[node name="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 2 )
 
-[node name="Sprite3D" parent="." index="4"]
+[node name="Sprite3D" parent="." index="5"]
 transform = Transform( -0.720018, 2.08616e-07, -1.42109e-14, 3.82231e-14, 9.95948e-08, 0.611309, 2.38419e-07, 0.611309, -9.95948e-08, -0.442704, 0.313232, 0.00845331 )
