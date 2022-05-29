@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scenes/PlayfieldBoxKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Import/Playfield_Blockout_Godot_03.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Scenes/InvisibleButtonPlunger.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/BossSetup.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Materials/3d_prints.tres" type="Material" id=13]
+[ext_resource path="res://Meshes/Louie_01.obj" type="ArrayMesh" id=14]
 [ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/FlipperV2_R.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/PinballSpawn.tscn" type="PackedScene" id=23]
@@ -305,6 +307,11 @@ IS_SHOOTING_PER_STAGE = {
 
 [node name="MultiballShip" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 12 )]
 transform = Transform( -0.627507, 0.526541, -0.573577, 0.642788, 0.766045, -1.49012e-08, 0.439386, -0.368688, -0.819153, 2.56042, 0.448842, -6.0174 )
+
+[node name="LoopingLouie" type="MeshInstance" parent="Playfield_Blockout_Godot_03/Center"]
+transform = Transform( -1.24258, 0.437885, 1.79215, -0.0944287, 2.14282, -0.589038, -1.84246, -0.40514, -1.17847, 4.07215, 0.203476, 2.16642 )
+mesh = ExtResource( 14 )
+material/0 = ExtResource( 13 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.450597, 0.892727, 0, -0.892727, 0.450597, 0, 0, 0 )
