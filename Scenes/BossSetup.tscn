@@ -80,6 +80,7 @@ IS_SHOOTING_PER_STAGE = {
 [connection signal="death" from="Boss" to="BossExplosionFX" method="_on_Boss_death"]
 [connection signal="health_changed" from="Boss" to="BossBar3D" method="_on_Boss_health_changed"]
 [connection signal="is_vulnerable_changed" from="Boss" to="BossBar3D" method="_on_Boss_is_vulnerable_changed"]
+[connection signal="bumped" from="BumperCluster" to="Boss" method="_on_BumperCluster_bumped"]
 [connection signal="health_changed" from="StraightShield" to="BossBar3D" method="_on_Shield_health_changed"]
 [connection signal="is_vulnerable_changed" from="StraightShield" to="BossBar3D" method="_on_Shield_is_vulnerable_changed"]
 

@@ -1,6 +1,7 @@
 class_name Boss
 extends "res://Scripts/Damageable.gd"
 
+export var BUMPER_CLUSTER_DMG_PER_BUMP = 1
 export var MISSILES_HEALTH_PERCENT = 50.0
 export var LASER_TREX_HEALTH_PERCENT = 60.0
 export var BLACK_HOLE_HEALTH_PERCENT = 40.0
@@ -44,3 +45,7 @@ func on_GameState_changed(new_state, is_debug_skip):
 				set_health(MAX_HEALTH * ECLIPSE_HEALTH_PERCENT * .01)
 			_:
 				set_health(MAX_HEALTH)
+
+
+func _on_BumperCluster_bumped(bumper_cluster, bumper, bumped_body):
+	take_damage(BUMPER_CLUSTER_DMG_PER_BUMP)
