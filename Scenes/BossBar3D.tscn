@@ -6,7 +6,6 @@
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
 flags_unshaded = true
-params_billboard_mode = 1
 
 [node name="BossBar3D" type="Sprite3D"]
 material_override = SubResource( 1 )
