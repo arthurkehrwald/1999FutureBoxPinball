@@ -47,7 +47,7 @@ func ensure_one_accessible_ball():
 
 
 func on_Pinball_became_inaccessible():
-	if GameState.current_state != GameState.PREGAME:
+	if GameState.current_state != GameState.PREGAME_STATE:
 		ensure_one_accessible_ball()
 
 
@@ -56,12 +56,12 @@ func set_spawn_with_remote(value):
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.PREGAME or is_debug_skip:
+	if new_state == GameState.PREGAME_STATE or is_debug_skip:
 		spawn_delay_timer.stop()
 		insert_turret_delay_timer.stop()
 		insert_next_ball_into_turret = false
 		spawn_with_remote = false
-	if new_state != GameState.PREGAME and is_debug_skip:
+	if new_state != GameState.PREGAME_STATE and is_debug_skip:
 		ensure_one_accessible_ball()
-	if new_state == GameState.EXPOSITION or new_state == GameState.TESTING:
+	if new_state == GameState.EXPOSITION_STATE or new_state == GameState.TESTING_STATE:
 		spawn_delay_timer.start()

@@ -1,18 +1,18 @@
 extends VideoPlayer
 
 
-var video = {
-	GameState.TESTING: null,
-	GameState.PREGAME: preload("res://HUD/Videos/pregame_overlay.ogv"),
-	GameState.EXPOSITION: null,
-	GameState.ENEMY_FLEET: preload("res://HUD/Videos/stage_one_overlay.ogv"),
-	GameState.BOSS_APPEARS: preload("res://HUD/Videos/stage_two_overlay.ogv"),
-	GameState.MISSILES: null,
-	GameState.TREX: null,
-	GameState.BLACK_HOLE: null,
-	GameState.ECLIPSE: null,
-	GameState.VICTORY: null,
-	GameState.DEFEAT: preload("res://HUD/Videos/game_over_overlay.ogv")
+onready var video = {
+	GameState.TESTING_STATE: null,
+	GameState.PREGAME_STATE: preload("res://HUD/Videos/pregame_overlay.ogv"),
+	GameState.EXPOSITION_STATE: null,
+	GameState.ENEMY_FLEET_STATE: preload("res://HUD/Videos/stage_one_overlay.ogv"),
+	GameState.BOSS_APPEARS_STATE: preload("res://HUD/Videos/stage_two_overlay.ogv"),
+	GameState.MISSILES_STATE: null,
+	GameState.TREX_STATE: null,
+	GameState.BLACK_HOLE_STATE: null,
+	GameState.ECLIPSE_STATE: null,
+	GameState.VICTORY_STATE: null,
+	GameState.DEFEAT_STATE: preload("res://HUD/Videos/game_over_overlay.ogv")
 }
 
 

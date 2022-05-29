@@ -36,11 +36,11 @@ func on_RestartTimer_timeout():
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.VICTORY:
+	if new_state == GameState.VICTORY_STATE:
 		result_label.text = "Victory!"
 		set_is_active(true)
-#	elif new_state == GameState.DEFEAT:
+#	elif new_state == GameState.DEFEAT_STATE:
 #		result_label.text = "You Lose!"
 #		set_is_active(true)
-	elif new_state == GameState.PREGAME or is_debug_skip:
+	elif new_state == GameState.PREGAME_STATE or is_debug_skip:
 		set_is_active(false)

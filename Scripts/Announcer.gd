@@ -23,15 +23,15 @@ func say(what, this_is_important = false):
 
 func on_GameState_changed(new_state, _is_debug_skip):
 	match new_state:
-		GameState.EXPOSITION:
+		GameState.EXPOSITION_STATE:
 			say("begin", true)
-		GameState.ENEMY_FLEET:
+		GameState.ENEMY_FLEET_STATE:
 			say("stage1", true)
-		GameState.BOSS_APPEARS:
+		GameState.BOSS_APPEARS_STATE:
 			say("stage2", true)
-		GameState.ECLIPSE:
+		GameState.ECLIPSE_STATE:
 			say("solar_eclipse", true)
-		GameState.VICTORY:
+		GameState.VICTORY_STATE:
 			say("victory", true)
-		GameState.DEFEAT:
+		GameState.DEFEAT_STATE:
 			say("sux", true)

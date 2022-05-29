@@ -16,7 +16,7 @@ func _on_Bomb_explosion_hit():
 	explode()
 
 func _on_GameState_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage == GameState.PREGAME:
+	if is_debug_skip or new_stage == GameState.PREGAME_STATE:
 		queue_free()
 	
 func explode():

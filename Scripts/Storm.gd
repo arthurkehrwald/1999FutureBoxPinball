@@ -6,7 +6,7 @@ func _ready():
 
 
 func on_GameState_changed(new_stage, _is_debug_skip):
-	set_is_active(new_stage < GameState.BOSS_APPEARS)
+	set_is_active(new_stage < GameState.BOSS_APPEARS_STATE)
 
 
 func set_is_active(is_active):

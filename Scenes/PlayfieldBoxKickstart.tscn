@@ -17,7 +17,9 @@ extents = Vector3( 1, 4.93401, 10 )
 
 [sub_resource type="CubeMesh" id=5]
 
-[node name="PlayfieldBoxKickstart" type="StaticBody"]
+[node name="PlayfieldBoxKickstart" type="StaticBody" groups=[
+"playfield_box",
+]]
 collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

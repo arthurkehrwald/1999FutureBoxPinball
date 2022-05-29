@@ -12,7 +12,6 @@ data = PoolVector3Array( -0.5357, 0.6924, 1.0837, 0.5357, 0.2218, 0.286, -0.5357
 [node name="Boss" type="StaticBody"]
 collision_mask = 0
 script = ExtResource( 1 )
-MAX_HEALTH = 250.0
 PINBALL_DIRECT_HIT_BASE_DAMAGE = 12.0
 MONEY_YIELD_PER_DAMAGE = 2.0
 BOMBS_EXPLODE_ON_IMPACT = true

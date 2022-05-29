@@ -88,7 +88,6 @@ var spin_speed = 0
 var spin_speed_decay = 0
 var state = INACTIVE
 var powerup_of_icon = {}
-var powerup_odds_per_state = {}
 var powerup_timers = {}
 var timer_on_time_bar = null
 
@@ -110,13 +109,6 @@ func _enter_tree():
 
 
 func _ready():
-	for stage_str_key in POWERUP_ODDS_PER_STAGE.keys():
-		var powerup_odds = {}
-		for powerup_str_key in POWERUP_ODDS_PER_STAGE[stage_str_key].keys():
-			var powerup = POWERUP_STR_TO_ENUM[powerup_str_key]
-			powerup_odds[powerup] = POWERUP_ODDS_PER_STAGE[stage_str_key][powerup_str_key]
-		var game_state = GameState.NAME_STATE_DICT[stage_str_key]
-		powerup_odds_per_state[game_state] = powerup_odds
 	visible = false
 	randomize()
 	if Globals.player_ship == null:
@@ -224,8 +216,8 @@ func activate_powerup(powerup):
 
 func calc_odds():
 	var sum_of_non_repair_odds = 0
-	for key in powerup_odds_per_state[GameState.current_state]:
-		var chance = powerup_odds_per_state[GameState.current_state][key]
+	for key in POWERUP_ODDS_PER_STAGE[GameState.current_state.NAME]:
+		var chance = POWERUP_ODDS_PER_STAGE[GameState.current_state.NAME][key]
 		if chance > 0:
 			sum_of_non_repair_odds += chance
 	var repair_chance = 0
@@ -235,8 +227,8 @@ func calc_odds():
 		repair_chance = 1 - Globals.player_ship.health / Globals.player_ship.MAX_HEALTH
 	var current_powerup_odds = {Powerup.REPAIR: repair_chance}
 	if sum_of_non_repair_odds > 0:
-		for key in powerup_odds_per_state[GameState.current_state]:
-			var chance = powerup_odds_per_state[GameState.current_state][key]
+		for key in POWERUP_ODDS_PER_STAGE[GameState.current_state.NAME]:
+			var chance = POWERUP_ODDS_PER_STAGE[GameState.current_state.NAME][key]
 			current_powerup_odds[key] = chance / sum_of_non_repair_odds * (1 - repair_chance)
 	return current_powerup_odds
 

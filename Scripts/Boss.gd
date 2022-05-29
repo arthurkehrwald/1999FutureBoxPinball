@@ -34,13 +34,13 @@ func on_GameState_changed(new_state, is_debug_skip):
 	.on_GameState_changed(new_state, is_debug_skip)
 	if is_debug_skip:
 		match new_state:
-			GameState.MISSILES:
+			GameState.MISSILES_STATE:
 				set_health(MAX_HEALTH * MISSILES_HEALTH_PERCENT * .01)
-			GameState.TREX:
+			GameState.TREX_STATE:
 				set_health(MAX_HEALTH * LASER_TREX_HEALTH_PERCENT * .01)
-			GameState.BLACK_HOLE:
+			GameState.BLACK_HOLE_STATE:
 				set_health(MAX_HEALTH * BLACK_HOLE_HEALTH_PERCENT * .01)
-			GameState.ECLIPSE:
+			GameState.ECLIPSE_STATE:
 				set_health(MAX_HEALTH * ECLIPSE_HEALTH_PERCENT * .01)
 			_:
 				set_health(MAX_HEALTH)

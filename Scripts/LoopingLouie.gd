@@ -32,7 +32,7 @@ func _process(delta):
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if is_debug_skip or new_state == GameState.PREGAME:
+	if is_debug_skip or new_state == GameState.PREGAME_STATE:
 		land()
 
 

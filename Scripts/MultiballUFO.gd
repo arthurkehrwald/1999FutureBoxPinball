@@ -10,7 +10,7 @@ func _ready():
 
 
 func on_GameState_changed(new_state, _is_debug_skip):
-	if new_state < GameState.MISSILES:
+	if new_state < GameState.MISSILES_STATE:
 		if is_out_of_sight:
 			ap.play_backwards("fly_away")
 			is_out_of_sight = false

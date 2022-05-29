@@ -8,9 +8,9 @@ func _ready():
 
 
 func on_GameState_changed(new_state, _is_debug_skip):
-	if new_state >= GameState.BOSS_APPEARS and new_state < GameState.VICTORY:
+	if new_state >= GameState.BOSS_APPEARS_STATE and new_state < GameState.VICTORY_STATE:
 		set_visible(false)
 		set_collision_layer(0)
-	elif new_state < GameState.BOSS_APPEARS:
+	elif new_state < GameState.BOSS_APPEARS_STATE:
 		set_visible(true)
 		set_collision_layer(col_layer_when_enabled)

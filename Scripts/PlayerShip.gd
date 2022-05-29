@@ -67,6 +67,6 @@ func on_hit_by_projectile(projectile):
 
 func on_GameState_changed(new_state, is_debug_skip):
 	.on_GameState_changed(new_state, is_debug_skip)
-	if new_state == GameState.PREGAME or is_debug_skip:
+	if new_state == GameState.PREGAME_STATE or is_debug_skip:
 		set_money(0)
 		set_coolness(0)

@@ -33,5 +33,5 @@ func on_body_entered(body):
 
 
 func on_GameState_changed(new_state, _is_debug_skip):
-	var is_bossfight = new_state > GameState.ENEMY_FLEET and new_state < GameState.VICTORY
-	set_is_active(new_state == GameState.TESTING or is_bossfight)
+	var is_bossfight = new_state > GameState.ENEMY_FLEET_STATE and new_state < GameState.VICTORY_STATE
+	set_is_active(new_state == GameState.TESTING_STATE or is_bossfight)

@@ -6,7 +6,7 @@ func _ready():
 	$AnimationPlayer.playback_speed = 1.0 / flight_duration
 	
 func _on_GameState_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage == GameState.PREGAME:
+	if is_debug_skip or new_stage == GameState.PREGAME_STATE:
 		set_flying(false)
 
 func set_flying(_is_flying):

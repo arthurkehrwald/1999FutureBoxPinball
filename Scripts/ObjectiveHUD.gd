@@ -99,7 +99,7 @@ func pop_queue():
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.PREGAME or is_debug_skip:
+	if new_state == GameState.PREGAME_STATE or is_debug_skip:
 		queued_complete_objectives.clear()
 		queued_new_objectives.clear()
 		is_new_objectives_anim_running = false

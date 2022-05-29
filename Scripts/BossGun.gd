@@ -31,7 +31,6 @@ export var IS_SHOOTING_PER_STAGE = {
 	"10-Defeat": true
 }
 
-var IS_SHOOTING_PER_GAME_STATE = {}
 var state = State.IDLE
 var ignored_projectiles = []
 
@@ -46,9 +45,6 @@ func _ready():
 	if Globals.boss == null:
 		push_warning("[Boss Gun] can't find Boss! Will not add collision exceptions with outgoing projectiles.")
 	rng.randomize()
-	for string_key in IS_SHOOTING_PER_STAGE.keys():
-		var game_state = GameState.NAME_STATE_DICT[string_key]
-		IS_SHOOTING_PER_GAME_STATE[game_state] = IS_SHOOTING_PER_STAGE[string_key]
 	GameState.connect("state_changed", self, "on_GameState_changed")
 	timer.connect("timeout", self, "on_Timer_timeout")
 	connect("body_entered", self, "on_hit_by_projectile")
@@ -116,10 +112,10 @@ func on_Timer_timeout():
 		enter_shooting_state()
 
 
-func on_GameState_changed(new_state, _is_debug_skip):
-	if state == State.IDLE and IS_SHOOTING_PER_GAME_STATE[new_state]:
+func on_GameState_changed(game_state, _is_debug_skip):
+	if state == State.IDLE and IS_SHOOTING_PER_STAGE[game_state.NAME]:
 		enter_shooting_state()
-	elif state != State.IDLE and not IS_SHOOTING_PER_GAME_STATE[new_state]:
+	elif state != State.IDLE and not IS_SHOOTING_PER_STAGE[game_state.NAME]:
 		enter_idle_state()
 
 

@@ -49,8 +49,8 @@ func on_entered_laser_area():
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if is_debug_skip or new_state == GameState.PREGAME:
+	if is_debug_skip or new_state == GameState.PREGAME_STATE:
 		PoolManager.request(PoolManager.PROJECTILE_DISAPPEAR, get_global_transform().origin)
 		queue_free()
 	else:
-		omni_light.set_visible(new_state == GameState.ECLIPSE)
+		omni_light.set_visible(new_state == GameState.ECLIPSE_STATE)

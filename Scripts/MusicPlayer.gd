@@ -15,17 +15,17 @@ onready var track_1_player = get_node("Track1Player")
 onready var track_2_player = get_node("Track2Player")
 onready var track_3_player = get_node("Track3Player")
 onready var active_player_in_state = {
-	GameState.TESTING: null,
-	GameState.PREGAME: track_1_player,
-	GameState.EXPOSITION: track_1_player,
-	GameState.ENEMY_FLEET: track_1_player,
-	GameState.BOSS_APPEARS: track_2_player,
-	GameState.MISSILES: track_2_player,
-	GameState.TREX: track_2_player,
-	GameState.BLACK_HOLE: track_3_player,
-	GameState.ECLIPSE: track_3_player,
-	GameState.VICTORY: track_3_player,
-	GameState.DEFEAT: null
+	GameState.TESTING_STATE: null,
+	GameState.PREGAME_STATE: track_1_player,
+	GameState.EXPOSITION_STATE: track_1_player,
+	GameState.ENEMY_FLEET_STATE: track_1_player,
+	GameState.BOSS_APPEARS_STATE: track_2_player,
+	GameState.MISSILES_STATE: track_2_player,
+	GameState.TREX_STATE: track_2_player,
+	GameState.BLACK_HOLE_STATE: track_3_player,
+	GameState.ECLIPSE_STATE: track_3_player,
+	GameState.VICTORY_STATE: track_3_player,
+	GameState.DEFEAT_STATE: null
 }
 
 

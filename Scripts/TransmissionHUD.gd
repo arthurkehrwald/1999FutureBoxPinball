@@ -57,28 +57,28 @@ func _ready():
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if is_debug_skip or new_state == GameState.PREGAME:
+	if is_debug_skip or new_state == GameState.PREGAME_STATE:
 		set_rex_mood(RexMood.NEUTRAL)
 		transmission_timer.stop()
 		reset()
 	match new_state:
-		GameState.EXPOSITION:
+		GameState.EXPOSITION_STATE:
 			play_sequence("exposition")
-		GameState.ENEMY_FLEET:
+		GameState.ENEMY_FLEET_STATE:
 			play_sequence("enemy_fleet_appears")
-		GameState.BOSS_APPEARS:
+		GameState.BOSS_APPEARS_STATE:
 			play_sequence("boss_appears")
-		GameState.MISSILES:
+		GameState.MISSILES_STATE:
 			play_sequence("missiles")
-		GameState.TREX:
+		GameState.TREX_STATE:
 			play_sequence("trex_appears")
-		GameState.BLACK_HOLE:
+		GameState.BLACK_HOLE_STATE:
 			play_sequence("black_hole_appears")
-		GameState.ECLIPSE:
+		GameState.ECLIPSE_STATE:
 			play_sequence("eclipse")
-		GameState.VICTORY:
+		GameState.VICTORY_STATE:
 			set_rex_mood(RexMood.HAPPY)
-		GameState.DEFEAT:
+		GameState.DEFEAT_STATE:
 			set_rex_mood(RexMood.ANGRY)
 
 

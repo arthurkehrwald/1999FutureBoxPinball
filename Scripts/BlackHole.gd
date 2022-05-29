@@ -31,15 +31,15 @@ func _process(_delta):
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.BLACK_HOLE:
+	if new_state == GameState.BLACK_HOLE_STATE:
 		Announcer.say("black_hoe", true)
 		animation_player.play("black_hole_appear_anim", -1, 1 / APPEAR_DURATION)
 		set_is_active(true)
-	elif new_state == GameState.ECLIPSE: 
+	elif new_state == GameState.ECLIPSE_STATE: 
 		if is_debug_skip:
 			set_is_active(true)
 		expand()
-	elif is_debug_skip or new_state == GameState.PREGAME:
+	elif is_debug_skip or new_state == GameState.PREGAME_STATE:
 		set_is_active(false)
 
 
@@ -63,7 +63,7 @@ func expand():
 	
 	yield(animation_player, "animation_finished")
 	
-	if GameState.current_state == GameState.ECLIPSE:
+	if GameState.current_state == GameState.ECLIPSE_STATE:
 		GameState.handle_event(GameState.Event.BLACK_HOLE_EXPANDED)
 		fade()
 
@@ -75,7 +75,7 @@ func fade():
 	
 	yield(animation_player, "animation_finished")
 	
-	if GameState.current_state == GameState.ECLIPSE:
+	if GameState.current_state == GameState.ECLIPSE_STATE:
 		set_is_active(false)
 
 

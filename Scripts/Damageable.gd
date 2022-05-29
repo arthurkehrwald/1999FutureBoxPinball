@@ -31,8 +31,6 @@ export var IS_VULNERABLE_PER_STAGE = {
 	"10-Defeat": false
 }
 
-
-var IS_VULNERABLE_PER_GAME_STATE = {}
 var is_vulnerable = true setget set_is_vulnerable
 var dynamic_regen_per_sec = 0.0
 
@@ -40,9 +38,6 @@ onready var health = MAX_HEALTH setget set_health
 
 
 func _ready():
-	for string_key in IS_VULNERABLE_PER_STAGE.keys():
-		var game_state = GameState.NAME_STATE_DICT[string_key]
-		IS_VULNERABLE_PER_GAME_STATE[game_state] = IS_VULNERABLE_PER_STAGE[string_key]
 	DIRECT_HIT_SPEED_RELEVANCE = clamp(DIRECT_HIT_SPEED_RELEVANCE, 0, 1)
 	GameState.connect("state_changed", self, "on_GameState_changed")
 	if MONEY_YIELD_PER_DAMAGE != 0 and Globals.player_ship == null:
@@ -87,8 +82,8 @@ func take_damage(damage):
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	set_is_vulnerable(IS_VULNERABLE_PER_GAME_STATE[new_state])
-	if new_state == GameState.PREGAME or is_debug_skip:
+	set_is_vulnerable(IS_VULNERABLE_PER_STAGE[new_state.NAME])
+	if new_state == GameState.PREGAME_STATE or is_debug_skip:
 		set_health(MAX_HEALTH)
 
 

@@ -61,6 +61,8 @@ func on_body_entered(body):
 	.on_body_entered(body)
 	if get_collision_exceptions().has(body) or body == self:
 		return
+	if body.is_in_group("playfield_box"):
+		return
 	if body.is_in_group("projectiles"):
 		gravity_scale = .3
 	else:

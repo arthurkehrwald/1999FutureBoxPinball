@@ -17,7 +17,7 @@ func _ready():
 
 
 func _on_GameState_changed(new_state, _is_debug_skip):
-	set_is_active(new_state == GameState.ENEMY_FLEET)
+	set_is_active(new_state == GameState.ENEMY_FLEET_STATE)
 
 
 func set_is_active(value):

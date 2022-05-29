@@ -1,0 +1,154 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Materials/boss_shield_shader.tres" type="Shader" id=1]
+[ext_resource path="res://Meshes/Sebasbossshield.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Scripts/Shield.gd" type="Script" id=3]
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( -1.38125, 0, -0.572132, -1.49505, 0, 0, -1.38125, 2, -0.572132, -1.49505, 2, 0, -1.68193, 2, 0, -1.68193, 0, 0, -1.5539, 2, -0.643648, -1.5539, 0, -0.643648, -1.5539, 0, -0.643648, -1.38125, 0, -0.572132, -1.5539, 2, -0.643648, -1.38125, 2, -0.572132, -1.49505, 2, 0, -1.49505, 0, 0, -1.68193, 2, 0, -1.68193, 0, 0, -1.49505, 0, 0, -1.38125, 0, -0.572132, -1.68193, 0, 0, -1.5539, 0, -0.643648, -1.38125, 2, -0.572132, -1.49505, 2, 0, -1.5539, 2, -0.643648, -1.68193, 2, 0 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( -1.72656, 0, -0.715165, -1.86881, 0, 0, -1.72656, 2, -0.715165, -1.86881, 2, 0, -2.0557, 0, 0, -1.86881, 0, 0, -1.89922, 0, -0.786681, -1.72656, 0, -0.715165, -2.0557, 2, 0, -1.86881, 2, 0, -2.0557, 0, 0, -1.86881, 0, 0, -1.89922, 2, -0.786681, -1.72656, 2, -0.715165, -2.0557, 2, 0, -1.86881, 2, 0, -2.0557, 2, 0, -2.0557, 0, 0, -1.89922, 2, -0.786681, -1.89922, 0, -0.786681, -1.89922, 0, -0.786681, -1.72656, 0, -0.715165, -1.89922, 2, -0.786681, -1.72656, 2, -0.715165 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/FadeProgress = null
+
+[sub_resource type="ConvexPolygonShape" id=4]
+points = PoolVector3Array( -1.86881, 2, 0, -1.86881, 0, 0, -1.72656, 2, -0.715165, -1.72656, 0, -0.715165, -1.5539, 0, -0.643648, -1.68193, 0, 0, -1.5539, 2, -0.643648, -1.68193, 2, 0, -1.68193, 0, 0, -1.86881, 0, 0, -1.68193, 2, 0, -1.86881, 2, 0, -1.5539, 0, -0.643648, -1.72656, 0, -0.715165, -1.68193, 0, 0, -1.86881, 0, 0, -1.68193, 2, 0, -1.86881, 2, 0, -1.5539, 2, -0.643648, -1.72656, 2, -0.715165, -1.72656, 2, -0.715165, -1.72656, 0, -0.715165, -1.5539, 2, -0.643648, -1.5539, 0, -0.643648 )
+
+[node name="Shield" type="StaticBody"]
+collision_layer = 3
+collision_mask = 0
+script = ExtResource( 3 )
+MAX_HEALTH = 30.0
+DIRECT_HIT_SPEED_RELEVANCE = 1.0
+BOMBS_EXPLODE_ON_IMPACT = true
+IS_VULNERABLE_PER_STAGE = {
+"0-Testing": true,
+"1-Pregame": false,
+"10-Defeat": false,
+"2-Exposition": false,
+"3-EnemyFleet": false,
+"4-BossAppears": true,
+"5-Missiles": true,
+"6-Trex": true,
+"7-BlackHole": true,
+"8-Eclipse": true,
+"9-Victory": false
+}
+
+[node name="RegenerationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BehindArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1 )
+monitorable = false
+collision_mask = 0
+
+[node name="InnerCollisionShape" type="CollisionShape" parent="BehindArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1 )
+shape = SubResource( 1 )
+
+[node name="InnerCollisionShape2" type="CollisionShape" parent="BehindArea"]
+transform = Transform( 0.92388, 0, -0.382683, 0, 1, 0, 0.382683, 0, 0.92388, 0, -1, -1 )
+shape = SubResource( 1 )
+
+[node name="InnerCollisionShape3" type="CollisionShape" parent="BehindArea"]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, -1, -1 )
+shape = SubResource( 1 )
+
+[node name="InnerCollisionShape4" type="CollisionShape" parent="BehindArea"]
+transform = Transform( 0.382683, 0, -0.92388, 0, 1, 0, 0.92388, 0, 0.382683, 0, -1, -1 )
+shape = SubResource( 1 )
+
+[node name="InnerCollisionShape5" type="CollisionShape" parent="BehindArea"]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, -1, -1 )
+shape = SubResource( 1 )
+
+[node name="InnerCollisionShape6" type="CollisionShape" parent="BehindArea"]
+transform = Transform( -0.382683, 0, -0.923879, 0, 1, 0, 0.923879, 0, -0.382683, 0, -1, -1 )
+shape = SubResource( 1 )
+
+[node name="InnerCollisionShape7" type="CollisionShape" parent="BehindArea"]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, -1, -1 )
+shape = SubResource( 1 )
+
+[node name="InnerCollisionShape8" type="CollisionShape" parent="BehindArea"]
+transform = Transform( -0.923879, 0, -0.382683, 0, 1, 0, 0.382683, 0, -0.923879, 0, -1, -1 )
+shape = SubResource( 1 )
+
+[node name="FrontArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1 )
+monitorable = false
+collision_mask = 0
+
+[node name="OuterCollisionShape" type="CollisionShape" parent="FrontArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1 )
+shape = SubResource( 2 )
+
+[node name="OuterCollisionShape2" type="CollisionShape" parent="FrontArea"]
+transform = Transform( 0.92388, 0, -0.382683, 0, 1, 0, 0.382683, 0, 0.92388, 0, -1, -1 )
+shape = SubResource( 2 )
+
+[node name="OuterCollisionShape3" type="CollisionShape" parent="FrontArea"]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, -1, -1 )
+shape = SubResource( 2 )
+
+[node name="OuterCollisionShape4" type="CollisionShape" parent="FrontArea"]
+transform = Transform( 0.382683, 0, -0.92388, 0, 1, 0, 0.92388, 0, 0.382683, 0, -1, -1 )
+shape = SubResource( 2 )
+
+[node name="OuterCollisionShape5" type="CollisionShape" parent="FrontArea"]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, -1, -1 )
+shape = SubResource( 2 )
+
+[node name="OuterCollisionShape6" type="CollisionShape" parent="FrontArea"]
+transform = Transform( -0.382683, 0, -0.923879, 0, 1, 0, 0.923879, 0, -0.382683, 0, -1, -1 )
+shape = SubResource( 2 )
+
+[node name="OuterCollisionShape7" type="CollisionShape" parent="FrontArea"]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, -1, -1 )
+shape = SubResource( 2 )
+
+[node name="OuterCollisionShape8" type="CollisionShape" parent="FrontArea"]
+transform = Transform( -0.923879, 0, -0.382683, 0, 1, 0, 0.382683, 0, -0.923879, 0, -1, -1 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -1.1, 0, 4.28356e-07, 0, 1.1, 0, -4.28356e-07, 0, -1.1, -0.539992, 1.44041, -0.340597 )
+mesh = ExtResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="MiddleCollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 4 )
+
+[node name="MiddleCollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 0.92388, 0, -0.382683, 0, 1, 0, 0.382683, 0, 0.92388, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="MiddleCollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="MiddleCollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( 0.382683, 0, -0.92388, 0, 1, 0, 0.92388, 0, 0.382683, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="MiddleCollisionShape5" type="CollisionShape" parent="."]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="MiddleCollisionShape6" type="CollisionShape" parent="."]
+transform = Transform( -0.382683, 0, -0.923879, 0, 1, 0, 0.923879, 0, -0.382683, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="MiddleCollisionShape7" type="CollisionShape" parent="."]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="MiddleCollisionShape8" type="CollisionShape" parent="."]
+transform = Transform( -0.923879, 0, -0.382683, 0, 1, 0, 0.382683, 0, -0.923879, 0, 0, 0 )
+shape = SubResource( 4 )

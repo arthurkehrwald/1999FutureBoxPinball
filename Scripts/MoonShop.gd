@@ -108,11 +108,11 @@ func on_ScaleAnimPlayer_animation_finished(_anim_name):
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.TESTING or new_state == GameState.EXPOSITION:
+	if new_state == GameState.TESTING_STATE or new_state == GameState.EXPOSITION_STATE:
 		set_is_open(true)
 	elif is_debug_skip and MONEY_INCREASE_TO_OPEN > 0:
 		set_is_open(false)
-	if new_state == GameState.PREGAME or is_debug_skip:
+	if new_state == GameState.PREGAME_STATE or is_debug_skip:
 		is_spinning = false
 		scale_state = ScaleState.SMALL
 		scale_anim_player.stop()

@@ -120,5 +120,5 @@ func buy_item(item_index):
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.PREGAME or is_debug_skip:
+	if new_state == GameState.PREGAME_STATE or is_debug_skip:
 		set_is_active(false)

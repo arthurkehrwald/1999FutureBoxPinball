@@ -18,5 +18,5 @@ func on_ShopMenu_bought_remote_control(var duration):
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.PREGAME or is_debug_skip:
+	if new_state == GameState.PREGAME_STATE or is_debug_skip:
 		stop()

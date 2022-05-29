@@ -6,19 +6,107 @@ signal objective_one_completed
 signal objective_two_completed
 signal objectives_changed(objectives)
 
-enum {
-	TESTING,
-	PREGAME,
-	EXPOSITION,
-	ENEMY_FLEET,
-	BOSS_APPEARS,
-	MISSILES,
-	TREX,
-	BLACK_HOLE,
-	ECLIPSE,
-	VICTORY,
-	DEFEAT
-}
+class SubState:
+	signal state_completed(state)
+	signal objective_one_completed(state)
+	signal objective_two_completed(state)
+	
+	var NAME = ""
+	var OBJECTIVES = {}
+	
+	func _init(name : String, objectives : Array):
+		NAME = name
+		OBJECTIVES = objectives
+	
+	func on_complete():
+		emit_signal("state_completed", self)
+	
+	func handle_event(_event):
+		pass
+
+
+class PostGameState extends SubState:
+	func _init(name).(name, ["", ""]):
+		pass
+	
+	func handle_event(event):
+		.handle_event(event)
+		if event == Event.POSTGAME_FINISHED:
+			on_complete()
+
+
+class PregameState extends SubState:
+	func _init().("1-Pregame", ["", ""]):
+		pass
+	
+	func handle_event(event):
+		.handle_event(event)
+		if event == Event.START_INPUT:
+			on_complete()
+
+
+class ExpositionState extends SubState:
+	func _init().("2-Exposition", ["To the moon!", ""]):
+		pass
+	
+	func handle_event(event):
+		.handle_event(event)
+		if event == Event.SHOP_USED:
+			emit_signal("objective_one_completed", self)
+			on_complete()
+
+
+class EnemyFleetState extends SubState:
+	func _init().("3-EnemyFleet", ["Destroy the enemy fleet!", ""]):
+		pass
+	
+	func handle_event(event):
+		.handle_event(event)
+		if event == Event.FLEET_DEFEATED:
+			emit_signal("objective_one_completed", self)
+			on_complete()
+
+
+class BossFightState extends SubState:
+	func _init(name : String).(name, ["Defeat the emperor!", ""]):
+		pass
+	
+	func handle_event(event):
+		.handle_event(event)
+		if event == Event.BOSS_DIED:
+			emit_signal("objective_one_completed", self)
+
+
+class BossAppearsState extends BossFightState:
+	func _init().("4-BossAppears"):
+		pass
+	
+	
+	func handle_event(event):
+		.handle_event(event)
+		if event == Event.BOSS_MISSILES_THRESHOLD or event == Event.BOSS_SHIELD_DESTROYED:
+			on_complete()
+
+onready var TESTING_STATE = SubState.new("0-Testing", ["Test123", "Yes"])
+onready var VICTORY_STATE = PostGameState.new("9-Victory")
+onready var DEFEAT_STATE = PostGameState.new("10-Defeat")
+
+onready var PREGAME_STATE = PregameState.new()
+onready var EXPOSITION_STATE = ExpositionState.new()
+onready var ENEMY_FLEET_STATE = EnemyFleetState.new()
+onready var BOSS_APPEARS_STATE = BossAppearsState.new()
+onready var MISSILES_STATE = BossFightState.new("5-Missiles")
+onready var TREX_STATE = null
+onready var BLACK_HOLE_STATE = null
+onready var ECLIPSE_STATE = null
+
+onready var SUB_STATES = [
+	PREGAME_STATE,
+	EXPOSITION_STATE,
+	ENEMY_FLEET_STATE,
+	BOSS_APPEARS_STATE,
+	MISSILES_STATE
+]
 
 enum Event {
 	START_INPUT,
@@ -36,121 +124,91 @@ enum Event {
 	POSTGAME_FINISHED
 }
 
-const NAME_STATE_DICT = {
-	"0-Testing": TESTING,
-	"1-Pregame": PREGAME,
-	"2-Exposition": EXPOSITION,
-	"3-EnemyFleet": ENEMY_FLEET,
-	"4-BossAppears": BOSS_APPEARS,
-	"5-Missiles": MISSILES,
-	"6-Trex": TREX,
-	"7-BlackHole": BLACK_HOLE,
-	"8-Eclipse": ECLIPSE,
-	"9-Victory": VICTORY,
-	"10-Defeat": DEFEAT
-}
+var current_state setget set_current_state, get_current_state
 
-const OBJECTIVES = {
-	TESTING: ["Test123", "Yes"],
-	PREGAME: ["", ""],
-	EXPOSITION: ["To the moon!", ""],
-	ENEMY_FLEET: ["Destroy the enemy fleet!", ""],
-	BOSS_APPEARS: ["Defeat the emperor!", ""],
-	MISSILES: ["Defeat the emperor!", ""],
-	TREX: ["Defeat the emperor!", ""],
-	BLACK_HOLE: ["Defeat the emperor!", ""],
-	ECLIPSE: ["Defeat the emperor!", ""],
-	VICTORY: ["", ""],
-	DEFEAT: ["", ""]
-}
 
-var current_state = TESTING
+func set_current_state(new_value : SubState, is_debug_skip := false):
+	if new_value == null:
+		return
+	if new_value == current_state:
+		return
+	if not new_value is SubState:
+		return
+	var prev_state = current_state
+	current_state = new_value
+	print("GameState: set to ", current_state.NAME)
+	emit_signal("state_changed", current_state, is_debug_skip)
+	if (prev_state and prev_state.OBJECTIVES != current_state.OBJECTIVES):
+		emit_signal("objectives_changed", current_state.OBJECTIVES)
 
-var has_player_used_shop = false
-var is_black_hole_expanding = false
 
-var global_non_wireframe_mat = preload("res://Materials/mat_for_3d_prints.tres")
-var global_wireframe_mat = preload("res://Materials/wireframe_material.tres")
+func get_current_state():
+	return current_state
 
 
 func _ready():
-	#yield(get_tree().create_timer(.1), "timeout")
 	set_pause_mode(Node.PAUSE_MODE_PROCESS)
-	if get_node_or_null("/root/Main") == null:
-		call_deferred("set_state", TESTING)
+	var is_main_scene = get_node_or_null("/root/Main") != null
+	if is_main_scene:
+		call_deferred("start_game")
 	else:
-		call_deferred("set_state", PREGAME)
-	#Engine.time_scale = .2
-	#emit_signal("objectives_changed", OBJECTIVES[current_state])
+		call_deferred("set_current_state", TESTING_STATE)
+	for state in SUB_STATES:
+		state.connect("objective_one_completed", self, "on_SubState_objective_one_completed")
+		state.connect("objective_two_completed", self, "on_SubState_objective_two_completed")
+		state.connect("state_completed", self, "on_SubState_completed")
+
+
+func start_game():
+	set_current_state(SUB_STATES[0])
+
+
+func on_SubState_objective_one_completed(_state : SubState):
+	emit_signal("objective_one_completed")
+
+
+func on_SubState_objective_two_completed(_state : SubState):
+	emit_signal("objective_two_completed")
+
+
+func on_SubState_completed(state : SubState):
+	if SUB_STATES.has(state):
+		set_next_state()
+	elif state is PostGameState:
+		start_game()
 
 
 func _input(event):
-	if event is InputEventKey and event.pressed:
-		match event.scancode:
-			_:
-				handle_event(Event.START_INPUT)
+	if event.is_action_type() and event.is_pressed():
+		if event.is_action("start"):
+			handle_event(Event.START_INPUT)
+		if event.is_action("debug_prev_stage"):
+				set_prev_state()
+		if event.is_action("debug_next_stage"):
+				set_next_state()
+		if event.is_action("restart_game"):
+				start_game()
 
 
 func handle_event(var event):
+	if current_state:
+		current_state.handle_event(event)
 	if event == Event.PLAYER_DIED:
-		set_state(DEFEAT)
+		set_current_state(DEFEAT_STATE)
 	elif event == Event.BOSS_DIED:
-		set_state(VICTORY)
-	match current_state:
-		TESTING:
-			pass
-		PREGAME:
-			if event == Event.START_INPUT:
-				set_state(EXPOSITION)
-		EXPOSITION:
-			if event == Event.SHOP_USED:
-				emit_signal("objective_one_completed")
-				set_state(ENEMY_FLEET)
-		ENEMY_FLEET:
-			if event == Event.FLEET_DEFEATED:
-				emit_signal("objective_one_completed")
-				set_state(BOSS_APPEARS)
-		BOSS_APPEARS:
-			if event == Event.BOSS_MISSILES_THRESHOLD or event == Event.BOSS_SHIELD_DESTROYED:
-				set_state(MISSILES)
-		MISSILES:
-			if event == Event.BOSS_TREX_THRESHOLD:
-				set_state(TREX)
-		TREX:
-			if event == Event.BOSS_BLACK_HOLE_THRESHOLD:
-				set_state(BLACK_HOLE)
-		BLACK_HOLE:
-			if event == Event.BOSS_ECLIPSE_THRESHOLD:
-				set_state(ECLIPSE)
-		ECLIPSE:
-			if event == Event.BLACK_HOLE_EXPANDED:
-				set_global_eclipse_materials(true)
-		VICTORY:
-			if event == Event.POSTGAME_FINISHED:
-				set_state(PREGAME)
-		DEFEAT:
-			if event == Event.POSTGAME_FINISHED:
-				set_state(PREGAME)
+		set_current_state(VICTORY_STATE)
 
 
-func set_state(new_state, is_debug_skip = false):
-	print("GameState: set to ", new_state)
-	if new_state < ECLIPSE:
-		set_global_eclipse_materials(false)
-	if new_state == EXPOSITION:
-		has_player_used_shop = false
-	emit_signal("state_changed", new_state, is_debug_skip)
-	if OBJECTIVES[current_state] != OBJECTIVES[new_state]:
-		emit_signal("objectives_changed", OBJECTIVES[new_state])
-	current_state = new_state
+func set_prev_state():
+	offset_sub_state_index(-1)
 
 
-func set_global_eclipse_materials(is_eclipse):
-	if is_eclipse:
-		global_non_wireframe_mat.albedo_color = Color.black
-		#global_wireframe_mat.albedo_color = Color(133, 0, 255, 255)
-		#global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_ADD)
-	else:
-		global_non_wireframe_mat.albedo_color = Color.gray
-		#global_wireframe_mat.albedo_color = Color(0, 255, 58, 255)
-		#global_wireframe_mat.set_blend_mode(SpatialMaterial.BLEND_MODE_SUB)
+func set_next_state():
+	offset_sub_state_index(1)
+
+
+func offset_sub_state_index(offset : int):
+	if SUB_STATES.has(current_state):
+		var index = SUB_STATES.find(current_state)
+		var new_index = (index + offset) % SUB_STATES.size()
+		set_current_state(SUB_STATES[new_index])

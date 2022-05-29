@@ -14,4 +14,4 @@ func toggle(value):
 
 
 func on_GameState_changed(new_state, _is_debug_skip):
-	toggle(new_state < GameState.MISSILES)
+	toggle(new_state < GameState.MISSILES_STATE)
