@@ -35,6 +35,63 @@ script = ExtResource( 3 )
 
 [node name="PowerupRoulette" parent="Viewport" instance=ExtResource( 2 )]
 visible = false
+POWERUP_ODDS_PER_STAGE = {
+"0-Testing": {
+"Remote": 1.0,
+"Stopper": 1.0,
+"Turret": 1.0
+},
+"1-Pregame": {
+"Remote": 1.0,
+"Stopper": 1.0,
+"Turret": 1.0
+},
+"10-Defeat": {
+"Remote": 1.0,
+"Stopper": 1.0,
+"Turret": 1.0
+},
+"2-Exposition": {
+"Remote": 0.0,
+"Stopper": 0.0,
+"Turret": 0.0
+},
+"3-EnemyFleet": {
+"Remote": 1.0,
+"Stopper": 1.0,
+"Turret": 1.0
+},
+"4-BossAppears": {
+"Remote": 1.0,
+"Stopper": 1.0,
+"Turret": 1.0
+},
+"5-Missiles": {
+"Remote": 1.0,
+"Stopper": 1.0,
+"Turret": 1.0
+},
+"6-Trex": {
+"Remote": 1.0,
+"Stopper": 1.0,
+"Turret": 1.0
+},
+"7-BlackHole": {
+"Remote": 1.0,
+"Stopper": 1.0,
+"Turret": 1.0
+},
+"8-Eclipse": {
+"Remote": 1.0,
+"Stopper": 1.0,
+"Turret": 1.0
+},
+"9-Victory": {
+"Remote": 1.0,
+"Stopper": 1.0,
+"Turret": 1.0
+}
+}
 
 [node name="ObjectiveHUD" parent="Viewport" instance=ExtResource( 5 )]
 
