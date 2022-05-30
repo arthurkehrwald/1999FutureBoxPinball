@@ -47,5 +47,5 @@ func on_GameState_changed(new_state, is_debug_skip):
 				set_health(MAX_HEALTH)
 
 
-func _on_BumperCluster_bumped(bumper_cluster, bumper, bumped_body):
+func _on_BumperCluster_bumped(_bumper_cluster, _bumper, _bumped_body):
 	take_damage(BUMPER_CLUSTER_DMG_PER_BUMP)
