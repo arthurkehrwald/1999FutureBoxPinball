@@ -222,13 +222,13 @@ func on_SubState_completed(state : SubState):
 func _input(event):
 	if event.is_action_type() and event.is_pressed():
 		if event.is_action("debug_prev_stage"):
-			set_prev_state()
+			set_prev_state(true)
 		if event.is_action("debug_next_stage"):
-			set_next_state()
+			set_next_state(true)
 		if event.is_action("restart_game"):
 			start_game()
 		if event.is_action("debug_enter_test_state"):
-			set_current_state(TESTING_STATE)
+			set_current_state(TESTING_STATE, true)
 
 
 func handle_event(var event):
@@ -240,16 +240,16 @@ func handle_event(var event):
 		set_current_state(VICTORY_STATE)
 
 
-func set_prev_state():
-	offset_sub_state_index(-1)
+func set_prev_state(is_debug_skip = false):
+	offset_sub_state_index(-1, is_debug_skip)
 
 
-func set_next_state():
-	offset_sub_state_index(1)
+func set_next_state(is_debug_skip = false):
+	offset_sub_state_index(1, is_debug_skip)
 
 
-func offset_sub_state_index(offset : int):
+func offset_sub_state_index(offset : int, is_debug_skip = false):
 	if SEQ_STATES.has(current_state):
 		var index = SEQ_STATES.find(current_state)
 		var new_index = (index + offset) % SEQ_STATES.size()
-		set_current_state(SEQ_STATES[new_index])
+		set_current_state(SEQ_STATES[new_index], is_debug_skip)
