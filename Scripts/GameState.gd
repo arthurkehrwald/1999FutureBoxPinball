@@ -41,7 +41,7 @@ class PregameState extends SubState:
 	
 	func handle_event(event):
 		.handle_event(event)
-		if event == Event.START_INPUT:
+		if event == Event.PREGAME_FINISHED:
 			on_complete()
 
 
@@ -109,7 +109,7 @@ onready var SUB_STATES = [
 ]
 
 enum Event {
-	START_INPUT,
+	PREGAME_FINISHED,
 	TRANSMISSION_FINISHED,
 	FLEET_DEFEATED,
 	SHOP_USED,
@@ -180,8 +180,6 @@ func on_SubState_completed(state : SubState):
 
 func _input(event):
 	if event.is_action_type() and event.is_pressed():
-		if event.is_action("start"):
-			handle_event(Event.START_INPUT)
 		if event.is_action("debug_prev_stage"):
 				set_prev_state()
 		if event.is_action("debug_next_stage"):
