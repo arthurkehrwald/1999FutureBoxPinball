@@ -6,7 +6,7 @@ signal objective_one_completed
 signal objective_two_completed
 signal objectives_changed(objectives)
 
-class SubState:
+class SubState extends Node:
 	signal state_completed(state)
 	signal objective_one_completed(state)
 	signal objective_two_completed(state)
@@ -18,11 +18,38 @@ class SubState:
 		NAME = name
 		OBJECTIVES = objectives
 	
+	func enter():
+		pass
+	
+	func exit():
+		pass
+	
 	func on_complete():
 		emit_signal("state_completed", self)
 	
 	func handle_event(_event):
 		pass
+
+
+class TimeLimitedState extends SubState:
+	var timer = null
+	
+	func _init(name : String, objectives : Array, time_limit : float).(name, objectives):
+		timer = Timer.new()
+		timer.set_wait_time(time_limit)
+		timer.one_shot = true
+		timer.connect("timeout", self, "on_Timer_timeout")
+		add_child(timer)
+	
+	func enter():
+		.enter()
+		timer.start()
+	
+	func exit():
+		timer.stop()
+
+	func on_Timer_timeout():
+		on_complete()
 
 
 class PostGameState extends SubState:
@@ -45,8 +72,8 @@ class PregameState extends SubState:
 			on_complete()
 
 
-class ExpositionState extends SubState:
-	func _init().("2-Exposition", ["To the moon!", ""]):
+class ExpositionState extends TimeLimitedState:
+	func _init().("2-Exposition", ["To the moon!", ""], 30):
 		pass
 	
 	func handle_event(event):
@@ -91,6 +118,12 @@ onready var TESTING_STATE = SubState.new("0-Testing", ["Test123", "Yes"])
 onready var VICTORY_STATE = PostGameState.new("9-Victory")
 onready var DEFEAT_STATE = PostGameState.new("10-Defeat")
 
+onready var SPECIAL_STATES = [
+	TESTING_STATE,
+	VICTORY_STATE,
+	DEFEAT_STATE
+]
+
 onready var PREGAME_STATE = PregameState.new()
 onready var EXPOSITION_STATE = ExpositionState.new()
 onready var ENEMY_FLEET_STATE = EnemyFleetState.new()
@@ -100,13 +133,15 @@ onready var TREX_STATE = null
 onready var BLACK_HOLE_STATE = null
 onready var ECLIPSE_STATE = null
 
-onready var SUB_STATES = [
+onready var SEQ_STATES = [
 	PREGAME_STATE,
 	EXPOSITION_STATE,
 	ENEMY_FLEET_STATE,
 	BOSS_APPEARS_STATE,
 	MISSILES_STATE
 ]
+
+onready var ALL_STATES = SPECIAL_STATES + SEQ_STATES
 
 enum Event {
 	PREGAME_FINISHED,
@@ -135,7 +170,10 @@ func set_current_state(new_value : SubState, is_debug_skip := false):
 	if not new_value is SubState:
 		return
 	var prev_state = current_state
+	if prev_state:
+		prev_state.exit()
 	current_state = new_value
+	current_state.enter()
 	print("GameState: set to ", current_state.NAME)
 	emit_signal("state_changed", current_state, is_debug_skip)
 	if (prev_state and prev_state.OBJECTIVES != current_state.OBJECTIVES):
@@ -153,14 +191,15 @@ func _ready():
 		call_deferred("start_game")
 	else:
 		call_deferred("set_current_state", TESTING_STATE)
-	for state in SUB_STATES:
+	for state in ALL_STATES:
+		add_child(state)
 		state.connect("objective_one_completed", self, "on_SubState_objective_one_completed")
 		state.connect("objective_two_completed", self, "on_SubState_objective_two_completed")
 		state.connect("state_completed", self, "on_SubState_completed")
 
 
 func start_game():
-	set_current_state(SUB_STATES[0])
+	set_current_state(SEQ_STATES[0])
 
 
 func on_SubState_objective_one_completed(_state : SubState):
@@ -172,7 +211,9 @@ func on_SubState_objective_two_completed(_state : SubState):
 
 
 func on_SubState_completed(state : SubState):
-	if SUB_STATES.has(state):
+	if current_state != state:
+		return
+	if SEQ_STATES.has(state):
 		set_next_state()
 	elif state is PostGameState:
 		start_game()
@@ -206,7 +247,7 @@ func set_next_state():
 
 
 func offset_sub_state_index(offset : int):
-	if SUB_STATES.has(current_state):
-		var index = SUB_STATES.find(current_state)
-		var new_index = (index + offset) % SUB_STATES.size()
-		set_current_state(SUB_STATES[new_index])
+	if SEQ_STATES.has(current_state):
+		var index = SEQ_STATES.find(current_state)
+		var new_index = (index + offset) % SEQ_STATES.size()
+		set_current_state(SEQ_STATES[new_index])
