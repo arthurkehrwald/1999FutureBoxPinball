@@ -222,11 +222,13 @@ func on_SubState_completed(state : SubState):
 func _input(event):
 	if event.is_action_type() and event.is_pressed():
 		if event.is_action("debug_prev_stage"):
-				set_prev_state()
+			set_prev_state()
 		if event.is_action("debug_next_stage"):
-				set_next_state()
+			set_next_state()
 		if event.is_action("restart_game"):
-				start_game()
+			start_game()
+		if event.is_action("debug_enter_test_state"):
+			set_current_state(TESTING_STATE)
 
 
 func handle_event(var event):

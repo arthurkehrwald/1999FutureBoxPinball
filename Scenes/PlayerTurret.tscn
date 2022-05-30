@@ -1,19 +1,25 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/PlayerTurret.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/dotted_line.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Materials/cyan_unlit.tres" type="Material" id=3]
 [ext_resource path="res://Meshes/turret.obj" type="ArrayMesh" id=4]
-[ext_resource path="res://Materials/mat_for_3d_prints.tres" type="Material" id=5]
+[ext_resource path="res://Materials/cyan.tres" type="Material" id=5]
 
-[node name="PlayerTurret" type="Spatial"]
+[sub_resource type="CylinderShape" id=1]
+radius = 0.35
+height = 0.8
+
+[node name="PlayerTurret" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0 )
+collision_mask = 0
 script = ExtResource( 1 )
-MAX_TURN_ANGLE = 90
+MAX_TURN_ANGLE = 30
+TURN_SPEED = 0.2
 MAX_SHOT_SPEED = 40
 SHOT_CHARGE_SPEED = 0.7
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-visible = false
 mesh = ExtResource( 4 )
 material/0 = ExtResource( 5 )
 
@@ -24,3 +30,9 @@ transform = Transform( 1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0
 transform = Transform( 1, 0, 0, 0, 0.984807, -0.043412, 0, 0.173648, 0.246202, 0, 0, 0 )
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]

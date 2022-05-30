@@ -1,11 +1,9 @@
 extends Control
 
 signal selected_repair(hp_per_sec)
-signal selected_stopper
 signal selected_turret
 signal selected_remote
 signal repair_expired(hp_per_sec)
-signal stopper_expired
 signal turret_expired
 signal remote_expired
 
@@ -17,37 +15,31 @@ enum {
 }
 enum Powerup {
 	REPAIR,
-	STOPPER,
 	TURRET,
 	REMOTE
 }
 
 const ICON_IMGS = {
 	Powerup.REPAIR: preload("res://HUD/repair_icon.png"),
-	Powerup.STOPPER: preload("res://HUD/stopper_icon.png"),
 	Powerup.TURRET: preload("res://HUD/turret_icon.png"),
 	Powerup.REMOTE: preload("res://HUD/remote_icon.png")
 }
 const INSTRUCTION_IMGS = {
 	Powerup.REPAIR: null,
-	Powerup.STOPPER: null,
 	Powerup.TURRET: preload("res://HUD/turret_instructions.png"),
 	Powerup.REMOTE: preload("res://HUD/remote_instructions.png")
 }
 const POWERUP_STR_TO_ENUM = {
 	"Repair": Powerup.REPAIR,
-	"Stopper": Powerup.STOPPER,
 	"Turret": Powerup.TURRET,
 	"Remote": Powerup.REMOTE
 }
 const POWERUP_ENUM_TO_STR = {
 	Powerup.REPAIR: "Repair",
-	Powerup.STOPPER: "Stopper",
 	Powerup.TURRET: "Turret",
 	Powerup.REMOTE: "Remote"
 }
 const POWERUP_ODDS_STR = {
-	"Stopper": 1.0,
 	"Turret": 1.0,
 	"Remote": 1.0
 }
@@ -69,7 +61,6 @@ export var POWERUP_ODDS_PER_STAGE = {
 }
 export var POWERUP_DURATIONS = {
 	"Repair": 5.0,
-	"Stopper": 30.0,
 	"Turret": 10.0,
 	"Remote": 30.0
 }
@@ -194,8 +185,6 @@ func activate_powerup(powerup):
 			Powerup.REPAIR:
 				var repair_dur = POWERUP_DURATIONS[POWERUP_ENUM_TO_STR[powerup]]
 				emit_signal("selected_repair", REPAIR_PERCENT / repair_dur)
-			Powerup.STOPPER: 
-				emit_signal("selected_stopper")
 			Powerup.TURRET:
 				emit_signal("selected_turret")
 			Powerup.REMOTE:
@@ -268,10 +257,7 @@ func display_instructions(powerup):
 	state = INSTRUCTING
 	
 	selected_icon_rect.texture = ICON_IMGS[powerup]
-	if powerup == Powerup.STOPPER:
-		name_label.text = "Eye Patch"
-	else:
-		name_label.text = POWERUP_ENUM_TO_STR[powerup]
+	name_label.text = POWERUP_ENUM_TO_STR[powerup]
 	instruction_rect.texture = INSTRUCTION_IMGS[powerup]
 	timer_on_time_bar = powerup_timers[powerup]
 	tween.start()
@@ -291,8 +277,6 @@ func on_PowerupTimer_timeout(expired_powerup):
 		Powerup.REPAIR:
 			var repair_dur = POWERUP_DURATIONS[POWERUP_ENUM_TO_STR[expired_powerup]]
 			emit_signal("repair_expired", REPAIR_PERCENT / repair_dur)
-		Powerup.STOPPER: 
-			emit_signal("stopper_expired")
 		Powerup.TURRET:
 			emit_signal("turret_expired")
 		Powerup.REMOTE:

@@ -1,4 +1,4 @@
-extends Spatial
+extends KinematicBody
 
 signal was_loaded
 signal has_shot
@@ -8,7 +8,9 @@ export var TURN_SPEED = .5
 export var MAX_SHOT_SPEED = 50
 export var SHOT_CHARGE_SPEED = 1.0
 export var TIME_SCALE_WHEN_AIMING = .1
+export var SINK_INTO_GROUND_DIST = 1.0
 
+var is_active = false setget set_is_active, get_is_active
 var ball_to_shoot = null
 var rotation_progress = 0.5
 var shot_charge = 0
@@ -21,6 +23,8 @@ onready var min_transform  = get_transform().rotated(get_transform().basis.y.nor
 		deg2rad(-MAX_TURN_ANGLE))
 onready var max_transform = get_transform().rotated(get_transform().basis.y.normalized(),
 		deg2rad(MAX_TURN_ANGLE))
+onready var max_y = get_transform().origin.y
+onready var min_y = max_y - SINK_INTO_GROUND_DIST
 
 
 func _enter_tree():
@@ -31,17 +35,18 @@ func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.powerup_roulette != null:
 		Globals.powerup_roulette.connect("selected_turret", self, "on_PowerupRoulette_selected_turret")
-		Globals.powerup_roulette.connect("turret_expired", self, "shoot", [shot_charge])
+		Globals.powerup_roulette.connect("turret_expired", self, "on_PowerupRoulette_turret_expired")
 	else:
 		push_warning("[Turret] can't find powerup roulette! Will not respond when player buys turret shot.")
 	if Globals.ball_spawn == null:
 		push_warning("[Turret] can't find ball spawn! Will not work if ball is drained when it gets triggered.")
 	set_process(false)
+	translation = Vector3(translation.x, min_y, translation.z)
 
 
 func _input(event):
 	if ball_to_shoot != null:
-		if event.is_action_released("ui_down"):
+		if event.is_action_released("plunger"):
 			shoot(shot_charge)
 
 
@@ -55,13 +60,13 @@ func _process(delta):
 		else:
 			rotation_progress = max(.5, rotation_progress - TURN_SPEED * delta)
 	else:
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed("flipper_right"):
 			if rotation_progress > 0:
 				rotation_progress -= TURN_SPEED / TIME_SCALE_WHEN_AIMING * delta
-		if Input.is_action_pressed("ui_left"):
+		if Input.is_action_pressed("flipper_left"):
 			if rotation_progress < 1:
 				rotation_progress += TURN_SPEED / TIME_SCALE_WHEN_AIMING * delta
-		if Input.is_action_pressed("ui_down"):
+		if Input.is_action_pressed("plunger"):
 			shot_charge = clamp(shot_charge + SHOT_CHARGE_SPEED / TIME_SCALE_WHEN_AIMING * delta, 0, 1)
 			var dotted_line_scale = Vector3(1, 1, lerp(1, 3, shot_charge))
 			dotted_line.set_transform(dotted_line_start_transform.scaled(dotted_line_scale))
@@ -81,6 +86,37 @@ func on_GameState_changed(new_state, is_debug_skip):
 		var start_rotation = Quat(start_transform.basis.orthonormalized())
 		set_transform(Transform(start_rotation, get_transform().origin))
 		Engine.time_scale = 1
+
+
+func on_PowerupRoulette_selected_turret():
+	set_is_active(true)
+
+
+func on_PowerRoulette_turret_expired():
+	set_is_active(false)
+
+
+func on_hit_by_projectile(projectile):
+	if projectile is Pinball:
+		insert_ball(projectile)
+
+
+func set_is_active(value : bool):
+	if is_active == value:
+		return
+	is_active = value
+	if (is_active and ball_to_shoot):
+		shoot(shot_charge)
+	$Tween.remove(self, "translation:y")
+	var from_y = min_y if is_active else max_y
+	var to_y = max_y if is_active else min_y
+	$Tween.interpolate_property(self, "translation:y",
+		from_y, to_y, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+
+func get_is_active():
+	return is_active
 
 
 func insert_ball(ball):
@@ -111,20 +147,10 @@ func shoot(charge):
 	shot_charge = 0
 	Engine.time_scale = 1
 	emit_signal("has_shot")
+	set_is_active(false)
 
 
 func delayed_announcer_instructions():
 	yield(get_tree().create_timer(1.0), "timeout")
 	if ball_to_shoot != null:
 		Announcer.say("plunger_fire")
-
-
-func on_PowerupRoulette_selected_turret():
-	for pinball in get_tree().get_nodes_in_group("pinballs"):
-		if pinball.is_accessible_to_player:
-			if pinball.current_wire_ramp != null:
-				pinball.current_wire_ramp.reset(true)
-			insert_ball(pinball)
-			return
-	if Globals.ball_spawn != null:
-		Globals.ball_spawn.insert_next_ball_into_turret = true

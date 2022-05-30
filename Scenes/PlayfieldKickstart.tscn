@@ -8,13 +8,13 @@
 [ext_resource path="res://Scenes/TransmissionHUD3D.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/PlayerStatsHUD3D.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Stopper.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/InvisibleButtonPlunger.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/BossSetup.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/MultiballShip.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Materials/3d_prints.tres" type="Material" id=13]
 [ext_resource path="res://Meshes/Louie_01.obj" type="ArrayMesh" id=14]
 [ext_resource path="res://Scenes/PlayerShip.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/PlayerTurret.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/FlipperV2_R.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/PinballSpawn.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/WireRamp.tscn" type="PackedScene" id=24]
@@ -245,9 +245,6 @@ transform = Transform( 0.8, 0, 0, 0, -3.72529e-08, 1, 0, -0.8, -4.47035e-08, -4.
 [node name="EnemyFleet" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326087, 0, 0 )
 
-[node name="Stopper" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 6.95921 )
-
 [node name="PlayerStatsHUD3D" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 7 )]
 transform = Transform( 0.8, 0, 0, 0, -1.2666e-07, 0.8, 0, -0.8, -1.2666e-07, 3.88829, 0.5, 8 )
 
@@ -312,6 +309,9 @@ transform = Transform( -0.627507, 0.526541, -0.573577, 0.642788, 0.766045, -1.49
 transform = Transform( -1.24258, 0.437885, 1.79215, -0.0944287, 2.14282, -0.589038, -1.84246, -0.40514, -1.17847, 4.07215, 0.203476, 2.16642 )
 mesh = ExtResource( 14 )
 material/0 = ExtResource( 13 )
+
+[node name="PlayerTurret" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.976 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.450597, 0.892727, 0, -0.892727, 0.450597, 0, 0, 0 )
