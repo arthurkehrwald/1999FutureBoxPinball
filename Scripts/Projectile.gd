@@ -43,6 +43,10 @@ func on_hit_by_explosion(explosion):
 	apply_central_impulse(-to_explosion.normalized() * knockback_strength)
 
 
+func on_hit_by_projectile(_projectile):
+	pass
+
+
 func on_entered_laser_area():
 	PoolManager.request(PoolManager.PROJECTILE_LASERED, get_global_transform().origin)
 	queue_free()

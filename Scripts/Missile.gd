@@ -62,6 +62,7 @@ func explode():
 func on_AnimationPlayer_animation_finished(_animation_name):
 	start_moving_towards_player_ship()
 
+
 func start_moving_towards_player_ship():
 	hitreg_area.monitoring = true
 	start_basis = get_global_transform().basis.orthonormalized()
@@ -72,15 +73,19 @@ func start_moving_towards_player_ship():
 		guidance_update_timer.start(GUIDANCE_UPDATE_RATE)
 
 
-func on_body_entered(body):
-	.on_body_entered(body)
-	if get_collision_exceptions().has(body) or body == self:
-		return
-	if body.is_in_group("playfield_box"):
-		return
-	if body.is_in_group("projectiles"):
-		gravity_scale = .3
-		explode_timer.start(EXPLODE_DELAY)
+func on_hit_by_projectile(projectile):
+	.on_hit_by_projectile(projectile)
+	on_hit()
+
+
+func on_hit_by_explosion(explosion):
+	.on_hit_by_explosion(explosion)
+	on_hit()
+
+
+func on_hit():
+	gravity_scale = .3
+	explode_timer.start(EXPLODE_DELAY)
 
 
 func on_GuidanceUpdateTimer_timeout():
