@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+signal test
+
+func _ready():
+	connect(\"test\", self, \"on_test\")
+	emit_signal(\"test\")
+	
+func on_test():
+	print(\"callback\")
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource( 1 )

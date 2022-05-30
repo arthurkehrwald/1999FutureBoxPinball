@@ -32,7 +32,7 @@ func set_is_active(value):
 
 func on_RestartTimer_timeout():
 	set_is_active(false)
-	GameState.handle_event(GameState.Event.POSTGAME_FINISHED)
+	#GameState.handle_event(GameState.Event.POSTGAME_FINISHED)
 
 
 func on_GameState_changed(new_state, is_debug_skip):
