@@ -18,9 +18,9 @@ onready var active_player_in_state = {
 	GameState.TESTING_STATE: null,
 	GameState.PREGAME_STATE: track_1_player,
 	GameState.EXPOSITION_STATE: track_1_player,
-	GameState.ENEMY_FLEET_STATE: track_1_player,
-	GameState.BOSS_APPEARS_STATE: track_2_player,
-	GameState.MISSILES_STATE: track_2_player,
+	GameState.ENEMY_FLEET_STATE: track_2_player,
+	GameState.BOSS_APPEARS_STATE: track_3_player,
+	GameState.MISSILES_STATE: track_3_player,
 	GameState.TREX_STATE: track_2_player,
 	GameState.BLACK_HOLE_STATE: track_3_player,
 	GameState.ECLIPSE_STATE: track_3_player,
@@ -47,6 +47,7 @@ func _process(delta):
 		fade_out_player.volume_db = fade_out_normal_db
 		fade_out_player = null
 		fade_progress = 0
+		stop_other_players(active_player)
 		set_process(false)
 
 
@@ -66,3 +67,16 @@ func on_GameState_changed(new_state, _is_debug_skip):
 		active_player = active_player_in_state[new_state]
 		active_player.play()
 		active_player_normal_db = active_player.volume_db
+
+
+func stop_other_players(player):
+	match active_player:
+		track_1_player:
+			track_2_player.stop()
+			track_3_player.stop()
+		track_2_player:
+			track_1_player.stop()
+			track_3_player.stop()
+		track_3_player:
+			track_1_player.stop()
+			track_2_player.stop()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Materials/3d_prints.tres" type="Material" id=1]
 [ext_resource path="res://Meshes/playfield_box_kickstart.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Materials/pink_unlit.tres" type="Material" id=3]
+[ext_resource path="res://Reference/ground_kickstart.jpeg" type="Texture" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 6.5, 1, 10 )
@@ -119,3 +120,9 @@ material/0 = ExtResource( 3 )
 transform = Transform( -2.0522e-06, -0.0141421, -0.0141421, -4.94538e-07, -0.0141421, 0.0141421, -8, 4.50203e-09, 2.75358e-09, 4.427, 0, 0 )
 mesh = SubResource( 5 )
 material/0 = ExtResource( 3 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( -1, -3.24601e-07, -2.83989e-08, 0, 0.0871556, -0.996195, 3.25841e-07, -0.996195, -0.0871556, 0, 0.01, 0 )
+visible = false
+flip_h = true
+texture = ExtResource( 4 )

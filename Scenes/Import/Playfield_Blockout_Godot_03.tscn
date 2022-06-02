@@ -71,3 +71,12 @@ material/0 = ExtResource( 2 )
 
 [node name="PlungerLanePlug" parent="." index="36"]
 material/0 = ExtResource( 2 )
+
+[node name="Slingshot_L" parent="SymmetryAxis" index="2"]
+material/0 = ExtResource( 2 )
+
+[node name="Slingshot_L001" parent="SymmetryAxis" index="3"]
+material/0 = ExtResource( 2 )
+
+[node name="Lazer_T-Rex_Bend_09" parent="." index="38"]
+material/0 = ExtResource( 2 )
