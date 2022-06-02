@@ -88,7 +88,7 @@ void fragment()
 }"
 custom_defines = ""
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
 shader = SubResource( 2 )
 shader_param/is_enabled = true
@@ -136,6 +136,6 @@ frustum_offset = Vector2( -0.04536, 0 )
 zoom = 0.172
 
 [node name="InterlacedStereoCanvas" parent="." instance=ExtResource( 1 )]
-material = SubResource( 5 )
+material = SubResource( 3 )
 left_viewport_path = NodePath("../ViewportContainer/Left")
 right_viewport_path = NodePath("../ViewportContainer/Right")

@@ -6,7 +6,7 @@
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TestUtilities/Scenes/LocalPosLabel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
-[ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Scenes/MusicPlayers.tscn" type="PackedScene" id=34]
 [ext_resource path="res://HUD/Videos/game_over_overlay.ogv" type="VideoStream" id=44]
 [ext_resource path="res://Scripts/VideoPlayer.gd" type="Script" id=46]
 [ext_resource path="res://Scenes/ScreenCenter.tscn" type="PackedScene" id=54]
@@ -24,7 +24,7 @@ loop = true
 
 [node name="Main" type="Spatial"]
 
-[node name="MusicPlayer" parent="." instance=ExtResource( 34 )]
+[node name="MusicPlayers" parent="." instance=ExtResource( 34 )]
 
 [node name="ScreenCenter" parent="." instance=ExtResource( 54 )]
 transform = Transform( 1, 0, 0, 0, 0.990838, -0.135059, 0, 0.135059, 0.990838, 0, 2.29891, 0.077672 )
@@ -42,7 +42,7 @@ visible = false
 transform = Transform( 0.023, 0, 0, 0, 0.023, -6.98492e-10, 0, 6.98492e-10, 0.023, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 50.0009, -2.90871e-05, 0, 2.90871e-05, 50.0009, -46.1786, 390.752, -87.2082 )
+transform = Transform( 50, 0, 0, 0, 50.0009, -2.90871e-05, 0, 2.90871e-05, 50.0009, -46.1787, 390.752, -87.2082 )
 
 [node name="LocalPosLabel" parent="ScreenCenter/Millimeters/AxisArrows" instance=ExtResource( 5 )]
 visible = false
@@ -61,6 +61,7 @@ transform = Transform( 14.5, 0, 0, 0, 18.577, 0, 0, 0, 18.314, -1.06211, 8.9873,
 
 [node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpaceBam" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.2666e-07, 0, 0, 1, 0, 5.96046e-08, 0.0555319 )
+enabled = false
 
 [node name="RemoteTransform" type="RemoteTransform" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam"]
 remote_path = NodePath("../../../Millimeters/AxisArrows")

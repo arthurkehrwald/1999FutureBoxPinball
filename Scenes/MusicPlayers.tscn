@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Audio/Music/track_01.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Audio/Music/track_03.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Audio/Music/track_02.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Meshes/MusicTrackPlayer.tscn" type="PackedScene" id=5]
+
+[node name="MusicPlayers" type="Node"]
+
+[node name="Track1Player" parent="." instance=ExtResource( 5 )]
+stream = ExtResource( 1 )
+TRACK_INDEX = 1
+FADE_DUR_SECS = 3.0
+
+[node name="Track2Player" parent="." instance=ExtResource( 5 )]
+stream = ExtResource( 3 )
+TRACK_INDEX = 2
+FADE_DUR_SECS = 3.0
+
+[node name="Track3Player" parent="." instance=ExtResource( 5 )]
+stream = ExtResource( 2 )
+TRACK_INDEX = 3
+FADE_DUR_SECS = 3.0

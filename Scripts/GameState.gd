@@ -12,11 +12,13 @@ class SubState extends Node:
 	signal objective_two_completed(state)
 	
 	var NAME = ""
-	var OBJECTIVES = {}
+	var OBJECTIVES = ["", ""]
+	var MUSIC_TRACK = -1
 	
-	func _init(name : String, objectives : Array):
+	func _init(name : String, objectives : Array, music_track : int):
 		NAME = name
 		OBJECTIVES = objectives
+		MUSIC_TRACK = music_track
 	
 	func enter():
 		pass
@@ -34,7 +36,7 @@ class SubState extends Node:
 class TimeLimitedState extends SubState:
 	var timer = null
 	
-	func _init(name : String, objectives : Array, time_limit : float).(name, objectives):
+	func _init(name : String, objectives : Array, music_track : int, time_limit : float).(name, objectives, music_track):
 		timer = Timer.new()
 		timer.set_wait_time(time_limit)
 		timer.one_shot = true
@@ -46,6 +48,7 @@ class TimeLimitedState extends SubState:
 		timer.start()
 	
 	func exit():
+		.exit()
 		timer.stop()
 
 	func on_Timer_timeout():
@@ -53,7 +56,7 @@ class TimeLimitedState extends SubState:
 
 
 class PostGameState extends SubState:
-	func _init(name).(name, ["", ""]):
+	func _init(name : String, music_track).(name, ["", ""], music_track):
 		pass
 	
 	func handle_event(event):
@@ -63,7 +66,7 @@ class PostGameState extends SubState:
 
 
 class PregameState extends SubState:
-	func _init().("1-Pregame", ["", ""]):
+	func _init().("1-Pregame", ["", ""], 1):
 		pass
 	
 	func handle_event(event):
@@ -73,7 +76,7 @@ class PregameState extends SubState:
 
 
 class ExpositionState extends TimeLimitedState:
-	func _init().("2-Exposition", ["To the moon!", ""], 30):
+	func _init().("2-Exposition", ["To the moon!", ""], 1, 30):
 		pass
 	
 	func handle_event(event):
@@ -84,7 +87,7 @@ class ExpositionState extends TimeLimitedState:
 
 
 class EnemyFleetState extends SubState:
-	func _init().("3-EnemyFleet", ["Destroy the enemy fleet!", ""]):
+	func _init().("3-EnemyFleet", ["Destroy the enemy fleet!", ""], 2):
 		pass
 	
 	func handle_event(event):
@@ -95,7 +98,7 @@ class EnemyFleetState extends SubState:
 
 
 class BossFightState extends SubState:
-	func _init(name : String).(name, ["Defeat the emperor!", ""]):
+	func _init(name : String).(name, ["Defeat the emperor!", ""], 3):
 		pass
 	
 	func handle_event(event):
@@ -108,15 +111,14 @@ class BossAppearsState extends BossFightState:
 	func _init().("4-BossAppears"):
 		pass
 	
-	
 	func handle_event(event):
 		.handle_event(event)
 		if event == Event.BOSS_MISSILES_THRESHOLD or event == Event.BOSS_SHIELD_DESTROYED:
 			on_complete()
 
-onready var TESTING_STATE = SubState.new("0-Testing", ["Test123", "Yes"])
-onready var VICTORY_STATE = PostGameState.new("9-Victory")
-onready var DEFEAT_STATE = PostGameState.new("10-Defeat")
+onready var TESTING_STATE = SubState.new("0-Testing", ["Test123", "Yes"], -1)
+onready var VICTORY_STATE = PostGameState.new("9-Victory", 0)
+onready var DEFEAT_STATE = PostGameState.new("10-Defeat", 0)
 
 onready var SPECIAL_STATES = [
 	TESTING_STATE,

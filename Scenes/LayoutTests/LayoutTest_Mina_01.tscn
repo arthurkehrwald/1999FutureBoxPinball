@@ -31,7 +31,7 @@
 [ext_resource path="res://Scenes/BallFeed.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/StageOneEntryRamp.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=31]
-[ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Scenes/MusicPlayers.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Scenes/StageTwoEntryRamp.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/LoopingLouiesLooping.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Scenes/TeleporterEntrance.tscn" type="PackedScene" id=35]
@@ -45,6 +45,8 @@
 [ext_resource path="res://Scenes/CurvedRampR.tscn" type="PackedScene" id=43]
 [ext_resource path="res://Scenes/CurvedRampL.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Scenes/GlitchShaderFullscreen.tscn" type="PackedScene" id=45]
+
+
 
 
 
