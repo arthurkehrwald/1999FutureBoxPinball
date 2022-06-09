@@ -42,7 +42,7 @@ visible = false
 transform = Transform( 0.023, 0, 0, 0, 0.023, -6.98492e-10, 0, 6.98492e-10, 0.023, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 50.0009, -2.90871e-05, 0, 2.90871e-05, 50.0009, -46.1739, 390.739, 64.7396 )
+transform = Transform( 50, 0, 0, 0, 50.0009, -2.90871e-05, 0, 2.90871e-05, 50.0009, -46.1787, 390.752, -87.2082 )
 
 [node name="LocalPosLabel" parent="ScreenCenter/Millimeters/AxisArrows" instance=ExtResource( 5 )]
 visible = false
@@ -57,10 +57,11 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="HeadTrackerSpaceBam" parent="ScreenCenter" instance=ExtResource( 30 )]
-transform = Transform( 14.5, 0, 0, 0, 18.577, 0, 0, 0, 18.314, -1.062, 8.987, 0.472 )
+transform = Transform( 14.5, 0, 0, 0, 18.577, 0, 0, 0, 18.314, -1.06211, 8.9873, -3.0228 )
 
 [node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpaceBam" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.2666e-07, 0, 0, 1, 0, 5.96046e-08, 0.0555319 )
+enabled = false
 
 [node name="RemoteTransform" type="RemoteTransform" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam"]
 remote_path = NodePath("../../../Millimeters/AxisArrows")
@@ -69,7 +70,7 @@ update_scale = false
 
 [node name="StereoCamera" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 3 )]
 transform = Transform( 0.517241, 0, 0, 0, 0.5427, 0.0603309, 0, -0.0570401, 0.574011, 0.0954536, -0.00757653, -0.056382 )
-stereo_offset = 0.18
+stereo_offset = 0.217
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"
