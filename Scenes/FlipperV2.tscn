@@ -19,7 +19,7 @@ transform = Transform( 0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 0, 0, 0 )
 collision_mask = 2147483648
 script = ExtResource( 1 )
 TURN_SPEED = 16
-IMPULSE_STRENGTH = 250
+IMPULSE_STRENGTH = 500
 MAX_IMPULSE_ANGLE = 60
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
