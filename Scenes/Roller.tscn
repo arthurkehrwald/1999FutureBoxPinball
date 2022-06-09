@@ -18,7 +18,6 @@ radius = 0.22
 
 [node name="Roller" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-MAX_GRAV = 15.0
 MIN_GRAV = 7.0
 GRAV_CURVE_STEEPNESS = 0.25
 GRAV_CURVE_OFFSET = 0.0

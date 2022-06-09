@@ -53,7 +53,6 @@ transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195,
 shape = SubResource( 3 )
 
 [node name="BoxEdgesForTesting" type="Spatial" parent="."]
-visible = false
 
 [node name="MeshInstance5" type="MeshInstance" parent="BoxEdgesForTesting"]
 transform = Transform( -3.20723e-07, -0.707107, -0.707107, 2.784, -1.62921e-07, -7.10543e-15, -3.20723e-07, -0.707107, 0.707107, 4.35, 1.98402, -7.95 )
