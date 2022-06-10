@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/PlayfieldKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/StereoCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TestUtilities/Scenes/LocalPosLabel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
@@ -39,12 +39,13 @@ transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
 visible = false
 
 [node name="Millimeters" type="Spatial" parent="ScreenCenter"]
-transform = Transform( 0.011, 0, 0, 0, 0.011, -6.68123e-10, 0, 3.34061e-10, 0.022, 0, 0, 0 )
+transform = Transform( 0.023, 0, 0, 0, 0.023, -6.98492e-10, 0, 6.98492e-10, 0.023, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 50.001, -3.09944e-05, 0, 3.09944e-05, 50.001, 145.818, 361.545, 10.8182 )
+transform = Transform( 50, 0, 0, 0, 50.0009, -2.90871e-05, 0, 2.90871e-05, 50.0009, -33.7391, 434.783, 72.6522 )
 
 [node name="LocalPosLabel" parent="ScreenCenter/Millimeters/AxisArrows" instance=ExtResource( 5 )]
+visible = false
 
 [node name="AxisArrows2" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
 transform = Transform( -400, 0, 0, 0, 400, 0, 0, 0, 400, 196.254, 1.52588e-05, 350.813 )
@@ -56,7 +57,7 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="HeadTrackerSpaceBam" parent="ScreenCenter" instance=ExtResource( 30 )]
-transform = Transform( 18.526, 0, 0, 0, 9.24, 0, 0, 0, 16.138, 1.604, 3.977, 0.119 )
+transform = Transform( 20, 0, 0, 0, 26, 0, 0, 0, 20, -0.776, 10, 1.671 )
 
 [node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpaceBam" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.2666e-07, 0, 0, 1, 0, 0, 0 )
@@ -66,7 +67,9 @@ remote_path = NodePath("../../../Millimeters/AxisArrows")
 update_rotation = false
 update_scale = false
 
-[node name="OffAxisCamera" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 3 )]
+[node name="StereoCamera" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 3 )]
+transform = Transform( 0.517241, 0, 0, 0, 0.5427, 0.0603309, 0, -0.0570401, 0.574011, 0.0954536, -0.00757653, -0.056382 )
+stereo_offset = 0.18
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"
