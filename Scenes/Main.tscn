@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/PlayfieldKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/StereoCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TestUtilities/Scenes/LocalPosLabel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/TrackingSoundFX.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/MusicPlayers.tscn" type="PackedScene" id=34]
 [ext_resource path="res://HUD/Videos/game_over_overlay.ogv" type="VideoStream" id=44]
@@ -42,7 +43,7 @@ visible = false
 transform = Transform( 0.011, 0, 0, 0, 0.011, -3.34061e-10, 0, 3.34061e-10, 0.011, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 50.0006, 4.33922e-05, 0, -4.33922e-05, 50.0006, 100.727, 729.273, 55.1818 )
+transform = Transform( 50, 0, 0, 0, 50.0006, 4.29153e-05, 0, -4.29153e-05, 50.0006, 100.727, 729.273, 55.1818 )
 
 [node name="LocalPosLabel" parent="ScreenCenter/Millimeters/AxisArrows" instance=ExtResource( 5 )]
 modulate = Color( 1, 1, 1, 1 )
@@ -69,6 +70,8 @@ update_scale = false
 
 [node name="StereoCamera" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 3 )]
 stereo_offset = 0.18
+
+[node name="TrackingSoundFX" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 6 )]
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"
