@@ -184,7 +184,7 @@ func _ready():
 
 
 func on_GameState_changed(new_state, is_debug_skip):
-	if not is_debug_skip and playback_managers[new_state] != null:
+	if playback_managers[new_state] != null:
 		if current_playback_manager:
 			current_playback_manager.request_stop()
 		current_playback_manager = playback_managers[new_state]

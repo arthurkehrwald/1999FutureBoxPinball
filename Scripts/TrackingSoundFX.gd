@@ -9,12 +9,14 @@ var has_target = false setget set_has_target
 func _ready():
 	$Timer.connect("timeout", self, "_on_Timer_timeout")
 
-
 func _process(delta):
 	var pos = get_global_transform().origin
 	if has_target:
 		if prev_pos == pos:
-			$Timer.start(target_lost_delay_seconds)
+			if $Timer.is_stopped():
+				$Timer.start(target_lost_delay_seconds)
+		else:
+			$Timer.stop()	
 	else:
 		if prev_pos != pos:
 			set_has_target(true)
@@ -32,5 +34,5 @@ func set_has_target(val):
 	if val:
 		Announcer.say("target_acquired")
 	else:
-		Announcer.say("face_lost")
+		Announcer.say("signal_lost")
 	has_target = val

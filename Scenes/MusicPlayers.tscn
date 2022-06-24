@@ -10,14 +10,11 @@
 [node name="Track1Player" parent="." instance=ExtResource( 5 )]
 stream = ExtResource( 1 )
 TRACK_INDEX = 1
-FADE_DUR_SECS = 3.0
 
 [node name="Track2Player" parent="." instance=ExtResource( 5 )]
 stream = ExtResource( 3 )
 TRACK_INDEX = 2
-FADE_DUR_SECS = 3.0
 
 [node name="Track3Player" parent="." instance=ExtResource( 5 )]
 stream = ExtResource( 2 )
 TRACK_INDEX = 3
-FADE_DUR_SECS = 3.0
