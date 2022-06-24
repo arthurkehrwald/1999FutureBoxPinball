@@ -157,14 +157,8 @@ onready var playback_managers = {
 		preload("res://HUD/Videos/pregame_overlay_v2_outro.ogv")
 	),
 	GameState.EXPOSITION_STATE: null,
-	GameState.ENEMY_FLEET_STATE: SingleVideoManager.new(
-		self,
-		preload("res://HUD/Videos/stage_one_overlay_v2.ogv")
-	),
-	GameState.BOSS_APPEARS_STATE: SingleVideoManager.new(
-		self,
-		preload("res://HUD/Videos/stage_two_overlay_v2.ogv")
-	),
+	GameState.ENEMY_FLEET_STATE: null,
+	GameState.BOSS_APPEARS_STATE: null,
 	GameState.MISSILES_STATE: null,
 	GameState.TREX_STATE: null,
 	GameState.BLACK_HOLE_STATE: null,
