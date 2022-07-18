@@ -41,4 +41,5 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MoneyTextFx"]
+playback_speed = 0.5
 anims/score_text_3d_fade_anim = ExtResource( 3 )
