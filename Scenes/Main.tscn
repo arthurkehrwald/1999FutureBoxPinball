@@ -43,7 +43,7 @@ visible = false
 transform = Transform( 0.011, 0, 0, 0, 0.011, -3.34061e-10, 0, 3.34061e-10, 0.011, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 50.0006, 4.24385e-05, 0, -4.24385e-05, 50.0006, 100.727, 729.273, 55.1818 )
+transform = Transform( 50, 0, 0, 0, 50.0006, 4.19617e-05, 0, -4.19617e-05, 50.0006, 109.455, 688.273, 363.636 )
 
 [node name="LocalPosLabel" parent="ScreenCenter/Millimeters/AxisArrows" instance=ExtResource( 5 )]
 modulate = Color( 1, 1, 1, 1 )
@@ -58,7 +58,7 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="HeadTrackerSpaceBam" parent="ScreenCenter" instance=ExtResource( 30 )]
-transform = Transform( 19.72, 0, 0, 0, 21.222, 0, 0, 0, 16.801, 1.108, 8.022, 0.607 )
+transform = Transform( 19.72, 0, 0, 0, 18, 0, 0, 0, 17, 1.204, 7.571, 4 )
 
 [node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpaceBam" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.2666e-07, 0, 0, 1, 0, 0, 0 )

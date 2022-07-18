@@ -72,10 +72,18 @@ material/0 = ExtResource( 2 )
 [node name="PlungerLanePlug" parent="." index="36"]
 material/0 = ExtResource( 2 )
 
+[node name="Collider03" parent="SymmetryAxis" index="0"]
+transform = Transform( 22.4958, 1.32825, -0.0020665, -0.00207321, 5.10413e-05, -22.535, -1.32825, 22.4958, 0.000173272, -2.15, 0, 4.508 )
+
+[node name="Collider03001" parent="SymmetryAxis" index="1"]
+transform = Transform( -22.4958, -1.32825, 0.00206637, -0.00207313, 5.10413e-05, -22.535, -1.32825, 22.4958, 0.000173272, 2.15, 0, 4.508 )
+
 [node name="Slingshot_L" parent="SymmetryAxis" index="2"]
+transform = Transform( 22.4958, 1.32825, -0.00206654, -0.00207342, 5.37276e-05, -22.535, -1.32825, 22.4958, 0.000175958, -2.15, 0, 4.508 )
 material/0 = ExtResource( 2 )
 
 [node name="Slingshot_L001" parent="SymmetryAxis" index="3"]
+transform = Transform( -22.4958, -1.32825, 0.00206637, -0.00207313, 5.10413e-05, -22.535, -1.32825, 22.4958, 0.000173272, 2.15, 0, 4.508 )
 material/0 = ExtResource( 2 )
 
 [node name="Lazer_T-Rex_Bend_09" parent="." index="38"]
