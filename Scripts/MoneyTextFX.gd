@@ -1,16 +1,14 @@
-extends Sprite3D
+extends Spatial
 
 signal finished
 
 const FORMAT_STRING = "+$%sbn"
 
-onready var viewport = get_node("Viewport")
-onready var label = get_node("Viewport/Label")
-onready var animation_player = get_node("AnimationPlayer")
+onready var label = get_node("MoneyTextFx/Viewport/Label")
+onready var animation_player = get_node("MoneyTextFx/AnimationPlayer")
 
 
 func _ready():
-	texture = viewport.get_texture()
 	animation_player.connect("animation_finished", self, "on_animation_finished")
 
 
