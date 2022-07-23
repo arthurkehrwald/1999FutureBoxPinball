@@ -82,6 +82,7 @@ IS_SHOOTING_PER_STAGE = {
 [node name="Fog" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.842596, -0.446508 )
 [connection signal="death" from="Boss" to="BossExplosionFX" method="_on_Boss_death"]
+[connection signal="health_changed" from="Boss" to="Fog" method="_on_Boss_health_changed"]
 [connection signal="health_changed" from="Boss" to="BossBar3D" method="_on_Boss_health_changed"]
 [connection signal="is_vulnerable_changed" from="Boss" to="Fog" method="_on_Boss_is_vulnerable_changed"]
 [connection signal="is_vulnerable_changed" from="Boss" to="BossBar3D" method="_on_Boss_is_vulnerable_changed"]
