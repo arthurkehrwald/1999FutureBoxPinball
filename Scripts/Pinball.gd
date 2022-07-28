@@ -46,9 +46,9 @@ func _process(_delta):
 func _physics_process(delta):
 	if is_remote_controlled and not is_remote_control_blocked:
 		var dir = Vector3.ZERO
-		if Input.is_action_pressed("ui_left"):
+		if Input.is_action_pressed("flipper_left"):
 			dir += Vector3.UP.cross(linear_velocity)
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed("flipper_right"):
 			dir += linear_velocity.cross(Vector3.UP)
 		if IS_REMOTE_CONTROL_FROM_PLAYER_POV and linear_velocity.z > 0:
 			dir = -dir
