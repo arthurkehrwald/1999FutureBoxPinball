@@ -33,9 +33,6 @@ func _ready():
 	set_is_remote_controlled(IS_ALWAYS_REMOTE_CONTROLLED)
 	connect("tree_exiting", self, "set_is_accessible_to_player", [false])
 	appear_particles_timer.connect("timeout", self, "on_AppearParticlesTimer_timeout")
-	if Globals.powerup_roulette != null:
-		Globals.powerup_roulette.connect("selected_remote", self, "set_is_remote_controlled", [true])
-		Globals.powerup_roulette.connect("remote_expired", self, "set_is_remote_controlled", [false])
 
 
 func _process(_delta):

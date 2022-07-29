@@ -19,18 +19,16 @@ collision_mask = 0
 script = ExtResource( 1 )
 MAX_TURN_ANGLE = 30
 TURN_SPEED = 0.2
-MAX_SHOT_SPEED = 40
-SHOT_CHARGE_SPEED = 0.7
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 4 )
 material/0 = ExtResource( 5 )
 
 [node name="Muzzle" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 1.10413, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10413, 0 )
 
 [node name="DottedLine" type="MeshInstance" parent="Muzzle"]
-transform = Transform( 1, 0, 0, 0, 0.984807, -0.043412, 0, 0.173648, 0.246202, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 0.984808, -0.138919, 0, 0.173648, 0.787846, 0, 0, 0 )
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 3 )
 

@@ -105,13 +105,15 @@ func select_center_icon():
 
 
 func _on_PowerupIcon_selection_animation_finished():
-	assert(selected_powerup != null)
+	if selected_powerup == null:
+		return
 	selected_powerup.activate()
 	present_selected_powerup()
 
 
 func present_selected_powerup():
-	assert(selected_powerup != null)
+	if selected_powerup == null:
+		return
 	state = State.PRESENTING
 	name_label.visible = true
 	name_label.text = selected_powerup.powerup_name
@@ -128,7 +130,7 @@ func _on_PresentPowerupTimer_timeout():
 	set_inactive()
 
 func _on_SelectedPowerup_is_active_changed(value):
-	if !value:
+	if state == State.PRESENTING and !value:
 		set_inactive()
 
 

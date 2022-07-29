@@ -1,25 +1,28 @@
 class_name PlayerTurret
 extends KinematicBody
 
+enum RotationDirection{
+	NONE,
+	LEFT,
+	RIGHT
+}
+
 signal was_loaded
 signal has_shot
 signal is_active_changed(value)
 
 export var MAX_TURN_ANGLE = 45
 export var TURN_SPEED = .5
-export var MAX_SHOT_SPEED = 50
-export var SHOT_CHARGE_SPEED = 1.0
-export var TIME_SCALE_WHEN_AIMING = .1
+export(float) var shot_force := 50.0
 export var SINK_INTO_GROUND_DIST = 1.0
 
 var is_active = false setget set_is_active, get_is_active
-var ball_to_shoot = null
-var rotation_progress = 0.5
-var shot_charge = 0
+var ball_to_shoot: RigidBody = null
+var rotation_progress = 0.5 setget set_rotation_progress
+var rotation_direction = RotationDirection.NONE
 
 onready var muzzle = get_node("Muzzle")
 onready var dotted_line = get_node("Muzzle/DottedLine")
-onready var dotted_line_start_transform = dotted_line.get_transform()
 onready var start_transform = get_transform()
 onready var min_transform  = get_transform().rotated(get_transform().basis.y.normalized(),
 		deg2rad(-MAX_TURN_ANGLE))
@@ -41,36 +44,48 @@ func _ready():
 
 func _input(event):
 	if ball_to_shoot != null:
-		if event.is_action_released("plunger"):
-			shoot(shot_charge)
+		if event.is_action_pressed("shoot_turret"):
+			shoot()
 
 
 func _process(delta):
-	var old_rotation_progress = rotation_progress
 	if ball_to_shoot == null:
 		if rotation_progress == .5:
+			rotation_direction = RotationDirection.NONE
 			set_process(false)
-		elif rotation_progress < .5:
-			rotation_progress = min(.5, rotation_progress + TURN_SPEED * delta)
 		else:
-			rotation_progress = max(.5, rotation_progress - TURN_SPEED * delta)
+			approach_centered_rotation(delta)
 	else:
-		if Input.is_action_pressed("flipper_right"):
-			if rotation_progress > 0:
-				rotation_progress -= TURN_SPEED / TIME_SCALE_WHEN_AIMING * delta
-		if Input.is_action_pressed("flipper_left"):
-			if rotation_progress < 1:
-				rotation_progress += TURN_SPEED / TIME_SCALE_WHEN_AIMING * delta
-		if Input.is_action_pressed("plunger"):
-			shot_charge = clamp(shot_charge + SHOT_CHARGE_SPEED / TIME_SCALE_WHEN_AIMING * delta, 0, 1)
-			var dotted_line_scale = Vector3(1, 1, lerp(1, 3, shot_charge))
-			dotted_line.set_transform(dotted_line_start_transform.scaled(dotted_line_scale))
-	
-	if rotation_progress != old_rotation_progress:
-		var min_basis = min_transform.basis.orthonormalized()
-		var max_basis = max_transform.basis.orthonormalized()
-		var new_rotation = Quat(min_basis.slerp(max_basis, rotation_progress))
-		set_transform(Transform(new_rotation, get_transform().origin))	
+		match rotation_direction:
+			RotationDirection.NONE:
+				rotation_direction = RotationDirection.LEFT
+			RotationDirection.LEFT:
+				if rotation_progress < 1:
+					set_rotation_progress(rotation_progress + TURN_SPEED * delta)
+				else:
+					rotation_direction = RotationDirection.RIGHT
+			RotationDirection.RIGHT:
+				if rotation_progress > 0:
+					set_rotation_progress(rotation_progress - TURN_SPEED * delta)
+				else:
+					rotation_direction = RotationDirection.LEFT
+
+
+func approach_centered_rotation(delta):
+	if rotation_progress < .5:
+		set_rotation_progress(min(.5, rotation_progress + TURN_SPEED * delta))
+	else:
+		set_rotation_progress(max(.5, rotation_progress - TURN_SPEED * delta))
+
+
+func set_rotation_progress(value):
+	if rotation_progress == value:
+		return
+	rotation_progress = value
+	var min_basis = min_transform.basis.orthonormalized()
+	var max_basis = max_transform.basis.orthonormalized()
+	var new_rotation = Quat(min_basis.slerp(max_basis, rotation_progress))
+	set_transform(Transform(new_rotation, get_transform().origin))
 
 
 func on_GameState_changed(new_state, is_debug_skip):
@@ -80,7 +95,6 @@ func on_GameState_changed(new_state, is_debug_skip):
 		set_process(false)
 		var start_rotation = Quat(start_transform.basis.orthonormalized())
 		set_transform(Transform(start_rotation, get_transform().origin))
-		Engine.time_scale = 1
 
 
 func on_hit_by_projectile(projectile):
@@ -91,16 +105,16 @@ func on_hit_by_projectile(projectile):
 func set_is_active(value : bool):
 	if is_active == value:
 		return
-	is_active = value
-	emit_signal("is_active_changed", is_active)
 	if (is_active and ball_to_shoot):
-		shoot(shot_charge)
+		shoot()
 	$Tween.remove(self, "translation:y")
-	var from_y = min_y if is_active else max_y
-	var to_y = max_y if is_active else min_y
+	var from_y = min_y if value else max_y
+	var to_y = max_y if value else min_y
 	$Tween.interpolate_property(self, "translation:y",
 		from_y, to_y, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
+	is_active = value
+	emit_signal("is_active_changed", is_active)
 
 
 func get_is_active():
@@ -111,7 +125,7 @@ func insert_ball(ball):
 	if ball == null or not ball.is_in_group("pinballs"):
 		return
 	if ball_to_shoot != null:
-		shoot(.5)
+		shoot()
 	Announcer.say("turret_active")
 	dotted_line.set_visible(true)
 	ball.set_locked(true)
@@ -120,20 +134,16 @@ func insert_ball(ball):
 	emit_signal("was_loaded")
 	set_process(true)
 	delayed_announcer_instructions()
-	Engine.time_scale = TIME_SCALE_WHEN_AIMING
 
 
-func shoot(charge):
+func shoot():
 	if ball_to_shoot == null:
 		return
 	dotted_line.set_visible(false)
 	ball_to_shoot.set_locked(false)
 	ball_to_shoot.set_visible(true)
-	var force = .15 * pow(charge - 1.7, 3) + 1
-	ball_to_shoot.apply_central_impulse(-muzzle.get_global_transform().basis.z.normalized() * MAX_SHOT_SPEED * force)
+	ball_to_shoot.apply_central_impulse(-muzzle.get_global_transform().basis.z.normalized() * shot_force)
 	ball_to_shoot = null
-	shot_charge = 0
-	Engine.time_scale = 1
 	emit_signal("has_shot")
 	set_is_active(false)
 

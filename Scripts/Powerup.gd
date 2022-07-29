@@ -13,18 +13,10 @@ var is_active := false
 var timer : SceneTreeTimer = null
 
 func _ready():
-	_register_in_roulette()
-
-
-func _exit_tree():
-	_unregister_in_roulette()
-
-
-func _register_in_roulette():
 	Globals.powerup_roulette.register_powerup(self)
 
 
-func _unregister_in_roulette():
+func _exit_tree():
 	Globals.powerup_roulette.unregister_powerup(self)
 
 
@@ -42,6 +34,9 @@ func activate():
 func deactivate():
 	if !is_active:
 		return
+	if timer != null:
+		timer.disconnect("timeout", self, "_on_timeout")
+		timer = null
 	is_active = false
 	print("Deactivated powerup %s" % powerup_name)
 	emit_signal("is_active_changed", false)
