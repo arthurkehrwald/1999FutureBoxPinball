@@ -1,13 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://HUD/future_shop_header.png" type="Texture" id=1]
 [ext_resource path="res://HUD/repair_icon.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/PowerupRoulette.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/PowerupIcon.tscn" type="PackedScene" id=4]
-[ext_resource path="res://HUD/remote_icon.png" type="Texture" id=5]
-[ext_resource path="res://HUD/stopper_icon.png" type="Texture" id=6]
-[ext_resource path="res://HUD/turret_icon.png" type="Texture" id=7]
-[ext_resource path="res://HUD/boost_icon.png" type="Texture" id=8]
 [ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://HUD/bar_full.png" type="Texture" id=11]
 [ext_resource path="res://HUD/bar_empty.png" type="Texture" id=12]
@@ -22,66 +17,19 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -200.0
-margin_top = -50.0
+margin_top = -160.0
 margin_right = 200.0
-margin_bottom = 50.0
+margin_bottom = 160.0
 script = ExtResource( 3 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-POWERUP_ODDS_PER_STAGE = {
-"0-Testing": {
-"Remote": 0.0,
-"Turret": 1.0
-},
-"1-Pregame": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"10-Defeat": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"2-Exposition": {
-"Remote": 0.0,
-"Turret": 0.0
-},
-"3-EnemyFleet": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"4-BossAppears": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"5-Missiles": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"6-Trex": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"7-BlackHole": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"8-Eclipse": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"9-Victory": {
-"Remote": 1.0,
-"Turret": 1.0
-}
-}
-POWERUP_DURATIONS = {
-"Remote": 10.0,
-"Repair": 3.0,
-"Turret": 5.0
-}
+debug_spin_speed = 2.0
+debug_speed_decay = 1.0
 
 [node name="SelectedIconRect" type="TextureRect" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -122,6 +70,7 @@ margin_left = -173.0
 margin_top = 116.0
 margin_right = 174.0
 margin_bottom = 126.0
+step = 0.0
 value = 100.0
 texture_under = ExtResource( 12 )
 texture_progress = ExtResource( 11 )
@@ -135,9 +84,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -200.0
+margin_left = -199.802
 margin_top = 76.0
-margin_right = 200.0
+margin_right = 200.198
 margin_bottom = 112.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
@@ -149,70 +98,24 @@ __meta__ = {
 }
 
 [node name="Icons" type="Control" parent="."]
-margin_top = -10.0
-margin_bottom = -10.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -50.0
+margin_bottom = 50.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" parent="Icons" instance=ExtResource( 4 )]
-texture = ExtResource( 2 )
-
-[node name="Icon2" parent="Icons" instance=ExtResource( 4 )]
-margin_left = 100.0
-margin_right = 200.0
-texture = ExtResource( 7 )
-
-[node name="Icon3" parent="Icons" instance=ExtResource( 4 )]
-margin_left = 200.0
-margin_right = 300.0
-texture = ExtResource( 5 )
-
-[node name="Icon4" parent="Icons" instance=ExtResource( 4 )]
-margin_left = 300.0
-margin_right = 400.0
-texture = ExtResource( 6 )
-
-[node name="Icon5" parent="Icons" instance=ExtResource( 4 )]
-margin_left = 400.0
-margin_right = 500.0
-texture = ExtResource( 8 )
-
-[node name="Icon6" parent="Icons" instance=ExtResource( 4 )]
-margin_left = 500.0
-margin_right = 600.0
-texture = ExtResource( 8 )
-
-[node name="Icon7" parent="Icons" instance=ExtResource( 4 )]
-margin_left = 600.0
-margin_right = 700.0
-texture = ExtResource( 8 )
-
-[node name="Icon8" parent="Icons" instance=ExtResource( 4 )]
-margin_left = 700.0
-margin_right = 800.0
-texture = ExtResource( 8 )
-
-[node name="Icon9" parent="Icons" instance=ExtResource( 4 )]
-margin_left = 800.0
-margin_right = 900.0
-texture = ExtResource( 8 )
-
-[node name="Icon10" parent="Icons" instance=ExtResource( 4 )]
-margin_left = 900.0
-margin_right = 1000.0
-texture = ExtResource( 8 )
-
 [node name="Tween" type="Tween" parent="."]
 
-[node name="SpinTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Title" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -75.5
-margin_top = -116.53
-margin_right = 75.5
-margin_bottom = -40.53
+grow_horizontal = 2
 texture = ExtResource( 1 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}

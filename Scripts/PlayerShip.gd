@@ -18,11 +18,6 @@ func _enter_tree():
 
 
 func _ready():
-	if Globals.powerup_roulette != null:
-		Globals.powerup_roulette.connect("selected_repair", self, "on_PowerupRoulette_selected_repair")
-		Globals.powerup_roulette.connect("repair_expired", self, "on_PowerupRoulette_repair_expired")
-	else:
-		push_warning("[PlayerShip]: Can't find powerup roulette!")
 	connect("health_changed", self, "on_health_changed")
 	connect("death", GameState, "handle_event", [GameState.Event.PLAYER_DIED])
 
@@ -40,14 +35,6 @@ func set_coolness(value):
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		coolness_tween.start()
 	coolness = value
-
-
-func on_PowerupRoulette_selected_repair(health_per_sec):
-	dynamic_regen_per_sec += health_per_sec
-
-
-func on_PowerupRoulette_repair_expired(health_per_sec):
-	dynamic_regen_per_sec -= health_per_sec
 
 
 func on_health_changed(current_health, old_health, _max_health):

@@ -1,86 +1,36 @@
+class_name PowerupRoulette
 extends Control
 
-signal selected_repair(hp_per_sec)
-signal selected_turret
-signal selected_remote
-signal repair_expired(hp_per_sec)
-signal turret_expired
-signal remote_expired
-
-enum {
+enum State {
 	INACTIVE,
 	SPINNING,
 	SELECTING,
-	INSTRUCTING
-}
-enum Powerup {
-	REPAIR,
-	TURRET,
-	REMOTE
+	PRESENTING
 }
 
-const ICON_IMGS = {
-	Powerup.REPAIR: preload("res://HUD/repair_icon.png"),
-	Powerup.TURRET: preload("res://HUD/turret_icon.png"),
-	Powerup.REMOTE: preload("res://HUD/remote_icon.png")
-}
-const INSTRUCTION_IMGS = {
-	Powerup.REPAIR: null,
-	Powerup.TURRET: preload("res://HUD/turret_instructions.png"),
-	Powerup.REMOTE: preload("res://HUD/remote_instructions.png")
-}
-const POWERUP_STR_TO_ENUM = {
-	"Repair": Powerup.REPAIR,
-	"Turret": Powerup.TURRET,
-	"Remote": Powerup.REMOTE
-}
-const POWERUP_ENUM_TO_STR = {
-	Powerup.REPAIR: "Repair",
-	Powerup.TURRET: "Turret",
-	Powerup.REMOTE: "Remote"
-}
-const POWERUP_ODDS_STR = {
-	"Turret": 1.0,
-	"Remote": 1.0
-}
-const ICONS_VISIBLE_AT_A_TIME = 4
+const ICON_SCENE = preload("res://Scenes/PowerupIcon.tscn")
+export(float) var time_to_present_selected_powerup := 5.0
+export(bool) var do_display_powerup_name_while_spinning := false
+export(float) var debug_spin_speed := 2.0
+export(float) var debug_speed_decay := 1.0
 
-export var REPAIR_PERCENT = 50.0
-export var POWERUP_ODDS_PER_STAGE = {
-	"0-Testing": POWERUP_ODDS_STR,
-	"1-Pregame": POWERUP_ODDS_STR,
-	"2-Exposition": POWERUP_ODDS_STR,
-	"3-EnemyFleet": POWERUP_ODDS_STR,
-	"4-BossAppears": POWERUP_ODDS_STR,
-	"5-Missiles": POWERUP_ODDS_STR,
-	"6-Trex": POWERUP_ODDS_STR,
-	"7-BlackHole": POWERUP_ODDS_STR,
-	"8-Eclipse": POWERUP_ODDS_STR,
-	"9-Victory": POWERUP_ODDS_STR,
-	"10-Defeat": POWERUP_ODDS_STR
-}
-export var POWERUP_DURATIONS = {
-	"Repair": 5.0,
-	"Turret": 10.0,
-	"Remote": 30.0
-}
-export var DISPLAY_POWERUP_NAME_WHILE_SPINNING = false
+var spin_speed := 0.0
+var spin_speed_decay := 0.0
+var state = State.INACTIVE
+var unscaled_icon_width : float
+var min_icon_pos_x : float
+var max_icon_pos_x : float
+var spin_progress := 0.0 setget set_spin_progress
 
-var spin_speed = 0
-var spin_speed_decay = 0
-var state = INACTIVE
-var powerup_of_icon = {}
-var powerup_timers = {}
-var timer_on_time_bar = null
+var powerups := []
+var powerup_icons := []
+var selected_powerup : Powerup = null
+var instruction_timers := []
 
-onready var icons = get_node("Icons")
-onready var move_range = icons.get_child(0).rect_size.x * ICONS_VISIBLE_AT_A_TIME
-onready var half_icon_width = icons.get_child(0).rect_size.x * .5
-onready var max_progress = 1.0 / ICONS_VISIBLE_AT_A_TIME * icons.get_child_count()
+onready var icon_parent = get_node("Icons")
 onready var tween = get_node("Tween")
 onready var glitch_overlay = get_node("../GlitchOverlay")
 onready var instruction_rect = get_node("InstructionRect")
-onready var first_icon = icons.get_child(0)
 onready var name_label = get_node("NameLabel")
 onready var time_bar = get_node("TimeBar")
 onready var selected_icon_rect = get_node("SelectedIconRect")
@@ -90,82 +40,147 @@ func _enter_tree():
 	Globals.powerup_roulette = self
 
 
+func register_powerup(powerup : Powerup):
+	if powerups.has(powerup):
+		push_error("Powerup %s is already registered! Cannot register" % powerup.powerup_name)
+		return
+	powerups.push_back(powerup)
+
+
+func unregister_powerup(powerup: Powerup):
+	if !powerups.has(powerup):
+		push_error("Powerup %s is not registered! Cannot unregister" % powerup.powerup_name)
+		return
+	powerups.erase(powerup)
+
+
 func _ready():
 	visible = false
 	randomize()
-	if Globals.player_ship == null:
-		print("[Powerup Roulette] can't find player ship. Repair powerup unavailable.")
-	for powerup_str in POWERUP_DURATIONS.keys():
-		var powerup_type = POWERUP_STR_TO_ENUM[powerup_str]
-		var timer = Timer.new()
-		timer.one_shot = true
-		timer.wait_time = POWERUP_DURATIONS[powerup_str]
-		if powerup_type == Powerup.TURRET and Globals.player_turret != null:
-			timer.wait_time *= Globals.player_turret.TIME_SCALE_WHEN_AIMING
-			Globals.player_turret.connect("was_loaded", timer, "start")
-		powerup_timers[powerup_type] = timer
-		timer.connect("timeout", self, "on_PowerupTimer_timeout", [powerup_type])
-		add_child(timer)
+
+
+func _input(event):
+	if event.is_action("debug_spin_roulette"):
+		start_spinning(debug_spin_speed, debug_speed_decay)
 
 
 func _process(delta):
-	if state == SPINNING:
-		if spin_speed > 0:
-			spin(delta)
-			spin_speed -= spin_speed_decay * delta
-		else:
-			state = SELECTING
-			var selected_icon = get_center_icon()
-			var selected_powerup = powerup_of_icon[selected_icon]
-			trigger_selection_animation(selected_icon)
-			var ap = selected_icon.get_node("AnimationPlayer")
-			ap.connect("animation_finished", self, "on_SelectionAnim_finished", [selected_powerup], CONNECT_ONESHOT)
-	elif state == INSTRUCTING:
-		time_bar.value = timer_on_time_bar.time_left * 100
+	if state == State.SPINNING:
+		set_spin_progress(spin_progress + spin_speed * delta)
+		spin_speed -= spin_speed_decay * delta
+		if spin_speed < 0:
+			select_center_icon()
+	if state == State.PRESENTING:
+		if selected_powerup.duration > 0.0:
+			time_bar.value = selected_powerup.get_time_left()
 
 
-func on_SelectionAnim_finished(_anim_name, selected_powerup):
-	activate_powerup(selected_powerup)
-	display_instructions(selected_powerup)
+func set_inactive():
+	state = State.INACTIVE
+	selected_powerup = null
+	visible = false
 
 
-func spin(delta):
-	for icon in icons.get_children():
-		var progress = (icon.rect_position.x + half_icon_width) / move_range
-		if progress >= max_progress:
-			icon.rect_position.x = -half_icon_width
-			if icon == first_icon:
-				even_icon_spacing()
-		icon.rect_position.x += spin_speed * move_range * delta
-		var scale = -2 * pow(progress - .5, 2) + 1
-		icon.rect_scale = Vector2.ONE * scale
-		if progress < .2:
-			icon.modulate = Color(1, 1, 1, progress * 5)
-		elif progress > .8:
-			icon.modulate = Color(1, 1 , 1, (1 - progress) * 5)
-		if DISPLAY_POWERUP_NAME_WHILE_SPINNING:
-			name_label.text = POWERUP_ENUM_TO_STR[powerup_of_icon[get_center_icon()]]
+func start_spinning(speed: float, decay: float):
+	spin_speed = speed
+	spin_speed_decay = decay
+	if state == State.SPINNING:
+		return
+	state = State.SPINNING
+	visible = true
+	name_label.visible = do_display_powerup_name_while_spinning
+	icon_parent.visible = true
+	instruction_rect.visible = false
+	time_bar.visible = false
+	selected_icon_rect.visible = false
+	prepare_powerup_icons()
 
 
-func get_center_icon():
+func select_center_icon():
+	state = State.SELECTING
+	var selected_icon = get_center_icon()
+	selected_powerup = selected_icon.associated_powerup
+	trigger_selection_animation(selected_icon)
+	selected_icon.connect("selection_animation_finished", self, "_on_PowerupIcon_selection_animation_finished", [], CONNECT_ONESHOT)
+
+
+func _on_PowerupIcon_selection_animation_finished():
+	assert(selected_powerup != null)
+	selected_powerup.activate()
+	present_selected_powerup()
+
+
+func present_selected_powerup():
+	assert(selected_powerup != null)
+	state = State.PRESENTING
+	name_label.visible = true
+	name_label.text = selected_powerup.powerup_name
+	if selected_powerup.duration > 0.0:
+		time_bar.visible = true
+		time_bar.max_value = selected_powerup.duration
+		selected_powerup.connect("is_active_changed", self, "_on_SelectedPowerup_is_active_changed", [], CONNECT_ONESHOT)
+	else:
+		var timer = get_tree().create_timer(time_to_present_selected_powerup)
+		timer.connect("timeout", self, "_on_PresentPowerupTimer_timeout")
+
+
+func _on_PresentPowerupTimer_timeout():
+	set_inactive()
+
+func _on_SelectedPowerup_is_active_changed(value):
+	if !value:
+		set_inactive()
+
+
+func display_instructions(powerup: Powerup):
+	state = State.INSTRUCTING
+	selected_icon_rect.texture = powerup.icon
+	name_label.text = powerup.powerup_name
+	instruction_rect.texture = powerup.instructions
+	name_label.visible = true
+	icon_parent.visible = false
+	selected_icon_rect.visible = true
+	instruction_rect.visible = true
+	if glitch_overlay != null:
+		glitch_overlay.super_glitch()
+
+
+func set_spin_progress(value: float):
+	spin_progress = fmod(value, 1.0)
+	var visible_icons = calc_icon_count_to_fill_icon_parent(unscaled_icon_width) + 1
+	var progress_offset_between_icons = (1.0 / visible_icons)
+	for i in range(0, powerup_icons.size()):
+		var anim_progress = spin_progress + i * progress_offset_between_icons
+		if anim_progress > 1.0:
+			anim_progress = fmod(anim_progress, 1.0) 
+			if anim_progress > spin_progress - progress_offset_between_icons + .01:
+				anim_progress = 0
+		powerup_icons[i].set_animation_progress(anim_progress)
+
+
+func get_center_icon() -> PowerupRouletteIcon:
 	var selected_icon = null
-	var min_offset_from_center = move_range
-	for icon in icons.get_children():
-		var offset = icon.rect_position.x + half_icon_width
-		var offset_from_center = abs((.5 * move_range) - offset)
-		if offset_from_center < min_offset_from_center:
-			min_offset_from_center = offset_from_center
+	var selected_icon_dist_to_middle = null
+	for icon in powerup_icons:
+		if selected_icon == null:
 			selected_icon = icon
+			selected_icon_dist_to_middle = selected_icon.calc_dist_to_middle()
+		else:
+			var icon_dist_to_middle = icon.calc_dist_to_middle()
+			if icon_dist_to_middle < selected_icon_dist_to_middle:
+				selected_icon = icon
+				selected_icon_dist_to_middle = icon_dist_to_middle
 	return selected_icon
 
 
-func trigger_selection_animation(selected_icon):
-	for icon in icons.get_children():
+func trigger_selection_animation(selected_icon: PowerupRouletteIcon):
+	for icon in powerup_icons:
+		icon = icon as PowerupRouletteIcon
 		if icon == selected_icon:
-			tween.interpolate_property(icon, "rect_position",
-					icon.rect_position, Vector2(move_range * .5 - half_icon_width, 0),
-					 .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			icon.get_node("AnimationPlayer").play("powerup_icon_scale_up")
+			tween.interpolate_property(icon, "animation_progress",
+					icon.animation_progress, 0.5,
+					 0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			icon.play_selection_animation()
 		else:
 			tween.interpolate_property(icon, "modulate",
 					icon.modulate, Color(1, 1, 1, 0),
@@ -176,120 +191,47 @@ func trigger_selection_animation(selected_icon):
 	tween.start()
 
 
-func activate_powerup(powerup):
-	var was_active = not powerup_timers[powerup].is_stopped()
-	if Globals.player_turret == null or not powerup == Powerup.TURRET:
-		powerup_timers[powerup].start()
-	if not was_active:
-		match powerup:
-			Powerup.REPAIR:
-				var repair_dur = POWERUP_DURATIONS[POWERUP_ENUM_TO_STR[powerup]]
-				emit_signal("selected_repair", REPAIR_PERCENT / repair_dur)
-			Powerup.TURRET:
-				emit_signal("selected_turret")
-			Powerup.REMOTE:
-				emit_signal("selected_remote")
-		GameState.handle_event(GameState.Event.SHOP_USED)
+func has_at_least_one_viable_powerup() -> bool:
+	for powerup in powerups:
+		if powerup.probability > 0:
+			return true
+	return false
 
 
-func calc_odds():
-	var sum_of_non_repair_odds = 0
-	for key in POWERUP_ODDS_PER_STAGE[GameState.current_state.NAME]:
-		var chance = POWERUP_ODDS_PER_STAGE[GameState.current_state.NAME][key]
-		if chance > 0:
-			sum_of_non_repair_odds += chance
-	var repair_chance = 0
-	if sum_of_non_repair_odds == 0:
-		repair_chance = 1
-	elif Globals.player_ship != null:
-		repair_chance = 1 - Globals.player_ship.health / Globals.player_ship.MAX_HEALTH
-	var current_powerup_odds = {Powerup.REPAIR: repair_chance}
-	if sum_of_non_repair_odds > 0:
-		for key in POWERUP_ODDS_PER_STAGE[GameState.current_state.NAME]:
-			var chance = POWERUP_ODDS_PER_STAGE[GameState.current_state.NAME][key]
-			key = POWERUP_STR_TO_ENUM[key]
-			current_powerup_odds[key] = chance / sum_of_non_repair_odds * (1 - repair_chance)
-	return current_powerup_odds
+func _on_Shop_hit(speed: float, decay: float):
+	if has_at_least_one_viable_powerup():
+		start_spinning(speed, decay)
 
 
-func start_spinning(speed, decay):
-	spin_speed = speed
-	spin_speed_decay = decay
-	if state == SPINNING:
+func prepare_powerup_icons():
+	delete_powerup_icons()
+	create_icons_for_all_powerups()
+	if powerup_icons.empty():
 		return
-	state = SPINNING
-	var powerup_odds = calc_odds()
-	var i = 0
-	for icon in icons.get_children():
-		icon.get_node("AnimationPlayer").stop() 
-		tween.remove_all()
-		icon.rect_scale = Vector2.ONE
-		icon.modulate = Color(1, 1, 1, 1)
-		icon.rect_position.x = icon.rect_size.x * i - half_icon_width
-		var r = randf()
-		var s = 0
-		for key in powerup_odds:
-			if powerup_odds[key] + s > r:
-				icon.texture = ICON_IMGS[key]
-				powerup_of_icon[icon] = key
-				break
-			else:
-				s += powerup_odds[key]
-		i += 1
-	visible = true
-	name_label.visible = DISPLAY_POWERUP_NAME_WHILE_SPINNING
-	icons.visible = true
-	instruction_rect.visible = false
-	time_bar.visible = false
-	selected_icon_rect.visible = false
+	unscaled_icon_width = powerup_icons[0].rect_size.x
+	var min_icon_count = calc_icon_count_to_fill_icon_parent(unscaled_icon_width) + 1
+	var created_enough_icons_to_fill_space = powerup_icons.size() >= min_icon_count
+	while !created_enough_icons_to_fill_space:
+		create_icons_for_all_powerups()
+		created_enough_icons_to_fill_space = powerup_icons.size() >= min_icon_count
 
 
-# Without calling this regularly, rounding error would lead to uneven distances
-# between icons when spinning fast.
-func even_icon_spacing():
-	var i = 0
-	for icon in icons.get_children():
-		icon.rect_position.x = -half_icon_width + icon.rect_size.x * i
-		i += 1
+func delete_powerup_icons():
+	for icon in powerup_icons:
+		icon.queue_free()
+	powerup_icons.clear()
 
 
-func display_instructions(powerup):
-	state = INSTRUCTING
-	
-	selected_icon_rect.texture = ICON_IMGS[powerup]
-	name_label.text = POWERUP_ENUM_TO_STR[powerup]
-	instruction_rect.texture = INSTRUCTION_IMGS[powerup]
-	timer_on_time_bar = powerup_timers[powerup]
-	tween.start()
-	time_bar.max_value = timer_on_time_bar.wait_time * 100
-	name_label.visible = true
-	icons.visible = false
-	selected_icon_rect.visible = true
-	instruction_rect.visible = true
-	time_bar.visible = true
-	
-	if glitch_overlay != null:
-		glitch_overlay.super_glitch()
+func create_icons_for_all_powerups():
+	for powerup in powerups:
+		for i in powerup.probability:
+			var icon = ICON_SCENE.instance()
+			icon.associated_powerup = powerup
+			icon_parent.add_child(icon)
+			powerup_icons.push_back(icon)
 
 
-func on_PowerupTimer_timeout(expired_powerup):
-	match expired_powerup:
-		Powerup.REPAIR:
-			var repair_dur = POWERUP_DURATIONS[POWERUP_ENUM_TO_STR[expired_powerup]]
-			emit_signal("repair_expired", REPAIR_PERCENT / repair_dur)
-		Powerup.TURRET:
-			emit_signal("turret_expired")
-		Powerup.REMOTE:
-			emit_signal("remote_expired")
-	var active_powerup_with_least_time_left = 0
-	var least_time_left = 0
-	for key in powerup_timers:
-		if powerup_timers[key].time_left > 0:
-			if least_time_left == 0 or powerup_timers[key].time_left < least_time_left:
-				least_time_left = powerup_timers[key].time_left
-				active_powerup_with_least_time_left = key
-	if least_time_left > 0:
-		display_instructions(active_powerup_with_least_time_left)
-	elif state == INSTRUCTING:
-		state = INACTIVE
-		visible = false
+func calc_icon_count_to_fill_icon_parent(icon_width: float) -> int:
+	var icon_count_to_fill_space = icon_parent.rect_size.x / icon_width
+	icon_count_to_fill_space = int(ceil(icon_count_to_fill_space))
+	return icon_count_to_fill_space

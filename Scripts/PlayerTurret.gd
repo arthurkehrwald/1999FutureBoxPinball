@@ -1,7 +1,9 @@
+class_name PlayerTurret
 extends KinematicBody
 
 signal was_loaded
 signal has_shot
+signal is_active_changed(value)
 
 export var MAX_TURN_ANGLE = 45
 export var TURN_SPEED = .5
@@ -33,13 +35,6 @@ func _enter_tree():
 
 func _ready():
 	GameState.connect("state_changed", self, "on_GameState_changed")
-	if Globals.powerup_roulette != null:
-		Globals.powerup_roulette.connect("selected_turret", self, "on_PowerupRoulette_selected_turret")
-		Globals.powerup_roulette.connect("turret_expired", self, "on_PowerupRoulette_turret_expired")
-	else:
-		push_warning("[Turret] can't find powerup roulette! Will not respond when player buys turret shot.")
-	if Globals.ball_spawn == null:
-		push_warning("[Turret] can't find ball spawn! Will not work if ball is drained when it gets triggered.")
 	set_process(false)
 	translation = Vector3(translation.x, min_y, translation.z)
 
@@ -88,14 +83,6 @@ func on_GameState_changed(new_state, is_debug_skip):
 		Engine.time_scale = 1
 
 
-func on_PowerupRoulette_selected_turret():
-	set_is_active(true)
-
-
-func on_PowerRoulette_turret_expired():
-	set_is_active(false)
-
-
 func on_hit_by_projectile(projectile):
 	if projectile is Pinball:
 		insert_ball(projectile)
@@ -105,6 +92,7 @@ func set_is_active(value : bool):
 	if is_active == value:
 		return
 	is_active = value
+	emit_signal("is_active_changed", is_active)
 	if (is_active and ball_to_shoot):
 		shoot(shot_charge)
 	$Tween.remove(self, "translation:y")

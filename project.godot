@@ -94,6 +94,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/PlayerShip.gd"
 }, {
+"base": "KinematicBody",
+"class": "PlayerTurret",
+"language": "GDScript",
+"path": "res://Scripts/PlayerTurret.gd"
+}, {
+"base": "Node",
+"class": "Powerup",
+"language": "GDScript",
+"path": "res://Scripts/Powerup.gd"
+}, {
+"base": "Control",
+"class": "PowerupRoulette",
+"language": "GDScript",
+"path": "res://Scripts/PowerupRoulette.gd"
+}, {
+"base": "TextureRect",
+"class": "PowerupRouletteIcon",
+"language": "GDScript",
+"path": "res://Scripts/PowerupRouletteIcon.gd"
+}, {
 "base": "RigidBody",
 "class": "Projectile",
 "language": "GDScript",
@@ -134,6 +154,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Old/StateMachine.gd"
 }, {
+"base": "Node",
+"class": "TurretPowerup",
+"language": "GDScript",
+"path": "res://Scripts/TurretPowerup.gd"
+}, {
 "base": "VisualShaderNodeCustom",
 "class": "VisualShaderNodePerlinNoise3D",
 "language": "GDScript",
@@ -157,6 +182,10 @@ _global_script_class_icons={
 "OffAxisCamera": "",
 "Pinball": "",
 "PlayerShip": "",
+"PlayerTurret": "",
+"Powerup": "",
+"PowerupRoulette": "",
+"PowerupRouletteIcon": "",
 "Projectile": "",
 "Roller": "",
 "RotationStabiliser": "",
@@ -165,6 +194,7 @@ _global_script_class_icons={
 "ShopEntranceV2": "",
 "State": "",
 "StateMachine": "",
+"TurretPowerup": "",
 "VisualShaderNodePerlinNoise3D": ""
 }
 
@@ -187,10 +217,10 @@ gdscript/warnings/return_value_discarded=false
 
 [display]
 
-window/size/width=1080
-window/size/height=1920
-window/size/borderless=true
-window/size/fullscreen=true
+window/size/width=720
+window/size/height=1280
+window/size/test_width=720
+window/size/test_height=1280
 window/vsync/use_vsync=false
 window/handheld/orientation="portrait"
 
@@ -306,6 +336,11 @@ debug_delete_all_balls={
 debug_enter_test_state={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":84,"unicode":0,"echo":false,"script":null)
+ ]
+}
+debug_spin_roulette={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
  ]
 }
 

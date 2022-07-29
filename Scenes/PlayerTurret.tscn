@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/PlayerTurret.gd" type="Script" id=1]
 [ext_resource path="res://Meshes/dotted_line.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Materials/cyan_unlit.tres" type="Material" id=3]
 [ext_resource path="res://Meshes/turret.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Materials/cyan.tres" type="Material" id=5]
+[ext_resource path="res://Scripts/TurretPowerup.gd" type="Script" id=6]
+[ext_resource path="res://HUD/turret_icon.png" type="Texture" id=7]
+[ext_resource path="res://HUD/turret_instructions.png" type="Texture" id=8]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.35
@@ -36,3 +39,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
 shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="TurretPowerup" type="Node" parent="."]
+script = ExtResource( 6 )
+powerup_name = "Turret"
+duration = 15.0
+icon = ExtResource( 7 )
+instructions = ExtResource( 8 )
+path_to_turret = NodePath("..")
