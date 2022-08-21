@@ -1,23 +1,22 @@
+class_name EnemyFleet
 extends Spatial
+
+signal defeated
 
 var total_ship_count = 0
 var remaining_ship_count = 0
-var is_active = false
+var is_active = false setget set_is_active
 
 onready var ship_parent = get_node("ParentForAnimation")
 onready var animation_player = get_node("AnimationPlayer")
 onready var fly_in_audio_player = get_node("FlyInAudioPlayer")
 
 func _ready():
-	GameState.connect("state_changed", self, "_on_GameState_changed")
 	total_ship_count = ship_parent.get_child_count()
 	remaining_ship_count = total_ship_count
 	for ship in ship_parent.get_children():
 		ship.connect("death", self, "_on_EnemyShip_death")
-
-
-func _on_GameState_changed(new_state, _is_debug_skip):
-	set_is_active(new_state == GameState.ENEMY_FLEET_STATE)
+	set_is_active(true)
 
 
 func set_is_active(value):
@@ -39,5 +38,5 @@ func _on_EnemyShip_death():
 	if is_active:
 		remaining_ship_count -= 1
 		if remaining_ship_count <= 0:
-			GameState.handle_event(GameState.Event.FLEET_DEFEATED)
 			set_is_active(false)
+			emit_signal("defeated")

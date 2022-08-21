@@ -4,21 +4,26 @@ extends "res://Scripts/State.gd"
 signal missions_completed
 
 export var mission_count: int = 3
+export var np_first_mission: NodePath = NodePath()
 
 var remaining_missions: int = 0
 
 func enter():
 	.enter()
 	remaining_missions = mission_count
-	_pick_random_mission()
+	var first_mission = get_node(np_first_mission) as Mission
+	if first_mission:
+		set_active_sub_state(first_mission)
+	else:
+		_pick_random_mission()
 
 func set_active_sub_state(value: State):
-	assert(value is MissionState)
-	assert(active_sub_state is MissionState || active_sub_state == null)
-	var prev_mission := active_sub_state as MissionState
+	assert(value is Mission)
+	assert(active_sub_state is Mission || active_sub_state == null)
+	var prev_mission := active_sub_state as Mission
 	.set_active_sub_state(value)
-	assert(active_sub_state is MissionState)
-	active_sub_state = active_sub_state as MissionState	
+	assert(active_sub_state is Mission)
+	active_sub_state = active_sub_state as Mission	
 	if prev_mission != active_sub_state:
 		if prev_mission:
 			prev_mission.disconnect("completed", self, "_on_Mission_completed")
@@ -29,7 +34,7 @@ func set_active_sub_state(value: State):
 
 func _ready():
 	for state in sub_states:
-		assert(state is MissionState)
+		assert(state is Mission)
 
 func _pick_random_mission():
 	var sub_state_index = randi() % len(sub_states)

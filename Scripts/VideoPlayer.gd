@@ -206,7 +206,7 @@ func on_PlaybackManager_started(playback_manager):
 	if playback_manager != current_playback_manager:
 		return
 	visible = true
-	get_tree().paused = true
+	#get_tree().paused = trues
 
 
 func on_PlaybackManager_finished(playback_manager):
