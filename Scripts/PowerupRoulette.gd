@@ -56,7 +56,6 @@ func unregister_powerup(powerup: Powerup):
 
 func _ready():
 	visible = false
-	randomize()
 
 
 func _input(event):

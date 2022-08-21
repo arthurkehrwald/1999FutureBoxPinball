@@ -1,11 +1,12 @@
+class_name MusicTrackPlayer
 extends AudioStreamPlayer
 
-enum State { OFF, FADING_IN, ON, FADING_OUT }
+enum Status { OFF, FADING_IN, ON, FADING_OUT }
 
 export var TRACK_INDEX = 0
 export var FADE_DUR_SECS = 3.0
 
-var state = State.OFF setget set_state, get_state
+var state = Status.OFF setget set_state, get_state
 
 onready var MAX_VOL_DB = volume_db
 onready var MIN_VOL_DB = volume_db - 50
@@ -29,42 +30,42 @@ func on_GameState_state_changed(new_state, _is_debug_skip):
 func set_state(val):
 	if val == state:
 		return
-	if val == State.FADING_OUT and state == State.OFF:
+	if val == Status.FADING_OUT and state == Status.OFF:
 		return
-	if val == State.FADING_IN and state == State.ON:
+	if val == Status.FADING_IN and state == Status.ON:
 		return
 	state = val
-	if val == State.OFF or val == State.FADING_IN:
+	if val == Status.OFF or val == Status.FADING_IN:
 		volume_db = MIN_VOL_DB
-	if val == State.ON or val == State.FADING_OUT:
+	if val == Status.ON or val == Status.FADING_OUT:
 		volume_db = MAX_VOL_DB
-	if val == State.OFF:
+	if val == Status.OFF:
 		stop()
 	else:
 		if not playing:
 			play()
 
 
-func get_state() -> State:
+func get_state():
 	return state
 
 func _process(delta):
 	match state:
-		State.FADING_IN:
+		Status.FADING_IN:
 			if volume_db >= MAX_VOL_DB:
-				set_state(State.ON)
+				set_state(Status.ON)
 			else:
 				volume_db += VOL_RANGE / FADE_DUR_SECS * delta
-		State.FADING_OUT:
+		Status.FADING_OUT:
 			if volume_db <= MIN_VOL_DB:
-				set_state(State.OFF)
+				set_state(Status.OFF)
 			else:
 				volume_db -= VOL_RANGE / FADE_DUR_SECS * delta
 
 func stop_playing():
-	if state == State.ON or state == State.FADING_IN:
-		set_state(State.FADING_OUT)
+	if state == Status.ON or state == Status.FADING_IN:
+		set_state(Status.FADING_OUT)
 
 func start_playing():
-	if state == State.OFF or state == State.FADING_OUT:
-		set_state(State.FADING_IN)
+	if state == Status.OFF or state == Status.FADING_OUT:
+		set_state(Status.FADING_IN)

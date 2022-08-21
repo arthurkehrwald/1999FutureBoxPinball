@@ -69,10 +69,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/InvisibleButtonPlunger.gd"
 }, {
+"base": "Node",
+"class": "MissionMasterState",
+"language": "GDScript",
+"path": "res://Scripts/MissionMasterState.gd"
+}, {
+"base": "Node",
+"class": "MissionState",
+"language": "GDScript",
+"path": "res://Scripts/MissionState.gd"
+}, {
 "base": "CollisionObject",
 "class": "MoonGate",
 "language": "GDScript",
 "path": "res://Scripts/MoonGate.gd"
+}, {
+"base": "AudioStreamPlayer",
+"class": "MusicTrackPlayer",
+"language": "GDScript",
+"path": "res://Scripts/MusicTrackPlayer.gd"
 }, {
 "base": "Area",
 "class": "NoRemoteCotrolArea",
@@ -147,12 +162,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://Scenes/Old/State.gd"
+"path": "res://Scripts/State.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://Scenes/Old/StateMachine.gd"
+"path": "res://Scripts/StateMachine.gd"
 }, {
 "base": "Node",
 "class": "TurretPowerup",
@@ -177,7 +192,10 @@ _global_script_class_icons={
 "Gate": "",
 "HitNotifier": "",
 "InvisibleButtonPlunger": "",
+"MissionMasterState": "",
+"MissionState": "",
 "MoonGate": "",
+"MusicTrackPlayer": "",
 "NoRemoteCotrolArea": "",
 "OffAxisCamera": "",
 "Pinball": "",
@@ -206,6 +224,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+AutoloadRandomize="*res://Scripts/AutoloadRandomize.gd"
 GameState="*res://Scripts/GameState.gd"
 Announcer="*res://Scripts/Announcer.gd"
 Globals="*res://Scripts/Globals.gd"

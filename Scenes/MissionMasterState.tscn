@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/MissionMasterState.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/MissionState.gd" type="Script" id=2]
+
+[node name="MissionMasterState" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Mission1" type="Node" parent="."]
+script = ExtResource( 2 )
+time_limit_seconds = 5.0
+objective = "Mission 1 objective blah blah"
+
+[node name="Mission2" type="Node" parent="."]
+script = ExtResource( 2 )
+time_limit_seconds = 3.0
+objective = "Mission 2 objective blah blah"
+
+[node name="Mission3" type="Node" parent="."]
+script = ExtResource( 2 )
+time_limit_seconds = 15.0
+objective = "Mission 3 objective blah blah"
