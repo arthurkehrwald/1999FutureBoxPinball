@@ -20,6 +20,7 @@ func enter():
 	transmission_hud.set_rex_mood(transmission_hud.RexMood.ANGRY)
 
 func exit():
+	.exit()
 	player_ship.set_is_vulnerable(true)
 
 func _on_VideoPlayer_playback_finished():
