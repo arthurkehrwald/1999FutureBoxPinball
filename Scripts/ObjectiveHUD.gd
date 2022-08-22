@@ -15,8 +15,6 @@ func _ready():
 		if mission is Mission:
 			mission.connect("entered", self, "_on_Mission_entered", [mission])
 			mission.connect("exited", self, "_on_Mission_exited", [mission])
-			mission.connect("completed", self, "_on_Mission_completed", [mission])
-			mission.connect("failed", self, "_on_Mission_failed", [mission])
 	animation_player.connect("animation_finished", self, "on_anim_finished")
 	if Globals.powerup_roulette != null:
 		Globals.powerup_roulette.connect("visibility_changed", self, "update_visibility")
@@ -33,13 +31,9 @@ func _on_Mission_entered(mission: Mission):
 	set_objective(mission.objective)
 
 func _on_Mission_exited(mission: Mission):
+	if mission.is_complete:
+		set_objective_complete()
 	set_objective("")
-
-func _on_Mission_completed(mission: Mission):
-	set_objective_complete()
-
-func _on_Mission_failed(mission: Mission):
-	pass
 
 func set_objective(objective: String):
 	if not visible or animation_player.is_playing():

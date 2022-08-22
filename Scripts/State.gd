@@ -17,18 +17,25 @@ func enter():
 	if is_active:
 		return
 	is_active = true
-	Utils.set_all_process_callbacks_enabled(self, true)
-	for component in components:
-		component = component as StateComponent
-		if component is ExitComponent:
-			component.connect("exit_condition_met", self, "exit")
-		component.set_is_active(true)
-	emit_signal("entered")
+	_on_enter()
 
 func exit():
 	if not is_active:
 		return
 	is_active = false
+	_on_exit()
+
+func _on_enter():
+	Utils.set_all_process_callbacks_enabled(self, true)
+	for component in components:
+		component = component as StateComponent
+		if component is ExitComponent:
+			component.connect("exit_condition_met", self, "exit")
+		component.set_is_active(true)	
+	print("entered %s" % name)
+	emit_signal("entered")
+
+func _on_exit():
 	Utils.set_all_process_callbacks_enabled(self, false)
 	if active_sub_state:
 		active_sub_state.exit()
@@ -37,6 +44,7 @@ func exit():
 		if component is ExitComponent:
 			component.disconnect("exit_condition_met", self, "exit")
 		component.set_is_active(false)
+	print("exited %s" % name)
 	emit_signal("exited")
 
 func set_active_sub_state(value: State):
@@ -45,15 +53,14 @@ func set_active_sub_state(value: State):
 	if value == active_sub_state:
 		return
 	if active_sub_state:
-		active_sub_state.disconnect("exited", self, "_on_SubState_exited")
+		active_sub_state.disconnect("exited", self, "_on_ActiveSubState_exited")
 		active_sub_state.exit()
 	active_sub_state = value
 	if active_sub_state:
-		active_sub_state.connect("exited", self, "_on_SubState_exited")
+		active_sub_state.connect("exited", self, "_on_ActiveSubState_exited")
 		active_sub_state.enter()
 
-func _on_SubState_exited(sub_state: State):
-	assert(sub_state == active_sub_state)
+func _on_ActiveSubState_exited():
 	set_active_sub_state(null)
 
 func _find_sub_states() -> Array:

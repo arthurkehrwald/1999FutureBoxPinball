@@ -17,3 +17,6 @@ func set_is_active(value: bool):
 
 func _on_Timer_timeout():
 	emit_signal("exit_condition_met")
+
+func _ready():
+	timer.one_shot = true
