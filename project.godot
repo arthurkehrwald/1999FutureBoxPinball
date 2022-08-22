@@ -99,11 +99,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/MissionMasterState.gd"
 }, {
-"base": "CollisionObject",
-"class": "MoonGate",
-"language": "GDScript",
-"path": "res://Scripts/MoonGate.gd"
-}, {
 "base": "Node",
 "class": "MusicComponent",
 "language": "GDScript",
@@ -263,7 +258,6 @@ _global_script_class_icons={
 "InvisibleButtonPlunger": "",
 "Mission": "",
 "MissionMasterState": "",
-"MoonGate": "",
 "MusicComponent": "",
 "MusicManager": "",
 "MusicTrackPlayer": "",

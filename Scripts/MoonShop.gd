@@ -37,7 +37,6 @@ func _enter_tree():
 
 
 func _ready():
-	# TODO GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.player_ship != null:
 		Globals.player_ship.connect("money_changed", self, "on_Player_money_changed")
 	else:
@@ -103,18 +102,6 @@ func on_ScaleAnimPlayer_animation_finished(_anim_name):
 			scale_down()
 	elif scale_state == ScaleState.SCALING_DOWN:
 		scale_state = ScaleState.SMALL
-		spinning_mesh.set_visible(false)
-
-
-func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.TESTING_STATE or new_state == GameState.EXPOSITION_STATE:
-		set_is_open(true)
-	elif is_debug_skip and MONEY_INCREASE_TO_OPEN > 0:
-		set_is_open(false)
-	if new_state == GameState.PREGAME_STATE or is_debug_skip:
-		is_spinning = false
-		scale_state = ScaleState.SMALL
-		scale_anim_player.stop()
 		spinning_mesh.set_visible(false)
 
 

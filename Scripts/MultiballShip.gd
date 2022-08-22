@@ -15,7 +15,6 @@ onready var muzzle = get_node("Muzzle") as Spatial
 
 
 func _ready():
-	#TODO: # TODO GameState.connect("state_changed", self, "on_GameState_changed")
 	entrance_area.connect("body_entered", self, "on_EntranceArea_body_entered")
 	exit_area.connect("body_exited", self, "on_ExitArea_body_exited")
 
@@ -63,9 +62,3 @@ func on_EntranceArea_body_entered(body):
 func on_ExitArea_body_exited(body):
 	body.remove_collision_exception_with(static_body)
 	static_body.remove_collision_exception_with(body)
-
-
-func on_GameState_changed(new_state, is_debug_skip):
-	if is_debug_skip or new_state == GameState.PREGAME_STATE:
-		pinballs_locked = 0
-		loaded_pinballs.clear()
