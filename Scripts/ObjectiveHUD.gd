@@ -5,7 +5,7 @@ var is_objective_complete_anim_queued := false
 var is_new_objectives_anim_running := false
 
 onready var animation_player = get_node("AnimationPlayer")
-onready var objective_complete_label = get_node("ObjectiveCompleteLabel")
+onready var objective_complete_label = get_node("MessageLabel")
 onready var objective_checkbox = get_node("ObjectiveOneCheckBox")
 onready var glitch_overlay = get_node("../GlitchOverlay")
 
@@ -34,7 +34,7 @@ func _on_Mission_exited(mission: Mission):
 	if mission.is_complete:
 		set_objective_complete()
 	set_objective("")
-
+	
 func set_objective(objective: String):
 	if not visible or animation_player.is_playing():
 		queued_new_objective = ""

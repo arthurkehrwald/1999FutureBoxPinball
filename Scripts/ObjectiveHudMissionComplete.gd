@@ -1,0 +1,24 @@
+class_name ObjectiveHudMissionComplete
+extends "res://Scripts/ObjectiveHudSubState.gd"
+
+func _on_enter():
+	._on_enter()
+	# In case this scripts mission tracker component has not yet been updated
+	yield(get_tree(), "idle_frame")
+	if mission_tracker.last_completed_mission:
+		_play_mission_complete_animation(mission_tracker.last_completed_mission)
+		animation_player.connect("animation_finished", self, "_on_AnimationPlayer_animation_finished")
+
+func _on_exit():
+	._on_exit()
+	animation_player.disconnect("animation_finished", self, "_on_AnimationPlayer_animation_finished")
+	animation_player.stop()
+
+func _play_mission_complete_animation(mission: Mission):
+	objective_checkbox.pressed = false
+	objective_checkbox.text = mission.objective
+	message_label.text = "Objective Complete!"
+	animation_player.play("objective_complete_anim")
+
+func _on_AnimationPlayer_animation_finished(_animation_name: String):
+	exit()

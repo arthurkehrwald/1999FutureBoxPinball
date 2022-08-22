@@ -4,7 +4,7 @@
 resource_name = "objective_complete_anim"
 length = 2.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("ObjectiveOneCheckBox:margin_left")
+tracks/0/path = NodePath("ObjectiveCheckBox:margin_left")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -16,7 +16,7 @@ tracks/0/keys = {
 "values": [ 71.0, 46.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("ObjectiveOneCheckBox:modulate")
+tracks/1/path = NodePath("ObjectiveCheckBox:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -28,7 +28,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("ObjectiveCompleteLabel:modulate")
+tracks/2/path = NodePath("MessageLabel:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -40,7 +40,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("ObjectiveCompleteLabel:custom_fonts/font:size")
+tracks/3/path = NodePath("MessageLabel:custom_fonts/font:size")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false

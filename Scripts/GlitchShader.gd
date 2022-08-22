@@ -1,3 +1,4 @@
+class_name GlitchOverlay
 extends Control
 
 export var auto_glitch = false

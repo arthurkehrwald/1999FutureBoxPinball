@@ -43,7 +43,7 @@ visible = false
 transform = Transform( 0.011, 0, 0, 0, 0.011, -3.34061e-10, 0, 3.34061e-10, 0.011, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 50.0006, 4.24385e-05, 0, -4.24385e-05, 50.0006, 109.455, 688.273, 363.636 )
+transform = Transform( 50, 0, 0, 0, 50.0006, 4.19617e-05, 0, -4.19617e-05, 50.0006, 109.455, 688.273, 363.636 )
 
 [node name="LocalPosLabel" parent="ScreenCenter/Millimeters/AxisArrows" instance=ExtResource( 5 )]
 modulate = Color( 1, 1, 1, 1 )

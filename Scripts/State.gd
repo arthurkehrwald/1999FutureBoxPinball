@@ -48,7 +48,7 @@ func _on_exit():
 	emit_signal("exited")
 
 func set_active_sub_state(value: State):
-	assert(value in sub_states)
+	assert(value in sub_states or value == null)
 	value = value as State
 	if value == active_sub_state:
 		return
