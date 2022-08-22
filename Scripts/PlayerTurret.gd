@@ -37,7 +37,6 @@ func _enter_tree():
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
 	set_process(false)
 	translation = Vector3(translation.x, min_y, translation.z)
 
@@ -86,15 +85,6 @@ func set_rotation_progress(value):
 	var max_basis = max_transform.basis.orthonormalized()
 	var new_rotation = Quat(min_basis.slerp(max_basis, rotation_progress))
 	set_transform(Transform(new_rotation, get_transform().origin))
-
-
-func on_GameState_changed(new_state, is_debug_skip):
-	if is_debug_skip or new_state == GameState.PREGAME_STATE:
-		dotted_line.set_visible(false)
-		ball_to_shoot = null
-		set_process(false)
-		var start_rotation = Quat(start_transform.basis.orthonormalized())
-		set_transform(Transform(start_rotation, get_transform().origin))
 
 
 func on_hit_by_projectile(projectile):

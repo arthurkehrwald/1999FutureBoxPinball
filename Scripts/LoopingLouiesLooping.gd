@@ -6,7 +6,7 @@ onready var looping_louie = get_node("LoopingLouie")
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
+	# TODO GameState.connect("state_changed", self, "on_GameState_changed")
 
 
 func _physics_process(_delta):

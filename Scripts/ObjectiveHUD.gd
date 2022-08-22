@@ -1,21 +1,22 @@
 extends Control
 
-var queued_new_objectives = []
-var queued_complete_objectives = []
-var is_new_objectives_anim_running = false
+var queued_new_objective := ""
+var is_objective_complete_anim_queued := false
+var is_new_objectives_anim_running := false
 
 onready var animation_player = get_node("AnimationPlayer")
 onready var objective_complete_label = get_node("ObjectiveCompleteLabel")
-onready var objective_one_check_box = get_node("ObjectiveOneCheckBox")
-onready var objective_two_check_box = get_node("ObjectiveTwoCheckBox")
+onready var objective_checkbox = get_node("ObjectiveOneCheckBox")
 onready var glitch_overlay = get_node("../GlitchOverlay")
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
-	GameState.connect("objective_one_completed", self, "set_objective_complete", [1])
-	GameState.connect("objective_two_completed", self, "set_objective_complete", [2])
-	GameState.connect("objectives_changed", self, "set_objectives")
+	for mission in get_tree().get_nodes_in_group("missions"):
+		if mission is Mission:
+			mission.connect("entered", self, "_on_Mission_entered", [mission])
+			mission.connect("exited", self, "_on_Mission_exited", [mission])
+			mission.connect("completed", self, "_on_Mission_completed", [mission])
+			mission.connect("failed", self, "_on_Mission_failed", [mission])
 	animation_player.connect("animation_finished", self, "on_anim_finished")
 	if Globals.powerup_roulette != null:
 		Globals.powerup_roulette.connect("visibility_changed", self, "update_visibility")
@@ -28,43 +29,42 @@ func _ready():
 		push_warning("[ObjectiveHUD] Can't find warning hud! Will ignore whether"
 				+ " it is active or not.")
 
+func _on_Mission_entered(mission: Mission):
+	set_objective(mission.objective)
 
-func set_objectives(objectives):
+func _on_Mission_exited(mission: Mission):
+	set_objective("")
+
+func _on_Mission_completed(mission: Mission):
+	set_objective_complete()
+
+func _on_Mission_failed(mission: Mission):
+	pass
+
+func set_objective(objective: String):
 	if not visible or animation_player.is_playing():
-		queued_new_objectives.clear()
-		queued_new_objectives.push_back(objectives[0])
-		queued_new_objectives.push_back(objectives[1])
+		queued_new_objective = ""
+		queued_new_objective = objective
 		return
 	glitch_overlay.super_glitch()
-	objective_one_check_box.text = objectives[0]
-	objective_one_check_box.pressed = false
-	objective_one_check_box.visible = objectives[0] != ""
-	objective_two_check_box.text = objectives[1]
-	objective_two_check_box.pressed = objectives[1] == ""
-	objective_two_check_box.visible = objectives[1] != ""
-	if not(objectives[0] == "" and objectives[1] == ""):
+	objective_checkbox.text = objective
+	objective_checkbox.pressed = false
+	objective_checkbox.visible = objective != ""
+	if objective != "":
 		objective_complete_label.text = "New Objective!"
-		animation_player.play_backwards("objectives_complete_anim")
+		animation_player.play_backwards("objective_complete_anim")
 		is_new_objectives_anim_running = true
 
 
-func set_objective_complete(completed_obj_index):
+func set_objective_complete():
 	if not visible or animation_player.is_playing():
-		if not queued_complete_objectives.has(completed_obj_index):
-			queued_complete_objectives.push_back(completed_obj_index)
+		is_objective_complete_anim_queued = true
 		return
 	glitch_overlay.super_glitch()
-	match completed_obj_index:
-		1:
-			objective_one_check_box.pressed = true
-			animation_player.play("objective_one_complete")
-		2:
-			objective_two_check_box.pressed = true
-			animation_player.play("objective_two_complete")
-	if objective_one_check_box.pressed and objective_two_check_box.pressed:
-		yield(animation_player, "animation_finished")
-		objective_complete_label.text = "Objective Complete!"
-		animation_player.play("objectives_complete_anim")
+	objective_checkbox.pressed = true
+	yield(animation_player, "animation_finished")
+	objective_complete_label.text = "Objective Complete!"
+	animation_player.play("objective_complete_anim")
 
 
 func update_visibility():
@@ -82,25 +82,15 @@ func update_visibility():
 
 
 func on_anim_finished(anim_name):
-	if visible and anim_name == "objectives_complete_anim":
+	if visible and anim_name == "objective_complete_anim":
 		if is_new_objectives_anim_running:
 			is_new_objectives_anim_running = false
-			queued_new_objectives.clear()
+			queued_new_objective = ""
 		pop_queue()
-	else:
-		queued_complete_objectives.pop_back()
 
 
 func pop_queue():
-	if not queued_complete_objectives.empty():
-		set_objective_complete(queued_complete_objectives.back())
-	elif not queued_new_objectives.empty():
-		set_objectives(queued_new_objectives)
-
-
-func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.PREGAME_STATE or is_debug_skip:
-		queued_complete_objectives.clear()
-		queued_new_objectives.clear()
-		is_new_objectives_anim_running = false
-		animation_player.stop()
+	if is_objective_complete_anim_queued:
+		set_objective_complete()
+	elif queued_new_objective != "":
+		set_objective(queued_new_objective)

@@ -19,21 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/BossBar3D.gd"
 }, {
-"base": "",
-"class": "BossGunIdle",
-"language": "GDScript",
-"path": "res://Scenes/Old/BossGunIdle.gd"
-}, {
-"base": "",
-"class": "BossGunShooting",
-"language": "GDScript",
-"path": "res://Scenes/Old/BossGunShooting.gd"
-}, {
-"base": "",
-"class": "BossGunStunned",
-"language": "GDScript",
-"path": "res://Scenes/Old/BossGunStunned.gd"
-}, {
 "base": "Area",
 "class": "Bumper",
 "language": "GDScript",
@@ -59,15 +44,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/EnemyFleetMission.gd"
 }, {
+"base": "Node",
+"class": "ExitComponent",
+"language": "GDScript",
+"path": "res://Scripts/ExitComponent.gd"
+}, {
 "base": "Area",
 "class": "Explosion",
 "language": "GDScript",
 "path": "res://Scripts/Explosion.gd"
 }, {
-"base": "StaticBody",
-"class": "Gate",
+"base": "VideoPlayer",
+"class": "FullscreenVideoPlayer",
 "language": "GDScript",
-"path": "res://Scenes/Old/Gate.gd"
+"path": "res://Scripts/FullscreenVideoPlayer.gd"
+}, {
+"base": "Node",
+"class": "GameOver",
+"language": "GDScript",
+"path": "res://Scripts/GameOver.gd"
+}, {
+"base": "Node",
+"class": "GameState",
+"language": "GDScript",
+"path": "res://Scripts/GameState.gd"
 }, {
 "base": "CollisionObject",
 "class": "HitNotifier",
@@ -93,6 +93,16 @@ _global_script_classes=[ {
 "class": "MoonGate",
 "language": "GDScript",
 "path": "res://Scripts/MoonGate.gd"
+}, {
+"base": "Node",
+"class": "MusicComponent",
+"language": "GDScript",
+"path": "res://Scripts/MusicComponent.gd"
+}, {
+"base": "Node",
+"class": "MusicManager",
+"language": "GDScript",
+"path": "res://Scripts/MusicManager.gd"
 }, {
 "base": "AudioStreamPlayer",
 "class": "MusicTrackPlayer",
@@ -139,6 +149,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/PowerupRouletteIcon.gd"
 }, {
+"base": "Node",
+"class": "Pregame",
+"language": "GDScript",
+"path": "res://Scripts/Pregame.gd"
+}, {
 "base": "RigidBody",
 "class": "Projectile",
 "language": "GDScript",
@@ -159,20 +174,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Shield.gd"
 }, {
-"base": "Area",
-"class": "ShopEntrance",
-"language": "GDScript",
-"path": "res://Scripts/ShopEntrance.gd"
-}, {
-"base": "Area",
-"class": "ShopEntranceV2",
-"language": "GDScript",
-"path": "res://Scripts/ShopEntranceV2.gd"
-}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
 "path": "res://Scripts/State.gd"
+}, {
+"base": "Node",
+"class": "StateComponent",
+"language": "GDScript",
+"path": "res://Scripts/StateComponent.gd"
+}, {
+"base": "Control",
+"class": "TransmissionHud",
+"language": "GDScript",
+"path": "res://Scripts/TransmissionHUD.gd"
 }, {
 "base": "Node",
 "class": "TurretPowerup",
@@ -187,21 +202,23 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Boss": "",
 "BossBar3D": "",
-"BossGunIdle": "",
-"BossGunShooting": "",
-"BossGunStunned": "",
 "Bumper": "",
 "BumperCluster": "",
 "Damageable": "",
 "EnemyFleet": "",
 "EnemyFleetMission": "",
+"ExitComponent": "",
 "Explosion": "",
-"Gate": "",
+"FullscreenVideoPlayer": "",
+"GameOver": "",
+"GameState": "",
 "HitNotifier": "",
 "InvisibleButtonPlunger": "",
 "Mission": "",
 "MissionMasterState": "",
 "MoonGate": "",
+"MusicComponent": "",
+"MusicManager": "",
 "MusicTrackPlayer": "",
 "NoRemoteCotrolArea": "",
 "OffAxisCamera": "",
@@ -211,13 +228,14 @@ _global_script_class_icons={
 "Powerup": "",
 "PowerupRoulette": "",
 "PowerupRouletteIcon": "",
+"Pregame": "",
 "Projectile": "",
 "Roller": "",
 "RotationStabiliser": "",
 "Shield": "",
-"ShopEntrance": "",
-"ShopEntranceV2": "",
 "State": "",
+"StateComponent": "",
+"TransmissionHud": "",
 "TurretPowerup": "",
 "VisualShaderNodePerlinNoise3D": ""
 }
@@ -231,10 +249,10 @@ config/icon="res://icon.png"
 [autoload]
 
 AutoloadRandomize="*res://Scripts/AutoloadRandomize.gd"
-GameState="*res://Scripts/GameState.gd"
 Announcer="*res://Scripts/Announcer.gd"
 Globals="*res://Scripts/Globals.gd"
 PoolManager="*res://Scripts/PoolManager.gd"
+Utils="*res://Scripts/Utils.gd"
 
 [debug]
 

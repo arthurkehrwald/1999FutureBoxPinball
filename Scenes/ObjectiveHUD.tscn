@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/objective_checkbox.png" type="Texture" id=3]
@@ -18,47 +18,9 @@ use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 35
-outline_color = Color( 0, 1, 0.811765, 1 )
-use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=4]
 size = 20
 use_filter = true
 font_data = ExtResource( 4 )
-
-[sub_resource type="Animation" id=5]
-resource_name = "objective_one_complete"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("ObjectiveOneCheckBox:rect_position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 85, 150 ), Vector2( 85, 130 ), Vector2( 85, 150 ) ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "objective_two_complete"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("ObjectiveTwoCheckBox:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 112.24, 219 ), Vector2( 112.24, 197 ), Vector2( 112.24, 219 ) ]
-}
 
 [node name="ObjectiveHUD" type="Control"]
 pause_mode = 2
@@ -94,7 +56,7 @@ __meta__ = {
 [node name="ObjectiveOneCheckBox" type="CheckBox" parent="."]
 margin_left = 71.0
 margin_top = 150.0
-margin_right = 538.0
+margin_right = 566.0
 margin_bottom = 211.0
 custom_icons/checked = ExtResource( 5 )
 custom_icons/unchecked = ExtResource( 3 )
@@ -108,23 +70,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ObjectiveTwoCheckBox" type="CheckBox" parent="."]
-margin_left = 112.24
-margin_top = 219.0
-margin_right = 472.0
-margin_bottom = 280.0
-custom_icons/checked = ExtResource( 5 )
-custom_icons/unchecked = ExtResource( 3 )
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-shortcut_in_tooltip = false
-button_mask = 0
-text = "Use the shop"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ObjectiveCompleteLabel" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 95.0
@@ -132,7 +77,7 @@ margin_top = 139.193
 margin_right = 488.0
 margin_bottom = 200.193
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "Complete!"
 align = 1
@@ -142,6 +87,4 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/objective_one_complete = SubResource( 5 )
-anims/objective_two_complete = SubResource( 6 )
-anims/objectives_complete_anim = ExtResource( 7 )
+anims/objective_complete_anim = ExtResource( 7 )

@@ -12,20 +12,6 @@ onready var MAX_VOL_DB = volume_db
 onready var MIN_VOL_DB = volume_db - 50
 onready var VOL_RANGE = abs(MAX_VOL_DB - MIN_VOL_DB)
 
-func _enter_tree():
-	GameState.connect("state_changed", self, "on_GameState_state_changed")
-
-func on_GameState_state_changed(new_state, _is_debug_skip):
-	match new_state.MUSIC_TRACK:
-		-1:
-			stop_playing()
-		0:
-			pass # Keep playing whatever track is currently on
-		TRACK_INDEX:
-			start_playing()
-		_:
-			stop_playing()
-
 
 func set_state(val):
 	if val == state:

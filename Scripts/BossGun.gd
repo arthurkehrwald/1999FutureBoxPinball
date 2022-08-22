@@ -45,7 +45,7 @@ func _ready():
 	if Globals.boss == null:
 		push_warning("[Boss Gun] can't find Boss! Will not add collision exceptions with outgoing projectiles.")
 	rng.randomize()
-	GameState.connect("state_changed", self, "on_GameState_changed")
+	# TODO GameState.connect("state_changed", self, "on_GameState_changed")
 	timer.connect("timeout", self, "on_Timer_timeout")
 	connect("body_entered", self, "on_hit_by_projectile")
 	enter_idle_state()

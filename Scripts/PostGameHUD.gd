@@ -10,10 +10,10 @@ onready var result_label = get_node("ResultLabel")
 var is_active = false
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
 	restart_timer.connect("timeout", self, "on_RestartTimer_timeout")
 	time_remaining_bar.max_value = RESTART_DELAY * 100
 	set_process(false)
+	set_is_active(false)
 
 
 func _process(_delta):
@@ -23,7 +23,6 @@ func _process(_delta):
 
 func set_is_active(value):
 	is_active = value
-	#get_tree().paused = value
 	set_visible(value)
 	set_process(value)
 	if value:
@@ -32,15 +31,3 @@ func set_is_active(value):
 
 func on_RestartTimer_timeout():
 	set_is_active(false)
-	#GameState.handle_event(GameState.Event.POSTGAME_FINISHED)
-
-
-func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.VICTORY_STATE:
-		result_label.text = "Victory!"
-		set_is_active(true)
-#	elif new_state == GameState.DEFEAT_STATE:
-#		result_label.text = "You Lose!"
-#		set_is_active(true)
-	elif new_state == GameState.PREGAME_STATE or is_debug_skip:
-		set_is_active(false)

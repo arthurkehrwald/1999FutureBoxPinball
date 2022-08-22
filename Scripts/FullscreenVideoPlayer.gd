@@ -1,3 +1,4 @@
+class_name FullscreenVideoPlayer
 extends VideoPlayer
 
 class PlaybackManager extends Node:
@@ -7,6 +8,7 @@ class PlaybackManager extends Node:
 	var video_player = null
 	var delay = 0
 	var delay_timer = null
+	var is_playing := false
 	
 	func _init(_video_player : VideoPlayer,_delay : float = 0.0):
 		video_player = _video_player
@@ -45,8 +47,12 @@ class PlaybackManager extends Node:
 	func _on_finished_clip():
 		pass
 	
+	func _on_finished_playback():
+		is_playing = false
+		emit_signal("finished", self)
 	
 	func play():
+		is_playing = true
 		emit_signal("started", self)
 	
 	
@@ -75,7 +81,7 @@ class SingleVideoManager extends PlaybackManager:
 			return
 		video_player.stop()
 		video_player.stream = null
-		emit_signal("finished", self)
+		_on_finished_playback()
 	
 	
 	func _on_finished_clip():
@@ -143,92 +149,80 @@ class LoopManager extends PlaybackManager:
 			PlaybackState.OUTRO:
 				if video_player.stream != outro:
 					return
-				emit_signal("finished", self)
+				_on_finished_playback()
 
+signal playback_finished
 
-var current_playback_manager
+var active_playback_manager: PlaybackManager = null setget _set_active_playback_manager
+var queued_playback_manager: PlaybackManager = null
 
-onready var playback_managers = {
-	GameState.TESTING_STATE: null,
-	GameState.PREGAME_STATE: LoopManager.new(
-		self,
-		preload("res://HUD/Videos/pregame_overlay_v2_intro.ogv"),
-		preload("res://HUD/Videos/pregame_overlay_v2_loop.ogv"),
-		preload("res://HUD/Videos/pregame_overlay_v2_outro.ogv")
-	),
-	GameState.EXPOSITION_STATE: null,
-	GameState.ENEMY_FLEET_STATE: null,
-	GameState.BOSS_APPEARS_STATE: null,
-	GameState.MISSILES_STATE: null,
-	GameState.TREX_STATE: null,
-	GameState.BLACK_HOLE_STATE: null,
-	GameState.ECLIPSE_STATE: null,
-	GameState.VICTORY_STATE: SingleVideoManager.new(
-		self,
-		preload("res://HUD/Videos/victory_overlay.ogv"),
-		5.0
-	),
-	GameState.DEFEAT_STATE: SingleVideoManager.new(
-		self,
-		preload("res://HUD/Videos/game_over_overlay_v2.ogv"),
-		2.0
-	)
-}
+export var pregrame_intro_stream: VideoStream = null
+export var pregrame_loop_stream: VideoStream = null
+export var pregrame_outro_stream: VideoStream = null
+export var game_over_stream: VideoStream = null
 
+onready var pregame_playback_manager = LoopManager.new(
+	self,
+	pregrame_intro_stream,
+	pregrame_loop_stream,
+	pregrame_outro_stream
+)
+
+onready var game_over_playback_manager = SingleVideoManager.new(
+	self,
+	game_over_stream,
+	2.0
+)
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
-	for playback_manager in playback_managers.values():
-		if playback_manager:
-			add_child(playback_manager)
+	add_child(pregame_playback_manager)
+	add_child(game_over_playback_manager)
 
 
-func on_GameState_changed(new_state, is_debug_skip):
-	if playback_managers[new_state] != null:
-		if current_playback_manager:
-			current_playback_manager.request_stop()
-		current_playback_manager = playback_managers[new_state]
-		current_playback_manager.connect("started", self, "on_PlaybackManager_started", [], CONNECT_ONESHOT)
-		current_playback_manager.connect("finished", self, "on_PlaybackManager_finished", [], CONNECT_ONESHOT)
-		current_playback_manager.request_play()
-		if new_state is GameState.PostGameState:
-			current_playback_manager.connect("finished", self, "on_PlaybackManager_finished_post_game_video", [], CONNECT_ONESHOT)
-		elif new_state is GameState.PregameState:
-			current_playback_manager.connect("finished", self, "on_PlaybackManager_finished_pre_game_video", [], CONNECT_ONESHOT)
+func play_pregame_video():
+	_set_active_playback_manager(pregame_playback_manager)
+
+
+func play_game_over_video():
+	_set_active_playback_manager(game_over_playback_manager)
+
+
+func _set_active_playback_manager(value: PlaybackManager):
+	assert(value is PlaybackManager || value == null)
+	if active_playback_manager == value:
+		return
+	if active_playback_manager and active_playback_manager.is_playing:
+		active_playback_manager.request_stop()
+		if value:
+			queued_playback_manager = value
 	else:
-		if current_playback_manager:
+		active_playback_manager = value
+		if active_playback_manager:
+			active_playback_manager.connect("started", self, "on_PlaybackManager_started", [], CONNECT_ONESHOT)
+			active_playback_manager.connect("finished", self, "on_PlaybackManager_finished", [], CONNECT_ONESHOT)
+			active_playback_manager.request_play()
+		else:
 			visible = false
 			get_tree().paused = false
-			current_playback_manager = null
 
 
 func on_PlaybackManager_started(playback_manager):
-	if playback_manager != current_playback_manager:
+	if playback_manager != active_playback_manager:
 		return
 	visible = true
-	#get_tree().paused = trues
+	get_tree().paused = true
 
 
 func on_PlaybackManager_finished(playback_manager):
-	if playback_manager != current_playback_manager:
+	if playback_manager != active_playback_manager:
 		return
-	visible = false
-	get_tree().paused = false
-
+	if queued_playback_manager:
+		_set_active_playback_manager(queued_playback_manager)
+	else:
+		_set_active_playback_manager(null)
+	emit_signal("playback_finished")
 
 func _input(event):
 	if event.is_action_pressed("start"):
-		if GameState.current_state is GameState.PregameState and current_playback_manager:
-			current_playback_manager.request_stop()
-
-
-func on_PlaybackManager_finished_pre_game_video(playback_manager):
-	if playback_manager != current_playback_manager:
-		return
-	GameState.handle_event(GameState.Event.PREGAME_FINISHED)
-
-
-func on_PlaybackManager_finished_post_game_video(playback_manager):
-	if playback_manager != current_playback_manager:
-		return
-	GameState.handle_event(GameState.Event.POSTGAME_FINISHED)
+		if active_playback_manager == pregame_playback_manager:
+			active_playback_manager.request_stop()

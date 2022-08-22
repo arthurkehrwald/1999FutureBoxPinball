@@ -1,7 +1,7 @@
 extends Sprite3D
 
 func _enter_tree():
-	GameState.connect("state_changed", self, "_on_GameState_changed")
+	# TODO GameState.connect("state_changed", self, "_on_GameState_changed")
 
 func _ready():
 	texture = $Viewport.get_texture()

@@ -2,11 +2,35 @@
 
 [ext_resource path="res://Animations/stage_one_entry_curve.tres" type="Curve3D" id=1]
 [ext_resource path="res://Scenes/WireRamp.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/StageOneEntryRamp.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://Scripts/WireRamp.gd\"
+
+
+func _ready():
+	GameState.connect(\"state_changed\", self, \"on_GameState_changed\")
+
+
+func on_GameState_changed(new_stage, is_debug_skip):
+	if new_stage <= GameState.PREGAME_STATE:
+		reset(true)
+	elif new_stage == GameState.BOSS_APPEARS_STATE:
+		reset(false)
+	elif is_debug_skip:
+		if new_stage <= GameState.ENEMY_FLEET_STATE:
+			reset(true)
+		else:
+			reset(false)
+"
 
 [node name="StageOneEntryRamp" instance=ExtResource( 2 )]
 curve = ExtResource( 1 )
-script = ExtResource( 3 )
+script = SubResource( 1 )
+start_velocity_multiplier = 1
+gravity = 14.0
+resistance = 0.3
+friction = 0.2
+allow_exit_as_entrance = false
 
 [node name="EntranceArea" parent="." index="1"]
 transform = Transform( -0.999804, 0, -0.0198081, 0, 1, 0, 0.0198081, 0, -0.999804, 0.317057, 0.282478, 0.322961 )

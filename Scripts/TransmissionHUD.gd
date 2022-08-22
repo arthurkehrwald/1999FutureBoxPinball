@@ -1,6 +1,8 @@
+class_name TransmissionHud
 extends Control
 
-enum RexMood {NEUTRAL, INJURED, HAPPY, ANGRY}
+enum RexMood { NEUTRAL, INJURED, HAPPY, ANGRY }
+enum SequenceId { EXPOSITION, ENEMY_FLEET, BOSSFIGHT}
 
 export var INJURED_PORTRAIT_HEALTH_PERCENTAGE = 30.0
 export var INJURED_REACTION_DURATION = 1.0
@@ -12,6 +14,13 @@ const REX_PORTRAITS = {
 	RexMood.HAPPY: preload("res://HUD/portrait_rex_happy.png"),
 	RexMood.ANGRY: preload("res://HUD/portrait_rex_angry.png")	
 }
+
+const SEQ_NAMES = {
+	SequenceId.EXPOSITION: "exposition",
+	SequenceId.ENEMY_FLEET: "enemy_fleet_appears",
+	SequenceId.BOSSFIGHT: "boss_appears"
+}
+
 const CAPTAIN_PORTRAIT = preload("res://HUD/portrait_captain.png")
 const PORTRAIT_LOUIE = preload("res://HUD/portrait_louie.png")
 const ENEMY_PORTRAIT = preload("res://HUD/portrait_enemy.png")
@@ -20,7 +29,7 @@ const TREX_PORTRAIT = preload("res://HUD/portrait_trex.png")
 const GREEN_PANEL = preload("res://HUD/panel_left.png")
 const RED_PANEL = preload("res://HUD/panel_left_red.png")
 
-var sequences = null
+var sequences: Dictionary = {}
 var queued_line = ""
 var rex_mood = RexMood.NEUTRAL
 var is_rex_on_display = true
@@ -44,7 +53,6 @@ func _ready():
 	file.open(TRANSMISSIONS_FILE_PATH, file.READ)
 	sequences = parse_json(file.get_as_text())
 	assert (typeof(sequences) == TYPE_DICTIONARY and sequences.size() > 0)
-	GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.player_ship != null:
 		Globals.player_ship.connect("health_changed", self, "on_PlayerShip_health_changed")
 	else:
@@ -56,33 +64,8 @@ func _ready():
 		Globals.trex.connect("death", self, "play_sequence", ["trex_defeated"])
 
 
-func on_GameState_changed(new_state, is_debug_skip):
-	if is_debug_skip or new_state == GameState.PREGAME_STATE:
-		set_rex_mood(RexMood.NEUTRAL)
-		transmission_timer.stop()
-		reset()
-	match new_state:
-		GameState.EXPOSITION_STATE:
-			play_sequence("exposition")
-		GameState.ENEMY_FLEET_STATE:
-			play_sequence("enemy_fleet_appears")
-		GameState.BOSS_APPEARS_STATE:
-			play_sequence("boss_appears")
-		GameState.MISSILES_STATE:
-			play_sequence("missiles")
-		GameState.TREX_STATE:
-			play_sequence("trex_appears")
-		GameState.BLACK_HOLE_STATE:
-			play_sequence("black_hole_appears")
-		GameState.ECLIPSE_STATE:
-			play_sequence("eclipse")
-		GameState.VICTORY_STATE:
-			set_rex_mood(RexMood.HAPPY)
-		GameState.DEFEAT_STATE:
-			set_rex_mood(RexMood.ANGRY)
-
-
-func play_sequence(key):
+func play_sequence(sequence_id: int):
+	var key: String = SEQ_NAMES[sequence_id]
 	display_line(key, 0)
 	current_sequence_key = key
 	current_line_index = 0
@@ -90,6 +73,10 @@ func play_sequence(key):
 
 
 func display_line(key, index):
+	var is_params_valid = sequences.has(key) and len(sequences[key]) > index
+	assert(is_params_valid)
+	if not is_params_valid:
+		return
 	var line = sequences[key][index]
 	audio_player.play()
 	character_name_label.text = line["name"]
@@ -149,7 +136,6 @@ func on_TransmissionTimer_timeout():
 		transmission_timer.start(sequences[current_sequence_key][current_line_index]["duration"])
 	else:
 		reset()
-		GameState.handle_event(GameState.Event.TRANSMISSION_FINISHED)
 
 
 func on_HurtReactionTimer_timeout():

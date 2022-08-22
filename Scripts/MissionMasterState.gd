@@ -4,18 +4,19 @@ extends "res://Scripts/State.gd"
 signal missions_completed
 
 export var mission_count: int = 3
-export var np_first_mission: NodePath = NodePath()
+export var path_to_initial_mission: NodePath = NodePath()
 
 var remaining_missions: int = 0
 
 func enter():
 	.enter()
 	remaining_missions = mission_count
-	var first_mission = get_node(np_first_mission) as Mission
+	var first_mission = get_node(path_to_initial_mission) as Mission
 	if first_mission:
 		set_active_sub_state(first_mission)
 	else:
 		_pick_random_mission()
+	Announcer.say("stage1", true)
 
 func set_active_sub_state(value: State):
 	assert(value is Mission)

@@ -15,7 +15,7 @@ var scale_interp_value = 1
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
+	# TODO GameState.connect("state_changed", self, "on_GameState_changed")
 	nom_area.connect("body_entered", self, "on_NomArea_body_entered")
 	pull_area.connect("body_entered", self, "on_PullArea_body_entered")
 	pull_area.connect("body_exited", self, "on_PullArea_body_exited")

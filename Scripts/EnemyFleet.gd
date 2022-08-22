@@ -16,7 +16,7 @@ func _ready():
 	remaining_ship_count = total_ship_count
 	for ship in ship_parent.get_children():
 		ship.connect("death", self, "_on_EnemyShip_death")
-	set_is_active(true)
+	set_is_active(false)
 
 
 func set_is_active(value):

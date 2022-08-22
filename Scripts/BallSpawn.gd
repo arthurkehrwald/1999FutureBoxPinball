@@ -12,7 +12,7 @@ func _enter_tree():
 
 func _ready():
 	spawn_delay_timer.connect("timeout", self, "spawn_ball")
-	GameState.connect("state_changed", self, "on_GameState_changed")
+	# TODO GameState.connect("state_changed", self, "on_GameState_changed")
 
 
 func spawn_ball():

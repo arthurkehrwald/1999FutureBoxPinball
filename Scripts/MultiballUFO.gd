@@ -6,7 +6,8 @@ onready var ap = get_node("AnimationPlayer")
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
+	# TODO # TODO GameState.connect("state_changed", self, "on_GameState_changed")
+	pass
 
 
 func on_GameState_changed(new_state, _is_debug_skip):

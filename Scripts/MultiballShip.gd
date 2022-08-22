@@ -15,7 +15,7 @@ onready var muzzle = get_node("Muzzle") as Spatial
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
+	#TODO: # TODO GameState.connect("state_changed", self, "on_GameState_changed")
 	entrance_area.connect("body_entered", self, "on_EntranceArea_body_entered")
 	exit_area.connect("body_exited", self, "on_ExitArea_body_exited")
 

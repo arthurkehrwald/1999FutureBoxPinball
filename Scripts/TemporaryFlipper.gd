@@ -10,7 +10,6 @@ onready var no_remote_control_area = get_node("NoRemoteControlArea")
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.shop_menu != null:
 		Globals.shop_menu.connect("bought_flipper", self, "on_ShopMenu_bought_flipper")
 	if Globals.powerup_roulette != null:
@@ -21,11 +20,6 @@ func _ready():
 
 func _process(_delta):
 	active_time_bar.value = active_timer.time_left
-
-
-func on_GameState_changed(new_stage, is_debug_skip):
-	if is_debug_skip or new_stage == GameState.PREGAME_STATE:
-		set_is_active(false)
 
 
 func set_is_active(value, duration = 0):

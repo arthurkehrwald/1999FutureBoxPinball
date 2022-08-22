@@ -37,7 +37,7 @@ func _enter_tree():
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
+	# TODO GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.player_ship != null:
 		Globals.player_ship.connect("money_changed", self, "on_Player_money_changed")
 	else:

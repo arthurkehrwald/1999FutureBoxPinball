@@ -14,7 +14,7 @@ onready var trail = get_node("PathFollow/Spatial/LoopingLouieTrailFX")
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
+	# TODO GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.player_ship == null:
 		push_warning("[LoopingLouie] Can't find player! Will not contribute to "
 				+ "coolness.")
