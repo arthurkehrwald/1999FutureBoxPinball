@@ -11,11 +11,18 @@ var start_transform = Transform()
 var max_transform = Transform()
 var rotation_progress = 0.0
 var input_code = ""
+var is_active := true
 
 onready var impulse_area = get_node("ImpulseArea")
 onready var friction_area = get_node("FrictionArea")
 onready var audio_player = get_node("AudioStreamPlayer")
 onready var start_basis = get_global_transform().basis
+
+
+func set_is_active(value: bool):
+	if value == is_active:
+		return
+	is_active = value
 
 
 func _ready():
@@ -35,13 +42,13 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed(input_code):
+	if is_active and event.is_action_pressed(input_code):
 		set_physics_process(true)
 		audio_player.play()
 
 
 func _physics_process(delta):
-	if Input.is_action_pressed(input_code):
+	if is_active and Input.is_action_pressed(input_code):
 		if rotation_progress <= 1:
 			set_rot_progress(rotation_progress + TURN_SPEED * delta)
 	elif rotation_progress > 0:

@@ -90,9 +90,9 @@ func check_stuck() -> bool:
 	if is_locked_in_place:
 		return false
 	for body in hitreg_area.get_overlapping_bodies():
-		if body.is_in_group("flippers") or body.is_in_group("plunger"):
+		if body.is_in_group("flippers") or body.is_in_group("plungers"):
 			return false
 	for area in hitreg_area.get_overlapping_areas():
-		if area.is_in_group("flippers") or area.is_in_group("plunger"):
+		if area.is_in_group("flippers") or area.is_in_group("plungers"):
 			return false
 	return linear_velocity.length() < MIN_NOT_STUCK_SPEED_UPSEC

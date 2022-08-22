@@ -3,10 +3,16 @@ extends Area
 
 export var IMPULSE_STRENGTH = 20.0
 
+var is_active := true
 var rollers_in_area = []
 
+func set_is_active(value: bool):
+	if value == is_active:
+		return
+	is_active = value
+
 func _ready():
-	add_to_group("plunger")
+	add_to_group("plungers")
 	connect("body_entered", self, "on_body_entered")
 	connect("body_exited", self, "on_body_exited")
 
@@ -27,7 +33,7 @@ func on_body_exited(body):
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("plunger"):
+	if is_active and Input.is_action_just_pressed("plunger"):
 		launch_all()
 
 
