@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PowerupRoulette.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/CentralHudBackground.gd" type="Script" id=3]
 [ext_resource path="res://HUD/central_hud_background.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/ObjectiveHUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/PostGameHUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/WarningHUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=9]
@@ -37,13 +36,6 @@ script = ExtResource( 3 )
 visible = false
 
 [node name="ObjectiveHUD" parent="Viewport" instance=ExtResource( 5 )]
-
-[node name="PostGameHud" parent="Viewport" instance=ExtResource( 6 )]
-visible = false
-margin_left = 43.4249
-margin_top = 10.0211
-margin_right = -458.575
-margin_bottom = -439.979
 
 [node name="WarningHUD" parent="Viewport" instance=ExtResource( 8 )]
 visible = false
