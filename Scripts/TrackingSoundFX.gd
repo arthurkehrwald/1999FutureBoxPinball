@@ -9,7 +9,7 @@ var has_target = false setget set_has_target
 func _ready():
 	$Timer.connect("timeout", self, "_on_Timer_timeout")
 
-func _process(delta):
+func _process(_delta):
 	var pos = get_global_transform().origin
 	if has_target:
 		if prev_pos == pos:
