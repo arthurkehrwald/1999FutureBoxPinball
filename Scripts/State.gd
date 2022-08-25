@@ -31,7 +31,7 @@ func _on_enter():
 		component = component as StateComponent
 		if component is ExitComponent:
 			component.connect("exit_condition_met", self, "exit")
-		component.set_is_active(true)	
+		component.set_is_active(true)
 	print("entered %s" % name)
 	emit_signal("entered")
 
@@ -50,8 +50,6 @@ func _on_exit():
 func set_active_sub_state(value: State):
 	assert(value in sub_states or value == null)
 	value = value as State
-	if value == active_sub_state:
-		return
 	if active_sub_state:
 		active_sub_state.disconnect("exited", self, "_on_ActiveSubState_exited")
 		active_sub_state.exit()

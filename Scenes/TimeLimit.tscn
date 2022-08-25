@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/TimeLimitComponent.gd" type="Script" id=1]
+
+[node name="TimeLimit" type="Node"]
+script = ExtResource( 1 )
+time_limit_sec = 3.0
+path_to_timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
