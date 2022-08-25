@@ -14,12 +14,13 @@ func _ready():
 
 
 func _on_MusicComponent_is_active_changed(value: bool, music_component: MusicComponent):
-	if music_component.stream:
-		var tmp := off_player
-		off_player = on_player
-		on_player = tmp
-		off_player.stop_playing()
-		on_player.stream = music_component.stream
-		on_player.start_playing()
-	else:
-		on_player.stop_playing()
+	if value:
+		if music_component.stream:
+			var tmp := off_player
+			off_player = on_player
+			on_player = tmp
+			off_player.stop_playing()
+			on_player.stream = music_component.stream
+			on_player.start_playing()
+		else:
+			on_player.stop_playing()

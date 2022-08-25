@@ -24,7 +24,7 @@ func set_is_active(value: bool):
 	set_is_vulnerable(is_active)
 	emit_signal("is_active_changed", is_active)
 
-func _on_Self_death(value: bool):
+func _on_Self_death():
 	set_is_active(false)
 
 func _on_BumperCluster_bumped(_bumper_cluster, _bumper, _bumped_body):

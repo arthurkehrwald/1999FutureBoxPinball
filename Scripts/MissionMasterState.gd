@@ -21,7 +21,6 @@ func _on_enter():
 func set_active_sub_state(value: State):
 	assert(value is Mission || value == null)
 	assert(active_sub_state is Mission || active_sub_state == null)
-	var prev_mission := active_sub_state as Mission
 	.set_active_sub_state(value)
 	assert(active_sub_state is Mission)
 	active_sub_state = active_sub_state as Mission
