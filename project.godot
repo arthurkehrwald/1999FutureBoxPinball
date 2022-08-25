@@ -39,11 +39,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/BumperCluster.gd"
 }, {
-"base": "Node",
-"class": "CurrentMissionTracker",
-"language": "GDScript",
-"path": "res://Scripts/CurrentMissionTracker.gd"
-}, {
 "base": "CollisionObject",
 "class": "Damageable",
 "language": "GDScript",
@@ -256,7 +251,6 @@ _global_script_class_icons={
 "BossFog": "",
 "Bumper": "",
 "BumperCluster": "",
-"CurrentMissionTracker": "",
 "Damageable": "",
 "EnemyFleet": "",
 "EnemyFleetMission": "",
@@ -313,6 +307,7 @@ Announcer="*res://Scripts/Announcer.gd"
 Globals="*res://Scripts/Globals.gd"
 PoolManager="*res://Scripts/PoolManager.gd"
 Utils="*res://Scripts/Utils.gd"
+MissionTracker="*res://Scripts/MissionTracker.gd"
 
 [debug]
 

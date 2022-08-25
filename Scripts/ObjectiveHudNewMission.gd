@@ -4,9 +4,9 @@ extends "res://Scripts/ObjectiveHudSubState.gd"
 func _on_enter():
 	._on_enter()
 	# In case this scripts mission tracker component has not yet been updated
-	yield(get_tree(), "idle_frame")
-	if mission_tracker.current_mission:
-		_play_intro_animation(mission_tracker.current_mission)
+	yield(get_tree(), "idle_frame")	
+	if MissionTracker.current_mission:
+		_play_intro_animation(MissionTracker.current_mission)
 		animation_player.connect("animation_finished", self, "_on_AnimationPlayer_animation_finished")
 
 func _on_exit():

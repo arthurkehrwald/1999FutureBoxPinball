@@ -1,5 +1,4 @@
-class_name CurrentMissionTracker
-extends "res://Scripts/StateComponent.gd"
+extends Node
 
 signal current_mission_changed(mission)
 signal current_mission_completed(mission)

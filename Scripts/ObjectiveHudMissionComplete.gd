@@ -5,8 +5,8 @@ func _on_enter():
 	._on_enter()
 	# In case this scripts mission tracker component has not yet been updated
 	yield(get_tree(), "idle_frame")
-	if mission_tracker.last_completed_mission:
-		_play_mission_complete_animation(mission_tracker.last_completed_mission)
+	if MissionTracker.last_completed_mission:
+		_play_mission_complete_animation(MissionTracker.last_completed_mission)
 		animation_player.connect("animation_finished", self, "_on_AnimationPlayer_animation_finished")
 
 func _on_exit():

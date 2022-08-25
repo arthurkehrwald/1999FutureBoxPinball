@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/ObjectiveHudState.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/CurrentMissionTracker.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/ObjectiveHudSubState.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/ObjectiveHudDisplayMission.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/ObjectiveHudNewMission.gd" type="Script" id=5]
@@ -13,12 +12,6 @@ is_root = true
 path_to_new_mission_state = NodePath("SubStates/NewMission")
 path_to_mission_display_state = NodePath("SubStates/DisplayMission")
 path_to_mission_complete_state = NodePath("SubStates/MissionCompleted")
-path_to_mission_tracker = NodePath("Components/MissionTracker")
-
-[node name="Components" type="Node" parent="."]
-
-[node name="MissionTracker" type="Node" parent="Components"]
-script = ExtResource( 2 )
 
 [node name="SubStates" type="Node" parent="."]
 
