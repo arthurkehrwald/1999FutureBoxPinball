@@ -62,7 +62,7 @@ func set_active_sub_state(value: State, enter_params := {}) -> Dictionary:
 		active_sub_state.enter(enter_params)
 	return exit_params
 
-func _on_ActiveSubState_exited():
+func _on_ActiveSubState_exited(params := {}):
 	set_active_sub_state(null)
 
 func _find_sub_states_parent() -> Node:
@@ -98,3 +98,5 @@ func _find_components() -> Array:
 func _ready():
 	if is_root:
 		call_deferred("enter")
+	else:
+		call_deferred("_on_exit")

@@ -34,7 +34,7 @@ func _pick_random_mission():
 	var sub_state = sub_states[sub_state_index]
 	set_active_sub_state(sub_state)
 
-func _on_ActiveSubState_exited():
+func _on_ActiveSubState_exited(params := {}):
 	active_sub_state = active_sub_state as Mission
 	if active_sub_state.is_complete:
 		remaining_missions -= 1

@@ -27,7 +27,7 @@ func handle_queued_missions() -> bool:
 		return true
 	return false
 
-func _on_ActiveSubState_exited():
+func _on_ActiveSubState_exited(exit_params := {}):
 	match active_sub_state:
 		new_mission_state:
 			.set_active_sub_state(mission_display_state)

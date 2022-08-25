@@ -11,7 +11,7 @@ func _on_enter(params := {}):
 	var components_parent = _find_components_parent() as Control
 	if components_parent:
 		components_parent.visible = true
-	._on_enter()
+	._on_enter(params)
 
 func _on_exit(passthrough_params := {}) -> Dictionary:
 	ui_nodes.visible = false
