@@ -12,8 +12,8 @@ onready var mission_complete_state := get_node(path_to_mission_complete_state) a
 var queued_new_mission: Mission = null
 var queued_completed_mission: Mission = null
 
-func _on_enter():
-	._on_enter()
+func _on_enter(params := {}):
+	._on_enter(params)
 	handle_queued_missions()
 
 func handle_queued_missions() -> bool:

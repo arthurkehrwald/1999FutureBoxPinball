@@ -13,11 +13,10 @@ onready var boss_fight := get_node(path_to_bossfight) as BossFight
 onready var game_over := get_node(path_to_game_over) as GameOver
 onready var player_ship := get_node(path_to_player_ship) as PlayerShip
 
-func enter():
+func enter(params := {}):
 	.enter()
 	pregame.connect("finished", self, "_on_Pregame_finished")
 	missions.connect("missions_completed", self, "_on_Missions_completed")
-	boss_fight.connect("exited", self, "_on_BossFight_exited")
 	player_ship.connect("death", self, "_on_PlayerShip_death")
 	set_active_sub_state(pregame)
 
@@ -27,8 +26,12 @@ func _on_Pregame_finished():
 func _on_Missions_completed():
 	set_active_sub_state(boss_fight)
 
-func _on_BossFight_exited():
-	set_active_sub_state(missions)
+func _on_ActiveSubState_exited(params := {}):
+	match active_sub_state:
+		boss_fight:
+			set_active_sub_state(missions)
+		_:
+			._on_ActiveSubState_exited()
 
 func _on_PlayerShip_death():
 	set_active_sub_state(game_over)

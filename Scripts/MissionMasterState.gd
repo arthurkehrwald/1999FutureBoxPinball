@@ -8,8 +8,8 @@ export var path_to_initial_mission: NodePath = NodePath()
 
 var remaining_missions: int = 0
 
-func _on_enter():
-	._on_enter()
+func _on_enter(params := {}):
+	._on_enter(params)
 	remaining_missions = mission_count
 	var first_mission = get_node(path_to_initial_mission) as Mission
 	if first_mission:
@@ -18,10 +18,10 @@ func _on_enter():
 		_pick_random_mission()
 	Announcer.say("stage1", true)
 
-func set_active_sub_state(value: State):
+func set_active_sub_state(value: State, enter_params := {}):
 	assert(value is Mission || value == null)
 	assert(active_sub_state is Mission || active_sub_state == null)
-	.set_active_sub_state(value)
+	.set_active_sub_state(value, enter_params)
 	assert(active_sub_state is Mission)
 	active_sub_state = active_sub_state as Mission
 
