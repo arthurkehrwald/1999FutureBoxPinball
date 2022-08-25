@@ -19,6 +19,8 @@ collision_mask = 0
 script = ExtResource( 1 )
 MAX_TURN_ANGLE = 30
 TURN_SPEED = 0.2
+path_to_dotted_line = NodePath("Muzzle/DottedLine")
+path_to_muzzle = NodePath("Muzzle")
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 4 )
