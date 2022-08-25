@@ -60,6 +60,10 @@ func _ready():
 				+ " portrait based on health.")
 	transmission_timer.connect("timeout", self, "on_TransmissionTimer_timeout")
 	hurt_reaction_timer.connect("timeout", self, "on_HurtReactionTimer_timeout")
+	for enemy_fleet in get_tree().get_nodes_in_group("enemy_fleets"):
+		enemy_fleet = enemy_fleet as EnemyFleet
+		if enemy_fleet:
+			enemy_fleet.connect("is_active_changed", self, "_on_EnemyFleet_is_active_changed")
 	if Globals.trex != null:
 		Globals.trex.connect("death", self, "play_sequence", ["trex_defeated"])
 
@@ -136,6 +140,12 @@ func on_TransmissionTimer_timeout():
 		transmission_timer.start(sequences[current_sequence_key][current_line_index]["duration"])
 	else:
 		reset()
+
+
+func _on_EnemyFleet_is_active_changed(value: bool):
+	if value:
+		play_sequence(SequenceId.ENEMY_FLEET)
+	
 
 
 func on_HurtReactionTimer_timeout():

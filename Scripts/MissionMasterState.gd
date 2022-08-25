@@ -25,7 +25,6 @@ func set_active_sub_state(value: State):
 	.set_active_sub_state(value)
 	assert(active_sub_state is Mission)
 	active_sub_state = active_sub_state as Mission
-	print("New objective %s" % active_sub_state.objective)
 
 func _ready():
 	for state in sub_states:
