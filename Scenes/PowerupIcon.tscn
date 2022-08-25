@@ -21,11 +21,11 @@ tracks/0/keys = {
 
 [node name="Icon" type="TextureRect"]
 anchor_bottom = 1.0
-margin_right = 100.0
+margin_right = 740.0
 margin_bottom = -1180.0
 grow_horizontal = 2
 rect_min_size = Vector2( 100, 100 )
-rect_pivot_offset = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 370, 370 )
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 6
