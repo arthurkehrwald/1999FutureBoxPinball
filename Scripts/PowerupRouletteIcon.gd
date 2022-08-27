@@ -8,10 +8,13 @@ export(float) var min_scale := 0.5
 export(float) var max_scale := 1.5
 export(float, 0.0, 0.5) var fade_zone := 0.2
 export(NodePath) var anim_player_path
+
 var associated_powerup : Powerup setget set_associated_powerup
-var animation_progress : float setget set_animation_progress
+export var animation_progress : float setget set_animation_progress
 var do_animate_scale : bool = true
+
 onready var anim_player = get_node(anim_player_path) as AnimationPlayer
+onready var unscaled_width := rect_size.x
 
 func _ready():
 	anim_player.connect("animation_finished", self, "_on_AnimationPlayer_animation_finished")

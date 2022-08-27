@@ -16,7 +16,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 3, 3 ), Vector2( 2, 2 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 3, 3 ), Vector2( 1.7, 1.7 ) ]
 }
 
 [node name="Icon" type="TextureRect"]
@@ -25,6 +25,7 @@ margin_right = 740.0
 margin_bottom = -1180.0
 grow_horizontal = 2
 rect_min_size = Vector2( 100, 100 )
+rect_scale = Vector2( 3, 3 )
 rect_pivot_offset = Vector2( 370, 370 )
 texture = ExtResource( 1 )
 expand = true

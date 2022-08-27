@@ -50,6 +50,9 @@ func has_at_least_one_viable_powerup() -> bool:
 			return true
 	return false
 
+func _input(event):
+	if event.is_action_pressed("ui_accept"):
+		start_roulette(3, 1)
 
 func _on_Moon_hit(speed: float, decay: float):
 	if has_at_least_one_viable_powerup():
@@ -65,19 +68,19 @@ func start_roulette(speed: float, decay: float):
 	var params = {
 		"start_speed": speed,
 		"speed_decay": decay,
-		"powerups": powerups
+		"powerups": powerups.duplicate()
 	}
 	.set_active_sub_state(spin_state, params)
 
 
 func _on_SpinState_selected_powerup(powerup: Powerup):
-	powerup.activate()
+	if powerup:
+		powerup.activate()
 
 
 func _on_ActiveSubState_exited(_exit_params := {}):
 	match active_sub_state:
 		spin_state:
 			set_wants_focus(false)
-			exit()
 		_:
 			._on_ActiveSubState_exited()
