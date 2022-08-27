@@ -37,13 +37,11 @@ func _on_enter(params := {}):
 	._on_enter(params)
 
 
-func _on_exit(passthrough_params := {}):
+func _on_exit(passthrough_params := {}) -> Dictionary:
 	speed_decay = default_speed_decay
 	powerups.clear()
 	selected_powerup = null
-	var params := {"selected_powerup": selected_powerup}
-	params = Utils.merge_dict(params, passthrough_params)
-	._on_exit(params)
+	return ._on_exit(passthrough_params)
 
 
 func _process(delta):

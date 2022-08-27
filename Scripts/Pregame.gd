@@ -11,7 +11,7 @@ onready var player_ship := get_node(path_to_player_ship) as PlayerShip
 onready var video_player := get_node(path_to_video_player) as FullscreenVideoPlayer
 onready var transmission_hud := get_node(path_to_transmission_hud) as TransmissionHud
 
-func _on_enter(params := {}):
+func _on_enter(_params := {}):
 	._on_enter()
 	Announcer.say("begin", true)
 	video_player.play_pregame_video()

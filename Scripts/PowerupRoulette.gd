@@ -25,7 +25,7 @@ func _ready():
 	moon.connect("hit", self, "_on_Moon_hit")
 	spin_state.connect("selected_powerup", self, "_on_SpinState_selected_powerup")
 
-func _on_enter(params := {}):
+func _on_enter(_params := {}):
 	if last_hit_info:
 		start_roulette(last_hit_info.speed, last_hit_info.decay)
 		last_hit_info = null
@@ -74,7 +74,7 @@ func _on_SpinState_selected_powerup(powerup: Powerup):
 	powerup.activate()
 
 
-func _on_ActiveSubState_exited(exit_params := {}):
+func _on_ActiveSubState_exited(_exit_params := {}):
 	match active_sub_state:
 		spin_state:
 			set_wants_focus(false)

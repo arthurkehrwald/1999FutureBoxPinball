@@ -12,10 +12,10 @@ func _ready():
 			mission.connect("entered", self, "_on_Mission_entered", [mission])
 			mission.connect("exited", self, "_on_Mission_exited", [mission])
 
-func _on_Mission_entered(mission: Mission):
+func _on_Mission_entered(_exit_params: Dictionary, mission: Mission):
 	_set_current_mission(mission)
 
-func _on_Mission_exited(mission: Mission):
+func _on_Mission_exited(_exit_params: Dictionary, mission: Mission):
 	if mission == current_mission:
 		if mission.is_complete:
 			last_completed_mission = mission

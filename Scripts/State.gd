@@ -2,8 +2,8 @@ class_name State
 extends Node
 # Encapsulates state specific behaviour
 
-signal entered
-signal exited 
+signal entered(params)
+signal exited(params)
 
 var active_sub_state: State = null setget set_active_sub_state
 var is_active := false
@@ -23,11 +23,11 @@ func exit() -> Dictionary:
 	if not is_active:
 		return {}
 	is_active = false
-	var params = _on_exit()
+	var params := _on_exit()
 	emit_signal("exited", params)
 	return params
 
-func _on_enter(_params := {}):
+func _on_enter(params := {}):
 	Utils.set_all_process_callbacks_enabled(self, true)
 	for component in components:
 		component = component as StateComponent
@@ -35,7 +35,7 @@ func _on_enter(_params := {}):
 			component.connect("exit_condition_met", self, "exit")
 		component.set_is_active(true)
 	print("entered %s" % name)
-	emit_signal("entered")
+	emit_signal("entered", params)
 
 func _on_exit(passthrough_params := {}) -> Dictionary:
 	Utils.set_all_process_callbacks_enabled(self, false)
@@ -62,7 +62,7 @@ func set_active_sub_state(value: State, enter_params := {}) -> Dictionary:
 		active_sub_state.enter(enter_params)
 	return exit_params
 
-func _on_ActiveSubState_exited(params := {}):
+func _on_ActiveSubState_exited(_params := {}):
 	set_active_sub_state(null)
 
 func _find_sub_states_parent() -> Node:

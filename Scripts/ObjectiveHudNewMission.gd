@@ -10,7 +10,8 @@ func _on_enter(params := {}):
 		animation_player.connect("animation_finished", self, "_on_AnimationPlayer_animation_finished")
 
 func _on_exit(passthrough_params := {}) -> Dictionary:
-	animation_player.disconnect("animation_finished", self, "_on_AnimationPlayer_animation_finished")
+	if animation_player.is_connected("animation_finished", self, "_on_AnimationPlayer_animation_finished"):
+		animation_player.disconnect("animation_finished", self, "_on_AnimationPlayer_animation_finished")
 	animation_player.stop()
 	return ._on_exit(passthrough_params)
 

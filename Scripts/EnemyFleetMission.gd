@@ -12,7 +12,8 @@ func _on_enter(params := {}):
 
 func _on_exit(passthrough_params := {}) -> Dictionary:
 	enemy_fleet.set_is_active(false)
-	enemy_fleet.disconnect("defeated", self, "_on_EnemyFleet_defeated")
+	if enemy_fleet.is_connected("defeated", self, "_on_EnemyFleet_defeated"):
+		enemy_fleet.disconnect("defeated", self, "_on_EnemyFleet_defeated")
 	return ._on_exit(passthrough_params)
 
 func _on_EnemyFleet_defeated():
