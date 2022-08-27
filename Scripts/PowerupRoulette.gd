@@ -50,9 +50,6 @@ func has_at_least_one_viable_powerup() -> bool:
 			return true
 	return false
 
-func _input(event):
-	if event.is_action_pressed("ui_accept"):
-		start_roulette(3, 1)
 
 func _on_Moon_hit(speed: float, decay: float):
 	if has_at_least_one_viable_powerup():
