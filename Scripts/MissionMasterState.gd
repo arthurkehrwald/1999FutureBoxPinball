@@ -1,8 +1,6 @@
 class_name MissionMasterState
 extends "res://Scripts/State.gd"
 
-signal missions_completed
-
 export var mission_count: int = 3
 export var path_to_initial_mission: NodePath = NodePath()
 
@@ -17,6 +15,11 @@ func _on_enter(params := {}):
 	else:
 		_pick_random_mission()
 	Announcer.say("stage1", true)
+
+func _on_exit(passthrough_params := {}) -> Dictionary:
+	var params = {"is_complete:": remaining_missions == 0}
+	params = Utils.merge_dict(passthrough_params, params)
+	return ._on_exit(params)
 
 func set_active_sub_state(value: State, enter_params := {}):
 	assert(value is Mission || value == null)
@@ -41,6 +44,6 @@ func _on_ActiveSubState_exited(_params := {}):
 		if remaining_missions > 0:
 			_pick_random_mission()
 		else:
-			emit_signal("missions_completed")
+			exit()
 	else:
 		_pick_random_mission()

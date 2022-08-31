@@ -15,15 +15,16 @@ onready var player_ship := get_node(path_to_player_ship) as PlayerShip
 
 func enter(_params := {}):
 	.enter()
-	pregame.connect("finished", self, "_on_Pregame_finished")
-	missions.connect("missions_completed", self, "_on_Missions_completed")
+	pregame.connect("exited", self, "_on_Pregame_exited")
+	missions.connect("exited", self, "_on_Missions_exited")
 	player_ship.connect("death", self, "_on_PlayerShip_death")
+	game_over.connect("exited", self, "_on_GameOver_exited")
 	set_active_sub_state(pregame)
 
-func _on_Pregame_finished():
+func _on_Pregame_exited(_exit_params := {}):
 	set_active_sub_state(missions)
 
-func _on_Missions_completed():
+func _on_Missions_exited(_exit_params := {}):
 	set_active_sub_state(boss_fight)
 
 func _on_ActiveSubState_exited(_params := {}):
@@ -36,5 +37,5 @@ func _on_ActiveSubState_exited(_params := {}):
 func _on_PlayerShip_death():
 	set_active_sub_state(game_over)
 
-func _on_GameOver_finished():
+func _on_GameOver_exited(_exit_params := {}):
 	get_tree().reload_current_scene()

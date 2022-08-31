@@ -13,6 +13,6 @@ func _on_enter(params := {}):
 	video_player.play_game_over_video()
 	player_ship.set_is_vulnerable(false)
 
-func _on_exit(passthrough_params := {}) -> Dictionary:	
+func _on_exit(passthrough_params := {}) -> Dictionary:
 	player_ship.set_is_vulnerable(true)
 	return ._on_exit(passthrough_params)

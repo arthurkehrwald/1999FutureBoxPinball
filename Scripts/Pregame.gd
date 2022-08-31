@@ -1,8 +1,6 @@
 class_name Pregame
 extends "res://Scripts/State.gd"
 
-signal finished
-
 export var path_to_player_ship := NodePath()
 export var path_to_video_player := NodePath()
 export var path_to_transmission_hud := NodePath()
@@ -24,4 +22,4 @@ func _on_exit(passthrough_params := {}) -> Dictionary:
 	return ._on_exit(passthrough_params)
 
 func _on_VideoPlayer_playback_finished():
-	emit_signal("finished")
+	exit()
