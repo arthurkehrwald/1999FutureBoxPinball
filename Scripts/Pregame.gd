@@ -13,11 +13,14 @@ func _on_enter(_params := {}):
 	._on_enter()
 	Announcer.say("begin", true)
 	video_player.play_pregame_video()
-	video_player.connect("playback_finished", self, "_on_VideoPlayer_playback_finished")
+	if not video_player.is_connected("playback_finished", self, "_on_VideoPlayer_playback_finished"):
+		video_player.connect("playback_finished", self, "_on_VideoPlayer_playback_finished")
 	player_ship.set_is_vulnerable(false)
 	transmission_hud.set_rex_mood(transmission_hud.RexMood.ANGRY)
 
 func _on_exit(passthrough_params := {}) -> Dictionary:
+	if video_player.is_connected("playback_finished", self, "_on_VideoPlayer_playback_finished"):
+		video_player.disconnect("playback_finished", self, "_on_VideoPlayer_playback_finished")
 	player_ship.set_is_vulnerable(true)
 	return ._on_exit(passthrough_params)
 

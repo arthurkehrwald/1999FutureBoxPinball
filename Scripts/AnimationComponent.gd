@@ -2,7 +2,7 @@ class_name AnimationComponent
 extends "res://Scripts/StateComponent.gd"
 
 export var path_to_animation_player := NodePath()
-export var animation_name: String
+export var animation_name: String = "animation"
 
 onready var animation_player := get_node(path_to_animation_player) as AnimationPlayer
 

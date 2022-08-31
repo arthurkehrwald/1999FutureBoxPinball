@@ -2,11 +2,12 @@ class_name State
 extends Node
 # Encapsulates state specific behaviour
 
-signal entered(params)
+signal entered()
 signal exited(params)
 
 var active_sub_state: State = null setget set_active_sub_state
 var is_active := false
+var is_active_sub_state_changing := false
 
 export var is_root := false
 
@@ -19,7 +20,7 @@ func enter(params := {}):
 	is_active = true
 	print("entered %s" % name)
 	_on_enter(params)
-	emit_signal("entered", params)
+	emit_signal("entered")
 
 func exit() -> Dictionary:
 	if not is_active:
@@ -30,7 +31,7 @@ func exit() -> Dictionary:
 	emit_signal("exited", params)
 	return params
 
-func _on_enter(params := {}):
+func _on_enter(_params := {}):
 	Utils.set_all_process_callbacks_enabled(self, true)
 	for component in components:
 		component = component as StateComponent
@@ -49,7 +50,17 @@ func _on_exit(passthrough_params := {}) -> Dictionary:
 		component.set_is_active(false)
 	return passthrough_params
 
-func set_active_sub_state(value: State, enter_params := {}) -> Dictionary:
+func set_active_sub_state(value: State, enter_params := {}) -> Dictionary:#
+	# Prevent strange things from happening
+	if not is_active and not value == null:
+		push_error("Attempted to change active sub state on inactive state. BIG nono!")
+		assert(false)
+		return {}
+	if is_active_sub_state_changing:
+		push_error("Attempted to change active sub state during transition. BIG nono!")
+		assert(false)
+		return {}
+	is_active_sub_state_changing = true
 	assert(value in sub_states or value == null)
 	value = value as State
 	var exit_params := {}
@@ -60,6 +71,7 @@ func set_active_sub_state(value: State, enter_params := {}) -> Dictionary:
 	if active_sub_state:
 		active_sub_state.connect("exited", self, "_on_ActiveSubState_exited")
 		active_sub_state.enter(enter_params)
+	is_active_sub_state_changing = false
 	return exit_params
 
 func _on_ActiveSubState_exited(_params := {}):
