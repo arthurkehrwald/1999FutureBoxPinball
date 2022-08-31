@@ -1,12 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/PowerupRoulette.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/CentralHudBackground.gd" type="Script" id=3]
-[ext_resource path="res://HUD/central_hud_background.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/ObjectiveHUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/WarningHUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/CentralUi.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=9]
 
 [node name="CentralHUD3D" type="Sprite3D"]
@@ -22,21 +17,4 @@ transparent_bg = true
 disable_3d = true
 render_target_v_flip = true
 
-[node name="Background" type="TextureRect" parent="Viewport"]
-anchor_left = 0.088
-anchor_top = 0.06
-anchor_right = 0.139
-anchor_bottom = 0.065
-margin_right = 578.0
-margin_bottom = 393.0
-texture = ExtResource( 4 )
-script = ExtResource( 3 )
-
-[node name="PowerupRoulette" parent="Viewport" instance=ExtResource( 2 )]
-
-[node name="ObjectiveHUD" parent="Viewport" instance=ExtResource( 5 )]
-
-[node name="WarningHUD" parent="Viewport" instance=ExtResource( 8 )]
-visible = false
-
-[node name="GlitchOverlay" parent="Viewport" instance=ExtResource( 7 )]
+[node name="CentralUi" parent="Viewport" instance=ExtResource( 2 )]

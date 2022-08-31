@@ -17,13 +17,16 @@ func enter(params := {}):
 	if is_active:
 		return
 	is_active = true
+	print("entered %s" % name)
 	_on_enter(params)
+	emit_signal("entered", params)
 
 func exit() -> Dictionary:
 	if not is_active:
 		return {}
 	is_active = false
 	var params := _on_exit()
+	print("exited %s" % name)
 	emit_signal("exited", params)
 	return params
 
@@ -34,8 +37,6 @@ func _on_enter(params := {}):
 		if component is ExitComponent:
 			component.connect("exit_condition_met", self, "exit")
 		component.set_is_active(true)
-	print("entered %s" % name)
-	emit_signal("entered", params)
 
 func _on_exit(passthrough_params := {}) -> Dictionary:
 	Utils.set_all_process_callbacks_enabled(self, false)
@@ -43,10 +44,9 @@ func _on_exit(passthrough_params := {}) -> Dictionary:
 		active_sub_state.exit()
 	for component in components:
 		component = component as StateComponent
-		if component is ExitComponent:
+		if component is ExitComponent and component.is_connected("exit_condition_met", self, "exit"):
 			component.disconnect("exit_condition_met", self, "exit")
 		component.set_is_active(false)
-	print("exited %s" % name)
 	return passthrough_params
 
 func set_active_sub_state(value: State, enter_params := {}) -> Dictionary:

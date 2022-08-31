@@ -5,35 +5,12 @@
 [ext_resource path="res://Textures/shader_texture_01.png" type="Texture" id=3]
 [ext_resource path="res://Textures/checkerboard.png" type="Texture" id=4]
 
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-render_mode unshaded;
-
-uniform sampler2D screen: hint_albedo;
-uniform float brightness: hint_range(0,.1);
-uniform float size: hint_range(0.1, 5.0);
-uniform float offset: hint_range(-1.0, 2.0);
-
-void fragment()
-{
-	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
-	COLOR.rgb += texture(screen, SCREEN_UV * size + offset).rgb * brightness;
-}"
-custom_defines = ""
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/brightness = 0.1
-shader_param/size = 0.428
-shader_param/offset = 0.143
-shader_param/screen = ExtResource( 3 )
-
 [sub_resource type="Animation" id=3]
 resource_name = "glitch_idle"
 length = 10.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("BackBufferCopy/lines:material:shader_param/offset")
+tracks/0/path = NodePath("lines:material:shader_param/offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -108,6 +85,29 @@ tracks/3/keys = {
 "values": [ 0.002, 0.02, 0.002 ]
 }
 
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D screen: hint_albedo;
+uniform float brightness: hint_range(0,.1);
+uniform float size: hint_range(0.1, 5.0);
+uniform float offset: hint_range(-1.0, 2.0);
+
+void fragment()
+{
+	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
+	COLOR.rgb += texture(screen, SCREEN_UV * size + offset).rgb * brightness;
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/brightness = 0.1
+shader_param/size = 0.428
+shader_param/offset = 0.0495
+shader_param/screen = ExtResource( 3 )
+
 [node name="GlitchOverlay" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
@@ -116,14 +116,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
-position = Vector2( 12.6539, 10.4614 )
-scale = Vector2( 2.36739, 1.63641 )
 texture = ExtResource( 4 )
 centered = false
 
@@ -132,25 +129,12 @@ material = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 copy_mode = 2
 rect = Rect2( 0, 0, 1080, 1920 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="lines" type="ColorRect" parent="BackBufferCopy"]
-material = SubResource( 2 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
 
 [node name="IdleAnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.5
@@ -162,3 +146,11 @@ anims/super_glitch = SubResource( 4 )
 
 [node name="SuperGlitchTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="lines" type="ColorRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

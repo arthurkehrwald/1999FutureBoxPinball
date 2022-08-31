@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/ObjectiveHudState.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HUD/objective_checkbox.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://HUD/objective_checkmark.png" type="Texture" id=5]
+[ext_resource path="res://Animations/objective_complete_message_anim.tres" type="Animation" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 35
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 0
+use_filter = true
+font_data = ExtResource( 4 )
+
+[node name="ObjectiveHUD" type="Control"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -289.0
+margin_top = -199.0
+margin_right = 289.0
+margin_bottom = 199.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeadingLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -74.0
+margin_top = 35.2944
+margin_right = 74.0
+margin_bottom = 84.2944
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "Objective"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ObjectiveCheckBox" type="CheckBox" parent="."]
+margin_left = 71.0
+margin_top = 150.0
+margin_right = 566.0
+margin_bottom = 211.0
+custom_icons/checked = ExtResource( 5 )
+custom_icons/unchecked = ExtResource( 3 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+shortcut_in_tooltip = false
+button_mask = 0
+text = "Destroy the enemy fleet"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageLabel" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 95.0
+margin_top = 139.193
+margin_right = 488.0
+margin_bottom = 200.193
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "Complete!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/objective_complete_anim = ExtResource( 6 )
+
+[node name="ObjectiveHudState" parent="." instance=ExtResource( 2 )]
+
+[node name="NewMission" parent="ObjectiveHudState/SubStates" index="0"]
+path_to_animation_player = NodePath("../../../AnimationPlayer")
+path_to_objective_checkbox = NodePath("../../../ObjectiveCheckBox")
+path_to_message_label = NodePath("../../../MessageLabel")
+
+[node name="MissionCompleted" parent="ObjectiveHudState/SubStates" index="2"]
+path_to_animation_player = NodePath("../../../AnimationPlayer")
+path_to_objective_checkbox = NodePath("../../../ObjectiveCheckBox")
+path_to_message_label = NodePath("../../../MessageLabel")
+
+[editable path="ObjectiveHudState"]

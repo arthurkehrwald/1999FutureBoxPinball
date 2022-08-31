@@ -10,9 +10,9 @@ func _on_enter(params := {}):
 	._on_enter(params)
 
 func _on_exit(passthrough_params := {}) -> Dictionary:
-	if not is_complete:
-		_on_mission_failed()
-	return ._on_exit(passthrough_params)
+	var params := {"is_complete": is_complete}
+	params = Utils.merge_dict(params, passthrough_params)
+	return ._on_exit(params)
 
 func _on_mission_completed():
 	is_complete = true

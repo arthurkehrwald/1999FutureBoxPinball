@@ -17,3 +17,5 @@ anchor_bottom = 1.0
 [node name="SubStates" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="Components" type="Node" parent="."]

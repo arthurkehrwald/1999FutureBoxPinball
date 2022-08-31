@@ -31,7 +31,7 @@ custom_defines = ""
 
 [resource]
 shader = SubResource( 1 )
-shader_param/dispOffset = 0.104
+shader_param/dispOffset = 0.036
 shader_param/dispAmt = 0.001
 shader_param/abberationAmtX = 0.002
 shader_param/abberationAmtY = 0.002
