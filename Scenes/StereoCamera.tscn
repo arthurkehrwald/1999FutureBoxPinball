@@ -113,7 +113,7 @@ __meta__ = {
 }
 
 [node name="Left" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1080, 1920 )
+size = Vector2( 1024, 1280 )
 handle_input_locally = false
 render_target_update_mode = 3
 gui_disable_input = true
@@ -124,7 +124,7 @@ frustum_offset = Vector2( 0.04536, 0 )
 zoom = 0.172
 
 [node name="Right" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1080, 1920 )
+size = Vector2( 1024, 1280 )
 handle_input_locally = false
 render_target_update_mode = 3
 gui_disable_input = true
