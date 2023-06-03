@@ -82,7 +82,7 @@ resource_name = "Rotation"
 length = 8.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("T-Rex-UVs_done_04:rotation_degrees")
+tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -93,35 +93,13 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("New_Rocket_UV_02:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Enemy_Spaceship_Uvs_done_05:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
-}
 
-[node name="Spatial" type="Spatial"]
+[node name="TurntableRoot" type="Spatial"]
 
-[node name="T-Rex-UVs_done_04" type="MeshInstance" parent="."]
-transform = Transform( 0.313529, 0, -0.949579, 0, 1, 0, 0.949579, 0, 0.313529, 0, 0, 0 )
+[node name="SpinnyBoi" type="Spatial" parent="."]
+
+[node name="T-Rex-UVs_done_04" type="MeshInstance" parent="SpinnyBoi"]
+transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0 )
 visible = false
 mesh = ExtResource( 2 )
 material/0 = SubResource( 1 )
@@ -129,17 +107,22 @@ material/1 = SubResource( 2 )
 material/2 = SubResource( 3 )
 material/3 = SubResource( 4 )
 
-[node name="New_Rocket_UV_02" type="MeshInstance" parent="."]
-transform = Transform( 0.603405, 0, -1.82752, 0, 1.92456, 0, 1.82752, 0, 0.603405, 0, 0.5, 0 )
-visible = false
+[node name="New_Rocket_UV_02" type="MeshInstance" parent="SpinnyBoi"]
+transform = Transform( 1.92456, 0, 0, 0, 1.92456, 0, 0, 0, 1.92456, 0, -0.84, 0 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 4 )
 
-[node name="Enemy_Spaceship_Uvs_done_05" type="MeshInstance" parent="."]
-transform = Transform( 0.102773, 0, -0.311267, 0, 0.327795, 0, 0.311267, 0, 0.102773, 0, 0.902, 0 )
+[node name="Enemy_Spaceship_Uvs_done_05" type="MeshInstance" parent="SpinnyBoi"]
+transform = Transform( 0.327795, 0, 5.73135e-08, 0, 0.327795, 0, -5.73135e-08, 0, 0.327795, 0, 0, -0.381 )
+visible = false
 mesh = ExtResource( 16 )
 material/0 = SubResource( 5 )
 material/1 = ExtResource( 3 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpinnyBoi"]
+autoplay = "Rotation"
 anims/Rotation = SubResource( 6 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.824916, 0.565255, 0, -0.565255, 0.824916, 0, 4, 6 )
+fov = 45.0
