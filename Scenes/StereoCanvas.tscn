@@ -42,7 +42,7 @@ func _set_left_viewport_path(value: NodePath) -> void:
 	if (left_viewport_path_init and value == left_viewport_path):
 		return
 	left_viewport_path = value
-	var viewport = get_node(left_viewport_path)
+	var viewport = get_node(left_viewport_path) if has_node(left_viewport_path) else null
 	if left_viewport_path == NodePath() or viewport != null:
 		_set_left_viewport(get_node(left_viewport_path) as Viewport)
 
@@ -60,7 +60,7 @@ func _set_right_viewport_path(value: NodePath) -> void:
 	if (right_viewport_path_init and value == right_viewport_path):
 		return
 	right_viewport_path = value
-	var viewport = get_node(right_viewport_path)
+	var viewport = get_node(right_viewport_path) if has_node(right_viewport_path) else null
 	if right_viewport_path == NodePath() or viewport != null:
 		_set_right_viewport(get_node(right_viewport_path) as Viewport)
 
@@ -89,7 +89,7 @@ func _set_is_enabled(value: bool) -> void:
 	is_enabled_init = true
 "
 
-[node name="InterlacedStereoCanvas" type="ColorRect"]
+[node name="StereoCanvas" type="ColorRect"]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0

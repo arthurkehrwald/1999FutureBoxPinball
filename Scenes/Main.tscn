@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/PlayfieldKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
@@ -6,10 +6,9 @@
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TestUtilities/Scripts/LocalPosLabel.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/TrackingSoundFX.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/StereoVideoPlayer.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/MusicPlayers.tscn" type="PackedScene" id=34]
-[ext_resource path="res://HUD/Videos/game_over_overlay.ogv" type="VideoStream" id=44]
-[ext_resource path="res://Scripts/VideoPlayer.gd" type="Script" id=46]
 [ext_resource path="res://Scenes/ScreenCenter.tscn" type="PackedScene" id=54]
 [ext_resource path="res://Scenes/TrackedHeadPoseUdp.tscn" type="PackedScene" id=55]
 
@@ -89,16 +88,7 @@ material/0 = SubResource( 2 )
 autoplay = "Cage_Rotation"
 anims/Cage_Rotation = SubResource( 3 )
 
-[node name="VideoPlayer" type="VideoPlayer" parent="."]
-pause_mode = 2
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-stream = ExtResource( 44 )
-script = ExtResource( 46 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="StereoVideoPlayer" parent="." instance=ExtResource( 7 )]
 
 [node name="PlayfieldKickstart" parent="." instance=ExtResource( 1 )]
 

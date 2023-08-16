@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scenes/InterlacedStereoCanvas.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/StereoCanvas.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Materials/Stereo.shader" type="Shader" id=3]
 
@@ -92,7 +92,7 @@ __meta__ = {
 }
 
 [node name="Left" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1024, 1280 )
+size = Vector2( 1024, 1200 )
 handle_input_locally = false
 render_target_update_mode = 3
 gui_disable_input = true
@@ -103,7 +103,7 @@ frustum_offset = Vector2( 0.04536, 0 )
 zoom = 0.172
 
 [node name="Right" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1024, 1280 )
+size = Vector2( 1024, 1200 )
 handle_input_locally = false
 render_target_update_mode = 3
 gui_disable_input = true
@@ -114,7 +114,8 @@ current = true
 frustum_offset = Vector2( -0.04536, 0 )
 zoom = 0.172
 
-[node name="InterlacedStereoCanvas" parent="." instance=ExtResource( 1 )]
+[node name="StereoCanvas" parent="." instance=ExtResource( 1 )]
 material = SubResource( 2 )
+mode = 1
 left_viewport_path = NodePath("../ViewportContainer/Left")
 right_viewport_path = NodePath("../ViewportContainer/Right")

@@ -216,6 +216,11 @@ func on_PlaybackManager_finished(playback_manager):
 	get_tree().paused = false
 
 
+func _process(delta):
+	if Input.is_action_just_pressed("start"):
+		if GameState.current_state is GameState.PregameState and current_playback_manager:
+			current_playback_manager.request_stop()
+
 func _input(event):
 	if event.is_action_pressed("start"):
 		if GameState.current_state is GameState.PregameState and current_playback_manager:
