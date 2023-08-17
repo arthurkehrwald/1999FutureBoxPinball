@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/StereoCanvas.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/OffAxisCamera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Materials/Stereo.shader" type="Shader" id=3]
+[ext_resource path="res://Scenes/VideoPlayer.tscn" type="PackedScene" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Spatial
@@ -69,10 +70,11 @@ func update_cam_zoom():
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/mode = 0
+shader_param/show_overlay = true
 shader_param/is_enabled = true
 shader_param/swap = false
 
-[node name="StereoCamera" type="Spatial"]
+[node name="StereoCompositor" type="Spatial"]
 transform = Transform( 0.517241, 0, 0, 0, 0.5427, 0.0603309, 0, -0.0570401, 0.574011, 0, 0, 0 )
 script = SubResource( 1 )
 __meta__ = {
@@ -80,8 +82,8 @@ __meta__ = {
 }
 zoom = 0.063
 stereo_offset = 0.2
-left_cam_path = NodePath("ViewportContainer/Left/OffAxisCamera")
-right_cam_path = NodePath("ViewportContainer/Right/OffAxisCamera")
+left_cam_path = NodePath("../StereoCompositor/ViewportContainer/Left/OffAxisCamera")
+right_cam_path = NodePath("../StereoCompositor/ViewportContainer/Right/OffAxisCamera")
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 anchor_right = 1.0
@@ -114,8 +116,19 @@ current = true
 frustum_offset = Vector2( -0.04536, 0 )
 zoom = 0.172
 
+[node name="Video" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1024, 1200 )
+handle_input_locally = false
+hdr = false
+usage = 0
+render_target_update_mode = 3
+
+[node name="VideoPlayer" parent="ViewportContainer/Video" instance=ExtResource( 4 )]
+
 [node name="StereoCanvas" parent="." instance=ExtResource( 1 )]
 material = SubResource( 2 )
 mode = 1
-left_viewport_path = NodePath("../ViewportContainer/Left")
-right_viewport_path = NodePath("../ViewportContainer/Right")
+left_viewport_path = NodePath("../../StereoCompositor/ViewportContainer/Left")
+right_viewport_path = NodePath("../../StereoCompositor/ViewportContainer/Right")
+video_viewport_path = NodePath("../../StereoCompositor/ViewportContainer/Video")
+video_player_path = NodePath("../../StereoCompositor/ViewportContainer/Video/VideoPlayer")

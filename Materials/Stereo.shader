@@ -3,43 +3,65 @@ shader_type canvas_item;
 uniform int mode = 0;
 uniform sampler2D left_camera;
 uniform sampler2D right_camera;
+uniform sampler2D overlay;
+uniform bool show_overlay = true;
 uniform bool is_enabled = true;
 uniform bool swap = false;
 
+void calcUvAndEye(vec2 screen_uv, vec4 frag_coord, out vec2 uv, out bool isLeft)
+{
+	if (mode == 0) // Interlaced
+	{
+		uv = screen_uv;
+		isLeft = mod(floor(frag_coord.x), 2.0) < 0.5;
+	}
+	else if (mode == 1) // Over Under
+	{
+		if (screen_uv.y < 0.5)
+		{
+			uv = screen_uv * vec2(1, 2);
+			isLeft = true;
+		}
+		else
+		{
+			uv = (screen_uv - vec2(0, 0.5)) * vec2(1, 2);
+			isLeft = false;
+		}
+	}
+	else if (mode == 2) // Over Under
+	{
+		if (screen_uv.x < 0.5)
+		{
+			uv = screen_uv * vec2(2, 1);
+			isLeft = true;
+		}
+		else
+		{
+			uv = (screen_uv - vec2(0.5, 0)) * vec2(2, 1);
+			isLeft = false;
+		}
+	}
+}
+
 void fragment()
 {
-	float pixelX = floor(FRAGCOORD.x);
 	if (is_enabled)
 	{
-		if (mode == 0) // Interlaced
+		vec2 uv;
+		bool is_left;
+		calcUvAndEye(SCREEN_UV, FRAGCOORD, uv, is_left);
+		if (show_overlay)
 		{
-			vec4 leftCol = texture(left_camera, SCREEN_UV);
-			vec4 rightCol = texture(right_camera, SCREEN_UV);
-			COLOR = mix(rightCol, leftCol, mod(pixelX, 2.0));
+			COLOR = texture(overlay, uv);
 		}
-		else if (mode == 1) // Over Under
+		else
 		{
-			if (SCREEN_UV.y < 0.5)
+			if (is_left)
 			{
-				vec2 uv = SCREEN_UV * vec2(1, 2);
 				COLOR = texture(left_camera, uv);
 			}
 			else
 			{
-				vec2 uv = (SCREEN_UV - vec2(0, 0.5)) * vec2(1, 2);
-				COLOR = texture(right_camera, uv);
-			}
-		}
-		else if (mode == 2) // Over Under
-		{
-			if (SCREEN_UV.x < 0.5)
-			{
-				vec2 uv = SCREEN_UV * vec2(2, 1);
-				COLOR = texture(left_camera, uv);
-			}
-			else
-			{
-				vec2 uv = (SCREEN_UV - vec2(0.5, 0)) * vec2(2, 1);
 				COLOR = texture(right_camera, uv);
 			}
 		}

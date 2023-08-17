@@ -1,12 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/PlayfieldKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/StereoCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/StereoCompositor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TestUtilities/Scripts/LocalPosLabel.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/TrackingSoundFX.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/StereoVideoPlayer.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/MusicPlayers.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Scenes/ScreenCenter.tscn" type="PackedScene" id=54]
@@ -53,7 +52,7 @@ update_scale = false
 
 [node name="CameraParent" type="Spatial" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam"]
 
-[node name="StereoCamera" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent" instance=ExtResource( 3 )]
+[node name="StereoCompositor" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent" instance=ExtResource( 3 )]
 
 [node name="Millimeters" type="Spatial" parent="ScreenCenter"]
 transform = Transform( 0.011, 0, 0, 0, 0.011, -4.65661e-10, 0, 4.65661e-10, 0.011, 0, 0, 0 )
@@ -87,8 +86,6 @@ material/0 = SubResource( 2 )
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"
 anims/Cage_Rotation = SubResource( 3 )
-
-[node name="StereoVideoPlayer" parent="." instance=ExtResource( 7 )]
 
 [node name="PlayfieldKickstart" parent="." instance=ExtResource( 1 )]
 
