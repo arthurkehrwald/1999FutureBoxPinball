@@ -81,7 +81,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 zoom = 0.063
-stereo_offset = 0.7
+stereo_offset = 0.2
 left_cam_path = NodePath("../StereoCompositor/ViewportContainer/Left/OffAxisCamera")
 right_cam_path = NodePath("../StereoCompositor/ViewportContainer/Right/OffAxisCamera")
 
