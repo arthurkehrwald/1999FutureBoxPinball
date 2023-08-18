@@ -52,7 +52,14 @@ void fragment()
 		calcUvAndEye(SCREEN_UV, FRAGCOORD, uv, is_left);
 		if (show_overlay)
 		{
-			COLOR = texture(overlay, uv);
+			if (is_left)
+			{
+				COLOR = texture(left_camera, uv) * texture(overlay, uv);
+			}
+			else
+			{
+				COLOR = texture(right_camera, uv) * texture(overlay, uv);
+			}
 		}
 		else
 		{
