@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Materials/Stereo.shader" type="Shader" id=1]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/mode = 0
@@ -10,7 +10,7 @@ shader_param/show_overlay = true
 shader_param/is_enabled = true
 shader_param/swap = false
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=2]
 script/source = "extends CanvasItem
 
 export(int, \"Interlaced\", \"OverUnder\", \"LeftRight\") var mode : int setget _set_mode
@@ -102,10 +102,10 @@ func _on_video_player_visibility_changed() -> void:
 "
 
 [node name="StereoCanvas" type="ColorRect"]
-material = SubResource( 2 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = SubResource( 3 )
+script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

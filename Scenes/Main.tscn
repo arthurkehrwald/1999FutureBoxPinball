@@ -58,7 +58,7 @@ update_scale = false
 transform = Transform( 0.011, 0, 0, 0, 0.011, -4.65661e-10, 0, 4.65661e-10, 0.011, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 50.0006, 4.19617e-05, 0, -4.19617e-05, 50.0006, 25.4545, 1363.64, 118.273 )
+transform = Transform( 50, 0, 0, 0, 50.0006, 4.1008e-05, 0, -4.1008e-05, 50.0006, 25.4545, 1363.64, 118.273 )
 
 [node name="AxisArrows2" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
 transform = Transform( -400, 0, 0, 0, 400, 0, 0, 0, 400, 196.254, 1.52588e-05, 350.813 )

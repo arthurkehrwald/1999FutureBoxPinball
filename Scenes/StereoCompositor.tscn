@@ -81,7 +81,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 zoom = 0.063
-stereo_offset = 0.2
+stereo_offset = 0.7
 left_cam_path = NodePath("../StereoCompositor/ViewportContainer/Left/OffAxisCamera")
 right_cam_path = NodePath("../StereoCompositor/ViewportContainer/Right/OffAxisCamera")
 
@@ -94,7 +94,7 @@ __meta__ = {
 }
 
 [node name="Left" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1024, 1200 )
+size = Vector2( 1024, 1280 )
 handle_input_locally = false
 render_target_update_mode = 3
 gui_disable_input = true
@@ -105,7 +105,7 @@ frustum_offset = Vector2( 0.04536, 0 )
 zoom = 0.172
 
 [node name="Right" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1024, 1200 )
+size = Vector2( 1024, 1280 )
 handle_input_locally = false
 render_target_update_mode = 3
 gui_disable_input = true
@@ -117,7 +117,7 @@ frustum_offset = Vector2( -0.04536, 0 )
 zoom = 0.172
 
 [node name="Video" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1024, 1200 )
+size = Vector2( 1024, 1280 )
 handle_input_locally = false
 hdr = false
 usage = 0
@@ -127,7 +127,7 @@ render_target_update_mode = 3
 
 [node name="StereoCanvas" parent="." instance=ExtResource( 1 )]
 material = SubResource( 2 )
-mode = 1
+mode = 2
 left_viewport_path = NodePath("../../StereoCompositor/ViewportContainer/Left")
 right_viewport_path = NodePath("../../StereoCompositor/ViewportContainer/Right")
 video_viewport_path = NodePath("../../StereoCompositor/ViewportContainer/Video")
