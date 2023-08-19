@@ -1,4 +1,4 @@
-class_name ObjectiveHud
+class_name ObjectiveUi
 extends "res://Scripts/StackedUi.gd"
 
 export var path_to_new_mission_state := NodePath()

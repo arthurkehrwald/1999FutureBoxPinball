@@ -1,6 +1,8 @@
+class_name StackedUi
 extends "res://Scripts/UiState.gd"
 
 var wants_focus := false setget set_wants_focus
+
 
 signal wants_focus_changed(value)
 

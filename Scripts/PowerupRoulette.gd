@@ -25,10 +25,11 @@ func _ready():
 	moon.connect("hit", self, "_on_Moon_hit")
 	spin_state.connect("selected_powerup", self, "_on_SpinState_selected_powerup")
 
-func _on_enter(_params := {}):
+func _on_enter(params := {}):
 	if last_hit_info:
 		start_roulette(last_hit_info.speed, last_hit_info.decay)
 		last_hit_info = null
+	._on_enter(params)
 
 func register_powerup(powerup : Powerup):
 	if powerups.has(powerup):
@@ -53,13 +54,13 @@ func has_at_least_one_viable_powerup() -> bool:
 
 func _on_Moon_hit(speed: float, decay: float):
 	if has_at_least_one_viable_powerup():
+		set_wants_focus(true)
 		if is_active:
 			start_roulette(speed, decay)
 		else:
 			last_hit_info = HitInfo.new()
 			last_hit_info.speed = speed
 			last_hit_info.decay = decay
-			set_wants_focus(true)
 
 func start_roulette(speed: float, decay: float):
 	var params = {

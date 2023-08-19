@@ -11,8 +11,8 @@ var is_active_sub_state_changing := false
 
 export var is_root := false
 
-onready var sub_states: Array = _find_sub_states()
-onready var components: Array = _find_components()
+onready var sub_states: Array = _find_sub_states_in_children(self)
+onready var components: Array = _find_components_in_children(self)
 
 func enter(params := {}):
 	if is_active:
@@ -77,34 +77,26 @@ func set_active_sub_state(value: State, enter_params := {}) -> Dictionary:#
 func _on_ActiveSubState_exited(_params := {}):
 	set_active_sub_state(null)
 
-func _find_sub_states_parent() -> Node:
-	return get_node_or_null("SubStates")
-
-func _find_sub_states() -> Array:
+func _find_sub_states_in_children(parent) -> Array:
 	var ret := []
-	var sub_states_parent := _find_sub_states_parent()
-	if not sub_states_parent:
-		return []
-	for child in sub_states_parent.get_children():
-		# Can't use 'child is State' because of Godot bug: https://github.com/godotengine/godot/issues/21461
-		child = child as State
-		if child:
-			ret.append(child)
+	for child in parent.get_children():
+		if child as State != null:
+			if not child.is_root:
+				ret.append(child)
+		else:
+			ret += _find_sub_states_in_children(child)
 	return ret
 
-func _find_components_parent() -> Node:
-	return get_node_or_null("Components")
 
-func _find_components() -> Array:
+func _find_components_in_children(parent) -> Array:
 	var ret := []
-	var components_parent := _find_components_parent()
-	if not components_parent:
-		return []
-	for child in components_parent.get_children():
-		# Can't use 'child is State' because of Godot bug: https://github.com/godotengine/godot/issues/21461
-		child = child as StateComponent
-		if child:
+	for child in parent.get_children():
+		var comp = child as StateComponent
+		var state = child as State
+		if comp:
 			ret.append(child)
+		elif not state:
+			ret += _find_components_in_children(child)
 	return ret
 
 func _ready():

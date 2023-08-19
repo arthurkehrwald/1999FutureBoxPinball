@@ -49,6 +49,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/BumperCluster.gd"
 }, {
+"base": "Node",
+"class": "CentralUi",
+"language": "GDScript",
+"path": "res://Scripts/CentralUi.gd"
+}, {
+"base": "TextureRect",
+"class": "CentralUiBackground",
+"language": "GDScript",
+"path": "res://Scripts/CentralUiBackground.gd"
+}, {
 "base": "CollisionObject",
 "class": "Damageable",
 "language": "GDScript",
@@ -145,14 +155,14 @@ _global_script_classes=[ {
 "path": "res://Scripts/NoRemoteControlArea.gd"
 }, {
 "base": "Node",
-"class": "ObjectiveHud",
-"language": "GDScript",
-"path": "res://Scripts/ObjectiveHud.gd"
-}, {
-"base": "Node",
 "class": "ObjectiveHudDisplayMission",
 "language": "GDScript",
 "path": "res://Scripts/ObjectiveHudDisplayMission.gd"
+}, {
+"base": "Node",
+"class": "ObjectiveUi",
+"language": "GDScript",
+"path": "res://Scripts/ObjectiveUi.gd"
 }, {
 "base": "Camera",
 "class": "OffAxisCamera",
@@ -220,9 +230,14 @@ _global_script_classes=[ {
 "path": "res://Scripts/Shield.gd"
 }, {
 "base": "Node",
-"class": "StackedUiState",
+"class": "StackedUi",
 "language": "GDScript",
-"path": "res://Scripts/StackedUiState.gd"
+"path": "res://Scripts/StackedUi.gd"
+}, {
+"base": "Node",
+"class": "StackedUiMaster",
+"language": "GDScript",
+"path": "res://Scripts/StackedUiMaster.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -253,6 +268,11 @@ _global_script_classes=[ {
 "class": "VisualShaderNodePerlinNoise3D",
 "language": "GDScript",
 "path": "res://Scripts/PerlinNoise3D.gd"
+}, {
+"base": "Node",
+"class": "WarningUi",
+"language": "GDScript",
+"path": "res://Scripts/WarningUi.gd"
 } ]
 _global_script_class_icons={
 "AnimationComponent": "",
@@ -263,6 +283,8 @@ _global_script_class_icons={
 "BossFog": "",
 "Bumper": "",
 "BumperCluster": "",
+"CentralUi": "",
+"CentralUiBackground": "",
 "Damageable": "",
 "EnemyFleet": "",
 "EnemyFleetMission": "",
@@ -282,8 +304,8 @@ _global_script_class_icons={
 "MusicTrackPlayer": "",
 "NoPinballComponent": "",
 "NoRemoteCotrolArea": "",
-"ObjectiveHud": "",
 "ObjectiveHudDisplayMission": "",
+"ObjectiveUi": "",
 "OffAxisCamera": "",
 "Pinball": "",
 "PlayerShip": "",
@@ -297,13 +319,15 @@ _global_script_class_icons={
 "Roller": "",
 "RotationStabiliser": "",
 "Shield": "",
-"StackedUiState": "",
+"StackedUi": "",
+"StackedUiMaster": "",
 "State": "",
 "StateComponent": "",
 "TransmissionHud": "",
 "TurretPowerup": "",
 "UiState": "",
-"VisualShaderNodePerlinNoise3D": ""
+"VisualShaderNodePerlinNoise3D": "",
+"WarningUi": ""
 }
 
 [application]
