@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scripts/CentralUiBackground.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/ObjectiveUi.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HUD/central_hud_background_red.png" type="Texture" id=3]
+[ext_resource path="res://HUD/central_hud_background.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/CentralUi.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/PowerupRoulette.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/WarningUi.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=8]
+
+[node name="CentralUi" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -220.0
+margin_top = -153.0
+margin_right = 220.0
+margin_bottom = 126.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+is_root = true
+path_to_glitch_overlay = NodePath("GlitchOverlay")
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -289.0
+margin_top = -196.5
+margin_right = 289.0
+margin_bottom = 196.5
+texture = ExtResource( 4 )
+stretch_mode = 4
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+red_bg = ExtResource( 3 )
+
+[node name="PowerupRoulette" parent="." instance=ExtResource( 6 )]
+is_root = false
+
+[node name="WarningUi" parent="." instance=ExtResource( 7 )]
+
+[node name="ObjectiveUi" parent="." instance=ExtResource( 2 )]
+is_root = false
+
+[node name="GlitchOverlay" parent="." instance=ExtResource( 8 )]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[editable path="GlitchOverlay"]

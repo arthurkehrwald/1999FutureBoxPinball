@@ -14,7 +14,6 @@ onready var trail = get_node("PathFollow/Spatial/LoopingLouieTrailFX")
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.player_ship == null:
 		push_warning("[LoopingLouie] Can't find player! Will not contribute to "
 				+ "coolness.")
@@ -29,11 +28,6 @@ func _process(delta):
 		land()
 	else:
 		path_follow.set_offset(path_follow.get_offset() + SPEED * delta)
-
-
-func on_GameState_changed(new_state, is_debug_skip):
-	if is_debug_skip or new_state == GameState.PREGAME_STATE:
-		land()
 
 
 func start_flying():

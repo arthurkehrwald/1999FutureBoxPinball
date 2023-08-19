@@ -1,0 +1,320 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/ObjectiveHudDisplayMission.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/ObjectiveUi.gd" type="Script" id=3]
+[ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scenes/UiState.tscn" type="PackedScene" id=5]
+[ext_resource path="res://HUD/objective_checkbox.png" type="Texture" id=6]
+[ext_resource path="res://HUD/objective_checkmark.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/AnimationComponent.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/AnimationExitComponent.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/CenterPivot.gd" type="Script" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 0
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "animation"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../UiNodes/MessageLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 2, 2.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("../../UiNodes/MessageLabel:custom_fonts/font:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.162931, -1.18831, 45, -0.0809454, 42.8999, 0.0359126, 1.9277, 45, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 2 )
+}
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "animation"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../UiNodes/HBoxContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../../UiNodes/HBoxContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -50, 75 ), Vector2( 0, 75 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "animation"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../UiNodes/MessageLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 2, 2.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("../../UiNodes/MessageLabel:custom_fonts/font:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.162931, -1.18831, 45, -0.0809454, 42.8999, 0.0359126, 1.9277, 45, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 2 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../UiNodes/MessageLabel:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "animation"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../UiNodes/MessageLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 2, 2.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("../../UiNodes/MessageLabel:custom_fonts/font:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.162931, -1.18831, 45, -0.0809454, 42.8999, 0.0359126, 1.9277, 45, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 2 )
+}
+
+[node name="ObjectiveUi" instance=ExtResource( 5 )]
+script = ExtResource( 3 )
+is_root = true
+path_to_new_mission_state = NodePath("SubStates/Intro")
+path_to_mission_display_state = NodePath("SubStates/Display")
+path_to_mission_complete_state = NodePath("SubStates/ObjectiveCompleted")
+path_to_mission_failed_state = NodePath("SubStates/ObjectiveFailed")
+
+[node name="HeadingLabel" type="Label" parent="UiNodes" index="0"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -74.0
+margin_right = 74.0
+margin_bottom = 49.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "Objective"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Intro" parent="SubStates" index="0" instance=ExtResource( 5 )]
+
+[node name="MessageLabel" type="Label" parent="SubStates/Intro/UiNodes" index="0"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+margin_top = 75.0
+rect_rotation = -360.0
+rect_pivot_offset = Vector2( 540, 0.5 )
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "New Objective"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterPivot" type="Node" parent="SubStates/Intro/UiNodes/MessageLabel" index="0"]
+script = ExtResource( 10 )
+
+[node name="AnimationExitComponent" type="Node" parent="SubStates/Intro/Components" index="0"]
+script = ExtResource( 9 )
+path_to_animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubStates/Intro/Components/AnimationExitComponent" index="0"]
+anims/animation = SubResource( 3 )
+
+[node name="Display" parent="SubStates" index="1" instance=ExtResource( 5 )]
+script = ExtResource( 2 )
+path_to_checkbox = NodePath("UiNodes/HBoxContainer/CheckBox")
+path_to_objective_label = NodePath("UiNodes/HBoxContainer/MarginContainer/RichTextLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubStates/Display/UiNodes" index="0"]
+anchor_right = 1.0
+margin_top = 75.0
+margin_bottom = 136.0
+size_flags_horizontal = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="SubStates/Display/UiNodes/HBoxContainer" index="0"]
+margin_right = 62.0
+margin_bottom = 61.0
+size_flags_vertical = 0
+custom_icons/checked = ExtResource( 7 )
+custom_icons/unchecked = ExtResource( 6 )
+
+[node name="MarginContainer" type="MarginContainer" parent="SubStates/Display/UiNodes/HBoxContainer" index="1"]
+margin_left = 66.0
+margin_right = 1080.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_constants/margin_top = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubStates/Display/UiNodes/HBoxContainer/MarginContainer" index="0"]
+margin_top = 6.0
+margin_right = 1014.0
+margin_bottom = 56.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_fonts/normal_font = SubResource( 4 )
+text = "Sample Text"
+fit_content_height = true
+
+[node name="AnimationComponent" type="Node" parent="SubStates/Display/Components" index="0"]
+script = ExtResource( 8 )
+path_to_animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubStates/Display/Components/AnimationComponent" index="0"]
+anims/animation = SubResource( 5 )
+
+[node name="ObjectiveCompleted" parent="SubStates" index="2" instance=ExtResource( 5 )]
+
+[node name="MessageLabel" type="Label" parent="SubStates/ObjectiveCompleted/UiNodes" index="0"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+margin_top = 75.0
+rect_rotation = 360.0
+rect_pivot_offset = Vector2( 540, 0.5 )
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "Complete!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterPivot" type="Node" parent="SubStates/ObjectiveCompleted/UiNodes/MessageLabel" index="0"]
+script = ExtResource( 10 )
+
+[node name="AnimationExitComponent" type="Node" parent="SubStates/ObjectiveCompleted/Components" index="0"]
+script = ExtResource( 9 )
+path_to_animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubStates/ObjectiveCompleted/Components/AnimationExitComponent" index="0"]
+anims/animation = SubResource( 6 )
+
+[node name="ObjectiveFailed" parent="SubStates" index="3" instance=ExtResource( 5 )]
+
+[node name="MessageLabel" type="Label" parent="SubStates/ObjectiveFailed/UiNodes" index="0"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+margin_top = 75.0
+rect_pivot_offset = Vector2( 540, 0.5 )
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "Failed!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterPivot" type="Node" parent="SubStates/ObjectiveFailed/UiNodes/MessageLabel" index="0"]
+script = ExtResource( 10 )
+
+[node name="AnimationExitComponent" type="Node" parent="SubStates/ObjectiveFailed/Components" index="0"]
+script = ExtResource( 9 )
+path_to_animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubStates/ObjectiveFailed/Components/AnimationExitComponent" index="0"]
+anims/animation = SubResource( 7 )
+
+[node name="ObjectiveHUD" type="Control" parent="." index="2"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -289.0
+margin_top = -199.0
+margin_right = 289.0
+margin_bottom = 199.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[editable path="SubStates/Intro"]
+
+[editable path="SubStates/Display"]
+
+[editable path="SubStates/ObjectiveCompleted"]
+
+[editable path="SubStates/ObjectiveFailed"]

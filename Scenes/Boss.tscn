@@ -14,19 +14,6 @@ script = ExtResource( 1 )
 PINBALL_DIRECT_HIT_BASE_DAMAGE = 12.0
 MONEY_YIELD_PER_DAMAGE = 2.0
 BOMBS_EXPLODE_ON_IMPACT = true
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 4 )
@@ -38,19 +25,6 @@ monitorable = true
 collision_mask = 1
 SECONDS_UNTIL_FIRST_SHOT = 0.0
 IS_STUNNABLE = true
-IS_SHOOTING_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
 
 [node name="BossBombGun2" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 0.898794, -0.438371, 0, 0.438371, 0.898794, 1.15, 0.9, -1.25 )
@@ -58,19 +32,6 @@ monitorable = true
 collision_mask = 1
 SECONDS_UNTIL_FIRST_SHOT = 10.0
 IS_STUNNABLE = true
-IS_SHOOTING_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

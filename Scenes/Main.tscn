@@ -6,6 +6,8 @@
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TestUtilities/Scripts/LocalPosLabel.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/TrackingSoundFX.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/FullscreenVideoPlayer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/GameState.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/MusicPlayers.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Scenes/ScreenCenter.tscn" type="PackedScene" id=54]
@@ -20,6 +22,9 @@ albedo_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 [sub_resource type="Animation" id=3]
 length = 5.0
 loop = true
+
+[sub_resource type="ViewportTexture" id=4]
+viewport_path = NodePath("Viewport")
 
 [node name="Main" type="Spatial"]
 
@@ -89,4 +94,35 @@ anims/Cage_Rotation = SubResource( 3 )
 
 [node name="PlayfieldKickstart" parent="." instance=ExtResource( 1 )]
 
+[node name="CentralHUD3D" parent="PlayfieldKickstart/Playfield_Blockout_Godot_03/Center" index="17"]
+texture = SubResource( 4 )
+
+[node name="GameState" parent="." instance=ExtResource( 8 )]
+path_to_player_ship = NodePath("../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/PlayerShip")
+
+[node name="Pregame" parent="GameState/SubStates" index="0"]
+path_to_player_ship = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/PlayerShip")
+path_to_video_player = NodePath("../../../FullscreenVideoPlayer")
+path_to_transmission_hud = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/TransmissionHUD3D/Viewport/TransmissionHUD")
+
+[node name="EnemyFleetMission" parent="GameState/SubStates/Missions/SubStates" index="0"]
+path_to_enemy_fleet = NodePath("../../../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/EnemyFleet")
+
+[node name="Bossfight" parent="GameState/SubStates" index="2"]
+path_to_boss = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/BossSetup/Boss")
+
+[node name="GameOver" parent="GameState/SubStates" index="3"]
+path_to_player_ship = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/PlayerShip")
+path_to_video_player = NodePath("../../../FullscreenVideoPlayer")
+
 [editable path="ScreenCenter/HeadTrackerSpaceUdp/TrackedHeadPoseUdp"]
+
+[editable path="PlayfieldKickstart"]
+
+[editable path="PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/TransmissionHUD3D"]
+
+[editable path="PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/BossSetup"]
+
+[editable path="GameState"]
+
+[editable path="GameState/SubStates/Missions"]

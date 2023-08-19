@@ -17,19 +17,6 @@ export var EXPLOSION_DISTANCE_RELEVANCE = 0.5
 export var MONEY_YIELD_PER_DAMAGE = 1.0
 export var MONEY_TEXT_HEIGHT = 0.5
 export var BOMBS_EXPLODE_ON_IMPACT = false
-export var IS_VULNERABLE_PER_STAGE = {
-	"0-Testing": true,
-	"1-Pregame": false,
-	"2-Exposition": true,
-	"3-EnemyFleet": true,
-	"4-BossAppears": true,
-	"5-Missiles": true,
-	"6-Trex": true,
-	"7-BlackHole": true,
-	"8-Eclipse": true,
-	"9-Victory": false,
-	"10-Defeat": false
-}
 
 var is_vulnerable = true setget set_is_vulnerable
 var dynamic_regen_per_sec = 0.0
@@ -39,7 +26,6 @@ onready var health = MAX_HEALTH setget set_health
 
 func _ready():
 	DIRECT_HIT_SPEED_RELEVANCE = clamp(DIRECT_HIT_SPEED_RELEVANCE, 0, 1)
-	GameState.connect("state_changed", self, "on_GameState_changed")
 	if MONEY_YIELD_PER_DAMAGE != 0 and Globals.player_ship == null:
 		push_warning("[" + name + "] can't find player ship!"
 				+ " Damaging it will not yield money.")
@@ -79,12 +65,6 @@ func take_damage(damage):
 			Globals.player_ship.set_money(Globals.player_ship.money + money_yield)
 			var money_pos = get_global_transform().origin + Vector3.UP * MONEY_TEXT_HEIGHT
 			PoolManager.request(PoolManager.MONEY_TEXT, money_pos)
-
-
-func on_GameState_changed(new_state, is_debug_skip):
-	set_is_vulnerable(IS_VULNERABLE_PER_STAGE[new_state.NAME])
-	if new_state == GameState.PREGAME_STATE or is_debug_skip:
-		set_health(MAX_HEALTH)
 
 
 func calc_roller_damage(var base_damage, var normalized_projectile_speed):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Meshes/boss.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Particles/white-smoke-transparent-background-png-6.png" type="Texture" id=2]
@@ -221,52 +221,6 @@ hue_variation_random = 0.6
 
 [sub_resource type="QuadMesh" id=33]
 
-[sub_resource type="SphereMesh" id=34]
-
-[sub_resource type="Gradient" id=35]
-offsets = PoolRealArray( 0.363874, 1 )
-colors = PoolColorArray( 0.649414, 0, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=36]
-gradient = SubResource( 35 )
-
-[sub_resource type="SpatialMaterial" id=37]
-flags_transparent = true
-flags_use_shadow_to_opacity = true
-params_cull_mode = 1
-params_grow = true
-params_grow_amount = 0.022
-albedo_color = Color( 1, 0, 0.984314, 1 )
-albedo_texture = SubResource( 36 )
-emission_enabled = true
-emission = Color( 0.972549, 0, 0.984314, 1 )
-emission_energy = 0.12
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SpatialMaterial" id=38]
-next_pass = SubResource( 37 )
-params_grow = true
-params_grow_amount = -0.1
-albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="SphereMesh" id=39]
-
-[sub_resource type="SpatialMaterial" id=40]
-params_blend_mode = 1
-params_cull_mode = 1
-params_grow = true
-params_grow_amount = 0.02
-emission_enabled = true
-emission = Color( 0.54902, 0, 0.486275, 1 )
-emission_energy = 3.9
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SpatialMaterial" id=41]
-next_pass = SubResource( 40 )
-albedo_color = Color( 0, 0, 0, 1 )
-
 [sub_resource type="SphereMesh" id=42]
 
 [sub_resource type="SpatialMaterial" id=43]
@@ -288,7 +242,7 @@ resource_name = "kack"
 length = 100.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance3:material/0:uv1_offset")
+tracks/0/path = NodePath("Orb:material/0:uv1_offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -300,9 +254,9 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 1, 1, 0 ) ]
 }
 
-[node name="Fog" type="StaticBody"]
-collision_mask = 0
+[node name="Fog" type="Spatial"]
 script = ExtResource( 9 )
+path_to_mesh = NodePath("Orb")
 
 [node name="boss" type="MeshInstance" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.00592e-09, 0.23725, 0.0230129 )
@@ -380,19 +334,7 @@ lifetime = 3.0
 process_material = SubResource( 32 )
 draw_pass_1 = SubResource( 33 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( -0.0579558, 2.17735, 0.841808, 1.60271, -0.575132, 1.59793, 1.69729, 0.617433, -1.48014, 0, 0, 0 )
-visible = false
-mesh = SubResource( 34 )
-material/0 = SubResource( 38 )
-
-[node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( -2.06796, 0, -1.80787e-07, 0, 2.06796, 0, 1.80787e-07, 0, -2.06796, 7.68064e-10, 0.439671, 0.0206457 )
-visible = false
-mesh = SubResource( 39 )
-material/0 = SubResource( 41 )
-
-[node name="MeshInstance3" type="MeshInstance" parent="."]
+[node name="Orb" type="MeshInstance" parent="."]
 transform = Transform( -0.0157724, -4.2088e-08, 2.06794, -2.06794, 1.07598e-08, -0.0157724, -1.04385e-08, -2.068, -4.21689e-08, 0, 0.44, 0.021 )
 mesh = SubResource( 42 )
 material/0 = SubResource( 43 )

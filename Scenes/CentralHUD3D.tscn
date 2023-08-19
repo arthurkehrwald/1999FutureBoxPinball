@@ -1,13 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/ViewportTextureSetter.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/PowerupRoulette.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/CentralHudBackground.gd" type="Script" id=3]
-[ext_resource path="res://HUD/central_hud_background.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/ObjectiveHUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/PostGameHUD.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/GlitchOverlay.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/WarningHUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/CentralUi.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Materials/Sprite3D.tres" type="Material" id=9]
 
 [node name="CentralHUD3D" type="Sprite3D"]
@@ -23,80 +17,10 @@ transparent_bg = true
 disable_3d = true
 render_target_v_flip = true
 
-[node name="Background" type="TextureRect" parent="Viewport"]
-anchor_left = 0.088
-anchor_top = 0.06
-anchor_right = 0.139
-anchor_bottom = 0.065
-margin_right = 578.0
-margin_bottom = 393.0
-texture = ExtResource( 4 )
-script = ExtResource( 3 )
+[node name="CentralUi" parent="Viewport" instance=ExtResource( 2 )]
 
-[node name="PowerupRoulette" parent="Viewport" instance=ExtResource( 2 )]
-visible = false
-POWERUP_ODDS_PER_STAGE = {
-"0-Testing": {
-"Remote": 0.0,
-"Turret": 1.0
-},
-"1-Pregame": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"10-Defeat": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"2-Exposition": {
-"Remote": 0.0,
-"Turret": 0.0
-},
-"3-EnemyFleet": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"4-BossAppears": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"5-Missiles": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"6-Trex": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"7-BlackHole": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"8-Eclipse": {
-"Remote": 1.0,
-"Turret": 1.0
-},
-"9-Victory": {
-"Remote": 1.0,
-"Turret": 1.0
-}
-}
-POWERUP_DURATIONS = {
-"Remote": 10.0,
-"Repair": 3.0,
-"Turret": 5.0
-}
+[node name="GlitchOverlay" parent="Viewport/CentralUi" index="4"]
+auto_glitch_rate = 100.0
+effect_strength = 1.891
 
-[node name="ObjectiveHUD" parent="Viewport" instance=ExtResource( 5 )]
-
-[node name="PostGameHud" parent="Viewport" instance=ExtResource( 6 )]
-visible = false
-margin_left = 43.4249
-margin_top = 10.0211
-margin_right = -458.575
-margin_bottom = -439.979
-
-[node name="WarningHUD" parent="Viewport" instance=ExtResource( 8 )]
-visible = false
-
-[node name="GlitchOverlay" parent="Viewport" instance=ExtResource( 7 )]
+[editable path="Viewport/CentralUi"]

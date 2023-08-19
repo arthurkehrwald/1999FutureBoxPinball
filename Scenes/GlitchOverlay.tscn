@@ -1,64 +1,40 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/GlitchShader.gd" type="Script" id=1]
-[ext_resource path="res://Materials/GlitchShader.tres" type="Material" id=2]
+[ext_resource path="res://Textures/shader_texture_02.jpg" type="Texture" id=2]
 [ext_resource path="res://Textures/shader_texture_01.png" type="Texture" id=3]
 [ext_resource path="res://Textures/checkerboard.png" type="Texture" id=4]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-render_mode unshaded;
-
-uniform sampler2D screen: hint_albedo;
-uniform float brightness: hint_range(0,.1);
-uniform float size: hint_range(0.1, 5.0);
-uniform float offset: hint_range(-1.0, 2.0);
-
-void fragment()
-{
-	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
-	COLOR.rgb += texture(screen, SCREEN_UV * size + offset).rgb * brightness;
-}"
-custom_defines = ""
+[ext_resource path="res://Materials/glitch_overlay.shader" type="Shader" id=5]
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/brightness = 0.1
-shader_param/size = 0.428
-shader_param/offset = 0.143
-shader_param/screen = ExtResource( 3 )
+shader = ExtResource( 5 )
+shader_param/dispOffset = 0.96
+shader_param/dispAmt = 0.202
+shader_param/abberationAmt = Vector2( 0.2, 0.2 )
+shader_param/dispSize = Vector2( 0.5, 0.5 )
+shader_param/maxAlpha = 1.0
+shader_param/scanlineSize = 0.181
+shader_param/scanlineIntensity = 0.454
+shader_param/displace = ExtResource( 2 )
+shader_param/scanlines = ExtResource( 3 )
 
 [sub_resource type="Animation" id=3]
-resource_name = "glitch_idle"
-length = 10.0
+length = 30.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("BackBufferCopy/lines:material:shader_param/offset")
+tracks/0/path = NodePath("displace:material:shader_param/dispOffset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 10 ),
+"times": PoolRealArray( 0, 30 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.55 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("displace:material:shader_param/dispOffset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 10 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.4 ]
+"values": [ 0.0, 1.0 ]
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "super_glitch"
 tracks/0/type = "value"
 tracks/0/path = NodePath("displace:material:shader_param/dispAmt")
 tracks/0/interp = 1
@@ -66,10 +42,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.001, 0.009, 0.003 ]
+"values": [ 1.0, 0.3 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("displace:material:shader_param/dispSize")
@@ -78,34 +54,22 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.245, 0.4, 0.1 ]
+"values": [ Vector2( 1, 1 ), Vector2( 3, 3 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("displace:material:shader_param/abberationAmtX")
+tracks/2/path = NodePath("displace:material:shader_param/abberationAmt")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.002, 0.02, 0.002 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("displace:material:shader_param/abberationAmtY")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.002, 0.02, 0.002 ]
+"values": [ Vector2( 0.3, 0.3 ), Vector2( 0.2, 0.2 ) ]
 }
 
 [node name="GlitchOverlay" type="Control"]
@@ -116,39 +80,23 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="TestImg" type="Sprite" parent="."]
 visible = false
-position = Vector2( 12.6539, 10.4614 )
-scale = Vector2( 2.36739, 1.63641 )
 texture = ExtResource( 4 )
 centered = false
 
 [node name="displace" type="ColorRect" parent="."]
-material = ExtResource( 2 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
-copy_mode = 2
-rect = Rect2( 0, 0, 1080, 1920 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="lines" type="ColorRect" parent="BackBufferCopy"]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 2.11896
+margin_top = -1.05945
+margin_right = 2.1189
+margin_bottom = -1.05945
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

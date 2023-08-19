@@ -13,11 +13,13 @@ var is_active := false
 var timer : SceneTreeTimer = null
 
 func _ready():
-	Globals.powerup_roulette.register_powerup(self)
+	if Globals.powerup_roulette:
+		Globals.powerup_roulette.register_powerup(self)
 
 
 func _exit_tree():
-	Globals.powerup_roulette.unregister_powerup(self)
+	if Globals.powerup_roulette:
+		Globals.powerup_roulette.unregister_powerup(self)
 
 
 func activate():

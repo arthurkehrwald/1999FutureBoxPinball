@@ -15,7 +15,6 @@ func _ready():
 	add_to_group("projectiles")
 	hitreg_area.connect("body_entered", self, "on_body_entered")
 	hitreg_area.connect("area_entered", self, "on_area_entered")
-	GameState.connect("state_changed", self, "on_GameState_changed")
 
 
 func on_body_entered(body):
@@ -50,11 +49,3 @@ func on_hit_by_projectile(_projectile):
 func on_entered_laser_area():
 	PoolManager.request(PoolManager.PROJECTILE_LASERED, get_global_transform().origin)
 	queue_free()
-
-
-func on_GameState_changed(new_state, is_debug_skip):
-	if is_debug_skip or new_state == GameState.PREGAME_STATE:
-		PoolManager.request(PoolManager.PROJECTILE_DISAPPEAR, get_global_transform().origin)
-		queue_free()
-	else:
-		omni_light.set_visible(new_state == GameState.ECLIPSE_STATE)

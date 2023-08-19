@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/BossFight.gd" type="Script" id=1]
+[ext_resource path="res://Audio/Music/track_01.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Scenes/MusicComponent.tscn" type="PackedScene" id=3]
+
+[node name="BossFight" type="Node"]
+script = ExtResource( 1 )
+objective = "Defeat the Monster Truck"
+
+[node name="Components" type="Node" parent="."]
+
+[node name="MusicComponent" parent="Components" instance=ExtResource( 3 )]
+stream = ExtResource( 2 )

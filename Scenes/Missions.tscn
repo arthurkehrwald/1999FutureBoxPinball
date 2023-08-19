@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/EnemyFleetMission.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/MissionMasterState.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/MusicComponent.gd" type="Script" id=4]
+[ext_resource path="res://Audio/Music/track_01.ogg" type="AudioStream" id=5]
+
+[node name="Missions" type="Node"]
+script = ExtResource( 3 )
+mission_count = 1
+path_to_initial_mission = NodePath("SubStates/EnemyFleetMission")
+
+[node name="SubStates" type="Node" parent="."]
+
+[node name="EnemyFleetMission" type="Node" parent="SubStates"]
+script = ExtResource( 2 )
+objective = "Defeat the Enemy Fleet!"
+
+[node name="Components" type="Node" parent="SubStates/EnemyFleetMission"]
+
+[node name="Music" type="Node" parent="SubStates/EnemyFleetMission/Components"]
+script = ExtResource( 4 )
+stream = ExtResource( 5 )

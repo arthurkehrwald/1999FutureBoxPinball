@@ -19,7 +19,6 @@ func _enter_tree():
 
 func _ready():
 	connect("health_changed", self, "on_health_changed")
-	connect("death", GameState, "handle_event", [GameState.Event.PLAYER_DIED])
 
 
 func set_money(value):
@@ -50,10 +49,3 @@ func on_hit_by_projectile(projectile):
 		projectile.on_hit_player()
 	if projectile.is_in_group("missiles"):
 		projectile.explode()
-
-
-func on_GameState_changed(new_state, is_debug_skip):
-	.on_GameState_changed(new_state, is_debug_skip)
-	if new_state == GameState.PREGAME_STATE or is_debug_skip:
-		set_money(0)
-		set_coolness(0)

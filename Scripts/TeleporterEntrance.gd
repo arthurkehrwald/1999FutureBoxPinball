@@ -10,8 +10,7 @@ func _ready():
 		push_warning("[TeleporterEntrance] can't find any exits. Will not work.")
 		return
 	rng.randomize()
-	#GameState.connect("state_changed", self, "on_GameState_changed")
-	#set_is_active(true)
+	set_is_active(true)
 	connect("body_entered", self, "on_body_entered")
 
 
@@ -30,8 +29,3 @@ func on_body_entered(body):
 	body.set_linear_velocity(Vector3(0, 0, 0))
 	PoolManager.request(PoolManager.STAR_GATE_ENTER, body.get_global_transform().origin)
 	PoolManager.request(PoolManager.STAR_GATE_EXIT, exit.get_global_transform().origin)
-
-
-func on_GameState_changed(new_state, _is_debug_skip):
-	var is_bossfight = new_state > GameState.ENEMY_FLEET_STATE and new_state < GameState.VICTORY_STATE
-	set_is_active(new_state == GameState.TESTING_STATE or is_bossfight)

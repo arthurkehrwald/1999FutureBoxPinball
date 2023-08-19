@@ -3,16 +3,24 @@ extends Spatial
 const BALL_SCENE = preload("res://Scenes/Pinball.tscn")
 
 onready var spawn_delay_timer = get_node("SpawnDelayTimer")
-onready var insert_turret_delay_timer = get_node("InsertTurretDelayTimer")
+var is_active := false setget set_is_active
 
+func set_is_active(value: bool):
+	if value == is_active:
+		return
+	is_active = value
+	if is_active:
+		ensure_one_accessible_ball()
+	else:
+		spawn_delay_timer.stop()
 
 func _enter_tree():
 	Globals.ball_spawn = self
-
+	add_to_group("pinball_spawns")
 
 func _ready():
 	spawn_delay_timer.connect("timeout", self, "spawn_ball")
-	GameState.connect("state_changed", self, "on_GameState_changed")
+	set_is_active(true)
 
 
 func spawn_ball():
@@ -26,21 +34,12 @@ func ensure_one_accessible_ball():
 	if not spawn_delay_timer.is_stopped():
 		return
 	for pinball in get_tree().get_nodes_in_group("pinballs"):
+		pinball = pinball as Pinball
 		if pinball.is_accessible_to_player:
 			return
 	spawn_delay_timer.start()
 
 
 func on_Pinball_became_inaccessible():
-	if GameState.current_state != GameState.PREGAME_STATE:
+	if is_active:
 		ensure_one_accessible_ball()
-
-
-func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.PREGAME_STATE or is_debug_skip:
-		spawn_delay_timer.stop()
-		insert_turret_delay_timer.stop()
-	if new_state != GameState.PREGAME_STATE and is_debug_skip:
-		ensure_one_accessible_ball()
-	if new_state == GameState.EXPOSITION_STATE or new_state == GameState.TESTING_STATE:
-		spawn_delay_timer.start()

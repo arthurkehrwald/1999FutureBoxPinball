@@ -1,8 +1,10 @@
+class_name MoonShop
 extends Spatial
 # The mobile, partially transparent part of the moon:
 #-  If player has enough money, scales up, spins and activates shop roulette when hit
 
 signal unlock_progress_changed(progress)
+signal hit(speed, decay)
 
 enum In {
 	SCALE_ANIM_DONE,
@@ -37,7 +39,6 @@ func _enter_tree():
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
 	if Globals.player_ship != null:
 		Globals.player_ship.connect("money_changed", self, "on_Player_money_changed")
 	else:
@@ -78,8 +79,7 @@ func on_hit_by_projectile(var projectile):
 	if scale_state == ScaleState.SCALING_DOWN or scale_state == ScaleState.SMALL:
 		scale_up()
 	PoolManager.request(PoolManager.MOON_TRIGGERED, get_global_transform().origin)
-	if Globals.powerup_roulette != null:
-		Globals.powerup_roulette.start_spinning(new_spin_speed, SPIN_SPEED_DECAY)
+	emit_signal("hit", new_spin_speed, SPIN_SPEED_DECAY)
 	if MONEY_INCREASE_TO_OPEN > 0:
 		set_is_open(false)
 
@@ -103,18 +103,6 @@ func on_ScaleAnimPlayer_animation_finished(_anim_name):
 			scale_down()
 	elif scale_state == ScaleState.SCALING_DOWN:
 		scale_state = ScaleState.SMALL
-		spinning_mesh.set_visible(false)
-
-
-func on_GameState_changed(new_state, is_debug_skip):
-	if new_state == GameState.TESTING_STATE or new_state == GameState.EXPOSITION_STATE:
-		set_is_open(true)
-	elif is_debug_skip and MONEY_INCREASE_TO_OPEN > 0:
-		set_is_open(false)
-	if new_state == GameState.PREGAME_STATE or is_debug_skip:
-		is_spinning = false
-		scale_state = ScaleState.SMALL
-		scale_anim_player.stop()
 		spinning_mesh.set_visible(false)
 
 

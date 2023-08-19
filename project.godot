@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "AnimationComponent",
+"language": "GDScript",
+"path": "res://Scripts/AnimationComponent.gd"
+}, {
+"base": "Node",
+"class": "AnimationExitComponent",
+"language": "GDScript",
+"path": "res://Scripts/AnimationExitComponent.gd"
+}, {
 "base": "CollisionObject",
 "class": "Boss",
 "language": "GDScript",
@@ -19,20 +29,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/BossBar3D.gd"
 }, {
-"base": "",
-"class": "BossGunIdle",
+"base": "Node",
+"class": "BossFight",
 "language": "GDScript",
-"path": "res://Scenes/Old/BossGunIdle.gd"
+"path": "res://Scripts/BossFight.gd"
 }, {
-"base": "",
-"class": "BossGunShooting",
+"base": "Spatial",
+"class": "BossFog",
 "language": "GDScript",
-"path": "res://Scenes/Old/BossGunShooting.gd"
-}, {
-"base": "",
-"class": "BossGunStunned",
-"language": "GDScript",
-"path": "res://Scenes/Old/BossGunStunned.gd"
+"path": "res://Scripts/BossFog.gd"
 }, {
 "base": "Area",
 "class": "Bumper",
@@ -44,20 +49,60 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/BumperCluster.gd"
 }, {
+"base": "Node",
+"class": "CentralUi",
+"language": "GDScript",
+"path": "res://Scripts/CentralUi.gd"
+}, {
+"base": "TextureRect",
+"class": "CentralUiBackground",
+"language": "GDScript",
+"path": "res://Scripts/CentralUiBackground.gd"
+}, {
 "base": "CollisionObject",
 "class": "Damageable",
 "language": "GDScript",
 "path": "res://Scripts/Damageable.gd"
+}, {
+"base": "Spatial",
+"class": "EnemyFleet",
+"language": "GDScript",
+"path": "res://Scripts/EnemyFleet.gd"
+}, {
+"base": "Node",
+"class": "EnemyFleetMission",
+"language": "GDScript",
+"path": "res://Scripts/EnemyFleetMission.gd"
+}, {
+"base": "Node",
+"class": "ExitComponent",
+"language": "GDScript",
+"path": "res://Scripts/ExitComponent.gd"
 }, {
 "base": "Area",
 "class": "Explosion",
 "language": "GDScript",
 "path": "res://Scripts/Explosion.gd"
 }, {
-"base": "StaticBody",
-"class": "Gate",
+"base": "VideoPlayer",
+"class": "FullscreenVideoPlayer",
 "language": "GDScript",
-"path": "res://Scenes/Old/Gate.gd"
+"path": "res://Scripts/FullscreenVideoPlayer.gd"
+}, {
+"base": "Node",
+"class": "GameOver",
+"language": "GDScript",
+"path": "res://Scripts/GameOver.gd"
+}, {
+"base": "Node",
+"class": "GameState",
+"language": "GDScript",
+"path": "res://Scripts/GameState.gd"
+}, {
+"base": "Control",
+"class": "GlitchOverlay",
+"language": "GDScript",
+"path": "res://Scripts/GlitchShader.gd"
 }, {
 "base": "CollisionObject",
 "class": "HitNotifier",
@@ -69,15 +114,55 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/InvisibleButtonPlunger.gd"
 }, {
-"base": "CollisionObject",
-"class": "MoonGate",
+"base": "Node",
+"class": "Mission",
 "language": "GDScript",
-"path": "res://Scripts/MoonGate.gd"
+"path": "res://Scripts/Mission.gd"
+}, {
+"base": "Node",
+"class": "MissionMasterState",
+"language": "GDScript",
+"path": "res://Scripts/MissionMasterState.gd"
+}, {
+"base": "Spatial",
+"class": "MoonShop",
+"language": "GDScript",
+"path": "res://Scripts/MoonShop.gd"
+}, {
+"base": "Node",
+"class": "MusicComponent",
+"language": "GDScript",
+"path": "res://Scripts/MusicComponent.gd"
+}, {
+"base": "Node",
+"class": "MusicManager",
+"language": "GDScript",
+"path": "res://Scripts/MusicManager.gd"
+}, {
+"base": "AudioStreamPlayer",
+"class": "MusicTrackPlayer",
+"language": "GDScript",
+"path": "res://Scripts/MusicTrackPlayer.gd"
+}, {
+"base": "Node",
+"class": "NoPinballComponent",
+"language": "GDScript",
+"path": "res://Scripts/NoPinballComponent.gd"
 }, {
 "base": "Area",
 "class": "NoRemoteCotrolArea",
 "language": "GDScript",
 "path": "res://Scripts/NoRemoteControlArea.gd"
+}, {
+"base": "Node",
+"class": "ObjectiveHudDisplayMission",
+"language": "GDScript",
+"path": "res://Scripts/ObjectiveHudDisplayMission.gd"
+}, {
+"base": "Node",
+"class": "ObjectiveUi",
+"language": "GDScript",
+"path": "res://Scripts/ObjectiveUi.gd"
 }, {
 "base": "Camera",
 "class": "OffAxisCamera",
@@ -104,7 +189,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Powerup.gd"
 }, {
-"base": "Control",
+"base": "Node",
 "class": "PowerupRoulette",
 "language": "GDScript",
 "path": "res://Scripts/PowerupRoulette.gd"
@@ -113,6 +198,16 @@ _global_script_classes=[ {
 "class": "PowerupRouletteIcon",
 "language": "GDScript",
 "path": "res://Scripts/PowerupRouletteIcon.gd"
+}, {
+"base": "Node",
+"class": "PowerupRouletteSpinState",
+"language": "GDScript",
+"path": "res://Scripts/PowerupRouletteSpinState.gd"
+}, {
+"base": "Node",
+"class": "Pregame",
+"language": "GDScript",
+"path": "res://Scripts/Pregame.gd"
 }, {
 "base": "RigidBody",
 "class": "Projectile",
@@ -134,51 +229,83 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Shield.gd"
 }, {
-"base": "Area",
-"class": "ShopEntrance",
+"base": "Node",
+"class": "StackedUi",
 "language": "GDScript",
-"path": "res://Scripts/ShopEntrance.gd"
+"path": "res://Scripts/StackedUi.gd"
 }, {
-"base": "Area",
-"class": "ShopEntranceV2",
+"base": "Node",
+"class": "StackedUiMaster",
 "language": "GDScript",
-"path": "res://Scripts/ShopEntranceV2.gd"
+"path": "res://Scripts/StackedUiMaster.gd"
 }, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://Scenes/Old/State.gd"
+"path": "res://Scripts/State.gd"
 }, {
 "base": "Node",
-"class": "StateMachine",
+"class": "StateComponent",
 "language": "GDScript",
-"path": "res://Scenes/Old/StateMachine.gd"
+"path": "res://Scripts/StateComponent.gd"
+}, {
+"base": "Control",
+"class": "TransmissionHud",
+"language": "GDScript",
+"path": "res://Scripts/TransmissionHUD.gd"
 }, {
 "base": "Node",
 "class": "TurretPowerup",
 "language": "GDScript",
 "path": "res://Scripts/TurretPowerup.gd"
 }, {
+"base": "Node",
+"class": "UiState",
+"language": "GDScript",
+"path": "res://Scripts/UiState.gd"
+}, {
 "base": "VisualShaderNodeCustom",
 "class": "VisualShaderNodePerlinNoise3D",
 "language": "GDScript",
 "path": "res://Scripts/PerlinNoise3D.gd"
+}, {
+"base": "Node",
+"class": "WarningUi",
+"language": "GDScript",
+"path": "res://Scripts/WarningUi.gd"
 } ]
 _global_script_class_icons={
+"AnimationComponent": "",
+"AnimationExitComponent": "",
 "Boss": "",
 "BossBar3D": "",
-"BossGunIdle": "",
-"BossGunShooting": "",
-"BossGunStunned": "",
+"BossFight": "",
+"BossFog": "",
 "Bumper": "",
 "BumperCluster": "",
+"CentralUi": "",
+"CentralUiBackground": "",
 "Damageable": "",
+"EnemyFleet": "",
+"EnemyFleetMission": "",
+"ExitComponent": "",
 "Explosion": "",
-"Gate": "",
+"FullscreenVideoPlayer": "",
+"GameOver": "",
+"GameState": "",
+"GlitchOverlay": "",
 "HitNotifier": "",
 "InvisibleButtonPlunger": "",
-"MoonGate": "",
+"Mission": "",
+"MissionMasterState": "",
+"MoonShop": "",
+"MusicComponent": "",
+"MusicManager": "",
+"MusicTrackPlayer": "",
+"NoPinballComponent": "",
 "NoRemoteCotrolArea": "",
+"ObjectiveHudDisplayMission": "",
+"ObjectiveUi": "",
 "OffAxisCamera": "",
 "Pinball": "",
 "PlayerShip": "",
@@ -186,16 +313,21 @@ _global_script_class_icons={
 "Powerup": "",
 "PowerupRoulette": "",
 "PowerupRouletteIcon": "",
+"PowerupRouletteSpinState": "",
+"Pregame": "",
 "Projectile": "",
 "Roller": "",
 "RotationStabiliser": "",
 "Shield": "",
-"ShopEntrance": "",
-"ShopEntranceV2": "",
+"StackedUi": "",
+"StackedUiMaster": "",
 "State": "",
-"StateMachine": "",
+"StateComponent": "",
+"TransmissionHud": "",
 "TurretPowerup": "",
-"VisualShaderNodePerlinNoise3D": ""
+"UiState": "",
+"VisualShaderNodePerlinNoise3D": "",
+"WarningUi": ""
 }
 
 [application]
@@ -206,10 +338,12 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameState="*res://Scripts/GameState.gd"
+AutoloadRandomize="*res://Scripts/AutoloadRandomize.gd"
 Announcer="*res://Scripts/Announcer.gd"
 Globals="*res://Scripts/Globals.gd"
 PoolManager="*res://Scripts/PoolManager.gd"
+Utils="*res://Scripts/Utils.gd"
+MissionTracker="*res://Scripts/MissionTracker.gd"
 
 [debug]
 
@@ -224,6 +358,7 @@ window/size/test_width=720
 window/size/test_height=1280
 window/vsync/use_vsync=false
 window/handheld/orientation="portrait"
+window/stretch/aspect="keep"
 
 [input]
 

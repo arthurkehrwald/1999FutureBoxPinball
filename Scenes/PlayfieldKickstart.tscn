@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/PlayfieldBoxKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Import/Playfield_Blockout_Godot_03.tscn" type="PackedScene" id=2]
@@ -80,6 +80,9 @@ _data = {
 "tilts": PoolRealArray( 0, 0 )
 }
 
+[sub_resource type="ViewportTexture" id=11]
+viewport_path = NodePath("Viewport")
+
 [node name="PlayfieldKickstart" type="Spatial"]
 __meta__ = {
 "_edit_lock_": true
@@ -110,19 +113,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.289, 0.35, 5.505 )
 
 [node name="PlayerShip" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0381613, 7.60382 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": false,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": true,
-"3-EnemyFleet": true,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
 
 [node name="WireRamp1-1" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12896, 0.137825, 1.30159 )
@@ -239,6 +229,10 @@ transform = Transform( -1, -1.26883e-14, -3.89414e-07, -1.77636e-14, 1, 0, 3.894
 
 [node name="CentralHUD3D" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 5 )]
 transform = Transform( 0.73, 0, 0, 0, -1.49012e-08, 0.73, 0, -0.73, -1.49012e-08, 0, 0.0619999, 4.084 )
+texture = SubResource( 11 )
+
+[node name="PowerupRoulette" parent="Playfield_Blockout_Godot_03/Center/CentralHUD3D/Viewport/CentralUi" index="1"]
+path_to_moon = NodePath("../../../../MoonShop")
 
 [node name="TransmissionHUD3D" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 6 )]
 transform = Transform( 0.8, 0, 0, 0, -3.72529e-08, 1, 0, -0.8, -4.47035e-08, -4.1, 0.5, 8 )
@@ -257,51 +251,12 @@ transform = Transform( -1, 0, -1.50996e-07, 2.66454e-15, 1, 0, 1.50996e-07, 0, -
 
 [node name="Boss" parent="Playfield_Blockout_Godot_03/Center/BossSetup" index="0"]
 transform = Transform( 1, -2.13163e-14, -4.26326e-14, -1.77636e-15, 0.866025, -0.5, 0, 0.5, 0.866025, 0.00686078, 0.608112, 0.00515318 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
 
 [node name="StraightShield" parent="Playfield_Blockout_Godot_03/Center/BossSetup" index="4"]
 transform = Transform( 1, 7.99361e-15, 9.08041e-43, -7.99361e-15, 1, 0, -9.08041e-43, 0, 1, 0, -5.96046e-08, -1.3 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
 
 [node name="BossMissileGun" parent="Playfield_Blockout_Godot_03/Center/BossSetup" index="5"]
 transform = Transform( 1, 8.88178e-15, -7.10543e-14, -4.44089e-15, 1, 0, 0, 0, 1, -7.45058e-08, 0.204196, -0.396811 )
-IS_SHOOTING_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": false,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
 
 [node name="MultiballShip" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 12 )]
 transform = Transform( -0.627507, 0.526541, -0.573577, 0.642788, 0.766045, -1.49012e-08, 0.439386, -0.368688, -0.819153, 2.56042, 0.448842, -6.0174 )
@@ -339,5 +294,9 @@ __meta__ = {
 [editable path="Playfield_Blockout_Godot_03/Center/WireRamp5"]
 
 [editable path="Playfield_Blockout_Godot_03/Center/WireRamp6"]
+
+[editable path="Playfield_Blockout_Godot_03/Center/CentralHUD3D"]
+
+[editable path="Playfield_Blockout_Godot_03/Center/CentralHUD3D/Viewport/CentralUi"]
 
 [editable path="Playfield_Blockout_Godot_03/Center/BossSetup"]

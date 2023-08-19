@@ -15,14 +15,17 @@ export var MAX_TURN_ANGLE = 45
 export var TURN_SPEED = .5
 export(float) var shot_force := 50.0
 export var SINK_INTO_GROUND_DIST = 1.0
+export var path_to_dotted_line := NodePath()
+export var path_to_muzzle := NodePath()
+export var is_active := false setget set_is_active, get_is_active
 
-var is_active = false setget set_is_active, get_is_active
+var has_is_active_been_set := false
 var ball_to_shoot: RigidBody = null
 var rotation_progress = 0.5 setget set_rotation_progress
 var rotation_direction = RotationDirection.NONE
 
-onready var muzzle = get_node("Muzzle")
-onready var dotted_line = get_node("Muzzle/DottedLine")
+onready var muzzle = get_node(path_to_muzzle) as Spatial
+onready var dotted_line = get_node(path_to_dotted_line) as MeshInstance
 onready var start_transform = get_transform()
 onready var min_transform  = get_transform().rotated(get_transform().basis.y.normalized(),
 		deg2rad(-MAX_TURN_ANGLE))
@@ -37,7 +40,7 @@ func _enter_tree():
 
 
 func _ready():
-	GameState.connect("state_changed", self, "on_GameState_changed")
+	set_is_active(is_active)
 	set_process(false)
 	translation = Vector3(translation.x, min_y, translation.z)
 
@@ -88,24 +91,18 @@ func set_rotation_progress(value):
 	set_transform(Transform(new_rotation, get_transform().origin))
 
 
-func on_GameState_changed(new_state, is_debug_skip):
-	if is_debug_skip or new_state == GameState.PREGAME_STATE:
-		dotted_line.set_visible(false)
-		ball_to_shoot = null
-		set_process(false)
-		var start_rotation = Quat(start_transform.basis.orthonormalized())
-		set_transform(Transform(start_rotation, get_transform().origin))
-
-
 func on_hit_by_projectile(projectile):
 	if projectile is Pinball:
 		insert_ball(projectile)
 
 
 func set_is_active(value : bool):
-	if is_active == value:
+	if has_is_active_been_set and is_active == value:
 		return
-	if (is_active and ball_to_shoot):
+	var was_active := is_active
+	is_active = value
+	has_is_active_been_set = true
+	if (was_active and ball_to_shoot):
 		shoot()
 	$Tween.remove(self, "translation:y")
 	var from_y = min_y if value else max_y
@@ -113,7 +110,8 @@ func set_is_active(value : bool):
 	$Tween.interpolate_property(self, "translation:y",
 		from_y, to_y, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
-	is_active = value
+	if !value:
+		dotted_line.visible = false
 	emit_signal("is_active_changed", is_active)
 
 
