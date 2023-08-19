@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/PlayfieldKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/TrackingSoundFX.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Materials/Stereo.shader" type="Shader" id=7]
 [ext_resource path="res://Scenes/GameState.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Highscore.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/MusicPlayers.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Scenes/ScreenCenter.tscn" type="PackedScene" id=54]
@@ -129,6 +130,8 @@ path_to_boss = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03
 [node name="GameOver" parent="GameState/SubStates" index="3"]
 path_to_player_ship = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/PlayerShip")
 path_to_video_player = NodePath("../../../ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor/ViewportContainer/Video/VideoPlayer")
+
+[node name="Highscore" parent="." instance=ExtResource( 9 )]
 
 [editable path="ScreenCenter/HeadTrackerSpaceUdp/TrackedHeadPoseUdp"]
 
