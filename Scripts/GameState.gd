@@ -7,7 +7,7 @@ export var path_to_missions := NodePath()
 export var path_to_bossfight := NodePath()
 export var path_to_player_ship := NodePath()
 
-onready var pregame := get_node(path_to_pregame) as Pregame
+onready var pregame := get_node(path_to_pregame)
 onready var missions := get_node(path_to_missions) as MissionMasterState
 onready var boss_fight := get_node(path_to_bossfight) as BossFight
 onready var game_over := get_node(path_to_game_over) as GameOver

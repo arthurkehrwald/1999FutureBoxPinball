@@ -5,7 +5,7 @@ export var path_to_player_ship := NodePath()
 onready var player_ship := get_node(path_to_player_ship) as PlayerShip
 
 export var path_to_video_player := NodePath()
-onready var video_player := get_node(path_to_video_player) as FullscreenVideoPlayer
+onready var video_player := get_node(path_to_video_player)
 
 func _on_enter(params := {}):
 	._on_enter(params)

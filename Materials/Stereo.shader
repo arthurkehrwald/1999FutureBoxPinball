@@ -28,7 +28,7 @@ void calcUvAndEye(vec2 screen_uv, vec4 frag_coord, out vec2 uv, out bool isLeft)
 			isLeft = false;
 		}
 	}
-	else if (mode == 2) // Over Under
+	else if (mode == 2) // Left Right
 	{
 		if (screen_uv.x < 0.5)
 		{

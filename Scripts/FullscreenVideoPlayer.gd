@@ -39,7 +39,7 @@ class PlaybackManager extends Node:
 		on_stop_requested()
 	
 	
-	func _play_stream(video_stream : VideoStream):		
+	func _play_stream(video_stream : VideoStream):
 		video_player.stream = video_stream
 		video_player.play()
 	
@@ -222,8 +222,8 @@ func on_PlaybackManager_finished(playback_manager):
 
 func _process(delta):
 	if Input.is_action_just_pressed("start"):
-		if GameState.current_state is GameState.PregameState and current_playback_manager:
-			current_playback_manager.request_stop()
+		if active_playback_manager == pregame_playback_manager:
+			active_playback_manager.request_stop()
 
 func _input(event):
 	if event.is_action_pressed("start"):

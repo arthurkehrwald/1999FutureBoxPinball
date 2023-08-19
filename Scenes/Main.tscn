@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/PlayfieldKickstart.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
@@ -6,12 +6,20 @@
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TestUtilities/Scripts/LocalPosLabel.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/TrackingSoundFX.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/FullscreenVideoPlayer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Materials/Stereo.shader" type="Shader" id=7]
 [ext_resource path="res://Scenes/GameState.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/MusicPlayers.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Scenes/ScreenCenter.tscn" type="PackedScene" id=54]
 [ext_resource path="res://Scenes/TrackedHeadPoseUdp.tscn" type="PackedScene" id=55]
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = ExtResource( 7 )
+shader_param/mode = 2
+shader_param/show_overlay = true
+shader_param/is_enabled = true
+shader_param/swap = false
 
 [sub_resource type="QuadMesh" id=1]
 
@@ -59,6 +67,10 @@ update_scale = false
 
 [node name="StereoCompositor" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent" instance=ExtResource( 3 )]
 
+[node name="StereoCanvas" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor" index="1"]
+material = SubResource( 5 )
+mode = 2
+
 [node name="Millimeters" type="Spatial" parent="ScreenCenter"]
 transform = Transform( 0.011, 0, 0, 0, 0.011, -4.65661e-10, 0, 4.65661e-10, 0.011, 0, 0, 0 )
 
@@ -102,7 +114,7 @@ path_to_player_ship = NodePath("../PlayfieldKickstart/Playfield_Blockout_Godot_0
 
 [node name="Pregame" parent="GameState/SubStates" index="0"]
 path_to_player_ship = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/PlayerShip")
-path_to_video_player = NodePath("../../../FullscreenVideoPlayer")
+path_to_video_player = NodePath("../../../ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor/ViewportContainer/Video/VideoPlayer")
 path_to_transmission_hud = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/TransmissionHUD3D/Viewport/TransmissionHUD")
 
 [node name="EnemyFleetMission" parent="GameState/SubStates/Missions/SubStates" index="0"]
@@ -113,9 +125,11 @@ path_to_boss = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03
 
 [node name="GameOver" parent="GameState/SubStates" index="3"]
 path_to_player_ship = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/PlayerShip")
-path_to_video_player = NodePath("../../../FullscreenVideoPlayer")
+path_to_video_player = NodePath("../../../ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor/ViewportContainer/Video/VideoPlayer")
 
 [editable path="ScreenCenter/HeadTrackerSpaceUdp/TrackedHeadPoseUdp"]
+
+[editable path="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor"]
 
 [editable path="PlayfieldKickstart"]
 
