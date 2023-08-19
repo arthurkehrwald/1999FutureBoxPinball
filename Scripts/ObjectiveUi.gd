@@ -21,6 +21,8 @@ func _on_enter(params := {}):
 		set_wants_focus(false)
 
 func handle_queued_missions() -> bool:
+	if not is_active:
+		return false
 	if queued_completed_mission:
 		queued_completed_mission = null
 		set_active_sub_state(mission_complete_state)

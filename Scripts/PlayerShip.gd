@@ -19,6 +19,7 @@ func _enter_tree():
 
 func _ready():
 	connect("health_changed", self, "on_health_changed")
+	connect("death", self, "on_death")
 
 
 func set_money(value):
@@ -40,6 +41,11 @@ func on_health_changed(current_health, old_health, _max_health):
 	if current_health < old_health:
 		#Announcer.say("ouch")
 		audio_player.play()
+
+
+func _on_death():
+	set_coolness(0)
+	set_money(0)
 
 
 func on_hit_by_projectile(projectile):

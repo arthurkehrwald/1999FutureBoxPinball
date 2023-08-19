@@ -22,6 +22,8 @@ func set_is_active(value: bool):
 	was_is_active_set = true
 	is_active = value
 	set_is_vulnerable(is_active)
+	if is_active:
+		set_health(MAX_HEALTH)
 	emit_signal("is_active_changed", is_active)
 
 func _on_Self_death():

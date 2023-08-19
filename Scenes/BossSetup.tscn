@@ -44,8 +44,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.204196, -1.18805 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.842596, -0.446508 )
 [connection signal="death" from="Boss" to="BossExplosionFX" method="_on_Boss_death"]
 [connection signal="health_changed" from="Boss" to="BossBar3D" method="_on_Boss_health_changed"]
-[connection signal="is_active_changed" from="Boss" to="Fog" method="_on_Boss_is_active_changed"]
 [connection signal="is_active_changed" from="Boss" to="BossBar3D" method="_on_Boss_is_active_changed"]
+[connection signal="is_active_changed" from="Boss" to="Fog" method="_on_Boss_is_active_changed"]
 [connection signal="bumped" from="BumperCluster" to="Boss" method="_on_BumperCluster_bumped"]
 [connection signal="health_changed" from="StraightShield" to="BossBar3D" method="_on_Shield_health_changed"]
 [connection signal="is_vulnerable_changed" from="StraightShield" to="BossBar3D" method="_on_Shield_is_vulnerable_changed"]

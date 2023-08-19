@@ -6,6 +6,7 @@ enum State {
 	STUNNED
 }
 
+export var BOSS_HEALTH_START_SHOOTING_THRESHOLD = 1.0
 export var SECONDS_UNTIL_FIRST_SHOT = 1.5
 export var SECONDS_BETWEEN_SHOTS = 3.0
 export var SECONDS_BETWEEN_SHOTS_RANDOMNESS = 0.0
@@ -29,7 +30,9 @@ onready var rng = RandomNumberGenerator.new()
 
 
 func _ready():
-	if Globals.boss == null:
+	if Globals.boss != null:
+		Globals.boss.connect("health_changed", self, "_on_Boss_health_changed")
+	else:
 		push_warning("[Boss Gun] can't find Boss! Will not add collision exceptions with outgoing projectiles.")
 	rng.randomize()
 	timer.connect("timeout", self, "on_Timer_timeout")
@@ -127,3 +130,16 @@ func on_hit_by_explosion(explosion):
 			base_stun_dur,
 			explosion.get_global_transform().origin,
 			explosion.blast_radius))
+
+
+func _on_Boss_health_changed(new_health, old_health, max_health):
+	var health_normalized = new_health / max_health
+	var should_be_shooting = health_normalized <= BOSS_HEALTH_START_SHOOTING_THRESHOLD
+	if state == State.IDLE and should_be_shooting:
+		enter_shooting_state()
+	elif state != State.IDLE and not should_be_shooting:
+		enter_idle_state()
+
+func _on_Boss_is_vulnerable_changed(value):
+	if !value and state != State.IDLE:
+		enter_idle_state()

@@ -14,7 +14,7 @@ func _on_exit(params := {}):
 	for state in sub_states:
 		if state.is_connected("entered", self, "_on_SubState_entered"):
 			state.disconnect("entered", self, "_on_SubState_entered")
-	._on_exit(params)
+	return ._on_exit(params)
 
 
 func _on_SubState_entered():

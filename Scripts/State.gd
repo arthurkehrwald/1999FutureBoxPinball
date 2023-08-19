@@ -54,11 +54,9 @@ func set_active_sub_state(value: State, enter_params := {}) -> Dictionary:#
 	# Prevent strange things from happening
 	if not is_active and not value == null:
 		push_error("Attempted to change active sub state on inactive state. BIG nono!")
-		assert(false)
 		return {}
 	if is_active_sub_state_changing:
 		push_error("Attempted to change active sub state during transition. BIG nono!")
-		assert(false)
 		return {}
 	is_active_sub_state_changing = true
 	assert(value in sub_states or value == null)

@@ -220,7 +220,7 @@ func on_PlaybackManager_finished(playback_manager):
 		_set_active_playback_manager(null)
 	emit_signal("playback_finished")
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("start"):
 		if active_playback_manager == pregame_playback_manager:
 			active_playback_manager.request_stop()

@@ -13,7 +13,7 @@
 [ext_resource path="res://Scenes/ScreenCenter.tscn" type="PackedScene" id=54]
 [ext_resource path="res://Scenes/TrackedHeadPoseUdp.tscn" type="PackedScene" id=55]
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/mode = 2
@@ -21,17 +21,17 @@ shader_param/show_overlay = true
 shader_param/is_enabled = true
 shader_param/swap = false
 
-[sub_resource type="QuadMesh" id=1]
+[sub_resource type="QuadMesh" id=2]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=3]
 flags_unshaded = true
 albedo_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 5.0
 loop = true
 
-[sub_resource type="ViewportTexture" id=4]
+[sub_resource type="ViewportTexture" id=5]
 viewport_path = NodePath("Viewport")
 
 [node name="Main" type="Spatial"]
@@ -67,9 +67,12 @@ update_scale = false
 
 [node name="StereoCompositor" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent" instance=ExtResource( 3 )]
 
+[node name="VideoPlayer" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor/ViewportContainer/Video" index="0"]
+visible = true
+
 [node name="StereoCanvas" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor" index="1"]
-material = SubResource( 5 )
-mode = 2
+material = SubResource( 1 )
+mode = 0
 
 [node name="Millimeters" type="Spatial" parent="ScreenCenter"]
 transform = Transform( 0.011, 0, 0, 0, 0.011, -4.65661e-10, 0, 4.65661e-10, 0.011, 0, 0, 0 )
@@ -97,17 +100,17 @@ __meta__ = {
 [node name="MeshInstance4" type="MeshInstance" parent="ScreenCenter/Millimeters/AxisArrows2"]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0.5, 0.5 )
 visible = false
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
 
 [node name="Animation_Player_for_Cages" type="AnimationPlayer" parent="."]
 autoplay = "Cage_Rotation"
-anims/Cage_Rotation = SubResource( 3 )
+anims/Cage_Rotation = SubResource( 4 )
 
 [node name="PlayfieldKickstart" parent="." instance=ExtResource( 1 )]
 
 [node name="CentralHUD3D" parent="PlayfieldKickstart/Playfield_Blockout_Godot_03/Center" index="17"]
-texture = SubResource( 4 )
+texture = SubResource( 5 )
 
 [node name="GameState" parent="." instance=ExtResource( 8 )]
 path_to_player_ship = NodePath("../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/PlayerShip")

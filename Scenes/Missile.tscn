@@ -1,9 +1,8 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Meshes/boss_missile.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Scenes/Projectile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Missile.gd" type="Script" id=3]
-[ext_resource path="res://Animations/missile_launch.tres" type="Animation" id=4]
 [ext_resource path="res://Meshes/missile_exhaust_flame.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://Meshes/New_Rocket_UV_02.obj" type="ArrayMesh" id=6]
 [ext_resource path="res://Materials/Crazy_Rocket_01/initialShadingGroup_baseColor.png" type="Texture" id=7]
@@ -57,6 +56,7 @@ albedo_color = Color( 0.878431, 0.564706, 0.286275, 1 )
 extents = Vector3( 0.3, 0.23, 0.51 )
 
 [node name="Missile" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mass = 5.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
@@ -64,7 +64,6 @@ linear_damp = 0.4
 angular_damp = 0.2
 script = ExtResource( 3 )
 SPEED = 0.7
-DO_INTRO_ANIM = false
 EXPLODE_DELAY = 1.5
 
 [node name="CollisionShape" parent="." index="0"]
@@ -81,17 +80,12 @@ visible = false
 mesh = ExtResource( 1 )
 material/0 = SubResource( 4 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
-playback_process_mode = 0
-playback_speed = 0.1
-anims/missile_launch = ExtResource( 4 )
-
-[node name="MainExhaustFlame" type="MeshInstance" parent="." index="5"]
+[node name="MainExhaustFlame" type="MeshInstance" parent="." index="4"]
 transform = Transform( 0.15, 0, 0, 0, -6.55671e-09, 0.15, 0, -0.15, -6.55671e-09, 0, 0, 0.350464 )
 mesh = ExtResource( 5 )
 material/0 = SubResource( 5 )
 
-[node name="TargetPointer" type="Spatial" parent="." index="6"]
+[node name="TargetPointer" type="Spatial" parent="." index="5"]
 
 [node name="MeshInstance" type="MeshInstance" parent="TargetPointer" index="0"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.65 )
@@ -99,11 +93,11 @@ visible = false
 mesh = SubResource( 6 )
 material/0 = null
 
-[node name="GuidanceUpdateTimer" type="Timer" parent="." index="7"]
+[node name="GuidanceUpdateTimer" type="Timer" parent="." index="6"]
 process_mode = 0
 wait_time = 0.1
 
-[node name="SteeringFlames" type="Spatial" parent="." index="8"]
+[node name="SteeringFlames" type="Spatial" parent="." index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3 )
 visible = false
 
@@ -131,13 +125,12 @@ visible = false
 mesh = ExtResource( 5 )
 material/0 = SubResource( 10 )
 
-[node name="HitregArea" parent="." index="9"]
+[node name="HitregArea" parent="." index="8"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, -0.0250001 )
-monitoring = false
 
 [node name="CollisionShape" parent="HitregArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 11 )
 
-[node name="ExplodeTimer" type="Timer" parent="." index="10"]
+[node name="ExplodeTimer" type="Timer" parent="." index="9"]
 one_shot = true

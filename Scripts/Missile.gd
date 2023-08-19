@@ -10,13 +10,12 @@ export var SPEED = 1.0
 export var TURN_FORCE = .3
 export var MAX_TURN_SPEED = 5.0
 export var VERTICAL_GUIDANCE = false
-export var DO_INTRO_ANIM = true
 export var EXPLODE_DELAY = 2.5
+export var MAX_LIFETIME = 30.0
 
 var start_basis = Basis.IDENTITY
 var target_pos = Vector3.ZERO
 
-onready var animation_player = get_node("AnimationPlayer")
 onready var target_pointer = get_node("TargetPointer")
 onready var steering_flames = get_node("SteeringFlames")
 onready var left_exhaust_flame = get_node("SteeringFlames/LeftExhaustFlame")
@@ -35,12 +34,8 @@ func _ready():
 	add_to_group("missiles")
 	guidance_update_timer.connect("timeout", self, "on_GuidanceUpdateTimer_timeout")
 	explode_timer.connect("timeout", self, "on_ExplodeTimer_timeout")
-	if DO_INTRO_ANIM:
-		animation_player.connect("animation_finished", self, "on_AnimationPlayer_animation_finished")
-		animation_player.play("missile_launch", -1, SPEED)
-		set_visible(false)
-	else:
-		start_moving_towards_player_ship()
+	explode_timer.start(MAX_LIFETIME)
+	start_moving_towards_player_ship()
 
 
 func _process(_delta):
