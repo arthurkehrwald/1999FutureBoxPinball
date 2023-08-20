@@ -81,7 +81,6 @@ _data = {
 }
 
 [sub_resource type="ViewportTexture" id=11]
-viewport_path = NodePath("Viewport")
 
 [node name="PlayfieldKickstart" type="Spatial"]
 __meta__ = {
@@ -231,9 +230,6 @@ transform = Transform( -1, -1.26883e-14, -3.89414e-07, -1.77636e-14, 1, 0, 3.894
 transform = Transform( 0.73, 0, 0, 0, -1.49012e-08, 0.73, 0, -0.73, -1.49012e-08, 0, 0.0619999, 4.084 )
 texture = SubResource( 11 )
 
-[node name="PowerupRoulette" parent="Playfield_Blockout_Godot_03/Center/CentralHUD3D/Viewport/CentralUi" index="1"]
-path_to_moon = NodePath("../../../../MoonShop")
-
 [node name="TransmissionHUD3D" parent="Playfield_Blockout_Godot_03/Center" instance=ExtResource( 6 )]
 transform = Transform( 0.8, 0, 0, 0, -3.72529e-08, 1, 0, -0.8, -4.47035e-08, -4.1, 0.5, 8 )
 
@@ -294,9 +290,5 @@ __meta__ = {
 [editable path="Playfield_Blockout_Godot_03/Center/WireRamp5"]
 
 [editable path="Playfield_Blockout_Godot_03/Center/WireRamp6"]
-
-[editable path="Playfield_Blockout_Godot_03/Center/CentralHUD3D"]
-
-[editable path="Playfield_Blockout_Godot_03/Center/CentralHUD3D/Viewport/CentralUi"]
 
 [editable path="Playfield_Blockout_Godot_03/Center/BossSetup"]

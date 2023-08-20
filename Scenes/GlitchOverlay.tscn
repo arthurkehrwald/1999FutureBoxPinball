@@ -6,19 +6,19 @@
 [ext_resource path="res://Textures/checkerboard.png" type="Texture" id=4]
 [ext_resource path="res://Materials/glitch_overlay.shader" type="Shader" id=5]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
-shader_param/dispOffset = 0.96
-shader_param/dispAmt = 0.202
+shader_param/dispOffset = 0.0
+shader_param/dispAmt = 0.2
 shader_param/abberationAmt = Vector2( 0.2, 0.2 )
-shader_param/dispSize = Vector2( 0.5, 0.5 )
+shader_param/dispSize = Vector2( 1, 1 )
 shader_param/maxAlpha = 1.0
 shader_param/scanlineSize = 0.181
 shader_param/scanlineIntensity = 0.454
 shader_param/displace = ExtResource( 2 )
 shader_param/scanlines = ExtResource( 3 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 length = 30.0
 loop = true
 tracks/0/type = "value"
@@ -34,7 +34,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("displace:material:shader_param/dispAmt")
 tracks/0/interp = 1
@@ -89,7 +89,7 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="displace" type="ColorRect" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.11896
@@ -102,11 +102,11 @@ __meta__ = {
 
 [node name="IdleAnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.5
-anims/glitch_idle = SubResource( 3 )
+anims/glitch_idle = SubResource( 2 )
 
 [node name="SuperGlitchAnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 5.0
-anims/super_glitch = SubResource( 4 )
+anims/super_glitch = SubResource( 3 )
 
 [node name="SuperGlitchTimer" type="Timer" parent="."]
 one_shot = true

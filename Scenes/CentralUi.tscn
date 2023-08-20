@@ -24,7 +24,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 is_root = true
-path_to_glitch_overlay = NodePath("GlitchOverlay")
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_left = 0.5
@@ -58,5 +57,3 @@ margin_left = -100.0
 margin_top = -100.0
 margin_right = 100.0
 margin_bottom = 100.0
-
-[editable path="GlitchOverlay"]

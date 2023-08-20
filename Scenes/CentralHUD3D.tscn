@@ -18,9 +18,3 @@ disable_3d = true
 render_target_v_flip = true
 
 [node name="CentralUi" parent="Viewport" instance=ExtResource( 2 )]
-
-[node name="GlitchOverlay" parent="Viewport/CentralUi" index="4"]
-auto_glitch_rate = 100.0
-effect_strength = 1.891
-
-[editable path="Viewport/CentralUi"]

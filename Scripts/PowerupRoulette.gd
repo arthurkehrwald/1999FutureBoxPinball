@@ -4,7 +4,6 @@ extends "res://Scripts/StackedUi.gd"
 const ICON_SCENE = preload("res://Scenes/PowerupIcon.tscn")
 
 export var path_to_spin_state := NodePath()
-export var path_to_moon := NodePath()
 
 var powerups := []
 var powerup_icons := []
@@ -12,7 +11,6 @@ var unscaled_icon_width: float
 var last_hit_info: HitInfo = null
 
 onready var spin_state := get_node(path_to_spin_state) as PowerupRouletteSpinState
-onready var moon := get_node(path_to_moon) as MoonShop
 
 class HitInfo:
 	var speed: float
@@ -22,7 +20,8 @@ func _enter_tree():
 	Globals.powerup_roulette = self
 
 func _ready():
-	moon.connect("hit", self, "_on_Moon_hit")
+	if Globals.moon_shop:
+		Globals.moon_shop.connect("hit", self, "_on_Moon_hit")
 	spin_state.connect("selected_powerup", self, "_on_SpinState_selected_powerup")
 
 func _on_enter(params := {}):
