@@ -1,33 +1,36 @@
+class_name HighscoreTracker
 extends Node
 
 var save_path := "user://score.save"
 var current_score := 0
 var highscore := 0 setget _set_highscore, get_highscore
-signal new_highscore(new_highscore, old_highscore)
+signal highscore_updated(new_highscore, old_highscore, was_beaten_just_now)
+
+func _enter_tree():
+	Globals.highscore_tracker = self
 
 func _ready():
-	highscore = load_score()
-	print("HIGH SCORE: %s" % highscore) 
+	_set_highscore(load_score())
+	print("HIGH SCORE: %s" % get_highscore()) 
 	if Globals.player_ship != null:
 		Globals.player_ship.connect("money_changed", self, "_on_PlayerShip_money_changed")		
 		Globals.player_ship.connect("death", self, "_on_PlayerShip_death")
 
 
-func _on_PlayerShip_money_changed(new_value, old_value) -> void:
+func _on_PlayerShip_money_changed(new_value, _old_value) -> void:
 	current_score = new_value
 
 
 func _on_PlayerShip_death() -> void:
-	if current_score > highscore:
-		var old_highscore := highscore
-		highscore = current_score
-		save_score(highscore)
-		print("HIGH SCORE: %s" % highscore)
-		emit_signal("new_highscore", highscore, old_highscore)
+	if current_score > get_highscore():
+		_set_highscore(current_score)
+		save_score(get_highscore())
 
 
-func _set_highscore(value: int) -> void:
+func _set_highscore(value: int, was_beaten_just_now: bool = false) -> void:
+	var old_highscore := highscore
 	highscore = value
+	emit_signal("highscore_updated", highscore, old_highscore, was_beaten_just_now)
 
 
 func get_highscore() -> int:

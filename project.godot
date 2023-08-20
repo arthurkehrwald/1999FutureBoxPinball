@@ -104,6 +104,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/GlitchShader.gd"
 }, {
+"base": "Node",
+"class": "HighscoreTracker",
+"language": "GDScript",
+"path": "res://Scripts/HighscoreTracker.gd"
+}, {
+"base": "Node",
+"class": "HighscoreUi",
+"language": "GDScript",
+"path": "res://Scripts/HighscoreUi.gd"
+}, {
 "base": "CollisionObject",
 "class": "HitNotifier",
 "language": "GDScript",
@@ -294,6 +304,8 @@ _global_script_class_icons={
 "GameOver": "",
 "GameState": "",
 "GlitchOverlay": "",
+"HighscoreTracker": "",
+"HighscoreUi": "",
 "HitNotifier": "",
 "InvisibleButtonPlunger": "",
 "Mission": "",

@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/UiState.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scripts/HighscoreUi.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 35
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+font_data = ExtResource( 2 )
+
+[node name="HighscoreUi" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+highscore_text_path = NodePath("UiNodes/VBoxContainer/HighscoreText")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UiNodes" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighscoreHeading" type="Label" parent="UiNodes/VBoxContainer" index="0"]
+margin_top = 876.0
+margin_right = 1080.0
+margin_bottom = 918.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "Highscore"
+align = 1
+valign = 1
+
+[node name="HighscoreText" type="Label" parent="UiNodes/VBoxContainer" index="1"]
+margin_top = 922.0
+margin_right = 1080.0
+margin_bottom = 1043.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "0"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SubStates" parent="." index="1"]
+margin_left = 1.25989
+margin_right = 1.25989

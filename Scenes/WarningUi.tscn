@@ -81,6 +81,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SubStates" parent="." index="1"]
+margin_left = -1.68176
+margin_right = -1.68176
+
 [node name="AnimationComponent" type="Node" parent="Components" index="0"]
 script = ExtResource( 3 )
 path_to_animation_player = NodePath("AnimationPlayer")

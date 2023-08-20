@@ -18,3 +18,4 @@ var moon_shop = null
 var ball_spawn = null
 var warning_hud = null
 var screen_center_child = null
+var highscore_tracker: HighscoreTracker = null

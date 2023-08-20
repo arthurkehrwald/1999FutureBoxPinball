@@ -19,22 +19,23 @@ func _enter_tree():
 
 func _ready():
 	connect("health_changed", self, "on_health_changed")
-	connect("death", self, "on_death")
 
 
 func set_money(value):
-	emit_signal("money_changed", value, money)
+	var old_money = money
 	money = value
+	emit_signal("money_changed", money, old_money)
 
 
 func set_coolness(value):
-	emit_signal("coolness_changed", value, coolness)
 	if value > coolness:
 		coolness_tween.remove_all()
 		coolness_tween.interpolate_property(self, "coolness", value, 0, COOLNESS_DECAY_TIME * value,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		coolness_tween.start()
+	var old_coolness = coolness
 	coolness = value
+	emit_signal("coolness_changed", coolness, old_coolness)
 
 
 func on_health_changed(current_health, old_health, _max_health):
@@ -43,7 +44,7 @@ func on_health_changed(current_health, old_health, _max_health):
 		audio_player.play()
 
 
-func _on_death():
+func reset_player_stats():
 	set_coolness(0)
 	set_money(0)
 
