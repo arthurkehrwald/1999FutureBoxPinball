@@ -8,13 +8,13 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
-shader_param/dispOffset = 0.0
-shader_param/dispAmt = 0.2
+shader_param/dispOffset = 0.96
+shader_param/dispAmt = 0.552
 shader_param/abberationAmt = Vector2( 0.2, 0.2 )
-shader_param/dispSize = Vector2( 1, 1 )
+shader_param/dispSize = Vector2( 0.3, 0.3 )
 shader_param/maxAlpha = 1.0
-shader_param/scanlineSize = 0.181
-shader_param/scanlineIntensity = 0.454
+shader_param/scanlineSize = 1.0
+shader_param/scanlineIntensity = 0.5
 shader_param/displace = ExtResource( 2 )
 shader_param/scanlines = ExtResource( 3 )
 
@@ -82,6 +82,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+effect_strength = 0.5
 
 [node name="TestImg" type="Sprite" parent="."]
 visible = false

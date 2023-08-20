@@ -365,8 +365,8 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1080
 window/size/height=1920
-window/size/test_width=720
-window/size/test_height=480
+window/size/borderless=true
+window/size/fullscreen=true
 window/vsync/use_vsync=false
 window/handheld/orientation="portrait"
 window/stretch/aspect="keep"
