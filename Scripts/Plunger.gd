@@ -1,3 +1,4 @@
+class_name Plunger
 extends KinematicBody
 
 export var windup_speed = 3.0
@@ -19,6 +20,9 @@ func set_is_active(value: bool):
 	if value == is_active:
 		return
 	is_active = value
+	set_process(is_active)
+	set_physics_process(is_active)
+	set_process_input(is_active)
 
 
 func _ready():

@@ -199,6 +199,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/PlayerTurret.gd"
 }, {
+"base": "KinematicBody",
+"class": "Plunger",
+"language": "GDScript",
+"path": "res://Scripts/Plunger.gd"
+}, {
 "base": "Node",
 "class": "Powerup",
 "language": "GDScript",
@@ -328,6 +333,7 @@ _global_script_class_icons={
 "Pinball": "",
 "PlayerShip": "",
 "PlayerTurret": "",
+"Plunger": "",
 "Powerup": "",
 "PowerupRoulette": "",
 "PowerupRouletteIcon": "",
@@ -371,8 +377,8 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1080
 window/size/height=1920
-window/size/borderless=true
-window/size/fullscreen=true
+window/size/test_width=720
+window/size/test_height=480
 window/vsync/use_vsync=false
 window/handheld/orientation="portrait"
 window/stretch/aspect="keep"
