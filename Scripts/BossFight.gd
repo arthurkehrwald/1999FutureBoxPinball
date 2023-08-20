@@ -17,4 +17,5 @@ func _ready():
 	boss.connect("death", self, "_on_Boss_death")
 
 func _on_Boss_death():
-	_on_mission_completed()
+	if is_active:
+		_on_mission_completed()

@@ -9,19 +9,7 @@
 extents = Vector3( 1, 1, 0.1 )
 
 [node name="StraightShield" instance=ExtResource( 1 )]
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": false,
-"4-BossAppears": true,
-"5-Missiles": true,
-"6-Trex": true,
-"7-BlackHole": true,
-"8-Eclipse": true,
-"9-Victory": false
-}
+collision_layer = 1
 
 [node name="CollisionShape" type="CollisionShape" parent="BehindArea" index="0"]
 transform = Transform( 1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0.4, 0.2 )
