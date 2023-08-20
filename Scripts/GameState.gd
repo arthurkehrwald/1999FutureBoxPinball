@@ -35,3 +35,6 @@ func _on_ActiveSubState_exited(_params := {}):
 func _on_PlayerShip_death():
 	set_active_sub_state(game_over)
 
+func _input(event):
+	if event.is_action_released("restart_game"):
+		set_active_sub_state(pregame)
