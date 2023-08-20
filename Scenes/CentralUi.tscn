@@ -53,22 +53,10 @@ is_root = false
 
 [node name="HighscoreUi" parent="." instance=ExtResource( 9 )]
 
-[node name="HighscoreHeading" parent="HighscoreUi/UiNodes/VBoxContainer" index="0"]
-margin_top = 56.0
-margin_right = 440.0
-margin_bottom = 98.0
-
-[node name="HighscoreText" parent="HighscoreUi/UiNodes/VBoxContainer" index="1"]
-margin_top = 102.0
-margin_right = 440.0
-margin_bottom = 223.0
-
 [node name="GlitchOverlay" parent="." instance=ExtResource( 8 )]
 margin_left = -100.0
 margin_top = -100.0
 margin_right = 100.0
 margin_bottom = 100.0
-
-[editable path="HighscoreUi"]
 
 [editable path="GlitchOverlay"]

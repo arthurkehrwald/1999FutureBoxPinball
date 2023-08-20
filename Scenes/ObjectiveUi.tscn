@@ -10,6 +10,7 @@
 [ext_resource path="res://Scripts/AnimationComponent.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/AnimationExitComponent.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/CenterPivot.gd" type="Script" id=10]
+[ext_resource path="res://Animations/text_intro_anim.tres" type="Animation" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -20,32 +21,6 @@ font_data = ExtResource( 4 )
 size = 0
 use_filter = true
 font_data = ExtResource( 4 )
-
-[sub_resource type="Animation" id=3]
-resource_name = "animation"
-length = 2.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("../../UiNodes/MessageLabel:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 2, 2.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("../../UiNodes/MessageLabel:custom_fonts/font:size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.162931, -1.18831, 45, -0.0809454, 42.8999, 0.0359126, 1.9277, 45, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3, 2 )
-}
 
 [sub_resource type="DynamicFont" id=4]
 size = 40
@@ -173,7 +148,7 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 margin_top = 75.0
 rect_rotation = -360.0
-rect_pivot_offset = Vector2( 540, 0.5 )
+rect_pivot_offset = Vector2( 540, 27.5 )
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
@@ -192,7 +167,7 @@ script = ExtResource( 9 )
 path_to_animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubStates/Intro/Components/AnimationExitComponent" index="0"]
-anims/animation = SubResource( 3 )
+anims/animation = ExtResource( 11 )
 
 [node name="Display" parent="SubStates" index="1" instance=ExtResource( 5 )]
 script = ExtResource( 2 )
@@ -249,7 +224,7 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 margin_top = 75.0
 rect_rotation = 360.0
-rect_pivot_offset = Vector2( 540, 0.5 )
+rect_pivot_offset = Vector2( 540, 27.5 )
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
@@ -276,7 +251,7 @@ anims/animation = SubResource( 6 )
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 margin_top = 75.0
-rect_pivot_offset = Vector2( 540, 0.5 )
+rect_pivot_offset = Vector2( 540, 27.5 )
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
