@@ -32,6 +32,7 @@ onready var rng = RandomNumberGenerator.new()
 func _ready():
 	if Globals.boss != null:
 		Globals.boss.connect("health_changed", self, "_on_Boss_health_changed")
+		Globals.boss.connect("is_vulnerable_changed", self, "_on_Boss_is_vulnerable_changed")
 	else:
 		push_warning("[Boss Gun] can't find Boss! Will not add collision exceptions with outgoing projectiles.")
 	rng.randomize()
