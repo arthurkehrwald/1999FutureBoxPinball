@@ -1,20 +1,22 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/UiState.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/HighscoreUi.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/AnimationExitComponent.gd" type="Script" id=4]
 [ext_resource path="res://Animations/text_intro_anim.tres" type="Animation" id=5]
+[ext_resource path="res://Audio/fx/airhorn.wav" type="AudioStream" id=6]
+[ext_resource path="res://Scripts/SoundEffectComponent.gd" type="Script" id=7]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 45
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 35
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 100
 font_data = ExtResource( 2 )
 
@@ -34,7 +36,7 @@ margin_right = 1.25989
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "New Highscore!"
 align = 1
@@ -50,6 +52,14 @@ path_to_animation_player = NodePath("../AnimationExitComponent/AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubStates/NewHighscoreIntro/Components/AnimationExitComponent" index="0"]
 anims/animation = ExtResource( 5 )
+
+[node name="Airhorn" type="Node" parent="SubStates/NewHighscoreIntro/Components" index="1"]
+script = ExtResource( 7 )
+audio_player_path = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SubStates/NewHighscoreIntro/Components/Airhorn" index="0"]
+stream = ExtResource( 6 )
+bus = "Effects"
 
 [node name="Display" parent="SubStates" index="1" instance=ExtResource( 1 )]
 
@@ -67,7 +77,7 @@ __meta__ = {
 margin_top = 876.0
 margin_right = 1080.0
 margin_bottom = 918.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "Highscore"
 align = 1
@@ -77,7 +87,7 @@ valign = 1
 margin_top = 922.0
 margin_right = 1080.0
 margin_bottom = 1043.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "0"
 align = 1
