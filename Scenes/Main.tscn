@@ -109,10 +109,10 @@ path_to_transmission_hud = NodePath("../../../PlayfieldKickstart/Playfield_Block
 [node name="EnemyFleetMission" parent="GameState/SubStates/Missions/SubStates" index="0"]
 path_to_enemy_fleet = NodePath("../../../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/EnemyFleet")
 
-[node name="Bossfight" parent="GameState/SubStates" index="2"]
+[node name="Bossfight" parent="GameState/SubStates" index="3"]
 path_to_boss = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/BossSetup/Boss")
 
-[node name="GameOver" parent="GameState/SubStates" index="3"]
+[node name="GameOver" parent="GameState/SubStates" index="4"]
 path_to_player_ship = NodePath("../../../PlayfieldKickstart/Playfield_Blockout_Godot_03/Center/PlayerShip")
 path_to_video_player = NodePath("../../../ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor/ViewportContainer/Video/VideoPlayer")
 

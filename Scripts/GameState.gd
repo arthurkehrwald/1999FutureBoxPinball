@@ -2,12 +2,14 @@ class_name GameState
 extends "res://Scripts/State.gd"
 
 export var path_to_pregame := NodePath()
+export var path_to_break := NodePath()
 export var path_to_game_over := NodePath()
 export var path_to_missions := NodePath()
 export var path_to_bossfight := NodePath()
 export var path_to_player_ship := NodePath()
 
 onready var pregame := get_node(path_to_pregame) as Pregame
+onready var break_ := get_node(path_to_break) as BreakState
 onready var missions := get_node(path_to_missions) as MissionMasterState
 onready var boss_fight := get_node(path_to_bossfight) as BossFight
 onready var game_over := get_node(path_to_game_over) as GameOver
@@ -21,6 +23,8 @@ func _on_enter(_params := {}):
 func _on_ActiveSubState_exited(_params := {}):
 	match active_sub_state:
 		pregame:
+			set_active_sub_state(break_)
+		break_:
 			set_active_sub_state(missions)
 		missions:
 			set_active_sub_state(boss_fight)

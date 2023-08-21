@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/BossShieldConnector.gd"
 }, {
+"base": "Node",
+"class": "BreakState",
+"language": "GDScript",
+"path": "res://Scripts/BreakState.gd"
+}, {
 "base": "Area",
 "class": "Bumper",
 "language": "GDScript",
@@ -307,6 +312,7 @@ _global_script_class_icons={
 "BossFight": "",
 "BossFog": "",
 "BossShieldConnector": "",
+"BreakState": "",
 "Bumper": "",
 "BumperCluster": "",
 "CentralUi": "",
