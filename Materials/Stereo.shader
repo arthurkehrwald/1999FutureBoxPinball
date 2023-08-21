@@ -75,6 +75,13 @@ void fragment()
 	}
 	else
 	{
-		COLOR = texture(left_camera, SCREEN_UV);
+		if (show_overlay)
+		{
+			COLOR = texture(left_camera, SCREEN_UV);
+		}
+		else
+		{
+			COLOR = texture(left_camera, SCREEN_UV) * texture(overlay, SCREEN_UV);
+		}
 	}
 }
