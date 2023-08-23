@@ -19,7 +19,6 @@ resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/mode = 2
 shader_param/show_overlay = true
-shader_param/is_enabled = true
 shader_param/swap = false
 
 [sub_resource type="QuadMesh" id=2]

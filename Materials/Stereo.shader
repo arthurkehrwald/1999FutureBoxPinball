@@ -5,17 +5,21 @@ uniform sampler2D left_camera;
 uniform sampler2D right_camera;
 uniform sampler2D overlay;
 uniform bool show_overlay = true;
-uniform bool is_enabled = true;
 uniform bool swap = false;
 
 void calcUvAndEye(vec2 screen_uv, vec4 frag_coord, out vec2 uv, out bool isLeft)
 {
-	if (mode == 0) // Interlaced
+	if (mode == 0)
+	{
+		uv = screen_uv;
+		isLeft = true;
+	}
+	else if (mode == 1) // Interlaced
 	{
 		uv = screen_uv;
 		isLeft = mod(floor(frag_coord.x), 2.0) < 0.5;
 	}
-	else if (mode == 1) // Over Under
+	else if (mode == 2) // Over Under
 	{
 		if (screen_uv.y < 0.5)
 		{
@@ -28,7 +32,7 @@ void calcUvAndEye(vec2 screen_uv, vec4 frag_coord, out vec2 uv, out bool isLeft)
 			isLeft = false;
 		}
 	}
-	else if (mode == 2) // Left Right
+	else if (mode == 3) // Left Right
 	{
 		if (screen_uv.x < 0.5)
 		{
@@ -45,43 +49,29 @@ void calcUvAndEye(vec2 screen_uv, vec4 frag_coord, out vec2 uv, out bool isLeft)
 
 void fragment()
 {
-	if (is_enabled)
+	vec2 uv;
+	bool is_left;
+	calcUvAndEye(SCREEN_UV, FRAGCOORD, uv, is_left);
+	if (show_overlay)
 	{
-		vec2 uv;
-		bool is_left;
-		calcUvAndEye(SCREEN_UV, FRAGCOORD, uv, is_left);
-		if (show_overlay)
+		if (is_left)
 		{
-			if (is_left)
-			{
-				COLOR = texture(left_camera, uv) * texture(overlay, uv);
-			}
-			else
-			{
-				COLOR = texture(right_camera, uv) * texture(overlay, uv);
-			}
+			COLOR = texture(left_camera, uv) * texture(overlay, uv);
 		}
 		else
 		{
-			if (is_left)
-			{
-				COLOR = texture(left_camera, uv);
-			}
-			else
-			{
-				COLOR = texture(right_camera, uv);
-			}
+			COLOR = texture(right_camera, uv) * texture(overlay, uv);
 		}
 	}
 	else
 	{
-		if (show_overlay)
+		if (is_left)
 		{
-			COLOR = texture(left_camera, SCREEN_UV);
+			COLOR = texture(left_camera, uv);
 		}
 		else
 		{
-			COLOR = texture(left_camera, SCREEN_UV) * texture(overlay, SCREEN_UV);
+			COLOR = texture(right_camera, uv);
 		}
 	}
 }

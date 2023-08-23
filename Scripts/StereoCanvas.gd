@@ -1,7 +1,8 @@
 extends CanvasItem
 
-export(int, "Interlaced", "OverUnder", "LeftRight") var mode : int setget _set_mode
+export(int, "Mono", "Interlaced", "OverUnder", "LeftRight") var mode : int setget _set_mode
 var mode_init := false
+const MODE_COUNT := 4
 
 export var left_viewport_path := NodePath() setget _set_left_viewport_path
 var left_viewport_path_init := false
@@ -13,9 +14,6 @@ var right_viewport_path_init := false
 var right_viewport : Viewport setget _set_right_viewport
 var right_viewport_init := false
 
-export var is_enabled := true setget _set_is_enabled
-var is_enabled_init := false
-
 export var video_viewport_path := NodePath()
 onready var video_viewport := get_node(video_viewport_path) as Viewport
 export var video_player_path:= NodePath()
@@ -25,14 +23,13 @@ func _ready():
 	_set_left_viewport_path(left_viewport_path)
 	_set_right_viewport_path(right_viewport_path)
 	_set_mode(mode)
-	_set_is_enabled(is_enabled)
 	video_player.connect("visibility_changed", self, "_on_video_player_visibility_changed")
 	var video_tex = video_viewport.get_texture() if video_viewport != null else null
 	material.set("shader_param/overlay", video_tex)
 
 func _process(_delta):
-	if (Input.is_action_just_pressed("toggle_stereo")):
-		_set_is_enabled(!is_enabled)
+	if (Input.is_action_just_pressed("cycle_stereo_mode")):
+		_set_mode((mode + 1) % MODE_COUNT)
 
 func _set_left_viewport_path(value: NodePath) -> void:
 	if (left_viewport_path_init and value == left_viewport_path):
@@ -76,13 +73,6 @@ func _set_mode(value: int) -> void:
 	mode = value
 	material.set("shader_param/mode", mode)
 	mode_init = true
-
-func _set_is_enabled(value: bool) -> void:
-	if (is_enabled_init and value == is_enabled):
-		return
-	is_enabled = value
-	material.set("shader_param/is_enabled", is_enabled)
-	is_enabled_init = true
 
 func _on_video_player_visibility_changed() -> void:
 	material.set("shader_param/show_overlay", video_player.visible)
