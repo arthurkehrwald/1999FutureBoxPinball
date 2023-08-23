@@ -9,7 +9,6 @@ extents = Vector3( 1.74066, 0.2, 0.427852 )
 [node name="PlayerShip" type="Area"]
 collision_mask = 0
 script = ExtResource( 2 )
-MAX_HEALTH = 1.0
 PINBALL_DIRECT_HIT_BASE_DAMAGE = 20.0
 BOMB_DIRECT_HIT_BASE_DAMAGE = 5.0
 MISSILE_DIRECT_HIT_DAMAGE = 5.0
