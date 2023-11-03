@@ -52,26 +52,16 @@ void fragment()
 	vec2 uv;
 	bool is_left;
 	calcUvAndEye(SCREEN_UV, FRAGCOORD, uv, is_left);
-	if (show_overlay)
+	if (is_left)
 	{
-		if (is_left)
-		{
-			COLOR = texture(left_camera, uv) * texture(overlay, uv);
-		}
-		else
-		{
-			COLOR = texture(right_camera, uv) * texture(overlay, uv);
-		}
+		COLOR = texture(left_camera, uv);
 	}
 	else
 	{
-		if (is_left)
-		{
-			COLOR = texture(left_camera, uv);
-		}
-		else
-		{
-			COLOR = texture(right_camera, uv);
-		}
+		COLOR = texture(right_camera, uv);
+	}
+	if (show_overlay)
+	{
+		COLOR *= texture(overlay, uv);
 	}
 }
