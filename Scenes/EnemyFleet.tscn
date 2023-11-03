@@ -14,115 +14,24 @@ transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 1.41072, -7.09119 )
 
 [node name="EnemyShip" parent="ParentForAnimation" instance=ExtResource( 1 )]
 MAX_HEALTH = 15.0
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": true,
-"4-BossAppears": false,
-"5-Missiles": false,
-"6-Trex": false,
-"7-BlackHole": false,
-"8-Eclipse": false,
-"9-Victory": false
-}
 
 [node name="EnemyShip2" parent="ParentForAnimation" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0, 0 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": true,
-"4-BossAppears": false,
-"5-Missiles": false,
-"6-Trex": false,
-"7-BlackHole": false,
-"8-Eclipse": false,
-"9-Victory": false
-}
 
 [node name="EnemyShip3" parent="ParentForAnimation" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0, 0 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": true,
-"4-BossAppears": false,
-"5-Missiles": false,
-"6-Trex": false,
-"7-BlackHole": false,
-"8-Eclipse": false,
-"9-Victory": false
-}
 
 [node name="EnemyShip4" parent="ParentForAnimation" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1.6 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": true,
-"4-BossAppears": false,
-"5-Missiles": false,
-"6-Trex": false,
-"7-BlackHole": false,
-"8-Eclipse": false,
-"9-Victory": false
-}
 
 [node name="EnemyShip5" parent="ParentForAnimation" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1.6 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": true,
-"4-BossAppears": false,
-"5-Missiles": false,
-"6-Trex": false,
-"7-BlackHole": false,
-"8-Eclipse": false,
-"9-Victory": false
-}
 
 [node name="EnemyShip7" parent="ParentForAnimation" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.6 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": true,
-"4-BossAppears": false,
-"5-Missiles": false,
-"6-Trex": false,
-"7-BlackHole": false,
-"8-Eclipse": false,
-"9-Victory": false
-}
 
 [node name="EnemyShip6" parent="ParentForAnimation" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1.6 )
-IS_VULNERABLE_PER_STAGE = {
-"0-Testing": true,
-"1-Pregame": false,
-"10-Defeat": false,
-"2-Exposition": false,
-"3-EnemyFleet": true,
-"4-BossAppears": false,
-"5-Missiles": false,
-"6-Trex": false,
-"7-BlackHole": false,
-"8-Eclipse": false,
-"9-Victory": false
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/enemy_fleet_appear_anim = ExtResource( 3 )
