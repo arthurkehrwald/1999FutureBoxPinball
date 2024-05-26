@@ -82,7 +82,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-effect_strength = 0.5
+effect_strength = 0.3
 
 [node name="TestImg" type="Sprite" parent="."]
 visible = false
