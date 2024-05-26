@@ -19,7 +19,7 @@ resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/mode = 2
 shader_param/show_overlay = true
-shader_param/swap = false
+shader_param/swap = true
 
 [sub_resource type="QuadMesh" id=2]
 
@@ -46,7 +46,7 @@ transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
 visible = false
 
 [node name="HeadTrackerSpaceBam" parent="ScreenCenter" instance=ExtResource( 30 )]
-transform = Transform( 18, 0, 0, 0, 16.895, 0, 0, 0, 18, 1.53, 13, 1.776 )
+transform = Transform( 18, 0, 0, 0, 16.895, 0, 0, 0, 18, 1.53, 2.4, 1.776 )
 
 [node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpaceBam" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.2666e-07, 0, 0, 1, 0, 0, 0 )
@@ -61,6 +61,7 @@ update_scale = false
 [node name="CameraParent" type="Spatial" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam"]
 
 [node name="StereoCompositor" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent" instance=ExtResource( 3 )]
+stereo_offset = 0.037
 
 [node name="VideoPlayer" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor/ViewportContainer/Video" index="0"]
 visible = true
@@ -72,7 +73,7 @@ material = SubResource( 1 )
 transform = Transform( 0.011, 0, 0, 0, 0.011, -4.65661e-10, 0, 4.65661e-10, 0.011, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 49.9996, 4.76837e-05, 0, -4.76837e-05, 49.9996, 139.091, 1181.82, 161.455 )
+transform = Transform( 50, 0, 0, 0, 50.0006, 4.19617e-05, 0, -4.19617e-05, 50.0006, 139.091, 218.182, 161.455 )
 
 [node name="AxisArrows2" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
 transform = Transform( -400, 0, 0, 0, 400, 0, 0, 0, 400, 196.254, 1.52588e-05, 350.813 )

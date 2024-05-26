@@ -45,6 +45,10 @@ void calcUvAndEye(vec2 screen_uv, vec4 frag_coord, out vec2 uv, out bool isLeft)
 			isLeft = false;
 		}
 	}
+	if (swap)
+	{
+		isLeft = !isLeft;
+	}
 }
 
 void fragment()
