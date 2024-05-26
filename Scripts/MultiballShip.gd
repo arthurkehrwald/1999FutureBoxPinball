@@ -9,15 +9,11 @@ var next_muzzle_position = Vector3(0, 0, 0)
 var loaded_pinballs = []
 
 onready var entrance_area = get_node("EntranceArea") as Area
-onready var exit_area = get_node("ExitArea") as Area
-onready var static_body = get_node("StaticBody") as StaticBody
 onready var muzzle = get_node("Muzzle") as Spatial
 
 
 func _ready():
 	entrance_area.connect("body_entered", self, "on_EntranceArea_body_entered")
-	exit_area.connect("body_exited", self, "on_ExitArea_body_exited")
-
 
 func on_EntranceArea_body_entered(body):
 	if not body.is_in_group("pinballs") or pinballs_locked >= 3:
@@ -27,8 +23,6 @@ func on_EntranceArea_body_entered(body):
 	loaded_pinballs.push_back(weakref(body))
 	body.set_visible(false)
 	body.set_locked(true)
-	body.add_collision_exception_with(static_body)
-	static_body.add_collision_exception_with(body)
 	body.teleport(muzzle.global_transform.origin)
 	pinballs_locked += 1
 	if pinballs_locked >= 3:
@@ -57,8 +51,3 @@ func on_EntranceArea_body_entered(body):
 	else:
 		body.set_is_accessible_to_player(false)
 		Announcer.say("ball_locked")
-
-
-func on_ExitArea_body_exited(body):
-	body.remove_collision_exception_with(static_body)
-	static_body.remove_collision_exception_with(body)

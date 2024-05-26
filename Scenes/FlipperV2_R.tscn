@@ -9,14 +9,17 @@ transform = Transform( 0.866026, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866026, 0, 0, 0 )
 IS_RIGHT_FLIPPER = true
 
 [node name="MeshInstance" parent="." index="0"]
-transform = Transform( 0.997051, 0, 0.0844103, 0, 1.1, 0, -0.0767364, 0, 1.09676, -0.113087, 0.170005, 0.0087036 )
+transform = Transform( 0.997051, 0, 0.0844101, 0, 1.1, 0, -0.0767364, 0, 1.09676, -0.113087, 0.170005, 0.0087036 )
 mesh = ExtResource( 3 )
 
 [node name="CollisionShape5" parent="." index="1"]
-transform = Transform( -0.9, 0, -2.7259e-07, 0, 1, 0, 3.50473e-07, 0, -0.7, 0, 0, 0 )
+transform = Transform( -0.8, 0, -2.7259e-07, 0, 1, 0, 3.11531e-07, 0, -0.7, 0, 0, 0 )
 
 [node name="ImpulseArea" parent="." index="2"]
 transform = Transform( 0.996918, 0, 0.0784591, 0, 1, 0, -0.0784591, 0, 0.996918, -0.45, 0.15, -0.2 )
+
+[node name="FrictionArea" parent="." index="3"]
+transform = Transform( 0.996917, 0, 0.0784591, 0, 1, 0, -0.0784591, 0, 0.996917, -0.45, 0.15, -0.2 )
 
 [node name="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 2 )
