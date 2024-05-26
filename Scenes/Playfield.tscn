@@ -17,49 +17,49 @@
 [ext_resource path="res://Scenes/WireRamp.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/FlipperV2.tscn" type="PackedScene" id=38]
 
-[sub_resource type="Curve3D" id=3]
+[sub_resource type="Curve3D" id=1]
 _data = {
 "points": PoolVector3Array( -0.911339, -1.21516, 3.76534, 0.911339, 1.21516, -3.76534, -0.0349762, 0.179941, -0.0258505, 3.261, 0.0885488, -5.22685, -3.261, -0.0885488, 5.22685, 0.622474, 0.266138, 4.18304 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=13]
+[sub_resource type="Curve3D" id=2]
 _data = {
 "points": PoolVector3Array( -0.911339, -1.21516, 3.76534, 0.911339, 1.21516, -3.76534, -0.0697048, 0.179613, -0.0296001, 3.261, 0.0885488, -5.22685, -3.261, -0.0885488, 5.22685, 0.260965, 0.252, 4.09462 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=14]
+[sub_resource type="Curve3D" id=3]
 _data = {
 "points": PoolVector3Array( -0.73895, 0.000147194, 1.87507, 0.73895, -0.000147194, -1.87507, 0.0813453, 0.242589, 0.199335, 0.00203514, -0.547561, 0.509503, -0.00203514, 0.547561, -0.509503, 0.827204, 0.735462, -2.27529 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=15]
+[sub_resource type="Curve3D" id=4]
 _data = {
 "points": PoolVector3Array( -0.73895, 0.000147194, 1.87507, 0.73895, -0.000147194, -1.87507, 0.0813453, 0.242589, 0.199335, 0.00203514, -0.547561, 0.509503, -0.00203514, 0.547561, -0.509503, 0.43257, 0.736455, -2.26394 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=7]
+[sub_resource type="Curve3D" id=5]
 _data = {
 "points": PoolVector3Array( 0.853606, -0.257634, 3.50937, -0.853606, 0.257634, -3.50937, 0.128544, 0.252129, 0.25118, -0.953423, 0.0736555, -0.226336, 0.953423, -0.0736555, 0.226336, 0.908513, 1.11468, -4.13315, 0.210307, 0.102963, -1.33458, -0.210307, -0.102963, 1.33458, 0.524893, 0.934398, -0.232069, 0.0993965, -0.00634581, -1.76965, -0.0993965, 0.00634581, 1.76965, -0.923388, 0.892845, 2.64009, -0.0037384, 0.00826037, -0.789652, 0.0037384, -0.00826037, 0.789652, -1.01545, 0.822884, 5.26399, 0, 0, 0, 0, 0, 0, -1.00475, 0.631532, 6.01723 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=12]
+[sub_resource type="Curve3D" id=6]
 _data = {
 "points": PoolVector3Array( 0.853606, -0.257634, 3.50937, -0.853606, 0.257634, -3.50937, 0.644292, 0.240415, 0.117235, -0.953423, 0.0736555, -0.226336, 0.953423, -0.0736555, 0.226336, 0.908513, 1.11468, -4.13315, 0.210307, 0.102963, -1.33458, -0.210307, -0.102963, 1.33458, 0.524893, 0.934398, -0.232069, 0.0993965, -0.00634581, -1.76965, -0.0993965, 0.00634581, 1.76965, -0.923388, 0.892845, 2.64009, -0.0037384, 0.00826037, -0.789652, 0.0037384, -0.00826037, 0.789652, -1.01545, 0.822884, 5.26399, 0, 0, 0, 0, 0, 0, -1.00475, 0.631532, 6.01723 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=9]
+[sub_resource type="Curve3D" id=7]
 _data = {
 "points": PoolVector3Array( 0.371578, 0.0603824, 2.13919, -0.371578, -0.0603824, -2.13919, -0.928, 0.270016, 1.35766, 0.240299, 0.0553456, -1.87749, -0.240299, -0.0553456, 1.87749, 2.58536, 0.147334, 1.12853 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
-[sub_resource type="ViewportTexture" id=11]
+[sub_resource type="ViewportTexture" id=8]
 
 [node name="Playfield" type="Spatial"]
 __meta__ = {
@@ -91,7 +91,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0381613, 7.60382 )
 
 [node name="WireRamp2-1" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.24576, 0.0113599, -2.43983 )
-curve = SubResource( 3 )
+curve = SubResource( 1 )
 allow_exit_as_entrance = true
 
 [node name="EntranceArea" parent="Center/WireRamp2-1" index="1"]
@@ -102,7 +102,7 @@ transform = Transform( -0.77009, 9.4504e-09, 0.637935, 1.07558e-08, 1, -1.83012e
 
 [node name="WireRamp2-2" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.59783, 0.0194186, -2.34772 )
-curve = SubResource( 13 )
+curve = SubResource( 2 )
 allow_exit_as_entrance = true
 
 [node name="PathFollow" parent="Center/WireRamp2-2" index="0"]
@@ -116,7 +116,7 @@ transform = Transform( -0.746554, 0.0653151, 0.662111, 0.029337, 0.997433, -0.06
 
 [node name="WireRamp3-1" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01078, 6.06827e-06, -2.46342 )
-curve = SubResource( 14 )
+curve = SubResource( 3 )
 
 [node name="EntranceArea" parent="Center/WireRamp3-1" index="1"]
 transform = Transform( -0.931931, 0, 0.362633, 0, 1, 0, -0.362633, 0, -0.931931, -0.01157, 0.222337, 0.244385 )
@@ -126,7 +126,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.819147, 0.747708, -2.28498 )
 
 [node name="WireRamp3-2" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46625, 6.03846e-06, -2.46342 )
-curve = SubResource( 15 )
+curve = SubResource( 4 )
 
 [node name="EntranceArea" parent="Center/WireRamp3-2" index="1"]
 transform = Transform( -0.931931, 0, 0.362633, 0, 1, 0, -0.362633, 0, -0.931931, -0.01157, 0.214543, 0.244385 )
@@ -136,7 +136,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.367471, 0.747708, -2.28498 )
 
 [node name="WireRamp4-1" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7257, -0.0059032, -3.40716 )
-curve = SubResource( 7 )
+curve = SubResource( 5 )
 
 [node name="EntranceArea" parent="Center/WireRamp4-1" index="1"]
 transform = Transform( -0.983618, 0.0157108, -0.179576, 0.0157108, 0.999876, 0.00142235, 0.179576, -0.00142235, -0.983743, 0.159798, 0.262098, 0.379096 )
@@ -146,7 +146,7 @@ transform = Transform( 1, 0, 0, 0, -4.47035e-08, 1, 0, -1, -4.47035e-08, -0.9845
 
 [node name="WireRamp4-2" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7257, -0.0059032, -3.40716 )
-curve = SubResource( 12 )
+curve = SubResource( 6 )
 
 [node name="EntranceArea" parent="Center/WireRamp4-2" index="1"]
 transform = Transform( -0.983618, 0.0157108, -0.179576, 0.0157108, 0.999876, 0.00142236, 0.179576, -0.00142238, -0.983743, 0.650513, 0.261345, 0.307924 )
@@ -156,7 +156,7 @@ transform = Transform( 1, 0, 0, 0, -4.47035e-08, 1, 0, -1, -4.47035e-08, -0.9809
 
 [node name="WireRamp5" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.781006, 1.09128e-06, -7.07809 )
-curve = SubResource( 9 )
+curve = SubResource( 7 )
 allow_exit_as_entrance = true
 
 [node name="EntranceArea" parent="Center/WireRamp5" index="1"]
@@ -176,7 +176,7 @@ transform = Transform( -1, -1.26883e-14, -3.89414e-07, -2.13163e-14, 1, 0, 3.894
 
 [node name="CentralHUD3D" parent="Center" instance=ExtResource( 5 )]
 transform = Transform( 0.73, 0, 0, 0, -1.49012e-08, 0.73, 0, -0.73, -1.49012e-08, 0, 0.0619999, 4.084 )
-texture = SubResource( 11 )
+texture = SubResource( 8 )
 
 [node name="TransmissionHUD3D" parent="Center" instance=ExtResource( 6 )]
 transform = Transform( 0.8, 0, 0, 0, -3.72529e-08, 1, 0, -0.8, -4.47035e-08, -4.1, 0.5, 8 )
