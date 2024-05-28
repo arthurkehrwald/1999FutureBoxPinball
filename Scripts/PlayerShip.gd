@@ -47,6 +47,7 @@ func on_health_changed(current_health, old_health, _max_health):
 func reset_player_stats():
 	set_coolness(0)
 	set_money(0)
+	set_health(MAX_HEALTH)
 
 
 func on_hit_by_projectile(projectile):
