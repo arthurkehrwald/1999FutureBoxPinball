@@ -11,7 +11,7 @@ shader = ExtResource( 5 )
 shader_param/dispOffset = 0.96
 shader_param/dispAmt = 0.552
 shader_param/abberationAmt = Vector2( 0.2, 0.2 )
-shader_param/dispSize = Vector2( 0.3, 0.3 )
+shader_param/dispSize = Vector2( 1, 1 )
 shader_param/maxAlpha = 1.0
 shader_param/scanlineSize = 1.0
 shader_param/scanlineIntensity = 0.5
@@ -82,7 +82,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-effect_strength = 0.3
+effect_strength = 0.2
 
 [node name="TestImg" type="Sprite" parent="."]
 visible = false
@@ -90,6 +90,7 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="displace" type="ColorRect" parent="."]
+visible = false
 material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
