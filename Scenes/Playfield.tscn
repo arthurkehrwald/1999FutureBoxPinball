@@ -29,15 +29,15 @@ _data = {
 "tilts": PoolRealArray( 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=3]
+[sub_resource type="Curve3D" id=10]
 _data = {
-"points": PoolVector3Array( -0.911339, -1.21516, 3.76534, 0.911339, 1.21516, -3.76534, -0.0349762, 0.179941, -0.0258505, 3.261, 0.0885488, -5.22685, -3.261, -0.0885488, 5.22685, 0.622474, 0.266138, 4.18304 ),
+"points": PoolVector3Array( -0.889165, -0.0944258, 1.49555, 0.889165, 0.0944258, -1.49555, -0.0349762, 0.179941, -0.0258505, 0.283025, -0.436785, 0.86798, -0.283025, 0.436785, -0.86798, 0.820425, 0.659222, -2.55111 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
 [sub_resource type="Curve3D" id=4]
 _data = {
-"points": PoolVector3Array( -0.73895, 0.000147194, 1.87507, 0.73895, -0.000147194, -1.87507, 0.0813453, 0.242589, 0.199335, 0.00203514, -0.547561, 0.509503, -0.00203514, 0.547561, -0.509503, 0.43257, 0.736455, -2.26394 ),
+"points": PoolVector3Array( -0.73895, 0.000147194, 1.87507, 0.73895, -0.000147194, -1.87507, 0.0813453, 0.242589, 0.199335, 0.00203514, -0.547561, 0.509503, -0.00203514, 0.547561, -0.509503, 0.367105, 0.710189, -2.56417 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
@@ -116,13 +116,13 @@ transform = Transform( -0.527791, 0.0653151, 0.662111, 0.0207404, 0.997433, -0.0
 
 [node name="WireRamp3-1" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01078, 6.06827e-06, -2.46342 )
-curve = SubResource( 3 )
+curve = SubResource( 10 )
 
 [node name="EntranceArea" parent="Center/WireRamp3-1" index="1"]
 transform = Transform( -0.931931, 0, 0.362633, 0, 1, 0, -0.362633, 0, -0.931931, -0.01157, 0.222337, 0.244385 )
 
 [node name="ExitArea" parent="Center/WireRamp3-1" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.819147, 0.747708, -2.28498 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.819147, 0.747709, -2.6012 )
 
 [node name="WireRamp3-2" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46625, 6.03846e-06, -2.46342 )
@@ -132,7 +132,7 @@ curve = SubResource( 4 )
 transform = Transform( -0.931931, 0, 0.362633, 0, 1, 0, -0.362633, 0, -0.931931, -0.01157, 0.214543, 0.244385 )
 
 [node name="ExitArea" parent="Center/WireRamp3-2" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.367471, 0.747708, -2.28498 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.367471, 0.747708, -2.61479 )
 
 [node name="WireRamp4-1" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7257, -0.0059032, -3.40716 )
@@ -228,7 +228,7 @@ shield_path = NodePath("../../../../Playfield/Center/BossSetup/StraightShield")
 transform = Transform( -0.627507, 0.526541, -0.573577, 0.642788, 0.766045, -7.45058e-09, 0.439386, -0.368688, -0.819153, 3.24577, 0.508574, -5.33466 )
 
 [node name="EntranceArea" parent="Center/MultiballShip" index="0"]
-transform = Transform( 0.737751, 0.5, -0.453566, -0.425941, 0.866026, 0.261867, 0.523733, -2.47732e-07, 0.851882, -0.238495, 0.137694, -0.296334 )
+transform = Transform( 0.737751, 0.5, -0.453566, -0.425941, 0.866026, 0.261867, 0.523733, -2.86847e-07, 0.851882, -0.295648, 0.170691, -0.18899 )
 
 [node name="Muzzle" parent="Center/MultiballShip" index="1"]
 transform = Transform( -0.0174825, 0.558283, -0.829465, -1.04308e-07, 0.829593, 0.558367, 0.999845, 0.00976175, -0.0145034, 0.300971, 0.410247, 0.317 )
