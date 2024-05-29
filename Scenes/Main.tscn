@@ -61,7 +61,7 @@ update_scale = false
 [node name="CameraParent" type="Spatial" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam"]
 
 [node name="StereoCompositor" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent" instance=ExtResource( 3 )]
-stereo_offset = 0.118
+stereo_offset = 0.112
 
 [node name="VideoPlayer" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor/ViewportContainer/Video" index="0"]
 visible = true
