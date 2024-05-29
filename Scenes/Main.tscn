@@ -120,6 +120,7 @@ path_to_video_player = NodePath("../../../ScreenCenter/HeadTrackerSpaceBam/Track
 [node name="HighscoreTracker" parent="." instance=ExtResource( 9 )]
 
 [node name="Playfield" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014, 0, 0 )
 
 [node name="CentralHUD3D" parent="Playfield/Center" index="14"]
 texture = SubResource( 4 )
