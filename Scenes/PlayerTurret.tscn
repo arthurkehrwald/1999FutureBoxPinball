@@ -11,7 +11,7 @@
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.35
-height = 0.8
+height = 0.573087
 
 [node name="PlayerTurret" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0 )
@@ -23,11 +23,12 @@ path_to_dotted_line = NodePath("Muzzle/DottedLine")
 path_to_muzzle = NodePath("Muzzle")
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, 0, 0 )
 mesh = ExtResource( 4 )
 material/0 = ExtResource( 5 )
 
 [node name="Muzzle" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10413, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730591, 0 )
 
 [node name="DottedLine" type="MeshInstance" parent="Muzzle"]
 transform = Transform( 1, 0, 0, 0, 0.984808, -0.138919, 0, 0.173648, 0.787846, 0, 0, 0 )
@@ -35,7 +36,7 @@ mesh = ExtResource( 2 )
 material/0 = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.292135, 0 )
 shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]

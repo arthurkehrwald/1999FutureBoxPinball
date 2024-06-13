@@ -16,6 +16,7 @@ MONEY_YIELD_PER_DAMAGE = 2.0
 BOMBS_EXPLODE_ON_IMPACT = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+visible = false
 mesh = ExtResource( 4 )
 material/0 = ExtResource( 2 )
 

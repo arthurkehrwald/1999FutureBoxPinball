@@ -17,6 +17,7 @@ func _ready() -> void:
 	if Globals.highscore_tracker != null:
 		Globals.highscore_tracker.connect("highscore_updated", self, "_on_HighscoreTracker_highscore_updated")
 		set_wants_focus(true)
+		highscore_text.text = str(Globals.highscore_tracker.get_highscore())
 
 
 func _on_enter(params := {}) -> void:

@@ -6,7 +6,7 @@
 
 [node name="InvisibleButtonPlunger" type="Area"]
 script = ExtResource( 1 )
-IMPULSE_STRENGTH = 40.0
+IMPULSE_STRENGTH = 90.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.3, 0 )

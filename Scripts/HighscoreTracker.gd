@@ -4,7 +4,9 @@ extends Node
 var save_path := "user://score.save"
 var current_score := 0
 var highscore := 0 setget _set_highscore, get_highscore
+var is_tracking := true setget _set_is_tracking, get_is_tracking
 signal highscore_updated(new_highscore, old_highscore, was_beaten_just_now)
+signal highscore_tracking_toggled(is_tracking)
 
 
 func _enter_tree():
@@ -22,6 +24,19 @@ func _ready():
 func _input(event):
 	if event.is_action_released("reset_highscore"):
 		reset_highscore()
+	if event.is_action_released("toggle_highscore_tracking"):
+		_set_is_tracking(!get_is_tracking())
+
+
+func _set_is_tracking(value: bool) -> void:
+	var old = is_tracking
+	is_tracking = value
+	if is_tracking != old:
+		emit_signal("highscore_tracking_toggled", is_tracking)
+
+
+func get_is_tracking() -> bool:
+	return is_tracking
 
 
 func _on_PlayerShip_money_changed(new_value, _old_value) -> void:
@@ -29,7 +44,7 @@ func _on_PlayerShip_money_changed(new_value, _old_value) -> void:
 
 
 func _on_PlayerShip_death() -> void:
-	if current_score > get_highscore():
+	if is_tracking and current_score > get_highscore():
 		_set_highscore(current_score, true)
 		save_score(get_highscore())
 
