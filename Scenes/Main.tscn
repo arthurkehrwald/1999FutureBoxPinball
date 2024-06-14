@@ -1,14 +1,15 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Playfield.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/StereoCompositor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestUtilities/Scenes/AxisArrows.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TestUtilities/Scripts/LocalPosLabel.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/TrackingSoundFX.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/TrackedPosValidator.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Materials/Stereo.shader" type="Shader" id=7]
 [ext_resource path="res://Scenes/GameState.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/HighscoreTracker.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scripts/CameraTrackingToggler.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/HeadTrackerSpace.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/MusicPlayers.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Scenes/ScreenCenter.tscn" type="PackedScene" id=54]
@@ -56,11 +57,17 @@ remote_path = NodePath("../../../Millimeters/AxisArrows")
 update_rotation = false
 update_scale = false
 
-[node name="TrackingSoundFX" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 6 )]
+[node name="TrackedPosValidator" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam" instance=ExtResource( 6 )]
 
 [node name="CameraParent" type="Spatial" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.046, 0, 0, 0 )
+script = ExtResource( 10 )
+tracked_pos_validator_path = NodePath("../TrackedPosValidator")
+tracked_parent_path = NodePath("..")
+non_tracked_parent_path = NodePath("../../../DefaultCameraPos")
 
 [node name="StereoCompositor" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent" instance=ExtResource( 3 )]
+transform = Transform( 0.517241, 0, 0, 0, 0.5427, 0.0603309, 0, -0.0570401, 0.574011, 0, 0, 0 )
 stereo_offset = 0.112
 
 [node name="VideoPlayer" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor/ViewportContainer/Video" index="0"]
@@ -98,6 +105,9 @@ transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0.5,
 visible = false
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
+
+[node name="DefaultCameraPos" type="Spatial" parent="ScreenCenter"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 7 )
 
 [node name="GameState" parent="." instance=ExtResource( 8 )]
 path_to_player_ship = NodePath("../Playfield/Center/PlayerShip")

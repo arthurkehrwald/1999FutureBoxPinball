@@ -71,7 +71,6 @@ resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/mode = 0
 shader_param/show_overlay = true
-shader_param/is_enabled = true
 shader_param/swap = false
 
 [node name="StereoCompositor" type="Spatial"]

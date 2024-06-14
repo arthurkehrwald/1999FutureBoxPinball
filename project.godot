@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/BumperCluster.gd"
 }, {
+"base": "Spatial",
+"class": "CameraTrackingToggler",
+"language": "GDScript",
+"path": "res://Scripts/CameraTrackingToggler.gd"
+}, {
 "base": "Node",
 "class": "CentralUi",
 "language": "GDScript",
@@ -279,6 +284,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/StateComponent.gd"
 }, {
+"base": "Spatial",
+"class": "TrackedPosValidator",
+"language": "GDScript",
+"path": "res://Scripts/TrackedPosValidator.gd"
+}, {
 "base": "Control",
 "class": "TransmissionHud",
 "language": "GDScript",
@@ -315,6 +325,7 @@ _global_script_class_icons={
 "BreakState": "",
 "Bumper": "",
 "BumperCluster": "",
+"CameraTrackingToggler": "",
 "CentralUi": "",
 "CentralUiBackground": "",
 "Damageable": "",
@@ -359,6 +370,7 @@ _global_script_class_icons={
 "StackedUiMaster": "",
 "State": "",
 "StateComponent": "",
+"TrackedPosValidator": "",
 "TransmissionHud": "",
 "TurretPowerup": "",
 "UiState": "",
@@ -390,7 +402,6 @@ gdscript/warnings/return_value_discarded=false
 window/size/width=1080
 window/size/height=1920
 window/size/resizable=false
-window/size/fullscreen=true
 window/dpi/allow_hidpi=true
 window/vsync/use_vsync=false
 window/handheld/orientation="portrait"
