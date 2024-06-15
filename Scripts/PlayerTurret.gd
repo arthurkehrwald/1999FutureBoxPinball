@@ -92,7 +92,7 @@ func set_rotation_progress(value):
 
 
 func on_hit_by_projectile(projectile):
-	if projectile is Pinball:
+	if projectile is Pinball and ball_to_shoot == null:
 		insert_ball(projectile)
 
 
