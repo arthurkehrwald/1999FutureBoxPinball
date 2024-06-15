@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/Import/playfield_blockout_tincon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/SlingshotTrigger.tscn" type="PackedScene" id=3]
@@ -61,6 +61,9 @@ _data = {
 
 [sub_resource type="ViewportTexture" id=8]
 
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 0.394255, 1, 0.619594 )
+
 [node name="Playfield" type="Spatial"]
 __meta__ = {
 "_edit_lock_": true
@@ -84,7 +87,7 @@ collision_mask = 0
 IMPULSE_STRENGTH = 75
 
 [node name="PinballSpawn" parent="Center" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.61973, 0.298956, 6.88064 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.49224, 0.298956, 6.46828 )
 
 [node name="PlayerShip" parent="Center" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0381613, 7.60382 )
@@ -185,7 +188,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326087, 0, 0 )
 transform = Transform( 0.559, 0, 0, 0, -2.56149e-08, 0.586, 0, -0.586, -2.56149e-08, 4.072, 0.41, 7.274 )
 
 [node name="InvisibleButtonPlunger" parent="Center" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.58244, 1.49792e-05, 7.65884 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.49826, 1.49792e-05, 6.49881 )
 
 [node name="BossSetup" parent="Center" instance=ExtResource( 11 )]
 transform = Transform( -1, 0, -1.50996e-07, 4.44089e-15, 1, 0, 1.50996e-07, 0, -1, 0, -0.001, -5.732 )
@@ -232,6 +235,13 @@ transform = Transform( -0.0174825, 0.558283, -0.829465, -1.04308e-07, 0.829593, 
 
 [node name="PlayerTurret" parent="Center" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.00816e-07, 6.976 )
+
+[node name="BallBlocker" type="StaticBody" parent="Center"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.47368, -8.16071e-07, 7.54525 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Center/BallBlocker"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.96046e-08, -0.215106 )
+shape = SubResource( 9 )
 
 [node name="playfield_blockout_tincon" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0, 0 )
