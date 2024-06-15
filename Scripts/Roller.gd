@@ -60,6 +60,9 @@ func set_locked(is_locked):
 	axis_lock_angular_y = is_locked
 	axis_lock_angular_z = is_locked
 
+func get_is_locked() -> bool:
+	return is_locked_in_place
+
 
 func update_gravity_scale():
 	var speed = get_linear_velocity().length()
