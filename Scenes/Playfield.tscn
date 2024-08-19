@@ -49,13 +49,13 @@ _data = {
 
 [sub_resource type="ViewportTexture" id=6]
 
+[sub_resource type="ViewportTexture" id=7]
+viewport_path = NodePath("Viewport")
+
 [sub_resource type="ViewportTexture" id=8]
 viewport_path = NodePath("Viewport")
 
-[sub_resource type="ViewportTexture" id=9]
-viewport_path = NodePath("Viewport")
-
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=9]
 extents = Vector3( 0.394255, 1, 0.619594 )
 
 [node name="Playfield" type="Spatial"]
@@ -149,19 +149,19 @@ transform = Transform( 0.409382, 0, 0.912363, 0, 1, 7.45058e-09, -0.912363, 0, 0
 transform = Transform( -1, -1.26883e-14, -3.89414e-07, -2.13163e-14, 1, 0, 3.89414e-07, 0, -1, -3.34412, 0.0561958, -3.33581 )
 
 [node name="CentralHUD3D" parent="Center" instance=ExtResource( 5 )]
-transform = Transform( 0.73, 0, 0, 0, -1.49012e-08, 0.73, 0, -0.73, -1.49012e-08, 0, 0.0619999, 4.084 )
+transform = Transform( 0.65, 0, 0, 0, -2.84124e-08, 0.65, 0, -0.65, -2.84124e-08, 0, 0.0619999, 4.084 )
 texture = SubResource( 6 )
 
 [node name="ScoreHUD3D" parent="Center" instance=ExtResource( 2 )]
 transform = Transform( 0.450741, 0, 0, 0, -7.45058e-08, 0.477747, 0, -0.451049, -7.82311e-08, -4.072, 0.41, 7.274 )
-texture = SubResource( 8 )
+texture = SubResource( 7 )
 
 [node name="EnemyFleet" parent="Center" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326087, 0, 0 )
 
 [node name="HealthHud3D" parent="Center" instance=ExtResource( 6 )]
 transform = Transform( 0.45, 0, 0, 0, -1.96701e-08, 0.45, 0, -0.45, -1.96701e-08, 4.072, 0.41, 7.274 )
-texture = SubResource( 9 )
+texture = SubResource( 8 )
 
 [node name="InvisibleButtonPlunger" parent="Center" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.49826, 1.49792e-05, 6.49881 )
@@ -220,7 +220,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.47368, -8.16071e-07, 7.54525
 
 [node name="CollisionShape" type="CollisionShape" parent="Center/BallBlocker"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.96046e-08, -0.215106 )
-shape = SubResource( 7 )
+shape = SubResource( 9 )
 
 [node name="playfield_blockout_tincon" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0, 0 )
