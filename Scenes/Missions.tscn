@@ -14,7 +14,7 @@ path_to_initial_mission = NodePath("SubStates/EnemyFleetMission")
 
 [node name="EnemyFleetMission" type="Node" parent="SubStates"]
 script = ExtResource( 2 )
-objective = "Defeat the Enemy Fleet!"
+objective = "Zerstöre die Raumschiffe!"
 
 [node name="Components" type="Node" parent="SubStates/EnemyFleetMission"]
 

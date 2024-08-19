@@ -4,7 +4,7 @@
 [ext_resource path="res://HUD/shop_bar_progress.png" type="Texture" id=2]
 [ext_resource path="res://HUD/player_lifebar_fill.png" type="Texture" id=3]
 [ext_resource path="res://HUD/car_outline.png" type="Texture" id=4]
-[ext_resource path="res://HUD/panel_right.png" type="Texture" id=5]
+[ext_resource path="res://HUD/panel_right_fullres.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/PlayerStatsHUD.gd" type="Script" id=6]
 [ext_resource path="res://HUD/shop_bar_over.png" type="Texture" id=7]
 
