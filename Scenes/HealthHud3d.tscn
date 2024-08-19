@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/HpHud.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/HUD3D.tscn" type="PackedScene" id=2]
 
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Viewport")
+
 [node name="HealthHud3D" instance=ExtResource( 2 )]
-centered = false
-offset = Vector2( -435, 0 )
-region_rect = Rect2( 0, 0, 435, 380 )
+modulate = Color( 1, 0, 0, 1 )
+texture = SubResource( 1 )
+region_rect = Rect2( 0, 0, 500, 200 )
 
 [node name="HealthHud" parent="Viewport" index="0" instance=ExtResource( 1 )]
 rect_scale = Vector2( 1, 1 )

@@ -153,14 +153,14 @@ transform = Transform( 0.65, 0, 0, 0, -2.84124e-08, 0.65, 0, -0.65, -2.84124e-08
 texture = SubResource( 6 )
 
 [node name="ScoreHUD3D" parent="Center" instance=ExtResource( 2 )]
-transform = Transform( 0.450741, 0, 0, 0, -7.45058e-08, 0.477747, 0, -0.451049, -7.82311e-08, -4.072, 0.41, 7.274 )
+transform = Transform( 0.450741, 0, 0, 0, -1.04308e-07, 0.477748, 0, -0.45105, -8.56817e-08, -2.852, 0.470454, 6.95161 )
 texture = SubResource( 7 )
 
 [node name="EnemyFleet" parent="Center" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326087, 0, 0 )
 
 [node name="HealthHud3D" parent="Center" instance=ExtResource( 6 )]
-transform = Transform( 0.45, 0, 0, 0, -1.96701e-08, 0.45, 0, -0.45, -1.96701e-08, 4.072, 0.41, 7.274 )
+transform = Transform( 0.45, 0, 0, 0, -1.11759e-08, 0.450002, 0, -0.450002, -1.11759e-08, 2.87831, 0.470454, 6.95122 )
 texture = SubResource( 8 )
 
 [node name="InvisibleButtonPlunger" parent="Center" instance=ExtResource( 10 )]
