@@ -18,3 +18,6 @@ data_*/
 # End of https://www.toptal.com/developers/gitignore/api/godot
 *.import
 *.import
+
+# VS Code
+.vs/
