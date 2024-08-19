@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://HUD/panel_left_red.png" type="Texture" id=3]
+[ext_resource path="res://HUD/panel_left.png" type="Texture" id=4]
+[ext_resource path="res://HUD/panel_right.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/ScoreLabel.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/UiBackground.gd" type="Script" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 94
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="PlayerScoreHUD" type="Control"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+margin_left = 0.397217
+margin_top = 0.397217
+margin_right = 421.397
+margin_bottom = 376.397
+texture = ExtResource( 5 )
+expand = true
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+green_tex = ExtResource( 4 )
+red_tex = ExtResource( 3 )
+
+[node name="ScoreNameLabel" type="Label" parent="Background"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -385.118
+margin_top = -192.701
+margin_right = -186.118
+margin_bottom = -131.701
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "Punktzahl"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="Background"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -391.205
+margin_top = -141.111
+margin_right = -156.205
+margin_bottom = -28.1112
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
+text = "0"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

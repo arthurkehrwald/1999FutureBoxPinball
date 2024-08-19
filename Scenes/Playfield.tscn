@@ -1,10 +1,10 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/Import/playfield_blockout_tincon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/ScoreHUD3D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/SlingshotTrigger.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/MoonShop.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/CentralHUD3D.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/TransmissionHUD3D.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/PlayerStatsHUD3D.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/EnemyFleet.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/InvisibleButtonPlunger.tscn" type="PackedScene" id=10]
@@ -29,27 +29,30 @@ _data = {
 "tilts": PoolRealArray( 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=7]
+[sub_resource type="Curve3D" id=3]
 _data = {
 "points": PoolVector3Array( 0.442941, 0.00789973, 2.12964, -0.442941, -0.00789973, -2.12964, 0.0897713, 0.015773, 0.292323, -0.472186, 0.000979841, 0.0111995, 0.472186, -0.000979841, -0.0111995, 1.74103, 0.0625295, -1.7977, 0.449909, -0.013404, -2.13838, -0.449909, 0.013404, 2.13838, 3.59604, 0.0177628, 0.295728 ),
 "tilts": PoolRealArray( 0, 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=5]
+[sub_resource type="Curve3D" id=4]
 _data = {
 "points": PoolVector3Array( 0.853606, -0.257634, 3.50937, -0.853606, 0.257634, -3.50937, 0.128544, 0.252129, 0.25118, -0.953423, 0.0736555, -0.226336, 0.953423, -0.0736555, 0.226336, 0.908513, 1.11468, -4.13315, 0.210307, 0.102963, -1.33458, -0.210307, -0.102963, 1.33458, 0.524893, 0.934398, -0.232069, 0.0993965, -0.00634581, -1.76965, -0.0993965, 0.00634581, 1.76965, -0.923388, 0.892845, 2.64009, -0.0037384, 0.00826037, -0.789652, 0.0037384, -0.00826037, 0.789652, -1.01545, 0.822884, 5.26399, 0, 0, 0, 0, 0, 0, -1.00475, 0.631532, 6.01723 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=6]
+[sub_resource type="Curve3D" id=5]
 _data = {
 "points": PoolVector3Array( 0.853606, -0.257634, 3.50937, -0.853606, 0.257634, -3.50937, 0.644292, 0.240415, 0.117235, -0.953423, 0.0736555, -0.226336, 0.953423, -0.0736555, 0.226336, 0.908513, 1.11468, -4.13315, 0.210307, 0.102963, -1.33458, -0.210307, -0.102963, 1.33458, 0.524893, 0.934398, -0.232069, 0.0993965, -0.00634581, -1.76965, -0.0993965, 0.00634581, 1.76965, -0.923388, 0.892845, 2.64009, -0.0037384, 0.00826037, -0.789652, 0.0037384, -0.00826037, 0.789652, -1.01545, 0.822884, 5.26399, 0, 0, 0, 0, 0, 0, -1.00475, 0.631532, 6.01723 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="ViewportTexture" id=8]
+[sub_resource type="ViewportTexture" id=6]
 
-[sub_resource type="BoxShape" id=9]
+[sub_resource type="ViewportTexture" id=8]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.394255, 1, 0.619594 )
 
 [node name="Playfield" type="Spatial"]
@@ -107,7 +110,7 @@ transform = Transform( -0.527791, 0.0653151, 0.662111, 0.0207404, 0.997433, -0.0
 
 [node name="WireRamp" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80018, 0.180766, -5.44533 )
-curve = SubResource( 7 )
+curve = SubResource( 3 )
 allow_exit_as_entrance = true
 
 [node name="ExitArea" parent="Center/WireRamp" index="2"]
@@ -115,7 +118,7 @@ transform = Transform( -0.998567, 0, 0.0535208, 1.86265e-09, 1, 5.21541e-08, -0.
 
 [node name="WireRamp4-1" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7257, -0.0059032, -3.40716 )
-curve = SubResource( 5 )
+curve = SubResource( 4 )
 
 [node name="EntranceArea" parent="Center/WireRamp4-1" index="1"]
 transform = Transform( -0.983618, 0.0157108, -0.179576, 0.0157108, 0.999876, 0.00142235, 0.179576, -0.00142235, -0.983743, 0.159798, 0.262098, 0.379096 )
@@ -125,7 +128,7 @@ transform = Transform( 1, 0, 0, 0, -4.47035e-08, 1, 0, -1, -4.47035e-08, -0.9845
 
 [node name="WireRamp4-2" parent="Center" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7257, -0.0059032, -3.40716 )
-curve = SubResource( 6 )
+curve = SubResource( 5 )
 
 [node name="EntranceArea" parent="Center/WireRamp4-2" index="1"]
 transform = Transform( -0.983618, 0.0157108, -0.179576, 0.0157108, 0.999876, 0.00142236, 0.179576, -0.00142238, -0.983743, 0.650513, 0.261345, 0.307924 )
@@ -144,10 +147,11 @@ transform = Transform( -1, -1.26883e-14, -3.89414e-07, -2.13163e-14, 1, 0, 3.894
 
 [node name="CentralHUD3D" parent="Center" instance=ExtResource( 5 )]
 transform = Transform( 0.73, 0, 0, 0, -1.49012e-08, 0.73, 0, -0.73, -1.49012e-08, 0, 0.0619999, 4.084 )
-texture = SubResource( 8 )
+texture = SubResource( 6 )
 
-[node name="TransmissionHUD3D" parent="Center" instance=ExtResource( 6 )]
-transform = Transform( 0.559, 0, 0, 0, -2.44347e-08, 0.559, 0, -0.559, -2.44347e-08, -4.072, 0.41, 7.274 )
+[node name="ScoreHUD3D" parent="Center" instance=ExtResource( 2 )]
+transform = Transform( 0.450741, 0, 0, 0, -7.34852e-08, 0.477747, 0, -0.451049, -7.78348e-08, -4.072, 0.41, 7.274 )
+texture = SubResource( 8 )
 
 [node name="EnemyFleet" parent="Center" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326087, 0, 0 )
@@ -212,7 +216,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.47368, -8.16071e-07, 7.54525
 
 [node name="CollisionShape" type="CollisionShape" parent="Center/BallBlocker"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.96046e-08, -0.215106 )
-shape = SubResource( 9 )
+shape = SubResource( 7 )
 
 [node name="playfield_blockout_tincon" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0, 0 )
