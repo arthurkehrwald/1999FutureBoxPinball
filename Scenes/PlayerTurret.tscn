@@ -43,7 +43,7 @@ shape = SubResource( 1 )
 
 [node name="TurretPowerup" type="Node" parent="."]
 script = ExtResource( 6 )
-powerup_name = "Geeschütz"
+powerup_name = "Geschütz"
 duration = 15.0
 icon = ExtResource( 7 )
 instructions = ExtResource( 8 )
