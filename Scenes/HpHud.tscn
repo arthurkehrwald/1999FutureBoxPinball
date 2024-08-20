@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://HUD/heart.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/CriticalHealthColorSwapper.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/CornerOrnaments.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/HealthLabel.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 130
+font_data = ExtResource( 1 )
+
+[node name="HealthHud" type="Control"]
+margin_right = 500.0
+margin_bottom = 200.0
+rect_scale = Vector2( 2.41475, 2.08872 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CornerOrnaments" parent="." instance=ExtResource( 4 )]
+
+[node name="Heart" type="TextureRect" parent="."]
+margin_left = 28.092
+margin_top = 37.209
+margin_right = 158.092
+margin_bottom = 167.209
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthLabel" type="Label" parent="."]
+margin_left = 170.609
+margin_top = 23.4263
+margin_right = 475.609
+margin_bottom = 180.426
+custom_fonts/font = SubResource( 1 )
+text = "100%"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CriticalHealthColorSwapper" parent="." instance=ExtResource( 3 )]
+normal_color = Color( 0, 0.0588235, 0.137255, 1 )

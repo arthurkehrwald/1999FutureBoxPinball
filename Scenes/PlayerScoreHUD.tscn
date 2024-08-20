@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Fonts/SF_Archery_Black_SC_Oblique.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/SF_Archery_Black_SC.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scenes/CornerOrnaments.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/CriticalHealthColorSwapper.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/ScoreLabel.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 130
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="PlayerScoreHUD" type="Control"]
+modulate = Color( 0, 0.0588235, 0.137255, 1 )
+margin_right = 500.0
+margin_bottom = 200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CornerOrnaments" parent="." instance=ExtResource( 3 )]
+margin_right = 1.0
+margin_bottom = 1.0
+
+[node name="ScoreNameLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -348.415
+margin_top = -63.5675
+margin_right = -149.415
+margin_bottom = -2.56754
+custom_fonts/font = SubResource( 1 )
+text = "Punkte"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -478.213
+margin_top = -199.173
+margin_right = -22.2135
+margin_bottom = -42.1733
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 1
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CriticalHealthColorSwapper" parent="." instance=ExtResource( 4 )]
+normal_color = Color( 0, 0.0588235, 0.137255, 1 )

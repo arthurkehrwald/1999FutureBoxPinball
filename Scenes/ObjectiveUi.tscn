@@ -22,11 +22,11 @@ size = 0
 use_filter = true
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 40
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "animation"
 length = 0.2
 tracks/0/type = "value"
@@ -54,7 +54,7 @@ tracks/1/keys = {
 "values": [ Vector2( -50, 75 ), Vector2( 0, 75 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "animation"
 length = 2.2
 tracks/0/type = "value"
@@ -92,7 +92,7 @@ tracks/2/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "animation"
 length = 2.2
 tracks/0/type = "value"
@@ -133,8 +133,7 @@ margin_left = -74.0
 margin_right = 74.0
 margin_bottom = 49.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
-text = "Objective"
+text = "Ziel"
 align = 1
 valign = 1
 __meta__ = {
@@ -148,11 +147,10 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 margin_top = 75.0
 rect_rotation = -360.0
-rect_pivot_offset = Vector2( 540, 27.5 )
+rect_pivot_offset = Vector2( 540, 0.5 )
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
-text = "New Objective"
+text = "Neues Ziel"
 align = 1
 valign = 1
 __meta__ = {
@@ -206,7 +204,7 @@ margin_bottom = 56.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 2
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 3 )
 text = "Sample Text"
 fit_content_height = true
 
@@ -215,7 +213,7 @@ script = ExtResource( 8 )
 path_to_animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubStates/Display/Components/AnimationComponent" index="0"]
-anims/animation = SubResource( 5 )
+anims/animation = SubResource( 4 )
 
 [node name="ObjectiveCompleted" parent="SubStates" index="2" instance=ExtResource( 5 )]
 
@@ -224,10 +222,9 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 margin_top = 75.0
 rect_rotation = 360.0
-rect_pivot_offset = Vector2( 540, 27.5 )
+rect_pivot_offset = Vector2( 540, 0.5 )
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
 text = "Complete!"
 align = 1
 valign = 1
@@ -243,7 +240,7 @@ script = ExtResource( 9 )
 path_to_animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubStates/ObjectiveCompleted/Components/AnimationExitComponent" index="0"]
-anims/animation = SubResource( 6 )
+anims/animation = SubResource( 5 )
 
 [node name="ObjectiveFailed" parent="SubStates" index="3" instance=ExtResource( 5 )]
 
@@ -251,11 +248,10 @@ anims/animation = SubResource( 6 )
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 margin_top = 75.0
-rect_pivot_offset = Vector2( 540, 27.5 )
+rect_pivot_offset = Vector2( 540, 0.5 )
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 1, 0.807843, 1 )
-text = "Failed!"
+text = "Mission Gescheitert!"
 align = 1
 valign = 1
 __meta__ = {
@@ -270,7 +266,7 @@ script = ExtResource( 9 )
 path_to_animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubStates/ObjectiveFailed/Components/AnimationExitComponent" index="0"]
-anims/animation = SubResource( 7 )
+anims/animation = SubResource( 6 )
 
 [node name="ObjectiveHUD" type="Control" parent="." index="2"]
 pause_mode = 2

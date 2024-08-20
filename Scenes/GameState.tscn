@@ -43,6 +43,7 @@ timer_path = NodePath("Timer")
 [node name="Missions" parent="SubStates" instance=ExtResource( 1 )]
 
 [node name="Bossfight" parent="SubStates" instance=ExtResource( 8 )]
+objective = "Zerstöre die Festung!"
 
 [node name="GameOver" type="Node" parent="SubStates"]
 script = ExtResource( 2 )

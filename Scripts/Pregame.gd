@@ -17,7 +17,8 @@ func _on_enter(_params := {}):
 		video_player.connect("playback_finished", self, "_on_VideoPlayer_playback_finished")
 	player_ship.set_is_vulnerable(false)
 	player_ship.reset_player_stats()
-	transmission_hud.set_rex_mood(transmission_hud.RexMood.NEUTRAL)
+	if transmission_hud:
+		transmission_hud.set_rex_mood(transmission_hud.RexMood.NEUTRAL)
 
 func _on_exit(passthrough_params := {}) -> Dictionary:
 	if video_player.is_connected("playback_finished", self, "_on_VideoPlayer_playback_finished"):

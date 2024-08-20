@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://HUD/panel_left.png" type="Texture" id=1]
+[ext_resource path="res://HUD/panel_left_red.png" type="Texture" id=2]
+[ext_resource path="res://HUD/panel_right.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/UiBackground.gd" type="Script" id=4]
+
+[node name="Background" type="TextureRect"]
+margin_left = 0.397217
+margin_top = 0.397217
+margin_right = 421.397
+margin_bottom = 376.397
+texture = ExtResource( 3 )
+expand = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+green_tex = ExtResource( 1 )
+red_tex = ExtResource( 2 )
