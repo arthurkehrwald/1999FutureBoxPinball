@@ -56,9 +56,10 @@ margin_right = 397.0
 margin_bottom = 23.7449
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 0, 0.435294, 1 )
-text = "WARNING"
+text = "Achtung"
 align = 1
 valign = 1
+uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -74,7 +75,7 @@ margin_right = 158.5
 margin_bottom = 63.1656
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0, 0.435294, 1 )
-text = "Maintenance Required"
+text = "Letzte Kugel"
 align = 1
 valign = 1
 __meta__ = {
