@@ -23,6 +23,7 @@ __meta__ = {
 }
 
 [node name="HighscoreTrackingIndicator" type="ColorRect" parent="."]
+visible = false
 material = SubResource( 2 )
 margin_left = 10.0
 margin_top = 10.0

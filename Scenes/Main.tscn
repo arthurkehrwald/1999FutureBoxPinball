@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/Playfield.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/TrackedHeadPoseBam.tscn" type="PackedScene" id=2]
@@ -29,6 +29,12 @@ albedo_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 
 [sub_resource type="ViewportTexture" id=4]
 
+[sub_resource type="ViewportTexture" id=5]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="ViewportTexture" id=6]
+viewport_path = NodePath("Viewport")
+
 [node name="Main" type="Spatial"]
 
 [node name="MusicPlayers" parent="." instance=ExtResource( 34 )]
@@ -46,7 +52,7 @@ transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
 visible = false
 
 [node name="HeadTrackerSpaceBam" parent="ScreenCenter" instance=ExtResource( 30 )]
-transform = Transform( 23, 0, 0, 0, 32, 0, 0, 0, 32, 0.38, 3.713, -0.361 )
+transform = Transform( 28, 0, 0, 0, 28.588, 0, 0, 0, 28, 1.151, 2.963, 0.248 )
 
 [node name="TrackedHeadPoseBam" parent="ScreenCenter/HeadTrackerSpaceBam" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.2666e-07, 0, 0, 1, 0, 0, 0 )
@@ -60,10 +66,10 @@ update_scale = false
 script = null
 
 [node name="CameraParent" type="Spatial" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.046, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 7.45058e-09, 0.046, 0, 0, 0 )
 
 [node name="StereoCompositor" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent" instance=ExtResource( 3 )]
-stereo_offset = 0.085
+stereo_offset = 0.063
 
 [node name="VideoPlayer" parent="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor/ViewportContainer/Video" index="0"]
 visible = true
@@ -76,7 +82,7 @@ mode = 3
 transform = Transform( 0.011, 0, 0, 0, 0.011, -4.65661e-10, 0, 4.65661e-10, 0.011, 0, 0, 0 )
 
 [node name="AxisArrows" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
-transform = Transform( 50, 0, 0, 0, 50.0006, 4.81606e-05, 0, -4.81606e-05, 50.0006, 34.5455, 337.545, -32.8182 )
+transform = Transform( 50, 0, 0, 0, 50.0006, 4.81606e-05, 0, -4.81606e-05, 50.0006, 104.636, 269.364, 22.5454 )
 
 [node name="AxisArrows2" parent="ScreenCenter/Millimeters" instance=ExtResource( 4 )]
 transform = Transform( -400, 0, 0, 0, 400, 0, 0, 0, 400, 196.254, 1.52588e-05, 350.813 )
@@ -130,6 +136,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014, 0, 0 )
 [node name="CentralHUD3D" parent="Playfield/Center" index="12"]
 texture = SubResource( 4 )
 
+[node name="ScoreHUD3D" parent="Playfield/Center" index="13"]
+texture = SubResource( 5 )
+
+[node name="HealthHud3D" parent="Playfield/Center" index="15"]
+texture = SubResource( 6 )
+
 [editable path="ScreenCenter/HeadTrackerSpaceUdp/TrackedHeadPoseUdp"]
 
 [editable path="ScreenCenter/HeadTrackerSpaceBam/TrackedHeadPoseBam/CameraParent/StereoCompositor"]
@@ -139,7 +151,5 @@ texture = SubResource( 4 )
 [editable path="GameState/SubStates/Missions"]
 
 [editable path="Playfield"]
-
-[editable path="Playfield/Center/TransmissionHUD3D"]
 
 [editable path="Playfield/Center/BossSetup"]
