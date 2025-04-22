@@ -5,17 +5,17 @@ using System.Runtime.ConstrainedExecution;
 
 public class TrackedHeadPoseBam : Spatial
 {
-	[Export]
-	private bool ignoreX = false;
-	[Export]
-	private bool ignoreY = false;
-	[Export]
-	private bool ignoreZ = false;
-	[Export]
-	private bool enabled = true;
+	[Export] private bool ignoreX = false;
+	[Export] private bool ignoreY = false;
+	[Export] private bool ignoreZ = false;
+	[Export] private Vector3 minPlausiblePos;
+	[Export] private Vector3 maxPlausiblePos;
+	[Export] private bool enabled = true;
 
 	private enum Status { Idle, Initializing, Tracking }
 	private Status status = Status.Idle;
+
+	private Vector3 defaultPos;
 
 	private void StartTracker()
 	{
@@ -23,7 +23,6 @@ public class TrackedHeadPoseBam : Spatial
 			return;
 		BAM_Tracker.init();
 		GD.Print("Starting BAM client...");
-		Translation = new Vector3 (0f, 5f, 0f);
 		status = Status.Initializing;
 	}
 
@@ -34,6 +33,11 @@ public class TrackedHeadPoseBam : Spatial
 		BAM_Tracker.release();
 		GD.Print("BAM Client closed.");
 		status = Status.Idle;
+	}
+
+	public override void _Ready()
+	{
+		defaultPos = Translation;
 	}
 
 	public override void _Process(float delta)
@@ -53,7 +57,11 @@ public class TrackedHeadPoseBam : Spatial
 					}
 					break;
 				case Status.Tracking:
-					ApplyTrackingData();
+					var pos = GetTrackedPos();
+					if (IsTrackedPosPlausible(pos))
+						ApplyTrackedPos(pos);
+					else
+						Translation = defaultPos;
 					break;
 			}
 		}
@@ -66,19 +74,32 @@ public class TrackedHeadPoseBam : Spatial
 		}
 	}
 
-	private void ApplyTrackingData()
+	private bool IsTrackedPosPlausible(Vector3 trackedPos)
 	{
-		if (status != Status.Tracking)
-			return;
+		return trackedPos.x < maxPlausiblePos.x &&
+		       trackedPos.x > minPlausiblePos.x &&
+		       trackedPos.y < maxPlausiblePos.y &&
+		       trackedPos.y > minPlausiblePos.y &&
+		       trackedPos.z < maxPlausiblePos.z &&
+		       trackedPos.z > minPlausiblePos.z;
+	}
+
+	private Vector3 GetTrackedPos()
+	{
 		BAM_Tracker.data_struct data = BAM_Tracker.getData();
-		Vector3 pose = new Vector3((float)data.EyeVecX, (float)data.EyeVecZ, -(float)data.EyeVecY) * .001f;
+		Vector3 pos = new Vector3((float)data.EyeVecX, (float)data.EyeVecZ, -(float)data.EyeVecY) * .001f;
+		return pos;
+	}
+
+	private void ApplyTrackedPos(Vector3 pos)
+	{
 		if (ignoreX)
-			pose.x = 0f;
+			pos.x = 0f;
 		if (ignoreY)
-			pose.y = 0f;
+			pos.y = 0f;
 		if (ignoreZ)
-			pose.z = 0f;
-		Translation = pose;
+			pos.z = 0f;
+		Translation = pos;
 	}
 
 	public override void _ExitTree()
